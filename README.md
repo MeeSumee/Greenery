@@ -1,2 +1,2 @@
 # Greenery
-My home server where I try making nixos and minecraft work so I can play modpacks with friends after work.
+My home server where I try to tie in nixos and minecraft so I can play modpacks with friends after work.
