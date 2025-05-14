@@ -14,6 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./aagl.nix
+    ./homemgr.nix
   ];
   
   # Required for MATLAB
@@ -163,6 +164,31 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  
+  # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
+  systemd.services.fprintd = {
+    wantedBy = ["multi-user.target"];
+    serviceConfig.Type = "simple";
+  };
+  services.fprintd = {
+    enable = true;
+    package = pkgs.fprintd-tod;
+    tod.enable = true;
+    tod.driver = pkgs.libfprint-2-tod1-elan;
+  };
+
+  # Enable Asus Numpad Service
+  services.asus-numberpad-driver = {
+    enable = true;
+    layout = "up5401ea";
+    wayland = true;
+    runtimeDir = "/run/user/1000/";
+    waylandDisplay = "wayland-0";
+    ignoreWaylandDisplayEnv = false;
+    config = {
+      # e.g. "activation_time" = "0.5";
+    };
+  };
 
   # Enable Firmware Updates
   services.fwupd.enable = true;

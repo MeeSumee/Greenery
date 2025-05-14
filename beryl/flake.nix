@@ -3,6 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
+    # Asus Numpad Driver (UM5302 and similar models)
+    asus-numberpad-driver = {
+      url = "github:asus-linux-drivers/asus-numberpad-driver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Yuan shen & other Zhongguo Games
     aagl = {
@@ -21,6 +27,7 @@
     self,
     nixpkgs,
     nix-matlab,
+    asus-numberpad-driver,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -39,6 +46,7 @@
         };
         modules = [
           ./hosts/Sumeezome/configuration.nix
+          asus-numberpad-driver.nixosModules.default
         ];
       };
     };
