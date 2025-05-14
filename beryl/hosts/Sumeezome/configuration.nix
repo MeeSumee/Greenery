@@ -199,8 +199,8 @@
   # Sets battery charge limit, nix file stolen from nix hardware repo
   hardware.asus.battery =
   {
-    chargeUpto = 90;   # Maximum level of charge for your battery, as a percentage.
-    enableChargeUptoScript = true; # Whether to add charge-upto to environment.systemPackages.
+    chargeUpto = 80;   # Maximum level of charge for your battery, as a percentage.
+    enableChargeUptoScript = false; # Whether to add charge-upto to 100 for longer
   };
 
   # Enable Firmware Updates
