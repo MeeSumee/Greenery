@@ -184,6 +184,12 @@
     tod.driver = pkgs.libfprint-2-tod1-elan;
   };
 
+  # Enable Asusctl
+  services.asusd = {
+    enable = true;
+    enableUserService = true;
+  };
+
   # Enable Asus Numpad Service
   services.asus-numberpad-driver = {
     enable = true;
