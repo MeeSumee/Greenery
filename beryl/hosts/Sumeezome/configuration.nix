@@ -184,7 +184,8 @@
     tod.driver = pkgs.libfprint-2-tod1-elan;
   };
 
-  # Enable Asusctl
+  # Enable Asusctl & supergfxctl
+  services.supergfxd.enable = true;
   services.asusd = {
     enable = true;
     enableUserService = true;
