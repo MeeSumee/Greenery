@@ -165,6 +165,9 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   
+  # Enable tailscale VPN service
+  services.tailscale.enable = true;
+  
   # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
   systemd.services.fprintd = {
     wantedBy = ["multi-user.target"];
