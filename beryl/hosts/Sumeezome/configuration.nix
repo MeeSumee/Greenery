@@ -149,6 +149,7 @@
     prismlauncher # Minecraft
     zoom-us # Meetings
     arduino-ide # Programming
+    asusctl # Asus Control
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
   ];
 
@@ -200,7 +201,7 @@
   hardware.asus.battery =
   {
     chargeUpto = 80;   # Maximum level of charge for your battery, as a percentage.
-    enableChargeUptoScript = false; # Whether to add charge-upto to 100 for longer
+    enableChargeUptoScript = true; # Whether to add charge-upto to 80
   };
 
   # Enable Firmware Updates
