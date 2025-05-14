@@ -149,7 +149,6 @@
     prismlauncher # Minecraft
     zoom-us # Meetings
     arduino-ide # Programming
-    asusctl # Asus Control
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
   ];
 
@@ -182,13 +181,6 @@
     package = pkgs.fprintd-tod;
     tod.enable = true;
     tod.driver = pkgs.libfprint-2-tod1-elan;
-  };
-
-  # Enable Asusctl & supergfxctl
-  services.supergfxd.enable = true;
-  services.asusd = {
-    enable = true;
-    enableUserService = true;
   };
 
   # Enable Asus Numpad Service
