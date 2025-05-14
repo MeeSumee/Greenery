@@ -166,7 +166,10 @@
   services.openssh.enable = true;
   
   # Enable tailscale VPN service
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+  };
   
   # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
   systemd.services.fprintd = {
