@@ -14,7 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./aagl.nix
-    ./homemgr.nix
+    ./battery.nix
   ];
   
   # Required for MATLAB
@@ -143,7 +143,7 @@
     openshot-qt # Video Editing
     gimp # Image Manipulation
     wineWowPackages.waylandFull # Wine
-    joplin-desktop # Note taking
+    xournalpp # Note taking
     libreoffice-fresh # MSOffice Alternative
     gparted # Disk Partitioning
     prismlauncher # Minecraft
@@ -188,6 +188,13 @@
     config = {
       # e.g. "activation_time" = "0.5";
     };
+  };
+
+  # Sets battery charge limit, nix file stolen from nix hardware repo
+  hardware.asus.battery =
+  {
+    chargeUpto = 90;   # Maximum level of charge for your battery, as a percentage.
+    enableChargeUptoScript = true; # Whether to add charge-upto to environment.systemPackages.
   };
 
   # Enable Firmware Updates
