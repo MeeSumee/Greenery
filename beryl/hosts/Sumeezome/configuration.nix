@@ -138,6 +138,7 @@
     matlab-shell # Matlab-shell for installing MATLAB
     discord # Slowly getting worse
     vim # Vim editor (I'm not good at it)
+    btop # System Monitoring
     sbctl # Secure Boot Control
     git # Self-explanatory
     openshot-qt # Video Editing
