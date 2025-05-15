@@ -37,16 +37,14 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Set Console and internationalisation properties.
+  # Set internationalisation properties.
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    supportedLocales = [ "en_US.UTF-8" "ja_JP.UTF-8" ];
     defaultLocale = "en_US.UTF-8";
+    extraLocales = [ "ja_JP.UTF-8" ] ;
   };
 
   # Font Settings for both English and Japanese
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     carlito
     dejavu_fonts
     ipafont
@@ -55,30 +53,17 @@
     ttf_bitstream_vera
   ];
   
-  # Enable "ultimate" font config, if it's weird, set to false
-  fonts.fontconfig.ultimate.enable = true;
-  
-  # Enable default fonts
-  fonts.fontconfig.defaultFonts = {
-    monospace = [
-      "DejaVu Sans Mono"
-      "IPAGothic"
-    ];
-    sansSerif = [
-      "DejaVu Sans"
-      "IPAPGothic"
-    ];
-    serif = [
-      "DejaVu Serif"
-      "IPAPMincho"
-    ];
-  };
-
   # Enable fcitx for Input Method Editor (IME)
-  i18n.inputMethod.enabled = "fcitx";
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+  };
   
   # Enable mozc as input method in fcitx. Good for JP input.
-  i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+  i18n.inputMethod.fcitx5.addons = [ pkgs.fcitx5-mozc ];
+  
+  # Provides ibus for input method
+  environment.variables.GLFW_IM_MODULE = "ibus";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
