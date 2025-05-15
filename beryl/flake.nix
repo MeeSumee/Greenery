@@ -9,6 +9,12 @@
       url = "github:asus-linux-drivers/asus-numberpad-driver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    # Lanzaboote for Secure Boot
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Yuan shen & other Zhongguo Games
     aagl = {
@@ -28,6 +34,7 @@
     nixpkgs,
     nix-matlab,
     asus-numberpad-driver,
+    lanzaboote,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -47,6 +54,17 @@
         modules = [
           ./hosts/Sumeezome/configuration.nix
           asus-numberpad-driver.nixosModules.default
+          
+          lanzaboote.nixosModules.lanzaboote
+          ({ pkgs, lib, ... }: {
+            
+            boot.loader.systemd-boot.enable = lib.mkForce false;
+            
+            boot.lanzaboote = {
+              enable = true;
+              pkiBundle = "/var/lib/sbctl";
+            };
+          })
         ];
       };
     };
