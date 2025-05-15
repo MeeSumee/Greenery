@@ -142,12 +142,13 @@
   # Java
   programs.java.enable = true;
   
-  # Multi-device communication
+  # Not necessary, used tailscale instead
+/*
   programs.kdeconnect = {
     enable = true;
     package = pkgs.gnomeExtensions.gsconnect;
   };
-
+*/
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -233,12 +234,13 @@
   # Enable Firmware Updates
   services.fwupd.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
+/*  # Open ports in the firewall.
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 1716 ]; # Port 1716 for KDEConnect, but I can just use tailscale lmao
+    allowedUDPPorts = [ 1716 ];
+  };
+*/
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
