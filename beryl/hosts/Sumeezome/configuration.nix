@@ -139,6 +139,7 @@
     discord # Slowly getting worse
     vim # Vim editor (I'm not good at it)
     btop # System Monitoring
+    btop-rocm # AMD GPU detection
     sbctl # Secure Boot Control
     git # Self-explanatory
     openshot-qt # Video Editing
