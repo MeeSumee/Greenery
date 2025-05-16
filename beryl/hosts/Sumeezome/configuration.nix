@@ -24,6 +24,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  services.hardware.bolt.enable = true;
+
   networking.hostName = "Beryl"; # The tint of blue I like
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
