@@ -104,7 +104,7 @@ I will try to get this config into a VM like umbrella for anyone to
 test it out or make any changes. 
 
 # Greenery Rambling
-This server aims to be complete remote providing only ssh access from the devices I allow.
+This server aims to be completely remote providing only ssh access from the devices I allow.
 This server is configured as a minecraft server with the intentions of running either 
 vanilla or modded. I've configured it with the intention of supporting all modloaders,
 including the infamous Forge. I've already seen Rex complain about forge driving him insane
