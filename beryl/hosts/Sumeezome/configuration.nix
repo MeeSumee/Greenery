@@ -23,7 +23,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  
+  # Enable Thunderbolt Service for USB4 support
   services.hardware.bolt.enable = true;
 
   networking.hostName = "Beryl"; # The tint of blue I like
@@ -174,6 +175,7 @@
     gimp # Image Manipulation
     wineWowPackages.waylandFull # Wine
     xournalpp # Note taking
+    vlc # Media Player
     libreoffice-fresh # MSOffice Alternative
     gparted # Disk Partitioning
     prismlauncher # Minecraft
