@@ -9,6 +9,7 @@ My server, a Dell Optiplex 3050 Tower
 ## Greenery NixOS Configuration
 ![image](https://github.com/MeeSumee/Greenery/blob/97d1d9cb0590ea8251f03fb02dc3e4ee774fec04/beryl/src/Screenshot%20From%202025-05-16%2015-30-19.png)
 - If you didn't catch on, it's minimal NixOS
+- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/97d1d9cb0590ea8251f03fb02dc3e4ee774fec04/greenery/hosts/administrator/configuration.nix)
 
 ## Beryl
 My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
