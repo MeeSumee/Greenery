@@ -47,7 +47,7 @@ It mostly involved following instructions [here](https://github.com/nix-communit
 However, I have not tested Lanzaboote with BIOS password enabled.
 
 ## Japanese Keyboard IME ( 日本語 )
-This can be used by anyone with a keyboard. Refer [here](https://search.nixos.org/options?channel=24.11&show=i18n.supportedLocales&size=50&sort=relevance&type=packages&query=i18n) for more details.
+My JP Keyboard Config can be used by anyone with a keyboard. Refer [here](https://search.nixos.org/options?channel=24.11&show=i18n.supportedLocales&size=50&sort=relevance&type=packages&query=i18n) for options.
 
 ## MATLAB
 This is strictly a Work-In-Progress section.
