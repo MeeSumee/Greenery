@@ -32,7 +32,7 @@ I will not get this far this quickly as the NixOS learning curve is steep,
 especially for me who has not used Linux often and only experimented with 
 distros of Debian when I was not even a teenager.
 
-The NixOS learning curve started by experimenting it in VMware. In this way I
+The NixOS learning curve started by experimenting it in VMware. In that way I
 can understand the system and get tutored by Rex easily in one machine. Once
 I got to installing it on my laptop, the first major challenge is configuring
 the hardware to best utilize my laptop with Nix. Luckily, being an ASUS Laptop,
@@ -57,7 +57,7 @@ Remember to swipe on the fingerprint sensor rather than the usual tap.
 ## Lanzaboote
 This is strictly a Work-In-Progress section.
 
-It mostly involved following instructions [here](https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md)
+It mostly involved following instructions [here](https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md).
 However, I have not tested Lanzaboote with BIOS password enabled.
 
 ## Japanese Keyboard IME ( 日本語 )
@@ -67,9 +67,16 @@ My JP Keyboard Config can be used by anyone with a keyboard. Refer [here](https:
 This is strictly a Work-In-Progress section.
 
 MATLAB is a pain since it can't be packaged easily due to licensing.
-MATLAB does have an online option for a valid account, therefore I
+MATLAB does have an online option for a valid account, which means I
 was not too worried if it failed.
 Most instructions were followed [here](https://gitlab.com/doronbehar/nix-matlab)
+
+As of writing this, MATLAB fails to launch due to the following error reported in console:
+```bash
+Launching updater executable
+An unexpected error has occurred.
+To resolve this issue, contact <a href="https://www.mathworks.com/pi_gene_mci_glnxa64">Technical Support</a>"
+```
 
 ## Enabling USB4
 This is not recommended for most users as it involves "hacking" the
@@ -78,14 +85,14 @@ BIOS. DO IT AT YOUR OWN RISK.
 UM5302TA is one of the few laptops capable of USB4, but disabled by the
 manufacturer due to potential instability with specific devices. 
 Despite knowing the risk, I've decided to enable USB4 using 
-[UniversalAMDFormBrowser](https://github.com/DavidS95/Smokeless_UMAF/blob/main/UniversalAMDFormBrowser.zip) by following this reddit [post](https://www.reddit.com/r/ASUS/comments/13omq1e/zenbook_s13_bios_update_for_usb_4_whats_going_on/)
+[UniversalAMDFormBrowser](https://github.com/DavidS95/Smokeless_UMAF/blob/main/UniversalAMDFormBrowser.zip) by following this reddit [post](https://www.reddit.com/r/ASUS/comments/13omq1e/zenbook_s13_bios_update_for_usb_4_whats_going_on/).
 Note that there are three options when enabling USB4.
 
 To activate USB4 on NixOS, enable the bolt service from my config.
 Test your USB4 ports using boltctl, if there's instability, disable.
 
 ## What's left in hardware & software for Beryl
-There is no easy way to toggle the webcam using Fn + F10 (Fn Lock enabled)
+There is no easy way to toggle the webcam using Fn + F10 (Fn Lock enabled).
 It involves running a custom script/program which I've yet to bother.
 
 System is currently in HSI:1 security and needs a few security tweaks.
@@ -130,7 +137,6 @@ This is why I ditched the original method of KDEConnect.
 ![image](https://github.com/MeeSumee/Beryl/blob/ba8149adbae3132c239b42b6fda52fbd54f66713/beryl/src/ForRex.jpg)
 
 This is for you Rex, as a token of gratitude.
-(It does not exist in danbooru for some reason) 
 
 I also want to thank the folks of UAFB who made USB4 possible.
 
