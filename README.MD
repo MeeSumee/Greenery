@@ -1,11 +1,24 @@
-# Beryl
+# My NixOS Repository
+Consists of Greenery, and Beryl
+
+## Greenery
+My server, a Dell Optiplex 3050 Tower
+![image](https://github.com/MeeSumee/Greenery/blob/44d0455a17e05871fb4cd5dc475f32973801a1a5/beryl/src/71sMeJBJRNL.png)
+- Source : [Dell](https://www.dell.com/support/product-details/en-us/product/optiplex-3050-desktop/overview)
+
+## Greenery NixOS Configuration
+![image](https://github.com/MeeSumee/Greenery/blob/97d1d9cb0590ea8251f03fb02dc3e4ee774fec04/beryl/src/Screenshot%20From%202025-05-16%2015-30-19.png)
+- If you didn't catch on, it's minimal NixOS
+
+## Beryl
 My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
 ![image](https://github.com/MeeSumee/Beryl/blob/507d56ffd8bc8dbb229f64353ea4c032a792f9e4/beryl/src/dlcdnwebimgs.asus.png)
 - Source : [ASUS](https://www.asus.com/us/laptops/for-home/zenbook/zenbook-s-13-oled-um5302/)
 
-## NixOS Configuration
+## Beryl NixOS Configuration
 ![image](https://github.com/MeeSumee/Beryl/blob/b5b12e39d878a493e417e0596055fe8849065894/beryl/src/Screenshot%20From%202025-05-16%2013-14-41.png)
 - Wallpaper : [Vivian Banshee by pyogo (danbooru)](https://danbooru.donmai.us/posts/9259057)
+- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/44d0455a17e05871fb4cd5dc475f32973801a1a5/beryl/hosts/Sumeezome/configuration.nix)
 
 ## Introduction
 So, I've started doing Nix Shenanigans, how did I get here and what did I do?
@@ -70,7 +83,7 @@ Note that there are three options when enabling USB4.
 To activate USB4 on NixOS, enable the bolt service from my config.
 Test your USB4 ports using boltctl, if there's instability, disable.
 
-## What's left in hardware & software
+## What's left in hardware & software for Beryl
 There is no easy way to toggle the webcam using Fn + F10 (Fn Lock enabled)
 It involves running a custom script/program which I've yet to bother.
 
@@ -81,6 +94,34 @@ I have no idea whether Pixel Shift (OLED Care) works in NixOS. I got a
 
 I will try to get this config into a VM like umbrella for anyone to
 test it out or make any changes. 
+
+## Greenery Rambling
+This server aims to be complete remote providing only ssh access from the devices I allow.
+This server is configured as a minecraft server with the intentions of running either 
+vanilla or modded. I've configured it with the intention of supporting all modloaders,
+including the infamous Forge. I've already seen Rex complain about forge driving him insane
+which means I can't exactly do much about it. I also tried nix-fabric by fetching toml files
+using my modpacks repo, but curseforge API keeps requesting me to manually download and
+blocks Nix toml fetching from Infinidoge's Nix-minecraft.
+
+Right now, I am running modpacks based on a dedicated folder where I extracted the server_pack
+and running it's start batch script while complying to it's Java version. I will figure
+out how I can automate the server pack fetching declaratively.
+
+## Tailscale
+Tailscale is integral to how the server operates and how I connect my devices.
+I've setup Greenery to act as an exit node to route all my traffic so my
+workplace doesn't fucking break websites and block me from pushing to git.
+I swear IT has been cracking down on what I've been meaning to use.
+I've defined on my [config](https://github.com/MeeSumee/Greenery/blob/97d1d9cb0590ea8251f03fb02dc3e4ee774fec04/greenery/hosts/administrator/configuration.nix) on how I've opened up the
+Firewall and the tailscale service to utilize MagicDNS routing in Tailscale.
+Tailscale enables me to share my server to other users to enable them to
+connect to my Minecraft Server. It reduces the risk of attackers trying
+to obtain IP addresses as well as bypass the blocked ports from my home
+WiFi.
+
+I also use Tailscale as a means to send files between my devices using Taildrop.
+This is why I ditched the original method of KDEConnect.
 
 ## Credits
 [RexCrazy804](https://github.com/Rexcrazy804) for literally carrying me. I swear he needs a better PC.
