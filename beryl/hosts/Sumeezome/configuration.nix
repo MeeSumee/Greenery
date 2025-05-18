@@ -23,6 +23,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
   
   # Enable Thunderbolt Service for USB4 support
   services.hardware.bolt.enable = true;
@@ -82,6 +83,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -167,8 +169,7 @@
     matlab-shell # Matlab-shell for installing MATLAB
     discord # Slowly getting worse
     vim # Vim editor (I'm not good at it)
-    btop # System Monitoring
-    btop-rocm # AMD GPU detection
+    btop # System Monitor
     sbctl # Secure Boot Control
     git # Self-explanatory
     openshot-qt # Video Editing
@@ -183,6 +184,9 @@
     arduino-ide # Programming
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
   ];
+
+  # Adds rocm support to btop and nixos
+  nixpkgs.config.rocmSupport = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
