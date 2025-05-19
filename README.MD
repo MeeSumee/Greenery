@@ -61,7 +61,6 @@ It mostly involved following instructions [here](https://github.com/nix-communit
 However, I have not tested Lanzaboote with BIOS password enabled.
 
 ## Japanese Keyboard IME ( 日本語 )
-My JP Keyboard Config can be used by anyone with a keyboard. Refer [here](https://search.nixos.org/options?channel=24.11&show=i18n.supportedLocales&size=50&sort=relevance&type=packages&query=i18n) for options.
 Insert this into your i18n:
 ```bash
 extraLocales = [ "ja_JP.UTF-8" ] ;
@@ -83,13 +82,15 @@ For Japanese Input, add this to your config. Fonts and inputs are customizable.
     enable = true;
     type = "fcitx5";
   };
-```
   
   # Enable mozc as input method in fcitx. Good for JP input.
   i18n.inputMethod.fcitx5.addons = [ pkgs.fcitx5-mozc ];
   
   # Provides ibus for input method
   environment.variables.GLFW_IM_MODULE = "ibus";
+```
+
+My JP Keyboard Config can be used by anyone with a keyboard. Refer [here](https://search.nixos.org/options?channel=24.11&show=i18n.supportedLocales&size=50&sort=relevance&type=packages&query=i18n) for options.
 
 ## MATLAB
 This is strictly a Work-In-Progress section.
