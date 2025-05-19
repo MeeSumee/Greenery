@@ -42,7 +42,7 @@
   # Set internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    extraLocales = [ "ja_JP.UTF-8" ];
+    extraLocales = [ "ja_JP.UTF-8" ] ;
   };
 
   # Font Settings for both English and Japanese

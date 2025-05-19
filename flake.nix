@@ -36,7 +36,7 @@
     
     # Nix-Minecraft
     nix-minecraft = {
-      url = "github:Infinidoge/nix-minecraft";
+      urls = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
