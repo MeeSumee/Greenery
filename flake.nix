@@ -3,13 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-/*
+
     # hjem for declaring files in home
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-*/    
+    
     # Asus Numpad Driver (UM5302 and similar models)
     asus-numberpad-driver = {
       url = "github:asus-linux-drivers/asus-numberpad-driver";
@@ -48,6 +48,7 @@
     asus-numberpad-driver,
     lanzaboote,
     nix-minecraft,
+    hjem,
     ...
   } @ inputs: let
     inherit (self) outputs;

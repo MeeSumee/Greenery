@@ -181,6 +181,26 @@
         "type": "github"
       }
     },
+    "hjem": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747038076,
+        "narHash": "sha256-vy+My+8yRRu0OG6XBEPDR8ebfrPS4iuruyQ1ZUyHq6s=",
+        "owner": "feel-co",
+        "repo": "hjem",
+        "rev": "7d674eaded6586554910e62baed5eadad6496315",
+        "type": "github"
+      },
+      "original": {
+        "owner": "feel-co",
+        "repo": "hjem",
+        "type": "github"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -313,6 +333,7 @@
       "inputs": {
         "aagl": "aagl",
         "asus-numberpad-driver": "asus-numberpad-driver",
+        "hjem": "hjem",
         "lanzaboote": "lanzaboote",
         "nix-matlab": "nix-matlab",
         "nix-minecraft": "nix-minecraft",
