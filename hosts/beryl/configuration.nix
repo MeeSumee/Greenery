@@ -26,7 +26,7 @@
   # Enable Thunderbolt Service for USB4 support
   services.hardware.bolt.enable = true;
 
-  networking.hostName = "Beryl"; # The tint of blue I like
+  networking.hostName = "beryl"; # The tint of blue I like
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
