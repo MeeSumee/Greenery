@@ -168,6 +168,7 @@
     matlab # Matlab for control systems and processing, WIP
     matlab-shell # Matlab-shell for installing MATLAB
     discord # Slowly getting worse
+    brave # Import Browser Profiles
     vim # Vim editor (I'm not good at it)
     btop # System Monitor
     sbctl # Secure Boot Control
