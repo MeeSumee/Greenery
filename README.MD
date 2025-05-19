@@ -117,7 +117,7 @@ Despite knowing the risk, I've decided to enable USB4 using
 [UniversalAMDFormBrowser](https://github.com/DavidS95/Smokeless_UMAF/blob/main/UniversalAMDFormBrowser.zip) by following this reddit [post](https://www.reddit.com/r/ASUS/comments/13omq1e/zenbook_s13_bios_update_for_usb_4_whats_going_on/).
 Note that there are three options when enabling USB4.
 
-To activate USB4 on NixOS, set ```bash services.hardware.bolt.enable``` to true.
+To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
 Test your USB4 ports using boltctl, if there's instability, disable bolt service.
 
 ## What's left in hardware & software for Beryl
