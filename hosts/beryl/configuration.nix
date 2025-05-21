@@ -167,14 +167,15 @@
 */
     matlab # Matlab for control systems and processing, WIP
     matlab-shell # Matlab-shell for installing MATLAB
-    discord # Slowly getting worse
+    (pkgs.discord.override { enableAutoscroll = true; }) # Discord + Auto Scroll Option
     brave # Import Browser Profiles
     vim # Vim editor (I'm not good at it)
     btop # System Monitor
     sbctl # Secure Boot Control
+    pkgs.win2xcur # Win2Linux Cursor Conversion Tool
     git # Self-explanatory
     openshot-qt # Video Editing
-    gimp # Image Manipulation
+    gimp3 # Image Manipulation
     wineWowPackages.waylandFull # Wine
     xournalpp # Note taking
     vlc # Media Player
