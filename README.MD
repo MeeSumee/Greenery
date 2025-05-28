@@ -21,6 +21,18 @@ My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
 - Wallpaper : [Vivian Banshee by pyogo (danbooru)](https://danbooru.donmai.us/posts/9259057)
 - Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/44d0455a17e05871fb4cd5dc475f32973801a1a5/beryl/hosts/Sumeezome/configuration.nix)
 
+# Running my configuration using nix run
+To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
+
+Greenery:
+```nix run github:MeeSumee/Greenery#greeneryVM```
+Username: greenery
+Password: touchgrass
+
+Beryl:
+```nix run github:MeeSumee/Greenery#berylVM```
+Password: berylline
+
 ## Introduction
 So, I've started doing Nix Shenanigans, how did I get here and what did I do?
 
@@ -128,9 +140,6 @@ System is currently in HSI:1 security and needs a few security tweaks.
 
 I have no idea whether Pixel Shift (OLED Care) works in NixOS. I got a
 [Pixel Shift Test image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/PIXELSHIFTTEST.png), however, I cannot notice any pixel shifts.
-
-I will try to get this config into a VM like umbrella for anyone to
-test it out or make any changes. 
 
 # Greenery Rambling
 This server aims to be completely remote providing only ssh access from the devices I allow.
