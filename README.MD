@@ -28,8 +28,7 @@ Greenery:
 ```
 nix run github:MeeSumee/Greenery#greeneryVM
 ```
-Username: greenery
-Password: touchgrass
+Username: greenery, Password: touchgrass
 
 Beryl:
 ```
