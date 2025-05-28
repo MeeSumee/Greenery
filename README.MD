@@ -26,7 +26,6 @@ To test out or modify either of my NixOS configurations, run the following comma
 
 Greenery:
 ```
-bash
 nix run github:MeeSumee/Greenery#greeneryVM
 ```
 Username: greenery
@@ -34,7 +33,6 @@ Password: touchgrass
 
 Beryl:
 ```
-bash
 nix run github:MeeSumee/Greenery#berylVM
 ```
 Password: berylline
