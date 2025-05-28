@@ -44,7 +44,7 @@
     };
     users.beryl = {
       enable = true;
-      initialPassword = "berylline";
+      initialPassword = "";
       createHome = true;
       isNormalUser = true;
       uid = 1000;
