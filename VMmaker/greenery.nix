@@ -33,7 +33,7 @@
     };
     users.greenery = {
       enable = true;
-      initialPassword = "";
+      initialPassword = "touchgrass";
       createHome = true;
       isNormalUser = true;
       uid = 1000;
