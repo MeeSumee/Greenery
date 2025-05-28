@@ -28,12 +28,15 @@ Greenery:
 ```
 nix run github:MeeSumee/Greenery#greeneryVM
 ```
-Username: greenery
+Username: ```greenery```
+
+Initial Password: ```touchgrass```
 
 Beryl:
 ```
 nix run github:MeeSumee/Greenery#berylVM
 ```
+Initial Password: ```berylline```
 
 Issues: BerylVM lags quite a bit, potentially due to the lack of hardware gpu passthrough as it's running NixOS Generators
 on a graphical user interface. It also does not have the extension plugins I've installed. Will make it declarative in
