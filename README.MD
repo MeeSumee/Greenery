@@ -25,12 +25,18 @@ My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
 To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
 
 Greenery:
-```nix run github:MeeSumee/Greenery#greeneryVM```
+```
+bash
+nix run github:MeeSumee/Greenery#greeneryVM
+```
 Username: greenery
 Password: touchgrass
 
 Beryl:
-```nix run github:MeeSumee/Greenery#berylVM```
+```
+bash
+nix run github:MeeSumee/Greenery#berylVM
+```
 Password: berylline
 
 ## Introduction
