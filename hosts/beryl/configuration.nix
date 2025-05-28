@@ -131,7 +131,7 @@
   };
 
   # Firefox
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
   
   # Gaseous H2O
   programs.steam = {
@@ -168,6 +168,7 @@
     matlab # Matlab for control systems and processing, WIP
     matlab-shell # Matlab-shell for installing MATLAB
     (pkgs.discord.override { enableAutoscroll = true; }) # Discord + Auto Scroll Option
+    librewolf # Librewolf browser
     brave # Import Browser Profiles
     vim # Vim editor (I'm not good at it)
     btop # System Monitor
@@ -233,6 +234,19 @@
     ignoreWaylandDisplayEnv = false;
     config = {
       # e.g. "activation_time" = "0.5";
+    };
+  };
+
+  # Potential fix for AMD Rembrandt Hardware Acceleration Crash? I'll find out soon
+  boot.kernelParams = ["idle=nowwait" "iommu=pt"];
+
+  # Enable OpenGL with AMD Vulkan (Might help Rembrandt HardwareAccel
+  hardware = {
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        amdvlk
+      ];
     };
   };
 
