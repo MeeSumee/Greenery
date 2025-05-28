@@ -63,7 +63,7 @@ However, I have not tested Lanzaboote with BIOS password enabled.
 ## Japanese Keyboard IME ( 日本語 )
 Insert this into your i18n:
 ```bash
-extraLocales = [ "ja_JP.UTF-8" ] ;
+extraLocales = [ "ja_JP.UTF-8" ];
 ```
 For Japanese Input, add this to your config. Fonts and inputs are customizable.
 ```bash
