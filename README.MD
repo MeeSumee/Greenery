@@ -36,6 +36,10 @@ nix run github:MeeSumee/Greenery#berylVM
 ```
 Password: berylline
 
+Issues: BerylVM lags quite a bit, potentially due to the lack of hardware gpu passthrough as it's running NixOS Generators
+on a graphical user interface. It also does not have the extension plugins I've installed. Will make it declarative in
+configuration.nix though.
+
 ## Introduction
 So, I've started doing Nix Shenanigans, how did I get here and what did I do?
 
