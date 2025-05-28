@@ -176,6 +176,7 @@
     git # Self-explanatory
     openshot-qt # Video Editing
     gimp3 # Image Manipulation
+    foliate # e-book reader
     wineWowPackages.waylandFull # Wine
     xournalpp # Note taking
     vlc # Media Player
