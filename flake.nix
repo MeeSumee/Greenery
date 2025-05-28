@@ -39,6 +39,12 @@
       url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    # QEMU VM Maker
+    generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -49,6 +55,7 @@
     lanzaboote,
     nix-minecraft,
     hjem,
+    generators,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -92,5 +99,23 @@
         ];
       };
     };
+    
+    packages = forAllSystems (pkgs: rec {
+      berylVM = generators.nixosGenerate {
+        inherit (pkgs) system;
+        modules = [
+          ./VMmaker/beryl.nix
+        ];
+        format = "vm";
+      };
+      
+      greeneryVM = generators.nixosGenerate {
+        inherit (pkgs) system;
+        modules = [
+          ./VMmaker/greenery.nix
+        ];
+        format = "vm";
+      };
+    });
   };
 }
