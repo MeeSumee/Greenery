@@ -181,10 +181,6 @@ This is why I ditched the original method of KDEConnect.
 ## Credits
 [RexCrazy804](https://github.com/Rexcrazy804) for literally carrying me. I swear he needs a better PC.
 
-![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/ForRex.jpg)
-
-This is for you Rex, as a token of gratitude.
-
 I also want to thank the folks of UAFB who made USB4 possible.
 
 Lastly, I want to thank the Nix Community for its push for packages,
