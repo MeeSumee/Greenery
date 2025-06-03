@@ -144,6 +144,17 @@
   # Java
   programs.java.enable = true;
   
+  programs.dconf.profiles.user.databases = [{
+    settings."org/gnome/desktop/interface" = {
+      cursor-theme = "xcursor-genshin-nahida";
+      icon-theme = "Adwaita";
+      font-name = "Adwaita Sans";
+      document-font-name = "Adwaita Sans";
+      monospace-font-name = "Source Code Pro";
+      color-scheme = "prefer-dark";
+    };
+  }];
+  
   # Not necessary, used tailscale instead
 /*
   programs.kdeconnect = {
