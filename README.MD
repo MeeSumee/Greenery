@@ -24,7 +24,7 @@ My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
 # Running my configuration using nix run
 To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
 
-Greenery:
+Greenery (GVM):
 ```
 nix run github:MeeSumee/Greenery#nixosConfigurations.GVM.config.system.build.vm
 ```
@@ -32,7 +32,7 @@ Username: ```greenery```
 
 Initial Password: ```touchgrass```
 
-Beryl:
+Beryl (BVM):
 ```
 nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm
 ```
