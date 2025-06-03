@@ -26,7 +26,7 @@ To test out or modify either of my NixOS configurations, run the following comma
 
 Greenery:
 ```
-nix run github:MeeSumee/Greenery#greeneryVM
+nix run github:MeeSumee/Greenery#nixosConfigurations.GVM.config.system.build.vm
 ```
 Username: ```greenery```
 
@@ -34,13 +34,12 @@ Initial Password: ```touchgrass```
 
 Beryl:
 ```
-nix run github:MeeSumee/Greenery#berylVM
+nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm
 ```
 Initial Password: ```berylline```
 
-Issues: BerylVM lags quite a bit, potentially due to the lack of hardware gpu passthrough as it's running NixOS Generators
-on a graphical user interface. It also does not have the extension plugins I've installed. Will make it declarative in
-configuration.nix though.
+Notes: Beryl VM (BVM) does not lag on my laptop due to the VM loading my laptop drivers, however, different
+machines may experience lag due to driver mismatch.
 
 ## Introduction
 So, I've started doing Nix Shenanigans, how did I get here and what did I do?
