@@ -31,12 +31,6 @@
     ];
   };
 
-  servModule = {
-    enable = true;
-    immich.enable = false;
-    minecraft.enable = false;
-  };
-
   services.dnscrypt-proxy2 = {
       enable = true;
       settings = {
@@ -107,7 +101,7 @@
     variant = "";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account.
   users.users.administrator = {
     isNormalUser = true;
     description = "Administrator";
@@ -130,8 +124,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+        pkgs.wget
 	pkgs.neovim
 	pkgs.jdk17
 	pkgs.speedtest-cli
@@ -186,12 +179,6 @@
 	  "--accept-dns=false"
 	];
   };  
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

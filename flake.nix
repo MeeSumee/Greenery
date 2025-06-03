@@ -39,12 +39,6 @@
       url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    # QEMU VM Maker
-    generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -55,7 +49,6 @@
     lanzaboote,
     nix-minecraft,
     hjem,
-    generators,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -98,24 +91,39 @@
           ./server
         ];
       };
-    };
-    
-    packages = forAllSystems (pkgs: rec {
-      berylVM = generators.nixosGenerate {
-        inherit (pkgs) system;
+      
+      BVM = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          flakeOverlays = [nix-matlab.overlay];
+        };
+        
         modules = [
           ./VMmaker/beryl.nix
+          asus-numberpad-driver.nixosModules.default
+          
+          lanzaboote.nixosModules.lanzaboote
+          ({ pkgs, lib, ... }: {
+            
+            boot.loader.systemd-boot.enable = lib.mkForce false;
+            
+            boot.lanzaboote = {
+              enable = true;
+              pkiBundle = "/var/lib/sbctl";
+            };
+          })
         ];
-        format = "vm";
       };
       
-      greeneryVM = generators.nixosGenerate {
-        inherit (pkgs) system;
+      GVM = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+        };
+        
         modules = [
           ./VMmaker/greenery.nix
         ];
-        format = "vm";
       };
-    });
+    };
   };
 }

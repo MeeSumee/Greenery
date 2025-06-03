@@ -120,16 +120,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.sumeezome = {
-    isNormalUser = true;
-    description = "Sumeezome";
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
+  # Define user accounts.
+  users.users = {
+    sumeezome = {
+      isNormalUser = true;
+      description = "Sumeezome";
+      extraGroups = ["networkmanager" "wheel"];
+    };
   };
-
+  
   # Firefox
   programs.firefox.enable = false;
   
@@ -187,6 +186,8 @@
     zoom-us # Meetings
     arduino-ide # Programming
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
+    gnomeExtensions.kimpanel # Input Method Panel
+    gnomeExtensions.blur-my-shell # Blurring Appearance Tool
   ];
 
   # Adds rocm support to btop and nixos
@@ -204,7 +205,14 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = ["Sumeezome"];
+    };
+  };
   
   # Enable tailscale VPN service
   services.tailscale = {
