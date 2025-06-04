@@ -67,6 +67,8 @@
         };
         modules = [
           ./hosts/beryl/configuration.nix
+          ./hosts/beryl/hardware-configuration.nix
+          ./hosts/beryl/battery.nix
           asus-numberpad-driver.nixosModules.default
           
           lanzaboote.nixosModules.lanzaboote
@@ -88,6 +90,7 @@
         
         modules = [
           ./hosts/greenery/configuration.nix
+          ./hosts/greenery/hardware-configuration.nix
           ./server
         ];
       };

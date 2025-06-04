@@ -9,10 +9,8 @@
   ...
 }: {
   imports = [
-    # Import hardware config and other stuff.
-    ./hardware-configuration.nix
+    # Imports.
     ./aagl.nix
-    ./battery.nix
   ];
   
   # Required for MATLAB
@@ -21,10 +19,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  
-  # Enable Thunderbolt Service for USB4 support
-  services.hardware.bolt.enable = true;
 
   networking.hostName = "beryl"; # The tint of blue I like
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -229,51 +223,6 @@
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "both";
-  };
-  
-  # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
-  systemd.services.fprintd = {
-    wantedBy = ["multi-user.target"];
-    serviceConfig.Type = "simple";
-  };
-  services.fprintd = {
-    enable = true;
-    package = pkgs.fprintd-tod;
-    tod.enable = true;
-    tod.driver = pkgs.libfprint-2-tod1-elan;
-  };
-
-  # Enable Asus Numpad Service
-  services.asus-numberpad-driver = {
-    enable = true;
-    layout = "up5401ea";
-    wayland = true;
-    runtimeDir = "/run/user/1000/";
-    waylandDisplay = "wayland-0";
-    ignoreWaylandDisplayEnv = false;
-    config = {
-      # e.g. "activation_time" = "0.5";
-    };
-  };
-
-  # Potential fix for AMD Rembrandt Hardware Acceleration Crash? I'll find out soon
-  boot.kernelParams = ["idle=nowwait" "iommu=pt"];
-
-  # Enable OpenGL with AMD Vulkan (Might help Rembrandt HardwareAccel
-  hardware = {
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        amdvlk
-      ];
-    };
-  };
-
-  # Sets battery charge limit, nix file stolen from nix hardware repo
-  hardware.asus.battery =
-  {
-    chargeUpto = 80;   # Maximum level of charge for your battery, as a percentage.
-    enableChargeUptoScript = true; # Whether to add charge-upto to 80
   };
 
   # Enable Firmware Updates
