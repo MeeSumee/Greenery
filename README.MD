@@ -70,7 +70,7 @@ for GNOME as far as I know.
 
 ## Fingerprint Sensor
 It is also relatively straightforward as all I did is use fprint with ELAN
-drivers. Refer to [configuration.nix](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/hosts/beryl/configuration.nix) as for how I implemented it.
+drivers. Refer to [hardware-configuration.nix](https://github.com/MeeSumee/Greenery/blob/71ad5bf7c585f36159a50af3b3ff3e6baaf4f475/hosts/beryl/hardware-configuration.nix) as for how I implemented it.
 Remember to swipe on the fingerprint sensor rather than the usual tap.
 (I swear it took me so long to realize this)
 
