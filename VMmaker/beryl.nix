@@ -12,6 +12,8 @@
   ];
 
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   
   virtualisation.vmVariant = {
     virtualisation = {
