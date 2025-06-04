@@ -11,6 +11,9 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   
+  # Tell xserver to use amd gpu
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  
   # Enable Thunderbolt Service for USB4 support
   services.hardware.bolt.enable = true;
 

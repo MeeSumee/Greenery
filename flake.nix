@@ -58,6 +58,10 @@
         system: fn (import nixpkgs {system = system;})
       );
   in {
+    packages = forAllSystems (pkgs: { 
+      default = pkgs.callPackage ./pkgs/cursors.nix {};
+    });
+    
     formatter = forAllSystems (pkgs: pkgs.alejandra);
     nixosConfigurations = {
       beryl = nixpkgs.lib.nixosSystem {

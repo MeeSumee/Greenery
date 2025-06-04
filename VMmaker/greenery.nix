@@ -5,11 +5,15 @@
 {
   imports =
     [
-      # Imports
+      # Imports config and undetected drivers in your system
       ../hosts/greenery/configuration.nix
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
   
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  # Provide support for AMD and Intel CPUs
+  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   
   virtualisation.vmVariant = {
     virtualisation = {

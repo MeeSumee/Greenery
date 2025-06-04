@@ -55,8 +55,26 @@
     type = "fcitx5";
   };
   
-  # Enable mozc as input method in fcitx. Good for JP input.
-  i18n.inputMethod.fcitx5.addons = [ pkgs.fcitx5-mozc ];
+  # Add and enable mozc as input method in fcitx. Good for JP input.
+  i18n.inputMethod.fcitx5 = {
+    addons = [ pkgs.fcitx5-mozc ];
+    
+    settings.inputMethod = {
+      "Groups/0" = {
+        "Name" = "Default";
+        "Default Layout" = "us";
+        "DefaultIM" = "mozc";
+      };
+      "Groups/0/Items/0" = {
+        "Name" = "keyboard-us";
+        "Layout" = null;
+      };
+      "Groups/0/Items/1" = {
+        "Name" = "mozc";
+        "Layout" = null;
+      };
+    };
+  };
   
   # Provides ibus for input method
   environment.variables.GLFW_IM_MODULE = "ibus";
@@ -75,7 +93,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -138,14 +155,51 @@
   # Java
   programs.java.enable = true;
   
+  # GNOME Configuration, evading requirement Home-Manager 
   programs.dconf.profiles.user.databases = [{
-    settings."org/gnome/desktop/interface" = {
-      cursor-theme = "xcursor-genshin-nahida";
-      icon-theme = "Adwaita";
-      font-name = "Adwaita Sans";
-      document-font-name = "Adwaita Sans";
-      monospace-font-name = "Source Code Pro";
-      color-scheme = "prefer-dark";
+    settings = {
+      "org/gnome/desktop/interface" = {
+        icon-theme = "Papirus-Dark";
+        cursor-theme = "xcursor-genshin-nahida";
+        monospace-font-name = "Source Code Pro";
+        color-scheme = "prefer-dark";
+        clock-show-weekday = true;
+      };
+      
+      "org/gnome/desktop/background" = {
+          picture-uri-dark = let
+            background = pkgs.fetchurl {
+              name = "vivianbg.jpeg";
+              url = "https://cdn.donmai.us/original/22/3a/__vivian_banshee_zenless_zone_zero_and_1_more_drawn_by_pyogo__223ad637e74d7f5bd860e08e7ea435ad.png?download=1";
+              hash = "sha256-oCx5xtlR4Kq4WGcdDHMbeMd7IiSA3RKsnh+cpD+4UY0=";
+            };
+          in "file://${background}";
+          picture-options = "zoom";
+       };
+      
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+      
+        enabled-extensions = [
+          "user-theme@gnome-shell-extensions.gcampax.github.com"
+          "kimpanel@kde.org"
+          "blur-my-shell@aunetx"
+        ];
+      
+        favorite-apps = [
+          "librewolf.desktop"
+          "brave-browser.desktop"
+          "steam.desktop"
+          "com.github.xournalpp.xournalpp.desktop"
+          "btop.desktop"
+          "org.prismlauncher.PrismLauncher.desktop"
+          "org.openshot.OpenShot.desktop"
+          "org.gnome.Nautilus.desktop"
+          "org.gnome.Console.desktop"
+          "org.gnome.TextEditor.desktop"
+          "com.github.johnfactotum.Foliate.desktop"
+        ];
+      };
     };
   }];
   
@@ -177,7 +231,6 @@
     vim # Vim editor (I'm not good at it)
     btop # System Monitor
     sbctl # Secure Boot Control
-    pkgs.win2xcur # Win2Linux Cursor Conversion Tool
     git # Self-explanatory
     openshot-qt # Video Editing
     gimp3 # Image Manipulation
@@ -191,8 +244,11 @@
     zoom-us # Meetings
     arduino-ide # Programming
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
+    (pkgs.callPackage ../../pkgs/cursors.nix {})
+    papirus-icon-theme # Icon Theme
     gnomeExtensions.kimpanel # Input Method Panel
     gnomeExtensions.blur-my-shell # Blurring Appearance Tool
+    gnomeExtensions.user-themes
   ];
 
   # Adds rocm support to btop and nixos

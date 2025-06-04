@@ -4,13 +4,16 @@
   pkgs,
   options,
   lib,
+  modulesPath,
   ...
 }: {
   imports = [
-    # Imports
+    # Imports config and undetected drivers in your system
     ../hosts/beryl/configuration.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
-
+  
+  # Provide support for AMD and Intel CPUs
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
