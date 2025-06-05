@@ -155,7 +155,7 @@
   # Java
   programs.java.enable = true;
   
-  # GNOME Configuration, evading requirement Home-Manager 
+  # GNOME Configuration, evading Home-Manager 
   programs.dconf.profiles.user.databases = [{
     settings = {
       "org/gnome/desktop/interface" = {
@@ -280,7 +280,13 @@
     enable = true;
     useRoutingFeatures = "both";
   };
-
+  
+  # Fix tailscale auto-connect
+  systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
+  
+  # Fix Gnome Keyring popup when using certain applications (Brave in my case)
+  security.pam.services.gdm.enableGnomeKeyring = true;
+  
   # Enable Firmware Updates
   services.fwupd.enable = true;
   
