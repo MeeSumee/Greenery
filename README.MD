@@ -38,8 +38,7 @@ nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm
 ```
 Initial Password: ```berylline```
 
-Notes: Beryl VM (BVM) does not lag on my laptop due to the VM loading my laptop drivers, however, different
-machines may experience lag due to driver mismatch.
+Notes: Beryl VM (BVM) may experience lag due to driver mismatch.
 
 ## Introduction
 So, I've started doing Nix Shenanigans, how did I get here and what did I do?
@@ -103,8 +102,26 @@ For Japanese Input, add this to your config. Fonts and inputs are customizable.
     type = "fcitx5";
   };
   
-  # Enable mozc as input method in fcitx. Good for JP input.
-  i18n.inputMethod.fcitx5.addons = [ pkgs.fcitx5-mozc ];
+  # Add and enable mozc as input method in fcitx. Good for JP input.
+  i18n.inputMethod.fcitx5 = {
+    addons = [ pkgs.fcitx5-mozc ];
+    
+    settings.inputMethod = {
+      "Groups/0" = {
+        "Name" = "Default";
+        "Default Layout" = "us";
+        "DefaultIM" = "mozc";
+      };
+      "Groups/0/Items/0" = {
+        "Name" = "keyboard-us";
+        "Layout" = null;
+      };
+      "Groups/0/Items/1" = {
+        "Name" = "mozc";
+        "Layout" = null;
+      };
+    };
+  };
   
   # Provides ibus for input method
   environment.variables.GLFW_IM_MODULE = "ibus";
