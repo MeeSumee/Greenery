@@ -126,7 +126,8 @@
   environment.systemPackages = with pkgs; [
         pkgs.wget
 	pkgs.neovim
-	pkgs.jdk17
+	pkgs.unzip
+	pkgs.jdk11
 	pkgs.speedtest-cli
 	pkgs.tree
 	pkgs.lm_sensors
