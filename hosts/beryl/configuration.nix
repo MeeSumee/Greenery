@@ -155,6 +155,12 @@
   # Java
   programs.java.enable = true;
   
+  # Zoxide, cd made easier
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+  
   # GNOME Configuration, evading Home-Manager 
   programs.dconf.profiles.user.databases = [{
     settings = {
@@ -228,7 +234,8 @@
     (pkgs.discord.override { enableAutoscroll = true; }) # Discord + Auto Scroll Option
     librewolf # Librewolf browser
     brave # Import Browser Profiles
-    vim # Vim editor (I'm not good at it)
+    neovim # neovim text editor
+    kdePackages.kate # Kate text editor
     btop # System Monitor
     sbctl # Secure Boot Control
     git # Self-explanatory
