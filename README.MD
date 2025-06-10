@@ -73,11 +73,9 @@ drivers. Refer to [hardware-configuration.nix](https://github.com/MeeSumee/Green
 Remember to swipe on the fingerprint sensor rather than the usual tap.
 (I swear it took me so long to realize this)
 
-## Lanzaboote
-This is strictly a Work-In-Progress section.
-
+## Lanzaboote & Boot Security
 It mostly involved following instructions [here](https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md).
-However, I have not tested Lanzaboote with BIOS password enabled.
+Adding a UEFI BIOS Password does not break the original EFI variables and NixOS boots fine with the password installed after configuring Lanzaboote.
 
 ## Japanese Keyboard IME ( 日本語 )
 Insert this into your i18n:
