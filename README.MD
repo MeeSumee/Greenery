@@ -77,6 +77,8 @@ Remember to swipe on the fingerprint sensor rather than the usual tap.
 It mostly involved following instructions [here](https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md).
 Adding a UEFI BIOS Password does not break the original EFI variables and NixOS boots fine with the password installed after configuring Lanzaboote.
 
+It is also noted that ASUS does not allow SPI Write Protection which means the max security level is HS1
+
 ## Japanese Keyboard IME ( 日本語 )
 Insert this into your i18n:
 ```bash
@@ -156,10 +158,10 @@ To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
 Test your USB4 ports using boltctl, if there's instability, disable bolt service.
 
 ## What's left in hardware & software for Beryl
+Integrate (or move to) [Niri](https://github.com/YaLTeR/niri). This requires extensive testing and UI building and will take a couple weeks to a couple months to refine it.
+
 There is no easy way to toggle the webcam using Fn + F10 (Fn Lock enabled).
 It involves running a custom script/program which I've yet to bother.
-
-System is currently in HSI:1 security and needs a few security tweaks.
 
 I have no idea whether Pixel Shift (OLED Care) works in NixOS. I got a
 [Pixel Shift Test image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/PIXELSHIFTTEST.png), however, I cannot notice any pixel shifts.
