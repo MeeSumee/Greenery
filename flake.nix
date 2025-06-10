@@ -106,7 +106,7 @@
         };
         
         modules = [
-          ./VMmaker/beryl.nix
+          ./vmmaker/beryl.nix
           asus-numberpad-driver.nixosModules.default
           
           lanzaboote.nixosModules.lanzaboote
@@ -128,7 +128,7 @@
         };
         
         modules = [
-          ./VMmaker/greenery.nix
+          ./vmmaker/greenery.nix
         ];
       };
     };
