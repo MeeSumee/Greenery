@@ -202,7 +202,7 @@
           "org.openshot.OpenShot.desktop"
           "org.gnome.Nautilus.desktop"
           "org.gnome.Console.desktop"
-          "org.gnome.TextEditor.desktop"
+          "org.kde.kate.desktop"
           "com.github.johnfactotum.Foliate.desktop"
         ];
       };
