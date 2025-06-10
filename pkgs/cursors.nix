@@ -4,8 +4,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     repo = "Greenery";
     owner = "MeeSumee";
-    rev = "c9047cee5aed566ea47321a0d505900e415883d8";
-    hash = "sha256-rCznuxP1mm5SB7t8KGzbgmqdM5Ry+e+oQXHzRp2fjq4=";
+    rev = "b3e311464be47f023243229e853968a5670b9952";
+    hash = "sha256-7kIz3fqEeGDTVeM8nUpWxRQp9kwVpGqfx+CD+YKVT90=";
   };
 
   installPhase = ''
