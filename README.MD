@@ -77,7 +77,7 @@ Remember to swipe on the fingerprint sensor rather than the usual tap.
 It mostly involved following instructions [here](https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md).
 Adding a UEFI BIOS Password does not break the original EFI variables and NixOS boots fine with the password installed after configuring Lanzaboote.
 
-It is also noted that ASUS does not allow SPI Write Protection which means the max security level is HS1
+It is also noted that ASUS does not allow SPI Write Protection which means the max security level is HS:1.
 
 ## Japanese Keyboard IME ( 日本語 )
 Insert this into your i18n:
