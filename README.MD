@@ -9,7 +9,7 @@ My server, a Dell Optiplex 3050 Tower
 ## Greenery NixOS Configuration
 ![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/Screenshot%20From%202025-05-16%2015-30-19.png)
 - If you didn't catch on, it's minimal NixOS
-- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/hosts/greenery/configuration.nix)
+- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/master/hosts/greenery/configuration.nix)
 
 ## Beryl
 My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
@@ -19,7 +19,7 @@ My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
 ## Beryl NixOS Configuration
 ![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/Screenshot%20From%202025-05-16%2013-14-41.png)
 - Wallpaper : [Vivian Banshee by pyogo (danbooru)](https://danbooru.donmai.us/posts/9259057)
-- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/44d0455a17e05871fb4cd5dc475f32973801a1a5/beryl/hosts/Sumeezome/configuration.nix)
+- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/master/hosts/beryl/configuration.nix)
 
 # Running my configuration using nix run
 To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
@@ -69,7 +69,7 @@ for GNOME as far as I know.
 
 ## Fingerprint Sensor
 It is also relatively straightforward as all I did is use fprint with ELAN
-drivers. Refer to [hardware-configuration.nix](https://github.com/MeeSumee/Greenery/blob/71ad5bf7c585f36159a50af3b3ff3e6baaf4f475/hosts/beryl/hardware-configuration.nix) as for how I implemented it.
+drivers. Refer to [hardware-configuration.nix](https://github.com/MeeSumee/Greenery/blob/master/hosts/beryl/hardware-configuration.nix) as for how I implemented it.
 Remember to swipe on the fingerprint sensor rather than the usual tap.
 (I swear it took me so long to realize this)
 
@@ -184,7 +184,7 @@ Tailscale is integral to how the server operates and how I connect my devices.
 I've setup Greenery to act as an exit node to route all my traffic so my
 workplace doesn't fucking break websites and block me from pushing to git.
 I swear IT has been cracking down on what I've been meaning to use.
-I've defined on my [config](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/hosts/greenery/configuration.nix) on how I've opened up the
+I've defined on my [config](https://github.com/MeeSumee/Greenery/blob/master/hosts/beryl/configuration.nix) on how I've opened up the
 Firewall and the tailscale service to utilize MagicDNS routing in Tailscale.
 Tailscale enables me to share my server to other users to enable them to
 connect to my Minecraft Server. It reduces the risk of attackers trying

@@ -121,17 +121,30 @@
 	"flakes"
   ];
 
+  # Enable non-nix executables
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
+
+  programs.zoxide = {
+	enable = true;
+	enableBashIntegration = true;
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
         pkgs.wget
 	pkgs.neovim
-	pkgs.jdk17
+	pkgs.unzip
+	pkgs.jdk21
 	pkgs.speedtest-cli
 	pkgs.tree
-	pkgs.lm_sensors
 	pkgs.screen
 	pkgs.git
+	pkgs.btop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
