@@ -6,15 +6,17 @@
   lib,
   modulesPath,
   flakeOverlays,
+  inputs,
   ...
 }: {
   imports = [
     # Imports.
     ./aagl.nix
+    inputs.niri.nixosModules.niri
   ];
   
-  # Required for MATLAB
-  nixpkgs.overlays = flakeOverlays;
+  # Nix Overlays defined from flake.nix
+  nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.nix-matlab.overlay ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -91,19 +93,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -155,13 +144,122 @@
   # Java
   programs.java.enable = true;
   
-  # Zoxide, cd made easier
+  # Extensive fish shell stuff (I cast thy spell STEAL on github:Rexcrazy804/Zaphkiel)
+  programs.fish = {
+    enable = true;
+    shellAbbrs = {
+
+      # nix stuff
+      snwb = "sudo nixos-rebuild boot --flake ~/nixos";
+      snwt = "sudo nixos-rebuild test --flake ~/nixos";
+      snws = "sudo nixos-rebuild switch --flake ~/nixos";
+      nsh = "nix shell nixpkgs#";
+      nrn = "nix run nixpkgs#";
+      np = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";
+
+      # git stuff
+      ga = "git add --all";
+      gc = "git commit";
+      gcm = "git commit -m";
+      gca = "git commit --amend";
+      gcp = "git cherry-pick";
+      gd = "git diff";
+      gds = "git diff --staged";
+
+      # misc
+      # to be added later
+    };
+
+    shellAliases = {
+      ls = "eza --icons --group-directories-first -1";
+      snowboot = "sudo nixos-rebuild boot --flake ~/nixos";
+      snowfall = "sudo nixos-rebuild switch --flake ~/nixos";
+      snowtest = "sudo nixos-rebuild test --flake ~/nixos";
+    };
+
+    interactiveShellInit = let
+      lsColors = pkgs.runCommandLocal "lscolors" {nativeBuildInputs = [pkgs.vivid];} ''
+        vivid generate rose-pine-moon > $out
+      '';
+    in ''
+      set sponge_purge_only_on_exit true
+      set fish_greeting
+      set fish_cursor_insert line blink
+      set -Ux LS_COLORS $(cat ${lsColors})
+      fish_vi_key_bindings
+
+      # segsy function to simply open whatever you've typed (in the prompt/) in
+      # your $EDITOR so that you can edit there and replace your command line
+      # with the edited content (actually sugoi desu rexie-kun)
+      function open_in_editor -d "opens current commandline in \$EDITOR"
+        set current_command $(commandline)
+        set tmp_file $(mktemp --suffix=.fish)
+        echo $current_command > $tmp_file
+        $EDITOR $tmp_file
+        commandline $(cat $tmp_file)
+        rm $tmp_file
+      end
+
+      function fish_user_key_bindings
+        bind --mode insert ctrl-o 'open_in_editor'
+        bind ctrl-o 'open_in_editor'
+      end
+    '';
+  };
+
   programs.zoxide = {
     enable = true;
-    enableBashIntegration = true;
+    enableFishIntegration = true;
+  };
+  programs.direnv.enableFishIntegration = true;
+
+  programs.command-not-found.enable = false;
+
+  programs.fzf.keybindings = true;
+
+  # bash-fish integration thanks to rexie
+  programs.bash = {
+    interactiveShellInit = ''
+      if [[ ($(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" || -n ''${IN_NIX_SHELL}) && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
+    '';
+  };
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+#    settings = {
+#      binds = {
+        # Key Binds
+#        "Mod+T".action.spawn = "foot";
+        
+        # Hardware communication
+#        "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
+#        "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
+#      };
+#    };
   };
   
-  # GNOME Configuration, evading Home-Manager 
+  services.displayManager.defaultSession = "niri";
+  systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # GNOME & X11 Configuration, evading Home-Manager
   programs.dconf.profiles.user.databases = [{
     settings = {
       "org/gnome/desktop/interface" = {
@@ -202,40 +300,30 @@
           "org.openshot.OpenShot.desktop"
           "org.gnome.Nautilus.desktop"
           "org.gnome.Console.desktop"
-          "org.kde.kate.desktop"
+          "org.gnome.TextEditor.desktop"
           "com.github.johnfactotum.Foliate.desktop"
         ];
       };
     };
   }];
-  
-  # Not necessary, used tailscale instead
-/*
-  programs.kdeconnect = {
-    enable = true;
-    package = pkgs.gnomeExtensions.gsconnect;
-  };
-*/
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-/*  
-    if you use "with pkgs;", elements inside the 
-    list don't need the "pkgs.<pkgname>" syntax
-    if you remove the "with pkgs;" line, then you will need to
-    call below as pkgs.<pkgname> (which is what I prefer personally)
-    why did I choose to remove pkgs.<pkgname>? MethLab 
-*/
+
+    # Desktop Programs
     matlab # Matlab for control systems and processing, WIP
     matlab-shell # Matlab-shell for installing MATLAB
     (pkgs.discord.override { enableAutoscroll = true; }) # Discord + Auto Scroll Option
     librewolf # Librewolf browser
     brave # Import Browser Profiles
     neovim # neovim text editor
-    kdePackages.kate # Kate text editor
+    vscodium # VSCodium text editor
+    fzf # Fuzzy Finder
+    foot # foot terminal
     btop # System Monitor
     sbctl # Secure Boot Control
     git # Self-explanatory
@@ -250,12 +338,25 @@
     prismlauncher # Minecraft
     zoom-us # Meetings
     arduino-ide # Programming
-    gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
+
+    # Flake Packages
     (pkgs.callPackage ../../pkgs/cursors.nix {})
+
+    # Niri stuff
+    alacritty # Get shit up and running cause I cannot do anything lmao
+
+    # Gnome stuff
+    gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
     papirus-icon-theme # Icon Theme
     gnomeExtensions.kimpanel # Input Method Panel
     gnomeExtensions.blur-my-shell # Blurring Appearance Tool
     gnomeExtensions.user-themes
+
+    # fish moment
+    fishPlugins.done
+    fishPlugins.sponge
+    eza
+    fish-lsp
   ];
 
   # Adds rocm support to btop and nixos
@@ -285,10 +386,10 @@
   # Enable tailscale VPN service
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "both";
+    useRoutingFeatures = "both"; # Enables the use of exit node
   };
   
-  # Fix tailscale auto-connect
+  # Fix tailscale auto-connect during login (might not be necessary)
   systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
   
   # Fix Gnome Keyring popup when using certain applications (Brave in my case)

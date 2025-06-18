@@ -21,6 +21,13 @@
       diskSize = 10 * 1024; # Set Disk Size in GiB
       memorySize = 4 * 1024; # Set Memory Allocation in GiB
       cores = 2; # Set number of cores
+      qemu.options = [
+        # Enable copy/paste
+        # https://www.kraxel.org/blog/2021/05/qemu-cut-paste/
+        "-chardev qemu-vdagent,id=ch1,name=vdagent,clipboard=on"
+        "-device virtio-serial-pci"
+        "-device virtserialport,chardev=ch1,id=ch1,name=com.redhat.spice.0"
+      ];
     };
   };
 

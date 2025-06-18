@@ -1,8 +1,20 @@
 {
-  description = "Beryl Flake Config";
+  description = "MeeSumee's Flake Config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Niri-flake
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    # Quickshell UI-maker
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # hjem for declaring files in home
     hjem = {
@@ -44,6 +56,7 @@
   outputs = {
     self,
     nixpkgs,
+    niri,
     nix-matlab,
     asus-numberpad-driver,
     lanzaboote,
@@ -67,7 +80,6 @@
       beryl = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          flakeOverlays = [nix-matlab.overlay];
         };
         modules = [
           ./hosts/beryl/configuration.nix
@@ -102,7 +114,6 @@
       BVM = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          flakeOverlays = [nix-matlab.overlay];
         };
         
         modules = [
