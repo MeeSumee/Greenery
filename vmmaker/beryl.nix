@@ -15,15 +15,19 @@
   
   # Provide support for AMD and Intel CPUs
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
-
+  
+  # Is it necessary? Idk
   hardware.graphics.enable = true;
-
+  
+  # Defines host platform
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
+  
+  # Enable Spice services for copy-paste 
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
   services.spice-autorandr.enable = true;
   
+  # VM configuration
   virtualisation.vmVariant = {
     virtualisation = {
       graphics = true; # Enable Graphics
@@ -32,12 +36,13 @@
       cores = 4; # Set number of cores
       spiceUSBRedirection.enable = true; # Spice USB correction thingy I found online
       qemu.options = [
-          # Better display option
-          "-device virtio-vga-gl,xres=1920,yres=1080"
+          # This set of config works well with wayland nixos, not tested on non-nixos platforms
+          "-device virtio-vga-gl"
           "-display sdl,gl=on"
+          "-full-screen"
           "-usb -device usb-tablet"
           "-usbdevice tablet"
-          # Enable copy/paste
+          # Enable copy/paste?
           # https://www.kraxel.org/blog/2021/05/qemu-cut-paste/
           "-chardev qemu-vdagent,id=ch1,name=vdagent,clipboard=on"
           "-device virtio-serial-pci"

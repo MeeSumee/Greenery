@@ -15,6 +15,11 @@
   # Provide support for AMD and Intel CPUs
   boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
   
+  # Enable Spice services for copy-paste 
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
+  services.spice-autorandr.enable = true;
+  
   virtualisation.vmVariant = {
     virtualisation = {
       graphics = false; # Enable Graphics
@@ -22,7 +27,7 @@
       memorySize = 4 * 1024; # Set Memory Allocation in GiB
       cores = 2; # Set number of cores
       qemu.options = [
-        # Enable copy/paste
+        # Enable copy/paste?
         # https://www.kraxel.org/blog/2021/05/qemu-cut-paste/
         "-chardev qemu-vdagent,id=ch1,name=vdagent,clipboard=on"
         "-device virtio-serial-pci"

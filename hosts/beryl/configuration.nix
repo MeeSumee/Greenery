@@ -12,11 +12,12 @@
   imports = [
     # Imports.
     ./aagl.nix
-    inputs.niri.nixosModules.niri
+    ./desktop.nix
+    ./inputfont.nix
   ];
   
   # Nix Overlays defined from flake.nix
-  nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.nix-matlab.overlay ];
+  nixpkgs.overlays = [ inputs.nix-matlab.overlay ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -40,46 +41,6 @@
     defaultLocale = "en_US.UTF-8";
     extraLocales = [ "ja_JP.UTF-8/UTF-8" ] ;
   };
-
-  # Font Settings for both English and Japanese
-  fonts.packages = with pkgs; [
-    carlito
-    dejavu_fonts
-    ipafont
-    kochi-substitute
-    source-code-pro
-    ttf_bitstream_vera
-  ];
-  
-  # Enable fcitx for Input Method Editor (IME)
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-  };
-  
-  # Add and enable mozc as input method in fcitx. Good for JP input.
-  i18n.inputMethod.fcitx5 = {
-    addons = [ pkgs.fcitx5-mozc ];
-    
-    settings.inputMethod = {
-      "Groups/0" = {
-        "Name" = "Default";
-        "Default Layout" = "us";
-        "DefaultIM" = "mozc";
-      };
-      "Groups/0/Items/0" = {
-        "Name" = "keyboard-us";
-        "Layout" = null;
-      };
-      "Groups/0/Items/1" = {
-        "Name" = "mozc";
-        "Layout" = null;
-      };
-    };
-  };
-  
-  # Provides ibus for input method
-  environment.variables.GLFW_IM_MODULE = "ibus";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -228,85 +189,6 @@
     '';
   };
 
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-#    settings = {
-#      binds = {
-        # Key Binds
-#        "Mod+T".action.spawn = "foot";
-        
-        # Hardware communication
-#        "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"];
-#        "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
-#      };
-#    };
-  };
-  
-  services.displayManager.defaultSession = "niri";
-  systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # GNOME & X11 Configuration, evading Home-Manager
-  programs.dconf.profiles.user.databases = [{
-    settings = {
-      "org/gnome/desktop/interface" = {
-        icon-theme = "Papirus-Dark";
-        cursor-theme = "xcursor-genshin-nahida";
-        monospace-font-name = "Source Code Pro";
-        color-scheme = "prefer-dark";
-        clock-show-weekday = true;
-      };
-      
-      "org/gnome/desktop/background" = {
-          picture-uri-dark = let
-            background = pkgs.fetchurl {
-              name = "vivianbg.jpeg";
-              url = "https://cdn.donmai.us/original/22/3a/__vivian_banshee_zenless_zone_zero_and_1_more_drawn_by_pyogo__223ad637e74d7f5bd860e08e7ea435ad.png?download=1";
-              hash = "sha256-oCx5xtlR4Kq4WGcdDHMbeMd7IiSA3RKsnh+cpD+4UY0=";
-            };
-          in "file://${background}";
-          picture-options = "zoom";
-       };
-      
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-      
-        enabled-extensions = [
-          "user-theme@gnome-shell-extensions.gcampax.github.com"
-          "kimpanel@kde.org"
-          "blur-my-shell@aunetx"
-        ];
-      
-        favorite-apps = [
-          "librewolf.desktop"
-          "brave-browser.desktop"
-          "steam.desktop"
-          "com.github.xournalpp.xournalpp.desktop"
-          "btop.desktop"
-          "org.prismlauncher.PrismLauncher.desktop"
-          "org.openshot.OpenShot.desktop"
-          "org.gnome.Nautilus.desktop"
-          "org.gnome.Console.desktop"
-          "org.gnome.TextEditor.desktop"
-          "com.github.johnfactotum.Foliate.desktop"
-        ];
-      };
-    };
-  }];
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -343,7 +225,7 @@
     (pkgs.callPackage ../../pkgs/cursors.nix {})
 
     # Niri stuff
-    alacritty # Get shit up and running cause I cannot do anything lmao
+    fuzzel # Get shit up and running cause I cannot do anything lmao
 
     # Gnome stuff
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<

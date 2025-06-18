@@ -15,7 +15,7 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    
     # hjem for declaring files in home
     hjem = {
       url = "github:feel-co/hjem";
@@ -62,6 +62,7 @@
     lanzaboote,
     nix-minecraft,
     hjem,
+    quickshell,
     ...
   } @ inputs: let
     inherit (self) outputs;
