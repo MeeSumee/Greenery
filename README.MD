@@ -1,6 +1,12 @@
 # My NixOS Repository
 Consists of Greenery, and Beryl
 
+> [!WARNING]
+> I've been modularizing NixOS as well as configuring Niri with quickshell.
+> Some of the links and info in this README are outdated and need proper linking.
+> Once I get Niri and quickshell figured out, the README will be fixed.
+> Also note that running VM with Niri WM will crash your system with out-of-memory error.
+
 ## Greenery
 My server, a Dell Optiplex 3050 Tower
 ![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/71sMeJBJRNL.png)
