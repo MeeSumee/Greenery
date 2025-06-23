@@ -3,8 +3,11 @@ Consists of Greenery, and Beryl
 
 > [!WARNING]
 > I've been modularizing NixOS as well as configuring Niri with quickshell.
+>
 > Some of the links and info in this README are outdated and need proper linking.
+>
 > Once I get Niri and quickshell figured out, the README will be fixed.
+>
 > Also note that running VM with Niri WM will crash your system with out-of-memory error.
 
 ## Greenery
