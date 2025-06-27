@@ -194,7 +194,10 @@
   environment.systemPackages = with pkgs; [
 
     # Desktop Programs
-    (pkgs.discord.override { enableAutoscroll = true; withOpenASAR = true; }) # Discord + Overrides
+    (pkgs.vesktop.override {
+      withMiddleClickScroll = true;
+      withSystemVencord = true;
+    }) # Better discord + Overrides
     librewolf # Librewolf browser
     brave # Import Browser Profiles
     neovim # neovim text editor
