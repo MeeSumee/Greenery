@@ -15,9 +15,6 @@
     ./desktop.nix
     ./inputfont.nix
   ];
-  
-  # Nix Overlays defined from flake.nix
-  nixpkgs.overlays = [ inputs.nix-matlab.overlay ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -197,13 +194,11 @@
   environment.systemPackages = with pkgs; [
 
     # Desktop Programs
-    matlab # Matlab for control systems and processing, WIP
-    matlab-shell # Matlab-shell for installing MATLAB
-    (pkgs.discord.override { enableAutoscroll = true; }) # Discord + Auto Scroll Option
+    (pkgs.discord.override { enableAutoscroll = true; withOpenASAR = true; }) # Discord + Overrides
     librewolf # Librewolf browser
     brave # Import Browser Profiles
     neovim # neovim text editor
-    vscodium # VSCodium text editor
+    kdePackages.kate # Kate text editor
     fzf # Fuzzy Finder
     foot # foot terminal
     btop # System Monitor
@@ -225,7 +220,12 @@
     (pkgs.callPackage ../../pkgs/cursors.nix {})
 
     # Niri stuff
-    fuzzel # Get shit up and running cause I cannot do anything lmao
+    # Add these fucking shit
+    # Keeps pissing me off for not
+    # getting jack shit done in 3 weeks
+    fuzzel
+    inputs.quickshell.packages.${pkgs.system}.default
+    wlsunset
 
     # Gnome stuff
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<

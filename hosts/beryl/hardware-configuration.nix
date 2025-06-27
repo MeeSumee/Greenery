@@ -49,7 +49,7 @@
     wayland = true;
     runtimeDir = "/run/user/1000/";
     waylandDisplay = "wayland-0";
-    ignoreWaylandDisplayEnv = false;
+    ignoreWaylandDisplayEnv = true;
     config = {
       # e.g. "activation_time" = "0.5";
     };

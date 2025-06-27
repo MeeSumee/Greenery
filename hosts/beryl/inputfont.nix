@@ -16,6 +16,7 @@
     ttf_bitstream_vera
     nerd-fonts.caskaydia-mono
     nerd-fonts.caskaydia-cove
+    material-symbols
   ];
   
   # Enable fcitx for Input Method Editor (IME)

@@ -5,6 +5,7 @@
   lib,
   flakeOverlays,
   inputs,
+  users,
   ...
 }: {
   # Import modules
@@ -14,7 +15,9 @@
   ];
   
   # Niri flake overlay
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs.overlays = [
+  inputs.niri.overlays.niri
+  ];
   
   # Niri 
   programs.niri = {
@@ -28,6 +31,14 @@
   # Xwayland satellite for X11 Windowing Support
   systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
   
+  # Forces applications to use wayland instead of Xwayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "0";
+
+  # Install the packages
+  environment.systemPackages = with pkgs; [
+
+  ];
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -90,16 +101,15 @@
   }];
 
   # Hjem for simple home management for niri config
-  hjem.users = let 
-    users = ["sumeezome" "beryl"];
-  in lib.genAttrs users (user: {
-    inherit user;
+  hjem.users = lib.genAttrs users (user: {
     enable = true;
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
     files = {
       ".config/niri/config.kdl".source = ../../hjem-template/config.kdl;
       ".config/foot/foot.ini".source = ../../hjem-template/foot.ini;
+      ".config/quickshell".source = ../../quickshell;
+#      ".config/gammastep/config.ini".source = ../../hjem-template/config.ini;
     };
   });
 }

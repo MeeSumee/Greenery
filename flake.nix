@@ -15,7 +15,7 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # hjem for declaring files in home
     hjem = {
       url = "github:feel-co/hjem";
@@ -39,12 +39,6 @@
       url = "github:ezKEa/aagl-gtk-on-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # MethLab
-    nix-matlab = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "gitlab:doronbehar/nix-matlab";
-    };
     
     # Nix-Minecraft
     nix-minecraft = {
@@ -57,7 +51,6 @@
     self,
     nixpkgs,
     niri,
-    nix-matlab,
     asus-numberpad-driver,
     lanzaboote,
     nix-minecraft,
@@ -81,6 +74,7 @@
       beryl = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
+          users = ["sumeezome"];
         };
         modules = [
           ./hosts/beryl/configuration.nix
@@ -115,6 +109,7 @@
       BVM = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
+          users = ["beryl"];
         };
         
         modules = [

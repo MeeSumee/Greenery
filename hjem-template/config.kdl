@@ -80,7 +80,7 @@ input {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
+    mode "2880x1800@60"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 2
@@ -257,12 +257,19 @@ layout {
     }
 }
 
+// Xwayland-satellite display setting
+environment {
+    DISPLAY ":0"
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
+// Start wlsunset so my eyes don't kill themselves.
+spawn-at-startup "wlsunset" "-T" "3000" "-t" "2999"
+// Start waybar
 spawn-at-startup "waybar"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -351,6 +358,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+E hotkey-overlay-title="Run Nautilus" { spawn "org.gnome.Nautilus"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: GNOME Display Manager" { spawn "gdm"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
