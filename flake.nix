@@ -71,15 +71,17 @@
     
     formatter = forAllSystems (pkgs: pkgs.alejandra);
     nixosConfigurations = {
+
       beryl = nixpkgs.lib.nixosSystem {
+
         specialArgs = {
           inherit inputs outputs;
           users = ["sumeezome"];
         };
+
         modules = [
           ./hosts/beryl/configuration.nix
           ./hosts/beryl/hardware-configuration.nix
-          ./hosts/beryl/battery.nix
           asus-numberpad-driver.nixosModules.default
           
           lanzaboote.nixosModules.lanzaboote
@@ -94,7 +96,9 @@
           })
         ];
       };
+
       greenery = nixpkgs.lib.nixosSystem {
+
         specialArgs = {
           inherit inputs outputs;
         };
@@ -107,6 +111,7 @@
       };
       
       BVM = nixpkgs.lib.nixosSystem {
+
         specialArgs = {
           inherit inputs outputs;
           users = ["beryl"];
@@ -130,6 +135,7 @@
       };
       
       GVM = nixpkgs.lib.nixosSystem {
+
         specialArgs = {
           inherit inputs outputs;
         };

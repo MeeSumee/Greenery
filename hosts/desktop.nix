@@ -34,9 +34,21 @@
   # Forces applications to use wayland instead of Xwayland
   environment.sessionVariables.NIXOS_OZONE_WL = "0";
 
-  # Install the packages
+  # Desktop Dependent Packages
   environment.systemPackages = with pkgs; [
+    # Niri Stuff
+    fuzzel # I need a fucking app manager
+    brightnessctl # I need a fucking brightness controller
+    swaylock # I need to fucking lock my screen
+    inputs.quickshell.packages.${pkgs.system}.default # I need fucking UI, but qml is fucking hard
+    wlsunset # I need fucking blue light filter, my fucking eyes hurt
 
+    # GNOME Stuff
+    gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
+    papirus-icon-theme # Icon Theme
+    gnomeExtensions.kimpanel # Input Method Panel
+    gnomeExtensions.blur-my-shell # Blurring Appearance Tool
+    gnomeExtensions.user-themes # User themes
   ];
 
   # Enable the X11 windowing system.
@@ -45,12 +57,6 @@
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # GNOME & X11 Configuration, evading Home-Manager
   programs.dconf.profiles.user.databases = [{
@@ -109,7 +115,6 @@
       ".config/niri/config.kdl".source = ../../hjem-template/config.kdl;
       ".config/foot/foot.ini".source = ../../hjem-template/foot.ini;
       ".config/quickshell".source = ../../quickshell;
-#      ".config/gammastep/config.ini".source = ../../hjem-template/config.ini;
     };
   });
 }

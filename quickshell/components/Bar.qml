@@ -1,27 +1,30 @@
 // Bar.qml
+import QtQuick
 import Quickshell
+import Quickshell.Wayland
 
 Scope {
-
     Variants {
         model: Quickshell.screens
 
-        PanelWindow {
-            property var modelData
+        delegate: WlrLayershell {
+            id: bar
+
+            required property ShellScreen modelData
+
+            anchors.left: true
+            anchors.right: true
+            anchors.top: true
+            color: "transparent"
+            exclusionMode: ExclusionMode.Auto
+            focusable: false
+            implicitHeight: 20
+            layer: WlrLayer.Top
             screen: modelData
-            color: 'transparent'
-            anchors {
-                top: true
-                left: true
-                right: true
-            }
+            surfaceFormat.opaque: false
 
-            implicitHeight: 30
-
-            ClockWidget {
-                anchors.centerIn: parent
-
-                // no more time binding
+            Rectangle {
+                anchors.fill: parent
             }
         }
     }

@@ -3,5 +3,5 @@ import QtQuick
 import "components"
 
 Scope {
-    Bar {}
+    Bar{}
 }

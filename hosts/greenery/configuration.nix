@@ -6,13 +6,9 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [
+      ../common.nix
     ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "greenery"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -74,31 +70,8 @@
   networking.firewall.allowedTCPPorts = [53];
   networking.firewall.allowedUDPPorts = [53];
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
   # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # Define a user account.
   users.users.administrator = {
@@ -113,14 +86,6 @@
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  nix.settings.experimental-features = [
-	"nix-command"
-	"flakes"
-  ];
-
   # Enable non-nix executables
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -128,23 +93,10 @@
     # here, NOT in environment.systemPackages
   ];
 
-  programs.zoxide = {
-	enable = true;
-	enableBashIntegration = true;
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Packages
   environment.systemPackages = with pkgs; [
-        pkgs.wget
-	pkgs.neovim
-	pkgs.unzip
-	pkgs.jdk21
-	pkgs.speedtest-cli
-	pkgs.tree
-	pkgs.screen
-	pkgs.git
-	pkgs.btop
+	jdk21
+	screen
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -158,7 +110,6 @@
   # List services that you want to enable:
   services.openssh = {
   	enable = true;
-	
 	settings = {
 		PasswordAuthentication = false;
 		PermitRootLogin = "no";
@@ -169,7 +120,9 @@
 	enable = true;
         maxretry = 3;
         ignoreIP = [
-          "nixos.wiki"
+          "beryl.berylline-mine.ts.net"
+          "iphone-12-mini.berylline-mine.ts.net"
+          "quartz.berylline-mine.ts.net"
         ];
 	bantime = "48h";
         bantime-increment = {
@@ -183,9 +136,7 @@
   };
 
   services.tailscale = {
-  	enable = true;
 	openFirewall = true;
-	useRoutingFeatures = "both";
 	extraSetFlags = [
 	  "--advertise-exit-node"
 	  "--webclient"
