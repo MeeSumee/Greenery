@@ -17,7 +17,7 @@
     ../inputfont.nix
   ];
 
-  networking.hostName = "beryl"; # The tint of blue I like
+  networking.hostName = "quartz"; # The color of my desktop + piezoelectric shenanigans
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -46,18 +46,22 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define user accounts.
+  # Define user accounts
   users.users = {
-    sumeezome = {
+    sumee = {
       isNormalUser = true;
-      description = "Sumeezome";
+      description = "Sumee";
       extraGroups = ["networkmanager" "wheel"];
     };
   };
 
   # Packages
   environment.systemPackages = with pkgs; [
-    foliate # e-book reader
+    audacity # Graphical Sound Editor
+    kicad # Electronic CAD Designer
+    komikku # Manga reading app
+    fan2go # Fan Control
+    openrgb # Open-Source RGB Control Software
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -71,13 +75,13 @@
 */
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
+  # Enable the OpenSSH daemon
   services.openssh = {
     enable = true;
     settings = {
       PasswordAuthentication = false;
       PermitRootLogin = "no";
-      AllowUsers = ["Sumeezome"];
+      AllowUsers = ["Sumee"];
     };
   };
   
@@ -88,8 +92,8 @@
 /*  
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 1716 ]; # Port 1716 for KDEConnect, but I can just use tailscale lmao
-    allowedUDPPorts = [ 1716 ];
+    allowedTCPPorts = [ ];
+    allowedUDPPorts = [ ];
   };
 */
 /*
@@ -100,5 +104,5 @@
   Before changing this value read the documentation for this option
   (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 */
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }

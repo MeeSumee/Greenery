@@ -19,10 +19,16 @@
     inputs.niri.overlays.niri
   ];
   
-  # Niri 
+  # Niri for laptop
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
+  };
+
+  # Hyprland for desktop
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
   
   # Set default session
@@ -36,8 +42,15 @@
 
   # Desktop Dependent Packages
   environment.systemPackages = with pkgs; [
-    # Niri Stuff
+    # Niri/Hyprland Stuff
     fuzzel # I need a fucking app manager
+    swww # I need a fucking background
+    wl-clipboard # I need a fucking clipboard
+    cliphist # I need a fucking clipboard history
+    wl-screenrec # I need a fucking screen recorder
+    trashy # I need to fucking stop using sudo rm
+    libnotify # I need it to fucking make notifications
+    imv # I need to fucking see images
     brightnessctl # I need a fucking brightness controller
     swaylock # I need to fucking lock my screen
     inputs.quickshell.packages.${pkgs.system}.default # I need fucking UI, but qml is fucking hard
@@ -51,12 +64,32 @@
     gnomeExtensions.user-themes # User themes
   ];
 
-  # Enable the X11 windowing system.
+  # Enable the X11 windowing system
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+
+  # Seahorse Password Manager
+  programs.seahorse.enable = true;
+
+  # Gnome Keyring
+  services.gnome.gnome-keyring.enable = true;
+
+  # Pokit Agent
+  security.soteria.enable = true;
+
+  # Pam Services and fixing Gnome Keyring Popups
+  security.pam.services = {
+    greetd.enableGnomeKeyring = true;
+    greetd-password.enableGnomeKeyring = true;
+    login.enableGnomeKeyring = true;
+    gdm.enableGnomeKeyring = true;
+  };
+
+  # Gnome Keyring Packages
+  services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
 
   # GNOME & X11 Configuration, evading Home-Manager
   programs.dconf.profiles.user.databases = [{

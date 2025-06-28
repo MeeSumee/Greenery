@@ -72,6 +72,18 @@
     formatter = forAllSystems (pkgs: pkgs.alejandra);
     nixosConfigurations = {
 
+      quartz = nixpkgs.lib.nixosSystem {
+
+        specialArgs = {
+          inherit inputs outputs;
+          users = ["sumee"];
+        };
+
+        modules = [
+          ./hosts/quartz/configuration.nix
+        ];
+      };
+
       beryl = nixpkgs.lib.nixosSystem {
 
         specialArgs = {
