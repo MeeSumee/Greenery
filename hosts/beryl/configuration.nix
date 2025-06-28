@@ -54,7 +54,7 @@
       extraGroups = ["networkmanager" "wheel"];
     };
   };
-  
+
   # Firefox
   programs.firefox.enable = false;
   

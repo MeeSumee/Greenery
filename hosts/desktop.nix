@@ -16,7 +16,7 @@
   
   # Niri flake overlay
   nixpkgs.overlays = [
-  inputs.niri.overlays.niri
+    inputs.niri.overlays.niri
   ];
   
   # Niri 
@@ -112,9 +112,9 @@
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
     files = {
-      ".config/niri/config.kdl".source = ../../hjem-template/config.kdl;
-      ".config/foot/foot.ini".source = ../../hjem-template/foot.ini;
-      ".config/quickshell".source = ../../quickshell;
+      ".config/niri/config.kdl".source = ../hjem-template/config.kdl;
+      ".config/foot/foot.ini".source = ../hjem-template/foot.ini;
+      ".config/quickshell".source = ../quickshell;
     };
   });
 }

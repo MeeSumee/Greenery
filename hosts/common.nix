@@ -44,14 +44,14 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # Enable essential features
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Zoxide, faster change directory
   programs.zoxide = {
