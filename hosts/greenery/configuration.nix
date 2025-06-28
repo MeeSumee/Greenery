@@ -1,5 +1,5 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
+# your system.  Help is available in the configuration.nix(4) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { inputs, lib, config, pkgs, ... }:
@@ -109,6 +109,7 @@
     openssh.authorizedKeys.keys = [  
 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAm49EzRUJgTjDvDswdUV3hXkJN5DbzUZiKT/EQGOssz nahida@sumee.kusa"
 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh siemens/meter"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 難しい"
     ];
   };
 
