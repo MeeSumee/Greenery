@@ -28,8 +28,15 @@
   # Hyprland for desktop
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     xwayland.enable = true;
   };
+
+  # Hyprland screen locking utility
+  programs.hyprlock.enable = true;
+
+  # Hyprland idle daemon
+  programs.hypridle.enable = true;
   
   # Set default session
   services.displayManager.defaultSession = "gnome";
@@ -38,7 +45,7 @@
   systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
   
   # Forces applications to use wayland instead of Xwayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "0";
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Desktop Dependent Packages
   environment.systemPackages = with pkgs; [
@@ -74,6 +81,9 @@
   # Seahorse Password Manager
   programs.seahorse.enable = true;
 
+  # GVFS Udisks2 Volume Monitor for end-4 dots
+  services.udisks2.enable = true;
+
   # Gnome Keyring
   services.gnome.gnome-keyring.enable = true;
 
@@ -100,6 +110,11 @@
         monospace-font-name = "Source Code Pro";
         color-scheme = "prefer-dark";
         clock-show-weekday = true;
+      };
+
+      "org/gnome/settings-daemon/plugins/color" = {
+        night-light-enabled = true;
+        night-light-temperature = 3000;
       };
       
       "org/gnome/desktop/background" = {
