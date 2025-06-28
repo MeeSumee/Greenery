@@ -62,6 +62,7 @@
     komikku # Manga reading app
     fan2go # Fan Control
     openrgb # Open-Source RGB Control Software
+    rare # Epic Games for Linux with GUI
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
