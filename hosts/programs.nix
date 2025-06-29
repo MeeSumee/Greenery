@@ -33,8 +33,67 @@
     wavey-launcher.enable = false;
   };
 
-  # Firefox
-  programs.firefox.enable = false;
+  # Librewolf Browser with customized settings
+  programs.firefox = {
+    enable = true;
+    package = pkgs.librewolf;
+    policies = {
+      Cookies = {
+        "Allow" = [
+        ];
+        "Locked" = true;
+      };
+      DisableBuiltinPDFViewer = true;
+      DisableTelemetry = true;
+      DisableFirefoxStudies = true;
+      Preferences = {
+        "browser.preferences.defaultPerformanceSettings.enabled" = false;
+        "browser.startup.homepage" = "about:home";
+        "browser.toolbar.bookmarks.visibility" = "newtab";
+        "browser.toolbars.bookmarks.visibility" = "newtab";
+        "browser.urlbar.suggest.bookmark" = false;
+        "browser.urlbar.suggest.engines" = false;
+        "browser.urlbar.suggest.history" = false;
+        "browser.urlbar.suggest.openpage" = false;
+        "browser.urlbar.suggest.recentsearches" = false;
+        "browser.urlbar.suggest.topsites" = false;
+        "browser.warnOnQuit" = false;
+        "browser.warnOnQuitShortcut" = false;
+        "places.history.enabled" = "false";
+        "cookiebanners.service.mode.privateBrowsing" = 2;
+        "cookiebanners.service.mode" = 2;
+        "network.cookie.lifetimePolicy" = 0;
+        "privacy.clearOnShutdown.cookies" = false;
+        "privacy.clearOnShutdown.history" = false;
+        "privacy.donottrackheader.enabled" = true;
+        "privacy.fingerprintingProtection" = true;
+        "privacy.resistFingerprinting" = true;
+        "privacy.trackingprotection.emailtracking.enabled" = true;
+        "privacy.trackingprotection.enabled" = true;
+        "privacy.trackingprotection.fingerprinting.enabled" = true;
+        "privacy.trackingprotection.socialtracking.enabled" = true;
+        "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
+        "webgl.disabled" = false;
+      };
+      ExtensionSettings = {
+        # uBlock Origin
+        "uBlock0@raymondhill.net" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        # Dark Reader
+        "addon@darkreader.org" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4488139/darkreader-4.9.106.xpi";
+          installation_mode = "force_installed";
+        };
+        # Bitwarden
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4493940/bitwarden_password_manager-2025.5.0.xpi";
+          installation_mode = "force_installed";
+        };
+      };
+    };
+  };
 
   # Gaseous H2O
   programs.steam = {
@@ -56,7 +115,6 @@
       withMiddleClickScroll = true;
       withSystemVencord = true;
     }) # Better discord + Overrides
-    librewolf # Librewolf browser
     brave # Import Browser Profiles
     kdePackages.kate # Kate text editor
     foot # foot terminal

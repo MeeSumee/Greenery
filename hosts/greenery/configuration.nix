@@ -77,9 +77,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [  
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbq0BJMziWmfEadq0 白い like nahida's hair"
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh oh so cute >.<"
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 可愛い過ぎる！"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAm49EzRUJgTjDvDswdUV3hXkJN5DbzUZiKT/EQGOssz nahida@sumee.kusa"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh siemens/meter"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 難しい"
     ];
   };
 

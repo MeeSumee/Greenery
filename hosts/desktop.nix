@@ -36,7 +36,7 @@
   programs.hyprlock.enable = true;
 
   # Hyprland idle daemon
-  programs.hypridle.enable = true;
+#  programs.hypridle.enable = true;
   
   # Set default session
   services.displayManager.defaultSession = "gnome";
@@ -114,7 +114,10 @@
 
       "org/gnome/settings-daemon/plugins/color" = {
         night-light-enabled = true;
-        night-light-temperature = 3000;
+        night-light-temperature = lib.gvariant.mkUint32 3000;
+        night-light-schedule-automatic = false;
+        night-light-schedule-from = 8.0;
+        night-light-schedule-to = 7.99;
       };
       
       "org/gnome/desktop/background" = {

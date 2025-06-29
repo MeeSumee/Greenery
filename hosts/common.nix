@@ -145,6 +145,9 @@
     '';
   };
 
+  # Stops building man-cache in nix rebuild
+  documentation.man.generateCaches = false;
+
   # Enable Firmware Updates
   services.fwupd.enable = true;
 

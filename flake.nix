@@ -81,6 +81,7 @@
 
         modules = [
           ./hosts/quartz/configuration.nix
+          ./hosts/quartz/hardware-configuration.nix
         ];
       };
 
