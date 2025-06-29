@@ -158,15 +158,17 @@
     };
   }];
 
-  # Hjem for simple home management for niri config
+  # Hjem for simple home management
   hjem.users = lib.genAttrs users (user: {
     enable = true;
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
     files = {
-      ".config/niri/config.kdl".source = ../hjem-template/config.kdl;
-      ".config/foot/foot.ini".source = ../hjem-template/foot.ini;
-      ".config/quickshell".source = ../quickshell;
+      ".config/niri/config.kdl".source = ../../hjem-template/config.kdl;
+      ".config/foot/foot.ini".source = ../../hjem-template/foot.ini;
+      ".config/quickshell".source = ../../quickshell;
+      ".config/fish/config.fish".source = ../../hjem-template/config.fish;
+      ".config/fish/themes/Rosé Pine.theme".source = ../../hjem-template/rosepine.theme;
     };
   });
 }

@@ -136,6 +136,6 @@
     protonvpn-gui # GUI VPN Service from Proton
 
     # Flake Packages
-    (pkgs.callPackage ../pkgs/cursors.nix {})
+    (pkgs.callPackage ../../pkgs/cursors.nix {})
   ];
 }

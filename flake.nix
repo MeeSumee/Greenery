@@ -132,18 +132,6 @@
         
         modules = [
           ./vmmaker/beryl.nix
-          asus-numberpad-driver.nixosModules.default
-          
-          lanzaboote.nixosModules.lanzaboote
-          ({ pkgs, lib, ... }: {
-            
-            boot.loader.systemd-boot.enable = lib.mkForce false;
-            
-            boot.lanzaboote = {
-              enable = true;
-              pkiBundle = "/var/lib/sbctl";
-            };
-          })
         ];
       };
       
