@@ -40,6 +40,8 @@
     policies = {
       Cookies = {
         "Allow" = [
+          "https://login.tailscale.com"
+          "https://github.com"
         ];
         "Locked" = true;
       };

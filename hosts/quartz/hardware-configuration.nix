@@ -16,37 +16,19 @@
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/amethyst" = {
+  fileSystems."/run/media/sumee/amethyst" = {
     device = "/dev/disk/by-uuid/22496045-6215-4194-9cfb-f364aa3b0472";
     fsType = "ext4";
-    options = [
-      "users"
-      "X-mount.group=wheel"
-      "nofail"
-      "rw"
-    ];
   };
 
-  fileSystems."/mnt/ametrine" = {
+  fileSystems."/run/media/sumee/ametrine" = {
     device = "/dev/disk/by-uuid/23f31baa-5f4a-427e-89f3-9599306925aa";
     fsType = "ext4";
-    options = [
-      "users"
-      "X-mount.group=wheel"
-      "nofail"
-      "rw"
-    ];
   };
 
-  fileSystems."/mnt/citrine" = {
+  fileSystems."/run/media/sumee/citrine" = {
     device = "/dev/disk/by-uuid/65778562-a080-45d8-8290-bb5d9a017885";
     fsType = "ext4";
-    options = [
-      "users"
-      "X-mount.group=wheel"
-      "nofail"
-      "rw"
-    ];
   };
 
   fileSystems."/boot" = {

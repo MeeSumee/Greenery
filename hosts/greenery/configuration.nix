@@ -77,9 +77,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [  
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAm49EzRUJgTjDvDswdUV3hXkJN5DbzUZiKT/EQGOssz nahida@sumee.kusa"
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh siemens/meter"
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 難しい"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 本当に愛してぇる"
     ];
   };
 
@@ -118,7 +118,7 @@
         maxretry = 3;
         ignoreIP = [
           "beryl.berylline-mine.ts.net"
-          "iphone-12-mini.berylline-mine.ts.net"
+          "garnet.berylline-mine.ts.net"
           "quartz.berylline-mine.ts.net"
         ];
 	bantime = "48h";

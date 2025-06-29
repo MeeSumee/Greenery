@@ -143,14 +143,15 @@
         favorite-apps = [
           "librewolf.desktop"
           "brave-browser.desktop"
+          "vesktop.desktop"
           "steam.desktop"
           "com.github.xournalpp.xournalpp.desktop"
           "btop.desktop"
           "org.prismlauncher.PrismLauncher.desktop"
           "org.openshot.OpenShot.desktop"
           "org.gnome.Nautilus.desktop"
-          "org.gnome.Console.desktop"
-          "org.gnome.TextEditor.desktop"
+          "foot.desktop"
+          "org.kde.kate.desktop"
           "com.github.johnfactotum.Foliate.desktop"
         ];
       };
