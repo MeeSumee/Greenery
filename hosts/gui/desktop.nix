@@ -119,7 +119,7 @@
         night-light-schedule-from = 8.0;
         night-light-schedule-to = 7.99;
       };
-      
+
       "org/gnome/desktop/background" = {
           picture-uri-dark = let
             background = pkgs.fetchurl {
