@@ -11,6 +11,7 @@
     ./fish.nix
     ./networking.nix
     ./locale.nix
+    ./micro.nix
   ];
 
   # Bootloader.

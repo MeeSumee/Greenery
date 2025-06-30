@@ -1,0 +1,44 @@
+{
+  "pins": {
+    "micro-bounce": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "sparques",
+        "repo": "micro-bounce"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "dce3ed5727fe1b2b0df27048be51a11dc0d81d99",
+      "url": "https://github.com/sparques/micro-bounce/archive/dce3ed5727fe1b2b0df27048be51a11dc0d81d99.tar.gz",
+      "hash": "1vmam3diglk53dz9sspnldh9xan0s02gzlzv0rl6cnz4lcl30j2s"
+    },
+    "micro-plugin-lsp": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "AndCake",
+        "repo": "micro-plugin-lsp"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "a3ed3a73b2f7576b1e2dc1ac3c98dfe695e6d05d",
+      "url": "https://github.com/AndCake/micro-plugin-lsp/archive/a3ed3a73b2f7576b1e2dc1ac3c98dfe695e6d05d.tar.gz",
+      "hash": "0vb055aay7qq1lza1cqhm2h042shzkq33sliw14rpyawq3rzmafi"
+    },
+    "micro-quoter": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "sparques",
+        "repo": "micro-quoter"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
+      "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
+      "hash": "1d399fvbjalpfa44jd0qy9kjchspfny0zy3gf1jv2gsmas7iaz85"
+    }
+  },
+  "version": 5
+}

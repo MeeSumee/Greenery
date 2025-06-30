@@ -64,6 +64,7 @@
       nixpkgs.lib.genAttrs systems (
         system: fn (import nixpkgs {system = system;})
       );
+    sources = import ./npins;
   in {
     packages = forAllSystems (pkgs: { 
       default = pkgs.callPackage ./pkgs/cursors.nix {};
@@ -75,7 +76,7 @@
       quartz = nixpkgs.lib.nixosSystem {
 
         specialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs sources;
           users = ["sumee"];
         };
 
@@ -88,7 +89,7 @@
       beryl = nixpkgs.lib.nixosSystem {
 
         specialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs sources;
           users = ["sumeezome"];
         };
 
@@ -113,7 +114,8 @@
       greenery = nixpkgs.lib.nixosSystem {
 
         specialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs sources;
+          users = ["administrator"];
         };
         
         modules = [
@@ -126,7 +128,7 @@
       BVM = nixpkgs.lib.nixosSystem {
 
         specialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs sources;
           users = ["beryl"];
         };
         
@@ -138,7 +140,8 @@
       GVM = nixpkgs.lib.nixosSystem {
 
         specialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs sources;
+          users = ["greenery"];
         };
         
         modules = [
