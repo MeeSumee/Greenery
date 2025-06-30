@@ -19,9 +19,9 @@
 
   # Universal Packages
   environment.systemPackages = with pkgs; [
+    npins
     git
     wget
-    micro
     neovim
     btop
     tree
