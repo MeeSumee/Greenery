@@ -13,10 +13,10 @@
       nsh = "nix shell nixpkgs#";
       nrn = "nix run nixpkgs#";
       np = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";
-      BVM = "nix run ~/green#nixosConfigurations.BVM.config.system.build.vm";
-      GVM = "nix run ~/green#nixosConfigurations.GVM.config.system.build.vm";
-      OBVM = "nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm";
-      OGVM = "nix run github:MeeSumee/Greenery#nixosConfigurations.GVM.config.system.build.vm";
+      bvm = "nix run ~/green#nixosConfigurations.BVM.config.system.build.vm";
+      gvm = "nix run ~/green#nixosConfigurations.GVM.config.system.build.vm";
+      obvm = "nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm";
+      ogvm = "nix run github:MeeSumee/Greenery#nixosConfigurations.GVM.config.system.build.vm";
 
       # git stuff
       ga = "git add --all";

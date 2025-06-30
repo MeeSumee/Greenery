@@ -39,7 +39,6 @@
           # This set of config works well with wayland nixos, not tested on non-nixos platforms
           "-device virtio-vga-gl"
           "-display sdl,gl=on"
-          "-full-screen"
           "-usb -device usb-tablet"
           "-usbdevice tablet"
           # Enable copy/paste?

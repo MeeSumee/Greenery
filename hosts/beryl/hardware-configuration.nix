@@ -60,7 +60,7 @@
   # Potential fix for AMD Rembrandt Hardware Acceleration Crash? I'll find out soon
   boot.kernelParams = ["idle=nowwait" "iommu=pt"];
 
-  # Enable OpenGL with AMD Vulkan (Might help Rembrandt HardwareAccel
+  # Enable OpenGL with AMD Vulkan (Might help Rembrandt HardwareAccel)
   hardware = {
     graphics = {
       enable = true;

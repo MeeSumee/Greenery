@@ -6,8 +6,12 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  # Enables AMDVLK Vulkan driver
+  hardware.amdgpu.amdvlk.enable = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
