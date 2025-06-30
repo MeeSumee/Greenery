@@ -9,16 +9,12 @@
 }: {
   imports = [
     # Imports.
-    ../common
-    ../gui
+    ../../common
+    ../../gui
   ];
 
   networking.hostName = "quartz"; # The color of my desktop + piezoelectric shenanigans
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -42,16 +38,6 @@
     rare # Epic Games for Linux with GUI
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-/*
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-*/
-
   # Enable the OpenSSH daemon
   services.openssh = {
     enable = true;
@@ -64,15 +50,7 @@
   
   # Fix tailscale auto-connect during login (might not be necessary)
   systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
-  
-  # Open ports in the firewall.
-/*  
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ ];
-  };
-*/
+
 /*
   This value determines the NixOS release from which the default
   settings for stateful data, like file locations and database versions

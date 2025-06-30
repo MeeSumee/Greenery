@@ -9,16 +9,12 @@
 }: {
   imports = [
     # Imports.
-    ../common
-    ../gui
+    ../../common
+    ../../gui
   ];
 
   networking.hostName = "beryl"; # The tint of blue I like
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -37,17 +33,6 @@
     foliate # e-book reader
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-/*
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-*/
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -61,14 +46,6 @@
   # Fix tailscale auto-connect during login (might not be necessary)
   systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
   
-  # Open ports in the firewall.
-/*  
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 1716 ]; # Port 1716 for KDEConnect, but I can just use tailscale lmao
-    allowedUDPPorts = [ 1716 ];
-  };
-*/
 /*
   This value determines the NixOS release from which the default
   settings for stateful data, like file locations and database versions

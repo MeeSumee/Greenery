@@ -21,6 +21,7 @@
   environment.systemPackages = with pkgs; [
     git
     wget
+    micro
     neovim
     btop
     tree
@@ -46,11 +47,5 @@
 
   # Enable Firmware Updates
   services.fwupd.enable = true;
-
-  # Enable tailscale VPN service
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "both"; # Enables the use of exit node
-  };
 
 }

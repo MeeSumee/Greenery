@@ -164,11 +164,11 @@
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
     files = {
-      ".config/niri/config.kdl".source = ../../hjem-template/config.kdl;
-      ".config/foot/foot.ini".source = ../../hjem-template/foot.ini;
-      ".config/quickshell".source = ../../quickshell;
-      ".config/fish/config.fish".source = ../../hjem-template/config.fish;
-      ".config/fish/themes/Rosé Pine.theme".source = ../../hjem-template/rosepine.theme;
+      ".config/niri/config.kdl".source = ../dots/niri/config.kdl;
+      ".config/foot/foot.ini".source = ../dots/foot/foot.ini;
+      ".config/quickshell".source = ../dots/quickshell;
+      ".config/fish/config.fish".source = ../dots/fish/config.fish;
+      ".config/fish/themes/Rosé Pine.theme".source = ../dots/fish/themes/rosepine.theme;
     };
   });
 }
