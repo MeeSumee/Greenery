@@ -73,6 +73,7 @@
 
   # Enable the X11 windowing system
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
@@ -169,6 +170,7 @@
       ".config/quickshell".source = ../dots/quickshell;
       ".config/fish/config.fish".source = ../dots/fish/config.fish;
       ".config/fish/themes/Rosé Pine.theme".source = ../dots/fish/themes/rosepine.theme;
+      ".librewolf/librewolf.overrides.cfg".source = ../dots/librewolf/librewolf.overrides.cfg;
     };
   });
 }
