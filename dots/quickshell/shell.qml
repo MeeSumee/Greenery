@@ -2,67 +2,84 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import "components"
-import QtQuick.Controls  // For Screen API
+import QtQuick.Controls
 
 PanelWindow {
     id: panel
+    WlrLayershell.layer: WlrLayer.Top  // Top layer so it floats above other windows
+    implicitWidth: Screen.implicitWidth
+    implicitHeight: expanded ? Screen.implicitHeight / 3 + 30 : 30  // Adjust the height based on expansion
     anchors {
         top: true
         left: true
         right: true
     }
-
     color: "lime"
-    implicitHeight: 30
-    height: expanded ? Screen.height / 3 : 30
 
     property bool expanded: false
 
+    // The main bar content (top part of the bar)
     MouseArea {
-        id: mouseArea
         anchors.fill: parent
-        onClicked: panel.expanded = !panel.expanded
-
+        onClicked: panel.expanded = !panel.expanded  // Toggle expansion
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
     }
 
     Text {
         anchors.centerIn: parent
-        anchors.top: parent
-        text: expanded ? "" : "I AM SBEVE "
+        text: expanded ? "" : "I AM SBEVE"
     }
 
+    // Expanded content (inside the same panel)
     Rectangle {
-        anchors {
-            top: parent.top
-            left: parent.left
-            bottom: parent.bottom
-            topMargin: 30
+        id: expandedContent
+        width: parent.width
+        height: expanded ? Screen.height / 3 : 0
+        color: "#ffffffcc"
+        anchors.top: parent.bottom
+
+        // Add some internal content
+        Rectangle {
+            anchors {
+                top: parent.top
+                left: parent.left
+                bottom: parent.bottom
+                topMargin: 30
+            }
+            width: parent.width / 3
+            color: "yellow"
         }
-        width: parent.width / 3
-        color: "yellow"
+
+        Rectangle {
+            anchors {
+                top: parent.top
+                right: parent.right
+                bottom: parent.bottom
+                topMargin: 30
+            }
+            width: parent.width / 3
+            color: "red"
+        }
+
+        // Animate expansion
+        Behavior on height {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
-    Rectangle { // Right side box
-        anchors {
-            top: parent.top
-            right: parent.right
-            bottom: parent.bottom
-            topMargin: 30
+    // Close behavior: If clicking outside, we collapse the panel
+    MouseArea {
+        id: outsideClickArea
+        anchors.fill: parent
+        onClicked: {
+            if (panel.expanded) {
+                panel.expanded = false
+            }
         }
-        width: parent.width / 8
-        color: "red"
-    }
-
-
-    Behavior on height {
-        NumberAnimation {
-            duration: 300
-            easing.type: Easing.InOutQuad
-        }
+        opacity: panel.expanded ? 0.2 : 0  // Show it when expanded
     }
 }
-
-
-
