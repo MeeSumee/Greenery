@@ -7,8 +7,8 @@ import QtQuick.Controls
 PanelWindow {
     id: panel
     WlrLayershell.layer: WlrLayer.Top  // Top layer so it floats above other windows
-    implicitWidth: Screen.implicitWidth
-    implicitHeight: expanded ? Screen.implicitHeight / 3 + 30 : 30  // Adjust the height based on expansion
+    width: Screen.width
+    height: expanded ? Screen.height / 3 + 30 : 30  // Adjust the height based on expansion
     anchors {
         top: true
         left: true
@@ -36,6 +36,7 @@ PanelWindow {
         id: expandedContent
         width: parent.width
         height: expanded ? Screen.height / 3 : 0
+        implicitHeight: 0
         color: "#ffffffcc"
         anchors.top: parent.bottom
 
