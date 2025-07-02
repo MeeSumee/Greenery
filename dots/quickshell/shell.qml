@@ -1,86 +1,110 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
-import "components"
-import QtQuick.Controls
+import "Widgets"
 
-PanelWindow {
-    id: panel
-    WlrLayershell.layer: WlrLayer.Top  // Top layer so it floats above other windows
-    width: Screen.width
-    height: expanded ? Screen.height / 3 + 30 : 30  // Adjust the height based on expansion
-    anchors {
-        top: true
-        left: true
-        right: true
-    }
-    color: "lime"
+Scope {
+	Variants {
+		model: Quickshell.screens
 
-    property bool expanded: false
+		delegate: WlrLayershell {
+			id: bar
 
-    // The main bar content (top part of the bar)
-    MouseArea {
-        anchors.fill: parent
-        onClicked: panel.expanded = !panel.expanded  // Toggle expansion
-        hoverEnabled: true
-        cursorShape: Qt.PointingHandCursor
-    }
+			required property ShellScreen modelData
 
-    Text {
-        anchors.centerIn: parent
-        text: expanded ? "" : "I AM SBEVE"
-    }
+            anchors.left: true
+            anchors.right: true
+            anchors.top: true
+            color: "transparent"
+            exclusionMode: ExclusionMode.Ignore
+            focusable: false
+            implicitHeight: screen.height * 0.65
+            layer: WlrLayer.Top
+            namespace: "sumee.bar.quickshell"
+            screen: modelData
+            surfaceFormat.opaque: false
 
-    // Expanded content (inside the same panel)
-    Rectangle {
-        id: expandedContent
-        width: parent.width
-        height: expanded ? Screen.height / 3 : 0
-        implicitHeight: 0
-        color: "#ffffffcc"
-        anchors.top: parent.bottom
-
-        // Add some internal content
-        Rectangle {
-            anchors {
-                top: parent.top
-                left: parent.left
-                bottom: parent.bottom
-                topMargin: 30
+            mask: Region {
+            	Region {
+            		item: barfull
+            	}
             }
-            width: parent.width / 3
-            color: "yellow"
-        }
 
-        Rectangle {
-            anchors {
-                top: parent.top
-                right: parent.right
-                bottom: parent.bottom
-                topMargin: 30
-            }
-            width: parent.width / 3
-            color: "red"
-        }
+            Rectangle {
+            	id: barfull
+        		anchors.horizontalCenter: parent.horizontalCenter
 
-        // Animate expansion
-        Behavior on height {
-            NumberAnimation {
-                duration: 200
-                easing.type: Easing.InOutQuad
-            }
-        }
-    }
+				ClockWidget {
+            		anchors.centerIn: parent
+      			}
 
-    // Close behavior: If clicking outside, we collapse the panel
-    MouseArea {
-        id: outsideClickArea
-        anchors.fill: parent
-        onClicked: {
-            if (panel.expanded) {
-                panel.expanded = false
+            	width: 100; height:1
+            	state: "HIDDEN"
+
+            	MouseArea {
+            		id: mouseArea
+            		anchors.fill: parent
+            		hoverEnabled: true
+            		onExited: barfull.state = "HIDDEN"
+            		onEntered: barfull.state = "SHOWN"
+            		onClicked: barfull.state = "FULL"
+            	}
+
+            	states: [
+            	    State {
+            	    	name: "HIDDEN";
+            	    	PropertyChanges { target: barfull; }
+            	    },
+            		State {
+            			name: "SHOWN";
+            			PropertyChanges { target: barfull; height: 30; width: 1000 }
+            		},
+            		State {
+            			name: "FULL";
+            			PropertyChanges { target: barfull; height: 400; width: 1000 }
+            		}
+                ]
+
+                transitions: [
+                    Transition {
+                        from: "HIDDEN"; to: "SHOWN";
+
+                        NumberAnimation {
+                            properties: "height, width";
+                            easing.type: Easing.InOutQuad;
+                            duration: 100;
+                        }
+                    },
+                    Transition {
+                        from: "SHOWN"; to: "FULL";
+
+                        NumberAnimation {
+                            properties: "height, width";
+                            easing.type: Easing.InOutQuad;
+                            duration: 250;
+                        }
+                    },
+                    Transition {
+                        from: "FULL"; to: "HIDDEN";
+
+                        NumberAnimation {
+                            easing.type: Easing.InOutQuad;
+                            properties: "height, width";
+                            duration: 250;
+                        }
+                    },
+                    Transition {
+                        from: "SHOWN"; to: "HIDDEN";
+
+                        NumberAnimation {
+                            easing.type: Easing.InOutQuad;
+                            properties: "height, width";
+                            duration: 100;
+                        }
+                    }
+                ]
             }
-        }
-        opacity: panel.expanded ? 0.2 : 0  // Show it when expanded
-    }
+		}
+	}
 }
