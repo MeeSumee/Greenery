@@ -12,7 +12,7 @@ PanelWindow {
         right: true
     }
 
-    color: "lime"
+    color: "blue"
     implicitHeight: 30
     height: expanded ? Screen.height / 3 : 30
 
