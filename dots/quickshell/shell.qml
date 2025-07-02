@@ -3,66 +3,100 @@ import Quickshell
 import Quickshell.Wayland
 import "components"
 import QtQuick.Controls  // For Screen API
+import QtQuick.Layouts
+
 
 PanelWindow {
     id: panel
     anchors {
         top: true
-        left: true
-        right: true
     }
 
-    color: "blue"
-    implicitHeight: 30
-    height: expanded ? Screen.height / 3 : 30
+    width: Screen.width / 2
+    color: "lavender"
+    height: expanded ? Screen.height / 3 : Screen.height / 35
 
+    // Item Row in TopBar=============================================
+    RowLayout {
+        id: topRow
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+
+        // anchors.margins: 8
+        // spacing: 20
+
+        // Left Icons/Items
+        Item {
+            Layout.fillWidth: true
+            RowLayout {
+                anchors.fill: parent
+                //spacing: 10
+
+                Image {
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                    }
+                    Layout.preferredWidth: Screen.height / 35
+                    Layout.preferredHeight: Screen.height / 35
+                    source: "icons/NixOS.png"
+
+
+                }
+            }
+        }
+
+        Item { // Spacer
+            Layout.fillWidth: true
+        }
+
+        ClockWidget {
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+        }
+
+        // Spacer to push right side to the right
+        Item {
+            Layout.fillWidth: true
+        }
+
+        // Right side icons
+        Item {
+            Layout.fillWidth: true
+            RowLayout {
+                anchors.fill: parent
+                spacing: 10
+
+
+            }
+        }
+    }
+
+
+    // Dropdown Expansion of TopBar ======================
     property bool expanded: false
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         onClicked: panel.expanded = !panel.expanded
-
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
     }
-
-    Text {
-        anchors.centerIn: parent
-        anchors.top: parent
-        text: expanded ? "" : "I AM SBEVE "
-    }
-
-    Rectangle {
-        anchors {
-            top: parent.top
-            left: parent.left
-            bottom: parent.bottom
-            topMargin: 30
-        }
-        width: parent.width / 3
-        color: "yellow"
-    }
-
-    Rectangle { // Right side box
-        anchors {
-            top: parent.top
-            right: parent.right
-            bottom: parent.bottom
-            topMargin: 30
-        }
-        width: parent.width / 8
-        color: "red"
-    }
-
-
     Behavior on height {
         NumberAnimation {
-            duration: 300
+            duration: 100
             easing.type: Easing.InOutQuad
         }
     }
 }
+
+
+
+
+
 
 
 
