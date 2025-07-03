@@ -35,12 +35,28 @@ Scope {
             	id: barfull
         		anchors.horizontalCenter: parent.horizontalCenter
 
-				ClockWidget {
-            		anchors.centerIn: parent
-      			}
+        		width: 1000; height:1
+        		state: "HIDDEN"
+        		opacity: 0
 
-            	width: 100; height:1
-            	state: "HIDDEN"
+	        	LazyLoader {
+					id: thingies
+
+	        	    loading: true
+
+	        	    RowLayout {
+						ClockWidget {
+							anchors.left: parent.left
+							anchors.top: parent.top
+		      			}
+
+		            	Image {
+		            	    width: 30
+		            	    height: 30
+		            	    source: "Assets/NixOS.png"
+		            	}
+            		}
+            	}
 
             	MouseArea {
             		id: mouseArea
@@ -58,11 +74,19 @@ Scope {
             	    },
             		State {
             			name: "SHOWN";
-            			PropertyChanges { target: barfull; height: 30; width: 1000 }
+            			PropertyChanges { target: barfull; height: 30; width: 1000; opacity: 0.95;  }
+            			PropertyChanges {
+            				thingies.item.anchors.top: parent.top
+            				thingies.item.anchors.horizontalCenter: parent.horizontalCenter
+            			}
             		},
             		State {
             			name: "FULL";
-            			PropertyChanges { target: barfull; height: 400; width: 1000 }
+            			PropertyChanges { target: barfull; height: 400; width: 1000; opacity: 0.95; }
+            			PropertyChanges {
+            				thingies.item.anchors.top: parent.top
+            				thingies.item.anchors.horizontalCenter: parent.horizontalCenter
+            			}
             		}
                 ]
 
