@@ -2,7 +2,7 @@
 Consists of Greenery, Beryl, and Quartz
 
 ## Overview
-> Structure of the repository
+### Structure of the repository
 ```
 assets/            # Miscellaneous pictures, gifs, sources used in this repo
 dots/              # Welcome to the ricefields, fellow ricers! Most are imported using hjem
@@ -49,36 +49,36 @@ Initial Password: ```berylline```
 Notes: Beryl VM (BVM) crashes in my own laptop using Niri. This could be a Rembrandt GPU issue.
 
 ## What mess have I created?
-> Whilst juggling many things at once, (Niri, Quickshell, Hyprland, new desktop config, Silent-SDDM, and many more...),
-> I never bothered to update the README until this commit. 
+ Whilst juggling many things at once, (Niri, Quickshell, Hyprland, new desktop config, Silent-SDDM, and many more...),
+ I never bothered to update the README until this commit. 
 
-> I've made a new branch called quickshell-test where I "try" to mess around and get a quickshell bar working. My plan
-> is to implement my bar (currently unnamed) for Niri with Niri Workspace support. I may add Hyprland support if deemed 
-> necessary for Quartz.
+ I've made a new branch called quickshell-test where I "try" to mess around and get a quickshell bar working. My plan
+ is to implement my bar (currently unnamed) for Niri with Niri Workspace support. I may add Hyprland support if deemed 
+ necessary for Quartz.
 
-> I'm transitioning towards npins, however, my repository remains flake dependent. As of right now, I currently use
-> npins for non-flake repositories and future nix inputs.
+ I'm transitioning towards npins, however, my repository remains flake dependent. As of right now, I currently use
+ npins for non-flake repositories and future nix inputs.
 
-> I'm setting up both Niri and Hyprland at the same time for two different systems (Crazy).
-> Plan is to have Niri on my laptop with quickshell optimized for performance and Hyprland on my desktop with
-> lots of features.
+ I'm setting up both Niri and Hyprland at the same time for two different systems (Crazy).
+ Plan is to have Niri on my laptop with quickshell optimized for performance and Hyprland on my desktop with
+ lots of features.
 
-> I've abandoned MATLAB in favor of it's online version as well as having Octave for offline engineering.
+ I've abandoned MATLAB in favor of it's online version as well as having Octave for offline engineering.
 
-> ASUS Trackpad Numpad does not work with Niri. This can be attributed to the python script being targeted for GNOME environments.
+ ASUS Trackpad Numpad does not work with Niri. This can be attributed to the python script being targeted for GNOME environments.
 
-> Silent-SDDM works fine for single monitor and multi-monitor setups with a few caveats.
-> For my multiple monitor setup, Silent-SDDM config duplicates the login screen and resets your display arrangement to default settings.
-> If you receive a blank white screen with the background only filling a part of the screen due to your monitors consisting of different resolutions,
-> add this to your configuration: 
-> ```
->     wayland = {
->       enable = true;
->       compositorCommand = "${lib.getExe' pkgs.kdePackages.kwin "kwin_wayland"} --drm --no-lockscreen --no-global-shortcuts --locale1";
->     };
-> ```
+ Silent-SDDM works fine for single monitor and multi-monitor setups with a few caveats.
+ For my multiple monitor setup, Silent-SDDM config duplicates the login screen and resets your display arrangement to default settings.
+ If you receive a blank white screen with the background only filling a part of the screen due to your monitors consisting of different resolutions,
+ add this to your configuration: 
+ ```
+     wayland = {
+       enable = true;
+       compositorCommand = "${lib.getExe' pkgs.kdePackages.kwin "kwin_wayland"} --drm --no-lockscreen --no-global-shortcuts --locale1";
+     };
+ ```
 
-The rest of the repository are from the legacy README that I didn't bother reformatting.
+The rest of the README are from the legacy README that I didn't bother reformatting.
 
 ## Japanese Keyboard IME ( 日本語 )
 Insert this into your i18n:
