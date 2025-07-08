@@ -3,18 +3,18 @@ Consists of Greenery, Beryl, and Quartz
 
 ## Overview
 > Structure of the repository
-
+```
 assets/                      # Miscellaneous pictures, gifs, sources used in this repo
 dots/                        # Welcome to the ricefields, fellow ricers! Most are imported using hjem
-- cursors/                   # Cursors imported from [AUR](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact) and [Pling](https://www.pling.com/p/2226124), imported using cursors.nix in pkgs/
-- fish/                      # [Fish](https://fishshell.com/) Shell ini and its themes
-- foot/                      # [Foot](https://codeberg.org/dnkl/foot) terminal ini
-- fuzzel/                    # [Fuzzel](https://codeberg.org/dnkl/fuzzel) app launcher ini
-- hyprland/                  # [Hyprland](https://hypr.land/) and [Hypridle](https://github.com/hyprwm/hypridle) configuration
-- librewolf/                 # Attempted [librewolf](https://librewolf.net/) configuration override, didn't override my config as of late
-- niri/                      # [Niri](https://github.com/YaLTeR/niri) configuration
-- quickshell/                # [Quickshell](https://quickshell.outfoxxed.me/) configuration. WIP in quickshell-test branch
-- uwsm/                      # [UWSM](https://github.com/Vladimir-csp/uwsm) environment variables.
+- cursors/                   # Cursors imported from AUR and Pling, imported using cursors.nix in pkgs/
+- fish/                      # Fish Shell ini and its themes
+- foot/                      # Foot terminal ini
+- fuzzel/                    # Fuzzel app launcher ini
+- hyprland/                  # Hyprland and Hypridle configuration
+- librewolf/                 # Attempted librewolf configuration override, didn't override my config as of late
+- niri/                      # Niri configuration
+- quickshell/                # Quickshell configuration. WIP in quickshell-test branch
+- uwsm/                      # UWSM environment variables.
 hosts/                       # Consists of all my devices and their configurations
 - beryl/                     # ASUSTek Zenbook S13 OLED (UM5302TA) Laptop. WM = Niri
 - greenery/                  # Dell Optiplex 3050 Tower Server. WM = None. SSH Only!
@@ -27,6 +27,7 @@ modules/                     # Key elements for all of my devices
 npins/                       # Auto-generated config when using npins command. Take note that it gets rewritten when modifying npins
 pkgs/                        # Consists of cursors.nix, fetches my repository dots and packages it as a nix package
 flake.nix                    # Unified flake that governs all of the inputs, and outputs of my devices. Slowly transitioning to npins
+```
 
 ### Running my configuration by building a VM locally
 To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
@@ -197,6 +198,7 @@ All code in this repository is under the MIT license unless wherever an
 explicit licensing is included.
 
 ## Miscellaneous Sources
+- [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact) & [Firefly](https://www.pling.com/p/2226124)
 - [User Profile Picture (Nix & Git)](https://danbooru.donmai.us/posts/9246148)
 - [Dell Optiplex 3050 Tower Specifications and Image](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/OptiPlex-3050-Towers-Technical-Specifications.pdf)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
