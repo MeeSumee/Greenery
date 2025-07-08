@@ -1,36 +1,36 @@
 # My NixOS Repository
-Consists of Greenery, and Beryl
+Consists of Greenery, Beryl, and Quartz
 
-> [!WARNING]
-> I've been modularizing NixOS as well as configuring Niri with quickshell.
->
-> Some of the links and info in this README are outdated and need proper linking.
->
-> Once I get Niri and quickshell figured out, the README will be fixed.
->
-> Also note that running VM with Niri WM will crash your system with out-of-memory error.
+## Overview
+> Structure of the repository
 
-## Greenery
-My server, a Dell Optiplex 3050 Tower
-![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/71sMeJBJRNL.png)
-- Source : [Dell](https://www.dell.com/support/product-details/en-us/product/optiplex-3050-desktop/overview)
+```
+assets/                      # Miscellaneous pictures, gifs, sources used in this repo
+dots/                        # Welcome to the ricefields, fellow ricers! Most are imported using hjem
+- cursors/                   # Cursors imported from [AUR](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact) and [Pling](https://www.pling.com/p/2226124), imported using cursors.nix in pkgs/
+- fish/                      # [Fish](https://fishshell.com/) Shell ini and its themes
+- foot/                      # [Foot](https://codeberg.org/dnkl/foot) terminal ini
+- fuzzel/                    # [Fuzzel](https://codeberg.org/dnkl/fuzzel) app launcher ini
+- hyprland/                  # [Hyprland](https://hypr.land/) and [Hypridle](https://github.com/hyprwm/hypridle) configuration
+- librewolf/                 # Attempted [librewolf](https://librewolf.net/) configuration override, didn't override my config as of late
+- niri/                      # [Niri](https://github.com/YaLTeR/niri) configuration
+- quickshell/                # [Quickshell](https://quickshell.outfoxxed.me/) configuration. WIP in quickshell-test branch
+- uwsm/                      # [UWSM](https://github.com/Vladimir-csp/uwsm) environment variables.
+hosts/                       # Consists of all my devices and their configurations
+- beryl/                     # ASUSTek Zenbook S13 OLED (UM5302TA) Laptop. WM = Niri
+- greenery/                  # Dell Optiplex 3050 Tower Server. WM = None. SSH Only!
+- quartz/                    # Personal Gaming PC with i9-12900K and RX 6950XT. WM = Hyprland
+- vmmaker/                   # QEMU VM "initializers" when you build my configuration using ```nix run```
+modules/                     # Key elements for all of my devices
+- common/                    # Common elements shared across all of my devices
+- gui/                       # Elements shared by devices that consists of a GUI (ex. Beryl & Quartz)
+- server/                    # Random minecraft/jellyfin server config added before this repository merged. WIP
+npins/                       # Auto-generated config when using npins command. Take note that it gets rewritten when modifying npins
+pkgs/                        # Consists of cursors.nix, fetches my repository dots and packages it as a nix package
+flake.nix                    # Unified flake that governs all of the inputs, and outputs of my devices. Slowly transitioning to npins
+```
 
-## Greenery NixOS Configuration
-![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/Screenshot%20From%202025-05-16%2015-30-19.png)
-- If you didn't catch on, it's minimal NixOS
-- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/master/hosts/greenery/configuration.nix)
-
-## Beryl
-My Personal Laptop, an ASUS Zenbook S13 OLED (UM5302)
-![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/dlcdnwebimgs.asus.png)
-- Source : [ASUS](https://www.asus.com/us/laptops/for-home/zenbook/zenbook-s-13-oled-um5302/)
-
-## Beryl NixOS Configuration
-![image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/Screenshot%20From%202025-05-16%2013-14-41.png)
-- Wallpaper : [Vivian Banshee by pyogo (danbooru)](https://danbooru.donmai.us/posts/9259057)
-- Configuration : [configuration.nix](https://github.com/MeeSumee/Greenery/blob/master/hosts/beryl/configuration.nix)
-
-# Running my configuration using nix run
+### Running my configuration by building a VM locally
 To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
 
 Greenery (GVM):
@@ -47,46 +47,39 @@ nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm
 ```
 Initial Password: ```berylline```
 
-Notes: Beryl VM (BVM) may experience lag due to driver mismatch.
+Notes: Beryl VM (BVM) crashes in my own laptop using Niri. This could be a Rembrandt GPU issue.
 
-## Introduction
-So, I've started doing Nix Shenanigans, how did I get here and what did I do?
+## What mess have I created?
+> Whilst juggling many things at once, (Niri, Quickshell, Hyprland, new desktop config, Silent-SDDM, and many more...),
+> I never bothered to update the README until this commit. 
 
-Well, RexCrazy804 invited me to this bandwagon because my laptop has started 
-to crash more often thanks to Microsoft™ Windows 11. Due to increased 
-frustration and wanting a config I can pull from quite easily for each laptop 
-generation I get, NixOS seemed to tick a lot of boxes. Of course, without Rex, 
-I will not get this far this quickly as the NixOS learning curve is steep, 
-especially for me who has not used Linux often and only experimented with 
-distros of Debian when I was not even a teenager.
+> I've made a new branch called quickshell-test where I "try" to mess around and get a quickshell bar working. My plan
+> is to implement my bar (currently unnamed) for Niri with Niri Workspace support. I may add Hyprland support if deemed 
+> necessary for Quartz.
 
-The NixOS learning curve started by experimenting it in VMware. In that way I
-can understand the system and get tutored by Rex easily in one machine. Once
-I got to installing it on my laptop, the first major challenge is configuring
-the hardware to best utilize my laptop with Nix. Luckily, being an ASUS Laptop,
-I can fork the [battery](https://github.com/NixOS/nixos-hardware/blob/master/asus/battery.nix) config straight from Nix-Hardware Repository and
-configure how Nix handles my laptop battery by setting charge level etc. To
-my surprise, Nix-GNOME automatically configured the Touchscreen as well as my 
-[stylus](https://renaisser.com/products/raphael-slim) and works well when tested on Xournal++. It is also surprising how 
-the majority of the Fn key shortcuts work out of the box. Despite these going
-smoothly, there are a few things I had to do for hardware and software.
+> I'm transitioning towards npins, however, my repository remains flake dependent. As of right now, I currently use
+> npins for non-flake repositories and future nix inputs.
 
-## ASUS Trackpad Numpad
-It is very easy to configure the trackpad and mainly followed [this](https://github.com/asus-linux-drivers/asus-numberpad-driver)
-repository. Just follow NixOS flake config as home-manager is not required
-for GNOME as far as I know.
+> I'm setting up both Niri and Hyprland at the same time for two different systems (Crazy).
+> Plan is to have Niri on my laptop with quickshell optimized for performance and Hyprland on my desktop with
+> lots of features.
 
-## Fingerprint Sensor
-It is also relatively straightforward as all I did is use fprint with ELAN
-drivers. Refer to [hardware-configuration.nix](https://github.com/MeeSumee/Greenery/blob/master/hosts/beryl/hardware-configuration.nix) as for how I implemented it.
-Remember to swipe on the fingerprint sensor rather than the usual tap.
-(I swear it took me so long to realize this)
+> I've abandoned MATLAB in favor of it's online version as well as having Octave for offline engineering.
 
-## Lanzaboote & Boot Security
-It mostly involved following instructions [here](https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md).
-Adding a UEFI BIOS Password does not break the original EFI variables and NixOS boots fine with the password installed after configuring Lanzaboote.
+> ASUS Trackpad Numpad does not work with Niri. This can be attributed to the python script being targeted for GNOME environments.
 
-It is also noted that ASUS does not allow SPI Write Protection which means the max security level is HS:1.
+> Silent-SDDM works fine for single monitor and multi-monitor setups with a few caveats.
+> For my multiple monitor setup, Silent-SDDM config duplicates the login screen and resets your display arrangement to default settings.
+> If you receive a blank white screen with the background only filling a part of the screen due to your monitors consisting of different resolutions,
+> add this to your configuration: 
+> ```
+>     wayland = {
+>       enable = true;
+>       compositorCommand = "${lib.getExe' pkgs.kdePackages.kwin "kwin_wayland"} --drm --no-lockscreen --no-global-shortcuts --locale1";
+>     };
+> ```
+
+The rest of the repository are from the legacy README that I didn't bother reformatting.
 
 ## Japanese Keyboard IME ( 日本語 )
 Insert this into your i18n:
@@ -138,21 +131,6 @@ For Japanese Input, add this to your config. Fonts and inputs are customizable.
 
 My JP Keyboard Config can be used by anyone with a keyboard. Refer [here](https://search.nixos.org/options?channel=24.11&show=i18n.supportedLocales&size=50&sort=relevance&type=packages&query=i18n) for options.
 
-## MATLAB
-This is strictly a Work-In-Progress section.
-
-MATLAB is a pain since it can't be packaged easily due to licensing.
-MATLAB does have an online option for a valid account, which means I
-was not too worried if it failed.
-Most instructions were followed [here](https://gitlab.com/doronbehar/nix-matlab)
-
-As of writing this, MATLAB fails to launch due to the following error reported in console:
-```bash
-Launching updater executable
-An unexpected error has occurred.
-To resolve this issue, contact <a href="https://www.mathworks.com/pi_gene_mci_glnxa64">Technical Support</a>"
-```
-
 ## Enabling USB4
 This is not recommended for most users as it involves "hacking" the
 BIOS. DO IT AT YOUR OWN RISK.
@@ -165,15 +143,6 @@ Note that there are three options when enabling USB4.
 
 To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
 Test your USB4 ports using boltctl, if there's instability, disable bolt service.
-
-## What's left in hardware & software for Beryl
-Integrate (or move to) [Niri](https://github.com/YaLTeR/niri). This requires extensive testing and UI building and will take a couple weeks to a couple months to refine it.
-
-There is no easy way to toggle the webcam using Fn + F10 (Fn Lock enabled).
-It involves running a custom script/program which I've yet to bother.
-
-I have no idea whether Pixel Shift (OLED Care) works in NixOS. I got a
-[Pixel Shift Test image](https://github.com/MeeSumee/Greenery/blob/ae043156180a0bac329dac5d40b1eac0d310bba6/src/PIXELSHIFTTEST.png), however, I cannot notice any pixel shifts.
 
 # Greenery Rambling
 This server aims to be completely remote providing only ssh access from the devices I allow.
@@ -193,7 +162,7 @@ Tailscale is integral to how the server operates and how I connect my devices.
 I've setup Greenery to act as an exit node to route all my traffic so my
 workplace doesn't fucking break websites and block me from pushing to git.
 I swear IT has been cracking down on what I've been meaning to use.
-I've defined on my [config](https://github.com/MeeSumee/Greenery/blob/master/hosts/beryl/configuration.nix) on how I've opened up the
+I've defined on networking.nix as well as configuration.nix on how I've opened up the
 Firewall and the tailscale service to utilize MagicDNS routing in Tailscale.
 Tailscale enables me to share my server to other users to enable them to
 connect to my Minecraft Server. It reduces the risk of attackers trying
@@ -204,7 +173,13 @@ I also use Tailscale as a means to send files between my devices using Taildrop.
 This is why I ditched the original method of KDEConnect.
 
 ## Credits
-[RexCrazy804](https://github.com/Rexcrazy804) for literally carrying me. I swear he needs a better PC.
+[Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. I swear he needs a better PC.
+He also gets a lot of credit for all the code I've stolen with permission.
+
+[Z](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
+
+Several sources of quickshell code I've been browsing through in an attempt to understand wtf is going on:
+[Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Ly-sec](https://github.com/Ly-sec/nixos), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar)  
 
 I also want to thank the folks of UAFB who made USB4 possible.
 
@@ -212,9 +187,20 @@ Lastly, I want to thank the Nix Community for its push for packages,
 maintainers, and hardware support. I haven't had this much fun in
 a while. Especially for coding cause I never get As in coding class.
 
+## Quartz PC Specifications
+Curious? Well, here ya go
+- CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
+- RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP) (Underclocked to 5600MHz due to RAM stability issues)
+- MB: [Gigabyte Z690 AORUS ELITE AX REV 1.4](https://www.gigabyte.com/Motherboard/Z690-AORUS-ELITE-AX-rev-14)
+- GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
+
 ## Licensing
 All code in this repository is under the MIT license unless wherever an
 explicit licensing is included.
 
 ## Miscellaneous Sources
 - [User Profile Picture (Nix & Git)](https://danbooru.donmai.us/posts/9246148)
+- [Dell Optiplex 3050 Tower Specifications and Image](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/OptiPlex-3050-Towers-Technical-Specifications.pdf)
+- [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
+- [Vivian Banshee Wallpaper](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
+- [ASUSTek Zenbook S13 OLED, ASUS removed the website :(](https://www.bestbuy.com/site/asus-zenbook-s-13-oled-um5302-13-3-laptop-amd-ryzen-7-16-gb-memory-1-tb-ssd-ponder-blue/6510809.p)
