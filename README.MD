@@ -19,7 +19,7 @@ hosts/             # Consists of all my devices and their configurations
 - beryl/           # ASUSTek Zenbook S13 OLED (UM5302TA) Laptop. WM = Niri
 - greenery/        # Dell Optiplex 3050 Tower Server. WM = None. SSH Only!
 - quartz/          # Personal Gaming PC with i9-12900K and RX 6950XT. WM = Hyprland
-- vmmaker/         # QEMU VM "initializers" when you build my configuration using ```nix run```
+- vmmaker/         # QEMU VM "initializers" when you build my configuration using nix run
 modules/           # Key elements for all of my devices
 - common/          # Common elements shared across all of my devices
 - gui/             # Elements shared by devices that consists of a GUI (ex. Beryl & Quartz)
