@@ -1,0 +1,5 @@
+{lib, ...}: {
+  imports = [
+    ./immich.nix
+  ];
+}

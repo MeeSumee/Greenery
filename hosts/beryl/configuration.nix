@@ -9,8 +9,8 @@
 }: {
   imports = [
     # Imports.
-    ../../common
-    ../../gui
+    ../../modules/common
+    ../../modules/gui
   ];
 
   networking.hostName = "beryl"; # The tint of blue I like

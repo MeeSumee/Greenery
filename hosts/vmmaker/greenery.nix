@@ -6,7 +6,7 @@
   imports =
     [
       # Imports config and undetected drivers in your system
-      ../hosts/greenery/configuration.nix
+      ../greenery/configuration.nix
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
   

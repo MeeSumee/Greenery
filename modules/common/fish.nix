@@ -20,6 +20,7 @@
 
       # git stuff
       ga = "git add --all";
+      gs = "git status";
       gc = "git commit";
       gcm = "git commit -m";
       gp = "git push";
@@ -31,6 +32,7 @@
 
       # misc
       qsp = "qs -p ~/green/quickshell/";
+      m = "micro";
     };
 
     # Aliases to execute commands directly

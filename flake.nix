@@ -40,9 +40,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # Nix-Minecraft
-    nix-minecraft = {
-      url = "github:Infinidoge/nix-minecraft";
+    # Silent SDDM Desktop Manager
+    silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -53,7 +53,7 @@
     niri,
     asus-numberpad-driver,
     lanzaboote,
-    nix-minecraft,
+    silentSDDM,
     hjem,
     quickshell,
     ...
@@ -64,12 +64,17 @@
       nixpkgs.lib.genAttrs systems (
         system: fn (import nixpkgs {system = system;})
       );
+
+    # npin integration to flakes
     sources = import ./npins;
+    
   in {
+    # External packages to build
     packages = forAllSystems (pkgs: { 
       default = pkgs.callPackage ./pkgs/cursors.nix {};
     });
-    
+
+    # Define nixos configurations for each host
     formatter = forAllSystems (pkgs: pkgs.alejandra);
     nixosConfigurations = {
 
@@ -79,7 +84,7 @@
           inherit inputs outputs sources;
           users = ["sumee"];
         };
-
+        
         modules = [
           ./hosts/quartz/configuration.nix
           ./hosts/quartz/hardware-configuration.nix
@@ -121,7 +126,6 @@
         modules = [
           ./hosts/greenery/configuration.nix
           ./hosts/greenery/hardware-configuration.nix
-          ./server
         ];
       };
       
@@ -133,7 +137,7 @@
         };
         
         modules = [
-          ./vmmaker/beryl.nix
+          ./hosts/vmmaker/beryl.nix
         ];
       };
       
@@ -145,7 +149,7 @@
         };
         
         modules = [
-          ./vmmaker/greenery.nix
+          ./hosts/vmmaker/greenery.nix
         ];
       };
     };

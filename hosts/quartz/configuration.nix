@@ -9,8 +9,8 @@
 }: {
   imports = [
     # Imports.
-    ../../common
-    ../../gui
+    ../../modules/common
+    ../../modules/gui
   ];
 
   networking.hostName = "quartz"; # The color of my desktop + piezoelectric shenanigans
@@ -36,6 +36,7 @@
     fan2go # Fan Control
     openrgb # Open-Source RGB Control Software
     rare # Epic Games for Linux with GUI
+    davinci-resolve # Video Editing
   ];
 
   # Enable the OpenSSH daemon

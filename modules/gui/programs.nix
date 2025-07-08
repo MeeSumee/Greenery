@@ -63,11 +63,12 @@
     kdePackages.kate # Kate text editor
     foot # foot terminal
     sbctl # Secure Boot Control
-    kdePackages.kdenlive # Video Editing
+    qimgv # Image viewer
     gimp3 # Image Manipulation
     wineWowPackages.waylandFull # Wine
     xournalpp # Note taking
-    vlc # Media Player
+    vlc # Old school Media Player I use
+    mpv # General Purpose Media Player
     libreoffice-fresh # MSOffice Alternative
     gparted # Disk Partitioning
     prismlauncher # Minecraft
@@ -78,6 +79,6 @@
     protonvpn-gui # GUI VPN Service from Proton
 
     # Flake Packages
-    (pkgs.callPackage ../pkgs/cursors.nix {})
+    (pkgs.callPackage ../../pkgs/cursors.nix {})
   ];
 }

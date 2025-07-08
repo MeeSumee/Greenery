@@ -3,7 +3,7 @@
 
 {
   imports = [
-      ../../common
+      ../../modules/common
   ];
 
   networking.hostName = "greenery"; # Define your hostname.

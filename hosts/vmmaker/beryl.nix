@@ -9,7 +9,7 @@
 }: {
   imports = [
     # Imports config and undetected drivers in your system
-    ../hosts/beryl/configuration.nix
+    ../beryl/configuration.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
   

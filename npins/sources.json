@@ -38,6 +38,19 @@
       "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
       "hash": "1d399fvbjalpfa44jd0qy9kjchspfny0zy3gf1jv2gsmas7iaz85"
+    },
+    "zaphkiel": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Rexcrazy804",
+        "repo": "Zaphkiel"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "4450e08696b49945fea8a22bbecc3657b6c0c102",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/4450e08696b49945fea8a22bbecc3657b6c0c102.tar.gz",
+      "hash": "0jkl2l0kzvxjar8a4kqjljbn2n3ryx78w3w7h31fgspgdwvi0d2v"
     }
   },
   "version": 5
