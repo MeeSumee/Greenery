@@ -178,7 +178,7 @@ He also gets a lot of credit for all the code I've stolen with permission.
 [Z](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
 
 Several sources of quickshell code I've been browsing through in an attempt to understand wtf is going on:
-[Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Ly-sec](https://github.com/Ly-sec/nixos), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar)  
+[Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/Ly-sec/nixos), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar)  
 
 I also want to thank the folks of UAFB who made USB4 possible.
 
