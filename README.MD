@@ -4,29 +4,29 @@ Consists of Greenery, Beryl, and Quartz
 ## Overview
 > Structure of the repository
 ```
-assets/                      # Miscellaneous pictures, gifs, sources used in this repo
-dots/                        # Welcome to the ricefields, fellow ricers! Most are imported using hjem
-- cursors/                   # Cursors imported from AUR and Pling, imported using cursors.nix in pkgs/
-- fish/                      # Fish Shell ini and its themes
-- foot/                      # Foot terminal ini
-- fuzzel/                    # Fuzzel app launcher ini
-- hyprland/                  # Hyprland and Hypridle configuration
-- librewolf/                 # Attempted librewolf configuration override, didn't override my config as of late
-- niri/                      # Niri configuration
-- quickshell/                # Quickshell configuration. WIP in quickshell-test branch
-- uwsm/                      # UWSM environment variables.
-hosts/                       # Consists of all my devices and their configurations
-- beryl/                     # ASUSTek Zenbook S13 OLED (UM5302TA) Laptop. WM = Niri
-- greenery/                  # Dell Optiplex 3050 Tower Server. WM = None. SSH Only!
-- quartz/                    # Personal Gaming PC with i9-12900K and RX 6950XT. WM = Hyprland
-- vmmaker/                   # QEMU VM "initializers" when you build my configuration using ```nix run```
-modules/                     # Key elements for all of my devices
-- common/                    # Common elements shared across all of my devices
-- gui/                       # Elements shared by devices that consists of a GUI (ex. Beryl & Quartz)
-- server/                    # Random minecraft/jellyfin server config added before this repository merged. WIP
-npins/                       # Auto-generated config when using npins command. Take note that it gets rewritten when modifying npins
-pkgs/                        # Consists of cursors.nix, fetches my repository dots and packages it as a nix package
-flake.nix                    # Unified flake that governs all of the inputs, and outputs of my devices. Slowly transitioning to npins
+assets/            # Miscellaneous pictures, gifs, sources used in this repo
+dots/              # Welcome to the ricefields, fellow ricers! Most are imported using hjem
+- cursors/         # Cursors imported from AUR and Pling, imported using cursors.nix in pkgs/
+- fish/            # Fish Shell ini and its themes
+- foot/            # Foot terminal ini
+- fuzzel/          # Fuzzel app launcher ini
+- hyprland/        # Hyprland and Hypridle configuration
+- librewolf/       # Attempted librewolf configuration override, didn't override my config as of late
+- niri/            # Niri configuration
+- quickshell/      # Quickshell configuration. WIP in quickshell-test branch
+- uwsm/            # UWSM environment variables.
+hosts/             # Consists of all my devices and their configurations
+- beryl/           # ASUSTek Zenbook S13 OLED (UM5302TA) Laptop. WM = Niri
+- greenery/        # Dell Optiplex 3050 Tower Server. WM = None. SSH Only!
+- quartz/          # Personal Gaming PC with i9-12900K and RX 6950XT. WM = Hyprland
+- vmmaker/         # QEMU VM "initializers" when you build my configuration using ```nix run```
+modules/           # Key elements for all of my devices
+- common/          # Common elements shared across all of my devices
+- gui/             # Elements shared by devices that consists of a GUI (ex. Beryl & Quartz)
+- server/          # Random minecraft/jellyfin server config added before this repository merged. WIP
+npins/             # Auto-generated config when using npins command. Take note that it gets rewritten when modifying npins
+pkgs/              # Consists of cursors.nix, fetches my repository dots and packages it as a nix package
+flake.nix          # Unified flake that governs all of the inputs, and outputs of my devices. Slowly transitioning to npins
 ```
 
 ### Running my configuration by building a VM locally
