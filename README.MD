@@ -4,7 +4,6 @@ Consists of Greenery, Beryl, and Quartz
 ## Overview
 > Structure of the repository
 
-```
 assets/                      # Miscellaneous pictures, gifs, sources used in this repo
 dots/                        # Welcome to the ricefields, fellow ricers! Most are imported using hjem
 - cursors/                   # Cursors imported from [AUR](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact) and [Pling](https://www.pling.com/p/2226124), imported using cursors.nix in pkgs/
@@ -28,7 +27,6 @@ modules/                     # Key elements for all of my devices
 npins/                       # Auto-generated config when using npins command. Take note that it gets rewritten when modifying npins
 pkgs/                        # Consists of cursors.nix, fetches my repository dots and packages it as a nix package
 flake.nix                    # Unified flake that governs all of the inputs, and outputs of my devices. Slowly transitioning to npins
-```
 
 ### Running my configuration by building a VM locally
 To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
