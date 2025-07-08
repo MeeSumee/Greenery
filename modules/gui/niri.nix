@@ -28,11 +28,11 @@
   # Xwayland satellite for X11 Windowing Support
   systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
 
-  # Packages for niri
+  # swww auto-run wallpaper daemon
   environment.systemPackages = with pkgs; [
-  	
+  	swww
   ];
-
+  
   # Niri Hjem config
   hjem.users = lib.genAttrs users (user: {
     enable = true;

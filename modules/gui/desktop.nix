@@ -15,11 +15,14 @@
   # Hyprland idle daemon
   services.hypridle.enable = true;
 
+  # Forces applications to use wayland instead of Xwayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "auto";
+
   # Common packages
   environment.systemPackages = with pkgs; [
     # Niri/Hyprland Stuff
     fuzzel # app manager
-    swww # background manager
     wl-clipboard # clipboard manager
     cliphist # clipboard history
     wl-screenrec # screen recorder

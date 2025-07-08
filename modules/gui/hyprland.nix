@@ -19,9 +19,6 @@
     xwayland.enable = true;
   };
 
-  # Forces applications to use wayland instead of Xwayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   # Hyprland Packages & Kurukuru bar
   environment.systemPackages = let
     kurukurubar = pkgs.callPackage (sources.zaphkiel + "/pkgs/kurukurubar.nix") {};
