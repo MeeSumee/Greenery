@@ -28,9 +28,10 @@
   # Xwayland satellite for X11 Windowing Support
   systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
 
-  # swww auto-run wallpaper daemon
+  # Niri Packages
   environment.systemPackages = with pkgs; [
   	swww
+  	xwayland-satellite
   ];
   
   # Niri Hjem config
@@ -38,8 +39,20 @@
     enable = true;
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
-    files = {
-      ".config/niri/config.kdl".source = ../../dots/niri/config.kdl;
+    files = let
+      niriwall = let
+		from = ["*SWALLOW_MY_OCTOPUS_WEINER*"];
+        swallow = pkgs.fetchurl {
+          name = "apartment";
+          url = "https://cdn.donmai.us/original/ae/78/ae78985535779323b7eef717f39e1c0f.gif?download=1";
+          hash = "sha256-bx6gG5fJTVJCnpeb/E91FBpNQk+xmXcBJpDDIebkqbg=";
+        };
+        to = ["${swallow}"]; 
+      in
+        builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
+    in {
+      ".config/niri/config.kdl".text = niriwall;
     };
   });
 }
+

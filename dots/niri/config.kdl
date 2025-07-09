@@ -262,15 +262,17 @@ environment {
     DISPLAY ":0"
 }
 
-// Add lines like this to spawn processes at startup.
+// Add lines like this to spawn processes at startup
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
 // Start wlsunset so my eyes don't kill themselves.
 spawn-at-startup "wlsunset" "-T" "3000" "-t" "2999"
-// Start waybar
-spawn-at-startup "waybar"
+
+// Start swww background service and wallpaper setter
+spawn-at-startup "swww-daemon"
+spawn-at-startup "sh" "-c" "sleep 1s; swww img *SWALLOW_MY_OCTOPUS_WEINER* --transition-type wave"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -341,7 +343,7 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
@@ -364,8 +366,8 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+E hotkey-overlay-title="Run Nautilus" { spawn "org.gnome.Nautilus"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: GNOME Display Manager" { spawn "gdm"; }
+    Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: hypridle" { spawn "hypridle"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
