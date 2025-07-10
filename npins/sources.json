@@ -9,9 +9,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "dce3ed5727fe1b2b0df27048be51a11dc0d81d99",
-      "url": "https://github.com/sparques/micro-bounce/archive/dce3ed5727fe1b2b0df27048be51a11dc0d81d99.tar.gz",
-      "hash": "1vmam3diglk53dz9sspnldh9xan0s02gzlzv0rl6cnz4lcl30j2s"
+      "revision": "de7a96dc6b6ffa7832b4923a65b02b67735dbd9c",
+      "url": "https://github.com/sparques/micro-bounce/archive/de7a96dc6b6ffa7832b4923a65b02b67735dbd9c.tar.gz",
+      "hash": "0rsk7ah0b156f7rqnb9mydc24z5djzdq3741afhjxynby0pz8f42"
     },
     "micro-plugin-lsp": {
       "type": "Git",
@@ -48,9 +48,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "4450e08696b49945fea8a22bbecc3657b6c0c102",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/4450e08696b49945fea8a22bbecc3657b6c0c102.tar.gz",
-      "hash": "0jkl2l0kzvxjar8a4kqjljbn2n3ryx78w3w7h31fgspgdwvi0d2v"
+      "revision": "38745bea0f65b3da04b7d838216f0b8be3ea3a0e",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/38745bea0f65b3da04b7d838216f0b8be3ea3a0e.tar.gz",
+      "hash": "1yc410mxjfyccvx3pcny3sybyd0pjg6l4g3s2m5xv7f1mw009xbg"
     }
   },
   "version": 5

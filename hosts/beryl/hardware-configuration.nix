@@ -49,11 +49,10 @@
     enable = true;
     layout = "up5401ea";
     wayland = true;
-    runtimeDir = "/run/user/1000/";
-    waylandDisplay = "wayland-0";
-    ignoreWaylandDisplayEnv = true;
+    waylandDisplay = "wayland-1";
+    ignoreWaylandDisplayEnv = false;
     config = {
-      # e.g. "activation_time" = "0.5";
+      "activation_time" = "0.5";
     };
   };
 
