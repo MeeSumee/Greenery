@@ -65,6 +65,8 @@
 
   # Exclude xterm
   services.xserver.excludePackages = with pkgs; [ xterm ];
+
+  services.displayManager.gdm.enable = true;
   
   # Set default applications
   xdg.mime.defaultApplications = {

@@ -3,7 +3,6 @@
 }:{
   imports = [
     ./desktop.nix
-    ./gdm.nix
     ./inputfont.nix
     ./programs.nix
     ./audio.nix
