@@ -6,6 +6,5 @@
     "Alt-r": "command:references",
     "CtrlSpace": "command:lspcompletion",
     "CtrlUnderscore": "lua:comment.comment",
-    "CtrlTab": "NextTab",
     "Alt-t": "command:term"
 }

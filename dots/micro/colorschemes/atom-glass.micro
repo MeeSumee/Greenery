@@ -1,4 +1,4 @@
-color-link comment "#7C7C7C,#1D1F21"
+color-link comment "#7C7C7C"
 color-link identifier "#F9EE98,#1D1F21"
 color-link constant "#FF73FD,#1D1F21"
 color-link constant.string "#A8FF60,#1D1F21"

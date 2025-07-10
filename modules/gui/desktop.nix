@@ -12,9 +12,6 @@
     inputs.hjem.nixosModules.default
   ];
 
-  # Hyprland idle daemon
-  services.hypridle.enable = true;
-
   # Forces applications to use wayland instead of Xwayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -41,6 +38,7 @@
 
   # Exclude pre-installed gnome applications
   environment.gnome.excludePackages = with pkgs; [
+    cheese
   	gnome-console
   	gnome-disk-utility
   	gnome-system-monitor
@@ -63,9 +61,11 @@
   	gnome-tour
   	gnome-weather
   	yelp
-  	xterm
   ];
 
+  # Exclude xterm
+  services.xserver.excludePackages = with pkgs; [ xterm ];
+  
   # Set default applications
   xdg.mime.defaultApplications = {
   	
