@@ -15,7 +15,7 @@
   	      cursor-theme = "xcursor-genshin-nahida";
   	      color-scheme = "prefer-dark";
   	      clock-show-weekday = true;
-  	      text-scaling-factor = 1.25;
+  	      scaling-factor = lib.gvariant.mkUint32 2;
   	    };
 
   	    "org/gnome/desktop/peripherals/keyboard" = {

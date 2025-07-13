@@ -13,6 +13,7 @@
     ./locale.nix
     ./micro.nix
     ./yazi.nix
+    ./nix.nix
   ];
 
   # Bootloader.
@@ -34,15 +35,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Enable essential features
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   # Adds rocm support to btop and nixos
   nixpkgs.config.rocmSupport = true;
