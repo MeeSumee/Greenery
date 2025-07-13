@@ -12,9 +12,12 @@ dots/              # Welcome to the ricefields, fellow ricers! Most are imported
 - fuzzel/          # Fuzzel app launcher ini
 - hyprland/        # Hyprland and Hypridle configuration
 - librewolf/       # Attempted librewolf configuration override, didn't override my config as of late
+- micro/           # Fork colorschemes and make them transparent, add settings and keybinds
+- mpv/             # mpv media player configuration
 - niri/            # Niri configuration
 - quickshell/      # Quickshell configuration. WIP in quickshell-test branch
-- uwsm/            # UWSM environment variables.
+- uwsm/            # UWSM environment variables
+- yazi/            # Yazi init.lua
 hosts/             # Consists of all my devices and their configurations
 - beryl/           # ASUSTek Zenbook S13 OLED (UM5302TA) Laptop. WM = Niri
 - greenery/        # Dell Optiplex 3050 Tower Server. WM = None. SSH Only!
@@ -49,9 +52,6 @@ Initial Password: ```berylline```
 Notes: Beryl VM (BVM) crashes in my own laptop using Niri. This could be a Rembrandt GPU issue.
 
 ## What mess have I created?
- Whilst juggling many things at once, (Niri, Quickshell, Hyprland, new desktop config, Silent-SDDM, and many more...),
- I never bothered to update the README until this commit. 
-
  I've made a new branch called quickshell-test where I "try" to mess around and get a quickshell bar working. My plan
  is to implement my bar (currently unnamed) for Niri with Niri Workspace support. I may add Hyprland support if deemed 
  necessary for Quartz.
@@ -65,26 +65,15 @@ Notes: Beryl VM (BVM) crashes in my own laptop using Niri. This could be a Rembr
 
  I've abandoned MATLAB in favor of it's online version as well as having Octave for offline engineering.
 
- ASUS Trackpad Numpad does not work with Niri. This can be attributed to the python script being targeted for GNOME environments.
+ ASUS Trackpad Numpad driver now works with niri when switching Wayland Environment Variables in hardware-config.nix in Beryl.
 
- Silent-SDDM works fine for single monitor and multi-monitor setups with a few caveats.
- For my multiple monitor setup, Silent-SDDM config duplicates the login screen and resets your display arrangement to default settings.
- If you receive a blank white screen with the background only filling a part of the screen due to your monitors consisting of different resolutions,
- add this to your configuration: 
- ```
-     wayland = {
-       enable = true;
-       compositorCommand = "${lib.getExe' pkgs.kdePackages.kwin "kwin_wayland"} --drm --no-lockscreen --no-global-shortcuts --locale1";
-     };
- ```
+ I've ditched sddm, explored greetd, got frustrated, then returned back to gdm and tried to poke at the source file to theme it.
+ It has worked well and looks like this:
+ [!image](https://github.com/MeeSumee/Greenery/blob/master/assets/GDM.png)
 
 The rest of the README are from the legacy README that I didn't bother reformatting.
 
 ## Japanese Keyboard IME ( 日本語 )
-Insert this into your i18n:
-```bash
-extraLocales = [ "ja_JP.UTF-8" ];
-```
 For Japanese Input, add this to your config. Fonts and inputs are customizable.
 ```bash
   # Font Settings for both English and Japanese
@@ -145,28 +134,17 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 
 # Greenery Rambling
 This server aims to be completely remote providing only ssh access from the devices I allow.
-This server is configured as a minecraft server with the intentions of running either 
-vanilla or modded. I've configured it with the intention of supporting all modloaders,
-including the infamous Forge. I've already seen Rex complain about forge driving him insane
-which means I can't exactly do much about it. I also tried nix-fabric by fetching toml files
-using my modpacks repo, but curseforge API keeps requesting me to manually download and
-blocks Nix toml fetching from Infinidoge's Nix-minecraft.
-
-Right now, I am running modpacks based on a dedicated folder where I extracted the server_pack
-and running it's start batch script while complying to it's Java version. I will figure
-out how I can automate the server pack fetching declaratively.
+This server is a multipurpose server that used to primarily serve as a minecraft server.
+It serves as a website host, manga/epub library host, as well as other services I can use
+for hosting in the future. This all would not be possible without tailscale.
 
 ## Tailscale
 Tailscale is integral to how the server operates and how I connect my devices.
 I've setup Greenery to act as an exit node to route all my traffic so my
 workplace doesn't fucking break websites and block me from pushing to git.
 I swear IT has been cracking down on what I've been meaning to use.
-I've defined on networking.nix as well as configuration.nix on how I've opened up the
-Firewall and the tailscale service to utilize MagicDNS routing in Tailscale.
-Tailscale enables me to share my server to other users to enable them to
-connect to my Minecraft Server. It reduces the risk of attackers trying
-to obtain IP addresses as well as bypass the blocked ports from my home
-WiFi.
+The main files to look for are common/networking.nix, hosts/configuration.nix, 
+and tailscale.nix 
 
 I also use Tailscale as a means to send files between my devices using Taildrop.
 This is why I ditched the original method of KDEConnect.
