@@ -144,8 +144,7 @@ Tailscale is integral to how the server operates and how I connect my devices.
 I've setup Greenery to act as an exit node to route all my traffic so my
 workplace doesn't fucking break websites and block me from pushing to git.
 I swear IT has been cracking down on what I've been meaning to use.
-The main files to look for are common/networking.nix, hosts/configuration.nix, 
-and tailscale.nix 
+The main files to look for are common/networking.nix and hosts/configuration.nix.
 
 I also use Tailscale as a means to send files between my devices using Taildrop.
 This is why I ditched the original method of KDEConnect.
