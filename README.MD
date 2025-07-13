@@ -69,7 +69,8 @@ Notes: Beryl VM (BVM) crashes in my own laptop using Niri. This could be a Rembr
 
  I've ditched sddm, explored greetd, got frustrated, then returned back to gdm and tried to poke at the source file to theme it.
  It has worked well and looks like this:
- [image](https://github.com/MeeSumee/Greenery/blob/master/assets/GDM.png)
+
+ https://github.com/MeeSumee/Greenery/blob/master/assets/GDM.png
 
 The rest of the README are from the legacy README that I didn't bother reformatting.
 
