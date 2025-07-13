@@ -49,6 +49,11 @@
   programs.dconf.profiles = {
     user.databases = [{
       settings = {
+        
+        "org/cinnamon/desktop/default-applications/terminal" = {
+          exec = "foot";    
+        };
+
         "org/gnome/desktop/interface" = {
           gtk-theme = "Nordic";
           icon-theme = "Papirus-Dark";

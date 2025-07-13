@@ -1,3 +1,7 @@
 {
-    "colorscheme": "kinetic"
+    "colorscheme": "kinetic",
+
+    "tabstospaces": true,
+
+    "ftoptions": false
 }

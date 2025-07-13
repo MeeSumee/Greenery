@@ -10,6 +10,11 @@
   	flavors = { inherit (pkgs.yaziPlugins) nord; };
 
   	settings = {
+  	  yazi = {
+  	    mgr = {
+  	      show_hidden = true;
+  	    };
+  	  };
   	  theme = {
   	    flavor = {
   	      light = "nord";

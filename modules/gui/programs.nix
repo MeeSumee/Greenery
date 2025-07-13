@@ -51,6 +51,11 @@
   # Java
   programs.java.enable = true;
 
+  # Foot terminal
+  programs.foot = {
+    enable = true;
+  };
+
   # Packages
   environment.systemPackages = with pkgs; [
 
@@ -58,24 +63,25 @@
     (pkgs.vesktop.override {
       withMiddleClickScroll = true;
       withSystemVencord = true;
-    }) # Better discord + Overrides
-    brave # Import Browser Profiles
-    kdePackages.kate # Kate text editor
-    foot # foot terminal
-    sbctl # Secure Boot Control
-    qimgv # Image viewer
-    gimp3 # Image Manipulation
-    wineWowPackages.waylandFull # Wine
-    xournalpp # Note taking
-    vlc # Old school Media Player I use
-    mpv # General Purpose Media Player
-    libreoffice-fresh # MSOffice Alternative
-    gparted # Disk Partitioning
-    prismlauncher # Minecraft
-    zoom-us # Meetings
-    arduino-ide # Programming
-    ngspice # Electronic Circuit Simulator
-    protonvpn-gui # GUI VPN Service from Proton
+    })                             # Better discord + Overrides
+    brave                          # Import Browser Profiles
+    nemo                           # GUI File Browser
+    kdePackages.kate               # Kate text editor
+    vscodium                       # vscodium for gui IDE
+    sbctl                          # Secure Boot Control
+    qimgv                          # Image viewer
+    gimp3                          # Image Manipulation
+    wineWowPackages.waylandFull    # Wine
+    xournalpp                      # Note taking
+    vlc                            # Old school Media Player I use
+    mpv                            # General Purpose Media Player
+    libreoffice-fresh              # MSOffice Alternative
+    gparted                        # Disk Partitioning
+    prismlauncher                  # Minecraft
+    zoom-us                        # Meetings
+    arduino-ide                    # Programming
+    ngspice                        # Electronic Circuit Simulator
+    protonvpn-gui                  # GUI VPN Service from Proton
 
     # Flake Packages
     (pkgs.callPackage ../../pkgs/cursors.nix {})

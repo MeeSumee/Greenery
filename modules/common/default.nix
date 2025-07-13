@@ -2,15 +2,13 @@
 {
   config,
   pkgs,
-  options,
-  lib,
-  inputs,
   ...
 }:{
   imports = [
     ./fish.nix
     ./networking.nix
     ./locale.nix
+    ./nvim.nix
     ./micro.nix
     ./yazi.nix
     ./nix.nix
@@ -25,13 +23,15 @@
     npins
     git
     wget
-    neovim
     btop
     tree
     unzip
     speedtest-cli
     fzf
   ];
+
+  # Disable nano
+  programs.nano.enable = false;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -41,5 +41,4 @@
 
   # Enable Firmware Updates
   services.fwupd.enable = true;
-
 }

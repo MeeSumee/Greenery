@@ -22,9 +22,17 @@
     inputs.hjem.nixosModules.default
   ];
 
+  environment.variables = {
+    EDITOR = "micro";
+    SYSTEMD_EDITOR = "micro";
+    VISUAL = "micro";
+  };
+  
   # Forces applications to use wayland instead of Xwayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+  };
 
   # Common GUI packages
   environment.systemPackages = with pkgs; [
@@ -41,9 +49,19 @@
   # Exclude xterm
   services.xserver.excludePackages = with pkgs; [ xterm ];
   
-  # Set default applications
-  xdg.mime.defaultApplications = {
-  	
+  # Set defaults
+  xdg = {
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [
+          "foot.desktop"
+        ];
+      };
+    };
+    mime.defaultApplications = {
+      "image" = "qimgv.desktop";
+    };
   };
   
   # Enable the X11 windowing system

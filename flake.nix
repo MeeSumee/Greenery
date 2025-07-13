@@ -40,9 +40,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    # Silent SDDM Desktop Manager
-    silentSDDM = {
-      url = "github:uiriansan/SilentSDDM";
+    # NVF, Neovim + Nix Config
+    nvf = {
+      url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -53,7 +53,7 @@
     niri,
     asus-numberpad-driver,
     lanzaboote,
-    silentSDDM,
+    nvf,
     hjem,
     quickshell,
     ...
