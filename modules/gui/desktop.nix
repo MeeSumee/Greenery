@@ -30,7 +30,8 @@
 
     # GNOME Stuff
     gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
-    papirus-icon-theme # Icon Theme
+    nordic # Gtk Theme
+    papirus-icon-theme # Gtk Icons
     gnomeExtensions.kimpanel # Input Method Panel
     gnomeExtensions.blur-my-shell # Blurring Appearance Tool
     gnomeExtensions.user-themes # User themes
@@ -39,6 +40,7 @@
   # Exclude pre-installed gnome applications
   environment.gnome.excludePackages = with pkgs; [
     cheese
+    nautilus
   	gnome-console
   	gnome-disk-utility
   	gnome-system-monitor
@@ -65,8 +67,6 @@
 
   # Exclude xterm
   services.xserver.excludePackages = with pkgs; [ xterm ];
-
-  services.displayManager.gdm.enable = true;
   
   # Set default applications
   xdg.mime.defaultApplications = {
@@ -78,13 +78,12 @@
   	enable = true;
   	displayManager = {
   	  setupCommands = ''
-  	    ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --off
   	  '';
   	};
   	videoDrivers = [ "amdgpu" ];
   };
 
-  # Enable GNOME Desktop Manager
+  # Enable GNOME Desktop
   services.desktopManager.gnome.enable = true;
   
   # Seahorse Password Manager (Do I need this?)
@@ -106,96 +105,103 @@
 
   # Gnome Keyring Packages (I dunno why keyring keeps complaining when I open brave)
   services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
-
+  
   # GNOME Configuration, evading Home-Manager
-  programs.dconf.profiles.user.databases = [{
-    settings = {
-      "org/gnome/desktop/interface" = {
-        icon-theme = "Papirus-Dark";
-        cursor-theme = "xcursor-genshin-nahida";
-        monospace-font-name = "Source Code Pro";
-        color-scheme = "prefer-dark";
-        clock-show-weekday = true;
-      };
+  programs.dconf.profiles = {
+    user.databases = [{
+      settings = {
+        "org/gnome/desktop/interface" = {
+          gtk-theme = "Nordic";
+          icon-theme = "Papirus-Dark";
+          cursor-theme = "xcursor-genshin-nahida";
+          monospace-font-name = "Source Code Pro";
+          color-scheme = "prefer-dark";
+          clock-show-weekday = true;
+        };
 
-      "org/gnome/settings-daemon/plugins/color" = {
-        night-light-enabled = true;
-        night-light-temperature = lib.gvariant.mkUint32 3000;
-        night-light-schedule-automatic = false;
-        night-light-schedule-from = 8.0;
-        night-light-schedule-to = 7.99;
-      };
+        "org/gnome/desktop/wm/preferences" = {
+          theme = "Nordic";
+        };
 
-      "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = [
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
-        ];
-      };
+        "org/gnome/settings-daemon/plugins/color" = {
+          night-light-enabled = true;
+          night-light-temperature = lib.gvariant.mkUint32 3000;
+          night-light-schedule-automatic = false;
+          night-light-schedule-from = 8.0;
+          night-light-schedule-to = 7.99;
+        };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-        binding = "<Super>t";
-        command = "foot";
-        name = "Foot Terminal"; 
-      };
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          custom-keybindings = [
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+          ];
+        };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-        binding = "<Super>c";
-        command = "gnome-calculator";
-        name = "Calculator";
-      };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          binding = "<Super>t";
+          command = "foot";
+          name = "Foot Terminal"; 
+        };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-        binding = "<Super>i";
-        command = "gnome-control-center";
-        name = "Settings";
-      };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+          binding = "<Super>c";
+          command = "gnome-calculator";
+          name = "Calculator";
+        };
 
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
-        binding = "<Super>e";
-        command = "nautilus";
-        name = "Files";
-      };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+          binding = "<Super>i";
+          command = "gnome-control-center";
+          name = "Settings";
+        };
 
-      "org/gnome/desktop/background" = {
-          picture-uri-dark = let
-            background = pkgs.fetchurl {
-              name = "vivianbg.jpeg";
-              url = "https://cdn.donmai.us/original/22/3a/__vivian_banshee_zenless_zone_zero_and_1_more_drawn_by_pyogo__223ad637e74d7f5bd860e08e7ea435ad.png?download=1";
-              hash = "sha256-oCx5xtlR4Kq4WGcdDHMbeMd7IiSA3RKsnh+cpD+4UY0=";
-            };
-          in "file://${background}";
-          picture-options = "zoom";
-       };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+          binding = "<Super>e";
+          command = "yazi";
+          name = "Yazi";
+        };
+
+        "org/gnome/desktop/background" = {
+            picture-uri-dark = let
+              background = pkgs.fetchurl {
+                name = "vivianbg.jpeg";
+                url = "https://cdn.donmai.us/original/22/3a/__vivian_banshee_zenless_zone_zero_and_1_more_drawn_by_pyogo__223ad637e74d7f5bd860e08e7ea435ad.png?download=1";
+                hash = "sha256-oCx5xtlR4Kq4WGcdDHMbeMd7IiSA3RKsnh+cpD+4UY0=";
+              };
+            in "file://${background}";
+            picture-options = "zoom";
+         };
       
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
       
-        enabled-extensions = [
-          "user-theme@gnome-shell-extensions.gcampax.github.com"
-          "kimpanel@kde.org"
-          "blur-my-shell@aunetx"
-        ];
+          enabled-extensions = [
+            "user-theme@gnome-shell-extensions.gcampax.github.com"
+            "kimpanel@kde.org"
+            "blur-my-shell@aunetx"
+          ];
       
-        favorite-apps = [
-          "librewolf.desktop"
-          "brave-browser.desktop"
-          "vesktop.desktop"
-          "steam.desktop"
-          "com.github.xournalpp.xournalpp.desktop"
-          "btop.desktop"
-          "org.prismlauncher.PrismLauncher.desktop"
-          "davinci-resolve.desktop"
-          "org.gnome.Nautilus.desktop"
-          "foot.desktop"
-          "org.kde.kate.desktop"
-          "com.github.johnfactotum.Foliate.desktop"
-        ];
+          favorite-apps = [
+            "librewolf.desktop"
+            "brave-browser.desktop"
+            "vesktop.desktop"
+            "steam.desktop"
+            "com.github.xournalpp.xournalpp.desktop"
+            "btop.desktop"
+            "org.prismlauncher.PrismLauncher.desktop"
+            "davinci-resolve.desktop"
+            "org.gnome.Nautilus.desktop"
+            "foot.desktop"
+            "org.kde.kate.desktop"
+            "com.github.johnfactotum.Foliate.desktop"
+          ];
+        };
       };
-    };
-  }];
+    }];
+  };
   
   # Hjem for simple home management
   hjem.users = lib.genAttrs users (user: {
@@ -203,7 +209,7 @@
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
     files = let 
-      # Set face icon for all users
+      # Make face.icon at /home/user/
       faceIcon = let
         pfp = pkgs.fetchurl {
           name = "vivianpfp.jpg";
@@ -220,6 +226,7 @@
 
     in {
       ".face.icon".source = faceIcon;
+      ".config/mpv".source = ../../dots/mpv;
       ".config/hypr/hypridle.conf".source = ../../dots/hyprland/hypridle.conf;
       ".config/foot/foot.ini".source = ../../dots/foot/foot.ini;
       ".config/fuzzel/fuzzel.ini".source = ../../dots/fuzzel/fuzzel.ini;

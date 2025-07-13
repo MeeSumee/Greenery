@@ -12,6 +12,7 @@
     ./networking.nix
     ./locale.nix
     ./micro.nix
+    ./yazi.nix
   ];
 
   # Bootloader.

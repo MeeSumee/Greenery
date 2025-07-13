@@ -75,7 +75,6 @@
     zoom-us # Meetings
     arduino-ide # Programming
     ngspice # Electronic Circuit Simulator
-    protonmail-desktop # Desktop Mail + Calendar
     protonvpn-gui # GUI VPN Service from Proton
 
     # Flake Packages
