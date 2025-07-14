@@ -41,13 +41,13 @@
     clobberFiles = lib.mkForce true;
     files = let
       niriwall = let
-		from = ["*SWALLOW_MY_OCTOPUS_WEINER*"];
-        swallow = pkgs.fetchurl {
+		from = ["*Why_is_IT_department_a_piece_of_shit*"];
+        real_life_moment = pkgs.fetchurl {
           name = "apartment";
           url = "https://cdn.donmai.us/original/ae/78/ae78985535779323b7eef717f39e1c0f.gif?download=1";
           hash = "sha256-bx6gG5fJTVJCnpeb/E91FBpNQk+xmXcBJpDDIebkqbg=";
         };
-        to = ["${swallow}"]; 
+        to = ["${real_life_moment}"];
       in
         builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
     in {
