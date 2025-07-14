@@ -1,6 +1,5 @@
 # Importer and Defaults maker
 {
-  config,
   pkgs,
   ...
 }:{

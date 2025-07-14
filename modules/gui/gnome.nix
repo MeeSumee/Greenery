@@ -17,7 +17,6 @@
   # Exclude pre-installed gnome applications
   environment.gnome.excludePackages = with pkgs; [
     cheese
-    nautilus
   	gnome-console
   	gnome-disk-utility
   	gnome-system-monitor

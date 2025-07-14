@@ -65,8 +65,6 @@
       withSystemVencord = true;
     })                             # Better discord + Overrides
     brave                          # Import Browser Profiles
-    nemo                           # GUI File Browser
-    kdePackages.kate               # Kate text editor
     vscodium                       # vscodium for gui IDE
     sbctl                          # Secure Boot Control
     qimgv                          # Image viewer
