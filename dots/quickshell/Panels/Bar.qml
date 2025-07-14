@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import "../Widgets" as Wid
-import "../Assets"
+import "../Data" as Dat
 
 Scope {
 	Variants {
@@ -34,9 +34,11 @@ Scope {
 
             Rectangle {
             	id: barfull
+				color: Dat.Colors.background
         		anchors.horizontalCenter: parent.horizontalCenter
 
         		width: 300; height:10
+				topLeftRadius: -25; topRightRadius: -25; bottomLeftRadius: 25; bottomRightRadius: 25
         		state: "HIDDEN"
         		opacity: 0
 
@@ -76,6 +78,8 @@ Scope {
 	      					anchors.verticalCenter: parent.verticalCenter
 	      					anchors.top: parent.top
 		        	    	Wid.Battery {
+								Layout.alignment: Qt.AlignTop
+								Layout.topMargin: 15
 		        	    	}
 		        	    }
         	    	}
@@ -98,11 +102,11 @@ Scope {
             	    },
             		State {
             			name: "SHOWN";
-            			PropertyChanges { target: barfull; height: 30; width: 1000; opacity: 0.95; }
+            			PropertyChanges { target: barfull; height: 30; width: 1000; opacity: 0.98; }
             		},
             		State {
             			name: "FULL";
-            			PropertyChanges { target: barfull; height: 400; width: 1000; opacity: 0.95; }
+            			PropertyChanges { target: barfull; height: 400; width: 1000; opacity: 0.98; }
             		}
                 ]
 
@@ -113,7 +117,7 @@ Scope {
                         NumberAnimation {
                             properties: "height, width, opacity";
                             easing.type: Easing.InOutQuad;
-                            duration: 100;
+                            duration: 300;
                         }
                     },
                     Transition {
@@ -122,7 +126,7 @@ Scope {
                         NumberAnimation {
                             properties: "height, width, opacity";
                             easing.type: Easing.InOutQuad;
-                            duration: 250;
+                            duration: 300;
                         }
                     },
                     Transition {
@@ -131,7 +135,7 @@ Scope {
                         NumberAnimation {
                             easing.type: Easing.InOutQuad;
                             properties: "height, width, opacity";
-                            duration: 250;
+                            duration: 300;
                         }
                     },
                     Transition {
@@ -140,7 +144,7 @@ Scope {
                         NumberAnimation {
                             easing.type: Easing.InOutQuad;
                             properties: "height, width, opacity";
-                            duration: 250;
+                            duration: 300;
                         }
                     },
                     Transition {
@@ -149,7 +153,7 @@ Scope {
                         NumberAnimation {
                             easing.type: Easing.InOutQuad;
                             properties: "height, width, opacity";
-                            duration: 100;
+                            duration: 300;
                         }
                     }
                 ]

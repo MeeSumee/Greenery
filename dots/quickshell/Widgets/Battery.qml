@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.UPower
+import "../Data" as Dat
 
 Rectangle {
   id: root
@@ -29,7 +30,7 @@ Rectangle {
 
       Text {
         id: batText
-
+        color: Dat.Colors.foreground
         anchors.centerIn: parent
         font.pointSize: 11
         text: Math.round(root.batPercentage * 100) + "%"

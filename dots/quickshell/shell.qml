@@ -4,4 +4,5 @@ import "Panels"
 
 Scope {
     Bar{}
+    Volume{}
 }

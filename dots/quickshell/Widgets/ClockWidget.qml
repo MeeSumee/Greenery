@@ -1,9 +1,8 @@
 // ClockWidget.qml
 import QtQuick
+import "../Data" as Dat
 
 Text {
-  // we no longer need time as an input
-
-  // directly access the time property from the Time singleton
+  color: Dat.Colors.foreground
   text: Time.time
 }
