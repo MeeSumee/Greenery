@@ -45,6 +45,12 @@
   
   # Fix tailscale auto-connect during login (might not be necessary)
   systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
+
+  # Toggle cam on/off aliases using fish (need sudo privileges tho)
+  programs.fish.shellAliases = {
+    camoff = ''echo "5-1:1.0" | sudo tee /sys/bus/usb/drivers/uvcvideo/unbind'';
+    camon = ''echo "5-1:1.0" | sudo tee /sys/bus/usb/drivers/uvcvideo/bind'';
+  };
   
 /*
   This value determines the NixOS release from which the default

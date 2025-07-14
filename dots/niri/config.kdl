@@ -61,7 +61,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -272,7 +272,7 @@ spawn-at-startup "wlsunset" "-T" "3000" "-t" "2999"
 
 // Start swww background service and wallpaper setter
 spawn-at-startup "swww-daemon"
-spawn-at-startup "fish" "-c" "sleep 1s; swww img *SWALLOW_MY_OCTOPUS_WEINER* --transition-type wave"
+spawn-at-startup "fish" "-c" "sleep 1s; swww img *Why_is_IT_department_a_piece_of_shit* --transition-type wave"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.

@@ -31,7 +31,7 @@
   # Forces applications to use wayland instead of Xwayland
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
   # Common GUI packages
