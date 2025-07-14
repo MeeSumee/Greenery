@@ -38,7 +38,7 @@ Scope {
         		anchors.horizontalCenter: parent.horizontalCenter
 
         		width: 300; height:10
-				topLeftRadius: -25; topRightRadius: -25; bottomLeftRadius: 25; bottomRightRadius: 25
+				bottomLeftRadius: 25; bottomRightRadius: 25
         		state: "HIDDEN"
         		opacity: 0
 
@@ -53,7 +53,7 @@ Scope {
 							anchors.verticalCenter: parent.verticalCenter
 							anchors.top: parent.top
 		        	    	Image {
-		        	    		anchors.top: parent.top
+		        	    		Layout.alignment: Qt.AlignTop
 		        	    	    Layout.maximumHeight: 30
 		        	    	    Layout.maximumWidth: 30   	    	    
 		        	    	    source: "../Assets/NixOS.png"
