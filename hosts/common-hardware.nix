@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, user, ... }:{
+{ config, lib, pkgs, modulesPath, users, ... }:{
   imports = [ 
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -14,7 +14,7 @@
       "x-systemd.automount"
       "reconnect"
       "ServerAliveInterval=15"
-      "IdentityFile=/home/${user}/.ssh/id_ed25519"
+      "IdentityFile=/home/${users}/.ssh/id_ed25519"
     ];
   };
 
