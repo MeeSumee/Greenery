@@ -52,13 +52,13 @@
   
   # Enable the X11 windowing system
   services.xserver = {
-  	enable = true;
+    enable = true;
     excludePackages = with pkgs; [ xterm ];
-  	displayManager = {
-  	  setupCommands = ''
-  	  '';
-  	};
-  	videoDrivers = [ "amdgpu" ];
+    displayManager = {
+      setupCommands = ''
+      '';
+    };
+    videoDrivers = [ "amdgpu" ];
   };
 
   # Pokit Agent (Do I need this??)

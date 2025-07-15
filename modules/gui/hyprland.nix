@@ -9,7 +9,7 @@
   ...
 }:{
   imports = [
-  	inputs.hjem.nixosModules.default
+    inputs.hjem.nixosModules.default
   ];
 
   # Hyprland idle daemon
@@ -43,26 +43,26 @@
     clobberFiles = lib.mkForce true;
     files = let
       hyprwall = let
-  	    from = ["%_HOLY_TIDDIES_%"];
-  	    sassy_cindrella_girl = pkgs.fetchurl {
-   	      name = "hyprlockvivian";
-   	      url = "https://img4.gelbooru.com/images/05/eb/05ebf5d940096c87b92497c92770c997.png";
-   	      hash = "sha256-lZ9dfCDthBgqewcBrzQOKFr2X5Rc+rlEhPPrO8VQA/g=";
-   	    };
-  	    to = ["${sassy_cindrella_girl}"];
-  	  in
-  	    builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprland.conf);
-  	    
-	    hyprlockwall = let
-	      from = ["$_SCHIZOPHRENIA_$"];
-  	    classy_cindrella_girl = pkgs.fetchurl {
-  	      name = "hyprvivian";
-  	      url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
-  	      hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
-  	    };	    
-	      to = ["${classy_cindrella_girl}"];
-	    in
-	  	  builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprlock.conf);
+        from = ["%_HOLY_TIDDIES_%"];
+        sassy_cindrella_girl = pkgs.fetchurl {
+           name = "hyprlockvivian";
+           url = "https://img4.gelbooru.com/images/05/eb/05ebf5d940096c87b92497c92770c997.png";
+           hash = "sha256-lZ9dfCDthBgqewcBrzQOKFr2X5Rc+rlEhPPrO8VQA/g=";
+         };
+        to = ["${sassy_cindrella_girl}"];
+      in
+        builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprland.conf);
+        
+      hyprlockwall = let
+        from = ["$_SCHIZOPHRENIA_$"];
+        classy_cindrella_girl = pkgs.fetchurl {
+          name = "hyprvivian";
+          url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
+          hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
+        };	    
+        to = ["${classy_cindrella_girl}"];
+      in
+        builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprlock.conf);
     in {
       ".config/uwsm/env".source = ../../dots/uwsm/env;
       ".config/hypr/hyprland.conf".text = hyprwall;

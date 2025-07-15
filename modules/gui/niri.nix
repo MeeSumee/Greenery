@@ -30,8 +30,8 @@
 
   # Niri Packages
   environment.systemPackages = with pkgs; [
-  	swww
-  	xwayland-satellite
+    swww
+    xwayland-satellite
   ];
   
   # Niri Hjem config
@@ -41,7 +41,7 @@
     clobberFiles = lib.mkForce true;
     files = let
       niriwall = let
-		from = ["*Why_is_IT_department_a_piece_of_shit*"];
+        from = ["*Why_is_IT_department_a_piece_of_shit*"];
         real_life_moment = pkgs.fetchurl {
           name = "apartment";
           url = "https://cdn.donmai.us/original/ae/78/ae78985535779323b7eef717f39e1c0f.gif?download=1";

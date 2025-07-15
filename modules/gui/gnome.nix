@@ -5,40 +5,40 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-  	# GNOME Stuff
-  	gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
-  	nordic # Gtk Theme
-  	papirus-icon-theme # Gtk Icons
-  	gnomeExtensions.kimpanel # Input Method Panel
-  	gnomeExtensions.blur-my-shell # Blurring Appearance Tool
-  	gnomeExtensions.user-themes # User themes
+    # GNOME Stuff
+    gnome-tweaks # Nahida Cursors & Other Cool Stuff >.<
+    nordic # Gtk Theme
+    papirus-icon-theme # Gtk Icons
+    gnomeExtensions.kimpanel # Input Method Panel
+    gnomeExtensions.blur-my-shell # Blurring Appearance Tool
+    gnomeExtensions.user-themes # User themes
   ];
 
   # Exclude pre-installed gnome applications
   environment.gnome.excludePackages = with pkgs; [
     cheese
-  	gnome-console
-  	gnome-disk-utility
-  	gnome-system-monitor
-  	gnome-text-editor
-  	gnome-music
-  	gnome-calendar
-  	gnome-characters
-  	gnome-clocks
-  	gnome-contacts
-  	decibels
-  	epiphany
-  	evince
-  	evolution
-  	geary
-  	loupe
-  	gnome-maps
-  	gnome-music
-  	gnome-online-accounts
-  	totem
-  	gnome-tour
-  	gnome-weather
-  	yelp
+    gnome-console
+    gnome-disk-utility
+    gnome-system-monitor
+    gnome-text-editor
+    gnome-music
+    gnome-calendar
+    gnome-characters
+    gnome-clocks
+    gnome-contacts
+    decibels
+    epiphany
+    evince
+    evolution
+    geary
+    loupe
+    gnome-maps
+    gnome-music
+    gnome-online-accounts
+    totem
+    gnome-tour
+    gnome-weather
+    yelp
   ];
 
   # Enable GNOME Desktop
@@ -49,7 +49,7 @@
     user.databases = [{
       settings = {
         
-        "org/cinnamon/desktop/default-applications/terminal" = {
+        "org/gnome/desktop/default-applications/terminal" = {
           exec = "foot";    
         };
 

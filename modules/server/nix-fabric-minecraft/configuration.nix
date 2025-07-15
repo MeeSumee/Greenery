@@ -20,9 +20,9 @@
       package = pkgs.fabricServers.fabric-1_20_1;
 
       serverProperties = {
-	gamemode = "survival";
-	difficulty = "hard";
-	simulation-distance = 10;
+        gamemode = "survival";
+        difficulty = "hard";
+        simulation-distance = 10;
       };
 
       whitelist = {/* */};
@@ -34,7 +34,7 @@
           packhash = "";
         });
       in {
-	"mods" = "${modpack}/mods";
+  "mods" = "${modpack}/mods";
       };
     };
   };

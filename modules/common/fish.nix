@@ -89,9 +89,9 @@
 
   # Zoxide, faster change directory
   programs.zoxide = {
-	enable = true;
-	enableBashIntegration = true;
-	enableFishIntegration = true;
+    enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
   };
 
   # Fish integration

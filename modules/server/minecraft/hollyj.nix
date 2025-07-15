@@ -46,10 +46,10 @@
             hash = "sha256-zGZTTJc/ydRmp4nT1GpOv9vqCb5IHAoOfdzHXr5VxjU=";
           };
 
-	  ClothConfigAPI = pkgs.fetchurl {
-	    url = "https://cdn.modrinth.com/data/9s6osm5g/versions/HpMb5wGb/cloth-config-15.0.140-fabric.jar";
-	    hash = "sha256-M4lOldo69ZAUs50SZYbVJB4H6jn4YYdj4w2rY3QF+V8=";
-	  };
+          ClothConfigAPI = pkgs.fetchurl {
+            url = "https://cdn.modrinth.com/data/9s6osm5g/versions/HpMb5wGb/cloth-config-15.0.140-fabric.jar";
+            hash = "sha256-M4lOldo69ZAUs50SZYbVJB4H6jn4YYdj4w2rY3QF+V8=";
+          };
 
           # AUTH
           EasyAuth = pkgs.fetchurl {
@@ -109,7 +109,7 @@
             hash = "sha256-2776x8pbQwJTjdqCfzZadB3HoVNytk8CoHq9pHosERs=";
           };
 
-	  Crowmap = pkgs.fetchurl {
+          Crowmap = pkgs.fetchurl {
             url = "https://cdn.modrinth.com/data/EAe3MQt5/versions/gMrVQcEJ/crowmap-1.21.1-1.1.0.jar";
             hash = "sha256-zJzC+E0j+ZTF9ZDbJhXtLPV9ZR6zzu6qDbqflfeLXu4=";
           };
@@ -119,17 +119,17 @@
             hash = "sha256-NBKxcCR93nNR4JRdhX5xO+32+uBaswCqdNBv+94MoH4=";
           };
 
-	  Leukocyte = pkgs.fetchurl {
+          Leukocyte = pkgs.fetchurl {
             url = "https://cdn.modrinth.com/data/hsRVgp6Q/versions/hqsHvIy7/leukocyte-0.3.9%2B1.21.1.jar";
             hash = "sha256-girfpCJLeijqpdZVPzadwSysFf1TEPUyRLY3PbL7W44=";
           };
 
-	  StyledPlayerList = pkgs.fetchurl {
-	    url = "https://cdn.modrinth.com/data/DQIfKUHf/versions/Ui7MOgqG/styledplayerlist-3.5.1%2B1.21.jar";
-	    hash = "sha256-JdgiYJRuWuJcaDgfqV6JDi8aV/8UIzwTY2aipVVmMZY=";
-	  };
+          StyledPlayerList = pkgs.fetchurl {
+            url = "https://cdn.modrinth.com/data/DQIfKUHf/versions/Ui7MOgqG/styledplayerlist-3.5.1%2B1.21.jar";
+            hash = "sha256-JdgiYJRuWuJcaDgfqV6JDi8aV/8UIzwTY2aipVVmMZY=";
+          };
 
-	  FallingTree = pkgs.fetchurl {
+          FallingTree = pkgs.fetchurl {
             url = "https://cdn.modrinth.com/data/Fb4jn8m6/versions/JtSM2Voq/FallingTree-1.21.1-1.21.1.7.jar";
             hash = "sha256-TJKotvK+5IvkPxByXdAZEIE9CdV+6IpUfvUqKBKjwM8=";
           };
@@ -164,16 +164,16 @@
             hash = "sha256-7KjPr2R5A38UOy2XcfXZzH79j4I/YvXgw3lVHw8aOdI=";
           };
 
-	  PolyLootr = pkgs.fetchurl {
-	    url = "https://github.com/unilock/PolyLootr/releases/download/2.0.0%2B1.21%2Bfabric/polylootr-2.0.0+1.21.1+fabric.jar";
-	    hash = "sha256-3f2D0EjGjNCx9ELMd6U64vryeiAHsznohy9cenhg9FM=";
-	  };
+          PolyLootr = pkgs.fetchurl {
+            url = "https://github.com/unilock/PolyLootr/releases/download/2.0.0%2B1.21%2Bfabric/polylootr-2.0.0+1.21.1+fabric.jar";
+            hash = "sha256-3f2D0EjGjNCx9ELMd6U64vryeiAHsznohy9cenhg9FM=";
+          };
 
           # TERRAIN AND WORLD GENERATION
 
-	  SkyVillages = pkgs.fetchurl {	  
-	    url = "https://cdn.modrinth.com/data/mb68eIfx/versions/5Ldpp3lm/SkyVillages-1.0.6-1.21.x-fabric-release.jar";
-	    hash = "sha256-w5CfFYPmu+hNisnHfzzgTMQA6H8kZR766AbjhRsGug8=";
+          SkyVillages = pkgs.fetchurl {	  
+            url = "https://cdn.modrinth.com/data/mb68eIfx/versions/5Ldpp3lm/SkyVillages-1.0.6-1.21.x-fabric-release.jar";
+            hash = "sha256-w5CfFYPmu+hNisnHfzzgTMQA6H8kZR766AbjhRsGug8=";
           };
 
           Terralith = pkgs.fetchurl {

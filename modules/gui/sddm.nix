@@ -16,23 +16,23 @@
       theme = "default";
       extraBackgrounds = [zero-bg];
       theme-overrides = {
-          "LoginScreen.LoginArea.Avatar" = {
-            shape = "circle";
-            active-border-size = 0;
-            inactive-border-size = 0;
-          };
+        "LoginScreen.LoginArea.Avatar" = {
+          shape = "circle";
+          active-border-size = 0;
+          inactive-border-size = 0;
+        };
           
-		  "LockScreen.Date" = {
-		    font-size = 24;	
-		  };
+        "LockScreen.Date" = {
+          font-size = 24;	
+        };
           
-          "LoginScreen" = {
-            background = "${zero-bg.name}";
-          };
+        "LoginScreen" = {
+          background = "${zero-bg.name}";
+        };
           
-          "LockScreen" = {
-            background = "${zero-bg.name}";
-          };
+        "LockScreen" = {
+          background = "${zero-bg.name}";
+        };
       };
     };
 
@@ -54,8 +54,8 @@ in {
     
     settings = {
       Theme = {
-      	CursorTheme = "xcursor-genshin-nahida";
-      	CursorSize = 24;
+        CursorTheme = "xcursor-genshin-nahida";
+        CursorSize = 24;
       };
       General = {
         GreeterEnvironment = builtins.concatStringsSep "," [

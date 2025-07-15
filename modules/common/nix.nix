@@ -6,18 +6,18 @@
 
   # Enable core nix features
   nix = {
-  	settings = {
-  	  experimental-features = ["nix-command" "flakes"];
-  	  auto-optimise-store = true;
-  	  trusted-users = ["root" "@wheel"];
-  	};
-  	
+    settings = {
+      experimental-features = ["nix-command" "flakes"];
+      auto-optimise-store = true;
+      trusted-users = ["root" "@wheel"];
+    };
+    
     # Nix auto garbage collect 
-  	gc = {
-  	  persistent = true;
-  	  automatic = true;
-  	  dates = "weekly";
-  	  options = "--delete-older-than 7d";
-  	};
+    gc = {
+      persistent = true;
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 }

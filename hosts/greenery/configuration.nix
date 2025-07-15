@@ -31,9 +31,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [  
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 本当に愛してぇる"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 本当に愛してぇる"
     ];
   };
 
@@ -46,45 +46,46 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
-	jdk21
-	screen
+    jdk21
+    screen
   ];
 
   # List services that you want to enable:
   services.openssh = {
-  	enable = true;
-	settings = {
-		PasswordAuthentication = false;
-		PermitRootLogin = "no";
-		AllowUsers = ["administrator"];
-	};
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = ["administrator"];
+    };
   };
+
   services.fail2ban = {
-	enable = true;
-        maxretry = 3;
-        ignoreIP = [
-          "beryl.berylline-mine.ts.net"
-          "garnet.berylline-mine.ts.net"
-          "quartz.berylline-mine.ts.net"
-        ];
-	bantime = "48h";
-        bantime-increment = {
-          enable = true;
-          formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
-          # multipliers = "1 2 4 8 16 32 64 128"; # same functionality as above
-          # Do not ban for more than 10 weeks
-          maxtime = "1680h";
-          overalljails = true;
-      };
+    enable = true;
+    maxretry = 3;
+    ignoreIP = [
+      "beryl.berylline-mine.ts.net"
+      "garnet.berylline-mine.ts.net"
+      "quartz.berylline-mine.ts.net"
+    ];
+    bantime = "48h";
+    bantime-increment = {
+      enable = true;
+      formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
+      # multipliers = "1 2 4 8 16 32 64 128"; # same functionality as above
+      # Do not ban for more than 10 weeks
+      maxtime = "1680h";
+      overalljails = true;
+    };
   };
 
   services.tailscale = {
-	openFirewall = true;
-	extraSetFlags = [
-	  "--advertise-exit-node"
-	  "--webclient"
-	  "--accept-dns=false"
-	];
+    openFirewall = true;
+    extraSetFlags = [
+      "--advertise-exit-node"
+      "--webclient"
+      "--accept-dns=false"
+    ];
   };  
 
   # This value determines the NixOS release from which the default
