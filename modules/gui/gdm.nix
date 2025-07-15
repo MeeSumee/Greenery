@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, users, ...}:
 {
   imports = [
-	inputs.hjem.nixosModules.default;
+	  inputs.hjem.nixosModules.default
   ];
 
   # Enable gnome display manager
@@ -60,7 +60,7 @@
 
     in {
 	  ".face.icon".source = faceIcon;
-	};
+	  };
   });
 
   # Set face icon for all users

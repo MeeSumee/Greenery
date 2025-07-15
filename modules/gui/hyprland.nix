@@ -28,8 +28,8 @@
   # Hyprland Packages & Kurukuru bar
   environment.systemPackages = let
     kurukurubar = pkgs.callPackage (sources.zaphkiel + "/pkgs/kurukurubar.nix") {};
-    grim = pkgs.grim
-    slurp = pkgs.slurp
+    grim = pkgs.grim;
+    slurp = pkgs.slurp;
   in [
     kurukurubar
     grim
