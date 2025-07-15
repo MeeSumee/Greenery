@@ -18,7 +18,7 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/run/sumee/media/taildrive" =
+  fileSystems."/run/media/sumee/taildrive" =
     { device = "/dev/disk/by-uuid/b3c424e3-f8a5-4ca1-a5ad-5c00c0e0802b";
       fsType = "ext4";
     };

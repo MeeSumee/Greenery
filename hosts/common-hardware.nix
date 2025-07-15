@@ -5,8 +5,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  fileSystems."/mnt/taildrive" = {
-    device = "administrator@greenery.berylline-mine.ts.net:/run/media/sumee/taildrive";
+  fileSystems."/run/media/sumee/taildrive" = {
+    device = "administrator@greenery:/run/media/sumee/taildrive";
     fsType = "sshfs";
     options = [
       "_netdev"
@@ -14,6 +14,7 @@
       "x-systemd.automount"
       "reconnect"
       "ServerAliveInterval=15"
+      "LogLevel=DEBUG2"
       "IdentityFile=${builtins.concatStringsSep "," (builtins.map (user: "${config.users.users.${user}.home}/.ssh/id_ed25519") users)}"
     ];
   };
