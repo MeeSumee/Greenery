@@ -1,5 +1,9 @@
-{ config, lib, pkgs, users, ...}:
+{ config, lib, pkgs, inputs, users, ...}:
 {
+  imports = [
+	inputs.hjem.nixosModules.default;
+  ];
+
   # Enable gnome display manager
   services.displayManager.gdm = {
   	enable = true;
@@ -32,6 +36,32 @@
   	  };
   	}];
   };
+  
+  # Hjem for setting face icon
+  hjem.users = lib.genAttrs users (user: {
+    enable = true;
+    directory = config.users.users.${user}.home;
+    clobberFiles = lib.mkForce true;
+    files = let 
+      # Make face.icon at /home/user/
+      faceIcon = let
+        pfp = pkgs.fetchurl {
+          name = "vivianpfp.jpg";
+          url = "https://cdn.donmai.us/original/b3/b2/__vivian_banshee_zenless_zone_zero_drawn_by_icetea_art__b3b237c829304f29705f1291118e468f.jpg?download=1";
+          hash = "sha256-KQZHp4tOufAOI4utGo8zLpihicMTzF5dRzQPEKc4omI=";
+        };
+      in
+        pkgs.runCommandWith {
+          name = "cropped-${pfp.name}";
+          derivationArgs.nativeBuildInputs = [pkgs.imagemagick];
+        } ''
+          magick ${pfp} -crop 1000x1000+210+100 - > $out
+        '';
+
+    in {
+	  ".face.icon".source = faceIcon;
+	};
+  });
 
   # Set face icon for all users
   systemd.tmpfiles.rules = lib.pipe users [

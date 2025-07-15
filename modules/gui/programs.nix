@@ -58,6 +58,17 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
+    # Common GUI
+    fuzzel                         # app manager
+    wl-clipboard                   # clipboard manager
+    cliphist                       # clipboard history
+    wl-screenrec                   # screen recorder
+    imv                            # image viewer? need to talk to rex about it
+    brightnessctl                  # brightness ctl so my eyes don't hurt
+    wlsunset                       # I need fucking blue light filter, my fucking eyes hurt
+
+    # QUICKSHELL GIVING ME A QUICKIE~~~
+    inputs.quickshell.packages.${pkgs.system}.default
 
     # Desktop Programs
     (pkgs.vesktop.override {
@@ -81,7 +92,7 @@
     ngspice                        # Electronic Circuit Simulator
     protonvpn-gui                  # GUI VPN Service from Proton
 
-    # Flake Packages
+    # Cursor Package
     (pkgs.callPackage ../../pkgs/cursors.nix {})
   ];
 }

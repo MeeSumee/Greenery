@@ -28,7 +28,13 @@
   # Hyprland Packages & Kurukuru bar
   environment.systemPackages = let
     kurukurubar = pkgs.callPackage (sources.zaphkiel + "/pkgs/kurukurubar.nix") {};
-  in [kurukurubar];  
+    grim = pkgs.grim
+    slurp = pkgs.slurp
+  in [
+    kurukurubar
+    grim
+    slurp
+  ];
   
   # Hjem for hyprland configs
   hjem.users = lib.genAttrs users (user: {
@@ -47,16 +53,16 @@
   	  in
   	    builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprland.conf);
   	    
-	  hyprlockwall = let
-	    from = ["$_SCHIZOPHRENIA_$"];
+	    hyprlockwall = let
+	      from = ["$_SCHIZOPHRENIA_$"];
   	    classy_cindrella_girl = pkgs.fetchurl {
   	      name = "hyprvivian";
   	      url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
   	      hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
   	    };	    
-	    to = ["${classy_cindrella_girl}"];
-	  in
-	  	builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprlock.conf);
+	      to = ["${classy_cindrella_girl}"];
+	    in
+	  	  builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprlock.conf);
     in {
       ".config/uwsm/env".source = ../../dots/uwsm/env;
       ".config/hypr/hyprland.conf".text = hyprwall;
