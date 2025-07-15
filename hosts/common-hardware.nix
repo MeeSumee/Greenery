@@ -6,16 +6,18 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   fileSystems."/run/media/sumee/taildrive" = {
-    device = "administrator@greenery:/run/media/sumee/taildrive";
+    device = "administrator@100.81.192.125:/run/media/sumee/emerald";
     fsType = "sshfs";
     options = [
-      "_netdev"
+      "IdentityFile=/home/sumeezome/.ssh/id_ed25519"
       "allow_other"
+      "_netdev"
       "x-systemd.automount"
       "reconnect"
       "ServerAliveInterval=15"
       "LogLevel=DEBUG2"
-      "IdentityFile=${builtins.concatStringsSep "," (builtins.map (user: "${config.users.users.${user}.home}/.ssh/id_ed25519") users)}"
+      "sshfs_debug"
+#      "IdentityFile=${builtins.concatStringsSep "," (builtins.map (user: "${config.users.users.${user}.home}/.ssh/id_ed25519") users)}"
     ];
   };
 

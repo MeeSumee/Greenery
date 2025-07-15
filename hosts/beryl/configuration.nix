@@ -24,7 +24,7 @@
     sumeezome = {
       isNormalUser = true;
       description = "Sumeezome";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "fuse"];
     };
   };
 
