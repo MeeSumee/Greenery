@@ -86,8 +86,8 @@
         };
         
         modules = [
-          ./hosts/quartz/configuration.nix
-          ./hosts/quartz/hardware-configuration.nix
+          ./hosts/common-hardware.nix
+          ./hosts/quartz
         ];
       };
 
@@ -99,8 +99,8 @@
         };
 
         modules = [
-          ./hosts/beryl/configuration.nix
-          ./hosts/beryl/hardware-configuration.nix
+          ./hosts/common-hardware.nix
+          ./hosts/beryl
           asus-numberpad-driver.nixosModules.default
           
           lanzaboote.nixosModules.lanzaboote
@@ -124,8 +124,8 @@
         };
         
         modules = [
-          ./hosts/greenery/configuration.nix
-          ./hosts/greenery/hardware-configuration.nix
+          ./hosts/common-hardware.nix
+          ./hosts/greenery
         ];
       };
       
