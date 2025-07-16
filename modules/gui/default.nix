@@ -73,7 +73,7 @@
     files = {
       ".config/mpv".source = ../../dots/mpv;
       ".config/foot/foot.ini".source = ../../dots/foot/foot.ini;
-      ".config/fuzzel/fuzzel.ini".source = ../../dots/fuzzel/fuzzel.ini;
+      ".config/walker/config.toml".source = ../../dots/walker/config.toml;
       ".config/fish/config.fish".source = ../../dots/fish/config.fish;
       ".config/fish/themes/Rosé Pine.theme".source = ../../dots/fish/themes/rosepine.theme;
       ".librewolf/librewolf.overrides.cfg".source = ../../dots/librewolf/librewolf.overrides.cfg;

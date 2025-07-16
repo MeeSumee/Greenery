@@ -6,16 +6,18 @@
   lib,
   modulesPath,
   sources,
-  inputs,
   ...
 }:{
+  # Imports
   imports = [
-    # Imports
-    inputs.aagl.nixosModules.default
+    (sources.aagl + "/module")
   ];
 
-  # Anime Games
-  nix.settings = inputs.aagl.nixConfig;
+  # Cache loader for anime games
+  nix.settings.extra-substituters = ["https://ezkea.cachix.org"];
+  nix.settings.extra-trusted-public-keys = ["ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="];
+
+  # Enable individual anime games
   programs = {
     # Gayshit Impact
     anime-game-launcher.enable = true;
@@ -61,6 +63,8 @@
     # GUI tools
     walker                         # GOODBYE FUZZEL
     wl-clipboard                   # clipboard manager
+    iwmenu                         # Wifi Menu for walker
+    bzmenu                         # Bluetooth Menu for walker
     wl-screenrec                   # screen recorder
     brightnessctl                  # brightness ctl so my eyes don't hurt
     wlsunset                       # I need fucking blue light filter, my fucking eyes hurt

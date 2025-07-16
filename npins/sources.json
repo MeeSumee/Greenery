@@ -1,5 +1,18 @@
 {
   "pins": {
+    "aagl": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ezKEa",
+        "repo": "aagl-gtk-on-nix"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "ec2ec4ec3f908ed9b125ea4afd52627bed60f183",
+      "url": "https://github.com/ezKEa/aagl-gtk-on-nix/archive/ec2ec4ec3f908ed9b125ea4afd52627bed60f183.tar.gz",
+      "hash": "1yyk034x32km8v472m1y6plh2822089b5aw4hil6g4h1ilh2canw"
+    },
     "micro-bounce": {
       "type": "Git",
       "repository": {

@@ -21,12 +21,6 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Yuan shen & other Zhongguo Games
-    aagl = {
-      url = "github:ezKEa/aagl-gtk-on-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     
     # NVF, Neovim + Nix Config
     nvf = {
