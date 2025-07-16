@@ -40,6 +40,8 @@
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
     files = let
+
+      # Set niri wallpaper
       niriwall = let
         from = ["*Why_is_IT_department_a_piece_of_shit*"];
         real_life_moment = pkgs.fetchurl {

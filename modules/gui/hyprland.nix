@@ -13,7 +13,15 @@
   ];
 
   # Hyprland idle daemon
-  services.hypridle.enable = true;
+  services.hypridle = {
+    enable = true;
+  };
+  
+  # Brightnessctl + Fix hypridle not starting in uwsm hyprland env
+  systemd.user.services.hypridle = {
+    path = [ pkgs.brightnessctl ];
+    wantedBy = [ "wayland-session@Hyprland.target" "graphical-session.target" ];
+  };
 
   # Hyprland screen locking utility
   programs.hyprlock.enable = true;
@@ -42,6 +50,8 @@
     directory = config.users.users.${user}.home;
     clobberFiles = lib.mkForce true;
     files = let
+      
+      # Set hyprland wallpaper
       hyprwall = let
         from = ["%_HOLY_TIDDIES_%"];
         sassy_cindrella_girl = pkgs.fetchurl {
@@ -52,7 +62,8 @@
         to = ["${sassy_cindrella_girl}"];
       in
         builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hyprland.conf);
-        
+      
+      # Set hyprlock wallpaper
       hyprlockwall = let
         from = ["$_SCHIZOPHRENIA_$"];
         classy_cindrella_girl = pkgs.fetchurl {
