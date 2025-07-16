@@ -1,5 +1,5 @@
 # Safe to modify as it's under flakes hehehehaw
-{ config, lib, pkgs, options, modulesPath, ... }:
+{ config, lib, pkgs, options, ... }:
 
 {
   imports = [

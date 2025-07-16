@@ -1,7 +1,7 @@
-{ config, lib, pkgs, inputs, users, ...}:
+{ config, lib, pkgs, sources, users, ...}:
 {
   imports = [
-    inputs.hjem.nixosModules.default
+    (sources.hjem + "/modules/nixos")
   ];
 
   # Enable gnome display manager

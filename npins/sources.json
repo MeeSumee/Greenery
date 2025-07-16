@@ -13,6 +13,19 @@
       "url": "https://github.com/ezKEa/aagl-gtk-on-nix/archive/ec2ec4ec3f908ed9b125ea4afd52627bed60f183.tar.gz",
       "hash": "1yyk034x32km8v472m1y6plh2822089b5aw4hil6g4h1ilh2canw"
     },
+    "hjem": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "feel-co",
+        "repo": "hjem"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "3093a74542b30f8155954d585d0ae2401e3adbe5",
+      "url": "https://github.com/feel-co/hjem/archive/3093a74542b30f8155954d585d0ae2401e3adbe5.tar.gz",
+      "hash": "1mqbmyv7bw8gjzljr7z7yfwg1hpwcgm6lykyr2bbf0l0all26fig"
+    },
     "micro-bounce": {
       "type": "Git",
       "repository": {

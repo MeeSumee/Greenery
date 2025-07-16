@@ -1,13 +1,14 @@
-{ config, lib, sources, inputs, users, pkgs, ...}:
+{ config, lib, sources, users, pkgs, ...}:
 {
   imports = [
-    inputs.hjem.nixosModules.default
+    (sources.hjem + "/modules/nixos")
   ];
 
   environment.systemPackages = with pkgs; [
     micro
   ];
 
+  # Micro Hjem setup
   hjem.users = lib.genAttrs users (user: {
     enable = true;
     directory = config.users.users.${user}.home;

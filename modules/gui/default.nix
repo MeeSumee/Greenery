@@ -3,7 +3,7 @@
   pkgs,
   options,
   lib,
-  inputs,
+  sources,
   users,
   ...
 }:{
@@ -18,8 +18,8 @@
     ./niri.nix
 #    ./sddm.nix
 
-    # Flake Inputs
-    inputs.hjem.nixosModules.default
+    # Hjem source
+    (sources.hjem + "/modules/nixos")
   ];
   
   # Set default editor

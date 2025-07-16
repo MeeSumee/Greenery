@@ -4,7 +4,6 @@
   pkgs,
   options,
   lib,
-  modulesPath,
   sources,
   ...
 }:{

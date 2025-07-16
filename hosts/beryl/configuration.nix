@@ -4,7 +4,6 @@
   pkgs,
   options,
   lib,
-  inputs,
   ...
 }: {
   imports = [

@@ -1,10 +1,9 @@
-# Beryl Configuration
+# Quartz Configuration
 {
   config,
   pkgs,
   options,
   lib,
-  inputs,
   ...
 }: {
   imports = [

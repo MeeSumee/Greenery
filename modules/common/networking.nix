@@ -14,7 +14,8 @@
       "127.0.0.1"
     ];
   };
-
+  
+  # DNS Proxy for DNS Resolving in Tailscale
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {

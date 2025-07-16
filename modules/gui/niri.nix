@@ -3,13 +3,13 @@
   pkgs,
   options,
   lib,
-  inputs,
+  sources,
   users,
   ...
 }: {
   # Import modules
   imports = [
-    inputs.hjem.nixosModules.default
+    (sources.hjem + "/modules/nixos")
   ];
 
   # Enable Niri

@@ -1,3 +1,4 @@
+# Depreciated, no silentSSDM flake input
 {
   pkgs,
   inputs,

@@ -1,7 +1,8 @@
 # It's fucking broken, leaving it for now
 { 
   pkgs,
-  inputs, 
+  inputs,
+  sources, 
   config, 
   lib, 
   options, 
@@ -10,7 +11,7 @@
   # Import nvf and hjem
   imports = [
     inputs.nvf.nixosModules.default
-    inputs.hjem.nixosModules.default
+    (sources.hjem + "/modules/nixos")
   ];
   
   programs.nvf = {

@@ -3,13 +3,12 @@
   options,
   lib,
   config,
-  inputs,
   users,
   sources,
   ...
 }:{
   imports = [
-    inputs.hjem.nixosModules.default
+    (sources.hjem + "/modules/nixos")
   ];
 
   # Hyprland idle daemon

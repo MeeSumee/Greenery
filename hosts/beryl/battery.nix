@@ -1,3 +1,4 @@
+# Stolen from nix hardware repo
 { config, pkgs, lib, ... }:
 let
   p = pkgs.writeScriptBin "charge-upto" ''
