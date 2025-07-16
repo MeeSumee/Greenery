@@ -270,6 +270,9 @@ environment {
 // Start wlsunset so my eyes don't kill themselves.
 spawn-at-startup "wlsunset" "-T" "3000" "-t" "2999"
 
+// Start walker service for faster startup
+spawn-at-startup "walker" "--gapplication-service"
+
 // Start swww background service and wallpaper setter
 spawn-at-startup "swww-daemon"
 spawn-at-startup "fish" "-c" "sleep 1s; swww img *Why_is_IT_department_a_piece_of_shit* --transition-type wave"
@@ -365,7 +368,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-    Mod+R hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+R hotkey-overlay-title="Run Prompt: walker" { spawn "walker"; }
     Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 

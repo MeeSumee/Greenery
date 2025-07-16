@@ -4,18 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Niri-flake
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
-    # Quickshell UI-maker
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # hjem for declaring files in home
     hjem = {
       url = "github:feel-co/hjem";
@@ -50,12 +38,10 @@
   outputs = {
     self,
     nixpkgs,
-    niri,
     asus-numberpad-driver,
     lanzaboote,
     nvf,
     hjem,
-    quickshell,
     ...
   } @ inputs: let
     inherit (self) outputs;

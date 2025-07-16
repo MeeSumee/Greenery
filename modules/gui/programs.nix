@@ -5,7 +5,7 @@
   options,
   lib,
   modulesPath,
-  flakeOverlays,
+  sources,
   inputs,
   ...
 }:{
@@ -58,17 +58,14 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
-    # Common GUI
-    fuzzel                         # app manager
+    # GUI tools
+    walker                         # GOODBYE FUZZEL
     wl-clipboard                   # clipboard manager
-    cliphist                       # clipboard history
     wl-screenrec                   # screen recorder
-    imv                            # image viewer? need to talk to rex about it
     brightnessctl                  # brightness ctl so my eyes don't hurt
     wlsunset                       # I need fucking blue light filter, my fucking eyes hurt
-
-    # QUICKSHELL GIVING ME A QUICKIE~~~
-    inputs.quickshell.packages.${pkgs.system}.default
+    quickshell                     # QUICKSHELL. GUYS, IT'S QUICK!
+    swww                           # SWWW wallpaper daemon
 
     # Desktop Programs
     (pkgs.vesktop.override {

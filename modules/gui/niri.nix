@@ -3,26 +3,18 @@
   pkgs,
   options,
   lib,
-  flakeOverlays,
   inputs,
   users,
   ...
 }: {
   # Import modules
   imports = [
-    inputs.niri.nixosModules.niri
     inputs.hjem.nixosModules.default
   ];
 
-  # Niri flake overlay
-  nixpkgs.overlays = [
-    inputs.niri.overlays.niri
-  ];
-
-  # Niri
+  # Enable Niri
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable;
   };  
 
   # Xwayland satellite for X11 Windowing Support
@@ -30,10 +22,9 @@
 
   # Niri Packages
   environment.systemPackages = with pkgs; [
-    swww
     xwayland-satellite
   ];
-  
+
   # Niri Hjem config
   hjem.users = lib.genAttrs users (user: {
     enable = true;

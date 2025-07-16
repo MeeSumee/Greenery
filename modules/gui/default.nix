@@ -29,10 +29,11 @@
     VISUAL = "micro";
   };
   
-  # Forces applications to use wayland instead of Xwayland
+  # Session variables for wayland usage + speeding up walker
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    GSK_RENDER = "cairo";
   };
   
   # Set defaults
