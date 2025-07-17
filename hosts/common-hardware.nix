@@ -8,7 +8,7 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   # Mount sshfs drive from greenery with mount on demand
-  fileSystems."/run/media/sumee/taildrive" = {
+  fileSystems."/run/media/${builtins.concatStringsSep "," users}/taildrive" = {
     device = "administrator@greenery:/run/media/sumee/emerald";
     fsType = "sshfs";
     options = [

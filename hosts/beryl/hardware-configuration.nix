@@ -40,7 +40,7 @@
     tod.driver = pkgs.libfprint-2-tod1-elan;
   };
 
-  # Enable Asus Numpad Service
+  # Enable Asus Numpad Service (wayland-1 for niri)
   services.asus-numberpad-driver = {
     enable = true;
     layout = "up5401ea";
@@ -54,13 +54,16 @@
 
   # Potential fix for AMD Rembrandt Hardware Acceleration Crash? I'll find out soon
   boot.kernelParams = ["idle=nowwait" "iommu=pt"];
+  
+  # Enables AMDVLK Vulkan driver
+  hardware.amdgpu.amdvlk.enable = true;
 
   # Enable OpenGL with AMD Vulkan (Might help Rembrandt HardwareAccel)
   hardware = {
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
-        amdvlk
+        rocmPackages.clr.icd
       ];
     };
   };
