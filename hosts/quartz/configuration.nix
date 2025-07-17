@@ -37,6 +37,9 @@
     rare # Epic Games for Linux with GUI
     davinci-resolve # Video Editing
   ];
+  
+  # Set default session for quartz
+  services.displayManager.defaultSession = "hyprland-uwsm";
 
   # Enable the OpenSSH daemon
   services.openssh = {

@@ -60,15 +60,16 @@
   # Packages
   environment.systemPackages = with pkgs; [
     # GUI tools
-    walker                         # GOODBYE FUZZEL
+    walker                         # Fuzzel, but more bloat :V (needs optimizing)
     wl-clipboard                   # clipboard manager
     iwmenu                         # Wifi Menu for walker
     bzmenu                         # Bluetooth Menu for walker
     wl-screenrec                   # screen recorder
-    brightnessctl                  # brightness ctl so my eyes don't hurt
+    brightnessctl                  # brightness ctl
     wlsunset                       # I need fucking blue light filter, my fucking eyes hurt
     quickshell                     # QUICKSHELL. GUYS, IT'S QUICK!
     swww                           # SWWW wallpaper daemon
+    ddcutil                        # Manipulating external monitors using i2c bus
 
     # Desktop Programs
     (pkgs.vesktop.override {

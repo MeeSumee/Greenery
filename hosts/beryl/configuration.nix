@@ -31,6 +31,9 @@
   environment.systemPackages = with pkgs; [
     foliate # e-book reader
   ];
+  
+  # Set default session for beryl
+  services.displayManager.defaultSession = "niri";
 
   # Enable the OpenSSH daemon.
   services.openssh = {
