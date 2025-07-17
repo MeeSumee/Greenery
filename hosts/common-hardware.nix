@@ -12,6 +12,7 @@
     device = "administrator@greenery:/run/media/sumee/emerald";
     fsType = "sshfs";
     options = [
+      "allow_other"
       "umask=003"
       "_netdev"
       "x-systemd.automount"

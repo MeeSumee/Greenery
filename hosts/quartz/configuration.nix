@@ -23,7 +23,7 @@
     sumee = {
       isNormalUser = true;
       description = "Sumee";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "fuse"];
     };
   };
 
