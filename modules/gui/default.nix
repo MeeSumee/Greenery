@@ -22,13 +22,6 @@
     (sources.hjem + "/modules/nixos")
   ];
   
-  # Set default editor
-  environment.variables = {
-    EDITOR = "micro";
-    SYSTEMD_EDITOR = "micro";
-    VISUAL = "micro";
-  };
-  
   # Session variables for wayland usage + speeding up walker
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";

@@ -11,11 +11,19 @@
     ./micro.nix
     ./yazi.nix
     ./nix.nix
+    ./sops.nix
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Set default editor
+  environment.variables = {
+    EDITOR = "micro";
+    SYSTEMD_EDITOR = "micro";
+    VISUAL = "micro";
+  };
 
   # Universal Packages
   environment.systemPackages = with pkgs; [
@@ -27,6 +35,7 @@
     unzip
     speedtest-cli
     fzf
+    sops
   ];
 
   # Disable nano

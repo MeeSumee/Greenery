@@ -65,6 +65,19 @@
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
       "hash": "1d399fvbjalpfa44jd0qy9kjchspfny0zy3gf1jv2gsmas7iaz85"
     },
+    "sops": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Mic92",
+        "repo": "sops-nix"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "2c8def626f54708a9c38a5861866660395bb3461",
+      "url": "https://github.com/Mic92/sops-nix/archive/2c8def626f54708a9c38a5861866660395bb3461.tar.gz",
+      "hash": "0iag6gdn60bw260x0ss7hvcgi0l0fr1cyg9vcp5vrfwhr7nlyn8s"
+    },
     "zaphkiel": {
       "type": "Git",
       "repository": {
