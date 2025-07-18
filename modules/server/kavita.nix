@@ -7,10 +7,10 @@
 
   services.kavita = {
     enable = true;
-    dataDir = "/run/media/sumee/emerald/kavita";
+    tokenKeyFile = "/home/administrator/tokenkey/kkeygen";
     settings = {
       Port = 5000;
-      IpAddresses = "greenery.berylline-mine.ts.net,::";
+#      IpAddresses = "100.81.192.125,::";
     };
   };
 }
