@@ -102,6 +102,7 @@
           ./hosts/common-hardware.nix
           ./hosts/greenery/configuration.nix
           ./hosts/greenery/hardware-configuration.nix
+          ./modules/server
         ];
       };
       

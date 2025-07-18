@@ -1,5 +1,5 @@
-{lib, ...}: {
+{...}: {
   imports = [
-    ./immich.nix
+    ./kavita.nix
   ];
 }

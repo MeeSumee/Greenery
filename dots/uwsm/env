@@ -1,4 +1,3 @@
-export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=qt6ct
 export XCURSOR_THEME=xcursor-genshin-nahida
 export XCURSOR_SIZE=36
