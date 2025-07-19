@@ -22,6 +22,11 @@
       wayland = true;
     };
 
+    # Add gdm dependencies
+    environment.systemPackages = with pkgs; [
+      gnome-settings-daemon # Enables gnome plugins for gdm 
+    ];
+
     # Edit GDM dconf profile
     programs.dconf.profiles = {
       gdm.databases = [{
