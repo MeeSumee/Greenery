@@ -92,7 +92,23 @@
         gnome-calculator                # gnome calculator
         nautilus                        # gnome file browser
         komikku                         # manga reading app
+        nordic                          # Gtk Theme
+        papirus-icon-theme              # Gtk Icons
       ];
+
+      # Theme gtk apps
+      programs.dconf.profiles.user.databases = [{
+        settings = {
+          "org/gnome/desktop/interface" = {
+            gtk-theme = "Nordic";
+            icon-theme = "Papirus-Dark";
+            cursor-theme = "xcursor-genshin-nahida";
+            monospace-font-name = "Source Code Pro";
+            color-scheme = "prefer-dark";
+            clock-show-weekday = true;
+          };
+        };
+      }];
     })
 
     # Engineering and projects
