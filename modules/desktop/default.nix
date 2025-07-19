@@ -26,26 +26,10 @@
 
   config = lib.mkIf config.greenery.desktop.enable {
 
-    # Session variables for wayland usage + speeding up walker
+    # Session variables for wayland usage
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-      GSK_RENDER = "cairo";
-    };
-
-    # Set defaults
-    xdg = {
-      terminal-exec = {
-        enable = true;
-        settings = {
-          default = [
-            "foot.desktop"
-          ];
-        };
-      };
-      mime.defaultApplications = {
-        "image" = "qimgv.desktop";
-      };
     };
 
     # Hjem for simple home management
@@ -55,7 +39,7 @@
       clobberFiles = lib.mkForce true;
       files = {
         ".config/mpv".source = ../../dots/mpv;
-        ".config/walker/config.toml".source = ../../dots/walker/config.toml;
+        ".config/fuzzel/fuzzel.ini".source = ../../dots/fuzzel/fuzzel.ini;
       };
     });  
   };

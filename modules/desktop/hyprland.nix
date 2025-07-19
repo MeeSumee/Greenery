@@ -31,12 +31,9 @@
       kurukurubar = pkgs.callPackage (sources.zaphkiel + "/pkgs/kurukurubar.nix") { 
         librebarcode = pkgs.callPackage (sources.zaphkiel + "/pkgs/librebarcode.nix") {}; 
       };
-      grim = pkgs.grim;
-      slurp = pkgs.slurp;
     in [
       kurukurubar
-      grim
-      slurp
+      pkgs.grim
     ];
 
     # Hjem for hyprland configs

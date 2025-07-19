@@ -56,7 +56,8 @@
     # Daemons and UI
     (lib.mkIf (config.greenery.programs.daemon.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
-        walker                          # Fuzzel, but more bloat :V (needs optimizing)
+        fuzzel                          # I went back to it cause walker is too bloated
+        slurp                           # area selection tool used for grim and wl-screenrec
         wl-clipboard                    # clipboard manager
         wl-screenrec                    # screen recorder
         brightnessctl                   # brightness ctl
@@ -116,7 +117,6 @@
       environment.systemPackages = with pkgs; [
         audacity                        # audio editor
         arduino-ide                     # microcontroller programming
-        ngspice                         # Electronic SPICE simulator
         octave                          # Scientific Programming Language
       ];
     })

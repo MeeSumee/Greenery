@@ -27,8 +27,19 @@
       VISUAL = "micro";
     };
 
-    # Disable nano
-    programs.nano.enable = false;
-    
+    # Set default applications
+    xdg = {
+      terminal-exec = {
+        enable = true;
+        settings = {
+          default = [
+            "foot.desktop"
+          ];
+        };
+      };
+      mime.defaultApplications = {
+        "image" = "qimgv.desktop";
+      };
+    };
   };
 }
