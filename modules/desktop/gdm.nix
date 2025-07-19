@@ -1,0 +1,156 @@
+{ 
+  config, 
+  options, 
+  lib, 
+  pkgs, 
+  sources, 
+  users, 
+  ...
+}:{
+  
+  imports = [
+    (sources.hjem + "/modules/nixos")
+  ];
+
+  options.greenery.desktop.gdm.enable = lib.mkEnableOption "gnome display manager";
+
+  config = lib.mkIf (config.greenery.desktop.gdm.enable && config.greenery.desktop.enable) {
+
+    # Enable gnome display manager
+    services.displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+
+    # Add gdm dependencies
+    environment.systemPackages = with pkgs; [
+      gnome-settings-daemon # Enables gnome plugins for gdm 
+    ];
+
+    # Edit GDM dconf profile
+    programs.dconf.profiles = {
+      gdm.databases = [{
+        settings = {
+          "org/gnome/desktop/interface" = {
+            gtk-theme = "Nordic";
+            cursor-theme = "xcursor-genshin-nahida";
+            color-scheme = "prefer-dark";
+            clock-show-weekday = true;
+            scaling-factor = lib.gvariant.mkUint32 2;
+          };
+
+          "org/gnome/desktop/peripherals/keyboard" = {
+            numlock-state = true;
+          };
+
+          "org/gnome/settings-daemon/plugins/color" = {
+            night-light-enabled = true;
+            night-light-temperature = lib.gvariant.mkUint32 3000;
+            night-light-schedule-automatic = false;
+            night-light-schedule-from = 8.0;
+            night-light-schedule-to = 7.99;
+          };
+        };
+      }];
+    };
+
+    # Hjem for setting face icon
+    hjem.users = lib.genAttrs users (user: {
+      enable = true;
+      directory = config.users.users.${user}.home;
+      clobberFiles = lib.mkForce true;
+      files = let 
+        # Make face.icon at /home/user/
+        faceIcon = let
+          pfp = pkgs.fetchurl {
+            name = "vivianpfp.jpg";
+            url = "https://cdn.donmai.us/original/b3/b2/__vivian_banshee_zenless_zone_zero_drawn_by_icetea_art__b3b237c829304f29705f1291118e468f.jpg?download=1";
+            hash = "sha256-KQZHp4tOufAOI4utGo8zLpihicMTzF5dRzQPEKc4omI=";
+          };
+        in
+          pkgs.runCommandWith {
+            name = "cropped-${pfp.name}";
+            derivationArgs.nativeBuildInputs = [pkgs.imagemagick];
+          } ''
+            magick ${pfp} -crop 1000x1000+210+100 - > $out
+          '';
+
+      in {
+      ".face.icon".source = faceIcon;
+      };
+    });
+
+    # Set face icon for all users
+    systemd.tmpfiles.rules = lib.pipe users [
+      (builtins.filter (user: config.hjem.users.${user}.files.".face.icon".source != null))
+      (builtins.map (user: [
+        "f+ /var/lib/AccountsService/users/${user}  0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
+        "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face.icon".source}"
+      ]))
+      (lib.flatten)
+    ];
+    /*
+    Implementation of GDM background and settings
+    Thanks https://github.com/cafetestrest/nixos
+    Source code: https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/48.2/data/theme/gnome-shell-sass/widgets/_login-lock.scss
+    UPDATED TO 48.2 (Nix 25.05 Unstable)
+    */
+    nixpkgs = {
+      overlays = [
+        (self: super: {
+          gnome-shell = super.gnome-shell.overrideAttrs (old: {
+            patches = (old.patches or []) ++ [
+              (let
+                bg = pkgs.fetchurl {
+                  name = "vivilock.jpg";
+                  url = "https://cdn.donmai.us/original/6e/cc/6eccec040e4b72d5568848b26a73cd23.jpg?download=1";
+                  sha256 = "sha256-ADnJVg+JnAV7vIRZ3leJeF5mb2cJWEdaBPGcQZzSQtk=";
+                };            
+              in pkgs.writeText "bg.patch" ''
+        --- a/data/theme/gnome-shell-sass/widgets/_login-lock.scss
+        +++ b/data/theme/gnome-shell-sass/widgets/_login-lock.scss
+        @@ -1,5 +1,5 @@
+        -$_gdm_bg: $system_base_color;
+        -$_gdm_fg: $system_fg_color;
+        +$_gdm_bg: transparent;
+        +$_gdm_fg: black;
+         $_gdm_dialog_width: 25em;
+         
+         // common style for login and lockscreen
+        @@ -165,11 +165,11 @@
+             .login-dialog-user-list-item {
+               // use button styling
+               @extend %button_common;
+        -      @include button(normal, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);
+        +      @include button(normal, $tc:$_gdm_fg, $c:$_gdm_bg, $always_dark: true);
+               &:selected,
+        -      &:focus { @include button(focus, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
+        -      &:hover { @include button(hover, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
+        -      &:active { @include button(active, $tc:$_gdm_fg, $c:$system_base_color, $always_dark: true);}
+        +      &:focus { @include button(focus, $tc:$_gdm_fg, $c:$_gdm_bg, $always_dark: true);}
+        +      &:hover { @include button(hover, $tc:$_gdm_fg, $c:$_gdm_bg, $always_dark: true);}
+        +      &:active { @include button(active, $tc:$_gdm_fg, $c:$_gdm_bg, $always_dark: true);}
+         
+               border-radius: $modal_radius;
+               padding: $base_padding * 1.5;
+        @@ -219,7 +219,10 @@
+         }
+         
+         #lockDialogGroup {
+        -  background-color: $_gdm_bg;
+        +  background: url('file://${bg}');
+        +  background-repeat: no-repeat;
+        +  background-size: cover;
+        +  background-position: center;
+         }
+         
+         // Clock
+         
+            '')
+            ];
+          });
+        })
+      ];
+    };
+  };
+}

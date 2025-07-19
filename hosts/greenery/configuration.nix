@@ -1,13 +1,95 @@
 # Greenery Configuration
-{ inputs, lib, config, pkgs, ... }:
+{ 
+  lib, 
+  config, 
+  pkgs, 
+  ... 
+}:{
 
-{
   imports = [
-      ../../modules/common
+    ../../modules
   ];
+
+  # All modules and their values
+  greenery = {
+    enable = true;
+    
+    desktop = {
+      enable = false;
+      gdm.enable = false;
+      gnome.enable = false;
+      hypridle.enable = false;
+      hyprland.enable = false;
+      hyprlock.enable = false;
+      niri.enable = false;
+      xserver.enable = false;
+
+      # sddm.nix isn't included and has no option
+    };
+
+    hardware = {
+      enable = true;
+      amdgpu.enable = false;
+      audio.enable = false;
+      intelgpu.enable = false;
+    };
+
+    networking = {
+      enable = true;
+      dnscrypt.enable = true;
+      fail2ban.enable = true;
+      openssh.enable = true;
+      taildrive.enable = false;
+      tailscale.enable = true;
+    };
+
+    programs = {
+      enable = true;
+      aagl.enable = false;
+      browser.enable = false;
+      foot.enable = false;
+      micro.enable = true;
+      core.enable = true;
+      server.enable  = true;
+      daemon.enable = false;
+      desktop.enable = false;
+      engineering.enable = false;
+      heavy.enable = false;
+      nvim.enable = false;
+      steam.enable = false;
+      yazi.enable = true;
+    };
+
+    server = {
+      enable = true;
+      jellyfin.enable = false;
+      kavita.enable = true;
+    };
+
+    system = {
+      enable = true;
+      fish.enable = true;
+      fonts.enable = false;
+      input.enable = false;
+      sops.enable = true;
+
+      # locale.nix included by default
+      # nix.nix included by default
+    };
+  };
 
   networking.hostName = "greenery"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Set DNS route
+  networking = {
+    dhcpcd.extraConfig = "nohook resolv.conf";
+    networkmanager.dns = lib.mkForce "none";
+    nameservers = [
+      "::1"
+      "127.0.0.1"
+    ];
+  };  
 
   services.dnscrypt-proxy2.settings = {
     listen_addresses = [
@@ -35,48 +117,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 本当に愛してぇる"
     ];
-  };
-
-  # Enable non-nix executables
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
-
-  # Packages
-  environment.systemPackages = with pkgs; [
-    jdk21
-    screen
-  ];
-
-  # List services that you want to enable:
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-      AllowUsers = ["administrator"];
-    };
-  };
-
-  services.fail2ban = {
-    enable = true;
-    maxretry = 3;
-    ignoreIP = [
-      "beryl.berylline-mine.ts.net"
-      "garnet.berylline-mine.ts.net"
-      "quartz.berylline-mine.ts.net"
-    ];
-    bantime = "48h";
-    bantime-increment = {
-      enable = true;
-      formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
-      # multipliers = "1 2 4 8 16 32 64 128"; # same functionality as above
-      # Do not ban for more than 10 weeks
-      maxtime = "1680h";
-      overalljails = true;
-    };
   };
 
   services.tailscale = {
