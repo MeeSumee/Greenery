@@ -59,7 +59,6 @@
         };
         
         modules = [
-          ./hosts/common-hardware.nix
           ./hosts/quartz/configuration.nix
           ./hosts/quartz/hardware-configuration.nix
         ];
@@ -73,7 +72,6 @@
         };
 
         modules = [
-          ./hosts/common-hardware.nix
           ./hosts/beryl/configuration.nix
           ./hosts/beryl/hardware-configuration.nix
           asus-numberpad-driver.nixosModules.default
@@ -99,10 +97,8 @@
         };
         
         modules = [
-          ./hosts/common-hardware.nix
           ./hosts/greenery/configuration.nix
           ./hosts/greenery/hardware-configuration.nix
-          ./modules/server
         ];
       };
       
@@ -118,15 +114,15 @@
         ];
       };
       
-      GVM = nixpkgs.lib.nixosSystem {
+      QVM = nixpkgs.lib.nixosSystem {
 
         specialArgs = {
           inherit inputs outputs sources;
-          users = ["greenery"];
+          users = ["quartz"];
         };
         
         modules = [
-          ./hosts/vmmaker/greenery.nix
+          ./hosts/vmmaker/quartz.nix
         ];
       };
     };

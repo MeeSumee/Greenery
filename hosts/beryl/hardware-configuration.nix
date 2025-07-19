@@ -8,7 +8,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   
@@ -54,21 +54,8 @@
 
   # Potential fix for AMD Rembrandt Hardware Acceleration Crash? I'll find out soon
   boot.kernelParams = ["idle=nowwait" "iommu=pt"];
-  
-  # Enables AMDVLK Vulkan driver
-  hardware.amdgpu.amdvlk.enable = true;
 
-  # Enable OpenGL with AMD Vulkan (Might help Rembrandt HardwareAccel)
-  hardware = {
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        rocmPackages.clr.icd
-      ];
-    };
-  };
-
-  # Sets battery charge limit, nix file stolen from nix hardware repo
+  # Sets battery charge limit
   hardware.asus.battery =
   {
     chargeUpto = 80;   # Maximum level of charge for your battery, as a percentage.

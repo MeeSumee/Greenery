@@ -8,9 +8,76 @@
 }: {
   imports = [
     # Imports.
-    ../../modules/common
-    ../../modules/gui
+    ../../modules
   ];
+
+  # All modules and their values
+  greenery = {
+    enable = true;
+    
+    desktop = {
+      enable = true;
+      gdm.enable = true;
+      gnome.enable = false;
+      hypridle.enable = true;
+      hyprland.enable = true;
+      hyprlock.enable = true;
+      niri.enable = false;
+      xserver.enable = true;
+
+      # sddm.nix isn't included and has no option
+    };
+
+    hardware = {
+      enable = true;
+      amdgpu.enable = true;
+      audio.enable = true;
+      intelgpu.enable = false;
+    };
+
+    networking = {
+      enable = true;
+      dnscrypt.enable = true;
+      fail2ban.enable = false;
+      openssh.enable = true;
+      taildrive.enable = true;
+      tailscale.enable = true;
+    };
+
+    programs = {
+      enable = true;
+      aagl.enable = true;
+      browser.enable = true;
+      foot.enable = true;
+      micro.enable = true;
+      core.enable = true;
+      server.enable  = false;
+      daemon.enable = true;
+      desktop.enable = true;
+      engineering.enable = true;
+      heavy.enable = true;
+      nvim.enable = false;
+      steam.enable = true;
+      yazi.enable = false;
+    };
+
+    server = {
+      enable = false;
+      jellyfin.enable = false;
+      kavita.enable = false;
+    };
+
+    system = {
+      enable = true;
+      fish.enable = true;
+      fonts.enable = true;
+      input.enable = true;
+      sops.enable = true;
+
+      # locale.nix included by default
+      # nix.nix included by default
+    };
+  };
 
   networking.hostName = "quartz"; # The color of my desktop + piezoelectric shenanigans
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -27,32 +94,11 @@
     };
   };
 
-  # Packages
+  # Packages that don't really make sense as a option
   environment.systemPackages = with pkgs; [
-    audacity # Graphical Sound Editor
-    kicad # Electronic CAD Designer
-    komikku # Manga reading app
-    fan2go # Fan Control
-    openrgb # Open-Source RGB Control Software
-    rare # Epic Games for Linux with GUI
-    davinci-resolve # Video Editing
+    fan2go                          # Fan Control
+    openrgb                         # Open-Source RGB Control Software
   ];
-  
-  # Set default session for quartz
-  services.displayManager.defaultSession = "hyprland-uwsm";
-
-  # Enable the OpenSSH daemon
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-      AllowUsers = ["Sumee"];
-    };
-  };
-  
-  # Fix tailscale auto-connect during login (might not be necessary)
-  systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
 
 /*
   This value determines the NixOS release from which the default
