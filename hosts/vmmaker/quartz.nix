@@ -1,14 +1,14 @@
-# Beryl VM Maker
-{
+# Quartz VM Maker
+{ 
   config,
   pkgs,
   options,
   lib,
-  ...
-}: {
+  ... 
+}:{
   imports = [
-    # Imports config and undetected drivers in your system
-    ../beryl/configuration.nix
+    # Imports config
+    ../quartz/configuration.nix
   ];
   
   # Module overrides
@@ -23,7 +23,9 @@
     };
 
     programs = {
+      aagl.enable = lib.mkForce false;
       engineering.enable = lib.mkForce false;
+      heavy.enable = lib.mkForce false;
       steam.enable = lib.mkForce false;
     };
   };
@@ -35,21 +37,21 @@
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
   services.spice-autorandr.enable = true;
-  
-  # VM configuration
+
+  # VM configuration  
   virtualisation.vmVariant = {
     virtualisation = {
       graphics = true; # Enable Graphics
-      diskSize = 10 * 1024; # Set Disk Size in GiB
-      memorySize = 6 * 1024; # Set Memory Allocation in GiB
+      diskSize = 12 * 1024; # Set Disk Size in GiB
+      memorySize = 8 * 1024; # Set Memory Allocation in GiB
       cores = 4; # Set number of cores
-      spiceUSBRedirection.enable = true; # Spice USB correction thingy I found online
+      spiceUSBRedirection.enable = true; # Spice USB correction thingy I found online      
       qemu.options = [
         # This set of config works well with wayland nixos, not tested on non-nixos platforms
         "-device virtio-vga-gl"
         "-display sdl,gl=on"
         "-usb -device usb-tablet"
-        "-usbdevice tablet"
+        "-usbdevice tablet"        
         # Enable copy/paste?
         # https://www.kraxel.org/blog/2021/05/qemu-cut-paste/
         "-chardev qemu-vdagent,id=ch1,name=vdagent,clipboard=on"
@@ -58,17 +60,17 @@
       ];
     };
   };
-  
+
   users = {
     groups = {
-      beryl = {};
+      quartz = {};
     };
-    users.beryl = {
+    users.quartz = {
       enable = true;
-      initialPassword = "berylline";
+      initialPassword = "quartzite";
       createHome = true;
       isNormalUser = true;
-      group = "beryl";
+      group = "quartz";
       extraGroups = ["wheel" "video" "audio"];
     };
   };

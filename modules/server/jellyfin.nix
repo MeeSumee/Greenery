@@ -8,13 +8,10 @@
   multimediaDir = "/home/multimedia";
   stateDirectory = "/var/lib/tailscale/tailscaled-jellyfin";
 in {
-  options = {
-    servModule.jellyfin = {
-      enable = lib.mkEnableOption "Enable Jellyfin and related Services";
-    };
-  };
+  options.greenery.server.jellyfin.enable = lib.mkEnableOption "jellyfin service";
 
-  config = lib.mkIf (config.servModule.jellyfin.enable && config.servModule.enable) {
+  config = lib.mkIf (config.greenery.server.jellyfin.enable && config.greenery.server.enable) {
+    
     services.jellyfin = {
       enable = true;
       openFirewall = false;
@@ -79,31 +76,5 @@ in {
         "sonarr"
       ]
       ++ users;
-
-    # Figure out if I really need this :]
-    # systemd.services.tailscale-jellyfin = {
-    #   after = ["tailscaled.service"];
-    #   wants = ["tailscaled.service"];
-    #   wantedBy = [ "multi-user.target" ];
-    #   serviceConfig = {
-    #     Type = "simple";
-    #   };
-    #   script = ''
-    #     ${pkgs.tailscale}/bin/tailscaled --statedir=${stateDirectory} --socket=${stateDirectory}/tailscaled.sock --port=0 --tun=user
-    #   '';
-    # };
-    #
-    # systemd.services.tailscale-jellyfin-up = {
-    #   after = ["tailscale-jellyfin-up.service"];
-    #   wants = ["tailscaled.service"];
-    #   wantedBy = [ "multi-user.target" ];
-    #   serviceConfig = {
-    #     Type = "oneshot";
-    #   };
-    #   script = ''
-    #     ${pkgs.tailscale}/bin/tailscale --socket=${stateDirectory}/tailscaled.sock up --auth-key=$(cat ${config.age.secrets.servarrAuth.path}) --hostname=jellyfin --reset
-    #     ${pkgs.tailscale}/bin/tailscale --socket=${stateDirectory}/tailscaled.sock serve --bg localhost:8096
-    #   '';
-    # };
   };
 }

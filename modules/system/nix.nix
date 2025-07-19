@@ -1,5 +1,7 @@
 # NIX DOT NIX I ALWAYS WANTED TO NAME IT
-{ ... }:{
+{ 
+  ... 
+}:{
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

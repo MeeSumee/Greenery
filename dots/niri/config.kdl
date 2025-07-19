@@ -370,7 +370,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+R hotkey-overlay-title="Run Prompt: walker" { spawn "walker"; }
     Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
-    Mod+C hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
+    Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
