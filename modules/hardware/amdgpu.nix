@@ -18,11 +18,15 @@
     # Enables AMDVLK Vulkan driver
     hardware.amdgpu.amdvlk.enable = true;
 
+# rocm has a problem with building in 25.11
+# https://github.com/NixOS/nixpkgs/issues/421822
+# The temp solution that goes over it eats up RAM
+
     # Enable OpenGL with AMD Vulkan
     hardware = {
       graphics = {
         extraPackages = with pkgs; [
-          rocmPackages.clr.icd
+#          rocmPackages.clr.icd
           vaapiVdpau
           libvdpau-va-gl
         ];
@@ -35,11 +39,12 @@
     services.xserver.videoDrivers = ["amdgpu"];
 
     # Adds rocm support to btop and nixos
-    nixpkgs.config.rocmSupport = true;
-    
+#    nixpkgs.config.rocmSupport = true;
+    /*
     # amd hip
     systemd.tmpfiles.rules = [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
+    */
   };
 }
