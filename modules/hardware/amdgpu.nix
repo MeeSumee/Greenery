@@ -12,20 +12,19 @@
     
     # Set boot to immediately load amdgpu drivers
     boot.initrd.kernelModules = [ "amdgpu" ];
-
-    environment.systemPackages = [pkgs.radeontop];
+    
+    # Include dependent packages
+    environment.systemPackages = [
+      pkgs.radeontop
+    ];
     
     # Enables AMDVLK Vulkan driver
     hardware.amdgpu.amdvlk.enable = true;
 
-# rocdbgapi has a problem with building in 25.11
-# https://github.com/NixOS/nixpkgs/issues/421822
-# https://hydra.nixos.org/job/nixpkgs/trunk/rocmPackages_6.rocdbgapi.x86_64-linux/all
-# The temp solution that goes over it eats up RAM
-
     # Enable OpenGL with AMD Vulkan
     hardware = {
       graphics = {
+        enable32Bit = true;
         extraPackages = with pkgs; [
           rocmPackages.clr.icd
           vaapiVdpau
@@ -36,16 +35,20 @@
       };
     };
 
-    # Set xserver video driver
-    services.xserver.videoDrivers = ["amdgpu"];
-
-    # Adds rocm support to btop and nixos
-#    nixpkgs.config.rocmSupport = true;
-    /*
     # amd hip
     systemd.tmpfiles.rules = [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
-    */
+
+    # Set xserver video driver
+    services.xserver.videoDrivers = ["amdgpu"];
+
+    # rocdbgapi has a problem with building in 25.11
+    # https://github.com/NixOS/nixpkgs/issues/421822
+    # https://hydra.nixos.org/job/nixpkgs/trunk/rocmPackages_6.rocdbgapi.x86_64-linux/all
+    # The temp solution that goes over it eats up RAM
+
+    # Adds rocm support to btop and nixos
+#    nixpkgs.config.rocmSupport = true;
   };
 }
