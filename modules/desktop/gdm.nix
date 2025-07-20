@@ -23,11 +23,8 @@
     };
 
     # Add gdm dependencies
-    environment.systemPackages = with pkgs; [
-      gnome-settings-daemon # Enables gnome plugins for gdm
-      glib
-    ];
-
+    services.colord.enable = true;
+    
     # Edit GDM dconf profile
     programs.dconf.profiles = {
       gdm.databases = [{
@@ -90,6 +87,7 @@
       ]))
       (lib.flatten)
     ];
+
     /*
     Implementation of GDM background and settings
     Thanks https://github.com/cafetestrest/nixos
