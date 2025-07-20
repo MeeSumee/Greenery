@@ -52,8 +52,16 @@
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
 
+        # Set hyprlock wallpaper
+        hyprvivi = let
+          from = ["%%刺し身％％"];
+          to = ["pidof hyprlock || hyprlock"];
+        in   
+          builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
+
       in {
         ".config/niri/config.kdl".text = niriwall;
+        ".config/hypr/hypridle.conf".text = hyprvivi;
       };
     });
   };

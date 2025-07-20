@@ -20,6 +20,7 @@
 
 # rocm has a problem with building in 25.11
 # https://github.com/NixOS/nixpkgs/issues/421822
+# https://hydra.nixos.org/job/nixpkgs/trunk/rocmPackages_6.rocdbgapi.x86_64-linux/all
 # The temp solution that goes over it eats up RAM
 
     # Enable OpenGL with AMD Vulkan
