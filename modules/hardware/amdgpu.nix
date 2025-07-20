@@ -13,11 +13,6 @@
     # Set boot to immediately load amdgpu drivers
     boot.initrd.kernelModules = [ "amdgpu" ];
     
-    # Include dependent packages
-    environment.systemPackages = [
-      pkgs.radeontop
-    ];
-    
     # Enables AMDVLK Vulkan driver
     hardware.amdgpu.amdvlk.enable = true;
 
@@ -49,6 +44,6 @@
     # The temp solution that goes over it eats up RAM
 
     # Adds rocm support to btop and nixos
-#    nixpkgs.config.rocmSupport = true;
+    nixpkgs.config.rocmSupport = false;
   };
 }

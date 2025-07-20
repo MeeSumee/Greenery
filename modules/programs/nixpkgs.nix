@@ -30,12 +30,20 @@
       environment.systemPackages = with pkgs; [
         git                             # git commands, highly important
         npins                           # source manager
-        btop                            # hardware monitor
+        btop-rocm                       # hardware monitor
         tree                            # enables tree view in terminal
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
         sbctl                           # EFI key maker, required for lanzaboote
       ];
+      
+      # Enables intel gpu monitoring
+      security.wrappers.btop = { 
+        owner = "root"; 
+        group = "root"; 
+        source = lib.getExe pkgs.btop-rocm;
+        capabilities = "cap_perfmon+ep";
+      };
     })
 
     # Server programs

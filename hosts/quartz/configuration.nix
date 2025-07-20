@@ -32,7 +32,7 @@
       enable = true;
       amdgpu.enable = true;
       audio.enable = true;
-      intelgpu.enable = false;
+      intelgpu.enable = true;
     };
 
     networking = {

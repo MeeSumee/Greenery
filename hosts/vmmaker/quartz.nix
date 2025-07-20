@@ -13,7 +13,10 @@
   
   # Module overrides
   greenery = {
-    hardware.amdgpu.enable = lib.mkForce false;
+    hardware = {
+      amdgpu.enable = lib.mkForce false;
+      intelgpu.enable = lib.mkForce false;
+    };
 
     networking = {
       dnscrypt.enable = lib.mkForce false;
