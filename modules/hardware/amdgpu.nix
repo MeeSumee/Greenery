@@ -18,7 +18,7 @@
     # Enables AMDVLK Vulkan driver
     hardware.amdgpu.amdvlk.enable = true;
 
-# rocm has a problem with building in 25.11
+# rocdbgapi has a problem with building in 25.11
 # https://github.com/NixOS/nixpkgs/issues/421822
 # https://hydra.nixos.org/job/nixpkgs/trunk/rocmPackages_6.rocdbgapi.x86_64-linux/all
 # The temp solution that goes over it eats up RAM
@@ -27,7 +27,7 @@
     hardware = {
       graphics = {
         extraPackages = with pkgs; [
-#          rocmPackages.clr.icd
+          rocmPackages.clr.icd
           vaapiVdpau
           libvdpau-va-gl
         ];

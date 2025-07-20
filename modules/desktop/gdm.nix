@@ -24,7 +24,8 @@
 
     # Add gdm dependencies
     environment.systemPackages = with pkgs; [
-      gnome-settings-daemon # Enables gnome plugins for gdm 
+      gnome-settings-daemon # Enables gnome plugins for gdm
+      glib
     ];
 
     # Edit GDM dconf profile
