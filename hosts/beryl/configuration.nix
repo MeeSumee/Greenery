@@ -37,6 +37,7 @@
 
     networking = {
       enable = true;
+      bluetooth.enable = true;      
       dnscrypt.enable = true;
       fail2ban.enable = false;
       openssh.enable = true;
@@ -99,6 +100,9 @@
     camoff = ''echo "5-1:1.0" | sudo tee /sys/bus/usb/drivers/uvcvideo/unbind'';
     camon = ''echo "5-1:1.0" | sudo tee /sys/bus/usb/drivers/uvcvideo/bind'';
   };
+  
+  # Enable power profiles
+  services.power-profiles-daemon.enable = true;
   
 /*
   This value determines the NixOS release from which the default

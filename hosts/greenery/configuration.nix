@@ -36,6 +36,7 @@
 
     networking = {
       enable = true;
+      bluetooth.enable = false;
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;

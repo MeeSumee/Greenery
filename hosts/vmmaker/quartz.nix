@@ -19,6 +19,7 @@
     };
 
     networking = {
+      bluetooth.enable = lib.mkForce false;      
       dnscrypt.enable = lib.mkForce false;
       openssh.enable = lib.mkForce false;
       taildrive.enable = lib.mkForce false;
