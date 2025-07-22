@@ -13,6 +13,9 @@
     # Set boot to immediately load amdgpu drivers
     boot.initrd.kernelModules = [ "amdgpu" ];
     
+    # Set exposed video decode for mpv
+    environment.variables.RADV_PERFTEST = "video_decode";
+    
     # Enables AMDVLK Vulkan driver
     hardware.amdgpu.amdvlk.enable = true;
 
