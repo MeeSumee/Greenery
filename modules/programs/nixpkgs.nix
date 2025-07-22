@@ -4,6 +4,7 @@
   pkgs,
   options,
   lib,
+  sources,
   ...
 }:{
 
@@ -35,6 +36,10 @@
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
         sbctl                           # EFI key maker, required for lanzaboote
+
+        (pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/npins-show.nix") {
+          writeAwk = pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/writeAwkScript.nix") {};
+        })
       ];
       
       # Enables intel gpu monitoring

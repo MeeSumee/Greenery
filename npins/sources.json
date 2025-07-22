@@ -11,7 +11,21 @@
       "submodules": false,
       "revision": "ec2ec4ec3f908ed9b125ea4afd52627bed60f183",
       "url": "https://github.com/ezKEa/aagl-gtk-on-nix/archive/ec2ec4ec3f908ed9b125ea4afd52627bed60f183.tar.gz",
-      "hash": "1yyk034x32km8v472m1y6plh2822089b5aw4hil6g4h1ilh2canw"
+      "hash": "1yyk034x32km8v472m1y6plh2822089b5aw4hil6g4h1ilh2canw",
+      "frozen": true
+    },
+    "asusnumpad": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "MeeSumee",
+        "repo": "asus-numberpad-driver"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2",
+      "url": "https://github.com/MeeSumee/asus-numberpad-driver/archive/0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2.tar.gz",
+      "hash": "1xx85h0zjajysx0n30jrlmgzkga2kkiav3in109x8d9h16wmax1j"
     },
     "hjem": {
       "type": "Git",
@@ -87,9 +101,10 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "a52cf1d6123fe7654ec1957c92d5bd11f9ad2eba",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/a52cf1d6123fe7654ec1957c92d5bd11f9ad2eba.tar.gz",
-      "hash": "0w305mihs9180jh767a3yy23y70y3m5khqw2mb5ck8ry4kavn1w3"
+      "revision": "70c80012d7343e09eb117df7237ae04d4d2fbbbd",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/70c80012d7343e09eb117df7237ae04d4d2fbbbd.tar.gz",
+      "hash": "1f5b29dvyakipp04y2hjrq90m5yhj1x6pq5v8w84x83690zfqv8g",
+      "frozen": true
     }
   },
   "version": 5
