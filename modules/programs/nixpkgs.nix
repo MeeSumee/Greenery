@@ -35,8 +35,8 @@
         tree                            # enables tree view in terminal
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
-        sbctl                           # EFI key maker, required for lanzaboote
-
+        
+        # npins-show command script
         (pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/npins-show.nix") {
           writeAwk = pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/writeAwkScript.nix") {};
         })
