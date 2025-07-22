@@ -59,6 +59,9 @@
         # Add any missing dynamic libraries for unpackaged programs
         # here, NOT in environment.systemPackages
       ];
+
+      # Java
+      programs.java.enable = true;
     })
 
     # Daemons and UI
