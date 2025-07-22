@@ -27,7 +27,7 @@
       serviceConfig = let 
         komfsrc = pkgs.fetchurl {
           url = "https://github.com/Snd-R/komf/releases/download/1.4.0/komf-1.4.0.jar";
-          hash = "";
+          hash = "sha256-zzcXT/bMlWhgW+5V2brbbMWM6BJtthMXtlIaiVc3PEA=";
         };
       in {
         Type = "oneshot";
