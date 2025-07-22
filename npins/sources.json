@@ -18,13 +18,13 @@
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "MeeSumee",
+        "owner": "asus-linux-drivers",
         "repo": "asus-numberpad-driver"
       },
       "branch": "master",
       "submodules": false,
       "revision": "0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2",
-      "url": "https://github.com/MeeSumee/asus-numberpad-driver/archive/0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2.tar.gz",
+      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2.tar.gz",
       "hash": "1xx85h0zjajysx0n30jrlmgzkga2kkiav3in109x8d9h16wmax1j"
     },
     "hjem": {

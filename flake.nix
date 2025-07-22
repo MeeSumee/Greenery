@@ -3,13 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
-    # Asus Numpad Driver (UM5302 and similar models)
-    asus-numberpad-driver = {
-      url = "github:asus-linux-drivers/asus-numberpad-driver";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
+
     # Lanzaboote for Secure Boot
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
@@ -26,7 +20,6 @@
   outputs = {
     self,
     nixpkgs,
-    asus-numberpad-driver,
     lanzaboote,
     nvf,
     ...
@@ -74,7 +67,6 @@
         modules = [
           ./hosts/beryl/configuration.nix
           ./hosts/beryl/hardware-configuration.nix
-          asus-numberpad-driver.nixosModules.default
           
           lanzaboote.nixosModules.lanzaboote
           ({ pkgs, lib, ... }: {

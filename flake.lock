@@ -1,25 +1,5 @@
 {
   "nodes": {
-    "asus-numberpad-driver": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1751836266,
-        "narHash": "sha256-MnRVuQkwNdQTCDaOreKcQr35X6VZgmFB114q+QEsqPc=",
-        "owner": "asus-linux-drivers",
-        "repo": "asus-numberpad-driver",
-        "rev": "0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "asus-linux-drivers",
-        "repo": "asus-numberpad-driver",
-        "type": "github"
-      }
-    },
     "crane": {
       "locked": {
         "lastModified": 1731098351,
@@ -279,7 +259,6 @@
     },
     "root": {
       "inputs": {
-        "asus-numberpad-driver": "asus-numberpad-driver",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf"

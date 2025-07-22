@@ -1,9 +1,17 @@
 # Safe to modify as it's under flakes hehehehaw
-{ config, lib, pkgs, options, ... }:
+{ config, lib, pkgs, options, sources, ... }:
 
-{
+# Simulate asus-numberpad-driver flake using npins
+let 
+  asses = pkgs.callPackage (sources.asusnumpad + "/nix/default.nix") {};
+  inputs = { self.packages.${pkgs.system}.default = asses; };
+
+in {
   imports = [
     ./battery.nix
+
+    # Import asus-numberpad-driver module.nix
+    (lib.modules.importApply (sources.asusnumpad + "/nix/module.nix") inputs)
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
