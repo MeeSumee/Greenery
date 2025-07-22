@@ -30,9 +30,8 @@
           hash = "sha256-zzcXT/bMlWhgW+5V2brbbMWM6BJtthMXtlIaiVc3PEA=";
         };
       in {
-        Type = "oneshot";
         Restart = "on-failure";
-        ExecStart = "${pkgs.jdk}/bin/java -jar ${komfsrc} /var/lib/kavita/application.yml";
+        ExecStart = "${pkgs.jdk}/bin/java -jar ${komfsrc} /var/lib/kavita/config/application.yml";
       };
     };
   };
