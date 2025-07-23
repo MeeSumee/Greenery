@@ -64,7 +64,7 @@
     server = {
       enable = true;
       jellyfin.enable = false;
-      kavita.enable = true;
+      manga.enable = true;
     };
 
     system = {
