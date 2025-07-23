@@ -19,8 +19,9 @@
     };
 
   fileSystems."/run/media/sumee/emerald" =
-    { device = "/dev/disk/by-uuid/b3c424e3-f8a5-4ca1-a5ad-5c00c0e0802b";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/8066d7cd-d925-42a0-be1a-9677ce7e2895";
+      fsType = "btrfs";
+      options = [ "compress=zstd" ];
     };
 
   swapDevices = [ ];
