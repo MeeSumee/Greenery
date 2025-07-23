@@ -1,38 +1,27 @@
 {
   description = "MeeSumee's Flake Config";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Lanzaboote for Secure Boot
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
-    # NVF, Neovim + Nix Config
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
+# NO MORE INPUTS DAYO
 
   outputs = {
     self,
-    nixpkgs,
-    lanzaboote,
-    nvf,
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    # Define each system architecture
     systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+
+    # Import nixpkgs npin
+    nixpkgs = (import sources.flake-compat {src = sources.nixpkgs;}).outputs;
+
+    # npin integration to flakes
+    sources = import ./npins;
+
     forAllSystems = fn:
       nixpkgs.lib.genAttrs systems (
         system: fn (import nixpkgs {system = system;})
       );
-
-    # npin integration to flakes
-    sources = import ./npins;
     
   in {
     # External packages to build
@@ -67,17 +56,6 @@
         modules = [
           ./hosts/beryl/configuration.nix
           ./hosts/beryl/hardware-configuration.nix
-          
-          lanzaboote.nixosModules.lanzaboote
-          ({ pkgs, lib, ... }: {
-            
-            boot.loader.systemd-boot.enable = lib.mkForce false;
-            
-            boot.lanzaboote = {
-              enable = true;
-              pkiBundle = "/var/lib/sbctl";
-            };
-          })
         ];
       };
 

@@ -1,41 +1,48 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Services.UPower
+import QtQuick.Layouts
 import "../Data" as Dat
 
-Rectangle {
-  id: root
+Item {
+    id: batteryWidget
+    
+    property var battery: UPower.displayDevice
+    property bool isReady: battery && battery.ready && battery.isLaptopBattery && battery.isPresent
+    property real percent: isReady ? (battery.percentage * 100) : 0
+    property bool charging: isReady ? battery.state === UPowerDeviceState.Charging : false
+    property bool show: isReady && percent > 0
 
-  readonly property real batPercentage: UPower.displayDevice.percentage
-  property bool hasBattery: UPower.displayDevice.percentage > 0
-
-  Layout.minimumWidth: contentRow.width ? contentRow.width : 1
-
-  Behavior on Layout.minimumWidth {
-    NumberAnimation {
-      duration: 150
-      easing.type: Easing.Linear
+    // Choose icon based on charge and charging state
+    function batteryIcon() {
+        if (!show) return "";
+        if (percent >= 95) return "battery_full";
+        if (percent >= 80) return "battery_80";
+        if (percent >= 60) return "battery_60";
+        if (percent >= 50) return "battery_50";
+        if (percent >= 30) return "battery_30";
+        if (percent >= 20) return "battery_20";
+        return "battery_alert";
     }
-  }
 
-  RowLayout {
-    id: contentRow
+    visible: isReady && battery.isLaptopBattery
+    width: 22
+    height: 36
 
-    anchors.centerIn: parent
-    spacing: 0
-
-    Item {
-      implicitWidth: batText.contentWidth + 16
-      visible: root.hasBattery
-
-      Text {
-        id: batText
-        color: Dat.Colors.foreground
-        anchors.centerIn: parent
-        font.pointSize: 11
-        text: Math.round(root.batPercentage * 100) + "%"
-        visible: UPower.displayDevice.percentage > 0
-      }
+    RowLayout {
+        anchors.fill: parent
+        spacing: 4
+        visible: show
+        Item {
+            height: 22
+            width: 22
+            Text {
+                text: batteryIcon()
+                font.family: "Material Symbols Outlined"
+                font.pixelSize: 14
+                color: Dat.Colors.foreground
+                verticalAlignment: Text.AlignVCenter
+                anchors.centerIn: parent
+            }
+        }
     }
-  }
 }
