@@ -8,6 +8,13 @@
   uwuToHypr = pkgs.runCommandLocal "quick" {} ''
     awk '/^export/ { split($2, ARR, "="); print "env = "ARR[1]","ARR[2]}' ${../../dots/uwsm/env} > $out
   '';
+
+  # Set wallpaper
+  gothic_lolita_stalker = pkgs.fetchurl {
+    name = "gothiclolitadm";
+    url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
+    hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
+  };
 in {
   imports = [(sources.zaphkiel + "/nixosModules/exported/kurukuruDM.nix")];
 
@@ -16,7 +23,8 @@ in {
     package = pkgs.kurukurubar;
 
     settings = {
-      wallpaper = config.hjem.users.${builtins.elemAt users 0}.files.".config/background".source;
+      wallpaper = gothic_lolita_stalker;
+      default_user = builtins.elemAt users 0;
       instantAuth = false;
       extraConfig = ''
         monitor = DP-1, 3840x2160, 1920x0, 2

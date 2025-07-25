@@ -17,7 +17,7 @@
     
     desktop = {
       enable = true;
-      gdm.enable = true;
+      gdm.enable = false;
       gnome.enable = false;
       hypridle.enable = true;
       hyprland.enable = false;
@@ -80,6 +80,9 @@
       # nix.nix included by default
     };
   };
+
+  # Enables fingerprint authentication
+  programs.kurukuruDM.settings.instantAuth = lib.mkForce true;
 
   networking.hostName = "beryl"; # The tint of blue I like
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
