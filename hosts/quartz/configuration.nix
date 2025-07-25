@@ -73,6 +73,7 @@
       fish.enable = true;
       fonts.enable = true;
       input.enable = true;
+      lanzaboote.enable = false;
       sops.enable = true;
 
       # locale.nix included by default

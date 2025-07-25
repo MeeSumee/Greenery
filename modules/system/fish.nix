@@ -2,40 +2,101 @@
   pkgs,
   lib,
   config,
-  options, 
+  options,
+  users, 
   ...
-}: {
-  
+}:
+/*
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⣠⠔⠒⠤⢄⡀⠀⠀⠀⠀⠐⠌⠓⢄⠙⢆⠐⣄⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠶⠋⠀⠀⢀⣔⠏⠐⠀⠀⠀⠀⠀⡀⠑⠢⡀⠀⠐⠘⢦⡄⠀⠀⠀⡳⡀⠀⠑⡲⡄⠘⠀⢰⡇⠠⢄⠐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠊⠀⢀⠞⠁⠀⠀⠀⡰⠋⠁⠀⠀⠀⠀⠀⠀⠀⠘⡄⠀⠐⠄⠀⠀⠀⠈⠢⡀⠀⡇⠐⢄⠀⠈⢲⣤⠀⢸⢧⠀⠀⠈⠒⢆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠈⠀⠠⡖⠁⠀⠀⠀⢀⠜⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠀⠀⠈⡄⠀⠀⠀⠀⠘⢤⠁⢸⣄⠢⠀⠀⢻⡀⢸⡏⣦⣀⠀⠀⠀⠁⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡦⠂⢀⠌⠀⠀⠀⠀⠀⠂⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⠈⠆⠀⠀⠘⡀⠀⠀⠀⠀⠸⡀⢸⡟⣢⢣⡀⠀⡏⠢⢧⣋⠡⡁⢄⠀⠀⠀⠈⠢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠊⠀⠐⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢃⠀⠀⠀⠀⡴⢻⠌⢻⣿⠊⣌⡑⢴⠀⠐⣿⡄⢻⣆⡡⡀⠂⠀⠀⠑⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡔⡠⠁⠀⡜⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⢀⡜⢀⣼⠿⠷⣝⣸⣏⡙⢬⣧⣠⡏⣇⠈⠻⡀⠱⡀⠙⡤⠀⠈⢂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠄⠌⢀⡜⠀⠀⠀⠀⠀⠌⠀⠀⠀⠀⠀⢀⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡆⠠⣊⡤⠻⠇⣖⠓⢮⣿⣽⠿⣼⢹⢇⠈⠻⢿⣄⡇⠀⢡⠀⠐⡐⢄⠀⠡⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡜⣠⢴⢫⠁⠀⠀⠀⠀⡐⠀⠀⠀⠀⠀⠀⢞⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⢃⠄⠀⠫⣦⣄⡈⣉⡍⢏⢹⡯⣱⠏⠈⡷⣄⠈⣿⢷⡀⠈⡄⠀⠘⣄⠡⡀⠡⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠗⡡⢁⡎⠠⠀⠀⠀⢠⠀⠀⠀⠀⠀⢀⠎⡌⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⢸⠐⡀⠀⠀⠑⢌⡿⡀⠘⢾⡇⢱⢀⠂⢠⢹⡆⠘⢮⣳⡀⢡⠀⠀⠰⠑⡐⠄⠡⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠔⠒⠢⢄⠀⠀⡎⠠⠁⡸⡠⠁⠀⠀⢠⠂⠀⠀⠀⠀⢀⠊⣜⣀⣸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⡇⠱⠀⠀⠀⠀⢩⠱⡄⠘⣿⢾⣏⣀⠈⡎⣎⢦⡀⠈⠷⣼⠁⠀⠀⢃⠈⢪⠄⢃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⠀⠀⢃⠀⠦⢁⣰⡿⠁⠀⠀⢀⠆⠀⠀⡀⠄⡲⢃⡜⠁⠀⠈⡇⠀⠀⡆⠀⠀⠀⠀⠀⡆⠀⠀⢘⢳⡀⠸⡀⠡⠑⠂⠤⣾⠋⣙⣷⡌⡟⣤⡈⢣⢸⡇⠀⣿⣦⣀⠀⢣⠀⠀⠘⡀⠀⠱⡆⢂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠎⠀⠀⠀⠀⠀⠀⢠⢎⣠⣶⣿⡟⠁⠠⠀⣠⠊⠀⠀⠁⣠⠞⡡⠊⠀⠀⠀⠀⠸⡀⠀⣳⠀⠀⠀⠀⠀⡇⠀⠀⡼⠀⠡⡀⠻⣆⠃⠀⠐⣧⠀⣿⡿⣧⣐⡿⣷⠈⡆⢧⠀⢻⣿⣝⣓⡦⣣⡀⠀⢃⠀⠀⠘⣎⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠎⠀⠀⠀⠀⠀⠀⠀⠋⠁⠀⠀⡿⠀⡰⢁⠔⠁⠀⢀⣠⠾⢁⠔⣁⢦⡀⠀⠤⢄⠀⢡⠀⢸⠃⠀⠀⠀⠀⢁⠀⢠⠃⢀⠤⠌⢢⣕⣝⢦⡀⡹⡄⠸⣿⣾⣿⢿⣿⡆⡇⠘⡷⡀⠻⣿⣿⣷⡀⠑⠀⢸⠀⠀⠀⡘⢞⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠰⣤⣀⣀⣠⣤⡶⠋⠀⢀⠄⠀⠀⠀⠀⠀⠀⠀⠀⡴⠁⡠⠖⠁⣀⠤⢒⢿⡫⠔⢻⣶⣿⣿⣿⣿⣷⣦⣄⠀⠳⠈⣎⢂⠀⠀⠀⢸⢠⠃⢈⣴⣾⣿⣿⣿⣿⣷⣞⡇⡟⢆⠙⣿⣾⣏⣿⡇⡇⡆⢳⠈⠢⣌⡻⣿⣷⡄⠀⠘⠀⡀⠀⢡⠈⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠈⠙⢿⡿⣯⣔⠂⠄⠀⠀⠀⠀⠀⠠⠢⠤⣤⣾⠷⢿⠖⠊⠉⠒⠈⠁⢸⡈⣺⣿⣿⣿⢛⣿⣿⣛⣻⡟⢇⠀⠑⣽⣎⠢⠀⠀⠐⡇⢠⢟⣿⡟⣹⣿⣉⣻⣿⣿⢠⣿⠈⠻⣎⠻⣿⣿⡇⣱⢃⠘⣇⠀⠈⢿⣶⢽⡻⣦⠀⡇⢠⠀⠀⢇⠈⡆⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⠓⠮⢝⣃⣀⣀⣀⣀⣠⣴⠶⠛⡝⠁⢀⢧⠀⠰⡀⠀⠀⠀⠈⣷⣿⡏⢾⢿⢟⠃⠘⢻⣟⡗⠀⠀⠀⠈⠳⢧⡑⠀⠀⢡⠀⠸⣿⣟⡋⠀⢛⣿⢿⣦⣿⡇⠀⠀⠈⠣⣌⠻⣧⣸⣼⠀⣿⣆⠀⣻⠈⠓⠬⣀⡑⢧⠀⠄⠀⠸⠀⠘⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⠛⠋⠉⠉⢀⡴⠁⠀⣸⢺⠀⠀⢣⠀⠀⠀⠀⣿⠙⣧⠘⡜⠌⠢⠔⠘⣻⠃⠀⠀⠀⠀⠀⠈⠓⢤⡀⠘⡄⠀⢏⠋⠱⠀⠈⢟⡾⢫⢟⠇⠀⠀⠰⡀⠙⠦⣝⢿⣿⠀⢹⠟⣄⡏⠀⠀⠀⠙⠳⡈⠢⡀⠀⠀⠀⠀⢣⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠠⠐⢈⡞⠀⠀⢀⢻⢸⠀⠀⠈⢧⡀⠀⠀⢙⢆⠀⠕⠌⢢⣄⠀⠔⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠣⢰⡀⠈⠂⠄⣀⡠⠪⠔⠅⡸⠀⠀⢠⠳⠁⠀⠀⡏⠓⡟⡇⠀⣸⣌⡻⣖⣤⢀⡀⠀⡇⠑⠻⣆⠀⠀⠀⠀⢃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⡀⠤⠐⠂⠉⠀⠀⠀⡎⢠⡀⠀⡘⠈⡄⡟⡀⠀⠀⢳⡀⠀⠈⠎⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⡰⠁⠀⢀⡴⠃⠀⠀⢰⠋⠀⡇⢱⠀⠏⡆⠈⠁⠀⠀⠈⠁⠓⠠⠄⡀⠀⠀⠀⠀⠈⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠙⠒⠶⠤⠤⠥⠤⢼⠀⢸⢐⠀⡷⣮⣇⢱⢡⠀⠀⠀⠹⣆⠀⠘⠌⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠠⣴⡟⠁⠀⠀⠀⡼⠀⠀⡿⠶⡆⠀⡧⠤⠤⠠⠤⠤⢤⠤⠖⠚⠁⠀⠀⠀⠀⠀⠸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡀⢸⠈⢸⠀⡇⣻⡈⡆⠡⡀⠀⠀⠘⠗⡦⣈⠀⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⡶⠮⠭⠙⢶⡆⠀⠀⠀⠠⠄⠤⣔⠊⠡⢤⠖⠉⡏⠀⠀⡐⠀⢠⠃⠠⠀⡇⠀⡇⢰⠃⠀⠀⡄⠀⢰⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢣⠀⠈⣼⠀⢠⢇⢷⠰⡀⠑⡄⠀⠀⠈⠻⣀⣵⡦⡬⠶⠤⠀⠀⠀⠀⠀⠀⠙⠂⠤⠐⠋⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠚⠠⡸⠀⠀⡰⠁⠀⡞⠀⢀⢷⠀⢀⢁⠆⠀⠀⠀⠃⠀⡌⣮⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠣⡀⣿⡀⠘⡸⡈⢧⡱⠀⠈⢂⠀⠀⠀⠹⡟⠛⠀⠑⠠⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡚⠁⠀⢸⢠⠃⠀⡰⠁⠀⡼⠀⠄⡌⡌⢀⣦⠃⠀⠀⠀⢸⠀⢰⠁⢿⠀⠀⠀⠀⡆⠀⠀⠀⠀⠰⠀⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⢼⣇⠀⢡⢳⠈⢷⡀⠀⠀⠁⠀⠀⠀⠱⣣⣒⠮⢖⣿⡏⢳⠢⢤⣀⡀⠀⠀⠀⠀⣀⣤⠴⢶⠟⣹⠫⡹⣄⠰⡘⡌⢀⡔⠁⢀⣼⢃⠎⡸⢰⠃⢁⠎⡘⠀⠀⠀⡆⠀⡆⢸⠐⡀⠀⠀⢸⠀⠀⠀⠀⠀⡄⠀⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢆⠀⢎⢧⠈⠻⣦⡀⠀⠀⠈⠢⠀⠱⡀⠉⠉⠀⠈⡾⣟⣷⣮⣟⠻⡒⡻⠛⣻⣟⣻⡶⡜⠀⠉⠉⠀⠉⡛⢠⠞⠀⢠⡾⡡⠊⡰⢁⠃⠀⡜⢠⠁⠀⠀⠀⠃⢰⠁⡄⠀⠆⠀⠀⡟⠀⠀⠀⠀⠀⠃⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣡⣼⡌⠟⢄⠈⠻⣦⣀⠀⠀⠁⠂⡘⢄⠀⠀⠀⣇⣿⣿⣿⣿⣧⣼⣥⣾⣿⣿⣿⡟⡇⠀⠀⠀⠀⡜⡡⠃⠀⠀⡷⠋⠁⡔⢡⠛⠲⡜⠀⡎⠀⠀⠀⢸⠀⡌⢀⠇⠀⡇⠀⣼⠃⠀⠀⠀⠀⠸⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡾⠛⠁⠘⢆⠈⠳⣄⠈⠫⣑⣤⡀⠀⠀⠂⠳⢤⣼⣿⣯⣿⣿⣿⢿⣿⣽⣿⣿⣯⣿⣽⣿⢦⣤⣤⠞⠀⠀⢀⠴⠋⠒⢤⡜⡰⠃⠀⢰⠁⢰⠃⠀⠀⠀⠈⢀⠃⢸⠀⠀⡇⠘⡟⡐⠀⠀⠀⢠⢣⠁⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡾⠛⠁⠀⠀⠀⠀⠈⢳⣁⠬⠷⣄⣈⡿⣿⣷⣶⣤⣄⣀⣉⣛⣿⣿⣿⣿⣽⣿⣿⣿⣿⣿⣿⣿⣛⣿⠟⠁⢀⣠⡶⢃⠠⠐⠊⠀⠈⠑⡄⠀⡇⠐⡿⠀⠀⠀⠀⠀⡸⠀⡆⠀⠀⡇⢸⠣⠁⠀⠀⠠⠂⠻⠀⢀⠃⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡶⠟⠉⠀⠀⠀⠀⠀⢀⠔⠉⣉⣀⠠⠤⠼⢄⠷⣈⢻⣻⣿⣭⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣻⣡⣤⣶⢿⠋⣡⠆⠀⣀⠠⠤⠂⠀⠓⢼⠁⢸⡇⠀⠀⠀⠀⠀⠁⠀⣇⠀⠀⣇⠏⠄⠀⠀⠀⠀⠀⠀⠀⡘⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⠀⣀⡀⠀⠀⣠⣴⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⠀⠀⣀⣀⣀⡆⠈⠑⢝⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⢻⣿⡻⣿⣿⣿⡿⠟⠁⠘⣄⠘⡦⠋⠀⢀⣀⢀⡀⠀⠸⡀⡌⡇⠀⠀⠀⠀⠀⠀⢸⠀⠙⢦⡟⠀⠀⠀⠀⠀⠀⠀⠀⢠⠃⠀⠀⠀⠀⠀⠀
+⠀⡀⠤⠒⠉⠀⠀⠒⠲⠭⢍⣉⠒⠢⠤⠄⣀⡀⠀⠀⠀⠀⢰⠁⠀⠀⠀⠉⠀⠀⠀⠀⣿⢄⡀⠀⠙⢿⡟⣋⠍⣋⣿⣿⣿⡟⣷⡿⢸⣿⣿⣷⣞⣉⠤⠤⣴⣶⣿⡦⠗⠤⠎⠁⠀⠀⠀⠀⠀⠁⡇⡇⠀⠀⠀⠀⠀⠀⠸⠀⠀⣸⠁⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⠀⠀⠀⠀⠀
+⠈⠀⠀⠀⠀⠀⠀⠀⠑⢂⠀⠉⠓⢄⡀⠀⠀⠈⠉⠉⠒⠒⢾⠀⠀⠀⠀⠀⠈⠉⠁⠉⠙⣼⣹⡖⢄⡈⢻⣴⣿⣿⣿⣿⣿⡗⢬⡐⢿⣿⣿⣿⣿⣷⣤⡐⠢⣍⡛⠧⣄⠐⠓⢄⣺⣥⠓⠀⠀⡇⡇⢁⠀⠀⠀⠀⠀⠀⡃⠀⢠⠃⠀⠀⠀⠀⠀⠀⠀⠀⡸⠁⠀⠀⠀⠀⠀⠀
+⠁⠒⠒⠠⠀⣀⠀⠀⠀⠀⠀⠀⠀⣀⡁⠐⠂⠢⠤⣀⣀⠔⡾⠀⠀⠀⠀⠀⠀⢠⡴⡆⢠⡟⡻⢳⠀⠈⢢⣻⣿⣿⣿⣿⣿⢸⡏⣿⢸⣿⣿⣿⣿⣿⣿⣿⣦⡘⡜⣄⣈⣆⠀⠀⠚⠁⠀⠀⠰⣗⡓⠼⠀⠀⠀⠀⠀⠀⡇⢠⠏⠀⠀⠀⠀⠀⠀⠀⠀⢀⠁⠀⠀⠀⠀⠀⠀⠀
+
+*/
+
+let
+  inherit (config.networking) hostName;
+  rebuildCommand = "sudo nixos-rebuild --log-format bar --no-reexec --file ~/green/default.nix -A ${hostName}";
+
+in {
+
   options.greenery.system.fish.enable = lib.mkEnableOption "fish shell";
 
   config = lib.mkIf (config.greenery.system.fish.enable && config.greenery.system.enable) {
+
+    # Enables users to use the shell
+    users.users = lib.genAttrs (users ++ ["root"])
+    (
+      usershell: {
+        shell = pkgs.fish;
+      }
+    );
+
+    # man-cache is too annoying
+    documentation.man.generateCaches = false;
+
     # Extensive fish shell stuff
     programs.fish = {
       enable = true;
+
+      # Removes bash script reliance for nix startups
+      useBabelfish = true;
 
       # Abbreviations to expand commands with simple keywords
       shellAbbrs = {
 
         # nix stuff
-        snrb = "sudo nixos-rebuild boot --flake ~/green";
-        snrt = "sudo nixos-rebuild test --flake ~/green";
-        snrs = "sudo nixos-rebuild switch --flake ~/green";
+        snr = rebuildCommand;
         nsh = "nix shell nixpkgs#";
         nrn = "nix run nixpkgs#";
-        np = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";
-        bvm = "nix run ~/green#nixosConfigurations.BVM.config.system.build.vm";
-        qvm = "nix run ~/green#nixosConfigurations.QVM.config.system.build.vm";
-        obvm = "nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm";
-        oqvm = "nix run github:MeeSumee/Greenery#nixosConfigurations.QVM.config.system.build.vm";
+        nip = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";        
+
+        # I killed VMs
 
         # git stuff
-        ga = "git add --all";
+        gaa = "git add --all";
+        ga = "git add";
         gs = "git status";
         gc = "git commit";
         gcm = "git commit -m";
+        gck = "git checkout -b";
         gp = "git push";
         gca = "git commit --amend";
         gcp = "git cherry-pick";
+        grsa = "git restore --staged .";
+        grs = "git restore --staged";
+        gr = "git restore";
+        gra = "git restore .";
         gd = "git diff";
         gds = "git diff --staged";
         gl = "git log";
@@ -48,9 +109,10 @@
       # Aliases to execute commands directly
       shellAliases = {
         ls = "eza --icons --group-directories-first -1";
-        snowball = "sudo nixos-rebuild boot --flake ~/green";
-        snowfall = "sudo nixos-rebuild switch --flake ~/green";
-        snowstorm = "sudo nixos-rebuild test --flake ~/green";
+        snowball = "${rebuildCommand} boot";
+        snowfall = "${rebuildCommand} switch";
+        snowstorm = "${rebuildCommand} test";
+        snowshed = "${rebuildCommand} dry-build";
         schizo = "ssh administrator@greenery";
       };
 
@@ -112,17 +174,6 @@
 
     # Fuzzy Finder keybinds
     programs.fzf.keybindings = true;
-
-    # bash-fish integration thanks to rexie
-    programs.bash = {
-      interactiveShellInit = ''
-        if [[ ($(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" || -n ''${IN_NIX_SHELL}) && -z ''${BASH_EXECUTION_STRING} ]]
-        then
-          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-        fi
-      '';
-    };
 
     # Fish dependancies
     environment.systemPackages = with pkgs; [

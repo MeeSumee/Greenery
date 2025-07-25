@@ -9,6 +9,7 @@
     ./fish.nix
     ./fonts.nix
     ./input.nix  
+    ./lanzaboote.nix    
     ./locale.nix    
     ./nix.nix
     ./sops.nix

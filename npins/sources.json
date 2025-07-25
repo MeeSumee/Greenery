@@ -27,6 +27,47 @@
       "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2.tar.gz",
       "hash": "1xx85h0zjajysx0n30jrlmgzkga2kkiav3in109x8d9h16wmax1j"
     },
+    "booru": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Rexcrazy804",
+        "repo": "booru-flake"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "d663b3c0f95abbdbf4b6afc7d862328024f7a937",
+      "url": "https://github.com/Rexcrazy804/booru-flake/archive/d663b3c0f95abbdbf4b6afc7d862328024f7a937.tar.gz",
+      "hash": "04k87l1yblcnj1bv0fnyxgibipf46257fna4ik40ygakj589qhii"
+    },
+    "crane": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ipetkov",
+        "repo": "crane"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "544d09fecc8c2338542c57f3f742f1a0c8c71e13",
+      "url": "https://github.com/ipetkov/crane/archive/544d09fecc8c2338542c57f3f742f1a0c8c71e13.tar.gz",
+      "hash": "0kl8z5i4ix3isxh08sin7f5d46d752k0rjglf7a29y936bg8z6w3",
+      "frozen": true
+    },
+    "flake-compat": {
+      "type": "Git",
+      "repository": {
+        "type": "Forgejo",
+        "server": "https://git.lix.systems/",
+        "owner": "lix-project",
+        "repo": "flake-compat"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "549f2762aebeff29a2e5ece7a7dc0f955281a1d1",
+      "url": "https://git.lix.systems/lix-project/flake-compat/archive/549f2762aebeff29a2e5ece7a7dc0f955281a1d1.tar.gz",
+      "hash": "0g4izwn5k7qpavlk3w41a92rhnp4plr928vmrhc75041vzm3vb1l"
+    },
     "hjem": {
       "type": "Git",
       "repository": {
@@ -39,6 +80,19 @@
       "revision": "3093a74542b30f8155954d585d0ae2401e3adbe5",
       "url": "https://github.com/feel-co/hjem/archive/3093a74542b30f8155954d585d0ae2401e3adbe5.tar.gz",
       "hash": "1mqbmyv7bw8gjzljr7z7yfwg1hpwcgm6lykyr2bbf0l0all26fig"
+    },
+    "lanzaboote": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Rexcrazy804",
+        "repo": "lanzaboote"
+      },
+      "branch": "npins-support",
+      "submodules": false,
+      "revision": "63b4c797fd6e370ad437ee25e30a5e5ff2c93f83",
+      "url": "https://github.com/Rexcrazy804/lanzaboote/archive/63b4c797fd6e370ad437ee25e30a5e5ff2c93f83.tar.gz",
+      "hash": "08vxxn44aj1n23gyqpgmk9hngkyckfshrjq79dhwmhxgyzfl5cfk"
     },
     "micro-bounce": {
       "type": "Git",
@@ -78,6 +132,39 @@
       "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
       "hash": "1d399fvbjalpfa44jd0qy9kjchspfny0zy3gf1jv2gsmas7iaz85"
+    },
+    "nixpkgs": {
+      "type": "Channel",
+      "name": "nixos-unstable",
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre831064.6e987485eb2c/nixexprs.tar.xz",
+      "hash": "sha256-okomYyezDlua8/ssPHEdE2/gC1r+MElosWlZQuFrIdQ=",
+      "frozen": true
+    },
+    "npins": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "andir",
+        "repo": "npins"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "afa9fe50cb0bff9ba7e9f7796892f71722b2180d",
+      "url": "https://github.com/andir/npins/archive/afa9fe50cb0bff9ba7e9f7796892f71722b2180d.tar.gz",
+      "hash": "1cl77vcs120jvmrxlczf7q2xdkgc237ywd11mr0qly9xr405i9qg"
+    },
+    "rust-overlay": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "oxalica",
+        "repo": "rust-overlay"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "0ad7ab4ca8e83febf147197e65c006dff60623ab",
+      "url": "https://github.com/oxalica/rust-overlay/archive/0ad7ab4ca8e83febf147197e65c006dff60623ab.tar.gz",
+      "hash": "1r7nkcjmxfy8h7sb6n6ry3p8ha51613qmp0a2a6fzyqpk091wr4f"
     },
     "sops": {
       "type": "Git",

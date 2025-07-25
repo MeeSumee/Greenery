@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
+import Quickshell.Widgets
 import Quickshell.Wayland
 import "../Widgets" as Wid
 import "../Data" as Dat
@@ -52,11 +54,10 @@ Scope {
 							anchors.left: parent.left
 							anchors.verticalCenter: parent.verticalCenter
 							anchors.top: parent.top
-		        	    	Image {
+		        	    	Wid.Logo {
 		        	    		Layout.alignment: Qt.AlignTop
 		        	    	    Layout.maximumHeight: 30
-		        	    	    Layout.maximumWidth: 30   	    	    
-		        	    	    source: "../Assets/NixOS.png"
+		        	    	    Layout.maximumWidth: 30
 		        	    	}
 		        	    }
         	    	}
