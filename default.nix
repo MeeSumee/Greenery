@@ -46,28 +46,4 @@ in {
       ./hosts/greenery/hardware-configuration.nix
     ];
   };
-  
-  BVM = nixosConfig {
-    system = null;
-    specialArgs = {
-      inherit sources;
-      users = ["beryl"];
-    };
-    
-    modules = [
-      ./hosts/vmmaker/beryl.nix
-    ];
-  };
-  
-  QVM = nixosConfig {
-    system = null;
-    specialArgs = {
-      inherit sources;
-      users = ["quartz"];
-    };
-    
-    modules = [
-      ./hosts/vmmaker/quartz.nix
-    ];
-  };
 }

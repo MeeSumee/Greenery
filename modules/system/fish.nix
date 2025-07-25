@@ -81,11 +81,7 @@ in {
         nrn = "nix run nixpkgs#";
         nip = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";        
 
-        # BROKEN FOR NOW
-        bvm = "nix run ~/green#nixosConfigurations.BVM.config.system.build.vm";
-        qvm = "nix run ~/green#nixosConfigurations.QVM.config.system.build.vm";
-        obvm = "nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm";
-        oqvm = "nix run github:MeeSumee/Greenery#nixosConfigurations.QVM.config.system.build.vm";
+        # I killed VMs
 
         # git stuff
         gaa = "git add --all";

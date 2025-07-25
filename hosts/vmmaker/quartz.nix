@@ -1,4 +1,4 @@
-# Quartz VM Maker
+# Legacy
 { 
   config,
   pkgs,
@@ -32,6 +32,8 @@
       heavy.enable = lib.mkForce false;
       steam.enable = lib.mkForce false;
     };
+    
+    system.lanzaboote.enable = lib.mkForce false;
   };
 
   # Provide support for AMD and Intel CPUs

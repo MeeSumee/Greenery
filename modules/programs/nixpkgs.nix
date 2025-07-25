@@ -35,15 +35,13 @@
         tree                            # enables tree view in terminal
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
+        npins                           # sources manager and replaces my flakes
 
         # npins-show command script
         (pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/npins-show.nix") {
           writeAwk = pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/writeAwkScript.nix") {};
         })
       ];
-      
-      # npin overlay to latest version
-      nixpkgs.overlays = [(final: prev: { npins = final.callPackage (sources.npins + "/npins.nix") {}; })];
 
       # Enables intel gpu monitoring
       security.wrappers.btop = { 
