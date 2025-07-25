@@ -1,24 +1,22 @@
 {
-  pkgs,
-  lib,
-  config,
-  options,
   sources,
-  inputs, 
+  pkgs,
+  config,
+  lib,
   ...
 }: let
   lanzaboote = import (sources.lanzaboote + "/default-npins.nix") {
     sources = null;
-    inherit (sources) rust-overlay crane nixpkgs;
-  };
+    # default-npins.nix does not assume v6 so explicitly pass in my v6'd sources
+    # so we can leverage it. not required otherwise
+    inherit (sources) crane nixpkgs rust-overlay;
+  };  
+in {
+  imports = [lanzaboote.nixosModules.lanzaboote];
 
-in {  
-  imports = [ lanzaboote.nixosModules.lanzaboote ];
-  
   options.greenery.system.lanzaboote.enable = lib.mkEnableOption "lanzaboote";
 
   config = lib.mkIf (config.greenery.system.lanzaboote.enable && config.greenery.system.enable) {
-    
     environment.systemPackages = [pkgs.sbctl];
     boot.loader.systemd-boot.enable = lib.mkForce false;
     boot.lanzaboote = {
@@ -30,5 +28,5 @@ in {
       # package = pkgs.lanzaboote-tool;
       configurationLimit = 12;
     };
-  }; 
+  };
 }
