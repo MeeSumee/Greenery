@@ -14,6 +14,7 @@
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
+    ./kurukurudm.nix
     ./niri.nix
 #    ./sddm.nix
     ./xserver.nix

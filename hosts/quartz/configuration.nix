@@ -17,7 +17,7 @@
     
     desktop = {
       enable = true;
-      gdm.enable = true;
+      gdm.enable = false;
       gnome.enable = false;
       hypridle.enable = true;
       hyprland.enable = true;

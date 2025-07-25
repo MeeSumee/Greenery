@@ -26,14 +26,10 @@
     # Set hyprland as default session
     services.displayManager.defaultSession = "hyprland-uwsm";
 
-    # Hyprland Dependent Packages & Kurukuru bar
-    environment.systemPackages = let
-      kurukurubar = pkgs.callPackage (sources.zaphkiel + "/pkgs/kurukurubar.nix") { 
-        librebarcode = pkgs.callPackage (sources.zaphkiel + "/pkgs/librebarcode.nix") {}; 
-      };
-    in [
+    # Hyprland Dependent Packages
+    environment.systemPackages = with pkgs; [
       kurukurubar
-      pkgs.grim
+      grim
     ];
 
     # Hjem for hyprland configs

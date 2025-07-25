@@ -23,9 +23,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2",
-      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/0f3a17beb3f96a24fb5b4b56005d0b7d8313f3b2.tar.gz",
-      "hash": "1xx85h0zjajysx0n30jrlmgzkga2kkiav3in109x8d9h16wmax1j"
+      "revision": "de1def2d69a63c1fb79926eaff6f06e4a5805a6d",
+      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/de1def2d69a63c1fb79926eaff6f06e4a5805a6d.tar.gz",
+      "hash": "03zsm07wl9p0zx48zz54dw8a8ia05mayjvfhj92fsdfk0167dg1w"
     },
     "booru": {
       "type": "Git",
@@ -153,6 +153,19 @@
       "url": "https://github.com/andir/npins/archive/afa9fe50cb0bff9ba7e9f7796892f71722b2180d.tar.gz",
       "hash": "1cl77vcs120jvmrxlczf7q2xdkgc237ywd11mr0qly9xr405i9qg"
     },
+    "quickshell": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Rexcrazy804",
+        "repo": "quickshell"
+      },
+      "branch": "greetd-fix",
+      "submodules": false,
+      "revision": "efc949fe8e1788b46379920601791e52b5e7d29b",
+      "url": "https://github.com/Rexcrazy804/quickshell/archive/efc949fe8e1788b46379920601791e52b5e7d29b.tar.gz",
+      "hash": "1l2z1xmi3q7fm6nlhpi57cdmcx40yrigjn4ib4sw1pnlidy1ngm0"
+    },
     "rust-overlay": {
       "type": "Git",
       "repository": {
@@ -162,9 +175,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "0ad7ab4ca8e83febf147197e65c006dff60623ab",
-      "url": "https://github.com/oxalica/rust-overlay/archive/0ad7ab4ca8e83febf147197e65c006dff60623ab.tar.gz",
-      "hash": "1r7nkcjmxfy8h7sb6n6ry3p8ha51613qmp0a2a6fzyqpk091wr4f"
+      "revision": "7ae12d14d6bb74acfadf31e17a204d928eaf77b8",
+      "url": "https://github.com/oxalica/rust-overlay/archive/7ae12d14d6bb74acfadf31e17a204d928eaf77b8.tar.gz",
+      "hash": "1n2r78nb1b1lx6vd65gnd9chfvkcj1ailjy2p9wwi1i56qlkqvwn"
     },
     "sops": {
       "type": "Git",
@@ -186,12 +199,11 @@
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel"
       },
-      "branch": "master",
+      "branch": "kurukuru-greeter",
       "submodules": false,
-      "revision": "70c80012d7343e09eb117df7237ae04d4d2fbbbd",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/70c80012d7343e09eb117df7237ae04d4d2fbbbd.tar.gz",
-      "hash": "1f5b29dvyakipp04y2hjrq90m5yhj1x6pq5v8w84x83690zfqv8g",
-      "frozen": true
+      "revision": "ac3bb0294b40faa9b182a52cb10d2e8bf27e83c5",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/ac3bb0294b40faa9b182a52cb10d2e8bf27e83c5.tar.gz",
+      "hash": "0gs22srmh87xpsl0bdyrrqggyqzva963g0d5b87szpqp5yd42qdj"
     }
   },
   "version": 5
