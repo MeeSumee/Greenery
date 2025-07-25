@@ -2,125 +2,368 @@
 Consists of Greenery, Beryl, and Quartz
 
 ## Overview
-### Structure of the repository
-```
-assets/            # Miscellaneous pictures, gifs, sources used in this repo
-dots/              # Welcome to the ricefields, fellow ricers! Most are imported using hjem
-- cursors/         # Cursors imported from AUR and Pling, imported using cursors.nix in pkgs/
-- fish/            # Fish Shell ini and its themes
-- foot/            # Foot terminal ini
-- fuzzel/          # Fuzzel app launcher ini
-- hyprland/        # Hyprland and Hypridle configuration
-- librewolf/       # Attempted librewolf configuration override, didn't override my config as of late
-- micro/           # Fork colorschemes and make them transparent, add settings and keybinds
-- mpv/             # mpv media player configuration
-- niri/            # Niri configuration
-- quickshell/      # Quickshell configuration. WIP in quickshell-test branch
-- uwsm/            # UWSM environment variables
-- yazi/            # Yazi init.lua
-hosts/             # Consists of all my devices and their configurations
-- beryl/           # ASUSTek Zenbook S13 OLED (UM5302TA) Laptop. WM = Niri
-- greenery/        # Dell Optiplex 3050 Tower Server. WM = None. SSH Only!
-- quartz/          # Personal Gaming PC with i9-12900K and RX 6950XT. WM = Hyprland
-- vmmaker/         # QEMU VM "initializers" when you build my configuration using nix run
-modules/           # Key elements for all of my devices
-- common/          # Common elements shared across all of my devices
-- gui/             # Elements shared by devices that consists of a GUI (ex. Beryl & Quartz)
-- server/          # Random minecraft/jellyfin server config added before this repository merged. WIP
-npins/             # Auto-generated config when using npins command. Take note that it gets rewritten when modifying npins
-pkgs/              # Consists of cursors.nix, fetches my repository dots and packages it as a nix package
-flake.nix          # Unified flake that governs all of the inputs, and outputs of my devices. Slowly transitioning to npins
-```
+### Repository tree
 
-### Running my configuration by building a VM locally
-To test out or modify either of my NixOS configurations, run the following commands on your desired folder:
-
-Greenery (GVM):
 ```
-nix run github:MeeSumee/Greenery#nixosConfigurations.GVM.config.system.build.vm
+.
+├── assets
+│   ├── 129992739_p0.jpg
+│   ├── 71sMeJBJRNL.png
+│   ├── dlcdnwebimgs.asus.png
+│   ├── ForRex.jpg
+│   └── GDM.png
+├── default.nix
+├── dots
+│   ├── cursors
+│   │   ├── Firefly
+│   │   │   ├── cursors
+│   │   │   │   ├── all-scroll
+│   │   │   │   ├── arrow
+│   │   │   │   ├── bottom_left_corner
+│   │   │   │   ├── bottom_right_corner
+│   │   │   │   ├── bottom_side
+│   │   │   │   ├── circle
+│   │   │   │   ├── closedhand
+│   │   │   │   ├── col-resize
+│   │   │   │   ├── cross
+│   │   │   │   ├── crossed_circle
+│   │   │   │   ├── crosshair
+│   │   │   │   ├── default
+│   │   │   │   ├── dnd-move
+│   │   │   │   ├── dnd_no_drop
+│   │   │   │   ├── dnd-none
+│   │   │   │   ├── down-arrow
+│   │   │   │   ├── draft
+│   │   │   │   ├── e-resize
+│   │   │   │   ├── ew-resize
+│   │   │   │   ├── fleur
+│   │   │   │   ├── forbidden
+│   │   │   │   ├── grab
+│   │   │   │   ├── grabbing
+│   │   │   │   ├── half-busy
+│   │   │   │   ├── hand
+│   │   │   │   ├── hand1
+│   │   │   │   ├── hand2
+│   │   │   │   ├── h_double_arrow
+│   │   │   │   ├── help
+│   │   │   │   ├── ibeam
+│   │   │   │   ├── left-arrow
+│   │   │   │   ├── left_ptr
+│   │   │   │   ├── left_ptr_help
+│   │   │   │   ├── left_ptr_watch
+│   │   │   │   ├── left_side
+│   │   │   │   ├── move
+│   │   │   │   ├── ne-resize
+│   │   │   │   ├── nesw-resize
+│   │   │   │   ├── no_drop
+│   │   │   │   ├── not_allowed
+│   │   │   │   ├── n-resize
+│   │   │   │   ├── ns-resize
+│   │   │   │   ├── nw-resize
+│   │   │   │   ├── nwse-resize
+│   │   │   │   ├── openhand
+│   │   │   │   ├── pencil
+│   │   │   │   ├── pirate
+│   │   │   │   ├── pointer
+│   │   │   │   ├── pointing_hand
+│   │   │   │   ├── progress
+│   │   │   │   ├── question_arrow
+│   │   │   │   ├── right-arrow
+│   │   │   │   ├── right_side
+│   │   │   │   ├── row-resize
+│   │   │   │   ├── sb_h_double_arrow
+│   │   │   │   ├── sb_v_double_arrow
+│   │   │   │   ├── se-resize
+│   │   │   │   ├── size_all
+│   │   │   │   ├── size-bdiag
+│   │   │   │   ├── size_bdiag
+│   │   │   │   ├── size-fdiag
+│   │   │   │   ├── size_fdiag
+│   │   │   │   ├── size-hor
+│   │   │   │   ├── size_hor
+│   │   │   │   ├── size-ver
+│   │   │   │   ├── size_ver
+│   │   │   │   ├── split_h
+│   │   │   │   ├── split_v
+│   │   │   │   ├── s-resize
+│   │   │   │   ├── sw-resize
+│   │   │   │   ├── text
+│   │   │   │   ├── top_left_arrow
+│   │   │   │   ├── top_left_corner
+│   │   │   │   ├── top_right_corner
+│   │   │   │   ├── top_side
+│   │   │   │   ├── up_arrow
+│   │   │   │   ├── v_double_arrow
+│   │   │   │   ├── wait
+│   │   │   │   ├── watch
+│   │   │   │   ├── whats_this
+│   │   │   │   ├── w-resize
+│   │   │   │   └── xterm
+│   │   │   ├── index.theme
+│   │   │   └── preview.gif
+│   │   └── xcursor-genshin-nahida
+│   │       ├── cursors
+│   │       │   ├── alias
+│   │       │   ├── all-scroll -> fleur
+│   │       │   ├── arrow -> left_ptr
+│   │       │   ├── bottom_left_corner
+│   │       │   ├── bottom_right_corner
+│   │       │   ├── bottom_side
+│   │       │   ├── cell
+│   │       │   ├── center_ptr
+│   │       │   ├── circle -> not-allowed
+│   │       │   ├── closedhand -> openhand
+│   │       │   ├── color-picker
+│   │       │   ├── col-resize
+│   │       │   ├── context-menu
+│   │       │   ├── copy
+│   │       │   ├── cross -> crosshair
+│   │       │   ├── crossed_circle -> not-allowed
+│   │       │   ├── crosshair
+│   │       │   ├── default
+│   │       │   ├── dnd-copy -> copy
+│   │       │   ├── dnd-move
+│   │       │   ├── dnd-no-drop
+│   │       │   ├── dnd-none -> dnd-move
+│   │       │   ├── down-arrow
+│   │       │   ├── draft
+│   │       │   ├── e-resize -> size_hor
+│   │       │   ├── ew-resize -> size_hor
+│   │       │   ├── fleur
+│   │       │   ├── forbidden -> no-drop
+│   │       │   ├── grab -> openhand
+│   │       │   ├── grabbing -> closedhand
+│   │       │   ├── half-busy -> progress
+│   │       │   ├── hand1 -> pointer
+│   │       │   ├── hand2 -> pointer
+│   │       │   ├── h_double_arrow -> size_hor
+│   │       │   ├── help
+│   │       │   ├── ibeam
+│   │       │   ├── left-arrow
+│   │       │   ├── left_ptr -> default
+│   │       │   ├── left_ptr_help -> help
+│   │       │   ├── left_ptr_watch -> progress
+│   │       │   ├── left_side
+│   │       │   ├── link -> alias
+│   │       │   ├── move -> dnd-move
+│   │       │   ├── ne-resize -> size_bdiag
+│   │       │   ├── nesw-resize -> size_bdiag
+│   │       │   ├── no-drop
+│   │       │   ├── not-allowed
+│   │       │   ├── n-resize -> size_ver
+│   │       │   ├── ns-resize -> size_ver
+│   │       │   ├── nw-resize -> size_fdiag
+│   │       │   ├── nwse-resize -> size_fdiag
+│   │       │   ├── openhand
+│   │       │   ├── pencil
+│   │       │   ├── pirate
+│   │       │   ├── plus -> cell
+│   │       │   ├── pointer -> crosshair
+│   │       │   ├── pointing_hand -> pointer
+│   │       │   ├── progress
+│   │       │   ├── question_arrow -> help
+│   │       │   ├── right-arrow
+│   │       │   ├── right_ptr
+│   │       │   ├── right_side
+│   │       │   ├── row-resize
+│   │       │   ├── sb_h_double_arrow -> size_hor
+│   │       │   ├── sb_v_double_arrow -> size_ver
+│   │       │   ├── se-resize -> size_fdiag
+│   │       │   ├── size_all -> fleur
+│   │       │   ├── size-bdiag -> default
+│   │       │   ├── size_bdiag
+│   │       │   ├── size-fdiag -> default
+│   │       │   ├── size_fdiag
+│   │       │   ├── size-hor -> default
+│   │       │   ├── size_hor
+│   │       │   ├── size-ver -> default
+│   │       │   ├── size_ver
+│   │       │   ├── split_h -> col-resize
+│   │       │   ├── split_v -> row-resize
+│   │       │   ├── s-resize -> size_ver
+│   │       │   ├── sw-resize -> size_bdiag
+│   │       │   ├── tcross -> crosshair
+│   │       │   ├── text
+│   │       │   ├── top_left_arrow -> default
+│   │       │   ├── top_left_corner
+│   │       │   ├── top_right_corner
+│   │       │   ├── top_side
+│   │       │   ├── up-arrow
+│   │       │   ├── v_double_arrow -> size_ver
+│   │       │   ├── vertical-text
+│   │       │   ├── wait
+│   │       │   ├── watch -> wait
+│   │       │   ├── wayland-cursor
+│   │       │   ├── whats_this -> help
+│   │       │   ├── w-resize -> size_hor
+│   │       │   ├── x-cursor
+│   │       │   ├── xterm -> ibeam
+│   │       │   ├── zoom-in
+│   │       │   └── zoom-out
+│   │       └── index.theme
+│   ├── fish
+│   │   ├── config.fish
+│   │   └── themes
+│   │       └── rosepine.theme
+│   ├── foot
+│   │   └── foot.ini
+│   ├── fuzzel
+│   │   └── fuzzel.ini
+│   ├── hyprland
+│   │   ├── hypridle.conf
+│   │   ├── hyprland.conf
+│   │   └── hyprlock.conf
+│   ├── librewolf
+│   │   └── librewolf.overrides.cfg
+│   ├── micro
+│   │   ├── bindings.json
+│   │   ├── colorschemes
+│   │   │   ├── atom-glass.micro
+│   │   │   └── kinetic.micro
+│   │   └── settings.json
+│   ├── mpv
+│   │   └── mpv.conf
+│   ├── niri
+│   │   └── config.kdl
+│   ├── quickshell
+│   │   ├── Assets
+│   │   │   ├── nahidah.gif
+│   │   │   ├── nahidas.gif
+│   │   │   ├── NixOS.png
+│   │   │   ├── volumemute.svg
+│   │   │   └── volume.svg
+│   │   ├── Corners.txt
+│   │   ├── Data
+│   │   │   └── Colors.qml
+│   │   ├── Panels
+│   │   │   ├── Bar.qml
+│   │   │   └── Volume.qml
+│   │   ├── Properties
+│   │   │   └── Globals.qml
+│   │   ├── shell.qml
+│   │   └── Widgets
+│   │       ├── Battery.qml
+│   │       ├── ClockWidget.qml
+│   │       ├── Logo.qml
+│   │       └── Time.qml
+│   ├── uwsm
+│   │   └── env
+│   └── yazi
+│       └── init.lua
+├── flake.lock
+├── flake.nix
+├── hosts
+│   ├── beryl
+│   │   ├── battery.nix
+│   │   ├── configuration.nix
+│   │   └── hardware-configuration.nix
+│   ├── greenery
+│   │   ├── configuration.nix
+│   │   └── hardware-configuration.nix
+│   ├── quartz
+│   │   ├── configuration.nix
+│   │   └── hardware-configuration.nix
+│   └── vmmaker
+│       ├── beryl.nix
+│       └── quartz.nix
+├── LICENSE
+├── modules
+│   ├── default.nix
+│   ├── desktop
+│   │   ├── default.nix
+│   │   ├── gdm.nix
+│   │   ├── gnome.nix
+│   │   ├── hypridle.nix
+│   │   ├── hyprland.nix
+│   │   ├── hyprlock.nix
+│   │   ├── kurukurudm.nix
+│   │   ├── niri.nix
+│   │   ├── sddm.nix
+│   │   └── xserver.nix
+│   ├── hardware
+│   │   ├── amdgpu.nix
+│   │   ├── audio.nix
+│   │   ├── default.nix
+│   │   └── intelgpu.nix
+│   ├── networking
+│   │   ├── bluetooth.nix
+│   │   ├── default.nix
+│   │   ├── dnscrypt.nix
+│   │   ├── fail2ban.nix
+│   │   ├── openssh.nix
+│   │   ├── taildrive.nix
+│   │   └── tailscale.nix
+│   ├── programs
+│   │   ├── aagl.nix
+│   │   ├── browser.nix
+│   │   ├── default.nix
+│   │   ├── foot.nix
+│   │   ├── micro.nix
+│   │   ├── nixpkgs.nix
+│   │   ├── nvim.nix
+│   │   ├── steam.nix
+│   │   └── yazi.nix
+│   ├── server
+│   │   ├── default.nix
+│   │   ├── jellyfin.nix
+│   │   ├── manga.nix
+│   │   ├── minecraft
+│   │   │   ├── backupservice.archivenix
+│   │   │   ├── default.archivenix
+│   │   │   └── hollyj.archivenix
+│   │   └── nix-fabric-minecraft
+│   │       ├── configuration.archivenix
+│   │       └── default.archivenix
+│   └── system
+│       ├── default.nix
+│       ├── fish.nix
+│       ├── fonts.nix
+│       ├── input.nix
+│       ├── lanzaboote.nix
+│       ├── locale.nix
+│       ├── nix.nix
+│       └── sops.nix
+├── npins
+│   ├── default.nix
+│   └── sources.json
+├── pkgs
+│   └── cursors.nix
+└── README.MD
 ```
-Username: ```greenery```
-
-Initial Password: ```touchgrass```
-
-Beryl (BVM):
-```
-nix run github:MeeSumee/Greenery#nixosConfigurations.BVM.config.system.build.vm
-```
-Initial Password: ```berylline```
-
-Notes: Beryl VM (BVM) crashes in my own laptop using Niri. This could be a Rembrandt GPU issue.
+Commit: d49d2fc
 
 ## What mess have I created?
- I've made a new branch called quickshell-test where I "try" to mess around and get a quickshell bar working. My plan
- is to implement my bar (currently unnamed) for Niri with Niri Workspace support. I may add Hyprland support if deemed 
- necessary for Quartz.
-
- I'm transitioning towards npins, however, my repository remains flake dependent. As of right now, I currently use
- npins for non-flake repositories and future nix inputs.
+ I've fully moved away from flakes and instead use npins to mimic flakes.
 
  I'm setting up both Niri and Hyprland at the same time for two different systems (Crazy).
  Plan is to have Niri on my laptop with quickshell optimized for performance and Hyprland on my desktop with
  lots of features.
 
- I've abandoned MATLAB in favor of it's online version as well as having Octave for offline engineering.
-
- ASUS Trackpad Numpad driver now works with niri when switching Wayland Environment Variables in hardware-config.nix in Beryl.
-
  I've ditched sddm, explored greetd, got frustrated, then returned back to gdm and tried to poke at the source file to theme it.
- It has worked well and looks like this:
+ Then ditched gdm for Rexcrazy's own display manager, dubbed kurukuruDM.
 
- ![GDM](assets/GDM.png)
+ I've gotten lazy in writing READMEs so anyone can open a PR on updating or formatting the README to look pretty.
 
-The rest of the README are from the legacy README that I didn't bother reformatting.
+# Greenery
 
-## Japanese Keyboard IME ( 日本語 )
-For Japanese Input, add this to your config. Fonts and inputs are customizable.
-```bash
-  # Font Settings for both English and Japanese
-  fonts.packages = with pkgs; [
-    carlito
-    dejavu_fonts
-    ipafont
-    kochi-substitute
-    source-code-pro
-    ttf_bitstream_vera
-  ];
-  
-  # Enable fcitx for Input Method Editor (IME)
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-  };
-  
-  # Add and enable mozc as input method in fcitx. Good for JP input.
-  i18n.inputMethod.fcitx5 = {
-    addons = [ pkgs.fcitx5-mozc ];
-    
-    settings.inputMethod = {
-      "Groups/0" = {
-        "Name" = "Default";
-        "Default Layout" = "us";
-        "DefaultIM" = "mozc";
-      };
-      "Groups/0/Items/0" = {
-        "Name" = "keyboard-us";
-        "Layout" = null;
-      };
-      "Groups/0/Items/1" = {
-        "Name" = "mozc";
-        "Layout" = null;
-      };
-    };
-  };
-  
-  # Provides ibus for input method
-  environment.variables.GLFW_IM_MODULE = "ibus";
-```
+## Overview
+Used as exit node to evade work WiFi website blocks and other annoying things
+IT throws at me.
 
-My JP Keyboard Config can be used by anyone with a keyboard. Refer [here](https://search.nixos.org/options?channel=24.11&show=i18n.supportedLocales&size=50&sort=relevance&type=packages&query=i18n) for options.
+Enables me to read manga anywhere at anytime thanks to suwayomi and tailscale reverse-proxy.
 
-## Enabling USB4
+SSH services for file transfer and remote access. Enables sharing my 12TB hard drive (taildrive).
+
+Future Endeavors: Jellyfin for anime hosting, maybe implement nextcloud services. 
+
+# Beryl
+
+## Overview
+ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for managing nix configs whenever I'm not at home.
+
+Future Endeavors: Remote into quartz for gaming on the go or using workstation-based applications.
+
+## Enabling USB4 on Zenbook S13 OLED (UM5302TA)
 This is not recommended for most users as it involves "hacking" the
 BIOS. DO IT AT YOUR OWN RISK.
 
@@ -133,21 +376,21 @@ Note that there are three options when enabling USB4.
 To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
 Test your USB4 ports using boltctl, if there's instability, disable bolt service.
 
-# Greenery Rambling
-This server aims to be completely remote providing only ssh access from the devices I allow.
-This server is a multipurpose server that used to primarily serve as a minecraft server.
-It serves as a website host, manga/epub library host, as well as other services I can use
-for hosting in the future. This all would not be possible without tailscale.
+# Quartz
 
-## Tailscale
-Tailscale is integral to how the server operates and how I connect my devices.
-I've setup Greenery to act as an exit node to route all my traffic so my
-workplace doesn't fucking break websites and block me from pushing to git.
-I swear IT has been cracking down on what I've been meaning to use.
-The main files to look for are common/networking.nix and hosts/configuration.nix.
+## Quartz PC Specifications
+- CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
+- RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP) (Underclocked to 5600MHz due to RAM stability issues)
+- MB: [Gigabyte Z690 AORUS ELITE AX REV 1.4](https://www.gigabyte.com/Motherboard/Z690-AORUS-ELITE-AX-rev-14)
+- GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
 
-I also use Tailscale as a means to send files between my devices using Taildrop.
-This is why I ditched the original method of KDEConnect.
+## Overview
+
+Custom-built gaming pc intended for workstation and gaming.
+
+Intended to be used as my nix config manager while I'm at home.
+
+Future Endeavors: Remote desktop setup for devices in my tailnet to access, GPU-Passthrough Windows for Altium Designer or other niche high performance demanding applications.
 
 ## Credits
 [Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. I swear he needs a better PC.
@@ -163,13 +406,6 @@ I also want to thank the folks of UAFB who made USB4 possible.
 Lastly, I want to thank the Nix Community for its push for packages,
 maintainers, and hardware support. I haven't had this much fun in
 a while. Especially for coding cause I never get As in coding class.
-
-## Quartz PC Specifications
-Curious? Well, here ya go
-- CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
-- RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP) (Underclocked to 5600MHz due to RAM stability issues)
-- MB: [Gigabyte Z690 AORUS ELITE AX REV 1.4](https://www.gigabyte.com/Motherboard/Z690-AORUS-ELITE-AX-rev-14)
-- GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
 
 ## Licensing
 All code in this repository is under the MIT license unless wherever an
