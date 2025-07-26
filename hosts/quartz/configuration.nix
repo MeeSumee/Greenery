@@ -21,7 +21,8 @@
       gnome.enable = false;
       hypridle.enable = true;
       hyprland.enable = true;
-      hyprlock.enable = true;
+      hyprlock.enable = false;
+      kurukurudm.enable = true;
       niri.enable = false;
       xserver.enable = true;
 

@@ -3,6 +3,7 @@
   sources,
   config,
   users,
+  lib,
   ...
 }: let
   uwuToHypr = pkgs.runCommandLocal "quick" {} ''
@@ -16,23 +17,30 @@
     hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
   };
 in {
-  imports = [(sources.zaphkiel + "/nixosModules/exported/kurukuruDM.nix")];
+  
+  imports = [(sources.zaphkiel + "/nixosModules/exported/kurukuruDM.nix")];  
+  
+  options.greenery.desktop.kurukurudm.enable = lib.mkEnableOption "rex's desktop manager";
 
-  programs.kurukuruDM = {
-    enable = true;
-    package = pkgs.kurukurubar;
+  config = lib.mkIf (config.greenery.desktop.kurukurudm.enable && config.greenery.desktop.enable) {
 
-    settings = {
-      wallpaper = gothic_lolita_stalker;
-      default_user = builtins.elemAt users 0;
-      instantAuth = false;
-      extraConfig = ''
-        monitor = DP-1, 3840x2160, 1920x0, 2
-        monitor = DP-2, 1920x1080, 0x0, 1
-        # night light
-        exec-once = wlsunset -T 3000 -t 2999
-        source = ${uwuToHypr}
-      '';
+    # More rexware, main imports from nixpkgs.nix
+    programs.kurukuruDM = {
+      enable = true;
+      package = pkgs.kurukurubar;
+
+      settings = {
+        wallpaper = gothic_lolita_stalker;
+        default_user = builtins.elemAt users 0;
+        instantAuth = false;
+        extraConfig = ''
+          monitor = DP-1, 3840x2160, 1920x0, 2
+          monitor = DP-2, 1920x1080, 0x0, 1
+          # night light
+          exec-once = wlsunset -T 3000 -t 2999
+          source = ${uwuToHypr}
+        '';
+      };
     };
   };
 }

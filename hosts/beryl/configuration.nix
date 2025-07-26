@@ -22,6 +22,7 @@
       hypridle.enable = true;
       hyprland.enable = false;
       hyprlock.enable = true;
+      kurukurudm.enable = true;
       niri.enable = true;
       xserver.enable = true;
 
