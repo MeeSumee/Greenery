@@ -194,6 +194,7 @@ in {
       fishPlugins.hydro
       eza
       fish-lsp
+      babelfish
     ];
   };
 }
