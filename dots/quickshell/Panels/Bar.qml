@@ -46,17 +46,7 @@ WlrLayershell {
 		anchors.horizontalCenter: parent.horizontalCenter
 		bottomLeftRadius: 25; bottomRightRadius: 25
 		clip: true
-		state: "HIDDEN"
-
-		MouseArea {
-			id: barArea
-			anchors.fill: parent 
-			hoverEnabled: true
-			onExited: barfull.state = "HIDDEN"
-			onEntered: barfull.state = "SHOWN"
-			onClicked: (barfull.state != "FULL")?"FULL":"SHOWN"
-		}
-		
+		state: "HIDDEN"	
 
 		states: [
 			State {
@@ -84,7 +74,16 @@ WlrLayershell {
 				}
 			}
 		]
-/*
+
+		MouseArea {
+			id: barArea
+			anchors.fill: parent 
+			hoverEnabled: true
+			onExited: barfull.state = "HIDDEN"
+			onEntered: barfull.state = "SHOWN"
+			onClicked: (barfull.state != "FULL") ? "FULL" : "SHOWN"
+		}
+		
 		transitions: [
 			Transition {
 				from: "HIDDEN"
@@ -191,6 +190,5 @@ WlrLayershell {
 				}
 			}
 		]
-*/
 	}
 }
