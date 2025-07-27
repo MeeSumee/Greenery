@@ -79,9 +79,9 @@ WlrLayershell {
 			id: barArea
 			anchors.fill: parent 
 			hoverEnabled: true
-			onExited: barfull.state = "HIDDEN"
-			onEntered: barfull.state = "SHOWN"
-			onClicked: (barfull.state != "FULL") ? "FULL" : "SHOWN"
+			onExited: barfull.state = (barfull.state == "FULL") ? "FULL" : "HIDDEN"
+			onEntered: barfull.state = (barfull.state == "FULL") ? "FULL" : "SHOWN"
+			onClicked: barfull.state = (barfull.state !== "FULL") ? "FULL" : "SHOWN"
 		}
 		
 		transitions: [
@@ -153,11 +153,6 @@ WlrLayershell {
 				to: "HIDDEN"
 
 				SequentialAnimation {
-					
-					PropertyAction {
-						property: "opacity"
-						target: barfull
-					}
 
 					ParallelAnimation {
 						NumberAnimation {
@@ -165,6 +160,11 @@ WlrLayershell {
 							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
 							target: barfull
 						}
+					}
+
+					PropertyAction {
+						property: "opacity"
+						target: barfull
 					}
 				}
 			},
@@ -174,11 +174,6 @@ WlrLayershell {
 				to: "HIDDEN"
 
 				SequentialAnimation {
-					
-					PropertyAction {
-						property: "opacity"
-						target: barfull
-					}
 
 					ParallelAnimation {
 						NumberAnimation {
@@ -186,6 +181,11 @@ WlrLayershell {
 							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
 							target: barfull
 						}
+					}
+					
+					PropertyAction {
+						property: "opacity"
+						target: barfull
 					}
 				}
 			}
