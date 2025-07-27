@@ -127,18 +127,6 @@
           };
         };
       }];
-      
-      # Kurukuru bar and friends
-      nixpkgs.overlays = [
-        (final: prev: {
-          # essentially creates a new package called kurukuru bar
-          kurukurubar = final.callPackage (sources.zaphkiel + "/pkgs/kurukurubar.nix") {
-            librebarcode = final.callPackage (sources.zaphkiel + "/pkgs/librebarcode.nix") {};
-            gpurecording = final.callPackage (sources.zaphkiel + "/pkgs/scripts/gpurecording.nix") {};
-            quickshell = final.callPackage (sources.quickshell) {};
-          };
-        })
-      ];
     })
 
     # Engineering and projects

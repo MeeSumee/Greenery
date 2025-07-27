@@ -16,18 +16,20 @@
     url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
     hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
   };
+
+  zaphkiel = import sources.zaphkiel {
+    inherit (sources) nixpkgs;
+  };
 in {
-  
-  imports = [(sources.zaphkiel + "/nixosModules/exported/kurukuruDM.nix")];  
-  
+  imports = [zaphkiel.nixosModules.kurukuruDM];
+
   options.greenery.desktop.kurukurudm.enable = lib.mkEnableOption "rex's desktop manager";
 
   config = lib.mkIf (config.greenery.desktop.kurukurudm.enable && config.greenery.desktop.enable) {
-
     # More rexware, main imports from nixpkgs.nix
     programs.kurukuruDM = {
       enable = true;
-      package = pkgs.kurukurubar;
+      package = zaphkiel.packages.kurukurubar-unstable;
 
       settings = {
         wallpaper = gothic_lolita_stalker;
@@ -44,3 +46,4 @@ in {
     };
   };
 }
+
