@@ -48,6 +48,44 @@ WlrLayershell {
 		clip: true
 		state: "HIDDEN"	
 
+
+		RowLayout {
+			anchors.fill: parent
+
+			Item {
+				Layout.fillHeight: true
+				Layout.fillWidth: true
+
+				Wid.Logo {
+					Layout.alignment: Qt.AlignTop
+				}
+			}
+
+			Item {
+				Layout.fillHeight: true
+				Layout.fillWidth: true
+				Layout.topMargin: 5
+			    anchors.horizontalCenter: parent.horizontalCenter
+
+				Wid.ClockWidget {
+					Layout.alignment: Qt.AlignTop
+					anchors.horizontalCenter: parent.horizontalCenter
+				}
+			}
+
+			Item {
+				Layout.fillHeight: true
+				Layout.fillWidth: true
+				Layout.topMargin: 5
+			    anchors.horizontalCenter: parent.horizontalCenter
+
+				Wid.Battery {
+					Layout.alignment: Qt.AlignTop
+					anchors.horizontalCenter: parent.horizontalCenter
+				}
+			}
+		}
+
 		states: [
 			State {
 				name: "HIDDEN";
