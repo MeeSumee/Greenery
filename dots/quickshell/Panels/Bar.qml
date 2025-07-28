@@ -7,6 +7,7 @@ import Quickshell.Wayland
 import "../Widgets" as Wid
 import "../Data" as Dat
 import "../Properties" as Prop
+import "../Panels" as Pan
 
 WlrLayershell {
 	id: bar
@@ -34,19 +35,20 @@ WlrLayershell {
 	Rectangle {
 		id: barfull
 
+		property string actWinName: activeWindow?.activated ? activeWindow?.appId : "desktop"
+		readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
 		readonly property int hiddenHeight: 1
-		readonly property int hiddenWidth: 300
+		readonly property int hiddenWidth: 500
 		readonly property int shownHeight: 30
 		readonly property int shownWidth: 1000
 		readonly property int fullHeight: 400
 		readonly property int fullWidth: this.shownWidth
 
-
 		color: Dat.Colors.background
 		anchors.horizontalCenter: parent.horizontalCenter
 		bottomLeftRadius: 25; bottomRightRadius: 25
 		clip: true
-		state: "HIDDEN"	
+		state: barfull.state = (barfull.actWinName == "desktop") ? "SHOWN" : "HIDDEN"	
 
 
 		RowLayout {
@@ -65,11 +67,13 @@ WlrLayershell {
 				Layout.fillHeight: true
 				Layout.fillWidth: true
 				Layout.topMargin: 5
-			    anchors.horizontalCenter: parent.horizontalCenter
+				anchors.horizontalCenter: parent.horizontalCenter
 
 				Wid.ClockWidget {
-					Layout.alignment: Qt.AlignTop
 					anchors.horizontalCenter: parent.horizontalCenter
+				} 
+
+				Pan.Panel {
 				}
 			}
 
@@ -77,10 +81,9 @@ WlrLayershell {
 				Layout.fillHeight: true
 				Layout.fillWidth: true
 				Layout.topMargin: 5
-			    anchors.horizontalCenter: parent.horizontalCenter
+				anchors.right:parent.right
 
 				Wid.Battery {
-					Layout.alignment: Qt.AlignTop
 					anchors.horizontalCenter: parent.horizontalCenter
 				}
 			}
@@ -139,6 +142,7 @@ WlrLayershell {
 							properties: "opacity, width, height"
 							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
 							target: barfull
+							duration: 400
 						}
 					}
 				}
@@ -197,6 +201,7 @@ WlrLayershell {
 							properties: "opacity, width, height"
 							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
 							target: barfull
+							duration: 700
 						}
 					}
 
@@ -214,10 +219,12 @@ WlrLayershell {
 				SequentialAnimation {
 
 					ParallelAnimation {
+
 						NumberAnimation {
 							properties: "opacity, width, height"
 							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
 							target: barfull
+							duration: 700
 						}
 					}
 					
