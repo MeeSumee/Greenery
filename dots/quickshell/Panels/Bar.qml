@@ -50,6 +50,15 @@ WlrLayershell {
 		clip: true
 		state: barfull.state = (barfull.actWinName == "desktop") ? "SHOWN" : "HIDDEN"	
 
+		MouseArea {
+			id: barArea
+			anchors.fill: parent 
+			hoverEnabled: true
+			preventStealing: true
+			onExited: barfull.state = (barfull.state == "FULL") ? "FULL" : "HIDDEN"
+			onEntered: barfull.state = (barfull.state == "FULL") ? "FULL" : "SHOWN"
+			onClicked: barfull.state = (barfull.state !== "FULL") ? "FULL" : "SHOWN"
+		}
 
 		RowLayout {
 			anchors.fill: parent
@@ -74,6 +83,7 @@ WlrLayershell {
 				} 
 
 				Pan.Panel {
+					
 				}
 			}
 
@@ -115,15 +125,6 @@ WlrLayershell {
 				}
 			}
 		]
-
-		MouseArea {
-			id: barArea
-			anchors.fill: parent 
-			hoverEnabled: true
-			onExited: barfull.state = (barfull.state == "FULL") ? "FULL" : "HIDDEN"
-			onEntered: barfull.state = (barfull.state == "FULL") ? "FULL" : "SHOWN"
-			onClicked: barfull.state = (barfull.state !== "FULL") ? "FULL" : "SHOWN"
-		}
 		
 		transitions: [
 			Transition {

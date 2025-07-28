@@ -35,7 +35,8 @@ Rectangle {
                     id: menulist
 
                     anchors.fill: parent
-                    
+
+                // HOW DO I MAKE A FUCKING BUTTON
                 }
             }
         }
