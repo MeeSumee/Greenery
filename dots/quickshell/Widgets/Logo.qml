@@ -2,12 +2,23 @@
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
+import QtQuick.Effects
+import "../Data" as Dat
 
 IconImage {
     id: root
 
     implicitHeight: 30
     implicitWidth: 30
+
+    smooth: true
+    asynchronous: true
+    layer.enabled: true
+    layer.effect: MultiEffect {
+        colorization: 1
+        colorizationColor: Dat.Colors.foreground
+        brightness: 0.5
+    }
 
     Process {
         running: true

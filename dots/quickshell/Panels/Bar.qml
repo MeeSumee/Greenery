@@ -52,9 +52,13 @@ WlrLayershell {
 
 		MouseArea {
 			id: barArea
-			anchors.fill: parent 
+			anchors.top: parent.top
+			height: 30
+			width: 1000
+
 			hoverEnabled: true
 			preventStealing: true
+
 			onExited: barfull.state = (barfull.state == "FULL") ? "FULL" : "HIDDEN"
 			onEntered: barfull.state = (barfull.state == "FULL") ? "FULL" : "SHOWN"
 			onClicked: barfull.state = (barfull.state !== "FULL") ? "FULL" : "SHOWN"
@@ -141,7 +145,7 @@ WlrLayershell {
 					ParallelAnimation {
 						NumberAnimation {
 							properties: "opacity, width, height"
-							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
+							easing.bezierCurve: Dat.MaterialEasing.emphasized
 							target: barfull
 							duration: 400
 						}
@@ -163,7 +167,7 @@ WlrLayershell {
 					ParallelAnimation {
 						NumberAnimation {
 							properties: "opacity, width, height"
-							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
+							easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
 							target: barfull
 						}
 					}
@@ -184,7 +188,7 @@ WlrLayershell {
 					ParallelAnimation {
 						NumberAnimation {
 							properties: "opacity, width, height"
-							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
+							easing.bezierCurve: Dat.MaterialEasing.emphasized
 							target: barfull
 						}
 					}
@@ -200,7 +204,7 @@ WlrLayershell {
 					ParallelAnimation {
 						NumberAnimation {
 							properties: "opacity, width, height"
-							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
+							easing.bezierCurve: Dat.MaterialEasing.emphasized
 							target: barfull
 							duration: 700
 						}
@@ -223,7 +227,7 @@ WlrLayershell {
 
 						NumberAnimation {
 							properties: "opacity, width, height"
-							easing.bezierCurve: [0.2, 0, 0, 1, 1, 1]
+							easing.bezierCurve: Dat.MaterialEasing.emphasized
 							target: barfull
 							duration: 700
 						}
