@@ -10,7 +10,8 @@ import "../Properties" as Prop
 Rectangle {
     id: system
 
-    anchors.fill: parent
+    Layout.fillHeight: true
+    Layout.fillWidth: true
 
     color: "#64535a10"
 

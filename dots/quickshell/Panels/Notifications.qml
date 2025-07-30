@@ -10,7 +10,8 @@ import "../Properties" as Prop
 Rectangle {
     id: notifications
 
-    anchors.fill: parent
+    Layout.fillHeight: true
+    Layout.fillWidth: true
 
     color: "#8000fffb"
 

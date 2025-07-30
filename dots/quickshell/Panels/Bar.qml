@@ -44,7 +44,7 @@ WlrLayershell {
 		readonly property int fullHeight: 400
 		readonly property int fullWidth: this.shownWidth
 
-		color: Dat.Colors.background
+		color: Dat.Colors.withAlpha(Dat.Colors.background, 0.80)
 		anchors.horizontalCenter: parent.horizontalCenter
 		bottomLeftRadius: 25; bottomRightRadius: 25
 		clip: true
@@ -54,7 +54,7 @@ WlrLayershell {
 			id: barArea
 			anchors.top: parent.top
 			height: 30
-			width: 1000
+			width: parent.width
 
 			hoverEnabled: true
 			preventStealing: true
@@ -73,6 +73,8 @@ WlrLayershell {
 
 				Wid.Logo {
 					Layout.alignment: Qt.AlignTop
+					implicitHeight: 30
+					implicitWidth: 30
 				}
 			}
 
@@ -80,7 +82,6 @@ WlrLayershell {
 				Layout.fillHeight: true
 				Layout.fillWidth: true
 				Layout.topMargin: 5
-				anchors.horizontalCenter: parent.horizontalCenter
 
 				Wid.ClockWidget {
 					anchors.horizontalCenter: parent.horizontalCenter
@@ -95,10 +96,9 @@ WlrLayershell {
 				Layout.fillHeight: true
 				Layout.fillWidth: true
 				Layout.topMargin: 5
-				anchors.right:parent.right
 
 				Wid.Battery {
-					anchors.horizontalCenter: parent.horizontalCenter
+					anchors.right: parent.right
 				}
 			}
 		}
@@ -115,7 +115,7 @@ WlrLayershell {
 			State {
 				name: "SHOWN";
 				PropertyChanges { 
-					barfull.opacity: 0.98
+					barfull.opacity: 1
 					barfull.height: barfull.shownHeight
 					barfull.width: barfull.shownWidth
 				}
@@ -123,7 +123,7 @@ WlrLayershell {
 			State {
 				name: "FULL";
 				PropertyChanges { 
-					barfull.opacity: 0.98
+					barfull.opacity: 1
 					barfull.height: barfull.fullHeight
 					barfull.width: barfull.fullWidth
 				}

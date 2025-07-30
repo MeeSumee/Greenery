@@ -10,9 +10,10 @@ import "../Properties" as Prop
 Rectangle {
     id: dashboard
 
-    anchors.fill: parent
+    Layout.fillHeight: true
+    Layout.fillWidth: true
 
-    color: "teal"
+    color: "transparent"
 
     GridLayout {
         id: dashgrid
@@ -41,17 +42,27 @@ Rectangle {
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
+            height: 340
             width: 350
-            color: "pink"
         }
 
         Rectangle {
             Layout.rowSpan: 2
-
-            height: 330
+            height: 340
             width: 300
-            color: "black"
+            radius: 20
+            color: Dat.Colors.background
+            opacity: 0.9
+
+            border {
+                width: 1
+                color: Dat.Colors.foreground
+            }
+
+            Wid.Calendar {
+                height: parent.height
+                width: parent.width
+            }
         }
     }
 }

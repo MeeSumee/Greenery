@@ -8,9 +8,6 @@ import "../Data" as Dat
 IconImage {
     id: root
 
-    implicitHeight: 30
-    implicitWidth: 30
-
     smooth: true
     asynchronous: true
     layer.enabled: true

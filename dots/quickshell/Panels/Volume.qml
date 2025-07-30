@@ -54,7 +54,14 @@ Scope {
 				anchors.fill: parent
 				radius: height / 2
 				color: Dat.Colors.background
-                opacity: 0.8
+				opacity: (root.shouldShowOsd == true) ? 0.8 : 0
+
+				Behavior on opacity {
+					NumberAnimation {
+						duration: Dat.MaterialEasing.standardAccelTime
+						easing.bezierCurve: Dat.MaterialEasing.standardAccel
+					}
+				}
 
 				RowLayout {
 					anchors {

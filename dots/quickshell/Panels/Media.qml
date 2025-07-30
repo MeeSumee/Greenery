@@ -10,7 +10,8 @@ import "../Properties" as Prop
 Rectangle {
     id: media
 
-    anchors.fill: parent
+    Layout.fillHeight: true
+    Layout.fillWidth: true
 
     color: "#800000FF"
 

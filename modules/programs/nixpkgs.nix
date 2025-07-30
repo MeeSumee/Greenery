@@ -82,6 +82,7 @@
         quickshell                      # QUICKSHELL. GUYS, IT'S QUICK!
         swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
+        khal                            # CLI Calendar dependency for banshell
 
         # Cursor Package
         (pkgs.callPackage ../../pkgs/cursors.nix {})      
