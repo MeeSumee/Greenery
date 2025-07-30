@@ -8,14 +8,14 @@ import "../Data" as Dat
 import "../Properties" as Prop
 
 Rectangle {
-    id: dashboard
+    id: media
 
     anchors.fill: parent
 
-    color: "teal"
+    color: "#800000FF"
 
     GridLayout {
-        id: dashgrid
+        id: mediagrid
         anchors.margins: 6        
         anchors.fill: parent
         flow: GridLayout.TopToBottom
@@ -26,7 +26,7 @@ Rectangle {
             Layout.rowSpan: 1
 
             height: 160
-            width: 250
+            width: 600
             color: "magenta"
         }
 
@@ -34,7 +34,7 @@ Rectangle {
             Layout.rowSpan: 1
 
             height: 160
-            width: 250
+            width: 600
             color: "gold"
         }
 
@@ -42,16 +42,8 @@ Rectangle {
             Layout.rowSpan: 2
 
             height: 330
-            width: 350
-            color: "pink"
-        }
-
-        Rectangle {
-            Layout.rowSpan: 2
-
-            height: 330
             width: 300
-            color: "black"
+            color: "lime"
         }
     }
 }

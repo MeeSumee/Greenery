@@ -8,14 +8,14 @@ import "../Data" as Dat
 import "../Properties" as Prop
 
 Rectangle {
-    id: dashboard
+    id: notifications
 
     anchors.fill: parent
 
-    color: "teal"
+    color: "#8000fffb"
 
     GridLayout {
-        id: dashgrid
+        id: notifgrid
         anchors.margins: 6        
         anchors.fill: parent
         flow: GridLayout.TopToBottom
@@ -23,27 +23,11 @@ Rectangle {
         columnSpacing: 5
 
         Rectangle {
-            Layout.rowSpan: 1
-
-            height: 160
-            width: 250
-            color: "magenta"
-        }
-
-        Rectangle {
-            Layout.rowSpan: 1
-
-            height: 160
-            width: 250
-            color: "gold"
-        }
-
-        Rectangle {
             Layout.rowSpan: 2
 
             height: 330
-            width: 350
-            color: "pink"
+            width: 600
+            color: "coral"
         }
 
         Rectangle {
@@ -51,7 +35,7 @@ Rectangle {
 
             height: 330
             width: 300
-            color: "black"
+            color: "bisque"
         }
     }
 }

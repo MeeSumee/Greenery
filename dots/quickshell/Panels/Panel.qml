@@ -42,7 +42,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
 
-//                    onClicked: loadDash.item.visible = !loadDash.item.visible
+                    onClicked: content.currentIndex = 0
                 }
             }
 
@@ -54,6 +54,12 @@ Rectangle {
                 width: parent.width
 
                 color: "orange"
+                
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: content.currentIndex = 1
+                }
             }
 
             Rectangle {
@@ -64,6 +70,12 @@ Rectangle {
                 width: parent.width
 
                 color: "yellow"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: content.currentIndex = 2
+                }
             }
 
             Rectangle {
@@ -74,6 +86,12 @@ Rectangle {
                 width: parent.width
 
                 color: "green"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: content.currentIndex = 3
+                }
             }
 
             Rectangle {
@@ -84,6 +102,12 @@ Rectangle {
                 width: parent.width
 
                 color: "blue"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: content.currentIndex = 4
+                }
             }
 
             Rectangle {
@@ -95,7 +119,39 @@ Rectangle {
                 width: parent.width
 
                 color: "purple"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: content.currentIndex = 5
+                }
             }
+        }
+    }
+
+    // Content
+    Item {
+        anchors.margins: 10        
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        implicitHeight: parent.implicitHeight - 20
+        implicitWidth: 920.5
+
+        StackLayout {
+            id: content
+            anchors.fill: parent
+
+            Pan.Dashboard {}
+
+            Pan.Media {}
+
+            Pan.Notifications {}
+
+            Pan.System {}
+
+            Pan.Performance {}
+
+            Pan.Settings {}
         }
     }
 }
