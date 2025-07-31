@@ -87,19 +87,13 @@ WlrLayershell {
 					anchors.horizontalCenter: parent.horizontalCenter
 				} 
 
-				Pan.Panel {
-					
-				}
+				Pan.Panel {}
 			}
 
 			Item {
 				Layout.fillHeight: true
 				Layout.fillWidth: true
 				Layout.topMargin: 5
-
-				Wid.Battery {
-					anchors.right: parent.right
-				}
 			}
 		}
 
