@@ -3,9 +3,9 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
-import "../Widgets" as Wid
-import "../Data" as Dat
-import "../Panels" as Pan
+import qs.Widgets as Wid
+import qs.Data as Dat
+import qs.Panels as Pan
 
 Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter

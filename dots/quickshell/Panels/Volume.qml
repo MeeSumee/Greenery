@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
-import "../Data" as Dat
+import qs.Data as Dat
 
 Scope {
 	id: root
@@ -42,6 +42,7 @@ Scope {
 
 			anchors.bottom: true
 			margins.bottom: screen.height / 5
+			exclusiveZone: 0
 
 			implicitWidth: 400
 			implicitHeight: 50
@@ -53,15 +54,7 @@ Scope {
 			Rectangle {
 				anchors.fill: parent
 				radius: height / 2
-				color: Dat.Colors.background
-				opacity: (root.shouldShowOsd == true) ? 0.8 : 0
-
-				Behavior on opacity {
-					NumberAnimation {
-						duration: Dat.MaterialEasing.standardAccelTime
-						easing.bezierCurve: Dat.MaterialEasing.standardAccel
-					}
-				}
+				color: Dat.Colors.withAlpha(Dat.Colors.background, 0.5)
 
 				RowLayout {
 					anchors {
@@ -70,9 +63,12 @@ Scope {
 						rightMargin: 15
 					}
 
-					IconImage {
-						implicitSize: 32						
-                        source: Qt.resolvedUrl("../Assets/volume.svg")
+					Dat.MaterialSymbols {
+						id: volumeUp
+						font.pixelSize: 30
+						font.bold: false
+						color: Dat.Colors.foreground
+						icon: "volume_up"
 					}
 
 					Rectangle {
@@ -81,15 +77,15 @@ Scope {
 
 						implicitHeight: 10
 						radius: 20
-						color: "#50ffffff"
+						color: Dat.Colors.foreground
 
 						Rectangle {
-                            color: Dat.Colors.foreground
 							anchors {
 								left: parent.left
 								top: parent.top
 								bottom: parent.bottom
 							}
+							color: Dat.Colors.background
 
 							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
 							radius: parent.radius

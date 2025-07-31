@@ -4,10 +4,9 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 import Quickshell.Wayland
-import "../Widgets" as Wid
-import "../Data" as Dat
-import "../Properties" as Prop
-import "../Panels" as Pan
+import qs.Widgets as Wid
+import qs.Data as Dat
+import qs.Panels as Pan
 
 WlrLayershell {
 	id: bar

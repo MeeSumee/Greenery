@@ -3,9 +3,8 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
-import "../Widgets" as Wid
-import "../Data" as Dat
-import "../Properties" as Prop
+import qs.Widgets as Wid
+import qs.Data as Dat
 
 Rectangle {
     id: dashboard

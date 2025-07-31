@@ -1,6 +1,6 @@
 import Quickshell
 import QtQuick
-import "Panels"
+import qs.Panels
 
 Scope {
     Bar{}
