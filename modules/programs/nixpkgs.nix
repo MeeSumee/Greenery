@@ -36,11 +36,6 @@
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
         npins                           # sources manager and replaces my flakes
-
-        # npins-show command script
-        (pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/npins-show.nix") {
-          writeAwk = pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/writeAwkScript.nix") {};
-        })
       ];
 
       # Enables intel gpu monitoring
@@ -79,7 +74,6 @@
         wl-screenrec                    # screen recorder
         brightnessctl                   # brightness ctl
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
-        quickshell                      # QUICKSHELL. GUYS, IT'S QUICK!
         swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
         khal                            # CLI Calendar dependency for banshell
@@ -128,18 +122,6 @@
           };
         };
       }];
-      
-      # Kurukuru bar and friends
-      nixpkgs.overlays = [
-        (final: prev: {
-          # essentially creates a new package called kurukuru bar
-          kurukurubar = final.callPackage (sources.zaphkiel + "/pkgs/kurukurubar.nix") {
-            librebarcode = final.callPackage (sources.zaphkiel + "/pkgs/librebarcode.nix") {};
-            gpurecording = final.callPackage (sources.zaphkiel + "/pkgs/scripts/gpurecording.nix") {};
-            quickshell = final.callPackage (sources.quickshell) {};
-          };
-        })
-      ];
     })
 
     # Engineering and projects

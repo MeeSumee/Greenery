@@ -153,19 +153,6 @@
       "url": "https://github.com/andir/npins/archive/afa9fe50cb0bff9ba7e9f7796892f71722b2180d.tar.gz",
       "hash": "1cl77vcs120jvmrxlczf7q2xdkgc237ywd11mr0qly9xr405i9qg"
     },
-    "quickshell": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "Rexcrazy804",
-        "repo": "quickshell"
-      },
-      "branch": "greetd-fix",
-      "submodules": false,
-      "revision": "efc949fe8e1788b46379920601791e52b5e7d29b",
-      "url": "https://github.com/Rexcrazy804/quickshell/archive/efc949fe8e1788b46379920601791e52b5e7d29b.tar.gz",
-      "hash": "1l2z1xmi3q7fm6nlhpi57cdmcx40yrigjn4ib4sw1pnlidy1ngm0"
-    },
     "rust-overlay": {
       "type": "Git",
       "repository": {
@@ -177,7 +164,8 @@
       "submodules": false,
       "revision": "7ae12d14d6bb74acfadf31e17a204d928eaf77b8",
       "url": "https://github.com/oxalica/rust-overlay/archive/7ae12d14d6bb74acfadf31e17a204d928eaf77b8.tar.gz",
-      "hash": "1n2r78nb1b1lx6vd65gnd9chfvkcj1ailjy2p9wwi1i56qlkqvwn"
+      "hash": "1n2r78nb1b1lx6vd65gnd9chfvkcj1ailjy2p9wwi1i56qlkqvwn",
+      "frozen": true
     },
     "sops": {
       "type": "Git",
@@ -199,11 +187,11 @@
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel"
       },
-      "branch": "kurukuru-greeter",
+      "branch": "master",
       "submodules": false,
-      "revision": "ac3bb0294b40faa9b182a52cb10d2e8bf27e83c5",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/ac3bb0294b40faa9b182a52cb10d2e8bf27e83c5.tar.gz",
-      "hash": "0gs22srmh87xpsl0bdyrrqggyqzva963g0d5b87szpqp5yd42qdj"
+      "revision": "65a7665ad9db7ccdf4c888c526f4518a457c2cb4",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/65a7665ad9db7ccdf4c888c526f4518a457c2cb4.tar.gz",
+      "hash": "15faqccwlfckw9rcx2mhs9qhbny0ixxdqlkflsiw0g8diiddl924"
     }
   },
   "version": 5
