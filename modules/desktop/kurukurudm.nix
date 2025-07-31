@@ -26,10 +26,16 @@ in {
   options.greenery.desktop.kurukurudm.enable = lib.mkEnableOption "rex's desktop manager";
 
   config = lib.mkIf (config.greenery.desktop.kurukurudm.enable && config.greenery.desktop.enable) {
+
+    # Add npins-show command for convenience
+    environment.systemPackages = with pkgs; [
+      zaphkiel.packages.scripts.npins-show
+      kurukurubar-unstable
+    ];
+
     # More rexware, main imports from nixpkgs.nix
     programs.kurukuruDM = {
       enable = true;
-      package = zaphkiel.packages.kurukurubar-unstable;
 
       settings = {
         wallpaper = gothic_lolita_stalker;

@@ -36,11 +36,6 @@
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
         npins                           # sources manager and replaces my flakes
-
-        # npins-show command script
-        (pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/npins-show.nix") {
-          writeAwk = pkgs.callPackage (sources.zaphkiel + "/pkgs/scripts/writeAwkScript.nix") {};
-        })
       ];
 
       # Enables intel gpu monitoring
@@ -79,7 +74,6 @@
         wl-screenrec                    # screen recorder
         brightnessctl                   # brightness ctl
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
-        quickshell                      # QUICKSHELL. GUYS, IT'S QUICK!
         swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
 
