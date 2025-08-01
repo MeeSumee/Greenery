@@ -136,8 +136,8 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre831064.6e987485eb2c/nixexprs.tar.xz",
-      "hash": "sha256-okomYyezDlua8/ssPHEdE2/gC1r+MElosWlZQuFrIdQ=",
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre837094.94def634a204/nixexprs.tar.xz",
+      "hash": "0z81pz46gzfsyvyq1mskcrmlns787pv54c2fw0pgci4nzb7h8q0z",
       "frozen": true
     },
     "npins": {
@@ -189,9 +189,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "65a7665ad9db7ccdf4c888c526f4518a457c2cb4",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/65a7665ad9db7ccdf4c888c526f4518a457c2cb4.tar.gz",
-      "hash": "15faqccwlfckw9rcx2mhs9qhbny0ixxdqlkflsiw0g8diiddl924"
+      "revision": "d0b4a6830050afca25f11df9521e45160d2eb530",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/d0b4a6830050afca25f11df9521e45160d2eb530.tar.gz",
+      "hash": "1v14m853y96i89m237va7dvp6sdfml6gnlsndfgnijap6dlsp210"
     }
   },
   "version": 5
