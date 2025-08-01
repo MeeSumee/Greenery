@@ -28,6 +28,11 @@ Rectangle {
             height: 330
             width: 600
             color: "gray"
+
+            Text {
+                anchors.centerIn: parent
+                text: "WORKSPACES AND APP SWITCHER"
+            }
         }
 
         Rectangle {
@@ -36,6 +41,11 @@ Rectangle {
             height: 330
             width: 300
             color: "azure"
+
+            Text {
+                anchors.centerIn: parent
+                text: "SYSTEM PROFILE"
+            }
         }
     }
 }

@@ -85,7 +85,7 @@ Scope {
 								top: parent.top
 								bottom: parent.bottom
 							}
-							color: Dat.Colors.background
+							color: "#686868"
 
 							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
 							radius: parent.radius

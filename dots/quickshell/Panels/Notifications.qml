@@ -28,6 +28,11 @@ Rectangle {
             height: 330
             width: 600
             color: "coral"
+
+            Text {
+                anchors.centerIn: parent
+                text: "NOTIFICATIONS"
+            }
         }
 
         Rectangle {
@@ -36,6 +41,11 @@ Rectangle {
             height: 330
             width: 300
             color: "bisque"
+
+            Text {
+                anchors.centerIn: parent
+                text: "NOTIFICATION SETTINGS"
+            }
         }
     }
 }

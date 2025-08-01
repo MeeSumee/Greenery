@@ -19,7 +19,7 @@ WlrLayershell {
 	color: "transparent"
 	exclusionMode: ExclusionMode.Ignore
 	focusable: false
-	implicitHeight: screen.height * 0.65
+	implicitHeight: screen.height * 0.4
 	layer: WlrLayer.Top
 	namespace: "sumee.bar.quickshell"
 	screen: modelData
@@ -69,18 +69,22 @@ WlrLayershell {
 			Item {
 				Layout.fillHeight: true
 				Layout.fillWidth: true
+				Layout.topMargin: 1
+				Layout.leftMargin: 3
 
 				Wid.Logo {
 					Layout.alignment: Qt.AlignTop
-					implicitHeight: 30
-					implicitWidth: 30
+					implicitHeight: 25
+					implicitWidth: 25
 				}
 			}
 
+// Apparently adding horizontalCenter twice stops the jittering of ClockWidget, but appears as warning
 			Item {
 				Layout.fillHeight: true
 				Layout.fillWidth: true
-				Layout.topMargin: 5
+				Layout.topMargin: 3
+				anchors.horizontalCenter: parent.horizontalCenter
 
 				Wid.ClockWidget {
 					anchors.horizontalCenter: parent.horizontalCenter

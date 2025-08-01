@@ -23,26 +23,23 @@ Rectangle {
         columnSpacing: 5
 
         Rectangle {
-            Layout.rowSpan: 1
-
-            height: 160
-            width: 250
-            color: "magenta"
-        }
-
-        Rectangle {
-            Layout.rowSpan: 1
-
-            height: 160
-            width: 250
-            color: "gold"
-        }
-
-        Rectangle {
             Layout.rowSpan: 2
 
             height: 340
-            width: 350
+            width: 270
+            color: "gold"
+
+            Text {
+                id: text1
+                anchors.centerIn: parent
+                text: "SYSTEM TRAY, SHUTDOWN,"
+            }
+
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: text1.bottom
+                text: "RESTART, LOCK, SLEEP, ETC"
+            }
         }
 
         Rectangle {
@@ -61,6 +58,18 @@ Rectangle {
             Wid.Calendar {
                 height: parent.height
                 width: parent.width
+            }
+        }
+
+        Rectangle {
+            Layout.rowSpan: 2
+
+            height: 340
+            width: 310
+
+            Text {
+                anchors.centerIn: parent
+                text: "WEATHER"
             }
         }
     }

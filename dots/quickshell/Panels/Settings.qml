@@ -28,6 +28,11 @@ Rectangle {
             height: 330
             width: 600
             color: "firebrick"
+
+            Text {
+                anchors.centerIn: parent
+                text: "QUICKSHELL SETTINGS"
+            }
         }
 
         Rectangle {
@@ -36,6 +41,11 @@ Rectangle {
             height: 330
             width: 300
             color: "ivory"
+
+            Text {
+                anchors.centerIn: parent
+                text: "I DUNNO WHAT TO DO WITH THIS THO"
+            }
         }
     }
 }

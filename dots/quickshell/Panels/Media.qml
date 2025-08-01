@@ -28,6 +28,11 @@ Rectangle {
             height: 160
             width: 600
             color: "magenta"
+
+            Text {
+                anchors.centerIn: parent
+                text: "MUSIC PLAYBACK"
+            }
         }
 
         Rectangle {
@@ -36,6 +41,11 @@ Rectangle {
             height: 160
             width: 600
             color: "gold"
+
+            Text {
+                anchors.centerIn: parent
+                text: "AUDIO MIXER"
+            }
         }
 
         Rectangle {
@@ -44,6 +54,11 @@ Rectangle {
             height: 330
             width: 300
             color: "lime"
+
+            Text {
+                anchors.centerIn: parent
+                text: "DANCING NAHIDA"
+            }
         }
     }
 }

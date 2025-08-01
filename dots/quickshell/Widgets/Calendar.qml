@@ -8,6 +8,8 @@ import "../Data/Khal.qml" as CalendarService
 Column {
     id: calendarGrid
 
+    width: parent.width
+
     property date displayDate: new Date()
 
     spacing: 5
@@ -23,33 +25,33 @@ Column {
             radius: 20
             color: "transparent"
 
-            Text {
+            Dat.MaterialSymbols {
                 anchors.centerIn: parent
-                text: "←"
-                font.pointSize: 18
+                font.pixelSize: 25
+                font.bold: false
                 color: Dat.Colors.foreground
-            }
+                icon: "arrow_circle_left"
 
-            MouseArea {
-                id: prevMonthArea
+                MouseArea {
+                    id: prevMonthArea
 
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    let newDate = new Date(displayDate);
-                    newDate.setMonth(newDate.getMonth() - 1);
-                    displayDate = newDate;
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        let newDate = new Date(displayDate);
+                        newDate.setMonth(newDate.getMonth() - 1);
+                        displayDate = newDate;
+                    }
                 }
             }
-
         }
 
         Text {
             width: parent.width - 80
             height: 40
             text: Qt.formatDate(displayDate, "MMMM yyyy")
-            font.pointSize: 11
+            font.pointSize: 15
             color: Dat.Colors.foreground
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -61,28 +63,27 @@ Column {
             radius: 20
             color: "transparent"
 
-            Text {
+            Dat.MaterialSymbols {
                 anchors.centerIn: parent
-                text: "→"
-                font.pointSize: 18
+                font.pixelSize: 25
+                font.bold: false
                 color: Dat.Colors.foreground
-            }
+                icon: "arrow_circle_right"
 
-            MouseArea {
-                id: nextMonthArea
+                MouseArea {
+                    id: nextMonthArea
 
-                anchors.fill: parent
-                hoverEnabled: true
-                cursorShape: Qt.PointingHandCursor
-                onClicked: {
-                    let newDate = new Date(displayDate);
-                    newDate.setMonth(newDate.getMonth() + 1);
-                    displayDate = newDate;
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        let newDate = new Date(displayDate);
+                        newDate.setMonth(newDate.getMonth() + 1);
+                        displayDate = newDate;
+                    }
                 }
             }
-
         }
-
     }
 
     // Days of week header
@@ -104,11 +105,8 @@ Column {
                     font.pointSize: 11
                     color: Dat.Colors.foreground
                 }
-
             }
-
         }
-
     }
 
     // Calendar grid
@@ -170,15 +168,9 @@ Column {
                             else
                                 return 0;
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     }
-
 }

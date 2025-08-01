@@ -26,16 +26,13 @@ Rectangle {
             Layout.rowSpan: 2
 
             height: 330
-            width: 600
-            color: "chocolate"
-        }
-
-        Rectangle {
-            Layout.rowSpan: 2
-
-            height: 330
-            width: 300
+            width: 915
             color: "crimson"
+
+            Text {
+                anchors.centerIn: parent
+                text: "PERFORMANCE AND PARAMETERS"
+            }
         }
     }
 }

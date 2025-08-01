@@ -5,4 +5,5 @@ import qs.Panels
 Scope {
     Bar{}
     Volume{}
+    AppTray{}
 }
