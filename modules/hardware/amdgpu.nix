@@ -47,6 +47,6 @@
     # The temp solution that goes over it eats up RAM
 
     # Adds rocm support to btop and nixos
-    nixpkgs.config.rocmSupport = false;
+    nixpkgs.config.rocmSupport = true;
   };
 }
