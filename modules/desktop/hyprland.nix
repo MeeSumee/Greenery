@@ -28,7 +28,6 @@
 
     # Hyprland Dependent Packages
     environment.systemPackages = with pkgs; [
-      kurukurubar
       grim
     ];
 
