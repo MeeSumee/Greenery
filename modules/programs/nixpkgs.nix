@@ -76,6 +76,7 @@
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
         swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
+        khal                            # CLI Calendar dependency for banshell
 
         # Cursor Package
         (pkgs.callPackage ../../pkgs/cursors.nix {})      
