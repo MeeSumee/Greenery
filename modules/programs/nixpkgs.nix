@@ -5,6 +5,7 @@
   options,
   lib,
   sources,
+  zaphkiel,
   ...
 }:{
 
@@ -35,7 +36,9 @@
         tree                            # enables tree view in terminal
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
-        npins                           # sources manager and replaces my flakes
+
+        # npins-v6 
+        zaphkiel.packages.npins
       ];
 
       # Enables intel gpu monitoring
@@ -76,6 +79,9 @@
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
         swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
+
+        # npins-show command
+        zaphkiel.packages.scripts.npins-show
 
         # Cursor Package
         (pkgs.callPackage ../../pkgs/cursors.nix {})      
@@ -126,7 +132,6 @@
     # Engineering and projects
     (lib.mkIf (config.greenery.programs.engineering.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
-        audacity                        # audio editor
         arduino-ide                     # microcontroller programming
         octave                          # Scientific Programming Language
       ];

@@ -11,7 +11,7 @@
       "submodules": false,
       "revision": "ec2ec4ec3f908ed9b125ea4afd52627bed60f183",
       "url": "https://github.com/ezKEa/aagl-gtk-on-nix/archive/ec2ec4ec3f908ed9b125ea4afd52627bed60f183.tar.gz",
-      "hash": "1yyk034x32km8v472m1y6plh2822089b5aw4hil6g4h1ilh2canw",
+      "hash": "sha256-3ComII0BkmdohISrshICQiAB6TU+VHHIRnWK0ckA0/s=",
       "frozen": true
     },
     "asusnumpad": {
@@ -25,7 +25,7 @@
       "submodules": false,
       "revision": "de1def2d69a63c1fb79926eaff6f06e4a5805a6d",
       "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/de1def2d69a63c1fb79926eaff6f06e4a5805a6d.tar.gz",
-      "hash": "03zsm07wl9p0zx48zz54dw8a8ia05mayjvfhj92fsdfk0167dg1w"
+      "hash": "sha256-PLx2TADTNe1EktBt6VUtQEWkEG+k/I9I/+Amyg+o+g8="
     },
     "booru": {
       "type": "Git",
@@ -38,7 +38,7 @@
       "submodules": false,
       "revision": "d663b3c0f95abbdbf4b6afc7d862328024f7a937",
       "url": "https://github.com/Rexcrazy804/booru-flake/archive/d663b3c0f95abbdbf4b6afc7d862328024f7a937.tar.gz",
-      "hash": "04k87l1yblcnj1bv0fnyxgibipf46257fna4ik40ygakj589qhii"
+      "hash": "sha256-MUKcUJFTPQ/IjERZd4owxN244uveOrBXkJbR5QM9aBI="
     },
     "crane": {
       "type": "Git",
@@ -51,7 +51,7 @@
       "submodules": false,
       "revision": "544d09fecc8c2338542c57f3f742f1a0c8c71e13",
       "url": "https://github.com/ipetkov/crane/archive/544d09fecc8c2338542c57f3f742f1a0c8c71e13.tar.gz",
-      "hash": "0kl8z5i4ix3isxh08sin7f5d46d752k0rjglf7a29y936bg8z6w3",
+      "hash": "sha256-g5uP3jIj+STUcfTJDKYopxnSijs2agRg13H0SGL5iE4=",
       "frozen": true
     },
     "flake-compat": {
@@ -66,7 +66,7 @@
       "submodules": false,
       "revision": "549f2762aebeff29a2e5ece7a7dc0f955281a1d1",
       "url": "https://git.lix.systems/lix-project/flake-compat/archive/549f2762aebeff29a2e5ece7a7dc0f955281a1d1.tar.gz",
-      "hash": "0g4izwn5k7qpavlk3w41a92rhnp4plr928vmrhc75041vzm3vb1l"
+      "hash": "sha256-NKw96t+BgHIYzHUjkTK95FqYRVKB8DHpVhefWSz/kTw="
     },
     "hjem": {
       "type": "Git",
@@ -79,7 +79,7 @@
       "submodules": false,
       "revision": "3093a74542b30f8155954d585d0ae2401e3adbe5",
       "url": "https://github.com/feel-co/hjem/archive/3093a74542b30f8155954d585d0ae2401e3adbe5.tar.gz",
-      "hash": "1mqbmyv7bw8gjzljr7z7yfwg1hpwcgm6lykyr2bbf0l0all26fig"
+      "hash": "sha256-LzojKFWAAreWyH56aupj/MLwuPPnnyzplw/xdbavC9c="
     },
     "lanzaboote": {
       "type": "Git",
@@ -92,7 +92,7 @@
       "submodules": false,
       "revision": "63b4c797fd6e370ad437ee25e30a5e5ff2c93f83",
       "url": "https://github.com/Rexcrazy804/lanzaboote/archive/63b4c797fd6e370ad437ee25e30a5e5ff2c93f83.tar.gz",
-      "hash": "08vxxn44aj1n23gyqpgmk9hngkyckfshrjq79dhwmhxgyzfl5cfk"
+      "hash": "sha256-07FC3fevw8phSwfLDLWbzM9nYZr1XezfEDZIRYjtfSM="
     },
     "micro-bounce": {
       "type": "Git",
@@ -105,7 +105,7 @@
       "submodules": false,
       "revision": "de7a96dc6b6ffa7832b4923a65b02b67735dbd9c",
       "url": "https://github.com/sparques/micro-bounce/archive/de7a96dc6b6ffa7832b4923a65b02b67735dbd9c.tar.gz",
-      "hash": "0rsk7ah0b156f7rqnb9mydc24z5djzdq3741afhjxynby0pz8f42"
+      "hash": "sha256-gjj0L/DL+i6hU4GcgduXrXwiWPM1LYvzcaaEBaA6U2c="
     },
     "micro-plugin-lsp": {
       "type": "Git",
@@ -118,7 +118,7 @@
       "submodules": false,
       "revision": "a3ed3a73b2f7576b1e2dc1ac3c98dfe695e6d05d",
       "url": "https://github.com/AndCake/micro-plugin-lsp/archive/a3ed3a73b2f7576b1e2dc1ac3c98dfe695e6d05d.tar.gz",
-      "hash": "0vb055aay7qq1lza1cqhm2h042shzkq33sliw14rpyawq3rzmafi"
+      "hash": "sha256-0an688Bc+ZtJ4JHqMfD8UAsCoKgQs6A+DRgfr1QpYG0="
     },
     "micro-quoter": {
       "type": "Git",
@@ -131,13 +131,13 @@
       "submodules": false,
       "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
-      "hash": "1d399fvbjalpfa44jd0qy9kjchspfny0zy3gf1jv2gsmas7iaz85"
+      "hash": "sha256-BX0Vj1ZVP7FlcG/4D7x1V0MmZ/IYNEmIcpcqubZLabQ="
     },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre837094.94def634a204/nixexprs.tar.xz",
-      "hash": "0z81pz46gzfsyvyq1mskcrmlns787pv54c2fw0pgci4nzb7h8q0z",
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre836203.dc9637876d0d/nixexprs.tar.xz",
+      "hash": "sha256-GBa/N8y1tJKl+TgKZJkfHB/KtSwYtFdb/PmSxsJjv0w=",
       "frozen": true
     },
     "npins": {
@@ -151,7 +151,7 @@
       "submodules": false,
       "revision": "afa9fe50cb0bff9ba7e9f7796892f71722b2180d",
       "url": "https://github.com/andir/npins/archive/afa9fe50cb0bff9ba7e9f7796892f71722b2180d.tar.gz",
-      "hash": "1cl77vcs120jvmrxlczf7q2xdkgc237ywd11mr0qly9xr405i9qg"
+      "hash": "sha256-D6dYAMk9eYpBriE07s8Q7M3WBT7uM9pz3RKIoNk+h7I="
     },
     "rust-overlay": {
       "type": "Git",
@@ -164,7 +164,7 @@
       "submodules": false,
       "revision": "7ae12d14d6bb74acfadf31e17a204d928eaf77b8",
       "url": "https://github.com/oxalica/rust-overlay/archive/7ae12d14d6bb74acfadf31e17a204d928eaf77b8.tar.gz",
-      "hash": "1n2r78nb1b1lx6vd65gnd9chfvkcj1ailjy2p9wwi1i56qlkqvwn",
+      "hash": "sha256-lm88KTYlhsh5usJLGlWQbG4HWWr2FdO26TSssCw6Wdg=",
       "frozen": true
     },
     "sops": {
@@ -178,7 +178,7 @@
       "submodules": false,
       "revision": "2c8def626f54708a9c38a5861866660395bb3461",
       "url": "https://github.com/Mic92/sops-nix/archive/2c8def626f54708a9c38a5861866660395bb3461.tar.gz",
-      "hash": "0iag6gdn60bw260x0ss7hvcgi0l0fr1cyg9vcp5vrfwhr7nlyn8s"
+      "hash": "sha256-GllP7cmQu7zLZTs9z0J2gIL42IZHa9CBEXwBY9szT0U="
     },
     "zaphkiel": {
       "type": "Git",
@@ -187,12 +187,12 @@
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel"
       },
-      "branch": "master",
+      "branch": "centralization",
       "submodules": false,
-      "revision": "d0b4a6830050afca25f11df9521e45160d2eb530",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/d0b4a6830050afca25f11df9521e45160d2eb530.tar.gz",
-      "hash": "1v14m853y96i89m237va7dvp6sdfml6gnlsndfgnijap6dlsp210"
+      "revision": "2b7d4af79bab332cdda1ff18729a5d623f46bc58",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/2b7d4af79bab332cdda1ff18729a5d623f46bc58.tar.gz",
+      "hash": "sha256-bD7BH181FTiYn8cVJUetIJf72XNTd4bPmzJoJitVl+s="
     }
   },
-  "version": 5
+  "version": 6
 }

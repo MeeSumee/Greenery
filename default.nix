@@ -6,12 +6,16 @@ let
   pkgs = import sources.nixpkgs {};
   nixosConfig = import (sources.nixpkgs + "/nixos/lib/eval-config.nix");
 
+  zaphkiel = import sources.zaphkiel {
+    inherit sources pkgs;
+  };
+
 # Define each nixos config
 in {
   quartz = nixosConfig {
     system = null;
     specialArgs = {
-      inherit sources;
+      inherit sources zaphkiel;
       users = ["sumee"];
     };
     
@@ -24,7 +28,7 @@ in {
   beryl = nixosConfig {
     system = null;
     specialArgs = {
-      inherit sources;
+      inherit sources zaphkiel;
       users = ["sumeezome"];
     };
 
@@ -37,7 +41,7 @@ in {
   greenery = nixosConfig {
     system = null;
     specialArgs = {
-      inherit sources;
+      inherit sources zaphkiel;
       users = ["administrator"];
     };
     

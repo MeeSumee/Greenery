@@ -4,6 +4,7 @@
   config,
   users,
   lib,
+  zaphkiel,
   ...
 }: let
   uwuToHypr = pkgs.runCommandLocal "quick" {} ''
@@ -17,9 +18,6 @@
     hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
   };
 
-  zaphkiel = import sources.zaphkiel {
-    inherit (sources) nixpkgs;
-  };
 in {
   imports = [zaphkiel.nixosModules.kurukuruDM];
 
@@ -27,9 +25,8 @@ in {
 
   config = lib.mkIf (config.greenery.desktop.kurukurudm.enable && config.greenery.desktop.enable) {
 
-    # Add npins-show command for convenience
+    # Add dependencies
     environment.systemPackages = with pkgs; [
-      zaphkiel.packages.scripts.npins-show
       kurukurubar-unstable
     ];
 
