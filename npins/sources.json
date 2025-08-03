@@ -187,11 +187,11 @@
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel"
       },
-      "branch": "centralization",
+      "branch": "master",
       "submodules": false,
-      "revision": "5631ca9684e5d254b47f1b43aaac3d6cceee6cd9",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/5631ca9684e5d254b47f1b43aaac3d6cceee6cd9.tar.gz",
-      "hash": "sha256-y25Mypr/AmFHW4n4N//kdU3XkpDRqVZQKHFehoxzpJw="
+      "revision": "e52788d440daaecd21b12cd8a7d10e88639668e6",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/e52788d440daaecd21b12cd8a7d10e88639668e6.tar.gz",
+      "hash": "sha256-BuekZI/Fhu0Q9Jnz+BYbJT5Q1Li7LhfziyL7IGWw9Po="
     }
   },
   "version": 6
