@@ -25,13 +25,46 @@ Singleton {
             });
     }
 
-    onLocChanged: Requests.get(`https://wttr.in/${loc}?format=j1`, text => {
-        const json = JSON.parse(text).current_condition[0];
-        icon = Icons.getWeatherIcon(json.weatherCode);
-        description = json.weatherDesc[0].value;
-        tempC = `${parseFloat(json.temp_C)}°C`;
-        tempF = `${parseFloat(json.temp_F)}°F`;
-    })
+
+    function fetchWeather() {
+        console.log("Fetching weather for location:", loc);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `https://wttr.in/${loc}?format=j1`);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log("Raw response:", xhr.responseText);
+                    try {
+                        const json = JSON.parse(xhr.responseText);
+                        const current = json.current_condition?.[0];
+
+                        if (!current) {
+                            console.error("No current_condition found.");
+                            return;
+                        }
+
+                        //icon = Icons.getWeatherIcon(current.weatherCode);
+                        description = current.weatherDesc?.[0]?.value ?? "Unknown";
+                        tempC = `${parseFloat(current.temp_C)}°C`;
+                        tempF = `${parseFloat(current.temp_F)}°F`;
+
+                        console.log("Updated temps:", tempC, tempF);
+                    } catch (e) {
+                        console.error("Failed to parse weather JSON:", e);
+                    }
+                } else {
+                    console.error("HTTP request failed with status:", xhr.status);
+                }
+            }
+        };
+        xhr.send();
+    }
+
+
+
+
+    onLocChanged: fetchWeather()
 
     Component.onCompleted: reload()
 
