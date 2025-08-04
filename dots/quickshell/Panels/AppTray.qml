@@ -14,12 +14,11 @@ WlrLayershell {
 	required property ShellScreen modelData
 
 	anchors.left: true
-	anchors.right: true
-	anchors.bottom: true
 	color: "transparent"
 	exclusionMode: ExclusionMode.Ignore
 	focusable: false
-	implicitHeight: screen.height * 0.5
+	implicitHeight: screen.height * 0.4
+    implicitWidth: screen.width
 	layer: WlrLayer.Top
 	namespace: "sumee.apptray.quickshell"
 	screen: modelData
@@ -34,14 +33,12 @@ WlrLayershell {
 	Rectangle {
 		id: appshow
 
-		readonly property int idleHeight: 20
-		readonly property int drawHeight: 500
+		readonly property int idleWidth: 20
+		readonly property int drawWidth: 400
 
-		width: 500
+		height: 400
 		color: Dat.Colors.withAlpha(Dat.Colors.background, 0.9)
-		anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-		topLeftRadius: 25; topRightRadius: 25
+		bottomRightRadius: 25; topRightRadius: 25
 		clip: true
 		state: "IDLE"
 
@@ -73,14 +70,14 @@ WlrLayershell {
 				name: "IDLE";
 				PropertyChanges {
 					appshow.opacity: 0
-					appshow.height: appshow.idleHeight
+					appshow.width: appshow.idleWidth
 				}
 			},
 			State {
 				name: "DRAW";
 				PropertyChanges {
 					appshow.opacity: 1
-					appshow.height: appshow.drawHeight
+					appshow.width: appshow.drawWidth
 				}
 			}
 		]
@@ -99,7 +96,7 @@ WlrLayershell {
 
 					ParallelAnimation {
 						NumberAnimation {
-							properties: "opacity, height"
+							properties: "opacity, width"
 							easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
 							target: appshow
 						}
@@ -115,8 +112,9 @@ WlrLayershell {
 
 					ParallelAnimation {
 						NumberAnimation {
-							properties: "opacity, height"
-							easing.bezierCurve: Dat.MaterialEasing.emphasized
+							properties: "opacity, width"
+							easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                            duration: 150
 							target: appshow
 						}
 					}

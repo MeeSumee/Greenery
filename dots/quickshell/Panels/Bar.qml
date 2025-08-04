@@ -13,13 +13,12 @@ WlrLayershell {
 
 	required property ShellScreen modelData
 
-	anchors.left: true
-	anchors.right: true
 	anchors.top: true
 	color: "transparent"
 	exclusionMode: ExclusionMode.Ignore
 	focusable: false
-	implicitHeight: screen.height * 0.4
+	implicitHeight: screen.height * 0.39
+	implicitWidth: screen.width * 0.61
 	layer: WlrLayer.Top
 	namespace: "sumee.bar.quickshell"
 	screen: modelData
