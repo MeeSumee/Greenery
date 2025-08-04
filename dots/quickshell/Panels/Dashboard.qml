@@ -63,13 +63,19 @@ Rectangle {
 
         Rectangle {
             Layout.rowSpan: 2
-
             height: 340
             width: 310
+            radius: 20
+            color: Dat.Colors.background
 
-            Text {
-                anchors.centerIn: parent
-                text: "WEATHER"
+            border {
+                width: 1
+                color: Dat.Colors.foreground 
+            }
+
+            Wid.WeatherWidget {
+                height: parent.height
+                width: parent.width
             }
         }
     }
