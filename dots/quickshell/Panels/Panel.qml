@@ -39,12 +39,29 @@ Rectangle {
 
                 height: parent.height / 7
 
-                color: "red"
+                color: "transparent"
 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: content.currentIndex = 0
+                Dat.MaterialSymbols {
+                    anchors.centerIn: parent
+                    font.pixelSize: (content.currentIndex == 0) ? 50:30
+
+                    Behavior on font.pixelSize {
+                        NumberAnimation {
+                            duration: Dat.MaterialEasing.standardAccelTime
+                            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                        }
+                    }
+
+                    font.bold: false
+                    color: Dat.Colors.foreground
+                    icon: "home"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: content.currentIndex = 0
+                    }
                 }
             }
 
@@ -58,13 +75,29 @@ Rectangle {
 
                 height: parent.height / 7
 
-                color: "orange"
+                color: "transparent"
                 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: content.currentIndex = 1
-                }               
+                Dat.MaterialSymbols {
+                    anchors.centerIn: parent
+                    font.pixelSize: (content.currentIndex == 1) ? 50:30
+
+                    Behavior on font.pixelSize {
+                        NumberAnimation {
+                            duration: Dat.MaterialEasing.standardAccelTime
+                            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                        }
+                    }
+
+                    font.bold: false
+                    color: Dat.Colors.foreground
+                    icon: "music_note"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: content.currentIndex = 1
+                    }
+                }              
             }
 
             Rectangle {
@@ -77,13 +110,29 @@ Rectangle {
 
                 height: parent.height / 7
 
-                color: "yellow"
+                color: "transparent"
+                
+                Dat.MaterialSymbols {
+                    anchors.centerIn: parent
+                    font.pixelSize: (content.currentIndex == 2) ? 50:30
 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: content.currentIndex = 2
-                }
+                    Behavior on font.pixelSize {
+                        NumberAnimation {
+                            duration: Dat.MaterialEasing.standardAccelTime
+                            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                        }
+                    }
+
+                    font.bold: false
+                    color: Dat.Colors.foreground
+                    icon: "notifications"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: content.currentIndex = 2
+                    }
+                }   
             }
 
             Rectangle {
@@ -96,13 +145,29 @@ Rectangle {
 
                 height: parent.height / 7
 
-                color: "green"
+                color: "transparent"
+                
+                Dat.MaterialSymbols {
+                    anchors.centerIn: parent
+                    font.pixelSize: (content.currentIndex == 3) ? 50:30
 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: content.currentIndex = 3
-                }
+                    Behavior on font.pixelSize {
+                        NumberAnimation {
+                            duration: Dat.MaterialEasing.standardAccelTime
+                            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                        }
+                    }
+
+                    font.bold: false
+                    color: Dat.Colors.foreground
+                    icon: "speed"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: content.currentIndex = 3
+                    }
+                }   
             }
 
             Rectangle {
@@ -115,13 +180,33 @@ Rectangle {
 
                 height: parent.height / 7
 
-                color: "blue"
+                color: "transparent"
+                
+                Wid.Logo {
+                    anchors.centerIn: parent
+                    implicitHeight: (content.currentIndex == 4) ? 50:30
+                    implicitWidth: (content.currentIndex == 4) ? 50:30
 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: content.currentIndex = 4
-                }
+                    Behavior on implicitHeight {
+                        NumberAnimation {
+                            duration: Dat.MaterialEasing.standardAccelTime
+                            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                        }
+                    }
+
+                    Behavior on implicitWidth {
+                        NumberAnimation {
+                            duration: Dat.MaterialEasing.standardAccelTime
+                            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: content.currentIndex = 4
+                    }
+                }   
             }
 
             Rectangle {
@@ -134,13 +219,29 @@ Rectangle {
 
                 height: parent.height / 7
 
-                color: "purple"
+                color: "transparent"
+                
+                Dat.MaterialSymbols {
+                    anchors.centerIn: parent
+                    font.pixelSize: (content.currentIndex == 5) ? 50:30
 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: content.currentIndex = 5
-                }
+                    Behavior on font.pixelSize {
+                        NumberAnimation {
+                            duration: Dat.MaterialEasing.standardAccelTime
+                            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+                        }
+                    }
+
+                    font.bold: false
+                    color: Dat.Colors.foreground
+                    icon: "manufacturing"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: content.currentIndex = 5
+                    }
+                }  
             }
         }
     }
@@ -187,7 +288,7 @@ Rectangle {
                 }
             }
 
-            Pan.System {
+            Pan.Performance {
                 opacity: visible ? 1 : 0
                 Behavior on opacity {
                     NumberAnimation {
@@ -197,7 +298,7 @@ Rectangle {
                 }
             }
 
-            Pan.Performance {
+            Pan.System {
                 opacity: visible ? 1 : 0
                 Behavior on opacity {
                     NumberAnimation {
