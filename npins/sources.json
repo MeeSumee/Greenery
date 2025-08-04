@@ -14,6 +14,19 @@
       "hash": "sha256-3ComII0BkmdohISrshICQiAB6TU+VHHIRnWK0ckA0/s=",
       "frozen": true
     },
+    "agenix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ryantm",
+        "repo": "agenix"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "531beac616433bac6f9e2a19feb8e99a22a66baf",
+      "url": "https://github.com/ryantm/agenix/archive/531beac616433bac6f9e2a19feb8e99a22a66baf.tar.gz",
+      "hash": "sha256-9P1FziAwl5+3edkfFcr5HeGtQUtrSdk/MksX39GieoA="
+    },
     "asusnumpad": {
       "type": "Git",
       "repository": {
@@ -166,19 +179,6 @@
       "url": "https://github.com/oxalica/rust-overlay/archive/7ae12d14d6bb74acfadf31e17a204d928eaf77b8.tar.gz",
       "hash": "sha256-lm88KTYlhsh5usJLGlWQbG4HWWr2FdO26TSssCw6Wdg=",
       "frozen": true
-    },
-    "sops": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "Mic92",
-        "repo": "sops-nix"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "2c8def626f54708a9c38a5861866660395bb3461",
-      "url": "https://github.com/Mic92/sops-nix/archive/2c8def626f54708a9c38a5861866660395bb3461.tar.gz",
-      "hash": "sha256-GllP7cmQu7zLZTs9z0J2gIL42IZHa9CBEXwBY9szT0U="
     },
     "zaphkiel": {
       "type": "Git",

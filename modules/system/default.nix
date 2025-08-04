@@ -12,7 +12,6 @@
     ./lanzaboote.nix    
     ./locale.nix    
     ./nix.nix
-    ./sops.nix
   ];
 
   options.greenery.system.enable = lib.mkEnableOption "system";

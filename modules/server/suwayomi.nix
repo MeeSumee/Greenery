@@ -5,9 +5,9 @@
   ...
 }: {
 
-  options.greenery.server.manga.enable = lib.mkEnableOption "manga hosting";
+  options.greenery.server.suwayomi.enable = lib.mkEnableOption "suwayomi";
   
-  config = lib.mkIf (config.greenery.server.manga.enable && config.greenery.server.enable) {
+  config = lib.mkIf (config.greenery.server.suwayomi.enable && config.greenery.server.enable) {
 
     # Suwayomi-server for fetching manga online
     services.suwayomi-server = {
@@ -43,6 +43,7 @@
             };
           };
 
+          # Extension list
           extensionRepos = [
             "https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json"
           ];
