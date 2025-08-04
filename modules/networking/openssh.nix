@@ -24,5 +24,14 @@
         AllowUsers = users;
       };
     };
+
+    # I was told by rex to add this
+    services.pcscd.enable = true;
+    
+    # GPG Keys
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 }
