@@ -20,11 +20,14 @@
 
   config = lib.mkIf config.greenery.programs.enable {
     
+    # Disable nano
+    programs.nano.enable = false;
+
     # Set default editor
     environment.variables = {
-      EDITOR = "micro";
-      SYSTEMD_EDITOR = "micro";
-      VISUAL = "micro";
+      EDITOR = "nvim";
+      SYSTEMD_EDITOR = "nvim";
+      VISUAL = "nvim";
     };
 
     # Set default applications

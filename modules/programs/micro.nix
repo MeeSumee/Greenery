@@ -16,9 +16,6 @@
 
   config = lib.mkIf (config.greenery.programs.micro.enable && config.greenery.programs.enable) {
 
-    # Disable nano
-    programs.nano.enable = false;
-
     environment.systemPackages = with pkgs; [
       micro
     ];

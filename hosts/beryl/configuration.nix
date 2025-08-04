@@ -51,14 +51,14 @@
       aagl.enable = false;
       browser.enable = true;
       foot.enable = true;
-      micro.enable = true;
+      micro.enable = false;
       core.enable = true;
       server.enable  = false;
       daemon.enable = true;
       desktop.enable = true;
       engineering.enable = true;
       heavy.enable = false;
-      nvim.enable = false;
+      nvim.enable = true;
       steam.enable = true;
       yazi.enable = false;
     };
