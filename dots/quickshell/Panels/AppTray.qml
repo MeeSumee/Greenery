@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
@@ -30,15 +31,36 @@ WlrLayershell {
 		}
 	}
 
+	Keys.onEscapePressed: {
+		appshow.state = "IDLE"
+	}
+
+	Keys.onPressed: function(event) {
+		var key = event.text
+		if (event.key == Qt.Key_Meta && Qt.Key_D) {
+			appshow.state = "DRAW"
+		}
+		else {
+			appshow.state = "IDLE"
+		}
+	}
+
 	Rectangle {
 		id: appshow
 
-		readonly property int idleWidth: 20
+		readonly property int idleWidth: 5
 		readonly property int drawWidth: 400
+		readonly property int idleX: 0
+		readonly property int drawX: (screen.width - drawWidth) / 2
+		readonly property int withdrawX: screen.width
 
 		height: 400
-		color: Dat.Colors.withAlpha(Dat.Colors.background, 0.9)
-		bottomRightRadius: 25; topRightRadius: 25
+		color: Dat.Colors.withAlpha(Dat.Colors.background, 1)
+		border {
+			width: 1
+			color: Dat.Colors.foreground
+		}
+		radius: 25
 		clip: true
 		state: "IDLE"
 
@@ -49,21 +71,8 @@ WlrLayershell {
 			hoverEnabled: true
 			preventStealing: true
 
-			onExited: appshow.state = "IDLE"
-			onEntered: appshow.state = "DRAW"
+			onEntered: appshow.state = (appshow.state !== "DRAW") ? "DRAW" : "IDLE"
 		}
-
-        Item {
-            Shortcut {
-            context: Qt.ApplicationShortcut
-            sequences: [StandardKey.Close, "Ctrl+D"]
-
-                onActivated: {
-                    appshow.state = (appshow.state !== "DRAW") ? "DRAW" : "IDLE"
-                    console.log("Activated")
-                }
-            }
-        }
 
 		states: [
 			State {
@@ -71,6 +80,7 @@ WlrLayershell {
 				PropertyChanges {
 					appshow.opacity: 0
 					appshow.width: appshow.idleWidth
+					appshow.x: appshow.idleX
 				}
 			},
 			State {
@@ -78,6 +88,7 @@ WlrLayershell {
 				PropertyChanges {
 					appshow.opacity: 1
 					appshow.width: appshow.drawWidth
+					appshow.x: appshow.drawX
 				}
 			}
 		]
@@ -88,15 +99,10 @@ WlrLayershell {
 				to: "DRAW"
 
 				SequentialAnimation {
-					
-					PropertyAction {
-						property: "opacity"
-						target: appshow
-					}
 
 					ParallelAnimation {
 						NumberAnimation {
-							properties: "opacity, width"
+							properties: "opacity, width, x"
 							easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
 							target: appshow
 						}
@@ -112,16 +118,11 @@ WlrLayershell {
 
 					ParallelAnimation {
 						NumberAnimation {
-							properties: "opacity, width"
+							properties: "opacity, width, x"
 							easing.bezierCurve: Dat.MaterialEasing.standardAccel
                             duration: 150
 							target: appshow
 						}
-					}
-                    
-                    PropertyAction {
-						property: "opacity"
-						target: appshow
 					}
 				}
 			}
