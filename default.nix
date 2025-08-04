@@ -50,4 +50,12 @@ in {
       ./hosts/greenery/hardware-configuration.nix
     ];
   };
+
+  kaolin = nixosConfig {
+    system = null;
+    specialArgs = {
+      inherit sources zaphkiel;
+      users = ["sumee"];
+    };
+  };
 }
