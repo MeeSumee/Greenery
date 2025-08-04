@@ -5,7 +5,7 @@
   config,
   ...
 }: let
-  multimediaDir = "/home/multimedia";
+  multimediaDir = "/run/media/sumee/emerald/multimedia";
   stateDirectory = "/var/lib/tailscale/tailscaled-jellyfin";
 in {
   options.greenery.server.jellyfin.enable = lib.mkEnableOption "jellyfin service";
@@ -53,7 +53,7 @@ in {
         alt-speed-down = 100000;
         upload-slots-per-torrent = 10;
       };
-      credentialsFile = config.age.secrets.transJson.path;
+#      credentialsFile = config.age.secrets.transJson.path;
     };
 
     services.sonarr = {

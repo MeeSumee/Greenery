@@ -66,7 +66,7 @@
     server = {
       enable = false;
       jellyfin.enable = false;
-      manga.enable = false;
+      suwayomi.enable = false;
     };
 
     system = {
@@ -75,7 +75,6 @@
       fonts.enable = true;
       input.enable = true;
       lanzaboote.enable = true;
-      sops.enable = true;
 
       # locale.nix included by default
       # nix.nix included by default
