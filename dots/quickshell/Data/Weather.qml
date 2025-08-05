@@ -25,7 +25,6 @@ Singleton {
             });
     }
 
-
     function fetchWeather() {
         console.log("Fetching weather for location:", loc);
 
@@ -60,9 +59,6 @@ Singleton {
         };
         xhr.send();
     }
-
-
-
 
     onLocChanged: fetchWeather()
 

@@ -3,6 +3,8 @@ import QtQuick
 import qs.Data as Dat
 
 Item {
+    anchors.fill: parent
+    
     Dat.MaterialSymbols {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
