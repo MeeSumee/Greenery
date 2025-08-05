@@ -101,7 +101,6 @@ in {
         gs = "git status";
         gc = "git commit";
         gcm = "git commit -m";
-        gscm = "git commit -S -m";
         gck = "git checkout -b";
         gp = "git push";
         gca = "git commit --amend";
