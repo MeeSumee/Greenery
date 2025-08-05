@@ -110,7 +110,6 @@
         protonvpn-gui                   # proton vpn
         gnome-calculator                # gnome calculator
         nautilus                        # gnome file browser
-        komikku                         # manga reading app
         nordic                          # Gtk Theme
         papirus-icon-theme              # Gtk Icons
       ];
