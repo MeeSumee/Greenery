@@ -44,8 +44,6 @@ in {
         nrn = "nix run nixpkgs#";
         nip = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";        
 
-        # I killed VMs
-
         # git stuff
         gaa = "git add --all";
         ga = "git add";
