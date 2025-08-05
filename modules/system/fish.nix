@@ -49,7 +49,7 @@ in {
         ga = "git add";
         gs = "git status";
         gc = "git commit";
-        gcm = "git commit -S -m";
+        gcm = "git commit -m";
         gck = "git checkout -b";
         gp = "git push";
         gca = "git commit --amend";
