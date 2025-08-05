@@ -2,7 +2,6 @@ pragma Singleton
 
 import Quickshell
 import QtQuick
-import qs.Data as Dat
 
 Singleton {
     id: root

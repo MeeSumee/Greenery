@@ -1,20 +1,23 @@
 import Quickshell
+import QtQuick.Layouts
 import QtQuick
 import qs.Data as Dat
 
-Item {
-    anchors.fill: parent
-    
-    Dat.MaterialSymbols {
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
+RowLayout {
+    anchors.top: parent.top
+    spacing: 5
 
-        text: Weather.icon || "cloud_alert"
+    Dat.MaterialSymbols {
+        id: icon
+        Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+
+        text: Dat.Weather.icon || "cloud_alert"
         color: Dat.Colors.foreground
         font.pointSize: 24
     }
 
     Text {
+        Layout.alignment: icon.Qt.AlignLeft
         text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF : Dat.Weather.tempC
         color: Dat.Colors.foreground
         font.pointSize: 24

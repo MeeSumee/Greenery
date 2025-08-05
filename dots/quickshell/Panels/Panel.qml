@@ -43,7 +43,7 @@ Rectangle {
 
                 Dat.MaterialSymbols {
                     anchors.centerIn: parent
-                    font.pixelSize: (content.currentIndex == 0) ? 50:30
+                    font.pixelSize: (content.currentIndex == 0) ? 40:25
 
                     Behavior on font.pixelSize {
                         NumberAnimation {
@@ -79,7 +79,7 @@ Rectangle {
                 
                 Dat.MaterialSymbols {
                     anchors.centerIn: parent
-                    font.pixelSize: (content.currentIndex == 1) ? 50:30
+                    font.pixelSize: (content.currentIndex == 1) ? 40:25
 
                     Behavior on font.pixelSize {
                         NumberAnimation {
@@ -114,7 +114,7 @@ Rectangle {
                 
                 Dat.MaterialSymbols {
                     anchors.centerIn: parent
-                    font.pixelSize: (content.currentIndex == 2) ? 50:30
+                    font.pixelSize: (content.currentIndex == 2) ? 40:25
 
                     Behavior on font.pixelSize {
                         NumberAnimation {
@@ -149,7 +149,7 @@ Rectangle {
                 
                 Dat.MaterialSymbols {
                     anchors.centerIn: parent
-                    font.pixelSize: (content.currentIndex == 3) ? 50:30
+                    font.pixelSize: (content.currentIndex == 3) ? 40:25
 
                     Behavior on font.pixelSize {
                         NumberAnimation {
@@ -184,8 +184,8 @@ Rectangle {
                 
                 Wid.Logo {
                     anchors.centerIn: parent
-                    implicitHeight: (content.currentIndex == 4) ? 50:30
-                    implicitWidth: (content.currentIndex == 4) ? 50:30
+                    implicitHeight: (content.currentIndex == 4) ? 40:25
+                    implicitWidth: (content.currentIndex == 4) ? 40:25
 
                     Behavior on implicitHeight {
                         NumberAnimation {
@@ -223,7 +223,7 @@ Rectangle {
                 
                 Dat.MaterialSymbols {
                     anchors.centerIn: parent
-                    font.pixelSize: (content.currentIndex == 5) ? 50:30
+                    font.pixelSize: (content.currentIndex == 5) ? 40:25
 
                     Behavior on font.pixelSize {
                         NumberAnimation {
