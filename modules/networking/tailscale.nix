@@ -19,12 +19,13 @@
     # Fix tailscale auto-connect during login (might not be necessary)
     systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
 
-    # Fix DNS resolve failures?
+    # Add default nameservers for tailscale to use
     networking.nameservers = [
       "1.1.1.1"
       "1.0.0.1"
     ];
-
+    
+    # Enable DNS Resolver as per nixos wiki
     services.resolved = {
       enable = true;
       dnssec = "true";
