@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  options,
   ...
 }: {
 
@@ -25,6 +24,7 @@
 
         cloaking_rules = pkgs.writeText "cloaking_rules.txt" ''
           greenery fd7a:115c:a1e0::d501:c081
+          kaolin fd7a:115c:a1e0::4234:9b27
 
           beryl fd7a:115c:a1e0::8801:df69
           quartz fd7a:115c:a1e0::ff01:637f

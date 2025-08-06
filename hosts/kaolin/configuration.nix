@@ -1,8 +1,6 @@
 # Kaolin Configuration (Swiss routing server hopefully running soon)
 { 
   lib, 
-  config, 
-  pkgs, 
   ... 
 }:{
 
@@ -38,9 +36,9 @@
     networking = {
       enable = true;
       bluetooth.enable = false;
-      dnscrypt.enable = false;
-      fail2ban.enable = false;
-      openssh.enable = false;
+      dnscrypt.enable = true;
+      fail2ban.enable = true;
+      openssh.enable = true;
       taildrive.enable = false;
       tailscale.enable = true;
     };
@@ -82,7 +80,7 @@
 
   networking.hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-/*
+
   # Set DNS route
   networking = {
     dhcpcd.extraConfig = "nohook resolv.conf";
@@ -95,8 +93,8 @@
 
   services.dnscrypt-proxy2.settings = {
     listen_addresses = [
-      "IPv4:53"
-      "[IPv6]:53"
+      "100.64.155.39:53"
+      "[fd7a:115c:a1e0::4234:9b27]:53"
       "127.0.0.1:53"
       "[::1]:53"
     ];
@@ -104,7 +102,7 @@
 
   networking.firewall.allowedTCPPorts = [53];
   networking.firewall.allowedUDPPorts = [53];
-*/
+
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
 
@@ -113,7 +111,6 @@
     isNormalUser = true;
     description = "Sumee";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
     openssh.authorizedKeys.keys = [  
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
@@ -125,10 +122,8 @@
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.domain = "europe-west6-c.c.the-other-468113-d8.internal";
-  services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO すみーちゃ聞く終えますか？''];
 
-/*
   # Exit-node flags
   services.tailscale = {
     openFirewall = true;
@@ -138,7 +133,7 @@
       "--accept-dns=false"
     ];
   };
-*/
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
