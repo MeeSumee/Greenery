@@ -121,7 +121,6 @@
   # Pre-generated config from nixos-infect
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
-  networking.domain = "europe-west6-c.c.the-other-468113-d8.internal";
   users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO すみーちゃ聞く終えますか？''];
 
   # Exit-node flags
