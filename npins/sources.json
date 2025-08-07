@@ -9,10 +9,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ec2ec4ec3f908ed9b125ea4afd52627bed60f183",
-      "url": "https://github.com/ezKEa/aagl-gtk-on-nix/archive/ec2ec4ec3f908ed9b125ea4afd52627bed60f183.tar.gz",
-      "hash": "sha256-3ComII0BkmdohISrshICQiAB6TU+VHHIRnWK0ckA0/s=",
-      "frozen": true
+      "revision": "13cb81238ebbd0eeddb465c962413a0f795baa44",
+      "url": "https://github.com/ezKEa/aagl-gtk-on-nix/archive/13cb81238ebbd0eeddb465c962413a0f795baa44.tar.gz",
+      "hash": "sha256-QivorP/1+7P4O6oEdrs6RFo9PptbX6ajBdvYifhzJc0="
     },
     "agenix": {
       "type": "Git",
@@ -23,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "531beac616433bac6f9e2a19feb8e99a22a66baf",
-      "url": "https://github.com/ryantm/agenix/archive/531beac616433bac6f9e2a19feb8e99a22a66baf.tar.gz",
-      "hash": "sha256-9P1FziAwl5+3edkfFcr5HeGtQUtrSdk/MksX39GieoA="
+      "revision": "9edb1787864c4f59ae5074ad498b6272b3ec308d",
+      "url": "https://github.com/ryantm/agenix/archive/9edb1787864c4f59ae5074ad498b6272b3ec308d.tar.gz",
+      "hash": "sha256-NA/FT2hVhKDftbHSwVnoRTFhes62+7dxZbxj5Gxvghs="
     },
     "asusnumpad": {
       "type": "Git",
@@ -36,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "de1def2d69a63c1fb79926eaff6f06e4a5805a6d",
-      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/de1def2d69a63c1fb79926eaff6f06e4a5805a6d.tar.gz",
-      "hash": "sha256-PLx2TADTNe1EktBt6VUtQEWkEG+k/I9I/+Amyg+o+g8="
+      "revision": "130a1b4048fbee0b29996147d26965193580f055",
+      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/130a1b4048fbee0b29996147d26965193580f055.tar.gz",
+      "hash": "sha256-M9Us2LAGtf25hmYCk+n0nbBUlcrs9kuG9tVF8QuFktg="
     },
     "booru": {
       "type": "Git",
@@ -90,9 +89,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "3093a74542b30f8155954d585d0ae2401e3adbe5",
-      "url": "https://github.com/feel-co/hjem/archive/3093a74542b30f8155954d585d0ae2401e3adbe5.tar.gz",
-      "hash": "sha256-LzojKFWAAreWyH56aupj/MLwuPPnnyzplw/xdbavC9c="
+      "revision": "ee5c671eeba5cddd94f2c7de3c36f019fae5854e",
+      "url": "https://github.com/feel-co/hjem/archive/ee5c671eeba5cddd94f2c7de3c36f019fae5854e.tar.gz",
+      "hash": "sha256-ByZ81/QttgSS1mQYttnaoMw2WnqMvQ6HCxBPOioKrOA="
     },
     "lanzaboote": {
       "type": "Git",
@@ -189,9 +188,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "e52788d440daaecd21b12cd8a7d10e88639668e6",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/e52788d440daaecd21b12cd8a7d10e88639668e6.tar.gz",
-      "hash": "sha256-BuekZI/Fhu0Q9Jnz+BYbJT5Q1Li7LhfziyL7IGWw9Po="
+      "revision": "c2cd688b41126deb3210ba7bb797119cf1f0bd7c",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/c2cd688b41126deb3210ba7bb797119cf1f0bd7c.tar.gz",
+      "hash": "sha256-3kLdFh8Lz3QxyQNLaeF4AxL+ivqS3kS3j42NEQ5fi0s="
     }
   },
   "version": 6

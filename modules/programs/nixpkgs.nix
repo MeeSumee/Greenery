@@ -120,7 +120,9 @@
             gtk-theme = "Nordic";
             icon-theme = "Papirus-Dark";
             cursor-theme = "xcursor-genshin-nahida";
-            monospace-font-name = "Source Code Pro";
+            document-font-name = "DejaVu Serif";
+            font-name = "DejaVu Sans";
+            monospace-font-name = "CaskaydiaMono NF";
             color-scheme = "prefer-dark";
             clock-show-weekday = true;
           };

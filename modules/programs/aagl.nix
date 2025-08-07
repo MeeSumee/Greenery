@@ -14,6 +14,10 @@
 
   config = lib.mkIf (config.greenery.programs.aagl.enable && config.greenery.programs.enable) {
 
+    nixpkgs.overlays = [
+      (import (sources.aagl + "/overlay.nix") {inherit (sources) rust-overlay;})
+    ];
+
     # Cache loader for anime games
     nix.settings.extra-substituters = ["https://ezkea.cachix.org"];
     nix.settings.extra-trusted-public-keys = ["ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="];
