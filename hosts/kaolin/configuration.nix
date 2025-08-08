@@ -93,8 +93,8 @@
 
   services.dnscrypt-proxy2.settings = {
     listen_addresses = [
-      "100.64.155.39:53"
-      "[fd7a:115c:a1e0::4234:9b27]:53"
+      "100.115.53.110:53"
+      "[fd7a:115c:a1e0::8a34:356e]:53"
       "127.0.0.1:53"
       "[::1]:53"
     ];
@@ -121,7 +121,6 @@
   # Pre-generated config from nixos-infect
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
-  users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO すみーちゃ聞く終えますか？''];
 
   # Exit-node flags
   services.tailscale = {
