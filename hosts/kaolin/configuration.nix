@@ -1,6 +1,7 @@
 # Kaolin Configuration (Swiss routing server hopefully running soon)
 { 
   lib, 
+  pkgs,
   ... 
 }:{
 
@@ -100,6 +101,11 @@
 
   networking.firewall.allowedTCPPorts = [53];
   networking.firewall.allowedUDPPorts = [53];
+
+  # Unofficial CLI for Cloudflare WARP
+  environment.systemPackages = with pkgs; [
+    wgcf
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
