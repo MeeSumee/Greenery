@@ -25,8 +25,6 @@
       kurukurudm.enable = true;
       niri.enable = true;
       xserver.enable = true;
-
-      # sddm.nix isn't included and has no option
     };
 
     hardware = {
