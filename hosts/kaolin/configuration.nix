@@ -1,7 +1,5 @@
 # Kaolin Configuration (Swiss routing server hopefully running soon)
 { 
-  lib, 
-  pkgs,
   ... 
 }:{
 
@@ -79,33 +77,6 @@
 
   networking.hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set DNS route
-  networking = {
-    dhcpcd.extraConfig = "nohook resolv.conf";
-    networkmanager.dns = lib.mkForce "none";
-    nameservers = [
-      "::1"
-      "127.0.0.1"
-    ];
-  };  
-
-  services.dnscrypt-proxy2.settings = {
-    listen_addresses = [
-      "100.73.1.86:53"
-      "[fd7a:115c:a1e0::5834:156]:53"
-      "127.0.0.1:53"
-      "[::1]:53"
-    ];
-  };
-
-  networking.firewall.allowedTCPPorts = [53];
-  networking.firewall.allowedUDPPorts = [53];
-
-  # Unofficial CLI for Cloudflare WARP
-  environment.systemPackages = with pkgs; [
-    wgcf
-  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Zurich";

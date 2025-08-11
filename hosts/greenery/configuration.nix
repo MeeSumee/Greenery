@@ -51,9 +51,6 @@
 */
 
 { 
-  lib, 
-  config, 
-  pkgs, 
   ... 
 }:{
 
@@ -132,28 +129,6 @@
   networking.hostName = "greenery"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Set DNS route
-  networking = {
-    dhcpcd.extraConfig = "nohook resolv.conf";
-    networkmanager.dns = lib.mkForce "none";
-    nameservers = [
-      "::1"
-      "127.0.0.1"
-    ];
-  };  
-
-  services.dnscrypt-proxy2.settings = {
-    listen_addresses = [
-      "100.81.192.125:53"
-      "[fd7a:115c:a1e0::d501:c081]:53"
-      "127.0.0.1:53"
-      "[::1]:53"
-    ];
-  };
-
-  networking.firewall.allowedTCPPorts = [53];
-  networking.firewall.allowedUDPPorts = [53];
-
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -162,7 +137,6 @@
     isNormalUser = true;
     description = "Administrator";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
     openssh.authorizedKeys.keys = [  
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
