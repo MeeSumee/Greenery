@@ -86,7 +86,7 @@
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = true;
-#    "net.ipv4.conf.wgcf.rp_filter" = false;
+    "net.ipv4.conf.wgcf.rp_filter" = false;
   };
 
   # Wireguard config to not cuck tailscale
@@ -98,8 +98,6 @@
         "172.16.0.2/32"
         "2606:4700:110:84e2:34bb:cd8e:eefc:62cb/128"
       ];
-
-      mtu = 1280;
 
       table = "off";
 
