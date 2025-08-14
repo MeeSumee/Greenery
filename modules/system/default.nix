@@ -1,11 +1,11 @@
 # Importer and Defaults maker
 {
   lib,
-  options,
   config,
   ...
 }:{
   imports = [
+    ./age.nix
     ./fish.nix
     ./fonts.nix
     ./input.nix  

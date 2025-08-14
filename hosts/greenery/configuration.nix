@@ -120,7 +120,8 @@
       fonts.enable = false;
       input.enable = false;
       lanzaboote.enable = false;
-
+      
+      # age.nix included by default
       # locale.nix included by default
       # nix.nix included by default
     };
