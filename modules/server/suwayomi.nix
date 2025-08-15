@@ -13,9 +13,17 @@ in {
   
   config = lib.mkIf (config.greenery.server.suwayomi.enable && config.greenery.server.enable) {
     
-    # Add age secret file
-    age.secrets.secret1.file = ../../secrets/secret1.age;
-    
+    # Add age secret files
+    age.secrets = {
+      secret1.file = ../../secrets/secret1.age;
+      secret2 = {
+        file = ../../secrets/secret2.age;
+        mode = "0400";
+        owner = "suwayomi";
+        group = "suwayomi";
+      };
+    };
+
     services = {
 
       # Caddy reverse-proxy using tailscale-caddy plugin
@@ -57,7 +65,7 @@ in {
             # Auth
             basicAuthEnabled = true;
             basicAuthUsername = "sumee";
-            basicAuthPasswordFile = "/var/lib/suwayomi-server/suwa";
+            basicAuthPasswordFile = config.age.secrets.secret2.path;
              
             # WebUI
             webUIEnabled = true;

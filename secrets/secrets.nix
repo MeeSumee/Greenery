@@ -15,6 +15,6 @@ let
   };
 
 in {
-  "secret1.age".publicKeys = hosts.greenery;
-  "secret2.age".publicKeys = hosts.greenery;
+  "secret1.age".publicKeys = users.administrator ++ hosts.greenery;
+  "secret2.age".publicKeys = users.administrator ++ hosts.greenery;
 }
