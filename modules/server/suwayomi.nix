@@ -17,6 +17,7 @@ in {
     age.secrets.secret1.file = ../../secrets/secret1.age;
     
     services = {
+
       # Caddy reverse-proxy using tailscale-caddy plugin
       caddy = {
         enable = true;
@@ -27,7 +28,8 @@ in {
           plugins = [ "github.com/tailscale/caddy-tailscale@${revision}" ];
           hash = "sha256-K4K3qxN1TQ1Ia3yVLNfIOESXzC/d6HhzgWpC1qkT22k=";
         };
-
+        
+        # Age file has contents TS_AUTH=<insert your auth key>
         globalConfig = ''
           tailscale {
             auth_key {$TS_AUTH}
