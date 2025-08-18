@@ -1,161 +1,66 @@
 # My NixOS Repository
-Consists of Greenery, Beryl, and Quartz
-
-## Overview
-### Repository tree
-
-```
-.
-├── assets
-│   ├── 129992739_p0.jpg
-│   ├── 71sMeJBJRNL.png
-│   ├── dlcdnwebimgs.asus.png
-│   ├── ForRex.jpg
-│   └── GDM.png
-├── default.nix
-├── dots
-│   ├── cursors
-│   ├── fish
-│   │   ├── config.fish
-│   │   └── themes
-│   │       └── rosepine.theme
-│   ├── foot
-│   │   └── foot.ini
-│   ├── fuzzel
-│   │   └── fuzzel.ini
-│   ├── hyprland
-│   │   ├── hypridle.conf
-│   │   ├── hyprland.conf
-│   │   └── hyprlock.conf
-│   ├── librewolf
-│   │   └── librewolf.overrides.cfg
-│   ├── micro
-│   │   ├── bindings.json
-│   │   ├── colorschemes
-│   │   │   ├── atom-glass.micro
-│   │   │   └── kinetic.micro
-│   │   └── settings.json
-│   ├── mpv
-│   │   └── mpv.conf
-│   ├── niri
-│   │   └── config.kdl
-│   ├── uwsm
-│   │   └── env
-│   └── yazi
-│       └── init.lua
-├── flake.lock
-├── flake.nix
-├── hosts
-│   ├── beryl
-│   │   ├── battery.nix
-│   │   ├── configuration.nix
-│   │   └── hardware-configuration.nix
-│   ├── greenery
-│   │   ├── configuration.nix
-│   │   └── hardware-configuration.nix
-│   ├── kaolin
-│   │   └── configuration.nix
-│   └── quartz
-│       ├── configuration.nix
-│       └── hardware-configuration.nix
-├── LICENSE
-├── modules
-│   ├── default.nix
-│   ├── desktop
-│   │   ├── default.nix
-│   │   ├── gdm.nix
-│   │   ├── gnome.nix
-│   │   ├── hypridle.nix
-│   │   ├── hyprland.nix
-│   │   ├── hyprlock.nix
-│   │   ├── kurukurudm.nix
-│   │   ├── niri.nix
-│   │   ├── sddm.nix
-│   │   └── xserver.nix
-│   ├── hardware
-│   │   ├── amdgpu.nix
-│   │   ├── audio.nix
-│   │   ├── default.nix
-│   │   └── intelgpu.nix
-│   ├── networking
-│   │   ├── bluetooth.nix
-│   │   ├── default.nix
-│   │   ├── dnscrypt.nix
-│   │   ├── fail2ban.nix
-│   │   ├── openssh.nix
-│   │   ├── taildrive.nix
-│   │   └── tailscale.nix
-│   ├── programs
-│   │   ├── aagl.nix
-│   │   ├── browser.nix
-│   │   ├── default.nix
-│   │   ├── foot.nix
-│   │   ├── micro.nix
-│   │   ├── nixpkgs.nix
-│   │   ├── nvim.nix
-│   │   ├── steam.nix
-│   │   └── yazi.nix
-│   ├── server
-│   │   ├── default.nix
-│   │   ├── jellyfin.nix
-│   │   ├── minecraft
-│   │   │   ├── _backupservice.nix
-│   │   │   ├── _default.nix
-│   │   │   └── _hollyj.nix
-│   │   ├── nix-fabric-minecraft
-│   │   │   ├── _configuration.nix
-│   │   │   └── _default.nix
-│   │   └── suwayomi.nix
-│   └── system
-│       ├── default.nix
-│       ├── fish.nix
-│       ├── fonts.nix
-│       ├── input.nix
-│       ├── lanzaboote.nix
-│       ├── locale.nix
-│       └── nix.nix
-├── npins
-│   ├── default.nix
-│   └── sources.json
-├── pkgs
-│   └── cursors.nix
-└── README.MD
-```
-Commit: 94048b0
+Consists of Greenery, Beryl, Quartz and Kaolin
 
 ## What mess have I created?
- I've fully moved away from flakes and instead use npins to mimic flakes.
+ I've been involved in more self-hosted applications, namely suwayomi, jellyfin, and davis with their own
+ tailscale IP configured using Caddy-Tailscale plugin.
+
+ Kaolin is a hard-earned success after a week of understanding how to route tailscale traffic via Cloudflare-WARP
+ all in the name of avoiding geoblocking. However I'm still stuck with Google Cloud and the trial will end. Need Oracle ASAP.
+
+ Agenix has been implemented successfully in Greenery and forging the path towards a more declarative operating system.
 
  I've made the quickshell branch and making steady progress towards "banshell" (name subject to change).
 
- I've ditched sddm, explored greetd, got frustrated, then returned back to gdm and tried to poke at the source file to theme it.
- Then ditched gdm for Rexcrazy's own display manager, dubbed kurukuruDM.
+ I'm still kinda lazy in updating READMEs, I will try though.
 
- Trying to get even more self-hosted websites in my tainet. Only problem is the lack of subdomains unless I try to containerize them.
- I have the potential option of making reverse proxy nodes, but need to have a concrete plan setup before executing.
+## Notes on Quickshell
 
- Hopefully start Kaolin to evade certain "restrictions". I'm still waiting for the email Oracle...
+Given the shenanigans of first world countries being invasive over the internet, Kaolin took a large part of what
+could've been UI design with Quickshell. I will discuss with friends on discord on whether "banshell" shall remain
+the name of my quickshell config.
 
- Implement agenix and made the system a bit more declarative rather than linking password files to a hard-coded path.
+The preliminary colors are based on Rose-Pine theme, however I also plan to implenent themes of:
 
- I've gotten lazy in writing READMEs so anyone can open a PR on updating or formatting the README to look pretty.
+- Vivian Banshee Colors
+- Nahida Colors
+- Matugen Color Generation for wallpaper analysis (may replace Vivian Banshee)
 
 # Greenery
 
-Used as exit node to evade work WiFi website blocks and other annoying things
-IT throws at me.
+Dell Optiplex 3050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
 
-Enables me to read manga anywhere at anytime thanks to suwayomi and the use of tailscale serve.
+Hosts Suwayomi for reading manga, Jellyfin for music (for now), and Davis for Calendar and Contacts syncing.
+
+Implemented self-hosted websites using Caddy-Tailscale plugin and reverse-proxying localhost ports.
 
 SSH services for file transfer and remote access. Enables sharing my 12TB hard drive (taildrive).
 
-Future Endeavors: Jellyfin for anime hosting and music (maybe fetch youtube and spotify?), Nextcloud for file transfer and calendar syncing with my quickshell endeavor. 
+Future Endeavors: More functional Jellyfin, FileBrowser for non-nix systems, 2FAuth so I can stop pulling out my
+phone, Proxy websites that do not involve with Kaolin (DMV would be confused by me being in Zurich), Improve 
+Security as Greenery plays an important role in my self-hosted lifestyle.
+
+# Kaolin
+
+VPS that routes all traffic via Tailscale Exit-node while using wireguard as a bridge to connect tailscale
+with Cloudflare-WARP.
+
+Infected Debian with NixOS my beloved.
+
+As I transition the server into Oracle, the architecture would change from x86-64 to aarch64.
+
+The ideal of 100% declarative system means the majority of time spent on transferring VPS is the NixOS-infect process.
+
+Future Endeavors: Transition to Oracle, utilize Agenix for a declarative system.
 
 # Beryl
 
 ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for managing nix configs whenever I'm not at home.
 
-Future Endeavors: Remote into quartz for gaming on the go or using workstation-based applications.
+Problems: AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed.
+Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
+
+Future Endeavors: Rice my laptop with quickshell and other theming applications, fix AMDGPU crashes from Youtube/demanding HWAccel Tasks.
 
 ## Enabling USB4 on Zenbook S13 OLED (UM5302TA)
 This is not recommended for most users as it involves "hacking" the
@@ -170,13 +75,22 @@ Note that there are three options when enabling USB4.
 To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
 Test your USB4 ports using boltctl, if there's instability, disable bolt service.
 
+# Graphite
+
+Copium, but it could be my work laptop if I can argue with IT for installing NixOS on it.
+
+This name will be reserved until I get NixOS on a work laptop.
+
 # Quartz
 
 Custom-built gaming pc intended for workstation and gaming.
 
 Intended to be used as my nix config manager while I'm at home.
 
-Future Endeavors: Remote desktop setup for devices in my tailnet to access, GPU-Passthrough Windows? Honestly not too sure if I need it.
+Problems: Hyprland 0.50 might have caused genshin to freeze entire system? Noted from btop++ where the GPUs kept switching while playing the game.
+Annoying thing is I can't diagnose the problem as journalctl has no leads to the problem. Experimentation imminent.
+
+Future Endeavors: Identify the core issues of dual-gpu setup in NixOS and resolve it, implement remote desktop for Beryl to communicate to, potential GPU-Passthrough Windows. 
 
 ## Quartz PC Specifications
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
@@ -185,10 +99,10 @@ Future Endeavors: Remote desktop setup for devices in my tailnet to access, GPU-
 - GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
 
 ## Credits
-[Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. I swear he needs a better PC.
+[Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. HE NEEDS A JOB AND A BETTER PC.
 He also gets a lot of credit for all the code I've stolen with permission.
 
-[Z](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
+[Florida Man](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
 
 Several sources of quickshell code I've been browsing through in an attempt to understand wtf is going on:
 [Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/Ly-sec/nixos), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
@@ -197,7 +111,7 @@ I also want to thank the folks of UAFB who made USB4 possible.
 
 Lastly, I want to thank the Nix Community for its push for packages,
 maintainers, and hardware support. I haven't had this much fun in
-a while. Especially for coding cause I never get As in coding class.
+a while.
 
 ## Licensing
 All code in this repository is under the MIT license unless wherever an
