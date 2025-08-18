@@ -1,27 +1,20 @@
 {
   lib,
   config,
-  pkgs,
   ...
-}: let
-
-  revision = "v0.0.0-20250508175905-642f61fea3cc";
-
-in {
+}:
+{
 
   options.greenery.server.suwayomi.enable = lib.mkEnableOption "suwayomi";
   
   config = lib.mkIf (config.greenery.server.suwayomi.enable && config.greenery.server.enable) {
     
     # Add age secret files
-    age.secrets = {
-      secret1.file = ../../secrets/secret1.age;
-      secret2 = {
-        file = ../../secrets/secret2.age;
-        mode = "0400";
-        owner = "suwayomi";
-        group = "suwayomi";
-      };
+    age.secrets.secret2 = {
+      file = ../../secrets/secret2.age;
+      mode = "0400";
+      owner = "suwayomi";
+      group = "suwayomi";
     };
 
     services = {
@@ -29,21 +22,6 @@ in {
       # Caddy reverse-proxy using tailscale-caddy plugin
       caddy = {
         enable = true;
-        
-        environmentFile = config.age.secrets.secret1.path;
-        
-        package = pkgs.caddy.withPlugins {
-          plugins = [ "github.com/tailscale/caddy-tailscale@${revision}" ];
-          hash = "sha256-K4K3qxN1TQ1Ia3yVLNfIOESXzC/d6HhzgWpC1qkT22k=";
-        };
-        
-        # Age file has contents TS_AUTH=<insert your auth key>
-        globalConfig = ''
-          tailscale {
-            auth_key {$TS_AUTH}
-          }
-        '';
-
         virtualHosts."https://manga.berylline-mine.ts.net" = {
           extraConfig = ''
             bind tailscale/manga

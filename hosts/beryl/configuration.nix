@@ -1,8 +1,5 @@
 # Beryl Configuration
 {
-  config,
-  pkgs,
-  options,
   lib,
   ...
 }: {
@@ -63,6 +60,7 @@
 
     server = {
       enable = false;
+      davis.enable = false;
       jellyfin.enable = false;
       suwayomi.enable = false;
     };
@@ -74,6 +72,7 @@
       input.enable = true;
       lanzaboote.enable = true;
 
+      # age.nix included by default
       # locale.nix included by default
       # nix.nix included by default
     };

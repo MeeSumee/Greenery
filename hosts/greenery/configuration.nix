@@ -110,7 +110,8 @@
 
     server = {
       enable = true;
-      jellyfin.enable = false;
+      davis.enable = true;
+      jellyfin.enable = true;
       suwayomi.enable = true;
     };
 
