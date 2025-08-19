@@ -1,9 +1,6 @@
 # Quartz Configuration
 {
-  config,
   pkgs,
-  options,
-  lib,
   ...
 }: {
   imports = [
@@ -63,6 +60,7 @@
 
     server = {
       enable = false;
+      davis.enable = false;
       jellyfin.enable = false;
       suwayomi.enable = false;
     };
@@ -74,6 +72,7 @@
       input.enable = true;
       lanzaboote.enable = false;
 
+      # age.nix included by default
       # locale.nix included by default
       # nix.nix included by default
     };
