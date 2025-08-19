@@ -1,7 +1,6 @@
 { 
   config, 
   lib, 
-  pkgs, 
   ...
 }: {
 
@@ -16,6 +15,7 @@
         "greenery.berylline-mine.ts.net"
         "beryl.berylline-mine.ts.net"
         "garnet.berylline-mine.ts.net"
+        "kaolin.berylline-mine.ts.net"
         "quartz.berylline-mine.ts.net"
       ];
       bantime = "48h";

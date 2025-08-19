@@ -1,8 +1,5 @@
 # Beryl Configuration
 {
-  config,
-  pkgs,
-  options,
   lib,
   ...
 }: {
@@ -25,8 +22,6 @@
       kurukurudm.enable = true;
       niri.enable = true;
       xserver.enable = true;
-
-      # sddm.nix isn't included and has no option
     };
 
     hardware = {
@@ -65,6 +60,7 @@
 
     server = {
       enable = false;
+      davis.enable = false;
       jellyfin.enable = false;
       suwayomi.enable = false;
     };
@@ -76,6 +72,7 @@
       input.enable = true;
       lanzaboote.enable = true;
 
+      # age.nix included by default
       # locale.nix included by default
       # nix.nix included by default
     };

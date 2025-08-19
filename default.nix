@@ -57,5 +57,10 @@ in {
       inherit sources zaphkiel;
       users = ["sumee"];
     };
+
+    modules = [
+      ./hosts/kaolin/configuration.nix
+      ./hosts/kaolin/hardware-configuration.nix
+    ];
   };
 }

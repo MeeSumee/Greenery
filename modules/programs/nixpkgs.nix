@@ -2,9 +2,7 @@
 {
   config,
   pkgs,
-  options,
   lib,
-  sources,
   zaphkiel,
   ...
 }:{
@@ -95,10 +93,9 @@
         
         (pkgs.vesktop.override {
           withMiddleClickScroll = true;
-          withSystemVencord = true;
+          withSystemVencord = false;
         })                              # Better discord + Overrides
 
-        vscodium                        # GUI editing + too shit at nvim
         qimgv                           # image viewer
         wineWowPackages.waylandFull     # wine
         xournalpp                       # note taking
@@ -107,10 +104,9 @@
         gparted                         # disk management software
         prismlauncher                   # minecraft 
         zoom-us                         # meetings
-        protonvpn-gui                   # proton vpn
         gnome-calculator                # gnome calculator
         nautilus                        # gnome file browser
-        nordic                          # Gtk Theme
+        nightfox-gtk-theme              # Gtk Theme
         papirus-icon-theme              # Gtk Icons
       ];
 
@@ -118,10 +114,12 @@
       programs.dconf.profiles.user.databases = [{
         settings = {
           "org/gnome/desktop/interface" = {
-            gtk-theme = "Nordic";
+            gtk-theme = "Nightfox-Dark";
             icon-theme = "Papirus-Dark";
             cursor-theme = "xcursor-genshin-nahida";
-            monospace-font-name = "Source Code Pro";
+            document-font-name = "DejaVu Serif";
+            font-name = "DejaVu Sans";
+            monospace-font-name = "CaskaydiaMono NF";
             color-scheme = "prefer-dark";
             clock-show-weekday = true;
           };

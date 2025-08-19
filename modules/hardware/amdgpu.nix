@@ -13,7 +13,7 @@
     # Set boot to immediately load amdgpu drivers
     boot.initrd.kernelModules = [ "amdgpu" ];
     
-    # Set exposed video decode for mpv
+    # Set exposed video decode for mpv?
     environment.variables.RADV_PERFTEST = "video_decode";
     
     # Enables AMDVLK Vulkan driver
@@ -22,6 +22,7 @@
     # Enable OpenGL with AMD Vulkan
     hardware = {
       graphics = {
+        enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
           rocmPackages.clr.icd
@@ -40,11 +41,6 @@
 
     # Set xserver video driver
     services.xserver.videoDrivers = ["amdgpu"];
-
-    # rocdbgapi has a problem with building in 25.11
-    # https://github.com/NixOS/nixpkgs/issues/421822
-    # https://hydra.nixos.org/job/nixpkgs/trunk/rocmPackages_6.rocdbgapi.x86_64-linux/all
-    # The temp solution that goes over it eats up RAM
 
     # Adds rocm support to btop and nixos
     nixpkgs.config.rocmSupport = true;
