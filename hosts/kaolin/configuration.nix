@@ -1,5 +1,6 @@
 # Kaolin Configuration
 {
+  config,  
   pkgs,
   ... 
 }:{
@@ -60,6 +61,7 @@
 
     server = {
       enable = false;
+      davis.enable = false;
       jellyfin.enable = false;
       suwayomi.enable = false;
     };
@@ -71,6 +73,7 @@
       input.enable = false;
       lanzaboote.enable = false;
 
+      # age.nix included by default
       # locale.nix included by default
       # nix.nix included by default
     };
@@ -89,10 +92,13 @@
     "net.ipv4.conf.wgcf.rp_filter" = false;
   };
 
+  # Agenix keyfile
+  age.secrets.secret5.file = ../../secrets/secret5.age;
+
   # Wireguard config to not cuck tailscale
   networking.wg-quick.interfaces = {
     wgcf = {
-      privateKeyFile = "/etc/wgcf.key";
+      privateKeyFile = config.age.secrets.secret5.path;
 
       address = [
         "172.16.0.2/32"
