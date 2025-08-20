@@ -29,7 +29,7 @@ in {
     system = null;
     specialArgs = {
       inherit sources zaphkiel;
-      users = ["sumeezome"];
+      users = ["sumee"];
     };
 
     modules = [

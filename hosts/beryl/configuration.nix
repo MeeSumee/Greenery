@@ -89,9 +89,9 @@
 
   # Define user accounts.
   users.users = {
-    sumeezome = {
+    sumee = {
       isNormalUser = true;
-      description = "Sumeezome";
+      description = "Sumee";
       extraGroups = ["networkmanager" "wheel" "fuse"];
     };
   };
