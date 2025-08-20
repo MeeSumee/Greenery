@@ -17,7 +17,7 @@ RowLayout {
     }
 
     Text {
-        Layout.alignment: icon.Qt.AlignLeft
+        Layout.alignment: Qt.AlignLeft
         text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF : Dat.Weather.tempC
         color: Dat.Colors.foreground
         font.pointSize: 24

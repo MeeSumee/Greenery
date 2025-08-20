@@ -25,8 +25,8 @@ Rectangle {
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 340
-            width: 270
+            implicitHeight: 340
+            implicitWidth: 270
             color: "gold"
 
             Text {
@@ -44,8 +44,8 @@ Rectangle {
 
         Rectangle {
             Layout.rowSpan: 2
-            height: 340
-            width: 300
+            implicitHeight: 340
+            implicitWidth: 300
             radius: 20
             color: Dat.Colors.background
             opacity: 0.9
@@ -63,8 +63,8 @@ Rectangle {
 
         Rectangle {
             Layout.rowSpan: 2
-            height: 340
-            width: 310
+            implicitHeight: 340
+            implicitWidth: 310
             radius: 20
             color: Dat.Colors.background
 

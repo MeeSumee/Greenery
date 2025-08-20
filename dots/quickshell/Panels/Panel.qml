@@ -1,8 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
-import Quickshell.Io
-import Quickshell.Widgets
 import qs.Widgets as Wid
 import qs.Data as Dat
 import qs.Panels as Pan
@@ -37,7 +34,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.margins: 4
 
-                height: parent.height / 7
+                implicitHeight: parent.implicitHeight / 7
 
                 color: "transparent"
 
@@ -71,9 +68,9 @@ Rectangle {
 
                 Layout.fillWidth: true
                 Layout.margins: 4
-                Layout.alignment: button1.Qt.AlignBottom
+                Layout.alignment: Qt.AlignBottom
 
-                height: parent.height / 7
+                implicitHeight: parent.implicitHeight / 7
 
                 color: "transparent"
                 
@@ -106,9 +103,9 @@ Rectangle {
 
                 Layout.fillWidth: true
                 Layout.margins: 4
-                Layout.alignment: button2.Qt.AlignBottom
+                Layout.alignment: Qt.AlignBottom
 
-                height: parent.height / 7
+                implicitHeight: parent.implicitHeight / 7
 
                 color: "transparent"
                 
@@ -141,9 +138,9 @@ Rectangle {
 
                 Layout.fillWidth: true
                 Layout.margins: 4
-                Layout.alignment: button3.Qt.AlignBottom
+                Layout.alignment: Qt.AlignBottom
 
-                height: parent.height / 7
+                implicitHeight: parent.implicitHeight / 7
 
                 color: "transparent"
                 
@@ -176,9 +173,9 @@ Rectangle {
 
                 Layout.fillWidth: true
                 Layout.margins: 4
-                Layout.alignment: button4.Qt.AlignBottom
+                Layout.alignment: Qt.AlignBottom
 
-                height: parent.height / 7
+                implicitHeight: parent.implicitHeight / 7
 
                 color: "transparent"
                 
@@ -217,7 +214,7 @@ Rectangle {
                 Layout.margins: 5
                 Layout.alignment: Qt.AlignBottom
 
-                height: parent.height / 7
+                implicitHeight: parent.implicitHeight / 7
 
                 color: "transparent"
                 
