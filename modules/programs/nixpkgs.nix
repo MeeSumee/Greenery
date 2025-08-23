@@ -102,7 +102,6 @@
         libreoffice-fresh               # office applications
         gparted                         # disk management software
         prismlauncher                   # minecraft 
-        zoom-us                         # meetings
         gnome-calculator                # gnome calculator
         nautilus                        # gnome file browser
         nightfox-gtk-theme              # Gtk Theme
@@ -130,7 +129,6 @@
     (lib.mkIf (config.greenery.programs.engineering.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
         arduino-ide                     # microcontroller programming
-        octave                          # Scientific Programming Language
       ];
     })
 
