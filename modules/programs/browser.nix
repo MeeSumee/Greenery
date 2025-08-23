@@ -164,7 +164,7 @@
           "browser.urlbar.suggest.searches" = false;
           "browser.search.suggest.enabled" = false;
           "browser.search.update" = false;
-          "browser.search.separatePrivateDefault" = true;
+          "browser.search.separatePrivateDefault" = false;
           "browser.search.separatePrivateDefault.ui.enabled" = true;
           "browser.search.serpEventTelemetryCategorization.enabled" = false;
           "browser.urlbar.suggest.mdn" = true;
@@ -226,6 +226,10 @@
           "SearchEngines" = {
             "Default" = "DuckDuckGo";
             "PreventInstalls" = true;
+            "Remove" = [
+              "Google"
+              "Bing"
+            ];
           };
 
           "app.support.baseURL" = "https://support.librewolf.net/";
