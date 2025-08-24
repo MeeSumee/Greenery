@@ -35,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "130a1b4048fbee0b29996147d26965193580f055",
-      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/130a1b4048fbee0b29996147d26965193580f055.tar.gz",
-      "hash": "sha256-M9Us2LAGtf25hmYCk+n0nbBUlcrs9kuG9tVF8QuFktg="
+      "revision": "2a00273b107aee8f00971ac4513aaf1a0c87e56f",
+      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/2a00273b107aee8f00971ac4513aaf1a0c87e56f.tar.gz",
+      "hash": "sha256-qkFcFeV8lIukGsDVKGWnGCWUYgMA+SM9IcNs+vrC4Bs="
     },
     "booru": {
       "type": "Git",
@@ -89,9 +89,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "565a15366d7b5aa5483ebe101fbc0ea27f0516b7",
-      "url": "https://github.com/feel-co/hjem/archive/565a15366d7b5aa5483ebe101fbc0ea27f0516b7.tar.gz",
-      "hash": "sha256-4XnVeNej5FJLBavw3qxoHI01ojmryeNzT6Mk9Q0nDXQ="
+      "revision": "ce24546f7f552bb92315e013f2599776e0b33249",
+      "url": "https://github.com/feel-co/hjem/archive/ce24546f7f552bb92315e013f2599776e0b33249.tar.gz",
+      "hash": "sha256-AS8mTZyvQDvP3XgSLPp/DI0GFhvdMlxcQBWTR48mBjU="
     },
     "lanzaboote": {
       "type": "Git",
@@ -148,9 +148,8 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre831064.6e987485eb2c/nixexprs.tar.xz",
-      "hash": "sha256-okomYyezDlua8/ssPHEdE2/gC1r+MElosWlZQuFrIdQ=",
-      "frozen": true
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre846535.20075955deac/nixexprs.tar.xz",
+      "hash": "sha256-AU6EqTVZNuNXrNVmVJ0J3QAuK/RezRzQqlJokCSey2M="
     },
     "npins": {
       "type": "Git",
@@ -161,9 +160,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "afa9fe50cb0bff9ba7e9f7796892f71722b2180d",
-      "url": "https://github.com/andir/npins/archive/afa9fe50cb0bff9ba7e9f7796892f71722b2180d.tar.gz",
-      "hash": "sha256-D6dYAMk9eYpBriE07s8Q7M3WBT7uM9pz3RKIoNk+h7I="
+      "revision": "e4683671e145c652c371b6b8ad9b0d757c88853c",
+      "url": "https://github.com/andir/npins/archive/e4683671e145c652c371b6b8ad9b0d757c88853c.tar.gz",
+      "hash": "sha256-Nu86s1xok+1EFM0J9e55hrYPgfoutEZUDBpeXReCOaY="
     },
     "rust-overlay": {
       "type": "Git",
@@ -188,9 +187,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "123aba48e10781fb39c6fe506921b2316f8d3305",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/123aba48e10781fb39c6fe506921b2316f8d3305.tar.gz",
-      "hash": "sha256-4hsfDLHmFanQK+AUpv8M0gu5Apb0tlYB9VECfPmsdtA="
+      "revision": "2fb85450b2d7f39970a6c9fb4b0df24b235dacc3",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/2fb85450b2d7f39970a6c9fb4b0df24b235dacc3.tar.gz",
+      "hash": "sha256-BrHOknOpRDYqjiMOLFWTZS2w8tYyQI6q1PcI4IIoqg0="
     }
   },
   "version": 6
