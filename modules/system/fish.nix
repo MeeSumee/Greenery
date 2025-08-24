@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  options,
   users, 
   ...
 }:
@@ -64,7 +63,7 @@ in {
 
         # misc
         qsp = "qs -p ~/green/quickshell/";
-        m = "micro";
+        n = "nvim";
       };
 
       # Aliases to execute commands directly
@@ -75,6 +74,7 @@ in {
         snowstorm = "${rebuildCommand} test";
         snowshed = "${rebuildCommand} dry-build";
         schizo = "ssh administrator@greenery";
+        escape = "ssh sumee@kaolin";
       };
 
       # Coloring shell, referenced from Zaphkiel config
