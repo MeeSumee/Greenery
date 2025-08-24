@@ -32,7 +32,7 @@
     networking = {
       enable = true;
       bluetooth.enable = true;
-      dnscrypt.enable = false;
+      dnscrypt.enable = true;
       fail2ban.enable = false;
       openssh.enable = true;
       taildrive.enable = false;
