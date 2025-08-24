@@ -63,4 +63,17 @@ in {
       ./hosts/kaolin/hardware-configuration.nix
     ];
   };
+
+  graphite = nixosConfig {
+    system = null;
+    specialArgs = {
+      inherit sources zaphkiel;
+      users = ["sumee"];
+    };
+    
+    modules = [
+      ./hosts/graphite/configuration.nix
+      ./hosts/graphite/hardware-configuration.nix
+    ];
+  };
 }
