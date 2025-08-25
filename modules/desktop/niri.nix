@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  options,
   lib,
   sources,
   users,
@@ -43,12 +42,12 @@
         # Set niri wallpaper
         niriwall = let
           from = ["*Why_is_IT_department_a_piece_of_shit*"];
-          real_life_moment = pkgs.fetchurl {
-            name = "apartment";
-            url = "https://cdn.donmai.us/original/ae/78/ae78985535779323b7eef717f39e1c0f.gif?download=1";
-            hash = "sha256-bx6gG5fJTVJCnpeb/E91FBpNQk+xmXcBJpDDIebkqbg=";
+          schizovivi = pkgs.fetchurl {
+            name = "schizovivi";
+            url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
+            hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
           };
-          to = ["${real_life_moment}"];
+          to = ["${schizovivi}"];
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
 

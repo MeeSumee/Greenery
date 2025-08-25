@@ -108,6 +108,9 @@ layout {
     // Set gaps around windows in logical pixels.
     gaps 16
 
+    // Set background as transparent
+    background-color "transparent"
+
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
@@ -154,7 +157,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -327,6 +330,18 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+}
+
+// Make wallpaper the background of everything including overlay and not have it move around
+layer-rule {
+  match namespace="^swww-daemon$"
+  place-within-backdrop true
+}
+
+overview {
+  workspace-shadow {
+    off
+  }
 }
 
 // Example: block out two password managers from screen capture.
