@@ -35,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "2a00273b107aee8f00971ac4513aaf1a0c87e56f",
-      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/2a00273b107aee8f00971ac4513aaf1a0c87e56f.tar.gz",
-      "hash": "sha256-qkFcFeV8lIukGsDVKGWnGCWUYgMA+SM9IcNs+vrC4Bs="
+      "revision": "5d83f3ab8bf3801ca8de2c041c912888f1d87449",
+      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/5d83f3ab8bf3801ca8de2c041c912888f1d87449.tar.gz",
+      "hash": "sha256-YO9ONuc61c+L5AyE2yqzVa2oGNhbHrr3zxqjtivYqOY="
     },
     "booru": {
       "type": "Git",
@@ -149,7 +149,8 @@
       "type": "Channel",
       "name": "nixos-unstable",
       "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre846535.20075955deac/nixexprs.tar.xz",
-      "hash": "sha256-AU6EqTVZNuNXrNVmVJ0J3QAuK/RezRzQqlJokCSey2M="
+      "hash": "sha256-AU6EqTVZNuNXrNVmVJ0J3QAuK/RezRzQqlJokCSey2M=",
+      "frozen": true
     },
     "npins": {
       "type": "Git",
