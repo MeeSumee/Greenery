@@ -120,7 +120,7 @@
       fish.enable = true;
       fonts.enable = false;
       input.enable = false;
-      lanzaboote.enable = false;
+      lanzaboote.enable = true;
       
       # age.nix included by default
       # locale.nix included by default
