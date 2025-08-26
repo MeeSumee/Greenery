@@ -29,7 +29,7 @@ in {
     system = null;
     specialArgs = {
       inherit sources zaphkiel;
-      users = ["sumeezome"];
+      users = ["sumee"];
     };
 
     modules = [
@@ -61,6 +61,19 @@ in {
     modules = [
       ./hosts/kaolin/configuration.nix
       ./hosts/kaolin/hardware-configuration.nix
+    ];
+  };
+
+  graphite = nixosConfig {
+    system = null;
+    specialArgs = {
+      inherit sources zaphkiel;
+      users = ["sumee"];
+    };
+    
+    modules = [
+      ./hosts/graphite/configuration.nix
+      ./hosts/graphite/hardware-configuration.nix
     ];
   };
 }

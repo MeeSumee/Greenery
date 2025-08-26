@@ -1,8 +1,6 @@
 { 
   config, 
   sources, 
-  options, 
-  users,
   lib,
   pkgs, 
   ... 
@@ -21,9 +19,11 @@
       enable = true;
     };
 
-    # Brightnessctl
-    systemd.user.services.hypridle = {
-      path = [ pkgs.brightnessctl ];
-    };   
+    # Fix paths
+    systemd.user.services.hypridle.path = lib.mkForce (lib.attrValues {
+      inherit (pkgs) brightnessctl kurukurubar-unstable;
+      hyprlock = config.programs.hyprlock.package;
+      hyprland = config.programs.hyprland.package;
+    });
   };
 }

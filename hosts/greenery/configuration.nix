@@ -120,7 +120,7 @@
       fish.enable = true;
       fonts.enable = false;
       input.enable = false;
-      lanzaboote.enable = false;
+      lanzaboote.enable = true;
       
       # age.nix included by default
       # locale.nix included by default
@@ -143,6 +143,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 本当に愛してぇる"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINSVW1+OKXQC3P/x/7SOl6D46BmHPUyFUytFK7G+7kNl `もうやめろすみちゃん〜〜`"
     ];
   };
 

@@ -1,5 +1,5 @@
 # Safe to modify as it's under flakes hehehehaw
-{ config, lib, pkgs, options, sources, ... }:
+{ config, lib, pkgs, sources, ... }:
 
 # Simulate asus-numberpad-driver flake using npins
 let 
@@ -41,6 +41,7 @@ in {
     wantedBy = ["multi-user.target"];
     serviceConfig.Type = "simple";
   };
+
   services.fprintd = {
     enable = true;
     package = pkgs.fprintd-tod;
