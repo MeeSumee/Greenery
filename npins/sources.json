@@ -35,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "5d83f3ab8bf3801ca8de2c041c912888f1d87449",
-      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/5d83f3ab8bf3801ca8de2c041c912888f1d87449.tar.gz",
-      "hash": "sha256-YO9ONuc61c+L5AyE2yqzVa2oGNhbHrr3zxqjtivYqOY="
+      "revision": "e34546fca9b31e9c660d41b3aa37cf24009706ed",
+      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/e34546fca9b31e9c660d41b3aa37cf24009706ed.tar.gz",
+      "hash": "sha256-lpS2jbnG4025lmEFhcdSmMPncHpEMOsCNBA+Pyv+BNE="
     },
     "booru": {
       "type": "Git",
