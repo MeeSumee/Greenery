@@ -77,6 +77,7 @@
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
         swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
+        khal                            # CLI Calendar dependency for banshell
 
         # npins-show command
         zaphkiel.packages.scripts.npins-show
