@@ -1,6 +1,5 @@
 {
   pkgs,
-  sources,
   config,
   users,
   lib,

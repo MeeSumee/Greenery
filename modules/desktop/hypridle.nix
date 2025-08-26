@@ -19,10 +19,11 @@
       enable = true;
     };
 
-    # Brightnessctl
+    # Fix paths
     systemd.user.services.hypridle.path = lib.mkForce (lib.attrValues {
-      inherit (config.programs.hyprland) package;
       inherit (pkgs) brightnessctl kurukurubar-unstable;
+      hyprlock = config.programs.hyprlock.package;
+      hyprland = config.programs.hyprland.package;
     });
   };
 }
