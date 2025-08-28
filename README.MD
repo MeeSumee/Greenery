@@ -1,30 +1,33 @@
 # My NixOS Repository
-Consists of Greenery, Beryl, Quartz and Kaolin
+Consists of multiple devices:
+Greenery - DNS, self-hosted, minecraft server with multiple services.
+Beryl - Remote access, personal laptop for tinkering with Niri and Quickshell.
+Quartz - Gaming PC for well, gaming.
+Kaolin - Traffic Relaying server to Switzerland using Cloudflare-WARP and Tailscale bridged using Wireguard.
+Graphite - Laptop found while dumpster diving and used as an excuse to use NixOS for work.
 
-## What mess have I created?
- I've been involved in more self-hosted applications, namely suwayomi, jellyfin, and davis with their own
- tailscale IP configured using Caddy-Tailscale plugin.
+## Status Updates
+ Graphite is real and can finally do work that doesn't involve Altium Designer on it.
 
- Kaolin is a hard-earned success after a week of understanding how to route tailscale traffic via Cloudflare-WARP
- all in the name of avoiding geoblocking. However I'm still stuck with Google Cloud and the trial will end. Need Oracle ASAP.
+ This will surely improve my productivity at work, hehehehaw.
 
- Agenix has been implemented successfully in Greenery and forging the path towards a more declarative operating system.
+ I AM STILL WAITING FOR ORACLE OMFG AAAHHHH.
 
- I've made the quickshell branch and making steady progress towards "banshell" (name subject to change).
+ Work has been such a pain in the ass for interrupting my quickshilling bingchilling.
 
  I'm still kinda lazy in updating READMEs, I will try though.
 
-## Notes on Quickshell
+## Notes on Quickshell (and ricing in a way)
 
-Given the shenanigans of first world countries being invasive over the internet, Kaolin took a large part of what
-could've been UI design with Quickshell. I will discuss with friends on discord on whether "banshell" shall remain
-the name of my quickshell config.
+I am slowly moving from Rose Pine themes to NightFox theme due to the more purple accents
+matching Vivian's theme.
 
-The preliminary colors are based on Rose-Pine theme, however I also plan to implenent themes of:
+Quickshell has been slow, but is making a bit of progress, widgets will be build as I go.
 
-- Vivian Banshee Colors
-- Nahida Colors
-- Matugen Color Generation for wallpaper analysis (may replace Vivian Banshee)
+Planned color themes:
+- Vivian Banshee Colors (Dark theme only)
+- Nahida Colors (Light and Dark theme)
+- Matugen Color Generation for wallpaper analysis (a later time)
 
 # Greenery
 
@@ -77,9 +80,9 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 
 # Graphite
 
-Copium, but it could be my work laptop if I can argue with IT for installing NixOS on it.
+Dell Latitude 5400 found in the dumpster. Consisted of 16GB of RAM and 256GB NVME SSD. Pretty good find imo.
 
-This name will be reserved until I get NixOS on a work laptop.
+Used for work and ssh into other NixOS systems during work. (Don't tell my manager about the latter)
 
 # Quartz
 
@@ -87,10 +90,7 @@ Custom-built gaming pc intended for workstation and gaming.
 
 Intended to be used as my nix config manager while I'm at home.
 
-Problems: Hyprland 0.50 might have caused genshin to freeze entire system? Noted from btop++ where the GPUs kept switching while playing the game.
-Annoying thing is I can't diagnose the problem as journalctl has no leads to the problem. Experimentation imminent.
-
-Future Endeavors: Identify the core issues of dual-gpu setup in NixOS and resolve it, implement remote desktop for Beryl to communicate to, potential GPU-Passthrough Windows. 
+Future Endeavors: Upgrade to 48GB cause I got 16GB Teamgroup RAM Stick for free, Implement remote desktop for Beryl to communicate to, potential GPU-Passthrough Windows. 
 
 ## Quartz PC Specifications
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
