@@ -1,10 +1,11 @@
 # My NixOS Repository
 Consists of multiple devices:
-Greenery - DNS, self-hosted, minecraft server with multiple services.
-Beryl - Remote access, personal laptop for tinkering with Niri and Quickshell.
-Quartz - Gaming PC for well, gaming.
-Kaolin - Traffic Relaying server to Switzerland using Cloudflare-WARP and Tailscale bridged using Wireguard.
-Graphite - Laptop found while dumpster diving and used as an excuse to use NixOS for work.
+
+- Greenery: DNS, self-hosted, minecraft server with multiple services.
+- Beryl: Remote access, personal laptop for tinkering with Niri and Quickshell.
+- Quartz: Gaming PC for well, gaming.
+- Kaolin: Traffic Relaying server to Switzerland using Cloudflare-WARP and Tailscale bridged using Wireguard.
+- Graphite: Laptop found while dumpster diving and used as an excuse to use NixOS for work.
 
 ## Status Updates
  Graphite is real and can finally do work that doesn't involve Altium Designer on it.
