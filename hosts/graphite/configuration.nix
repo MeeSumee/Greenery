@@ -68,7 +68,7 @@
       fish.enable = true;
       fonts.enable = true;
       input.enable = true;
-      lanzaboote.enable = false;
+      lanzaboote.enable = true;
 
       # put the required comments later
     };
