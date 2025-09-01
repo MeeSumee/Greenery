@@ -44,10 +44,6 @@
 
   # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
-  
-#  services.displayManager.preStart = ''
-#    ${pkgs.libdrm}/bin/proptest -M i915 241 connector 248 2
-#  '';
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

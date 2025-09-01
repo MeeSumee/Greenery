@@ -1,14 +1,9 @@
 { 
   config, 
-  sources, 
   lib,
   pkgs, 
   ... 
 }:{
-  
-  imports = [
-    (sources.hjem + "/modules/nixos")
-  ];
 
   options.greenery.desktop.hypridle.enable = lib.mkEnableOption "hypridle";
 
@@ -21,7 +16,7 @@
 
     # Fix paths
     systemd.user.services.hypridle.path = lib.mkForce (lib.attrValues {
-      inherit (pkgs) brightnessctl kurukurubar-unstable;
+      inherit (pkgs) brightnessctl kurukurubar-unstable systemd;
       hyprlock = config.programs.hyprlock.package;
       hyprland = config.programs.hyprland.package;
     });

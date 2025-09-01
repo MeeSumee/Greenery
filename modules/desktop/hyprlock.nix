@@ -1,16 +1,10 @@
 { 
-  sources, 
   users, 
-  options, 
   config,
   lib,
   pkgs, 
   ... 
 }:{
-  
-  imports = [
-    (sources.hjem + "/modules/nixos")
-  ];
   
   options.greenery.desktop.hyprlock.enable = lib.mkEnableOption "hyprlock";
 
