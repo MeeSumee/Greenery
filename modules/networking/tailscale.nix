@@ -12,9 +12,13 @@
     services.tailscale = {
       enable = true;
       useRoutingFeatures = "both"; # Enables the use of exit node
+      extraSetFlags = [
+        "--accept-routes=true"
+        "--accept-dns=false"
+      ];
     };
 
-    # Fix tailscale auto-connect during login (might not be necessary)
+    # Fix system hang when no internet connection
     systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
   };
 }

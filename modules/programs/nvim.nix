@@ -1,16 +1,11 @@
 {
   zaphkiel,
-  sources,
   config,
   lib,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
 in {
-  # Import hjem
-  imports = [
-    (sources.hjem + "/modules/nixos")
-  ];
 
   options.greenery.programs.nvim.enable = mkEnableOption "nvim";
 

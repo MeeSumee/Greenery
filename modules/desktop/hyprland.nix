@@ -3,13 +3,8 @@
   lib,
   config,
   users,
-  sources,
   ...
 }:{
-  
-  imports = [
-    (sources.hjem + "/modules/nixos")
-  ];
   
   options.greenery.desktop.hyprland.enable = lib.mkEnableOption "hyprland";
 

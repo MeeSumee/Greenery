@@ -71,6 +71,9 @@
       fonts.enable = true;
       input.enable = true;
       lanzaboote.enable = true;
+      sumee.enable = true;
+      nahida.enable = false;
+      yang.enable = false;
 
       # age.nix included by default
       # locale.nix included by default
@@ -86,21 +89,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
-
-  # Define user accounts.
-  users.users = {
-    sumee = {
-      isNormalUser = true;
-      description = "Sumee";
-      extraGroups = ["networkmanager" "wheel" "fuse"];
-    };
-  };
-
-  # Toggle cam on/off aliases using fish (need sudo privileges tho)
-  programs.fish.shellAliases = {
-    camoff = ''echo "5-1:1.0" | sudo tee /sys/bus/usb/drivers/uvcvideo/unbind'';
-    camon = ''echo "5-1:1.0" | sudo tee /sys/bus/usb/drivers/uvcvideo/bind'';
-  };
   
   # Enable power profiles
   services.power-profiles-daemon.enable = true;

@@ -71,6 +71,9 @@
       fonts.enable = true;
       input.enable = true;
       lanzaboote.enable = false;
+      sumee.enable = true;
+      nahida.enable = false;
+      yang.enable = false;
 
       # age.nix included by default
       # locale.nix included by default
@@ -83,21 +86,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
-
-  # Define user accounts
-  users.users = {
-    sumee = {
-      isNormalUser = true;
-      description = "Sumee";
-      extraGroups = ["networkmanager" "wheel" "fuse"];
-    };
-  };
-
-  # Packages that don't really make sense as a option
-  environment.systemPackages = with pkgs; [
-    fan2go                          # Fan Control
-    openrgb                         # Open-Source RGB Control Software
-  ];
 
 /*
   This value determines the NixOS release from which the default

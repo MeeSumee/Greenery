@@ -89,9 +89,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ce24546f7f552bb92315e013f2599776e0b33249",
-      "url": "https://github.com/feel-co/hjem/archive/ce24546f7f552bb92315e013f2599776e0b33249.tar.gz",
-      "hash": "sha256-AS8mTZyvQDvP3XgSLPp/DI0GFhvdMlxcQBWTR48mBjU="
+      "revision": "2426d6ad20e767895e936ed0c9563cc4e2b6c96f",
+      "url": "https://github.com/feel-co/hjem/archive/2426d6ad20e767895e936ed0c9563cc4e2b6c96f.tar.gz",
+      "hash": "sha256-WJ70Dv+tJjIl7mMOqUgcdcz+RrujDRoeKptiU6oh1lI="
     },
     "lanzaboote": {
       "type": "Git",
@@ -188,9 +188,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "2fb85450b2d7f39970a6c9fb4b0df24b235dacc3",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/2fb85450b2d7f39970a6c9fb4b0df24b235dacc3.tar.gz",
-      "hash": "sha256-BrHOknOpRDYqjiMOLFWTZS2w8tYyQI6q1PcI4IIoqg0="
+      "revision": "de0ccd363612c238eecc302e61bd473fa7cb7b69",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/de0ccd363612c238eecc302e61bd473fa7cb7b69.tar.gz",
+      "hash": "sha256-mmeMOtLVt21zumFJoIRYsQLR5eFochyU8zniE2bR6UE="
     }
   },
   "version": 6

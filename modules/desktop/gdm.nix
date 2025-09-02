@@ -1,16 +1,9 @@
 { 
   config, 
-  options, 
   lib, 
   pkgs, 
-  sources, 
-  users, 
   ...
 }:{
-  
-  imports = [
-    (sources.hjem + "/modules/nixos")
-  ];
 
   options.greenery.desktop.gdm.enable = lib.mkEnableOption "gnome display manager";
 

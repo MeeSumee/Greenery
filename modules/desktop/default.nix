@@ -1,9 +1,7 @@
 {
   config,
   pkgs,
-  options,
   lib,
-  sources,
   users,
   ...
 }:{
@@ -17,9 +15,6 @@
     ./kurukurudm.nix
     ./niri.nix
     ./xserver.nix
-
-    # Hjem source
-    (sources.hjem + "/modules/nixos")
   ];
   
   options.greenery.desktop.enable = lib.mkEnableOption "desktop enviroment";

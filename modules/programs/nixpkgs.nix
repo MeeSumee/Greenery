@@ -135,11 +135,15 @@
 
     # Large/Demanding applications
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
+      
       environment.systemPackages = with pkgs; [
         gimp3                           # GIMP image manipulator
         kicad                           # KiCAD Electronic schematic/PCB designer
         rare                            # GUI based on legendary which is a port of Epic Games
-        davinci-resolve                 # Davinci Resolve Free Video Editor
+        davinci-resolve                 # Davinci-resolve video editor
+
+        # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)
+        # (pkgs.callPackage ./davinci.nix {})
       ];
     })        
   ];

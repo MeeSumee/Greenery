@@ -1,6 +1,5 @@
 { 
   config,
-  options, 
   lib, 
   sources, 
   users, 
@@ -8,9 +7,6 @@
   ...
 }:
 {
-  imports = [
-    (sources.hjem + "/modules/nixos")
-  ];
 
   options.greenery.programs.micro.enable = lib.mkEnableOption "micro";
 

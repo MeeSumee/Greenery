@@ -121,7 +121,10 @@
       fonts.enable = false;
       input.enable = false;
       lanzaboote.enable = true;
-      
+      sumee.enable = false;
+      nahida.enable = false;
+      yang.enable = false;
+
       # age.nix included by default
       # locale.nix included by default
       # nix.nix included by default
@@ -152,7 +155,6 @@
     extraSetFlags = [
       "--advertise-exit-node"
       "--webclient"
-      "--accept-dns=false"
     ];
   };  
 
@@ -163,5 +165,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

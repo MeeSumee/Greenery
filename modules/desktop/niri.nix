@@ -2,15 +2,9 @@
   config,
   pkgs,
   lib,
-  sources,
   users,
   ...
 }: {
-  
-  # Import modules
-  imports = [
-    (sources.hjem + "/modules/nixos")
-  ];
 
   options.greenery.desktop.niri.enable = lib.mkEnableOption "niri";
 
