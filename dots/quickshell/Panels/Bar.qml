@@ -94,7 +94,13 @@ WlrLayershell {
             Item {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.topMargin: 5
+                Layout.topMargin: 0
+
+                Wid.Battery {
+                  Layout.alignment:Qt.AlignTop
+                  implicitWidth: 25
+                  implicitHeight: 25
+                }
             }
         }
 

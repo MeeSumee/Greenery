@@ -32,7 +32,7 @@ Singleton {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    console.log("Raw response:", xhr.responseText);
+                    // console.log("Raw response:", xhr.responseText);
                     try {
                         const json = JSON.parse(xhr.responseText);
                         const current = json.current_condition?.[0];
@@ -42,10 +42,11 @@ Singleton {
                             return;
                         }
 
-                        //icon = Icons.getWeatherIcon(current.weatherCode);
+                        // icon = Icons.getWeatherIcon(current.weatherCode);
                         description = current.weatherDesc?.[0]?.value ?? "Unknown";
                         tempC = `${parseFloat(current.temp_C)}°C`;
                         tempF = `${parseFloat(current.temp_F)}°F`;
+
 
                         console.log("Updated temps:", tempC, tempF);
                     } catch (e) {

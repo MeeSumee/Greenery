@@ -1,4 +1,3 @@
-import Quickshell
 import QtQuick.Layouts
 import QtQuick
 import qs.Data as Dat
