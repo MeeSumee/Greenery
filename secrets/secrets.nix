@@ -21,4 +21,5 @@ in {
   "secret3.age".publicKeys = users.administrator ++ hosts.greenery;
   "secret4.age".publicKeys = users.administrator ++ hosts.greenery;
   "secret5.age".publicKeys = users.sumee ++ hosts.kaolin;
+  "secret6.age".publicKeys = users.sumee;
 }

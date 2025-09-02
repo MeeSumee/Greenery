@@ -69,8 +69,13 @@
       fonts.enable = true;
       input.enable = true;
       lanzaboote.enable = true;
+      sumee.enable = true;
+      nahida.enable = false;
+      yang.enable = false;
 
-      # put the required comments later
+      # age.nix included by default
+      # locale.nix included by default
+      # nix.nix included by default
     };
   };
 
@@ -80,13 +85,6 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Define a user account
-  users.users.sumee = {
-    isNormalUser = true;
-    description = "Sumee";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -94,5 +92,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }

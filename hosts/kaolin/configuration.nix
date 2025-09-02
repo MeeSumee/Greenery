@@ -72,6 +72,9 @@
       fonts.enable = false;
       input.enable = false;
       lanzaboote.enable = false;
+      sumee.enable = true;
+      nahida.enable = false;
+      yang.enable = false;
 
       # age.nix included by default
       # locale.nix included by default
@@ -180,18 +183,6 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
-
-  # Define a user account.
-  users.users.sumee = {
-    isNormalUser = true;
-    description = "Sumee";
-    extraGroups = [ "networkmanager" "wheel" ];
-    openssh.authorizedKeys.keys = [  
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIX4OMIF84eVKP5JqtAoE0/Wqd8c8cY2gAsXsKPC8C+X 本当に愛してぇる"
-    ];
-  };
 
   # Add kaolin specific packages
   environment.systemPackages = with pkgs; [
