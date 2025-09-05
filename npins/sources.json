@@ -66,6 +66,19 @@
       "hash": "sha256-g5uP3jIj+STUcfTJDKYopxnSijs2agRg13H0SGL5iE4=",
       "frozen": true
     },
+    "ecchirexi": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Rexcrazy804",
+        "repo": "hjem-impure"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "8008b39dfbcc747e609fe806d2ead82513867266",
+      "url": "https://github.com/Rexcrazy804/hjem-impure/archive/8008b39dfbcc747e609fe806d2ead82513867266.tar.gz",
+      "hash": "sha256-St8r9HmrMW0lXUHRgGeskwOyhI8thWxarW0YI+eFPxU="
+    },
     "flake-compat": {
       "type": "Git",
       "repository": {

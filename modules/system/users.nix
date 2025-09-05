@@ -3,6 +3,7 @@
   sources,
   lib,
   pkgs,
+  users,
   ...
 } @ args: let
 
@@ -20,6 +21,7 @@
 in {
   imports = [hjemModule];
 
+
   # Options maker
   options.greenery.system = {
     sumee.enable = mkEnableOption "Enable the SUMEE user";
@@ -29,6 +31,17 @@ in {
   
   config = mkMerge [
     
+    # Seal hornie rexie in my basement
+    ({
+      hjem.extraModules = [
+        (sources.ecchirexi + "/hjem-impure.nix")
+      ];
+
+      hjem.users = lib.genAttrs users (user: {
+        impure.enable = true;
+      });
+    })
+
     # WHERE DOES THE STOMEE LIVE???
     (mkIf (config.greenery.system.sumee.enable && config.greenery.system.enable) {
       
