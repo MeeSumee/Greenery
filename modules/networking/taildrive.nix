@@ -1,7 +1,6 @@
 { 
   config, 
   lib, 
-  options, 
   users, 
   ... 
 }:
@@ -10,7 +9,7 @@
 
   config = lib.mkIf (config.greenery.networking.taildrive.enable && config.greenery.networking.enable) {
 
-    # Cursed way of putting uers to mount taildrive as users is a single item in a list (it works btw)
+    # Set taildrive to mount in user folder (very cursed lol)
     fileSystems."/run/media/${builtins.concatStringsSep "," users}/taildrive" = {
       device = "administrator@greenery:/run/media/sumee/emerald";
       fsType = "sshfs";

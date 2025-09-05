@@ -1,8 +1,6 @@
 {
   config,
-  options,
   lib,
-  sources,
   users,
   ...
 }:{
@@ -15,15 +13,13 @@
       enable = true;
     };
 
-    # Foot + Fish rice
+    # Foot Theming
     hjem.users = lib.genAttrs users (user: {
       enable = true;
       directory = config.users.users.${user}.home;
       clobberFiles = lib.mkForce true;
       files = {
         ".config/foot/foot.ini".source = ../../dots/foot/foot.ini;
-        ".config/fish/config.fish".source = ../../dots/fish/config.fish;
-        ".config/fish/themes/Rosé Pine.theme".source = ../../dots/fish/themes/rosepine.theme;        
       };
     });    
   };
