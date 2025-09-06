@@ -88,9 +88,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "8008b39dfbcc747e609fe806d2ead82513867266",
-      "url": "https://github.com/Rexcrazy804/hjem-impure/archive/8008b39dfbcc747e609fe806d2ead82513867266.tar.gz",
-      "hash": "sha256-St8r9HmrMW0lXUHRgGeskwOyhI8thWxarW0YI+eFPxU="
+      "revision": "fcb955a63557561b2ad36bb20d1a9bfb00607782",
+      "url": "https://github.com/Rexcrazy804/hjem-impure/archive/fcb955a63557561b2ad36bb20d1a9bfb00607782.tar.gz",
+      "hash": "sha256-e257brFXMMzONe64mOLktYAjxRyYkrvRTqX8HS32qSs="
     },
     "flake-compat": {
       "type": "Git",
@@ -214,9 +214,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "739f07d417eb47ffba3cac961b8925f3174ad5b5",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/739f07d417eb47ffba3cac961b8925f3174ad5b5.tar.gz",
-      "hash": "sha256-LrTONNR+rsmvUSzDdX92lge6NSbHNfrCIuH9tc17/bw="
+      "revision": "01d226068a1f06159fcdfcd44e624a9c0366a2bf",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/01d226068a1f06159fcdfcd44e624a9c0366a2bf.tar.gz",
+      "hash": "sha256-GDOhadAAKEHCMwZORhiyVRrlF6wklx6cQwEojvMHWAc="
     }
   },
   "version": 6
