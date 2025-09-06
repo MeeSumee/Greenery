@@ -18,9 +18,6 @@
 
     # Micro Hjem setup
     hjem.users = lib.genAttrs users (user: {
-      enable = true;
-      directory = config.users.users.${user}.home;
-      clobberFiles = lib.mkForce true;
       files = {
         ".config/micro/plug/lsp".source = sources.micro-plugin-lsp;
         ".config/micro/plug/bounce".source = sources.micro-bounce;

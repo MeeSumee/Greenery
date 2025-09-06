@@ -150,9 +150,6 @@ in {
 
     # Hjem fish dotfiles
     hjem.users = lib.genAttrs users (user: {
-      enable = true;
-      directory = config.users.users.${user}.home;
-      clobberFiles = lib.mkForce true;
       files = {
         ".config/fish/config.fish".source = ../../dots/fish/config.fish;
         ".config/fish/themes/Dracula Official.theme".source = ../../dots/fish/themes/dracula.theme;        

@@ -15,9 +15,6 @@
 
     # Foot Theming
     hjem.users = lib.genAttrs users (user: {
-      enable = true;
-      directory = config.users.users.${user}.home;
-      clobberFiles = lib.mkForce true;
       files = {
         ".config/foot/foot.ini".source = ../../dots/foot/foot.ini;
       };
