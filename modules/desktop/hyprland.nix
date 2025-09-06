@@ -32,8 +32,8 @@
         # Set hyprland wallpaper
         hyprwall = pkgs.fetchurl {
           name = "hyprvivian";
-          url = "https://img4.gelbooru.com/images/05/eb/05ebf5d940096c87b92497c92770c997.png";
-          hash = "sha256-lZ9dfCDthBgqewcBrzQOKFr2X5Rc+rlEhPPrO8VQA/g=";
+          url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
+          hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
         };
         
         # Set quickshell lockscreen bundled from kurushell
