@@ -66,6 +66,19 @@
       "hash": "sha256-g5uP3jIj+STUcfTJDKYopxnSijs2agRg13H0SGL5iE4=",
       "frozen": true
     },
+    "dracula-fish": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "dracula",
+        "repo": "fish"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "269cd7d76d5104fdc2721db7b8848f6224bdf554",
+      "url": "https://github.com/dracula/fish/archive/269cd7d76d5104fdc2721db7b8848f6224bdf554.tar.gz",
+      "hash": "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY="
+    },
     "ecchirexi": {
       "type": "Git",
       "repository": {

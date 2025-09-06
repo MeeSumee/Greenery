@@ -2,7 +2,8 @@
   pkgs,
   lib,
   config,
-  users, 
+  users,
+  sources,
   ...
 }:
 
@@ -152,7 +153,7 @@ in {
     hjem.users = lib.genAttrs users (user: {
       files = {
         ".config/fish/config.fish".source = ../../dots/fish/config.fish;
-        ".config/fish/themes/Dracula Official.theme".source = ../../dots/fish/themes/dracula.theme;        
+        ".config/fish/themes".source = sources.dracula-fish + "/themes";        
       };
     });    
   };
