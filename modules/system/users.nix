@@ -63,7 +63,6 @@ in {
         enable = true;
         directory = config.users.users.${user}.home;
         clobberFiles = lib.mkForce true;
-
       });
 
       # Set face icon for all users

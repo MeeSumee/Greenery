@@ -3,6 +3,7 @@
   config,
   pkgs,
   lib,
+  users,
   zaphkiel,
   ...
 }:{
@@ -104,7 +105,7 @@
         prismlauncher                   # minecraft 
         gnome-calculator                # gnome calculator
         nautilus                        # gnome file browser
-        nightfox-gtk-theme              # Gtk Theme
+        dracula-theme                   # Gtk Theme
         papirus-icon-theme              # Gtk Icons
       ];
 
@@ -112,7 +113,7 @@
       programs.dconf.profiles.user.databases = [{
         settings = {
           "org/gnome/desktop/interface" = {
-            gtk-theme = "Nightfox-Dark";
+            gtk-theme = "Dracula";
             icon-theme = "Papirus-Dark";
             cursor-theme = "xcursor-genshin-nahida";
             document-font-name = "DejaVu Serif";
@@ -123,6 +124,18 @@
           };
         };
       }];
+
+      # Correct bitchy ass nautilus
+      hjem.users = lib.genAttrs users (user: {
+        files = let
+          themeName = "Dracula";
+          themeDir = "/run/current-system/sw/share/themes/${themeName}";
+        in {
+          ".config/gtk-4.0/assets".source = "${themeDir}/gtk-4.0/assets";
+          ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
+          ".config/gtk-4.0/gtk-dark.css".source = "${themeDir}/gtk-4.0/gtk-dark.css";
+        };
+      });
     })
 
     # Engineering and projects
