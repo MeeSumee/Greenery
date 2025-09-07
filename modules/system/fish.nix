@@ -42,7 +42,7 @@ in {
         snr = rebuildCommand;
         nsh = "nix shell nixpkgs#";
         nrn = "nix run nixpkgs#";
-        nip = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";        
+        nbn = "nix build nixpkgs#";
 
         # git stuff
         gaa = "git add --all";
@@ -72,6 +72,7 @@ in {
       # Aliases to execute commands directly
       shellAliases = {
         ls = "eza --icons --group-directories-first -1";
+        gparted = "sudo -EH gparted";
         snowball = "${rebuildCommand} boot";
         snowfall = "${rebuildCommand} switch";
         snowstorm = "${rebuildCommand} test";

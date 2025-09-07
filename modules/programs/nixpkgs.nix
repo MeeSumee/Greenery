@@ -105,8 +105,11 @@
         prismlauncher                   # minecraft 
         gnome-calculator                # gnome calculator
         nemo                            # nemo file browser
-        dracula-theme                   # Gtk Theme
-        papirus-icon-theme              # Gtk Icons
+        dracula-theme                   # Dracula Gtk Theme
+
+        (pkgs.papirus-icon-theme.override {
+          color = "violet";
+        })                              # Papirus Icons with violet folders
       ];
 
       # Theme gtk apps
