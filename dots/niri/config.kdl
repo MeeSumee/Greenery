@@ -381,7 +381,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+R hotkey-overlay-title="Run Prompt: fuzzel" { spawn "fuzzel"; }
-    Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
+    Mod+E hotkey-overlay-title="Run Nemo" { spawn "nemo"; }
     Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 

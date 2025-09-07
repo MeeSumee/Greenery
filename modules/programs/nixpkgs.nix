@@ -104,7 +104,7 @@
         gparted                         # disk management software
         prismlauncher                   # minecraft 
         gnome-calculator                # gnome calculator
-        nautilus                        # gnome file browser
+        nemo                            # nemo file browser
         dracula-theme                   # Gtk Theme
         papirus-icon-theme              # Gtk Icons
       ];
@@ -125,7 +125,7 @@
         };
       }];
 
-      # Correct bitchy ass nautilus
+      # Correct gtk theming for apps that don't use runtime directory
       hjem.users = lib.genAttrs users (user: {
         files = let
           themeName = "Dracula";
