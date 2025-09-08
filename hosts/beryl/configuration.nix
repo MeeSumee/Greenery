@@ -14,10 +14,7 @@
     
     desktop = {
       enable = true;
-      gdm.enable = false;
-      gnome.enable = false;
       hypridle.enable = true;
-      hyprland.enable = false;
       hyprlock.enable = true;
       kurukurudm.enable = true;
       niri.enable = true;
@@ -28,14 +25,13 @@
       enable = true;
       amdgpu.enable = true;
       audio.enable = true;
-      intelgpu.enable = false;
+      power.enable = true;
     };
 
     networking = {
       enable = true;
       bluetooth.enable = true;      
       dnscrypt.enable = true;
-      fail2ban.enable = false;
       openssh.enable = true;
       taildrive.enable = true;
       tailscale.enable = true;
@@ -43,26 +39,14 @@
 
     programs = {
       enable = true;
-      aagl.enable = false;
       browser.enable = true;
       foot.enable = true;
-      micro.enable = false;
       core.enable = true;
-      server.enable  = false;
       daemon.enable = true;
       desktop.enable = true;
       engineering.enable = true;
-      heavy.enable = false;
       nvim.enable = true;
       steam.enable = true;
-      yazi.enable = false;
-    };
-
-    server = {
-      enable = false;
-      davis.enable = false;
-      jellyfin.enable = false;
-      suwayomi.enable = false;
     };
 
     system = {
@@ -72,12 +56,6 @@
       input.enable = true;
       lanzaboote.enable = true;
       sumee.enable = true;
-      nahida.enable = false;
-      yang.enable = false;
-
-      # age.nix included by default
-      # locale.nix included by default
-      # nix.nix included by default
     };
   };
 
@@ -89,9 +67,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
-  
-  # Enable power profiles
-  services.power-profiles-daemon.enable = true;
   
 /*
   This value determines the NixOS release from which the default

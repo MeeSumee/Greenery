@@ -1,6 +1,5 @@
 {
   lib,
-  options,
   config,
   modulesPath,
   ...
@@ -9,6 +8,7 @@
     ./amdgpu.nix
     ./audio.nix
     ./intelgpu.nix
+    ./power.nix
     
     # Scans undetected hardware
     (modulesPath + "/installer/scan/not-detected.nix")
