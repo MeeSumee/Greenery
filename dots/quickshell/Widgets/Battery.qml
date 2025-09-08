@@ -41,13 +41,13 @@ Rectangle {
   RowLayout {
     id: contentRow
 
-    anchors.centerIn: parent
+    anchors.left: parent.left
     height: parent.height
     spacing: 0
 
     Item {
       Layout.fillHeight: true
-      implicitWidth: batText.contentWidth + 16
+      implicitWidth: batText.contentWidth
       visible: root.hasBattery
 
       Text {
