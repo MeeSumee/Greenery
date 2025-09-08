@@ -2,7 +2,8 @@
   pkgs,
   lib,
   config,
-  users, 
+  users,
+  sources,
   ...
 }:
 
@@ -41,7 +42,7 @@ in {
         snr = rebuildCommand;
         nsh = "nix shell nixpkgs#";
         nrn = "nix run nixpkgs#";
-        nip = "env NIXPKGS_ALLOW_UNFREE=1 nix --impure";        
+        nbn = "nix build nixpkgs#";
 
         # git stuff
         gaa = "git add --all";
@@ -51,6 +52,8 @@ in {
         gcm = "git commit -m";
         gck = "git checkout -b";
         gp = "git push";
+        gpu = "git pull";
+        gsw = "git switch";
         gca = "git commit --amend";
         gcp = "git cherry-pick";
         grsa = "git restore --staged .";
@@ -69,6 +72,7 @@ in {
       # Aliases to execute commands directly
       shellAliases = {
         ls = "eza --icons --group-directories-first -1";
+        gparted = "sudo -EH gparted";
         snowball = "${rebuildCommand} boot";
         snowfall = "${rebuildCommand} switch";
         snowstorm = "${rebuildCommand} test";
@@ -80,10 +84,10 @@ in {
       # Coloring shell, referenced from Zaphkiel config
       interactiveShellInit = let
         lsColors = pkgs.runCommandLocal "lscolors" {nativeBuildInputs = [pkgs.vivid];} ''
-          vivid generate rose-pine > $out
+          vivid generate dracula > $out
         '';
-        rosepine-fzf = ["fg:#908caa" "bg:-1" "hl:#ebbcba" "fg+:#e0def4" "bg+:#26233a" "hl+:#ebbcba" "border:#403d52" "header:#31748f" "gutter:#191724" "spinner:#f6c177" "info:#9ccfd8" "pointer:#c4a7e7" "marker:#eb6f92" "prompt:#908caa"];
-        fzf-options = builtins.concatStringsSep " " (builtins.map (option: "--color=" + option) rosepine-fzf);
+        dracula-fzf = ["fg:#f8f8f2" "bg:#282a36" "hl:#bd93f9" "fg+:#f8f8f2" "bg+:#44475a" "hl+:#bd93f9" "info:#ffb86c" "prompt:#50fa7b" "pointer:#ff79c6" "marker:#ff79c6" "spinner:#ffb86c" "header:#6272a4"];
+        fzf-options = builtins.concatStringsSep " " (builtins.map (option: "--color=" + option) dracula-fzf);
       in ''
         set sponge_purge_only_on_exit true
         set fish_greeting
@@ -145,5 +149,13 @@ in {
       fish-lsp
       babelfish
     ];
+
+    # Hjem fish dotfiles
+    hjem.users = lib.genAttrs users (user: {
+      files = {
+        ".config/fish/config.fish".source = ../../dots/fish/config.fish;
+        ".config/fish/themes".source = sources.dracula-fish + "/themes";        
+      };
+    });    
   };
 }

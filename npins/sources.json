@@ -66,6 +66,32 @@
       "hash": "sha256-g5uP3jIj+STUcfTJDKYopxnSijs2agRg13H0SGL5iE4=",
       "frozen": true
     },
+    "dracula-fish": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "dracula",
+        "repo": "fish"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "269cd7d76d5104fdc2721db7b8848f6224bdf554",
+      "url": "https://github.com/dracula/fish/archive/269cd7d76d5104fdc2721db7b8848f6224bdf554.tar.gz",
+      "hash": "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY="
+    },
+    "ecchirexi": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Rexcrazy804",
+        "repo": "hjem-impure"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "fcb955a63557561b2ad36bb20d1a9bfb00607782",
+      "url": "https://github.com/Rexcrazy804/hjem-impure/archive/fcb955a63557561b2ad36bb20d1a9bfb00607782.tar.gz",
+      "hash": "sha256-e257brFXMMzONe64mOLktYAjxRyYkrvRTqX8HS32qSs="
+    },
     "flake-compat": {
       "type": "Git",
       "repository": {
@@ -188,9 +214,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "de0ccd363612c238eecc302e61bd473fa7cb7b69",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/de0ccd363612c238eecc302e61bd473fa7cb7b69.tar.gz",
-      "hash": "sha256-mmeMOtLVt21zumFJoIRYsQLR5eFochyU8zniE2bR6UE="
+      "revision": "01d226068a1f06159fcdfcd44e624a9c0366a2bf",
+      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/01d226068a1f06159fcdfcd44e624a9c0366a2bf.tar.gz",
+      "hash": "sha256-GDOhadAAKEHCMwZORhiyVRrlF6wklx6cQwEojvMHWAc="
     }
   },
   "version": 6

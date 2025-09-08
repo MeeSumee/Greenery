@@ -3,6 +3,7 @@
   config,
   pkgs,
   lib,
+  users,
   zaphkiel,
   ...
 }:{
@@ -104,16 +105,19 @@
         gparted                         # disk management software
         prismlauncher                   # minecraft 
         gnome-calculator                # gnome calculator
-        nautilus                        # gnome file browser
-        nightfox-gtk-theme              # Gtk Theme
-        papirus-icon-theme              # Gtk Icons
+        nemo                            # nemo file browser
+        dracula-theme                   # Dracula Gtk Theme
+
+        (pkgs.papirus-icon-theme.override {
+          color = "violet";
+        })                              # Papirus Icons with violet folders
       ];
 
       # Theme gtk apps
       programs.dconf.profiles.user.databases = [{
         settings = {
           "org/gnome/desktop/interface" = {
-            gtk-theme = "Nightfox-Dark";
+            gtk-theme = "Dracula";
             icon-theme = "Papirus-Dark";
             cursor-theme = "xcursor-genshin-nahida";
             document-font-name = "DejaVu Serif";
@@ -124,6 +128,18 @@
           };
         };
       }];
+
+      # Correct gtk theming for apps that don't use runtime directory
+      hjem.users = lib.genAttrs users (user: {
+        files = let
+          themeName = "Dracula";
+          themeDir = "/run/current-system/sw/share/themes/${themeName}";
+        in {
+          ".config/gtk-4.0/assets".source = "${themeDir}/gtk-4.0/assets";
+          ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
+          ".config/gtk-4.0/gtk-dark.css".source = "${themeDir}/gtk-4.0/gtk-dark.css";
+        };
+      });
     })
 
     # Engineering and projects

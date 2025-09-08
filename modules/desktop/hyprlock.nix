@@ -15,9 +15,6 @@
     
     # Set hyprlock dot file
     hjem.users = lib.genAttrs users (user: {
-      enable = true;
-      directory = config.users.users.${user}.home;
-      clobberFiles = lib.mkForce true;
       files = let
 
         # Set hyprlock wallpaper

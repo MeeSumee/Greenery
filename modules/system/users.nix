@@ -3,6 +3,7 @@
   sources,
   lib,
   pkgs,
+  users,
   ...
 } @ args: let
 
@@ -10,12 +11,34 @@
   inherit (lib.modules) importApply;
 
   argsWith = attrs: args // attrs;
+
   hjem-lib = import (sources.hjem + "/lib.nix") {
     inherit lib pkgs;
   };
+
   hjemModule = importApply (sources.hjem + "/modules/nixos") (argsWith {
     inherit hjem-lib;
   });
+
+  nix-dir = "green";
+
+  points = let
+    inherit (lib.fileset) unions toSource;
+    root = ../../dots;
+  in
+    toSource {
+      inherit root;
+      fileset = unions [
+        (root + /fish/config.fish)
+        (root + /foot/foot.ini)
+        (root + /fuzzel/fuzzel.ini)
+        (root + /hyprland/hypridle.conf)
+        (root + /hyprland/hyprland.conf)
+        (root + /hyprland/hyprlock.conf)
+        (root + /niri/config.kdl)
+        (root + /uwsm/env)
+      ];
+    };
 
 in {
   imports = [hjemModule];
@@ -29,6 +52,30 @@ in {
   
   config = mkMerge [
     
+    # Seal hornie rexie in my basement
+    ({
+      hjem.extraModules = [
+        (sources.ecchirexi + "/hjem-impure.nix")
+      ];
+      
+      # Hjem config for all users
+      hjem.users = lib.genAttrs users (user: {
+        enable = true;
+        directory = config.users.users.${user}.home;
+        clobberFiles = lib.mkForce true;
+      });
+
+      # Set face icon for all users
+      systemd.tmpfiles.rules = lib.pipe users [
+        (builtins.filter (user: config.hjem.users.${user}.files.".face.icon".source != null))
+        (builtins.map (user: [
+          "f+ /var/lib/AccountsService/users/${user}  0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
+          "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face.icon".source}"
+        ]))
+        (lib.flatten)
+      ];
+    })
+
     # WHERE DOES THE STOMEE LIVE???
     (mkIf (config.greenery.system.sumee.enable && config.greenery.system.enable) {
       
@@ -52,6 +99,60 @@ in {
           hashedPasswordFile = config.age.secrets.secret6.path;
         };
       };
+
+      # hjem config for all sumee users
+      hjem.users = lib.genAttrs users (user: {
+
+        # Yoinked from rexies.nix
+        impure = {
+          enable = true;
+          dotsDir = "${points}";
+          dotsDirImpure = "/home/${user}/${nix-dir}/dots";
+          parseAttrs = [config.hjem.users.${user}.xdg.config.files];
+        };
+
+        xdg.config.files = let
+          dots = config.hjem.users.${user}.impure.dotsDir;
+        in {
+          # Fish shell
+          "fish/config.fish".source = dots + "/fish/config.fish";
+          
+          # Foot terminal
+          "foot/foot.ini".source = dots + "/foot/foot.ini";
+
+          # Fuzzel
+          "fuzzel/fuzzel.ini".source = dots + "/fuzzel/fuzzel.ini";
+
+          # Hyprland stuff
+          "hypr/hypridle.conf".source = dots + "/hyprland/hypridle.conf";
+          "hypr/hyprland.conf".source = dots + "/hyprland/hyprland.conf";
+          "hypr/hyprlock.conf".source = dots + "/hyprland/hyprlock.conf";
+          "uwsm/env".source = dots + "/uwsm/env";
+
+          # Niri stuff
+          "niri/config.kdl".source = dots + "/niri/config.kdl";
+        };
+
+        files = let 
+          # Make face.icon at /home/user/
+          faceIcon = let
+            pfp = pkgs.fetchurl {
+              name = "vivianpfp.jpg";
+              url = "https://cdn.donmai.us/original/b3/b2/__vivian_banshee_zenless_zone_zero_drawn_by_icetea_art__b3b237c829304f29705f1291118e468f.jpg?download=1";
+              hash = "sha256-KQZHp4tOufAOI4utGo8zLpihicMTzF5dRzQPEKc4omI=";
+            };
+          in
+            pkgs.runCommandWith {
+              name = "cropped-${pfp.name}";
+              derivationArgs.nativeBuildInputs = [pkgs.imagemagick];
+            } ''
+              magick ${pfp} -crop 1000x1000+210+100 - > $out
+            '';
+
+        in {
+          ".face.icon".source = faceIcon;
+        };
+      });
     })
     
     # SHE'S MAKING A SUPERCOMPUTER IN MINECRAFT AGAIN????
