@@ -1,6 +1,5 @@
 # Quartz Configuration
 {
-  pkgs,
   ...
 }: {
   imports = [
@@ -14,13 +13,9 @@
     
     desktop = {
       enable = true;
-      gdm.enable = false;
-      gnome.enable = false;
       hypridle.enable = true;
       hyprland.enable = true;
-      hyprlock.enable = false;
       kurukurudm.enable = true;
-      niri.enable = false;
       xserver.enable = true;
     };
 
@@ -35,7 +30,6 @@
       enable = true;
       bluetooth.enable = true;      
       dnscrypt.enable = true;
-      fail2ban.enable = false;
       openssh.enable = true;
       taildrive.enable = true;
       tailscale.enable = true;
@@ -46,23 +40,13 @@
       aagl.enable = true;
       browser.enable = true;
       foot.enable = true;
-      micro.enable = false;
       core.enable = true;
-      server.enable  = false;
       daemon.enable = true;
       desktop.enable = true;
       engineering.enable = true;
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;
-      yazi.enable = false;
-    };
-
-    server = {
-      enable = false;
-      davis.enable = false;
-      jellyfin.enable = false;
-      suwayomi.enable = false;
     };
 
     system = {
@@ -70,14 +54,7 @@
       fish.enable = true;
       fonts.enable = true;
       input.enable = true;
-      lanzaboote.enable = false;
       sumee.enable = true;
-      nahida.enable = false;
-      yang.enable = false;
-
-      # age.nix included by default
-      # locale.nix included by default
-      # nix.nix included by default
     };
   };
 

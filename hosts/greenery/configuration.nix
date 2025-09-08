@@ -61,50 +61,24 @@
   # All modules and their values
   greenery = {
     enable = true;
-    
-    desktop = {
-      enable = false;
-      gdm.enable = false;
-      gnome.enable = false;
-      hypridle.enable = false;
-      hyprland.enable = false;
-      hyprlock.enable = false;
-      kurukurudm.enable = false;
-      niri.enable = false;
-      xserver.enable = false;
-    };
 
     hardware = {
       enable = true;
-      amdgpu.enable = false;
-      audio.enable = false;
-      intelgpu.enable = false;
     };
 
     networking = {
       enable = true;
-      bluetooth.enable = false;
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
-      taildrive.enable = false;
       tailscale.enable = true;
     };
 
     programs = {
       enable = true;
-      aagl.enable = false;
-      browser.enable = false;
-      foot.enable = false;
-      micro.enable = false;
       core.enable = true;
       server.enable  = true;
-      daemon.enable = false;
-      desktop.enable = false;
-      engineering.enable = false;
-      heavy.enable = false;
       nvim.enable = true;
-      steam.enable = false;
       yazi.enable = true;
     };
 
@@ -118,16 +92,7 @@
     system = {
       enable = true;
       fish.enable = true;
-      fonts.enable = false;
-      input.enable = false;
       lanzaboote.enable = true;
-      sumee.enable = false;
-      nahida.enable = false;
-      yang.enable = false;
-
-      # age.nix included by default
-      # locale.nix included by default
-      # nix.nix included by default
     };
   };
 
