@@ -1,3 +1,4 @@
+// I gave up and stole rex's battery config
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.UPower
@@ -28,8 +29,8 @@ Rectangle {
     break;
   }
 
-  Layout.minimumWidth: contentRow.width ? contentRow.width : 1
-  color: Dat.Colors.background
+  Layout.minimumWidth: contentRow.width ? contentRow.width : 15
+  color: "transparent"
 
   Behavior on Layout.minimumWidth {
     NumberAnimation {
@@ -41,7 +42,7 @@ Rectangle {
   RowLayout {
     id: contentRow
 
-    anchors.left: parent.left
+    anchors.right: parent.left
     height: parent.height
     spacing: 0
 
@@ -55,7 +56,7 @@ Rectangle {
 
         anchors.centerIn: parent
         color: Dat.Colors.foreground
-        font.pointSize: 11
+        font.pointSize: 15
         text: Math.round(root.batPercentage * 100) + "%"
         visible: UPower.displayDevice.percentage > 0
       }
@@ -63,14 +64,14 @@ Rectangle {
 
     Rectangle {
       Layout.fillHeight: true
-      color: Dat.Colors.background
+      color: "transparent"
       implicitWidth: this.height
       radius: this.height
 
       Text {
         anchors.centerIn: parent
         color: Dat.Colors.foreground
-        font.pointSize: 11
+        font.pointSize: 15
         text: (!root.hasBattery) ? root.profileIcon : ((root.batCharging) ? root.chargeIcon : root.batIcon)
       }
     }

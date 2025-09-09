@@ -66,7 +66,7 @@ WlrLayershell {
 
             Item {
                 Layout.fillHeight: true
-                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: 1
                 Layout.leftMargin: 3
 
@@ -80,12 +80,11 @@ WlrLayershell {
             // Apparently adding horizontalCenter twice stops the jittering of ClockWidget, but appears as warning
             Item {
                 Layout.fillHeight: true
-                Layout.fillWidth: true
                 Layout.topMargin: 3
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Wid.ClockWidget {
-                    anchors.horizontalCenter: parent.horizontalCenter
+                  anchors.horizontalCenter: parent.horizontalCenter
                 }
 
                 Pan.Panel {}
@@ -93,11 +92,11 @@ WlrLayershell {
 
             Item {
                 Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.topMargin: 0
+                Layout.alignment: Qt.AlignRight
+                Layout.topMargin: 1
 
                 Wid.Battery {
-                  Layout.alignment:Qt.AlignTop
+                  Layout.alignment:Qt.AlignTop                 
                   implicitWidth: 25
                   implicitHeight: 25
                 }
