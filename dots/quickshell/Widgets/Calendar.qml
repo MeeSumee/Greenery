@@ -1,6 +1,4 @@
 import QtQuick
-import QtQuick.Controls
-import QtQuick.Effects
 
 import "../Data" as Dat
 import "../Data/Khal.qml" as CalendarService
