@@ -78,7 +78,7 @@ Rectangle {
   }
 
   Timer {
-    interval: 600
+    interval: 500
     repeat: true
     running: root.batCharging
 
