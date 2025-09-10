@@ -1,8 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
-import Quickshell.Io
-import Quickshell.Widgets
 import qs.Widgets as Wid
 import qs.Data as Dat
 
@@ -47,8 +44,7 @@ Rectangle {
             implicitHeight: 340
             implicitWidth: 300
             radius: 20
-            color: Dat.Colors.background
-            opacity: 0.9
+            color: "transparent"
 
             border {
                 width: 1
@@ -56,17 +52,15 @@ Rectangle {
             }
 
             Wid.Calendar {
-                height: parent.height
-                width: parent.width
             }
         }
 
         Rectangle {
-            Layout.rowSpan: 2
-            implicitHeight: 340
+            Layout.rowSpan: 1
+            implicitHeight: 225
             implicitWidth: 310
             radius: 20
-            color: Dat.Colors.background
+            color: "transparent"
 
             border {
                 width: 1
@@ -74,8 +68,20 @@ Rectangle {
             }
 
             Wid.WeatherWidget {
-                height: parent.height
-                width: parent.width
+            }
+        }
+
+        Rectangle {
+          Layout.rowSpan: 1
+          Layout.bottomMargin: 5
+            implicitHeight: 100
+            implicitWidth: 310
+            radius: 20
+            color: "transparent"
+
+            border {
+                width: 1
+                color: Dat.Colors.foreground 
             }
         }
     }

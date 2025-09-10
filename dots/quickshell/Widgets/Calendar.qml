@@ -1,6 +1,6 @@
 import QtQuick
 
-import "../Data" as Dat
+import qs.Data as Dat
 import "../Data/Khal.qml" as CalendarService
 
 Column {

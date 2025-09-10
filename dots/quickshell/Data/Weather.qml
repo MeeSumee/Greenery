@@ -59,18 +59,18 @@ Singleton {
   })
 
   property string loc
-  property list<string> tempC
-  property list<string> icon
-  property list<string> tempF
-  property list<string> time
+  property list<string> tempC: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
+  property list<string> icon: ["cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert"]
+  property list<string> tempF: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
+  property list<string> time: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
   property string description: "Unknown"
-  property string feelstempC
-  property string feelstempF
-  property string humidity
+  property string feelstempC: "??"
+  property string feelstempF: "??"
+  property string area: "Unknown"
   
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
-  property string weatherLocation: "philadelphia"
+  property string weatherLocation: "~Willis-Tower"
   property bool useFahrenheit: false // Enable fahrenheit
 
   // fetch weather location either based on predefined Latitude and Longitude
@@ -80,7 +80,7 @@ Singleton {
       loc = weatherLocation;
     else if (!loc || timer.elapsed() > 900)
       Requests.get("https://ipinfo.io/json", text => {
-      loc = JSON.parse(text).loc ?? "";
+      loc = JSON.parse(text).city ?? "";
       timer.restart();
     });
   }
@@ -106,6 +106,7 @@ Singleton {
             const json = JSON.parse(xhr.responseText);
             const current = json.current_condition?.[0];
             const weatherToday = json.weather;
+            const location = json.nearest_area?.[0];
 
             if (!current) {
               console.error("No current_condition found.");
@@ -118,26 +119,25 @@ Singleton {
             }
 
             icon[0] = current ? getWeatherIcon(current.weatherCode): "cloud_alert";
-            tempC[0] = `${parseFloat(current.temp_C)}°C`;
-            tempF[0] = `${parseFloat(current.temp_F)}°F`;
-            time[0] = "Last Updated:" + `${current.localObsDateTime}`.slice(-9) ?? "Unknown";
+            tempC[0] = `${parseFloat(current.temp_C)}` ?? "??";
+            tempF[0] = `${parseFloat(current.temp_F)}` ?? "??";
+            time[0] = "Updated:" + `${current.localObsDateTime}`.slice(-9) ?? "??";
             description = current.weatherDesc?.[0]?.value ?? "Unknown";
-            feelstempC = `${parseFloat(current.FeelsLikeC)}°C`;
-            feelstempF = `${parseFloat(current.FeelsLikeF)}°F`;
-            humidity = `${parseFloat(current.humidity)}%`;
+            area = location.areaName?.[0]?.value ?? "Unknown";
+            feelstempC = "Feels like: " + `${parseFloat(current.FeelsLikeC)}` + "°C" ?? "??";
+            feelstempF = "Feels like: " + `${parseFloat(current.FeelsLikeF)}` + "°F" ?? "??";
 
             for (var i=0; i < 8; i++) {
               icon[i+1] = weatherToday ? getWeatherIcon(weatherToday?.[0]?.hourly?.[i]?.weatherCode) : "cloud_alert";
-              tempC[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempC)}°C`;
-              tempF[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempF)}°F`;
-              time[i+1] = `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2) + ":" + `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(-2);
+              tempC[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempC)}` ?? "??";
+              tempF[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempF)}` ?? "??";
+              time[i+1] = `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2) + ":" + `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(-2) ?? "??";
             }
 
             if (time[1] != "0:00") {
               time[1] = "0:00";
             }
                   
-            console.log("Updated time:", time);
           } catch (e) {
             console.error("Failed to parse weather JSON:", e);
           }
