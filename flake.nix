@@ -23,6 +23,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Zaphkiel config
+    zaphkiel = {
+      url = "github:Rexcrazy804/Zaphkiel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Agenix
     agenix = {
       url = "github:ryantm/agenix";
@@ -30,6 +36,7 @@
     };
   };
 
+  # RexCrazy804 Schematic
   outputs = inputs: let
     inherit (inputs) nixpkgs self;
     inherit (nixpkgs) lib;
@@ -49,7 +56,7 @@
     eachSystem = fn: lib.genAttrs systems (system: fn (pkgsFor system));
 
   in {
-    formatter = eachSystem (pkgs: self.packages.${pkgs.system}.irminsul);
+    formatter = eachSystem (pkgs: inputs.zaphkiel.packages.${pkgs.system}.irminsul);
     packages = eachSystem (pkgs: callModule ./pkgs {inherit pkgs;});
     nixosConfigurations = callModule ./hosts {};
   };
