@@ -12,7 +12,7 @@ Rectangle {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    color: "#800000FF"
+    color: "transparent"
 
     GridLayout {
         id: mediagrid
@@ -25,39 +25,58 @@ Rectangle {
         Rectangle {
             Layout.rowSpan: 1
 
-            height: 160
-            width: 600
-            color: "magenta"
+            implicitHeight: 160
+            implicitWidth: 600
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "MUSIC PLAYBACK"
+                color: Dat.Colors.foreground
             }
         }
 
         Rectangle {
             Layout.rowSpan: 1
 
-            height: 160
-            width: 600
-            color: "gold"
+            implicitHeight: 160
+            implicitWidth: 600
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "AUDIO MIXER"
+                color: Dat.Colors.foreground
             }
         }
 
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 300
-            color: "lime"
+            implicitHeight: 340
+            implicitWidth: 300
+            color: "transparent"
+            radius: 20
 
-            Text {
-                anchors.centerIn: parent
-                text: "DANCING NAHIDA"
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
+            
+            Wid.MediaGif {
+
             }
         }
     }

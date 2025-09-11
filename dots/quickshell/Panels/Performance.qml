@@ -12,7 +12,7 @@ Rectangle {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    color: "#648638b3"
+    color: "transparent"
 
     GridLayout {
         id: systemgrid
@@ -25,13 +25,20 @@ Rectangle {
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 915
-            color: "crimson"
+            implicitHeight: 330
+            implicitWidth: 915
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "PERFORMANCE AND PARAMETERS"
+                color: Dat.Colors.foreground
             }
         }
     }

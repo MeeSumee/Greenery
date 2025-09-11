@@ -12,7 +12,7 @@ Rectangle {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    color: "#8000fffb"
+    color: "transparent"
 
     GridLayout {
         id: notifgrid
@@ -25,26 +25,40 @@ Rectangle {
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 600
-            color: "coral"
+            implicitHeight: 330
+            implicitWidth: 600
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "NOTIFICATIONS"
+                color: Dat.Colors.foreground
             }
         }
 
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 300
-            color: "bisque"
+            implicitHeight: 330
+            implicitWidth: 300
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "NOTIFICATION SETTINGS"
+                color: Dat.Colors.foreground
             }
         }
     }

@@ -24,18 +24,26 @@ Rectangle {
 
             implicitHeight: 340
             implicitWidth: 270
-            color: "gold"
+            radius: 20
+            color: "transparent"
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 id: text1
                 anchors.centerIn: parent
                 text: "SYSTEM TRAY, SHUTDOWN,"
+                color: Dat.Colors.foreground
             }
 
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: text1.bottom
                 text: "RESTART, LOCK, SLEEP, ETC"
+                color: Dat.Colors.foreground
             }
         }
 
@@ -82,6 +90,10 @@ Rectangle {
             border {
                 width: 1
                 color: Dat.Colors.foreground 
+            }
+
+            Wid.Event {
+
             }
         }
     }

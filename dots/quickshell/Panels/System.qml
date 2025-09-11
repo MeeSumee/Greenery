@@ -12,7 +12,7 @@ Rectangle {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    color: "#64406867"
+    color: "transparent"
 
     GridLayout {
         id: systemgrid
@@ -25,26 +25,40 @@ Rectangle {
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 600
-            color: "gray"
+            implicitHeight: 330
+            implicitWidth: 600
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "WORKSPACES AND APP SWITCHER"
+                color: Dat.Colors.foreground
             }
         }
 
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 300
-            color: "azure"
+            implicitHeight: 330
+            implicitWidth: 300
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "SYSTEM PROFILE"
+                color: Dat.Colors.foreground
             }
         }
     }

@@ -12,7 +12,7 @@ Rectangle {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    color: "#64535a10"
+    color: "transparent"
 
     GridLayout {
         id: systemgrid
@@ -25,26 +25,40 @@ Rectangle {
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 600
-            color: "firebrick"
+            implicitHeight: 330
+            implicitWidth: 600
+            color: "transparent"
+            radius: 20
+            
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "QUICKSHELL SETTINGS"
+                color: Dat.Colors.foreground
             }
         }
 
         Rectangle {
             Layout.rowSpan: 2
 
-            height: 330
-            width: 300
-            color: "ivory"
+            implicitHeight: 330
+            implicitWidth: 300
+            color: "transparent"
+            radius: 20
+
+            border {
+              width: 1
+              color: Dat.Colors.foreground
+            }
 
             Text {
                 anchors.centerIn: parent
                 text: "I DUNNO WHAT TO DO WITH THIS THO"
+                color: Dat.Colors.foreground
             }
         }
     }
