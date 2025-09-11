@@ -1,35 +1,56 @@
+# Maybe the real flake is the 友達 we made along da wei.
+# Once again nahida will look by my shoulders wondering why am I wasting so much time on NixOS.
 {
   description = "MeeSumee's Flake Config";
 
-# NO MORE INPUTS DAYO
+  inputs = {
 
-  outputs = {
-    self,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
+    # NixOS Unstable
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+    # Hjem
+    hjem.url = "github:feel-co/hjem";
+
+    # ecchirexi
+    ecchirexi.url = "github:Rexcrazy804/hjem-impure";
+
+    # Nix-Systems
+    systems.url = "github:nix-systems/default";
+
+    # Quickshilling Bingchilling
+    quickshell = {
+      url = "github:Rexcrazy804/quickshell?ref=overridable-qs-unwrapped";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Agenix
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.systems.follows = "systems";
+    };
+  };
+
+  outputs = inputs: let
+    inherit (inputs) nixpkgs self;
+    inherit (nixpkgs) lib;
 
     # Define each system architecture
-    systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-
-    # Import nixpkgs npin
-    nixpkgs = (import sources.flake-compat {src = sources.nixpkgs;}).outputs;
+    systems = import inputs.systems;
 
     # npin integration to flakes
     sources = import ./npins;
 
-    forAllSystems = fn:
-      nixpkgs.lib.genAttrs systems (
-        system: fn (import nixpkgs {system = system;})
-      );
-    
-  in {
-    # 
-    formatter = forAllSystems (pkgs: pkgs.alejandra);
+    callModule = {
+      __functor = self: path: attrs: import path (self // attrs);
+      inherit inputs self lib sources;
+    };
 
-    # External packages to build
-    packages = forAllSystems (pkgs: { 
-      default = pkgs.callPackage ./pkgs/cursors.nix {};
-    });
+    pkgsFor = system: nixpkgs.legacyPackages.${system};
+    eachSystem = fn: lib.genAttrs systems (system: fn (pkgsFor system));
+
+  in {
+    formatter = eachSystem (pkgs: self.packages.${pkgs.system}.irminsul);
+    packages = eachSystem (pkgs: callModule ./pkgs {inherit pkgs;});
+    nixosConfigurations = callModule ./hosts {};
   };
 }
