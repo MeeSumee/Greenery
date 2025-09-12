@@ -43,7 +43,7 @@ in {
     system = null;
     specialArgs = {
       inherit sources zaphkiel;
-      users = ["administrator"];
+      users = ["sumee"];
     };
     
     modules = [
