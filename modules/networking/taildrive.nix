@@ -11,7 +11,7 @@
 
     # Set taildrive to mount in user folder (very cursed lol)
     fileSystems."/run/media/${builtins.concatStringsSep "," users}/taildrive" = {
-      device = "administrator@greenery:/run/media/sumee/emerald";
+      device = "sumee@greenery:/run/media/sumee/emerald";
       fsType = "sshfs";
       options = [
         "allow_other"

@@ -77,7 +77,7 @@ in {
         snowfall = "${rebuildCommand} switch";
         snowstorm = "${rebuildCommand} test";
         snowshed = "${rebuildCommand} dry-build";
-        schizo = "ssh administrator@greenery";
+        schizo = "ssh sumee@greenery";
         escape = "ssh sumee@kaolin";
       };
 
