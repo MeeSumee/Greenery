@@ -1,3 +1,4 @@
+# DEFUNCT, PLEASE VIEW hosts/default.nix FOR SYSTEM BUILDING 
 # To build systems
 # sudo nixos-rebuild --no-reexec --file ./default.nix -A <hostname> <boot|test|switch...>
 let

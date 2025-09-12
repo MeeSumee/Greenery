@@ -1,31 +1,5 @@
 {
   "pins": {
-    "aagl": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "ezKEa",
-        "repo": "aagl-gtk-on-nix"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "7566a0bcc55dbfaeb28791c06aa02060cf5bd0bf",
-      "url": "https://github.com/ezKEa/aagl-gtk-on-nix/archive/7566a0bcc55dbfaeb28791c06aa02060cf5bd0bf.tar.gz",
-      "hash": "sha256-r0Y5VDxpiA1AJy02VkmeCNudZ8/JJR1OP3ldtfce0ls="
-    },
-    "agenix": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "ryantm",
-        "repo": "agenix"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "9edb1787864c4f59ae5074ad498b6272b3ec308d",
-      "url": "https://github.com/ryantm/agenix/archive/9edb1787864c4f59ae5074ad498b6272b3ec308d.tar.gz",
-      "hash": "sha256-NA/FT2hVhKDftbHSwVnoRTFhes62+7dxZbxj5Gxvghs="
-    },
     "asusnumpad": {
       "type": "Git",
       "repository": {
@@ -39,33 +13,6 @@
       "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/e34546fca9b31e9c660d41b3aa37cf24009706ed.tar.gz",
       "hash": "sha256-lpS2jbnG4025lmEFhcdSmMPncHpEMOsCNBA+Pyv+BNE="
     },
-    "booru": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "Rexcrazy804",
-        "repo": "booru-flake"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "7b11787457f4163ffc5a567fd9ac8e9e5f6370f0",
-      "url": "https://github.com/Rexcrazy804/booru-flake/archive/7b11787457f4163ffc5a567fd9ac8e9e5f6370f0.tar.gz",
-      "hash": "sha256-1N93LVYL1BMHfuP3RPlVWsh36T7RkLJvL9mR6FsDOtM="
-    },
-    "crane": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "ipetkov",
-        "repo": "crane"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "544d09fecc8c2338542c57f3f742f1a0c8c71e13",
-      "url": "https://github.com/ipetkov/crane/archive/544d09fecc8c2338542c57f3f742f1a0c8c71e13.tar.gz",
-      "hash": "sha256-g5uP3jIj+STUcfTJDKYopxnSijs2agRg13H0SGL5iE4=",
-      "frozen": true
-    },
     "dracula-fish": {
       "type": "Git",
       "repository": {
@@ -78,59 +25,6 @@
       "revision": "269cd7d76d5104fdc2721db7b8848f6224bdf554",
       "url": "https://github.com/dracula/fish/archive/269cd7d76d5104fdc2721db7b8848f6224bdf554.tar.gz",
       "hash": "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY="
-    },
-    "ecchirexi": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "Rexcrazy804",
-        "repo": "hjem-impure"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "fcb955a63557561b2ad36bb20d1a9bfb00607782",
-      "url": "https://github.com/Rexcrazy804/hjem-impure/archive/fcb955a63557561b2ad36bb20d1a9bfb00607782.tar.gz",
-      "hash": "sha256-e257brFXMMzONe64mOLktYAjxRyYkrvRTqX8HS32qSs="
-    },
-    "flake-compat": {
-      "type": "Git",
-      "repository": {
-        "type": "Forgejo",
-        "server": "https://git.lix.systems/",
-        "owner": "lix-project",
-        "repo": "flake-compat"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "549f2762aebeff29a2e5ece7a7dc0f955281a1d1",
-      "url": "https://git.lix.systems/lix-project/flake-compat/archive/549f2762aebeff29a2e5ece7a7dc0f955281a1d1.tar.gz",
-      "hash": "sha256-NKw96t+BgHIYzHUjkTK95FqYRVKB8DHpVhefWSz/kTw="
-    },
-    "hjem": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "feel-co",
-        "repo": "hjem"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "2426d6ad20e767895e936ed0c9563cc4e2b6c96f",
-      "url": "https://github.com/feel-co/hjem/archive/2426d6ad20e767895e936ed0c9563cc4e2b6c96f.tar.gz",
-      "hash": "sha256-WJ70Dv+tJjIl7mMOqUgcdcz+RrujDRoeKptiU6oh1lI="
-    },
-    "lanzaboote": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "Rexcrazy804",
-        "repo": "lanzaboote"
-      },
-      "branch": "npins-support",
-      "submodules": false,
-      "revision": "63b4c797fd6e370ad437ee25e30a5e5ff2c93f83",
-      "url": "https://github.com/Rexcrazy804/lanzaboote/archive/63b4c797fd6e370ad437ee25e30a5e5ff2c93f83.tar.gz",
-      "hash": "sha256-07FC3fevw8phSwfLDLWbzM9nYZr1XezfEDZIRYjtfSM="
     },
     "micro-bounce": {
       "type": "Git",
@@ -170,54 +64,7 @@
       "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
       "hash": "sha256-BX0Vj1ZVP7FlcG/4D7x1V0MmZ/IYNEmIcpcqubZLabQ="
-    },
-    "nixpkgs": {
-      "type": "Channel",
-      "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-25.11pre846535.20075955deac/nixexprs.tar.xz",
-      "hash": "sha256-AU6EqTVZNuNXrNVmVJ0J3QAuK/RezRzQqlJokCSey2M=",
-      "frozen": true
-    },
-    "npins": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "andir",
-        "repo": "npins"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "e4683671e145c652c371b6b8ad9b0d757c88853c",
-      "url": "https://github.com/andir/npins/archive/e4683671e145c652c371b6b8ad9b0d757c88853c.tar.gz",
-      "hash": "sha256-Nu86s1xok+1EFM0J9e55hrYPgfoutEZUDBpeXReCOaY="
-    },
-    "rust-overlay": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "oxalica",
-        "repo": "rust-overlay"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "7ae12d14d6bb74acfadf31e17a204d928eaf77b8",
-      "url": "https://github.com/oxalica/rust-overlay/archive/7ae12d14d6bb74acfadf31e17a204d928eaf77b8.tar.gz",
-      "hash": "sha256-lm88KTYlhsh5usJLGlWQbG4HWWr2FdO26TSssCw6Wdg=",
-      "frozen": true
-    },
-    "zaphkiel": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "Rexcrazy804",
-        "repo": "Zaphkiel"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "01d226068a1f06159fcdfcd44e624a9c0366a2bf",
-      "url": "https://github.com/Rexcrazy804/Zaphkiel/archive/01d226068a1f06159fcdfcd44e624a9c0366a2bf.tar.gz",
-      "hash": "sha256-GDOhadAAKEHCMwZORhiyVRrlF6wklx6cQwEojvMHWAc="
     }
   },
-  "version": 6
+  "version": 5
 }

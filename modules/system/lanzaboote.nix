@@ -1,12 +1,12 @@
 {
-  zaphkiel,
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: 
 {
-  imports = [zaphkiel.nixosModules.lanzaboote];
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
   options.greenery.system.lanzaboote.enable = lib.mkEnableOption "lanzaboote";
 

@@ -1,15 +1,15 @@
 {
-  sources,
+  inputs,
   users,
   pkgs,
   ...
 }: {
   # Import agenix
-  imports = [(sources.agenix + "/modules/age.nix")];
+  imports = [inputs.agenix.nixosModules.default];
   
   # Add agenix package for creating age files
   environment.systemPackages = [
-    (pkgs.callPackage "${sources.agenix}/pkgs/agenix.nix" {})
+    (inputs.agenix.packages.${pkgs.system}.default)
   ];
   
   # Identity Paths to decrypt age files
