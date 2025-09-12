@@ -29,6 +29,13 @@
       inputs.flake-compat.follows = "";
     };
 
+    # Anime-game
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "";
+    };
+
     # Zaphkiel config
     zaphkiel = {
       url = "github:Rexcrazy804/Zaphkiel";
