@@ -8,8 +8,7 @@
 }:
 
 let
-  inherit (config.networking) hostName;
-  rebuildCommand = "sudo nixos-rebuild --log-format bar --no-reexec --file ~/green/default.nix -A ${hostName}";
+  rebuildCommand = "nixos-rebuild --flake .# --sudo";
 
 in {
 

@@ -9,7 +9,11 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # Hjem
-    hjem.url = "github:feel-co/hjem";
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.smfh.follows = "";
+    };
 
     # ecchirexi
     ecchirexi.url = "github:Rexcrazy804/hjem-impure";
@@ -17,21 +21,32 @@
     # Nix-Systems
     systems.url = "github:nix-systems/default";
 
-    # Quickshilling Bingchilling
-    quickshell = {
-      url = "github:Rexcrazy804/quickshell?ref=overridable-qs-unwrapped";
+    # Lanzaboote
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks-nix.follows = "";
+      inputs.flake-compat.follows = "";
     };
 
     # Zaphkiel config
     zaphkiel = {
       url = "github:Rexcrazy804/Zaphkiel";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+      inputs.hjem.follows = "";
+      inputs.hjem-impure.follows = "";
+      inputs.agenix.follows = "";
+      inputs.crane.follows = "";
+      inputs.stash.follows = "";
     };
 
     # Agenix
     agenix = {
       url = "github:ryantm/agenix";
+      inputs.darwin.follows = "";
+      inputs.home-manager.follows = "";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
   };
@@ -57,7 +72,11 @@
 
   in {
     formatter = eachSystem (pkgs: inputs.zaphkiel.packages.${pkgs.system}.irminsul);
-    packages = eachSystem (pkgs: callModule ./pkgs {inherit pkgs;});
+
+    packages = eachSystem (pkgs:{ 
+      default = pkgs.callPackage ./pkgs/cursors.nix {};
+    });
+
     nixosConfigurations = callModule ./hosts {};
   };
 }

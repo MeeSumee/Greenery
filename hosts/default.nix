@@ -1,5 +1,4 @@
 {
-  self,
   sources,
   inputs,
   lib,
@@ -10,13 +9,21 @@
     nixosSystem {
       specialArgs = {
         inherit inputs sources;
-        mein = self.packages;
         users = ["sumee"];
       };
       modules = [
         ./${hostName}/configuration.nix
         ./${hostName}/hardware-configuration.nix
         ../modules
+
+        # Import zaphkiel packages from flake
+        ({
+          pkgs,
+          inputs,
+          ...
+          }:{
+            nixpkgs.overlays = [(_: _: {zpkgs = inputs.zaphkiel.packages.${pkgs.system}; } )];
+        })
       ];
     };
 

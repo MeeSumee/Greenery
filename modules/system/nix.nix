@@ -1,19 +1,22 @@
 # NIX DOT NIX I ALWAYS WANTED TO NAME IT
 { 
-  sources,
+  inputs,
+  pkgs,
   ... 
 }:{
 
   # Essential config changes
   nixpkgs = {
     config.allowUnfree = true;
-    flake.source = sources.nixpkgs;
   };
 
   # Enable core nix features
   nix = {
+    package = pkgs.nixVersions.nix_2_30;
+    registry.nixpkgs.flake = inputs.nixpkgs;
     channel.enable = false;
     settings = {
+      allow-import-from-derivation = false;
       experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
       trusted-users = ["root" "@wheel"];

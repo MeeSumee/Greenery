@@ -19,15 +19,6 @@
       ];
     };  
 
-    services.dnscrypt-proxy2.settings = {
-      listen_addresses = [
-        "100.81.192.125:53"
-        "[fd7a:115c:a1e0::d501:c081]:53"
-        "127.0.0.1:53"
-        "[::1]:53"
-      ];
-    };
-
     networking.firewall.allowedTCPPorts = [53];
     networking.firewall.allowedUDPPorts = [53];
    
@@ -43,6 +34,13 @@
         forwarding_rules = pkgs.writeText "forwarding_rules.txt" ''
           ts.net 100.100.100.100
         '';
+
+        listen_addresses = [
+          "100.81.192.125:53"
+          "[fd7a:115c:a1e0::d501:c081]:53"
+          "127.0.0.1:53"
+          "[::1]:53"
+        ];
 
         cloaking_rules = pkgs.writeText "cloaking_rules.txt" ''
           greenery fd7a:115c:a1e0::d501:c081
