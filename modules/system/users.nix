@@ -1,24 +1,13 @@
 {
   config,
-  sources,
+  inputs,
   lib,
   pkgs,
   users,
   ...
-} @ args: let
+}: let
 
   inherit (lib) mkEnableOption mkMerge mkIf;
-  inherit (lib.modules) importApply;
-
-  argsWith = attrs: args // attrs;
-
-  hjem-lib = import (sources.hjem + "/lib.nix") {
-    inherit lib pkgs;
-  };
-
-  hjemModule = importApply (sources.hjem + "/modules/nixos") (argsWith {
-    inherit hjem-lib;
-  });
 
   nix-dir = "green";
 
@@ -41,7 +30,7 @@
     };
 
 in {
-  imports = [hjemModule];
+  imports = [inputs.hjem.nixosModules.default];
 
   # Options maker
   options.greenery.system = {
@@ -54,9 +43,7 @@ in {
     
     # Seal hornie rexie in my basement
     ({
-      hjem.extraModules = [
-        (sources.ecchirexi + "/hjem-impure.nix")
-      ];
+      hjem.extraModules = [inputs.ecchirexi.hjemModules.default];
       
       # Hjem config for all users
       hjem.users = lib.genAttrs users (user: {

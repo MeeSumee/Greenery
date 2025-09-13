@@ -8,8 +8,7 @@
 }:
 
 let
-  inherit (config.networking) hostName;
-  rebuildCommand = "sudo nixos-rebuild --log-format bar --no-reexec --file ~/green/default.nix -A ${hostName}";
+  rebuildCommand = "nixos-rebuild --flake .# --sudo";
 
 in {
 
@@ -77,7 +76,7 @@ in {
         snowfall = "${rebuildCommand} switch";
         snowstorm = "${rebuildCommand} test";
         snowshed = "${rebuildCommand} dry-build";
-        schizo = "ssh administrator@greenery";
+        schizo = "ssh sumee@greenery";
         escape = "ssh sumee@kaolin";
       };
 

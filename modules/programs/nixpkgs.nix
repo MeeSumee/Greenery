@@ -4,7 +4,6 @@
   pkgs,
   lib,
   users,
-  zaphkiel,
   ...
 }:{
 
@@ -35,9 +34,7 @@
         tree                            # enables tree view in terminal
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
-
-        # npins-v6 
-        zaphkiel.packages.npins
+        npins                           # Npins source manager
       ];
 
       # Enables intel gpu monitoring
@@ -79,9 +76,7 @@
         swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
         khal                            # CLI Calendar dependency for banshell
-
-        # npins-show command
-        zaphkiel.packages.scripts.npins-show
+        zpkgs.scripts.npins-show        # npins-show command
 
         # Cursor Package
         (pkgs.callPackage ../../pkgs/cursors.nix {})      

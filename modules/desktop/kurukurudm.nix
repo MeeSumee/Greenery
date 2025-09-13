@@ -3,7 +3,7 @@
   config,
   users,
   lib,
-  zaphkiel,
+  inputs,
   ...
 }: let
   uwuToHypr = pkgs.runCommandLocal "quick" {} ''
@@ -18,7 +18,7 @@
   };
 
 in {
-  imports = [zaphkiel.nixosModules.kurukuruDM];
+  imports = [inputs.zaphkiel.nixosModules.kurukuruDM];
 
   options.greenery.desktop.kurukurudm.enable = lib.mkEnableOption "rex's desktop manager";
 

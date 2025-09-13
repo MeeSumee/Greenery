@@ -1,3 +1,4 @@
+# DEFUNCT, PLEASE VIEW hosts/default.nix FOR SYSTEM BUILDING 
 # To build systems
 # sudo nixos-rebuild --no-reexec --file ./default.nix -A <hostname> <boot|test|switch...>
 let
@@ -42,7 +43,7 @@ in {
     system = null;
     specialArgs = {
       inherit sources zaphkiel;
-      users = ["administrator"];
+      users = ["sumee"];
     };
     
     modules = [
