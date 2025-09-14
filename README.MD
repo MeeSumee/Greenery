@@ -8,31 +8,27 @@ Consists of multiple devices:
 - Graphite: Laptop found while dumpster diving and used as an excuse to use NixOS for work.
 
 ## Status Updates
- Graphite is real and can finally do work that doesn't involve Altium Designer on it.
-
- This will surely improve my productivity at work, hehehehaw.
-
  I AM STILL WAITING FOR ORACLE OMFG AAAHHHH.
 
- Work has been such a pain in the ass for interrupting my quickshilling bingchilling.
+ I plan to grab the Intel Arc Pro B50 for my server to provide GPU Passthru Windows.
 
  I'm still kinda lazy in updating READMEs, I will try though.
 
 ## Notes on Quickshell (and ricing in a way)
 
-I am slowly moving from Rose Pine themes to NightFox theme due to the more purple accents
+I am slowly moving from Rose Pine themes to Dracula theme due to the more purple accents
 matching Vivian's theme.
 
 Quickshell has been slow, but is making a bit of progress, widgets will be build as I go.
 
 Planned color themes:
-- Vivian Banshee Colors (Dark theme only)
-- Nahida Colors (Light and Dark theme)
-- Matugen Color Generation for wallpaper analysis (a later time)
+- Dracula Theme (Dark theme only)
+- Nahida Colors (Light theme only)
+- JSON Color maker by detecting wallpaper (idea taken from rex's implementation)
 
 # Greenery
 
-Dell Optiplex 3050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
+Dell Optiplex 7050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
 
 Hosts Suwayomi for reading manga, Jellyfin for music (for now), and Davis for Calendar and Contacts syncing.
 
@@ -40,9 +36,12 @@ Implemented self-hosted websites using Caddy-Tailscale plugin and reverse-proxyi
 
 SSH services for file transfer and remote access. Enables sharing my 12TB hard drive (taildrive).
 
-Future Endeavors: More functional Jellyfin, FileBrowser for non-nix systems, 2FAuth so I can stop pulling out my
-phone, Proxy websites that do not involve with Kaolin (DMV would be confused by me being in Zurich), Improve 
-Security as Greenery plays an important role in my self-hosted lifestyle.
+Hooked up to a modded Netgear NAS with TinyCore Linux and Raided HDDs that combine to 14TB. Used primarily for
+backups.
+
+Future Endeavors: More functional Jellyfin, FileBrowser for non-nix systems, add discrete GPU for GPU-Passthru Windows
+for AI, CAD, and Rendering via remote access, Proxy websites that do not involve with Kaolin (DMV would be confused by me 
+being in Zurich), Improve Security as Greenery plays an important role in my self-hosted lifestyle.
 
 # Kaolin
 
@@ -51,11 +50,11 @@ with Cloudflare-WARP.
 
 Infected Debian with NixOS my beloved.
 
-As I transition the server into Oracle, the architecture would change from x86-64 to aarch64.
+I would love to use Oracle, but they keep refusing to give me an account.
 
 The ideal of 100% declarative system means the majority of time spent on transferring VPS is the NixOS-infect process.
 
-Future Endeavors: Transition to Oracle, utilize Agenix for a declarative system.
+Future Endeavors: Transition to Oracle (or other sources by November).
 
 # Beryl
 
@@ -91,7 +90,7 @@ Custom-built gaming pc intended for workstation and gaming.
 
 Intended to be used as my nix config manager while I'm at home.
 
-Future Endeavors: Upgrade to 48GB cause I got 16GB Teamgroup RAM Stick for free, Implement remote desktop for Beryl to communicate to, potential GPU-Passthrough Windows. 
+Future Endeavors: Implement remote desktop for Beryl/Graphite to communicate. 
 
 ## Quartz PC Specifications
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
