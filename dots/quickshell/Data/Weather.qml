@@ -153,7 +153,7 @@ Singleton {
                 icon[i+1] = weatherToday ? getWeatherIcon(sunrcode) : "cloud_alert";
               }
               else if(((sunset < parseFloat(time[i+1].slice(0,-2))) || (sunrise > parseFloat(time[i+1].slice(0,-2)))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
-                const sunscode = (`${parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode)}` - 1).toString();
+                const sunscode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) - 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunscode) : "cloud_alert";
               }
               else {
