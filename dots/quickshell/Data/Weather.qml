@@ -6,9 +6,11 @@ import QtQuick
 Singleton {
   id: root
 
-  // Yoinked from sora's shell
+  // Yoinked from sora's shell + added some of my own
   readonly property var weatherIcons: ({
     "113": "clear_day",
+    "114": "bedtime",
+    "115": "partly_cloudy_night",
     "116": "partly_cloudy_day",
     "119": "cloud",
     "122": "cloud",
@@ -67,6 +69,8 @@ Singleton {
   property string feelstempC: "??"
   property string feelstempF: "??"
   property string area: "Unknown"
+  property string sunrise: "??"
+  property string sunset: "??"
   
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
@@ -74,7 +78,7 @@ Singleton {
   property bool useFahrenheit: false // Enable fahrenheit
 
   // fetch weather location either based on predefined Latitude and Longitude
-  // or use IP location
+  // or use IP location (currently fucked)
   function reload(): void {
     if (weatherLocation)
       loc = weatherLocation;
@@ -89,7 +93,7 @@ Singleton {
   function getWeatherIcon(code: string): string {
     if (weatherIcons.hasOwnProperty(code))
       return weatherIcons[code];
-    return "air";
+    return "cloud_alert";
   }
 
   // eel magick
@@ -118,6 +122,7 @@ Singleton {
               return;
             }
 
+            // Set all necessary values for derivation or presentation
             icon[0] = current ? getWeatherIcon(current.weatherCode): "cloud_alert";
             tempC[0] = `${parseFloat(current.temp_C)}` ?? "??";
             tempF[0] = `${parseFloat(current.temp_F)}` ?? "??";
@@ -126,18 +131,36 @@ Singleton {
             area = location.areaName?.[0]?.value ?? "Unknown";
             feelstempC = "Feels like: " + `${parseFloat(current.FeelsLikeC)}` + "°C" ?? "??";
             feelstempF = "Feels like: " + `${parseFloat(current.FeelsLikeF)}` + "°F" ?? "??";
+            sunrise = parseFloat(`${weatherToday?.[0]?.astronomy?.[0]?.sunrise}`.slice(0,2)) ?? "??";
+            sunset = 13 + parseFloat(`${weatherToday?.[0]?.astronomy?.[0]?.sunset}`.slice(0,2)) ?? "??";
 
+            // For loop to get array index values and set value for another array
             for (var i=0; i < 8; i++) {
-              icon[i+1] = weatherToday ? getWeatherIcon(weatherToday?.[0]?.hourly?.[i]?.weatherCode) : "cloud_alert";
               tempC[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempC)}` ?? "??";
               tempF[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempF)}` ?? "??";
               time[i+1] = `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2) + ":" + `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(-2) ?? "??";
             }
-
+            
+            // Force check midnight 0 and change to 0:00
             if (time[1] != "0:00") {
               time[1] = "0:00";
             }
-                  
+            
+            // Most fucked up check for sunrise & sunset and change icons from sun to moon
+            for (var i=0; i < 8; i++) {
+              if(((sunset < parseFloat(time[i+1].slice(0,-3))) || (sunrise > parseFloat(time[i+1].slice(0,-3)))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
+                const sunrcode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) + 1).toString();
+                icon[i+1] = weatherToday ? getWeatherIcon(sunrcode) : "cloud_alert";
+              }
+              else if(((sunset < parseFloat(time[i+1].slice(0,-2))) || (sunrise > parseFloat(time[i+1].slice(0,-2)))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
+                const sunscode = (`${parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode)}` - 1).toString();
+                icon[i+1] = weatherToday ? getWeatherIcon(sunscode) : "cloud_alert";
+              }
+              else {
+                icon[i+1] = weatherToday ? getWeatherIcon(weatherToday?.[0]?.hourly?.[i]?.weatherCode) : "cloud_alert";
+              }
+            }
+
           } catch (e) {
             console.error("Failed to parse weather JSON:", e);
           }

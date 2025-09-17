@@ -32,18 +32,7 @@ Rectangle {
               color: Dat.Colors.foreground
             }
 
-            Text {
-                id: text1
-                anchors.centerIn: parent
-                text: "SYSTEM TRAY, SHUTDOWN,"
-                color: Dat.Colors.foreground
-            }
-
-            Text {
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: text1.bottom
-                text: "RESTART, LOCK, SLEEP, ETC"
-                color: Dat.Colors.foreground
+            Wid.StatusTray {
             }
         }
 

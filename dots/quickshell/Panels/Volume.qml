@@ -19,7 +19,7 @@ Scope {
 			root.shouldShowOsd = true;
 			hideTimer.restart();
 		}
-	}
+  }
 
 	property bool shouldShowOsd: false
 
@@ -53,7 +53,7 @@ Scope {
 			Rectangle {
 				anchors.fill: parent
 				radius: height / 2
-				color: Dat.Colors.withAlpha(Dat.Colors.background, 0.5)
+				color: Dat.Colors.withAlpha(Dat.Colors.background, 0.4)
 
 				RowLayout {
 					anchors {
@@ -63,10 +63,10 @@ Scope {
 					}
 
 					Dat.MaterialSymbols {
-						id: volumeUp
+						id: volume
 						font.pixelSize: 30
 						font.bold: false
-						color: Dat.Colors.foreground
+						color: Dat.Colors.purple
 						icon: "volume_up"
 					}
 
@@ -76,7 +76,7 @@ Scope {
 
 						implicitHeight: 10
 						radius: 20
-						color: Dat.Colors.foreground
+						color: Dat.Colors.comment
 
 						Rectangle {
 							anchors {
@@ -84,7 +84,7 @@ Scope {
 								top: parent.top
 								bottom: parent.bottom
 							}
-							color: "#686868"
+							color: Dat.Colors.purple
 
 							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
 							radius: parent.radius

@@ -8,8 +8,6 @@ GridLayout {
   anchors.fill: parent
   columns: 8
 
-  Component.onCompleted: Dat.Weather.reload()
-
   Text {
     Layout.columnSpan: 8
     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop

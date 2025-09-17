@@ -157,7 +157,6 @@ Column {
 
             anchors.fill: parent
             radius: parent.radius
-            visible: Dat.Khal
             opacity: {
               if (isToday)
                 return 0.25;

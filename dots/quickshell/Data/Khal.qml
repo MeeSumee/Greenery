@@ -228,10 +228,9 @@ Singleton {
                 }
                 // Sort events by start time within each date
                 for (let dateKey in newEventsByDate) {
-                    newEventsByDate[dateKey].sort((a, b) => {
-                                                      return a.start.getTime(
-                                                          ) - b.start.getTime()
-                                                  })
+                  newEventsByDate[dateKey].sort((a, b) => {
+                    return a.start.getTime() - b.start.getTime()
+                  })
                 }
                 root.eventsByDate = newEventsByDate
                 root.lastError = ""
