@@ -11,6 +11,7 @@ in {
 
   imports = [
     ./davis.nix
+    ./files.nix
     ./jellyfin.nix
     ./suwayomi.nix
   ];
