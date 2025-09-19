@@ -33,6 +33,7 @@ Rectangle {
             }
 
             Wid.StatusTray {
+              stackView: 0
             }
         }
 
