@@ -85,7 +85,9 @@
     server = {
       enable = true;
       davis.enable = true;
+      files.enable = true;
       jellyfin.enable = true;
+      remotevm.enable = true;
       suwayomi.enable = true;
     };
 
@@ -94,8 +96,6 @@
       fish.enable = true;
       lanzaboote.enable = true;
       sumee.enable = true;
-      nahida.enable = false;
-      yang.enable = false;
 
       # age.nix included by default
       # locale.nix included by default

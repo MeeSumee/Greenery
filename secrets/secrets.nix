@@ -21,5 +21,5 @@ in {
   "secret3.age".publicKeys = users.sumee ++ hosts.greenery;
   "secret4.age".publicKeys = users.sumee ++ hosts.greenery;
   "secret5.age".publicKeys = users.sumee ++ hosts.kaolin;
-  "secret6.age".publicKeys = users.sumee;
+  "secret6.age".publicKeys = users.sumee ++ hosts.greenery;
 }
