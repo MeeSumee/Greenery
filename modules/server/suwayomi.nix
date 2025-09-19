@@ -55,7 +55,7 @@
             # Downloader
             downloadAsCbz = true;
             downloadsPath = "/run/media/sumee/emerald/suwayomi";
-            autoDownloadNewChapters = true;
+            autoDownloadNewChapters = false;
             excludeEntryWithUnreadChapters = true;
             autoDownloadIgnoreReUploads = false;
             downloadConversions = {

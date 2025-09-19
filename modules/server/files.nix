@@ -27,7 +27,7 @@
         openFirewall = true;
 
         settings = {
-          root = "/run/media/sumee/emerald";
+          root = "/run/media/sumee/emerald/data";
           port = 6969;
         };
       };

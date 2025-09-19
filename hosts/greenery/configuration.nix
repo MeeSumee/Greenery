@@ -87,6 +87,7 @@
       davis.enable = true;
       files.enable = true;
       jellyfin.enable = true;
+      remotevm.enable = true;
       suwayomi.enable = true;
     };
 

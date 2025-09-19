@@ -13,6 +13,7 @@ in {
     ./davis.nix
     ./files.nix
     ./jellyfin.nix
+    ./remotevm.nix
     ./suwayomi.nix
   ];
   
