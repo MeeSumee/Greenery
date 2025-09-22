@@ -8,7 +8,7 @@
 }:
 
 let
-  rebuildCommand = "nixos-rebuild --flake .# --sudo";
+  rebuildCommand = "nixos-rebuild --flake ~/green# --sudo";
 
 in {
 
