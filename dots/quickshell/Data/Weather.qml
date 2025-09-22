@@ -74,7 +74,7 @@ Singleton {
   
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
-  property string weatherLocation: "~Willis-Tower"
+  property string weatherLocation: "Sears-Tower"
   property bool useFahrenheit: false // Enable fahrenheit
 
   // fetch weather location either based on predefined Latitude and Longitude
