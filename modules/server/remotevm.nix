@@ -39,10 +39,10 @@
         };
         
         # Set libvirtd options declaratively
-        extraOptions = [
-          "--network=default"
-          "--graphics vnc,port=5900"
-        ];
+        # extraOptions = [
+        #   "--network bridge=virbr0"
+        #   "--graphics vnc,port=5900,listen=127.0.0.1"
+        # ];
       };
     };
 
@@ -52,7 +52,6 @@
       python313Packages.websockify
       OVMF
       qemu
-      dnsmasq
       edk2
       (writeShellScriptBin "qemu-system-x86_64-uefi" ''
         qemu-system-x86_64 \
@@ -75,6 +74,15 @@
 
     # Core networking services
     services = {
+
+      # Tell it to not fuck with port 53 from dnscrypt
+      dnsmasq = {
+        enable = true;
+        settings = {
+          listen-address = "127.0.0.1";
+          port = 5300;
+        };
+      };
 
       # Caddy reverse-proxy using tailscale-caddy plugin
       caddy = {
