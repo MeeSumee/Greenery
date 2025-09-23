@@ -141,10 +141,8 @@ Singleton {
               time[i+1] = `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2) + ":" + `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(-2) ?? "??";
             }
             
-            // Force check midnight 0 and change to 0:00
-            if (time[1] != "0:00") {
-              time[1] = "0:00";
-            }
+            // Force set midnight 0 and change to 0:00
+            time[1] = "0:00";
             
             // Most fucked up check for sunrise & sunset and change icons from sun to moon
             for (var i=0; i < 8; i++) {
