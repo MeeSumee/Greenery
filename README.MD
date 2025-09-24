@@ -26,6 +26,12 @@ Planned color themes:
 - Nahida Colors (Light theme only)
 - JSON Color maker by detecting wallpaper (idea taken from rex's implementation)
 
+Dependencies:
+- Quickshell 0.2.0
+- Khal
+- Upower
+- Power-Profiles-Daemon
+
 # Greenery
 
 Dell Optiplex 7050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
