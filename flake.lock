@@ -9,11 +9,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1757519352,
-        "narHash": "sha256-Rfokm02H340r+uuxswri8IiC64S30vziLGR36/NDId4=",
+        "lastModified": 1758557465,
+        "narHash": "sha256-SeDqOZQoARl/xxEMdej09IScCf77SEQfRAjED7lBgMY=",
         "owner": "ezKEa",
         "repo": "aagl-gtk-on-nix",
-        "rev": "dc83e172461fb4f2e55b4a61762d898c73026a85",
+        "rev": "944f9903859ad16db762fbe573fb6f05f7367e16",
         "type": "github"
       },
       "original": {
@@ -47,6 +47,31 @@
         "type": "github"
       }
     },
+    "booru-hs": {
+      "inputs": {
+        "nixpkgs": [
+          "zaphkiel",
+          "nixpkgs"
+        ],
+        "systems": [
+          "zaphkiel",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758667320,
+        "narHash": "sha256-645wno0QuBomf7jWW9RNhYOti19mZTROP4mEwgeNKEI=",
+        "owner": "Rexcrazy804",
+        "repo": "booru.hs",
+        "rev": "abeda27926b24f903b66c9b0b0d1a1d8750eb4c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rexcrazy804",
+        "repo": "booru.hs",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1731098351,
@@ -64,11 +89,11 @@
     },
     "ecchirexi": {
       "locked": {
-        "lastModified": 1757443745,
-        "narHash": "sha256-FhxxHhCFITdL23TON37dUO+PdJuKWAg71G4I2IFG/rI=",
+        "lastModified": 1758544059,
+        "narHash": "sha256-j+ff9fcIcwDu453uyoMhXqbc8UVN1Md9IJwiV6xf14g=",
         "owner": "Rexcrazy804",
         "repo": "hjem-impure",
-        "rev": "a280ffc2dfa4a9688bc94933db1810a95aaadf88",
+        "rev": "fc1ecda8104e2850b03e66715a59d3345bdc2597",
         "type": "github"
       },
       "original": {
@@ -106,16 +131,41 @@
         "smfh": []
       },
       "locked": {
-        "lastModified": 1757593056,
-        "narHash": "sha256-E3+ZItMG0LbUiz/8F7/uOvZzk72ZuQ51OFCJQEjCW5o=",
+        "lastModified": 1757733237,
+        "narHash": "sha256-q57LxLzOQuW0ROtoBMMPbG8neBYa6LizRH9FVOQkkLQ=",
         "owner": "feel-co",
         "repo": "hjem",
-        "rev": "94e77114b3cddf6c9b1c2ee541836ac32c1ac8a6",
+        "rev": "627b34efad55fd42d6dd52c19c796604d2b8e8bd",
         "type": "github"
       },
       "original": {
         "owner": "feel-co",
         "repo": "hjem",
+        "type": "github"
+      }
+    },
+    "hs-todo": {
+      "inputs": {
+        "nixpkgs": [
+          "zaphkiel",
+          "nixpkgs"
+        ],
+        "systems": [
+          "zaphkiel",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1757771500,
+        "narHash": "sha256-gh5aecNgMctFZ6gBW1hjKA8cDUhXDIP+F9QDxrwgNZc=",
+        "owner": "Rexcrazy804",
+        "repo": "haskell-todo",
+        "rev": "e4fd68420bfce80147f9e7053b3010d9877ccdb2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rexcrazy804",
+        "repo": "haskell-todo",
         "type": "github"
       }
     },
@@ -179,10 +229,10 @@
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1757487488,
-        "narHash": "sha256-HMwfAJBdrr8wXAkbGhtcby1zGFvs+StOp19xNsbqdOg=",
+        "narHash": "sha256-pHpxZ/IyCwoTQPtFIAG2QaxuSm8jWzrzBGjwQZIttJc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "20075955deac2583bb12f07151c2df830ef346b4",
+        "rev": "554be6495561ff07b6c724047bdd7e0716aa7b46",
         "type": "github"
       },
       "original": {
@@ -231,11 +281,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1754575663,
-        "narHash": "sha256-afOx8AG0KYtw7mlt6s6ahBBy7eEHZwws3iCRoiuRQS4=",
+        "lastModified": 1758508617,
+        "narHash": "sha256-kx2uELmVnAbiekj/YFfWR26OXqXedImkhe2ocnbumTA=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "6db0fb0e9cec2e9729dc52bf4898e6c135bb8a0f",
+        "rev": "d2bac276ac7e669a1f09c48614538a37e3eb6d0f",
         "type": "github"
       },
       "original": {
@@ -283,9 +333,11 @@
     "zaphkiel": {
       "inputs": {
         "agenix": [],
+        "booru-hs": "booru-hs",
         "crane": [],
         "hjem": [],
         "hjem-impure": [],
+        "hs-todo": "hs-todo",
         "mnw": "mnw",
         "nixpkgs": [
           "nixpkgs"
@@ -297,11 +349,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1757708640,
-        "narHash": "sha256-rwQp09ntWLgJ8pq9YU69/MJKPlM2B2o2Rp/WEpCWO3M=",
+        "lastModified": 1758799874,
+        "narHash": "sha256-P8/FX5Aoc7sA4Rc1+Bofj+V+2Ko/9vuFMzrcAHIWF0s=",
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel",
-        "rev": "5208dcd37330cc08a0fb94cb62c4a2e76df38996",
+        "rev": "a25257c75f7264139965a82cbea8ba0ed65058e9",
         "type": "github"
       },
       "original": {
