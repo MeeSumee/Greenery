@@ -2,7 +2,6 @@
   config, 
   lib, 
   pkgs, 
-  options, 
   ... 
 }:{
 
@@ -14,17 +13,18 @@
     boot.initrd.kernelModules = [ "amdgpu" ];
     
     # Set exposed video decode for mpv?
-    environment.variables.RADV_PERFTEST = "video_decode";
+    environment.variables = {
+      RADV_PERFTEST = "video_decode";
+      RUSTICL_ENABLE = "radeonsi";
+    };
     
-    # Enables AMDVLK Vulkan driver
-    hardware.amdgpu.amdvlk.enable = true;
-
     # Enable OpenGL with AMD Vulkan
     hardware = {
       graphics = {
         enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
+          mesa.opencl
           rocmPackages.clr.icd
           vaapiVdpau
           libvdpau-va-gl
