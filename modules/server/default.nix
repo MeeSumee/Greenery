@@ -30,7 +30,7 @@ in {
       
       package = pkgs.caddy.withPlugins {
         plugins = [ "github.com/tailscale/caddy-tailscale@${revision}" ];
-        hash = "sha256-0GsjeeJnfLsJywWzWwJcCDk5wjTSBwzqMBY7iHjPQa8=";
+        hash = "sha256-oYCY85/Sze17RhqMEfM7t80VXUXL5hpNAjtH75Il5yQ=";
       };
       
       # Age file has contents TS_AUTH=<insert your auth key>

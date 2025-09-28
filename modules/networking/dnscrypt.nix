@@ -17,13 +17,15 @@
         "::1"
         "127.0.0.1"
       ];
-    };  
 
-    networking.firewall.allowedTCPPorts = [53];
-    networking.firewall.allowedUDPPorts = [53];
+      firewall = {
+        allowedTCPPorts = [53];
+        allowedUDPPorts = [53];
+      };
+    };  
    
     # DNS Proxy for DNS Resolving in Tailscale
-    services.dnscrypt-proxy2 = {
+    services.dnscrypt-proxy = {
       enable = true;
       settings = {
         ipv4_servers = true;

@@ -128,11 +128,10 @@
       hjem.users = lib.genAttrs users (user: {
         files = let
           themeName = "Dracula";
-          themeDir = "/run/current-system/sw/share/themes/${themeName}";
         in {
-          ".config/gtk-4.0/assets".source = "${themeDir}/gtk-4.0/assets";
-          ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
-          ".config/gtk-4.0/gtk-dark.css".source = "${themeDir}/gtk-4.0/gtk-dark.css";
+          ".config/gtk-4.0/assets".source = "${pkgs.dracula-theme}/share/themes/${themeName}/gtk-4.0/assets";
+          ".config/gtk-4.0/gtk.css".source = "${pkgs.dracula-theme}/share/themes/${themeName}/gtk-4.0/gtk.css";
+          ".config/gtk-4.0/gtk-dark.css".source = "${pkgs.dracula-theme}/share/themes/${themeName}/gtk-4.0/gtk-dark.css";
         };
       });
     })
@@ -151,7 +150,7 @@
         gimp3                           # GIMP image manipulator
         kicad                           # KiCAD Electronic schematic/PCB designer
         rare                            # GUI based on legendary which is a port of Epic Games
-        davinci-resolve                 # Davinci-resolve video editor
+        # davinci-resolve                 # Davinci-resolve video editor
 
         # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)
         # (pkgs.callPackage ./davinci.nix {})
