@@ -147,19 +147,20 @@ Column {
           Text {
             anchors.centerIn: parent
             text: dayDate.getDate()
-            color: Dat.Colors.foreground
+            color: isToday ? Dat.Colors.red : Dat.Colors.foreground
+            font.bold: isToday? true : false
             font.pointSize: 11
           }
 
           // Highlight Today's Date
           Rectangle {
-            id: eventIndicator
-
+            id: today
+            color: Dat.Colors.foreground
             anchors.fill: parent
             radius: parent.radius
             opacity: {
               if (isToday)
-                return 0.25;
+                return 0.5;
               else
                 return 0;
             }
