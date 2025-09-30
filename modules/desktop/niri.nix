@@ -21,9 +21,10 @@
     # Xwayland satellite for X11 Windowing Support
     systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
 
-    # Niri Packages
+    # Niri Dependencies
     environment.systemPackages = with pkgs; [
       xwayland-satellite
+      jq
     ];
 
     # Niri Hjem config

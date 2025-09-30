@@ -260,11 +260,6 @@ layout {
     }
 }
 
-// Xwayland-satellite display setting
-environment {
-    DISPLAY ":0"
-}
-
 // Add lines like this to spawn processes at startup
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
