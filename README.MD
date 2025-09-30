@@ -28,7 +28,6 @@ Planned color themes:
 
 Dependencies:
 - Quickshell 0.2.0
-- Khal
 - Upower
 - Power-Profiles-Daemon
 
