@@ -54,8 +54,8 @@ Rectangle {
         }
 
         Rectangle {
-            Layout.rowSpan: 1
-            implicitHeight: 225
+            Layout.rowSpan: 2
+            implicitHeight: 340
             implicitWidth: 310
             radius: 20
             color: "transparent"
@@ -66,24 +66,6 @@ Rectangle {
             }
 
             Wid.WeatherWidget {
-            }
-        }
-
-        Rectangle {
-          Layout.rowSpan: 1
-          Layout.bottomMargin: 5
-            implicitHeight: 100
-            implicitWidth: 310
-            radius: 20
-            color: "transparent"
-
-            border {
-                width: 1
-                color: Dat.Colors.foreground 
-            }
-
-            Wid.Event {
-
             }
         }
     }

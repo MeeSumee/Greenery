@@ -74,19 +74,33 @@ Singleton {
   
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
-  property string weatherLocation: "Sears-Tower"
+  property string weatherLocation: ""
   property bool useFahrenheit: false // Enable fahrenheit
 
-  // fetch weather location either based on predefined Latitude and Longitude
-  // or use IP location (currently fucked)
+  // fetch weather location or use IP location
   function reload(): void {
     if (weatherLocation)
       loc = weatherLocation;
-    else if (!loc || timer.elapsed() > 900)
-      Requests.get("https://ipinfo.io/json", text => {
-      loc = JSON.parse(text).city ?? "";
-      timer.restart();
-    });
+    else if (!loc || timer.elapsed() > 10000) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://ipinfo.io/json");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            try {
+              var response = JSON.parse(xhr.responseText);
+              loc = response.city ?? "";
+              timer.restart();
+            } catch (e) {
+              console.error("Failed to parse IP info JSON:", e);
+            }
+          } else {
+            console.error("HTTP request for IP info failed with status:", xhr.status);
+          }
+        }
+      }
+      xhr.send();
+    }
   }
 
   // Fetch weather icon
@@ -131,8 +145,8 @@ Singleton {
             area = location.areaName?.[0]?.value ?? "Unknown";
             feelstempC = "Feels like: " + `${parseFloat(current.FeelsLikeC)}` + "°C" ?? "??";
             feelstempF = "Feels like: " + `${parseFloat(current.FeelsLikeF)}` + "°F" ?? "??";
-            sunrise = parseFloat(`${weatherToday?.[0]?.astronomy?.[0]?.sunrise}`.slice(0,2)) ?? "??";
-            sunset = 13 + parseFloat(`${weatherToday?.[0]?.astronomy?.[0]?.sunset}`.slice(0,2)) ?? "??";
+            sunrise = weatherToday?.[0]?.astronomy?.[0]?.sunrise ?? "??";
+            sunset = weatherToday?.[0]?.astronomy?.[0]?.sunset ?? "??";
 
             // For loop to get array index values and set value for another array
             for (var i=0; i < 8; i++) {
@@ -146,11 +160,11 @@ Singleton {
             
             // Most fucked up check for sunrise & sunset and change icons from sun to moon
             for (var i=0; i < 8; i++) {
-              if(((sunset < parseFloat(time[i+1].slice(0,-3))) || (sunrise > parseFloat(time[i+1].slice(0,-3)))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
+              if(((13 + parseFloat(sunset.slice(0,2)) < parseFloat(time[i+1].slice(0,-3))) || (parseFloat(sunrise.slice(0,2)) > parseFloat(time[i+1].slice(0,-3)))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
                 const sunrcode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) + 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunrcode) : "cloud_alert";
               }
-              else if(((sunset < parseFloat(time[i+1].slice(0,-2))) || (sunrise > parseFloat(time[i+1].slice(0,-2)))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
+              else if(((13 + parseFloat(sunset.slice(0,2)) < parseFloat(time[i+1].slice(0,-2))) || (parseFloat(sunrise.slice(0,2)) > parseFloat(time[i+1].slice(0,-2)))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
                 const sunscode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) - 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunscode) : "cloud_alert";
               }
@@ -172,9 +186,21 @@ Singleton {
 
   onLocChanged: fetchWeather()
 
-  Component.onCompleted: reload()
-
   ElapsedTimer {
     id: timer
+  }
+
+  Component.onCompleted: {
+    reload()
+    refresh.start()
+  }
+
+  // 1hr refresh
+  Timer {
+    id: refresh
+    interval: 3600000
+    repeat: true
+    running: false
+    onTriggered: fetchWeather()
   }
 }

@@ -4,7 +4,7 @@ import qs.Data as Dat
 
 GridLayout {
   id: weathergrid
-  anchors.margins: 6        
+  anchors.margins: 10        
   anchors.fill: parent
   columns: 8
 
