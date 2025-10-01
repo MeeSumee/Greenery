@@ -137,7 +137,6 @@ Singleton {
             }
 
             // Set all necessary values for derivation or presentation
-            icon[0] = current ? getWeatherIcon(current.weatherCode): "cloud_alert";
             tempC[0] = `${parseFloat(current.temp_C)}` ?? "??";
             tempF[0] = `${parseFloat(current.temp_F)}` ?? "??";
             time[0] = "Updated:" + `${current.localObsDateTime}`.slice(-9) ?? "??";
@@ -147,6 +146,21 @@ Singleton {
             feelstempF = "Feels like: " + `${parseFloat(current.FeelsLikeF)}` + "°F" ?? "??";
             sunrise = weatherToday?.[0]?.astronomy?.[0]?.sunrise ?? "??";
             sunset = weatherToday?.[0]?.astronomy?.[0]?.sunset ?? "??";
+
+            // IF CHECKS CAUSE I'M RETARDED LOL
+            if(((13 + parseFloat(sunset.slice(0,2)) < 13 + parseFloat(time[0].slice(9,11))) || (parseFloat(sunrise.slice(0,2)) > 13 + parseFloat(time[0].slice(9,11)))) && current.weatherCode === "113") {
+              const rcode = (parseFloat(current.weatherCode) + 1).toString();
+              icon[0] = current ? getWeatherIcon(rcode) : "cloud_alert";
+            }
+            else if(((13 + parseFloat(sunset.slice(0,2)) < 13 + parseFloat(time[0].slice(9,11))) || (parseFloat(sunrise.slice(0,2)) > 13 + parseFloat(time[0].slice(9,11)))) && current.weatherCode === "116") {
+              const scode = (parseFloat(current.weatherCode) - 1).toString();
+              icon[0] = current ? getWeatherIcon(scode) : "cloud_alert";
+            }
+            else {
+              icon[0] = current ? getWeatherIcon(current.weatherCode) : "cloud_alert";
+            }
+
+            console.log(parseFloat(time[0].slice(9,11)), icon[0], parseFloat(current.weatherCode) + 1)
 
             // For loop to get array index values and set value for another array
             for (var i=0; i < 8; i++) {

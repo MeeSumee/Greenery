@@ -49,7 +49,7 @@ GridLayout {
 
   Dat.MaterialSymbols {
     Layout.columnSpan: 4
-    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+    Layout.alignment: Qt.AlignRight | Qt.AlignTop
     Layout.topMargin: 1.75
     Layout.rightMargin: 8
 
@@ -62,11 +62,15 @@ GridLayout {
     Text {
       anchors.top: parent.bottom
       anchors.horizontalCenter: parent.horizontalCenter
+      height: 80
+      width: 80
 
       id: desc
       text: Dat.Weather.description
       color: Dat.Colors.foreground
       font.pointSize: 10
+      horizontalAlignment: Text.AlignHCenter
+      wrapMode: Text.WordWrap
     }
   }
 
