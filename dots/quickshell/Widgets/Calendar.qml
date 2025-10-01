@@ -158,12 +158,7 @@ Column {
             color: Dat.Colors.foreground
             anchors.fill: parent
             radius: parent.radius
-            opacity: {
-              if (isToday)
-                return 0.5;
-              else
-                return 0;
-            }
+            opacity: isToday ? 0.5 : 0
           }
         }
       }
