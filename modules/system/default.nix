@@ -19,14 +19,16 @@
 
   config = lib.mkIf config.greenery.system.enable {
 
-    # Bootloader.
+    # Bootloader
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    # Enable CUPS to print documents.
-    services.printing.enable = true;
-
-    # Enable Firmware Updates
-    services.fwupd.enable = true;
+    # Enable core firmware services
+    services = {
+      printing.enable = true;
+      gvfs.enable = true;
+      udisks2.enable = true;
+      fwupd.enable = true;
+    };
   };
 }
