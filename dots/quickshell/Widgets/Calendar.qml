@@ -1,14 +1,21 @@
 import QtQuick
 import qs.Data as Dat
+import qs.Panels as Pan
 
 Column {
   id: calendarGrid
-
   width: parent.width
 
   property date displayDate: new Date()
 
   spacing: 5
+
+  // Check to see if the date is the same, rerun the loader otherwise
+  function isSameDay(d1, d2) {
+    return d1.getFullYear() === d2.getFullYear()
+    && d1.getMonth() === d2.getMonth()
+    && d1.getDate() === d2.getDate();
+  }
 
   // Month navigation header
   Row {
@@ -105,62 +112,80 @@ Column {
     }
   }
 
-  // Calendar grid
-  Grid {
-    property date firstDay: {
-      let date = new Date(displayDate.getFullYear(), displayDate.getMonth(), 1);
-      let dayOfWeek = date.getDay();
-      date.setDate(date.getDate() - dayOfWeek);
-      return date;
-    }
-
+  // Calendar Grid Loader
+  Loader {
+    id: loader
     width: parent.width
-    height: 245 // Fixed height for calendar
-    columns: 7
-    rows: 6
+    active: true
 
-    Repeater {
-      model: 42
+    sourceComponent: Grid {
+      property date firstDay: {
+        let date = new Date(displayDate.getFullYear(), displayDate.getMonth(), 1);
+        let dayOfWeek = date.getDay();
+        date.setDate(date.getDate() - dayOfWeek);
+        return date;
+      }
 
-      Rectangle {
-        property date dayDate: {
-          let date = new Date(parent.firstDay);
-          date.setDate(date.getDate() + index);
-          return date;
-        }
-        property bool isCurrentMonth: dayDate.getMonth() === displayDate.getMonth()
-        property bool isToday: dayDate.toDateString() === new Date().toDateString()
+      width: parent.width
+      height: 245 // Fixed height for calendar
+      columns: 7
+      rows: 6
 
-        width: parent.width / 7
-        height: (parent.height + 8) / 6
-        color: "transparent"
-        clip: true
+      Repeater {
+        model: 42
 
         Rectangle {
-          anchors.centerIn: parent
-          width: parent.width - 4
-          height: parent.height - 4
+          property date dayDate: {
+            let date = new Date(parent.firstDay);
+            date.setDate(date.getDate() + index);
+            return date;
+          }
+          property bool isCurrentMonth: dayDate.getMonth() === displayDate.getMonth()
+          property bool isToday: dayDate.toDateString() === new Date().toDateString()
+
+          width: parent.width / 7
+          height: (parent.height + 8) / 6
           color: "transparent"
-          radius: 20
           clip: true
 
-          Text {
-            anchors.centerIn: parent
-            text: dayDate.getDate()
-            color: isToday ? Dat.Colors.red : Dat.Colors.foreground
-            font.bold: isToday? true : false
-            font.pointSize: 11
-          }
-
-          // Highlight Today's Date
           Rectangle {
-            id: today
-            color: Dat.Colors.foreground
-            anchors.fill: parent
-            radius: parent.radius
-            opacity: isToday ? 0.5 : 0
+            anchors.centerIn: parent
+            width: parent.width - 4
+            height: parent.height - 4
+            color: "transparent"
+            radius: 20
+            clip: true
+
+            Text {
+              anchors.centerIn: parent
+              text: dayDate.getDate()
+              color: isToday ? Dat.Colors.red : Dat.Colors.foreground
+              font.bold: isToday? true : false
+              font.pointSize: 11
+            }
+
+            // Highlight Today's Date
+            Rectangle {
+              id: today
+              color: Dat.Colors.foreground
+              anchors.fill: parent
+              radius: parent.radius
+              opacity: isToday ? 0.5 : 0
+            }
           }
         }
+      }
+    }
+
+    // Reload if the day changes
+    Component.onCompleted: {
+      const currentDate = new Date()
+      const calendarHasToday = calendarGrid.isSameDay(currentDate, calendarGrid.displayDate)
+
+      if (!calendarHasToday) {
+        console.log("Today's date has changed — refreshing calendar")
+        loader.active = false
+        loader.active = true
       }
     }
   }
