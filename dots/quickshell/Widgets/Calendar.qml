@@ -1,6 +1,5 @@
 import QtQuick
 import qs.Data as Dat
-import qs.Panels as Pan
 
 Column {
   id: calendarGrid
