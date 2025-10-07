@@ -71,10 +71,12 @@ Singleton {
   property string area: "Unknown"
   property string sunrise: "??"
   property string sunset: "??"
+
+  signal weatherReady()
   
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
-  property string weatherLocation: "~John-Hancock-Center"
+  property string weatherLocation: ""
   property bool useFahrenheit: false // Enable fahrenheit
 
   // fetch weather location or use IP location
@@ -199,6 +201,8 @@ Singleton {
                 icon[i+1] = weatherToday ? getWeatherIcon(weatherToday?.[0]?.hourly?.[i]?.weatherCode) : "cloud_alert";
               }
             }
+
+            root.weatherReady()
 
           } catch (e) {
             console.error("Failed to parse weather JSON:", e);

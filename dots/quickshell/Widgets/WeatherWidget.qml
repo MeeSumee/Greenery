@@ -4,7 +4,7 @@ import qs.Data as Dat
 
 GridLayout {
   id: weathergrid
-  anchors.margins: 10        
+  anchors.margins: 5       
   anchors.fill: parent
   columns: 8
 
@@ -74,24 +74,100 @@ GridLayout {
     }
   }
 
+  Item {
+    Layout.columnSpan: 8
+    Layout.alignment: Qt.AlignTop
+    Layout.fillWidth: true
+    implicitHeight: 100
+
+    Canvas {
+      id: tempgraph
+      antialiasing: true
+      anchors.fill: parent
+      renderStrategy: Canvas.Cooperative
+
+      onPaint: {
+        if (Dat.Weather.tempC[0] != "??") {
+          const ctx = getContext("2d")
+          ctx.reset()
+          ctx.clearRect(0, 0, width, height)
+
+          const count = Dat.Weather.tempC.length - 1
+          if (count < 2)
+            return
+
+          // Compute ranges
+          const maxTemp = Dat.Weather.useFahrenheit ? Math.max(...Dat.Weather.tempF) : Math.max(...Dat.Weather.tempC)
+          const minTemp = Dat.Weather.useFahrenheit ? Math.min(...Dat.Weather.tempF) : Math.min(...Dat.Weather.tempC)
+          const range = maxTemp - minTemp || 1
+
+          const padding = 20
+          const xStep = (width - 2 * padding) / (count - 1)
+
+          // Y mapping: higher temps → higher on graph
+          function tempToY(temp) {
+            const ratio = (temp - minTemp) / range
+            return height - padding - ratio * (height - 2 * padding)
+          }
+
+          // Draw line path
+          ctx.beginPath()
+          ctx.strokeStyle = Dat.Colors.foreground
+          ctx.lineWidth = 2
+          ctx.moveTo(padding, tempToY(Dat.Weather.useFahrenheit ? Dat.Weather.tempF[1] : Dat.Weather.tempC[1]))
+
+          for (let i = 1; i < count; i++) {
+            ctx.lineTo(padding + i * xStep, tempToY(Dat.Weather.useFahrenheit ? Dat.Weather.tempF[i+1] : Dat.Weather.tempC[i+1]))
+          }
+          ctx.stroke()
+
+          // Draw points and temperature labels
+          ctx.fillStyle = Dat.Colors.foreground
+          ctx.font = "14px sans-serif"
+          ctx.textAlign = "center"
+          ctx.textBaseline = "bottom"
+          for (let i = 0; i < count; i++) {
+            const x = padding + i * xStep
+            const y = tempToY(Dat.Weather.useFahrenheit ? Dat.Weather.tempF[i+1] : Dat.Weather.tempC[i+1])
+            ctx.beginPath()
+            ctx.arc(x, y, 3, 0, Math.PI * 2)
+            ctx.fill()
+
+            const label = Dat.Weather.useFahrenheit ? Dat.Weather.tempF[i+1] + "°" : Dat.Weather.tempC[i+1] + "°"
+            const xOffset = i % 2 === 0 ? 4 : 0
+            ctx.fillText(label, x + xOffset, y - 6)
+          }
+        }
+      }
+      Connections {
+        target: Dat.Weather
+        function onWeatherReady() {
+          tempgraph.requestPaint()
+        }
+      }
+    }
+  }
+
+
   Rectangle {
     color: "transparent"
     Layout.columnSpan: 8
-    Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
     Layout.fillWidth: true
-    implicitHeight: 90
+    implicitHeight: 40
     radius: 20
 
     GridLayout {
       id: forecast
       anchors.fill: parent
+      anchors.margins: 5
       columns: 8
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[1]
@@ -99,9 +175,9 @@ GridLayout {
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[2]
@@ -109,9 +185,9 @@ GridLayout {
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[3]
@@ -119,9 +195,9 @@ GridLayout {
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[4]
@@ -129,9 +205,9 @@ GridLayout {
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[5]
@@ -139,9 +215,9 @@ GridLayout {
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[6]
@@ -149,9 +225,9 @@ GridLayout {
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[7]
@@ -159,91 +235,12 @@ GridLayout {
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 32
+        font.pixelSize: 28
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[8]
-      }
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[1] + "°" : Dat.Weather.tempC[1] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
-      }
-
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[2] + "°" : Dat.Weather.tempC[2] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
-      }
-
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[3] + "°" : Dat.Weather.tempC[3] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
-      }
-
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[4] + "°" : Dat.Weather.tempC[4] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
-      }
-
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[5] + "°" : Dat.Weather.tempC[5] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
-      }
-
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[6] + "°" : Dat.Weather.tempC[6] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
-      }
-
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[7] + "°" : Dat.Weather.tempC[7] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
-      }
-
-
-      Text {
-        Layout.columnSpan: 1
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-     
-        text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[8] + "°" : Dat.Weather.tempC[8] + "°"
-        color: Dat.Colors.foreground
-        font.pointSize: 12
       }
 
       Text {
