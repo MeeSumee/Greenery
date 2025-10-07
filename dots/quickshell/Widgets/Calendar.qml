@@ -126,7 +126,7 @@ Column {
       }
 
       width: parent.width
-      height: 245 // Fixed height for calendar
+      height: 245
       columns: 7
       rows: 6
 
@@ -176,15 +176,18 @@ Column {
       }
     }
 
-    // Reload if the day changes
-    Component.onCompleted: {
-      const currentDate = new Date()
-      const calendarHasToday = calendarGrid.isSameDay(currentDate, calendarGrid.displayDate)
-
-      if (!calendarHasToday) {
-        console.log("Today's date has changed — refreshing calendar")
-        loader.active = false
-        loader.active = true
+    // Check to see if day has changed
+    Timer {
+      interval: 60000
+      running: true
+      repeat: true
+      onTriggered: {
+        const now = new Date()
+        if (!calendarGrid.isSameDay(now, calendarGrid.displayDate)) {
+          console.log("New day — refreshing calendar")
+          loader.active = false
+          loader.active = true
+        }
       }
     }
   }
