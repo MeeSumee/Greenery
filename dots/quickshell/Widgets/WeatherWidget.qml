@@ -13,7 +13,7 @@ GridLayout {
     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
     id: updated
-    text: Dat.Weather.area + ", " + Dat.Weather.time[0]
+    text: `${Dat.Weather.area}, Updated: ${Dat.Weather.time[0]}`
     color: Dat.Colors.foreground
     font.pointSize: 10
   }
@@ -24,7 +24,7 @@ GridLayout {
     Layout.leftMargin: 8
 
     id: temp
-    text: Dat.Weather.useFahrenheit ? Dat.Weather.tempF[0] : Dat.Weather.tempC[0]
+    text: Dat.Weather.temp[0]
     color: Dat.Colors.foreground
     font.pointSize: 50
 
@@ -32,7 +32,7 @@ GridLayout {
       anchors.left: parent.right
 
       id: unit
-      text: Dat.Weather.useFahrenheit ? "°F" : "°C"
+      text: Dat.Weather.imperial ? "°F" : "°C"
       color: Dat.Colors.foreground
       font.pointSize: 30
     }
@@ -41,7 +41,7 @@ GridLayout {
       anchors.top: parent.bottom
 
       id: feelstemp
-      text: Dat.Weather.useFahrenheit ? Dat.Weather.feelstempF : Dat.Weather.feelstempC
+      text: `Feels like: ${Dat.Weather.feelstemp}${Dat.Weather.imperial ? "°F" : "°C"}`
       color: Dat.Colors.foreground
       font.pointSize: 10
     }
@@ -89,18 +89,18 @@ GridLayout {
       renderStrategy: Canvas.Cooperative
 
       onPaint: {
-        if (Dat.Weather.tempC[0] != "??") {
+        if (Dat.Weather.temp[0] != "??") {
           const ctx = getContext("2d")
           ctx.reset()
           ctx.clearRect(0, 0, width, height)
 
-          const count = Dat.Weather.tempC.length - 1
+          const count = Dat.Weather.temp.length - 1
           if (count < 2)
             return
 
           // Compute ranges
-          const maxTemp = Dat.Weather.useFahrenheit ? Math.max(...Dat.Weather.tempF) : Math.max(...Dat.Weather.tempC)
-          const minTemp = Dat.Weather.useFahrenheit ? Math.min(...Dat.Weather.tempF) : Math.min(...Dat.Weather.tempC)
+          const maxTemp = Math.max(...Dat.Weather.temp)
+          const minTemp = Math.min(...Dat.Weather.temp)
           const range = maxTemp - minTemp || 1
 
           const padding = 20
@@ -116,10 +116,10 @@ GridLayout {
           ctx.beginPath()
           ctx.strokeStyle = Dat.Colors.foreground
           ctx.lineWidth = 2
-          ctx.moveTo(padding, tempToY(Dat.Weather.useFahrenheit ? Dat.Weather.tempF[1] : Dat.Weather.tempC[1]))
+          ctx.moveTo(padding, tempToY(Dat.Weather.temp[1]))
 
           for (let i = 1; i < count; i++) {
-            ctx.lineTo(padding + i * xStep, tempToY(Dat.Weather.useFahrenheit ? Dat.Weather.tempF[i+1] : Dat.Weather.tempC[i+1]))
+            ctx.lineTo(padding + i * xStep, tempToY(Dat.Weather.temp[i+1]))
           }
           ctx.stroke()
 
@@ -130,12 +130,12 @@ GridLayout {
           ctx.textBaseline = "bottom"
           for (let i = 0; i < count; i++) {
             const x = padding + i * xStep
-            const y = tempToY(Dat.Weather.useFahrenheit ? Dat.Weather.tempF[i+1] : Dat.Weather.tempC[i+1])
+            const y = tempToY(Dat.Weather.temp[i+1])
             ctx.beginPath()
             ctx.arc(x, y, 3, 0, Math.PI * 2)
             ctx.fill()
 
-            const label = Dat.Weather.useFahrenheit ? Dat.Weather.tempF[i+1] + "°" : Dat.Weather.tempC[i+1] + "°"
+            const label = Dat.Weather.temp[i+1] + "°"
             ctx.fillText(label, x + 2, y - 7)
           }
         }
@@ -246,6 +246,7 @@ GridLayout {
         icon: Dat.Weather.icon[8]
       }
 
+      // TODO: Fix imperial text alignment
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
@@ -253,6 +254,7 @@ GridLayout {
         text: Dat.Weather.time[1]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
 
 
@@ -263,6 +265,7 @@ GridLayout {
         text: Dat.Weather.time[2]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
@@ -272,6 +275,7 @@ GridLayout {
         text: Dat.Weather.time[3]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
@@ -281,6 +285,7 @@ GridLayout {
         text: Dat.Weather.time[4]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
@@ -290,6 +295,7 @@ GridLayout {
         text: Dat.Weather.time[5]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
@@ -299,6 +305,7 @@ GridLayout {
         text: Dat.Weather.time[6]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
@@ -308,6 +315,7 @@ GridLayout {
         text: Dat.Weather.time[7]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
@@ -317,6 +325,7 @@ GridLayout {
         text: Dat.Weather.time[8]
         color: Dat.Colors.foreground
         font.pointSize: 8
+        horizontalAlignment: Text.AlignHCenter
       }
     }
   }
@@ -351,7 +360,7 @@ GridLayout {
 
           text: Dat.Weather.sunrise
           color: Dat.Colors.foreground
-          font.pointSize: 12
+          font.pointSize: Dat.Weather.imperial ? 11 : 12
           horizontalAlignment: Text.AlignHCenter
         }
       }
@@ -372,7 +381,7 @@ GridLayout {
 
           text: Dat.Weather.sunset
           color: Dat.Colors.foreground
-          font.pointSize: 12
+          font.pointSize: Dat.Weather.imperial ? 11 : 12
           horizontalAlignment: Text.AlignHCenter
         }
       }
@@ -391,9 +400,9 @@ GridLayout {
           anchors.top: parent.bottom
           anchors.horizontalCenter: parent.horizontalCenter
 
-          text: Dat.Weather.wind
+          text: `${Dat.Weather.wind} ${Dat.Weather.imperial ? "mph" : "kph"}`
           color: Dat.Colors.foreground
-          font.pointSize: 12
+          font.pointSize: Dat.Weather.imperial ? 11 : 12
           horizontalAlignment: Text.AlignHCenter
         }
       }
@@ -414,7 +423,7 @@ GridLayout {
 
           text: Dat.Weather.uvindex
           color: Dat.Colors.foreground
-          font.pointSize: 12
+          font.pointSize: Dat.Weather.imperial ? 11 : 12
           horizontalAlignment: Text.AlignHCenter
         }
       }

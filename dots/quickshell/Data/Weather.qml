@@ -6,6 +6,11 @@ import QtQuick
 Singleton {
   id: root
 
+  // Accepted strings: csv coordinates, airport code, city name, landmark
+  // Reference: https://github.com/chubin/wttr.in
+  property string weatherLocation: ""
+  property bool imperial: false // Enable imperial units (fahrenheit, mph, etc)
+
   // Yoinked from sora's shell + added some of my own
   readonly property var weatherIcons: ({
     "113": "clear_day",
@@ -81,13 +86,11 @@ Singleton {
   })
 
   property string loc
-  property list<string> tempC: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
+  property list<string> temp: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
   property list<string> icon: ["cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert"]
-  property list<string> tempF: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
   property list<string> time: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
   property string description: "Unknown"
-  property string feelstempC: "??"
-  property string feelstempF: "??"
+  property string feelstemp: "??"
   property string area: "Unknown"
   property string sunrise: "??"
   property string sunset: "??"
@@ -96,11 +99,6 @@ Singleton {
   property string winddir: "emergency_heat_2"
 
   signal weatherReady()
-  
-  // Accepted strings: csv coordinates, airport code, city name, landmark
-  // Reference: https://github.com/chubin/wttr.in
-  property string weatherLocation: "Oslo"
-  property bool useFahrenheit: false // Enable fahrenheit
 
   // fetch weather location or use IP location
   function reload(): void {
@@ -139,6 +137,30 @@ Singleton {
     }
 
     return `${formattedHour}:${minute}`;
+  }
+
+  // I added this for the american monkes
+  function conv12hr(timeString) {
+    const [hour, minute] = timeString.split(':');
+    let formattedHour = parseInt(hour);
+
+    if (hour > 12) {
+      formattedHour -= 12;
+      return `${formattedHour}:${minute} PM`
+    }
+    
+    else if (hour === 12) {
+      return `${formattedHour}:${minute} PM`
+    }
+
+    else if (hour === 0) {
+      formattedHour += 12;
+      return `${formattedHour}:${minute} AM`
+    }
+
+    else {
+      return `${formattedHour}:${minute} AM`
+    }
   }
 
   // Fetch weather icon
@@ -181,25 +203,23 @@ Singleton {
             }
 
             // Set all necessary values for derivation or presentation
-            tempC[0] = `${parseFloat(current.temp_C)}` ?? "??";
-            tempF[0] = `${parseFloat(current.temp_F)}` ?? "??";
-            time[0] = "Updated: " + conv24hr(`${current.localObsDateTime}`.slice(-8)) ?? "??";
+            temp[0] = imperial ? parseFloat(current.temp_F) : parseFloat(current.temp_C);
+            time[0] = imperial ? current.localObsDateTime.slice(-7) : conv24hr(current.localObsDateTime.slice(-8));
             description = current.weatherDesc?.[0]?.value ?? "Unknown";
             area = location.areaName?.[0]?.value ?? "Unknown";
-            feelstempC = "Feels like: " + `${parseFloat(current.FeelsLikeC)}` + "°C" ?? "??";
-            feelstempF = "Feels like: " + `${parseFloat(current.FeelsLikeF)}` + "°F" ?? "??";
-            sunrise = conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise) ?? "??";
-            sunset = conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset) ?? "??";
-            wind = current.windspeedKmph + " kph" ?? "??";
+            feelstemp = imperial ? parseFloat(current.FeelsLikeF) : parseFloat(current.FeelsLikeC);
+            sunrise = imperial ? weatherToday?.[0]?.astronomy?.[0]?.sunrise.slice(-7) : conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise);
+            sunset = imperial ? weatherToday?.[0]?.astronomy?.[0]?.sunset.slice(-7) : conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset);
+            wind = imperial ? current.windspeedMiles : current.windspeedKmph;
             winddir = getWindIcon(current.winddir16Point) ?? "emergency_heat_2";
             uvindex = current.uvIndex ?? "??";
 
             // IF CHECKS CAUSE I'M RETARDED LOL
-            if((parseInt(sunset.slice(0,2)) < parseInt(conv24hr((current.localObsDateTime).slice(-8))) || parseInt(sunrise.slice(0,2)) > parseInt(conv24hr((`${current.localObsDateTime}`).slice(-8)))) && current.weatherCode === "113") {
+            if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(conv24hr((current.localObsDateTime).slice(-8))) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(conv24hr((current.localObsDateTime).slice(-8)))) && current.weatherCode === "113") {
               const rcode = (parseFloat(current.weatherCode) + 1).toString();
               icon[0] = current ? getWeatherIcon(rcode) : "cloud_alert";
             }
-            else if((parseInt(sunset.slice(0,2)) < parseInt(conv24hr((current.localObsDateTime).slice(-8))) || parseInt(sunrise.slice(0,2)) > parseInt(conv24hr((current.localObsDateTime).slice(-8)))) && current.weatherCode === "116") {
+            else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(conv24hr((current.localObsDateTime).slice(-8))) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(conv24hr((current.localObsDateTime).slice(-8)))) && current.weatherCode === "116") {
               const scode = (parseFloat(current.weatherCode) - 1).toString();
               icon[0] = current ? getWeatherIcon(scode) : "cloud_alert";
             }
@@ -209,21 +229,25 @@ Singleton {
 
             // For loop to get array index values and set value for another array
             for (var i=0; i < 8; i++) {
-              tempC[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempC)}` ?? "??";
-              tempF[i+1] = `${parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempF)}` ?? "??";
-              time[i+1] = `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2) + ":" + `${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(-2) ?? "??";
+              temp[i+1] = imperial ? parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempF) : parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempC) ?? "??";
+              if (weatherToday?.[0]?.hourly?.[i]?.time === "0") {
+                time[i+1] = imperial ? conv12hr("0:00") : "0:00";
+              }
+              else {
+                time[i+1] = imperial ? conv12hr(`${weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)}:${weatherToday?.[0]?.hourly?.[i]?.time.slice(-2)}`) : `${weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)}:${weatherToday?.[0]?.hourly?.[i]?.time.slice(-2)}`;
+              }
             }
             
             // Force set midnight 0 and change to 0:00
-            time[1] = "0:00";
+            time[1] = imperial ? conv12hr("0:00") : "0:00";
             
             // Most fucked up check for sunrise & sunset and change icons from sun to moon
             for (var i=0; i < 8; i++) {
-              if((parseInt(conv24hr(sunset).slice(0,2)) < parseInt(time[i+1].slice(0,-2)) || parseInt(conv24hr(sunrise).slice(0,2)) > parseInt(time[i+1].slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
+              if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
                 const sunrcode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) + 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunrcode) : "cloud_alert";
               }
-              else if((parseInt(conv24hr(sunset).slice(0,2)) < parseInt(time[i+1].slice(0,-2)) || parseInt(conv24hr(sunrise).slice(0,2)) > parseInt(time[i+1].slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
+              else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) > parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
                 const sunscode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) - 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunscode) : "cloud_alert";
               }
@@ -232,6 +256,7 @@ Singleton {
               }
             }
 
+            // Signal Weather Ready status to Temperature Graph
             root.weatherReady()
 
           } catch (e) {
