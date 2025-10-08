@@ -230,24 +230,21 @@ Singleton {
             // For loop to get array index values and set value for another array
             for (var i=0; i < 8; i++) {
               temp[i+1] = imperial ? parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempF) : parseFloat(weatherToday?.[0]?.hourly?.[i]?.tempC) ?? "??";
+
+              // Force fix time "0"
               if (weatherToday?.[0]?.hourly?.[i]?.time === "0") {
                 time[i+1] = imperial ? conv12hr("0:00") : "0:00";
               }
               else {
                 time[i+1] = imperial ? conv12hr(`${weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)}:${weatherToday?.[0]?.hourly?.[i]?.time.slice(-2)}`) : `${weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)}:${weatherToday?.[0]?.hourly?.[i]?.time.slice(-2)}`;
               }
-            }
-            
-            // Force set midnight 0 and change to 0:00
-            time[1] = imperial ? conv12hr("0:00") : "0:00";
-            
-            // Most fucked up check for sunrise & sunset and change icons from sun to moon
-            for (var i=0; i < 8; i++) {
-              if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
+
+              // Most fucked up check for sunrise & sunset and change icons from sun to moon
+              if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
                 const sunrcode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) + 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunrcode) : "cloud_alert";
               }
-              else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) > parseInt(`${weatherToday?.[0]?.hourly?.[i]?.time}`.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
+              else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
                 const sunscode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) - 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunscode) : "cloud_alert";
               }
