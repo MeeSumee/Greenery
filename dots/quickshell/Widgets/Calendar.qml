@@ -184,7 +184,6 @@ Column {
       onTriggered: {
         const now = new Date()
         if (!calendarGrid.isSameDay(now, calendarGrid.displayDate)) {
-          console.log("New day — refreshing calendar")
           loader.active = false
           loader.active = true
         }
