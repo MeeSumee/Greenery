@@ -76,14 +76,16 @@ GridLayout {
 
   Item {
     Layout.columnSpan: 8
-    Layout.alignment: Qt.AlignTop
+    Layout.topMargin: 10
+    Layout.alignment: Qt.AlignBottom
     Layout.fillWidth: true
-    implicitHeight: 100
+    implicitHeight: 80
 
     Canvas {
       id: tempgraph
       antialiasing: true
       anchors.fill: parent
+      anchors.top: parent.bottom
       renderStrategy: Canvas.Cooperative
 
       onPaint: {
@@ -107,7 +109,7 @@ GridLayout {
           // Y mapping: higher temps → higher on graph
           function tempToY(temp) {
             const ratio = (temp - minTemp) / range
-            return height - padding - ratio * (height - 2 * padding)
+            return height - (0.25 * padding) - ratio * (height - 1.6 * padding)
           }
 
           // Draw line path
@@ -134,8 +136,7 @@ GridLayout {
             ctx.fill()
 
             const label = Dat.Weather.useFahrenheit ? Dat.Weather.tempF[i+1] + "°" : Dat.Weather.tempC[i+1] + "°"
-            const xOffset = i % 2 === 0 ? 4 : 0
-            ctx.fillText(label, x + xOffset, y - 6)
+            ctx.fillText(label, x + 2, y - 7)
           }
         }
       }
@@ -148,26 +149,28 @@ GridLayout {
     }
   }
 
-
   Rectangle {
     color: "transparent"
     Layout.columnSpan: 8
-    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+    Layout.alignment: Qt.AlignTop
     Layout.fillWidth: true
-    implicitHeight: 40
+    implicitHeight: 50
     radius: 20
 
     GridLayout {
       id: forecast
       anchors.fill: parent
-      anchors.margins: 5
+      anchors.leftMargin: 5
+      anchors.rightMargin: 5
       columns: 8
+      uniformCellWidths: true
+      rowSpacing: -20
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[1]
@@ -177,7 +180,7 @@ GridLayout {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[2]
@@ -187,7 +190,7 @@ GridLayout {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[3]
@@ -197,7 +200,7 @@ GridLayout {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[4]
@@ -207,7 +210,7 @@ GridLayout {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[5]
@@ -217,7 +220,7 @@ GridLayout {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[6]
@@ -227,7 +230,7 @@ GridLayout {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[7]
@@ -237,7 +240,7 @@ GridLayout {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-        font.pixelSize: 28
+        font.pixelSize: 24
         font.bold: false
         color: Dat.Colors.foreground
         icon: Dat.Weather.icon[8]
@@ -314,6 +317,106 @@ GridLayout {
         text: Dat.Weather.time[8]
         color: Dat.Colors.foreground
         font.pointSize: 8
+      }
+    }
+  }
+
+  Rectangle {
+    color: "transparent"
+    Layout.columnSpan: 8
+    Layout.alignment: Qt.AlignTop
+    Layout.fillWidth: true
+    implicitHeight: 60
+    radius: 20
+
+    GridLayout {
+      id: sunstatus
+      anchors.fill: parent
+      columns: 4
+      uniformCellWidths: true
+
+      Dat.MaterialSymbols {
+        Layout.columnSpan: 1
+        Layout.bottomMargin: 20
+        Layout.alignment: Qt.AlignHCenter
+
+        font.pixelSize: 32
+        font.bold: false
+        color: Dat.Colors.foreground
+        icon: "wb_twilight"
+
+        Text {
+          anchors.top: parent.bottom
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          text: Dat.Weather.sunrise
+          color: Dat.Colors.foreground
+          font.pointSize: 12
+          horizontalAlignment: Text.AlignHCenter
+        }
+      }
+
+      Dat.MaterialSymbols {
+        Layout.columnSpan: 1
+        Layout.bottomMargin: 20
+        Layout.alignment: Qt.AlignHCenter
+
+        font.pixelSize: 32
+        font.bold: false
+        color: Dat.Colors.foreground
+        icon: "water_lux"
+
+        Text {
+          anchors.top: parent.bottom
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          text: Dat.Weather.sunset
+          color: Dat.Colors.foreground
+          font.pointSize: 12
+          horizontalAlignment: Text.AlignHCenter
+        }
+      }
+
+      Dat.MaterialSymbols {
+        Layout.columnSpan: 1
+        Layout.bottomMargin: 20
+        Layout.alignment: Qt.AlignHCenter
+
+        font.pixelSize: 32
+        font.bold: false
+        color: Dat.Colors.foreground
+        icon: Dat.Weather.winddir
+
+        Text {
+          anchors.top: parent.bottom
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          text: Dat.Weather.wind
+          color: Dat.Colors.foreground
+          font.pointSize: 12
+          horizontalAlignment: Text.AlignHCenter
+        }
+      }
+
+      Dat.MaterialSymbols {
+        Layout.columnSpan: 1
+        Layout.bottomMargin: 20
+        Layout.alignment: Qt.AlignHCenter
+
+        font.pixelSize: 32
+        font.bold: false
+        color: Dat.Colors.foreground
+        icon: "dry"
+
+        Text {
+          anchors.top: parent.bottom
+          anchors.horizontalCenter: parent.horizontalCenter
+
+          text: Dat.Weather.uvindex
+          color: Dat.Colors.foreground
+          font.pointSize: 12
+          horizontalAlignment: Text.AlignHCenter
+        }
       }
     }
   }

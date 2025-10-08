@@ -60,6 +60,26 @@ Singleton {
     "395": "snowing"
   })
 
+  // Wind Direction Mapper
+  readonly property var winddir16Point: ({
+    "N": "south",
+    "E": "west",
+    "S": "north",
+    "W": "east",
+    "NE": "south_west",
+    "NNE": "south_west",
+    "ENE": "south_west",
+    "NW": "south_east",
+    "NNW": "south_east",
+    "WNW": "south_east",
+    "SE": "north_west",
+    "SSE": "north_west",
+    "ESE": "north_west",
+    "SW": "north_east",
+    "SSW": "north_east",
+    "WSW": "north_east"
+  })
+
   property string loc
   property list<string> tempC: ["??", "??", "??", "??", "??", "??", "??", "??", "??"]
   property list<string> icon: ["cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert", "cloud_alert"]
@@ -71,12 +91,15 @@ Singleton {
   property string area: "Unknown"
   property string sunrise: "??"
   property string sunset: "??"
+  property string uvindex: "??"
+  property string wind: "??"
+  property string winddir: "emergency_heat_2"
 
   signal weatherReady()
   
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
-  property string weatherLocation: ""
+  property string weatherLocation: "Oslo"
   property bool useFahrenheit: false // Enable fahrenheit
 
   // fetch weather location or use IP location
@@ -125,6 +148,12 @@ Singleton {
     return "cloud_alert";
   }
 
+  function getWindIcon(point) {
+    if (winddir16Point.hasOwnProperty(point))
+      return winddir16Point[point];
+    return "emergency_heat_2";
+  }
+
   // eel magick
   function fetchWeather() {
     console.log("Fetching weather for location:", loc);
@@ -154,22 +183,23 @@ Singleton {
             // Set all necessary values for derivation or presentation
             tempC[0] = `${parseFloat(current.temp_C)}` ?? "??";
             tempF[0] = `${parseFloat(current.temp_F)}` ?? "??";
-            time[0] = "Updated: " + `${current.localObsDateTime}`.slice(-8) ?? "??";
+            time[0] = "Updated: " + conv24hr(`${current.localObsDateTime}`.slice(-8)) ?? "??";
             description = current.weatherDesc?.[0]?.value ?? "Unknown";
             area = location.areaName?.[0]?.value ?? "Unknown";
             feelstempC = "Feels like: " + `${parseFloat(current.FeelsLikeC)}` + "°C" ?? "??";
             feelstempF = "Feels like: " + `${parseFloat(current.FeelsLikeF)}` + "°F" ?? "??";
-            sunrise = weatherToday?.[0]?.astronomy?.[0]?.sunrise ?? "??";
-            sunset = weatherToday?.[0]?.astronomy?.[0]?.sunset ?? "??";
-
-            console.log(parseInt(conv24hr(sunrise).slice(0,2)), conv24hr((current.localObsDateTime).slice(-8)), parseInt(conv24hr(sunset).slice(0,2)));
+            sunrise = conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise) ?? "??";
+            sunset = conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset) ?? "??";
+            wind = current.windspeedKmph + " kph" ?? "??";
+            winddir = getWindIcon(current.winddir16Point) ?? "emergency_heat_2";
+            uvindex = current.uvIndex ?? "??";
 
             // IF CHECKS CAUSE I'M RETARDED LOL
-            if((parseInt(conv24hr(sunset).slice(0,2)) < parseInt(conv24hr((`${current.localObsDateTime}`).slice(-8))) || parseInt(conv24hr(sunrise).slice(0,2)) > parseInt(conv24hr((`${current.localObsDateTime}`).slice(-8)))) && current.weatherCode === "113") {
+            if((parseInt(sunset.slice(0,2)) < parseInt(conv24hr((current.localObsDateTime).slice(-8))) || parseInt(sunrise.slice(0,2)) > parseInt(conv24hr((`${current.localObsDateTime}`).slice(-8)))) && current.weatherCode === "113") {
               const rcode = (parseFloat(current.weatherCode) + 1).toString();
               icon[0] = current ? getWeatherIcon(rcode) : "cloud_alert";
             }
-            else if((parseInt(conv24hr(sunset).slice(0,2)) < parseInt(conv24hr((current.localObsDateTime).slice(-8))) || parseInt(conv24hr(sunrise).slice(0,2)) > parseInt(conv24hr((current.localObsDateTime).slice(-8)))) && current.weatherCode === "116") {
+            else if((parseInt(sunset.slice(0,2)) < parseInt(conv24hr((current.localObsDateTime).slice(-8))) || parseInt(sunrise.slice(0,2)) > parseInt(conv24hr((current.localObsDateTime).slice(-8)))) && current.weatherCode === "116") {
               const scode = (parseFloat(current.weatherCode) - 1).toString();
               icon[0] = current ? getWeatherIcon(scode) : "cloud_alert";
             }
