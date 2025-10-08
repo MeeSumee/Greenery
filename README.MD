@@ -30,6 +30,7 @@ Dependencies:
 - Quickshell 0.2.0
 - Upower
 - Power-Profiles-Daemon
+- Google Material-Symbols Font
 
 # Greenery
 
