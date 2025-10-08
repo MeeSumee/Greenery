@@ -77,7 +77,7 @@ WlrLayershell {
                 }
             }
 
-            // Apparently adding horizontalCenter twice stops the jittering of ClockWidget, but appears as warning
+            // Apparently adding horizontalCenter fixes it from not being center (Layout does absolutely nothing)
             Item {
                 Layout.fillHeight: true
                 Layout.topMargin: 3
@@ -87,7 +87,8 @@ WlrLayershell {
                   anchors.horizontalCenter: parent.horizontalCenter
                 }
 
-                Pan.Panel {}
+                Pan.Panel {
+                }
             }
 
             Item {

@@ -1,6 +1,6 @@
 // ClockWidget.qml
 import QtQuick
-import "../Data" as Dat
+import qs.Data as Dat
 
 Text {
   font.pointSize: 15
