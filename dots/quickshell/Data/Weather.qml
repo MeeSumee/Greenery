@@ -132,7 +132,7 @@ Singleton {
     const [hour, minute] = time.split(':');
     let formattedHour = parseInt(hour);
 
-    if (period === 'PM' && hour != 12) {
+    if (period === 'PM' && formattedHour != 12) {
       formattedHour += 12;
     }
 
@@ -144,16 +144,16 @@ Singleton {
     const [hour, minute] = timeString.split(':');
     let formattedHour = parseInt(hour);
 
-    if (hour > 12) {
+    if (formattedHour > 12) {
       formattedHour -= 12;
       return `${formattedHour}:${minute} PM`
     }
     
-    else if (hour === 12) {
+    else if (formattedHour === 12) {
       return `${formattedHour}:${minute} PM`
     }
 
-    else if (hour === 0) {
+    else if (formattedHour === 0) {
       formattedHour += 12;
       return `${formattedHour}:${minute} AM`
     }

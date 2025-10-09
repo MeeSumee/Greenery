@@ -164,7 +164,7 @@ GridLayout {
       anchors.rightMargin: 5
       columns: 8
       uniformCellWidths: true
-      rowSpacing: -20
+      rowSpacing: Dat.Weather.imperial ? -2 : -20
 
       Dat.MaterialSymbols {
         Layout.columnSpan: 1
@@ -246,86 +246,100 @@ GridLayout {
         icon: Dat.Weather.icon[8]
       }
 
-      // TODO: Fix imperial text alignment
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[1]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
-
 
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[2]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
 
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[3]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
 
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[4]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
 
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[5]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
 
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[6]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
 
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[7]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
 
       Text {
         Layout.columnSpan: 1
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+        Layout.maximumWidth: parent.width / 10
 
         text: Dat.Weather.time[8]
         color: Dat.Colors.foreground
         font.pointSize: 8
         horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.WordWrap
       }
     }
   }
@@ -407,15 +421,15 @@ GridLayout {
         }
       }
 
-      Dat.MaterialSymbols {
+      Text {
         Layout.columnSpan: 1
         Layout.bottomMargin: 20
         Layout.alignment: Qt.AlignHCenter
 
-        font.pixelSize: 32
+        font.pointSize: 24
         font.bold: false
         color: Dat.Colors.foreground
-        icon: "dry"
+        text: "UV"
 
         Text {
           anchors.top: parent.bottom
