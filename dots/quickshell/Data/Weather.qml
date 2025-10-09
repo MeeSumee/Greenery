@@ -1,3 +1,4 @@
+// Potential API change to open-meteo?
 pragma Singleton
 
 import Quickshell
@@ -8,7 +9,7 @@ Singleton {
 
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
-  property string weatherLocation: ""
+  property string weatherLocation: "~Sears-Tower"
   property bool imperial: false // Enable imperial units (fahrenheit, mph, etc)
 
   // Yoinked from sora's shell + added some of my own
@@ -240,11 +241,11 @@ Singleton {
               }
 
               // Most fucked up check for sunrise & sunset and change icons from sun to moon
-              if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
+              if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(time[i+1].slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(time[i+1].slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
                 const sunrcode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) + 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunrcode) : "cloud_alert";
               }
-              else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(weatherToday?.[0]?.hourly?.[i]?.time.slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
+              else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(time[i+1].slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(time[i+1].slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
                 const sunscode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) - 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunscode) : "cloud_alert";
               }
