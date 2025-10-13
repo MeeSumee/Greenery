@@ -39,6 +39,7 @@ Item {
             color: Dat.Colors.foreground
             font.pointSize: 10
             text: `${parseInt(root.node?.audio?.volume * 100)}%` ?? ""
+            verticalAlignment: Text.AlignVCenter
           }
 
           MouseArea {
