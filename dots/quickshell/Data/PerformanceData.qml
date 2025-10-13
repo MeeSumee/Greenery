@@ -4,6 +4,7 @@ import Quickshell.Io
 import QtQuick
 
 import qs.Data as Dat
+import qs.Panels as Pan
 
 Singleton {
   id: root
@@ -61,7 +62,7 @@ Singleton {
   Timer {
     interval: 1000
     repeat: true
-    running: Dat.Globals.notchState == "FULLY_EXPANDED" && Dat.Globals.swipeIndex == 4 && Dat.Globals.settingsTabIndex == 0
+    running: Pan.Bar.barfull.state == "FULLY_EXPANDED" && Pan.Panel.content.swipeIndex == 3
 
     onTriggered: {
       cpuInfo.reload();
