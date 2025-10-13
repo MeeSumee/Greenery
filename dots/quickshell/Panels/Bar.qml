@@ -31,14 +31,16 @@ WlrLayershell {
   Rectangle {
     id: barfull
 
-    property string actWinName: activeWindow?.activated ? activeWindow?.appId : "desktop"
-    readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
     readonly property int hiddenHeight: 1
     readonly property int hiddenWidth: 500
     readonly property int shownHeight: 30
     readonly property int shownWidth: 1000
     readonly property int fullHeight: 400
     readonly property int fullWidth: this.shownWidth
+
+    property string actWinName: activeWindow?.activated ? activeWindow?.appId : "desktop"
+    readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
+    property bool hover: false
 
     color: Dat.Colors.withAlpha(Dat.Colors.background, 0.80)
     anchors.horizontalCenter: parent.horizontalCenter
@@ -56,9 +58,17 @@ WlrLayershell {
       hoverEnabled: true
       preventStealing: true
 
-      onExited: barfull.state = (barfull.state == "FULL") ? "FULL" : "HIDDEN"
+      onExited: barfull.state = (barfull.state == "FULL") ? "FULL" : (barfull.state === "SHOWN" && barfull.actWinName === "desktop") ? "SHOWN" : "HIDDEN"
       onEntered: barfull.state = (barfull.state == "FULL") ? "FULL" : "SHOWN"
       onClicked: barfull.state = (barfull.state !== "FULL") ? "FULL" : "SHOWN"
+    }  
+
+    onActWinNameChanged: {
+      if (barfull.actWinName == "desktop" && barfull.state == "HIDDEN") {
+        barfull.state = "SHOWN";
+      } else if (barfull.state == "SHOWN" && !barfull.hover) {
+        barfull.state = "HIDDEN";
+      }
     }
 
     RowLayout {
