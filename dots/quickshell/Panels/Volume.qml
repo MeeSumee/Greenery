@@ -53,7 +53,7 @@ Scope {
 			Rectangle {
 				anchors.fill: parent
 				radius: height / 2
-				color: Dat.Colors.withAlpha(Dat.Colors.background, 0.4)
+				color: Dat.Colors.withAlpha(Dat.Colors.background, 0.8)
 
 				RowLayout {
 					anchors {
@@ -76,7 +76,7 @@ Scope {
 
 						implicitHeight: 10
 						radius: 20
-						color: Dat.Colors.comment
+						color: Dat.Colors.selection
 
 						Rectangle {
 							anchors {
