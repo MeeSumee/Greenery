@@ -137,6 +137,10 @@ Singleton {
       formattedHour += 12;
     }
 
+    else if (period === 'AM' && formattedHour === 12) {
+      formattedHour -=12;
+    }
+
     return `${formattedHour}:${minute}`;
   }
 
@@ -241,11 +245,11 @@ Singleton {
               }
 
               // Most fucked up check for sunrise & sunset and change icons from sun to moon
-              if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(time[i+1].slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(time[i+1].slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
+              if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(conv24hr(time[i+1]).slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(conv24hr(time[i+1]).slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "113") {
                 const sunrcode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) + 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunrcode) : "cloud_alert";
               }
-              else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(time[i+1].slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(time[i+1].slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
+              else if((parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunset).slice(0,2)) < parseInt(conv24hr(time[i+1]).slice(0,-2)) || parseInt(conv24hr(weatherToday?.[0]?.astronomy?.[0]?.sunrise).slice(0,2)) > parseInt(conv24hr(time[i+1]).slice(0,-2))) && weatherToday?.[0]?.hourly?.[i]?.weatherCode === "116") {
                 const sunscode = (parseFloat(weatherToday?.[0]?.hourly?.[i]?.weatherCode) - 1).toString();
                 icon[i+1] = weatherToday ? getWeatherIcon(sunscode) : "cloud_alert";
               }
