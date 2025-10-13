@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
-import Quickshell.Widgets
+import Quickshell.Services.Pipewire
 import qs.Widgets as Wid
 import qs.Data as Dat
 
@@ -55,10 +54,34 @@ Rectangle {
               color: Dat.Colors.foreground
             }
 
-            Text {
-                anchors.centerIn: parent
-                text: "AUDIO MIXER"
-                color: Dat.Colors.foreground
+            Rectangle {
+              anchors.fill: parent
+              anchors.margins: 2
+              clip: true
+              color: "transparent"
+              radius: parent.radius
+
+              ListView {
+                anchors.fill: parent
+                anchors.margins: 10
+                spacing: 12
+
+                delegate: Wid.Audio {
+                  required property PwNode modelData
+
+                  implicitWidth: parent?.width ?? 0
+                  node: modelData
+                }
+                model: ScriptModel {
+                  id: sModel
+
+                  values: Pipewire.nodes.values.filter(node => node.audio).sort()
+                }
+              }
+
+              PwObjectTracker {
+                objects: sModel.values
+              }
             }
         }
 
