@@ -8,40 +8,45 @@ Consists of multiple devices:
 - Graphite: Laptop found while dumpster diving and used as an excuse to use NixOS for work.
 
 ## Status Updates
- I AM STILL WAITING FOR ORACLE OMFG AAAHHHH.
+ I've given up on Oracle VPS as all my friends who tried got denied (plus they got hacked recently).
+ Instead, I'll be proceeding with Infomaniak's VPS Lite Servers for ~$44/yr
 
- I plan to grab the Intel Arc Pro B50 for my server to provide GPU Passthru Windows.
+ I might do the omega troll of using a Raspberry Pi 4 I yoinked to be a router for my NAS as Internet Connection
+ Sharing bricks my main server.
 
  I'm still kinda lazy in updating READMEs, I will try though.
 
-## Notes on Quickshell (and ricing in a way)
+## Notes on Banshell (and ricing in a way)
 
-I am slowly moving from Rose Pine themes to Dracula theme due to the more purple accents
-matching Vivian's theme.
+My rice themes have become a mess, xvim uses tokyonight while the rest of my config uses dracula theme.
 
-Quickshell has been slow, but is making a bit of progress, widgets will be build as I go.
+Banshell has been progressing okay, Weather and Calendar widgets have been completed, the rest will be slowly built up.
+
+Once the status tray is complete, Banshell will be merged to master as an alpha version where it can be optionally enabled.
+
+I shall consult the Rexiel Scarlet to teach me how to package it.
 
 Planned color themes:
 - Dracula Theme (Dark theme only)
 - Nahida Colors (Light theme only)
-- JSON Color maker by detecting wallpaper (idea taken from rex's implementation)
+- JSON Color importer from color themes (Taken from rack-shell)
 
 # Greenery
 
 Dell Optiplex 7050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
 
-Hosts Suwayomi for reading manga, Jellyfin for music (for now), and Davis for Calendar and Contacts syncing.
+Hosts Suwayomi for reading manga, Jellyfin for music (for now), Davis for Calendar and Contacts syncing, and
+FileBrowser for a unified folder to connect between Android, Windows, and NixOS.
 
 Implemented self-hosted websites using Caddy-Tailscale plugin and reverse-proxying localhost ports.
 
 SSH services for file transfer and remote access. Enables sharing my 12TB hard drive (taildrive).
 
-Hooked up to a modded Netgear NAS with TinyCore Linux and Raided HDDs that combine to 14TB. Used primarily for
-backups.
+14TB Backup drive hosted on a Netgear Pro 6 with Tinycore Linux. Unfortunately failed to hook it up to Greenery via
+Ethernet.
 
-Future Endeavors: More functional Jellyfin, FileBrowser for non-nix systems, add discrete GPU for GPU-Passthru Windows
-for AI, CAD, and Rendering via remote access, Proxy websites that do not involve with Kaolin (DMV would be confused by me 
-being in Zurich), Improve Security as Greenery plays an important role in my self-hosted lifestyle.
+Future Endeavors: More functional Jellyfin, Proxy websites that do not involve with Kaolin, Improve Security as Greenery 
+plays an important role in my self-hosted lifestyle.
 
 # Kaolin
 
@@ -50,11 +55,9 @@ with Cloudflare-WARP.
 
 Infected Debian with NixOS my beloved.
 
-I would love to use Oracle, but they keep refusing to give me an account.
-
 The ideal of 100% declarative system means the majority of time spent on transferring VPS is the NixOS-infect process.
 
-Future Endeavors: Transition to Oracle (or other sources by November).
+Future Endeavors: Transfer to Infomaniak VPS Lite Server.
 
 # Beryl
 
@@ -82,7 +85,7 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 
 Dell Latitude 5400 found in the dumpster. Consisted of 16GB of RAM and 256GB NVME SSD. Pretty good find imo.
 
-Used for work and ssh into other NixOS systems during work. (Don't tell my manager about the latter)
+Used for work and ssh into other NixOS systems during work.
 
 # Quartz
 
@@ -90,7 +93,7 @@ Custom-built gaming pc intended for workstation and gaming.
 
 Intended to be used as my nix config manager while I'm at home.
 
-Future Endeavors: Implement remote desktop for Beryl/Graphite to communicate. 
+Future Endeavors: Enable sunshine config for moonlight clients (Beryl & Graphite) to access it. 
 
 ## Quartz PC Specifications
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
@@ -99,10 +102,10 @@ Future Endeavors: Implement remote desktop for Beryl/Graphite to communicate.
 - GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
 
 ## Credits
-[Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. HE NEEDS A JOB AND A BETTER PC.
+[Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. HE NEEDS A JOB.
 He also gets a lot of credit for all the code I've stolen with permission.
 
-[Florida Man](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
+[Eel](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
 
 Several sources of quickshell code I've been browsing through in an attempt to understand wtf is going on:
 [Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/Ly-sec/nixos), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
