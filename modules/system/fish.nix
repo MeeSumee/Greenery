@@ -152,6 +152,6 @@ in {
         ".config/fish/config.fish".source = ../../dots/fish/config.fish;
         ".config/fish/themes".source = sources.rosefish + "/themes";        
       };
-    });    
+    });
   };
 }
