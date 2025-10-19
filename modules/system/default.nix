@@ -20,8 +20,8 @@
   config = lib.mkIf config.greenery.system.enable {
 
     # Bootloader
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.enable = lib.mkDefault true;
+    boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
 
     # Enable core firmware services
     services = {
