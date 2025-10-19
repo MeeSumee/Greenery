@@ -56,8 +56,6 @@ Infected Debian with NixOS my beloved.
 
 The ideal of 100% declarative system means the majority of time spent on transferring VPS is the NixOS-infect process.
 
-Future Endeavors: Transfer to Infomaniak VPS Lite Server.
-
 # Beryl
 
 ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for managing nix configs whenever I'm not at home.
