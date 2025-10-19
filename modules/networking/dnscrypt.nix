@@ -58,8 +58,8 @@
 
         # Quad9 Server chosen from https://github.com/DNSCrypt/dnscrypt-resolvers/blob/master/v3/public-resolvers.md
         server_names = [
-          "quad9-dnscrypt-ip4-filter-pri"
-          "quad9-dnscrypt-ip6-filter-pri"
+          "quad9-dnscrypt-ip4-nofilter-pri"
+          "quad9-dnscrypt-ip6-nofilter-pri"
         ];
       };
     };
