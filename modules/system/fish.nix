@@ -82,16 +82,13 @@ in {
 
       # Coloring shell, referenced from Zaphkiel config
       interactiveShellInit = let
-        lsColors = pkgs.runCommandLocal "lscolors" {nativeBuildInputs = [pkgs.vivid];} ''
-          vivid generate dracula > $out
-        '';
-        dracula-fzf = ["fg:#f8f8f2" "bg:#282a36" "hl:#bd93f9" "fg+:#f8f8f2" "bg+:#44475a" "hl+:#bd93f9" "info:#ffb86c" "prompt:#50fa7b" "pointer:#ff79c6" "marker:#ff79c6" "spinner:#ffb86c" "header:#6272a4"];
-        fzf-options = builtins.concatStringsSep " " (builtins.map (option: "--color=" + option) dracula-fzf);
+        rosepine-fzf = ["fg:#908caa" "bg:-1" "hl:#ebbcba" "fg+:#e0def4" "bg+:#26233a" "hl+:#ebbcba" "border:#403d52" "header:#31748f" "gutter:#191724" "spinner:#f6c177" "info:#9ccfd8" "pointer:#c4a7e7" "marker:#eb6f92" "prompt:#908caa"];
+        fzf-options = builtins.concatStringsSep " " (builtins.map (option: "--color=" + option) rosepine-fzf);
       in ''
         set sponge_purge_only_on_exit true
         set fish_greeting
         set fish_cursor_insert line blink
-        set -Ux LS_COLORS $(cat ${lsColors})
+        set -Ux LS_COLORS $(cat ${../../dots/fish/rosepinelscolors})
         set -Ux FZF_DEFAULT_OPTS ${fzf-options}
 
         function fish_user_key_bindings
@@ -153,7 +150,7 @@ in {
     hjem.users = lib.genAttrs users (user: {
       files = {
         ".config/fish/config.fish".source = ../../dots/fish/config.fish;
-        ".config/fish/themes".source = sources.dracula-fish + "/themes";        
+        ".config/fish/themes".source = sources.rosefish + "/themes";        
       };
     });    
   };

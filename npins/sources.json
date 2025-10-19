@@ -1,18 +1,5 @@
 {
   "pins": {
-    "asusnumpad": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "asus-linux-drivers",
-        "repo": "asus-numberpad-driver"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "e34546fca9b31e9c660d41b3aa37cf24009706ed",
-      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/e34546fca9b31e9c660d41b3aa37cf24009706ed.tar.gz",
-      "hash": "sha256-lpS2jbnG4025lmEFhcdSmMPncHpEMOsCNBA+Pyv+BNE="
-    },
     "dracula-fish": {
       "type": "Git",
       "repository": {
@@ -64,6 +51,19 @@
       "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
       "hash": "sha256-BX0Vj1ZVP7FlcG/4D7x1V0MmZ/IYNEmIcpcqubZLabQ="
+    },
+    "rosefish": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "rose-pine",
+        "repo": "fish"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "b82982c55582cfaf6f220de1893c7c73dd0cb301",
+      "url": "https://github.com/rose-pine/fish/archive/b82982c55582cfaf6f220de1893c7c73dd0cb301.tar.gz",
+      "hash": "1qqxragn6hynxkf5lbfkbhvqy0w0rw2j9lq6a66lsffp9vbb1xhf"
     }
   },
   "version": 5
