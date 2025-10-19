@@ -11,7 +11,5 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/share/icons/xcursor-genshin-nahida
     cp -r ./dots/cursors/xcursor-genshin-nahida/* $out/share/icons/xcursor-genshin-nahida
-    mkdir -p $out/share/icons/Firefly
-    cp -r ./dots/cursors/Firefly/* $out/share/icons/Firefly
   '';
 }
