@@ -13,38 +13,31 @@
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";
-    };
-    
-    # Add and enable mozc as input method in fcitx. Good for JP input.
-    i18n.inputMethod.fcitx5 = {
+      fcitx5 = {
+        waylandFrontend = true;
+        ignoreUserConfig = true;
+        addons = with pkgs; [ 
+          fcitx5-mozc                # Japanese Input
+          fcitx5-rose-pine           # Rose Pine Theme
+        ];
+        settings = {
+          inputMethod = {
+            "Groups/0" = {
+              "Name" = "Default";
+              "Default Layout" = "us";
+              "DefaultIM" = "mozc";
+            };
 
-      waylandFrontend = true;
-
-      addons = [ pkgs.fcitx5-mozc ];
-      
-      settings.inputMethod = {
-        "Groups/0" = {
-          "Name" = "Default";
-          "Default Layout" = "us";
-          "DefaultIM" = "mozc";
-        };
-        "Groups/0/Items/0" = {
-          "Name" = "keyboard-us";
-          "Layout" = null;
-        };
-        "Groups/0/Items/1" = {
-          "Name" = "mozc";
-          "Layout" = null;
+            "Groups/0/Items/0".Name = "keyboard-us";
+            "Groups/0/Items/1".Name = "mozc";
+          };
         };
       };
     };
     
+    # Provides ibus for input method
     environment = {
-      # Provides ibus for input method
       variables.GLFW_IM_MODULE = "ibus";
-
-      # Rose Pine Theme for FCITX
-      systemPackages = [pkgs.fcitx5-rose-pine];
     };
 
     # fcitx5 dotfile config
