@@ -30,7 +30,6 @@
       core.enable = true;
       server.enable  = true;
       nvim.enable = true;
-      yazi.enable = true;
     };
 
     system = {

@@ -100,6 +100,7 @@
         prismlauncher                   # minecraft 
         gnome-calculator                # gnome calculator
         nemo                            # nemo file browser
+        moonlight-qt                    # Remote to Windows GPU-Passthru
         dracula-theme                   # Dracula Gtk Theme
 
         (pkgs.papirus-icon-theme.override {
