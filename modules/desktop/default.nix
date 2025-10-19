@@ -2,6 +2,7 @@
   config,
   lib,
   users,
+  sources,
   ...
 }:{
   imports = [
@@ -31,6 +32,7 @@
       files = {
         ".config/mpv".source = ../../dots/mpv;
         ".config/fuzzel/fuzzel.ini".source = ../../dots/fuzzel/fuzzel.ini;
+        ".config/fuzzel/themes".source = sources.catfuzzel + "/themes";
       };
     });
 

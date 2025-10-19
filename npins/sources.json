@@ -1,5 +1,18 @@
 {
   "pins": {
+    "catfuzzel": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "catppuccin",
+        "repo": "fuzzel"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "0af0e26901b60ada4b20522df739f032797b07c3",
+      "url": "https://github.com/catppuccin/fuzzel/archive/0af0e26901b60ada4b20522df739f032797b07c3.tar.gz",
+      "hash": "163shqaf52gfp26526sizxvxz0j4b2gkifrz5ppqbaqqdcq2v4jy"
+    },
     "micro-bounce": {
       "type": "Git",
       "repository": {
