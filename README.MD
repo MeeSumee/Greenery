@@ -17,7 +17,7 @@ Consists of multiple devices:
 
 ## Notes on Banshell (and ricing in a way)
 
-My rice themes have become a mess, xvim uses tokyonight while the rest of my config uses dracula theme.
+My rice themes have been more or less unified with rose pine, exceptions being nvim with TokyoNight and fuzzel with Catppuccin.
 
 Banshell has been progressing okay, Weather and Calendar widgets have been completed, the rest will be slowly built up.
 
@@ -26,7 +26,7 @@ Once the status tray is complete, Banshell will be merged to master as an alpha 
 I shall consult the Rexiel Scarlet to teach me how to package it.
 
 Planned color themes:
-- Dracula Theme (Dark theme only)
+- Dracula/Vivian Theme (Dark theme only)
 - Nahida Colors (Light theme only)
 - JSON Color importer from color themes (Taken from rack-shell)
 
@@ -55,6 +55,136 @@ with Cloudflare-WARP.
 Infected Debian with NixOS my beloved.
 
 The ideal of 100% declarative system means the majority of time spent on transferring VPS is the NixOS-infect process.
+
+<details>
+<summary>Why and How?</summary>
+<br>
+
+VPS IPs are generally blocked by most services online whereas Cloudflare Warp IPs are generally not blocked.
+However, Cloudflare Warp chooses a server closest to the host machine, making it effectively useless for geolocation.
+
+You may use cloudflare warp on the VPS to effectly connect to a regional server based on the VPS's location enabling 
+you to use your VPS as a VPN. However, using another VPN such as tailscale can conflict with cloudflare warp's configuration.
+
+To solve this problem, we must setup an interface that uniformly passes traffic from Tailscale to Cloudflare.
+Wireguard is supported by both Tailscale and Cloudflare and can be used to set rules and nftables.
+
+First, configure your own set of IPs and keys using [wgcf](https://github.com/ViRb3/wgcf) by executing
+
+```bash
+$ wgcf register
+$ wgcf generate
+```
+
+This will provide the interface and peer information. Take note of them for setting up nftables.
+
+To setup nftables and Wireguard interfaces
+
+```nix
+# configuration.nix
+
+  # Enable nftables
+  networking.nftables.enable = true;
+
+  # Enable IPv4 forwarding
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = true;
+    "net.ipv4.conf.wgcf.rp_filter" = false;
+  };
+
+  # Wireguard config to not cuck tailscale
+  networking.wg-quick.interfaces = {
+    wgcf = {
+      privateKeyFile = "/path/to/privatekeyfile";
+
+      address = [
+        [Insert IPv4 from wgcf]
+        [Insert IPv6 from wgcf]
+      ];
+
+      table = "off";
+
+      postUp = ''
+        set -e
+
+        WG_IFACE=wgcf
+        ROUTE_TABLE=39
+
+        echo "[+] Adding nftables rules..."
+        nft -f - <<EOF
+        table inet ts-warp {
+          chain prerouting {
+            type filter hook prerouting priority mangle; policy accept;
+            iifname "tailscale0" counter packets 0 bytes 0 meta mark set mark and 0xff00ffff or 0x0040000
+          }
+          chain input {
+            type filter hook input priority filter; policy accept;
+            iifname != "tailscale0" ip saddr 100.115.92.0/23 counter packets 0 bytes 0 return
+            iifname != "tailscale0" ip saddr 100.64.0.0/10 counter packets 0 bytes 0 drop
+            iifname "tailscale0" counter packets 0 bytes 0 accept
+          }
+          chain forward {
+            type filter hook forward priority filter; policy accept;
+            oifname "tailscale0" ip saddr 100.64.0.0/10 counter packets 0 bytes 0 drop
+          }
+          chain postrouting {
+            type nat hook postrouting priority srcnat; policy accept;
+            meta mark & 0x00ff0000 == 0x00040000 counter packets 0 bytes 0 masquerade
+          }
+        }
+        EOF
+
+        echo "[+] Adding routing rule for marked packets..."
+        ip route add default dev "$WG_IFACE" table $ROUTE_TABLE || true
+        ip -6 route add default dev "$WG_IFACE" table $ROUTE_TABLE || true
+        ip rule add fwmark 0x40000/0xff0000 lookup $ROUTE_TABLE || true
+        ip -6 rule add fwmark 0x40000/0xff0000 lookup $ROUTE_TABLE || true
+      '';
+
+      preDown = ''
+        set -e
+
+        WG_IFACE=wgcf
+        ROUTE_TABLE=39
+
+        echo "[-] Deleting nftables rules..."
+        nft delete table inet ts-warp || true
+
+        echo "[-] Removing routing rules..."
+        ip rule del fwmark 0x40000/0xff0000 lookup $ROUTE_TABLE || true
+        ip -6 rule del fwmark 0x40000/0xff0000 lookup $ROUTE_TABLE || true
+        ip route flush table $ROUTE_TABLE || true
+        ip -6 route flush table $ROUTE_TABLE || true
+      '';
+
+      peers = [
+        {
+          publicKey = [Insert your public key from wgcf];
+
+          allowedIPs = [
+            "0.0.0.0/0"
+            "::/0"
+          ];
+
+          endpoint = "162.159.192.1:2408";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
+
+  # Advertise Routes
+  services.tailscale.extraSetFlags = [
+    "--advertise-exit-node"
+    "--advertise-routes=[Insert IPv4 from wgcf]"
+    "--netfilter-mode=nodivert"
+  ];
+```
+
+With this setup, it will enable you to use Tailscale as a way to connect to Cloudflare Warp, enabling your phone to use the machine as an exit node.
+
+</details>
 
 # Beryl
 
@@ -118,7 +248,7 @@ All code in this repository is under the MIT license unless wherever an
 explicit licensing is included.
 
 ## Miscellaneous Sources
-- [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact) & [Firefly](https://www.pling.com/p/2226124)
+- [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact)
 - [User Profile Picture (Nix & Git)](https://danbooru.donmai.us/posts/9246148)
 - [Dell Optiplex 3050 Tower Specifications and Image](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/OptiPlex-3050-Towers-Technical-Specifications.pdf)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
