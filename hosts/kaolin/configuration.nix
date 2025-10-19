@@ -42,8 +42,26 @@
   networking.hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable nftables
-  networking.nftables.enable = true;
+  # Enable nftables & Tailscale DNS-crypt forwarding
+  networking = {
+    nftables.enable = true;
+    firewall = {
+      interfaces."tailscale0" = {
+        allowedTCPPorts = [22];
+        allowedUDPPorts = [53];
+      };
+    };
+  };
+
+  # Define specific dnscrypt proxy config
+  services.dnscrypt-proxy.settings = {
+    listen_addresses = [
+      "100.117.90.18:53"
+      "[fd7a:115c:a1e0::3401:5a31]:53"
+      "127.0.0.1:53"
+      "[::1]:53"
+    ];
+  };
 
   # Enable IPv4 forwarding
   boot.kernel.sysctl = {

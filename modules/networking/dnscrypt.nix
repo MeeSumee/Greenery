@@ -17,14 +17,9 @@
         "::1"
         "127.0.0.1"
       ];
-
-      firewall = {
-        allowedTCPPorts = [53];
-        allowedUDPPorts = [53];
-      };
     };  
    
-    # DNS Proxy for DNS Resolving in Tailscale
+    # DNS Proxy for DNS Resolving with Tailscale Integration
     services.dnscrypt-proxy = {
       enable = true;
       settings = {
@@ -38,8 +33,6 @@
         '';
 
         listen_addresses = [
-          "100.81.192.125:53"
-          "[fd7a:115c:a1e0::d501:c081]:53"
           "127.0.0.1:53"
           "[::1]:53"
         ];
@@ -47,11 +40,10 @@
         cloaking_rules = pkgs.writeText "cloaking_rules.txt" ''
           greenery fd7a:115c:a1e0::d501:c081
 
-          kaolin fd7a:115c:a1e0::5834:156
+          kaolin fd7a:115c:a1e0::3401:5a31
           beryl fd7a:115c:a1e0::8801:df69
           quartz fd7a:115c:a1e0::ff01:637f
           graphite fd7a:115c:a1e0::b534:9e21
-          garnet fd7a:115c:a1e0::ec01:c948
           obsidian fd7a:115c:a1e0::2034:ae77
         '';
 
@@ -64,10 +56,10 @@
           minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
         };
 
-        # You can choose a specific set of servers from https://github.com/DNSCrypt/dnscrypt-resolvers/blob/master/v3/public-resolvers.md
+        # Quad9 Server chosen from https://github.com/DNSCrypt/dnscrypt-resolvers/blob/master/v3/public-resolvers.md
         server_names = [
-          "cloudflare"
-          "cloudflare-ipv6"
+          "quad9-dnscrypt-ip4-filter-pri"
+          "quad9-dnscrypt-ip6-filter-pri"
         ];
       };
     };
