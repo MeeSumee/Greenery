@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  users,
   ...
 }: {
   options.greenery.system.input.enable = lib.mkEnableOption "language input";
@@ -45,5 +46,12 @@
       # Rose Pine Theme for FCITX
       systemPackages = [pkgs.fcitx5-rose-pine];
     };
+
+    # fcitx5 dotfile config
+    hjem.users = lib.genAttrs users (user: {
+      files = {
+        ".config/fcitx5/conf/classicui.conf".source = ../../dots/fcitx5/classicui.conf;        
+      };
+    });
   };
 }
