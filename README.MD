@@ -8,8 +8,7 @@ Consists of multiple devices:
 - Graphite: Laptop found while dumpster diving and used as an excuse to use NixOS for work.
 
 ## Status Updates
- I've given up on Oracle VPS as all my friends who tried got denied (plus they got hacked recently).
- Instead, I'll be proceeding with Infomaniak's VPS Lite Servers for ~$44/yr
+ I've successfully migrated to Infomaniak's VPS Lite. I did not expect them to use Legacy BIOS though.
 
  I might do the omega troll of using a Raspberry Pi 4 I yoinked to be a router for my NAS as Internet Connection
  Sharing bricks my main server.
