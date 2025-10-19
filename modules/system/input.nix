@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  options,
   config,
   ...
 }: {
@@ -39,7 +38,12 @@
       };
     };
     
-    # Provides ibus for input method
-    environment.variables.GLFW_IM_MODULE = "ibus";
+    environment = {
+      # Provides ibus for input method
+      variables.GLFW_IM_MODULE = "ibus";
+
+      # Rose Pine Theme for FCITX
+      systemPackages = [pkgs.fcitx5-rose-pine];
+    };
   };
 }
