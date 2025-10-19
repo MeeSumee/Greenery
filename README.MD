@@ -50,11 +50,11 @@ plays an important role in my self-hosted lifestyle.
 # Kaolin
 
 VPS that routes all traffic via Tailscale Exit-node while using wireguard as a bridge to connect tailscale
-with Cloudflare-WARP.
+with Cloudflare-WARP. Also doubles as a DNS Proxy Server with dnscrypt-proxy
 
-Infected Debian with NixOS my beloved.
+Infected Infomaniak's Debian with NixOS my beloved.
 
-The ideal of 100% declarative system means the majority of time spent on transferring VPS is the NixOS-infect process.
+The system is nearly 100% declarative with the only exception of hardware config.
 
 <details>
 <summary>Why and How?</summary>
@@ -195,7 +195,10 @@ Due to the issue being a relatively rare scenario (once every month or two), I'm
 
 Future Endeavors: Rice my laptop with quickshell and other theming applications, fix AMDGPU crashes from Youtube/demanding HWAccel Tasks.
 
-## Enabling USB4 on Zenbook S13 OLED (UM5302TA)
+<details>
+<summary>Enabling USB4 on Zenbook S13 OLED (UM5302TA)</summary>
+<br>
+
 This is not recommended for most users as it involves "hacking" the
 BIOS. DO IT AT YOUR OWN RISK.
 
@@ -208,11 +211,13 @@ Note that there are three options when enabling USB4.
 To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
 Test your USB4 ports using boltctl, if there's instability, disable bolt service.
 
+</details>
+
 # Graphite
 
 Dell Latitude 5400 found in the dumpster. Consisted of 16GB of RAM and 256GB NVME SSD. Pretty good find imo.
 
-Used for work and ssh into other NixOS systems during work.
+Used for work.
 
 # Quartz
 
