@@ -1,18 +1,5 @@
 {
   "pins": {
-    "dracula-fish": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "dracula",
-        "repo": "fish"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "269cd7d76d5104fdc2721db7b8848f6224bdf554",
-      "url": "https://github.com/dracula/fish/archive/269cd7d76d5104fdc2721db7b8848f6224bdf554.tar.gz",
-      "hash": "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY="
-    },
     "micro-bounce": {
       "type": "Git",
       "repository": {
@@ -51,6 +38,19 @@
       "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
       "hash": "sha256-BX0Vj1ZVP7FlcG/4D7x1V0MmZ/IYNEmIcpcqubZLabQ="
+    },
+    "rosebtop": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "rose-pine",
+        "repo": "btop"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312",
+      "url": "https://github.com/rose-pine/btop/archive/6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312.tar.gz",
+      "hash": "15s3llr9snrg30fh39a2gfzmjd8p5ki8vaggznm9jirjzdhm0a5i"
     },
     "rosefish": {
       "type": "Git",
