@@ -158,7 +158,7 @@ Column {
             Text {
               anchors.centerIn: parent
               text: dayDate.getDate()
-              color: isToday ? Dat.Colors.red : Dat.Colors.foreground
+              color: isToday ? Dat.Colors.purple : Dat.Colors.foreground
               font.bold: isToday? true : false
               font.pointSize: 11
             }

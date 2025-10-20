@@ -58,7 +58,7 @@ Item {
         id: icon  
         required property bool active
         property color activeColor: Dat.Colors.foreground
-        property color passiveColor: Dat.Colors.pink
+        property color passiveColor: Dat.Colors.purple
 
         color: Dat.Colors.selection
 
