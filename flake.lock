@@ -47,28 +47,23 @@
         "type": "github"
       }
     },
-    "booru-hs": {
+    "asusnumpad": {
       "inputs": {
         "nixpkgs": [
-          "zaphkiel",
           "nixpkgs"
-        ],
-        "systems": [
-          "zaphkiel",
-          "systems"
         ]
       },
       "locked": {
-        "lastModified": 1759141158,
-        "narHash": "sha256-9f8lWNkYf6DGEXP0MSCHURbCqeoen5tpBp8tUYMJ4xE=",
-        "owner": "Rexcrazy804",
-        "repo": "booru.hs",
-        "rev": "f9f93adda35d0f21edc9087e168d6e855dc7cfea",
+        "lastModified": 1760466703,
+        "narHash": "sha256-3xvmlPH/awFCg/c7ivvtbzaAoO0ObrJOvSv4jsx/rbM=",
+        "owner": "asus-linux-drivers",
+        "repo": "asus-numberpad-driver",
+        "rev": "74fbd5ac1e64bf99b8dd5b11ce45af62911bb912",
         "type": "github"
       },
       "original": {
-        "owner": "Rexcrazy804",
-        "repo": "booru.hs",
+        "owner": "asus-linux-drivers",
+        "repo": "asus-numberpad-driver",
         "type": "github"
       }
     },
@@ -141,31 +136,6 @@
       "original": {
         "owner": "feel-co",
         "repo": "hjem",
-        "type": "github"
-      }
-    },
-    "hs-todo": {
-      "inputs": {
-        "nixpkgs": [
-          "zaphkiel",
-          "nixpkgs"
-        ],
-        "systems": [
-          "zaphkiel",
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1757771500,
-        "narHash": "sha256-gh5aecNgMctFZ6gBW1hjKA8cDUhXDIP+F9QDxrwgNZc=",
-        "owner": "Rexcrazy804",
-        "repo": "haskell-todo",
-        "rev": "e4fd68420bfce80147f9e7053b3010d9877ccdb2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Rexcrazy804",
-        "repo": "haskell-todo",
         "type": "github"
       }
     },
@@ -268,6 +238,7 @@
       "inputs": {
         "aagl": "aagl",
         "agenix": "agenix",
+        "asusnumpad": "asusnumpad",
         "ecchirexi": "ecchirexi",
         "hjem": "hjem",
         "lanzaboote": "lanzaboote",
@@ -333,11 +304,11 @@
     "zaphkiel": {
       "inputs": {
         "agenix": [],
-        "booru-hs": "booru-hs",
+        "booru-hs": [],
         "crane": [],
         "hjem": [],
         "hjem-impure": [],
-        "hs-todo": "hs-todo",
+        "hs-todo": [],
         "mnw": "mnw",
         "nixpkgs": [
           "nixpkgs"
@@ -349,11 +320,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760559418,
-        "narHash": "sha256-osk6F2lb/mK4SgDuopWj7AADsits5/ST4oHg4kkBNx8=",
+        "lastModified": 1760889774,
+        "narHash": "sha256-re9IRpHPj3Dhxm6l8L5y+qTv2CGpn3Vik4inBhxlX8k=",
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel",
-        "rev": "ba6fdb332f5edd424dafa0a76bc256331149f70d",
+        "rev": "a8ceb5dda4177e84461d60b12a23deb56cab3d6c",
         "type": "github"
       },
       "original": {

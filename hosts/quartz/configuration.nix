@@ -42,7 +42,6 @@
       core.enable = true;
       daemon.enable = true;
       desktop.enable = true;
-      engineering.enable = true;
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;

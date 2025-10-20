@@ -1,30 +1,17 @@
 {
   "pins": {
-    "asusnumpad": {
+    "catfuzzel": {
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "asus-linux-drivers",
-        "repo": "asus-numberpad-driver"
+        "owner": "catppuccin",
+        "repo": "fuzzel"
       },
-      "branch": "master",
+      "branch": "main",
       "submodules": false,
-      "revision": "e34546fca9b31e9c660d41b3aa37cf24009706ed",
-      "url": "https://github.com/asus-linux-drivers/asus-numberpad-driver/archive/e34546fca9b31e9c660d41b3aa37cf24009706ed.tar.gz",
-      "hash": "sha256-lpS2jbnG4025lmEFhcdSmMPncHpEMOsCNBA+Pyv+BNE="
-    },
-    "dracula-fish": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "dracula",
-        "repo": "fish"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "269cd7d76d5104fdc2721db7b8848f6224bdf554",
-      "url": "https://github.com/dracula/fish/archive/269cd7d76d5104fdc2721db7b8848f6224bdf554.tar.gz",
-      "hash": "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY="
+      "revision": "0af0e26901b60ada4b20522df739f032797b07c3",
+      "url": "https://github.com/catppuccin/fuzzel/archive/0af0e26901b60ada4b20522df739f032797b07c3.tar.gz",
+      "hash": "163shqaf52gfp26526sizxvxz0j4b2gkifrz5ppqbaqqdcq2v4jy"
     },
     "micro-bounce": {
       "type": "Git",
@@ -64,6 +51,45 @@
       "revision": "31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c",
       "url": "https://github.com/sparques/micro-quoter/archive/31a8bc6b04755546d47984e6e1ab3dd5e6f0f24c.tar.gz",
       "hash": "sha256-BX0Vj1ZVP7FlcG/4D7x1V0MmZ/IYNEmIcpcqubZLabQ="
+    },
+    "rosebtop": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "rose-pine",
+        "repo": "btop"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312",
+      "url": "https://github.com/rose-pine/btop/archive/6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312.tar.gz",
+      "hash": "15s3llr9snrg30fh39a2gfzmjd8p5ki8vaggznm9jirjzdhm0a5i"
+    },
+    "rosefish": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "rose-pine",
+        "repo": "fish"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "b82982c55582cfaf6f220de1893c7c73dd0cb301",
+      "url": "https://github.com/rose-pine/fish/archive/b82982c55582cfaf6f220de1893c7c73dd0cb301.tar.gz",
+      "hash": "1qqxragn6hynxkf5lbfkbhvqy0w0rw2j9lq6a66lsffp9vbb1xhf"
+    },
+    "rosefoot": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "rose-pine",
+        "repo": "foot"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "725e9c38880d577ee973eb916e83395964ffc287",
+      "url": "https://github.com/rose-pine/foot/archive/725e9c38880d577ee973eb916e83395964ffc287.tar.gz",
+      "hash": "1x6k38mharmvp5bfwvhzmyy0z45hlhb54wqk95a87fgyka80g3rf"
     }
   },
   "version": 5

@@ -2,6 +2,7 @@
   config,
   lib,
   users,
+  sources,
   ...
 }:{
   options.greenery.programs.foot.enable = lib.mkEnableOption "foot";
@@ -17,6 +18,7 @@
     hjem.users = lib.genAttrs users (user: {
       files = {
         ".config/foot/foot.ini".source = ../../dots/foot/foot.ini;
+        ".config/foot/rose-pine.ini".source = sources.rosefoot + "/rose-pine";
       };
     });    
   };

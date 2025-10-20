@@ -1,17 +1,16 @@
-# Safe to modify as it's under flakes hehehehaw
-{ config, lib, pkgs, sources, ... }:
-
-# Simulate asus-numberpad-driver flake using npins
-let 
-  asses = pkgs.callPackage (sources.asusnumpad + "/nix/default.nix") {};
-  inputs = { self.packages.${pkgs.system}.default = asses; };
-
-in {
+# Beryl Hardware Configuration
+{ 
+  config, 
+  lib, 
+  pkgs, 
+  inputs, 
+  ... 
+}:{
   imports = [
     ./battery.nix
 
-    # Import asus-numberpad-driver module.nix
-    (lib.modules.importApply (sources.asusnumpad + "/nix/module.nix") inputs)
+    # Import asus-numberpad-driver
+    inputs.asusnumpad.nixosModules.default
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -23,16 +22,16 @@ in {
   # Enable Thunderbolt Service for USB4 support
   services.hardware.bolt.enable = true;
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/e601b8ce-ce2f-423f-9dd8-dc2ea8548019";
-      fsType = "ext4";
-    };
+  fileSystems."/" = { 
+    device = "/dev/disk/by-uuid/e601b8ce-ce2f-423f-9dd8-dc2ea8548019";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5797-C73C";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+  fileSystems."/boot" = { 
+    device = "/dev/disk/by-uuid/5797-C73C";
+    fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
+  };
 
   swapDevices = [ ];
 
@@ -65,8 +64,7 @@ in {
   boot.kernelParams = ["idle=nowwait" "iommu=pt"];
 
   # Sets battery charge limit
-  hardware.asus.battery =
-  {
+  hardware.asus.battery = {
     chargeUpto = 80;   # Maximum level of charge for your battery, as a percentage.
     enableChargeUptoScript = true; # Whether to add charge-upto to 80
   };

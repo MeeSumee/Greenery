@@ -17,8 +17,6 @@
 
     desktop.enable = lib.mkEnableOption "enable desktop programs";
 
-    engineering.enable = lib.mkEnableOption "enable engineering tools";
-
     heavy.enable = lib.mkEnableOption "enable heavy/demanding programs";
   };
   
@@ -101,10 +99,10 @@
         gnome-calculator                # gnome calculator
         nemo                            # nemo file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
-        dracula-theme                   # Dracula Gtk Theme
+        rose-pine-gtk-theme             # Rose-Pine Gtk Theme
 
         (pkgs.papirus-icon-theme.override {
-          color = "violet";
+          color = "teal";
         })                              # Papirus Icons with violet folders
       ];
 
@@ -112,7 +110,7 @@
       programs.dconf.profiles.user.databases = [{
         settings = {
           "org/gnome/desktop/interface" = {
-            gtk-theme = "Dracula";
+            gtk-theme = "rose-pine";
             icon-theme = "Papirus-Dark";
             cursor-theme = "xcursor-genshin-nahida";
             document-font-name = "DejaVu Serif";
@@ -127,20 +125,14 @@
       # Correct gtk theming for apps that don't use runtime directory
       hjem.users = lib.genAttrs users (user: {
         files = let
-          themeName = "Dracula";
+          themeName = "rose-pine";
+          themeDir = "${pkgs.rose-pine-gtk-theme}/share/themes/${themeName}/gtk-4.0";
         in {
-          ".config/gtk-4.0/assets".source = "${pkgs.dracula-theme}/share/themes/${themeName}/gtk-4.0/assets";
-          ".config/gtk-4.0/gtk.css".source = "${pkgs.dracula-theme}/share/themes/${themeName}/gtk-4.0/gtk.css";
-          ".config/gtk-4.0/gtk-dark.css".source = "${pkgs.dracula-theme}/share/themes/${themeName}/gtk-4.0/gtk-dark.css";
+          ".config/gtk-4.0/assets".source = "${themeDir}/assets";
+          ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk.css";
+          ".config/gtk-4.0/gtk-dark.css".source = "${themeDir}/gtk-dark.css";
         };
       });
-    })
-
-    # Engineering and projects
-    (lib.mkIf (config.greenery.programs.engineering.enable && config.greenery.programs.enable) {
-      environment.systemPackages = with pkgs; [
-        arduino-ide                     # microcontroller programming
-      ];
     })
 
     # Large/Demanding applications
@@ -155,6 +147,6 @@
         # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)
         # (pkgs.callPackage ./davinci.nix {})
       ];
-    })        
+    })
   ];
 }

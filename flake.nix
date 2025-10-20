@@ -15,6 +15,12 @@
       inputs.smfh.follows = "";
     };
 
+    # Asusu numberpad driver
+    asusnumpad = {
+      url = "github:asus-linux-drivers/asus-numberpad-driver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # ecchirexi
     ecchirexi.url = "github:Rexcrazy804/hjem-impure";
 
@@ -46,6 +52,8 @@
       inputs.agenix.follows = "";
       inputs.crane.follows = "";
       inputs.stash.follows = "";
+      inputs.booru-hs.follows = "";
+      inputs.hs-todo.follows = "";
     };
 
     # Agenix

@@ -9,7 +9,7 @@ in {
 
   options.greenery.programs.nvim.enable = mkEnableOption "nvim";
 
-  # Dracula themed nvim config by the cutie himself :D
+  # nvim config by the cutie himself :D
   config = mkIf (config.greenery.programs.nvim.enable && config.greenery.programs.enable) {
     environment.systemPackages = [pkgs.zpkgs.xvim.vivi];
   };
