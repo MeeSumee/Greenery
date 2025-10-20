@@ -42,7 +42,7 @@ WlrLayershell {
     readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
     property bool hover: false
 
-    color: Dat.Colors.withAlpha(Dat.Colors.background, 0.80)
+    color: Dat.Colors.withAlpha(Dat.Colors.background, 0.9)
     anchors.horizontalCenter: parent.horizontalCenter
     bottomLeftRadius: 25
     bottomRightRadius: 25
