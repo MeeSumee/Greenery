@@ -34,12 +34,12 @@
         # Set niri wallpaper
         niriwall = let
           from = ["*Why_is_IT_department_a_piece_of_shit*"];
-          schizovivi = pkgs.fetchurl {
-            name = "schizovivi";
-            url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
-            hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
+          schizomiku = pkgs.fetchurl {
+            name = "schizomiku";
+            url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
+            hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
           };
-          to = ["${schizovivi}"];
+          to = ["${schizomiku}"];
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
 
