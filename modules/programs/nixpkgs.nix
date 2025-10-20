@@ -17,8 +17,6 @@
 
     desktop.enable = lib.mkEnableOption "enable desktop programs";
 
-    engineering.enable = lib.mkEnableOption "enable engineering tools";
-
     heavy.enable = lib.mkEnableOption "enable heavy/demanding programs";
   };
   
@@ -135,13 +133,6 @@
           ".config/gtk-4.0/gtk-dark.css".source = "${themeDir}/gtk-dark.css";
         };
       });
-    })
-
-    # Engineering and projects
-    (lib.mkIf (config.greenery.programs.engineering.enable && config.greenery.programs.enable) {
-      environment.systemPackages = with pkgs; [
-        arduino-ide                     # microcontroller programming
-      ];
     })
 
     # Large/Demanding applications
