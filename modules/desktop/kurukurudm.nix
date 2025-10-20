@@ -11,10 +11,10 @@
   '';
 
   # Set wallpaper
-  gothic_lolita_stalker = pkgs.fetchurl {
-    name = "gothiclolitadm";
-    url = "https://img4.gelbooru.com/images/62/f3/62f3da5821dab06f98cfaf71dc304243.png";
-    hash = "sha256-X6zdZVYi6iyGc1M065lNlcqMBVQ21RMX2IKOGAzkzqE=";
+  listening = pkgs.fetchurl {
+    name = "listening";
+    url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
+    hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
   };
 
 in {
@@ -34,7 +34,7 @@ in {
       enable = true;
 
       settings = {
-        wallpaper = gothic_lolita_stalker;
+        wallpaper = listening;
         default_user = builtins.elemAt users 0;
         instantAuth = false;
         extraConfig = ''
