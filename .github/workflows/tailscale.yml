@@ -15,7 +15,7 @@ jobs:
         with: 
           fetch depth: 2
 
-      - name: Condition
+      - shell: pwsh
         id: check_file_changed
         run:
           $diff = git diff --name-only HEAD^ HEAD
