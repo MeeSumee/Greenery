@@ -20,7 +20,7 @@ jobs:
         run:
           $diff = git diff --name-only HEAD^ HEAD
 
-          $SourceDiff = $diff | Where-Object { $_ -match 'policy.hujson' }
+          $SourceDiff = $diff | Where-Object { $_ -match '.hujson$' }
           $HasDiff = $SourceDiff.Length -gt 0
 
           Write-Host "::set-output name=acl_changed::$HasDiff"
