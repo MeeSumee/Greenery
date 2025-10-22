@@ -66,7 +66,7 @@ Scope {
 						id: volume
 						font.pixelSize: 30
 						font.bold: false
-						color: Dat.Colors.purple
+						color: Dat.Colors.foreground
 						icon: "volume_up"
 					}
 
@@ -84,7 +84,7 @@ Scope {
 								top: parent.top
 								bottom: parent.bottom
 							}
-							color: Dat.Colors.purple
+							color: Dat.Colors.foreground
 
 							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
 							radius: parent.radius
