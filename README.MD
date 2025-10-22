@@ -30,6 +30,12 @@ Planned color themes:
 - Nahida Colors (Light theme only)
 - JSON Color importer from color themes (Taken from rack-shell)
 
+Dependencies:
+- Quickshell 0.2.0
+- Upower
+- Power-Profiles-Daemon
+- Google Material-Symbols Font
+
 # Greenery
 
 Dell Optiplex 7050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
