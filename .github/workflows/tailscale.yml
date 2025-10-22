@@ -3,12 +3,8 @@ name: Sync Tailscale ACLs
 on:
   push:
     branches: [ "master" ]
-    paths: 
-    - "policy.hujson"
   pull_request:
     branches: [ "master" ]
-    paths:
-    - "policy.hujson" 
 
 jobs:
   acls:
@@ -16,9 +12,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with: 
+          fetch depth: 2
+
+      - name: Condition
+        id: check_file_changed
+        run:
+          $diff = git diff --name-only HEAD^ HEAD
+
+          $SourceDiff = $diff | Where-Object { $_ -match 'policy.hujson' }
+          $HasDiff = $SourceDiff.Length -gt 0
+
+          Write-Host "::set-output name=acl_changed::$HasDiff"
+
 
       - name: Deploy ACL
-        if: github.event_name == 'push'
+        if: steps.check_file_changed.outputs.acl_changed == 'True' && github.event_name == 'push'
         id: deploy-acl
         uses: tailscale/gitops-acl-action@v1
         with:
@@ -27,7 +36,7 @@ jobs:
           action: apply
 
       - name: Test ACL
-        if: github.event_name == 'pull_request'
+        if: steps.check_file_changed.outputs.acl_changed == 'True' && github.event_name == 'pull_request'
         id: test-acl
         uses: tailscale/gitops-acl-action@v1
         with:
