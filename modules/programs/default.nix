@@ -12,7 +12,7 @@
     ./nixpkgs.nix
     ./nvim.nix    
     ./steam.nix
-    ./yazi.nix
+    ./vindows.nix
   ];
   
   options.greenery.programs.enable = lib.mkEnableOption "programs";

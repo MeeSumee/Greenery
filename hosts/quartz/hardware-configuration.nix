@@ -1,11 +1,29 @@
-# Modify Hardware Config to support multiple drives
+# Quartz PCI-Passthrough + Multi-Drive Support
 { config, lib, pkgs, ... }:
 
 {
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+
+  boot.initrd.kernelModules = [ 
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
+
+    # Load AMD GPU after vfio
+    "amdgpu"
+  ];
+
+  boot.kernelParams = [
+    "intel_iommu=on"
+    "vfio_pci.ids=8086:4680"
+  ];
+
+  boot.blacklistedKernelModules = [
+    "i915"
+  ];
+
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   
