@@ -79,7 +79,6 @@
       core.enable = true;
       server.enable  = true;
       nvim.enable = true;
-      yazi.enable = true;
     };
 
     server = {
@@ -87,7 +86,6 @@
       davis.enable = true;
       files.enable = true;
       jellyfin.enable = true;
-      remotevm.enable = true;
       suwayomi.enable = true;
     };
 

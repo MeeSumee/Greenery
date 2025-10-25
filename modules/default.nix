@@ -63,7 +63,7 @@
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;
-      yazi.enable = true;
+      vindows.enable = true;
     };
 
     server = {
@@ -71,7 +71,6 @@
       davis.enable = true;
       files.enable = true;
       jellyfin.enable = true;
-      remotevm.enable = true;
       suwayomi.enable = true;
     };
 
