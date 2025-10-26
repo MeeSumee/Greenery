@@ -16,7 +16,7 @@
 
     # Fix paths
     systemd.user.services.hypridle.path = lib.mkForce (lib.attrValues {
-      inherit (pkgs) brightnessctl kurukurubar-unstable systemd;
+      inherit (pkgs) brightnessctl kurukurubar systemd;
       hyprlock = config.programs.hyprlock.package;
       hyprland = config.programs.hyprland.package;
     });

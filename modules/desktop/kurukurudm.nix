@@ -26,7 +26,7 @@ in {
 
     # Add dependencies
     environment.systemPackages = with pkgs; [
-      kurukurubar-unstable
+      kurukurubar
     ];
 
     # More rexware, main imports from nixpkgs.nix
