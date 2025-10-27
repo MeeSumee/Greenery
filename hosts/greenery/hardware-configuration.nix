@@ -4,25 +4,8 @@
   lib, 
   ... 
 }:
-
 {
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
-  
-  # Set VFIO and IOMMU config for GPU-Passthru
-  boot.initrd.kernelModules = [ 
-    "vfio_pci"
-    "vfio"
-    "vfio_iommu_type1"
-  ];
-
-  boot.kernelParams = [
-    "radeon.runpm=0,"
-    "radeon.modeset=0,"
-    "amdgpu.runpm=0,"
-    "amdgpu.modeset=0,"
-    "intel_iommu=on"
-    "vfio_pci.ids=1002:6610,1002:aab0"
-  ];
 
   boot.blacklistedKernelModules = [
     "amdgpu"
