@@ -37,7 +37,25 @@ Rectangle {
     source: root.player.isPlaying ? root.jumpge : root.readge
   }
 
+  Rectangle {
+    anchors.verticalCenter: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    width: parent.width
+    height: 60
+    radius: 20
+    color: Dat.Colors.background
+    visible: !root.player.isPlaying
+
+    Text {
+      anchors.centerIn: parent
+      text: !marea.pressed ? "(ᵕ—ᴗ—), 𝄞?" : "(⸝⸝⸝O﹏ O⸝⸝⸝)"
+      color: "#90C090"
+      font.pointSize: 32
+    }
+  }
+
   MouseArea {
+    id: marea
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onPressed: {
