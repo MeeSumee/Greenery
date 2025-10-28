@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
 import qs.Widgets as Wid
 import qs.Data as Dat
 
@@ -96,10 +97,17 @@ Rectangle {
       border {
         width: 1
         color: Dat.Colors.foreground
-      }
-      
-      Wid.MediaGif {
+      }      
 
+      Repeater {
+        model: ScriptModel {
+          values: [...Mpris.players.values]
+        }
+        
+        Wid.MediaGif {
+          required property MprisPlayer modelData
+          player: modelData
+        }
       }
     }
   }
