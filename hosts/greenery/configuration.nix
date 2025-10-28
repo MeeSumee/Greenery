@@ -79,7 +79,6 @@
       core.enable = true;
       server.enable  = true;
       nvim.enable = true;
-      yazi.enable = true;
     };
 
     server = {
@@ -87,7 +86,6 @@
       davis.enable = true;
       files.enable = true;
       jellyfin.enable = true;
-      remotevm.enable = true;
       suwayomi.enable = true;
     };
 
@@ -107,7 +105,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Chicago";
 
   services.tailscale = {
     openFirewall = true;

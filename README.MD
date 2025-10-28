@@ -1,17 +1,21 @@
 # My NixOS Repository
 Consists of multiple devices:
 
-- Greenery: DNS, self-hosted, minecraft server with multiple services.
+- Greenery: Self-hosted Server with multiple services
 - Beryl: Remote access, personal laptop for tinkering with Niri and Quickshell.
-- Quartz: Gaming PC for well, gaming.
-- Kaolin: Traffic Relaying server to Switzerland using Cloudflare-WARP and Tailscale bridged using Wireguard.
+- Quartz: Gaming PC with attempts of iGPU Passthrough Windows.
+- Kaolin: Swiss VPS acting as both an exit-node and a DNS Server.
 - Graphite: Laptop found while dumpster diving and used as an excuse to use NixOS for work.
 
 ## Status Updates
- I've successfully migrated to Infomaniak's VPS Lite. I did not expect them to use Legacy BIOS though.
+ I've moved my PCI-Passthrough Config from Greenery to Quartz due to massive performance uplifts.
+ However, I've been meaning to use the Intel UHD 770 iGPU to be passed through to the VM which
+ has been a bitch as of late due to how Intel structured their GPUs to be more SR-IOV oriented
+ rather than legacy PCI-Passthrough.
 
- I might do the omega troll of using a Raspberry Pi 4 I yoinked to be a router for my NAS as Internet Connection
- Sharing bricks my main server.
+ Due to Greenery being more overkill as of late (5% CPU + 1.8GB/32GB util), Greenery hardware might
+ be shifted over to the Raspberry Pi 4 with 8GB of RAM. Need to first configure the Pi for network
+ routing for the NAS before adding all the server modules.
 
  I'm still kinda lazy in updating READMEs, I will try though.
 
@@ -19,16 +23,18 @@ Consists of multiple devices:
 
 My rice themes have been more or less unified with rose pine, exceptions being nvim with TokyoNight and fuzzel with Catppuccin.
 
-Banshell has been progressing okay, Weather and Calendar widgets have been completed, the rest will be slowly built up.
+Xcursor-Genshin-Nahida will soon be packaged in a general way, fetching from Author's GitHub and
+converted to Linux Cursors using ```pkgs.win2xcur```. This will also solve the licensing conflicts.
+
+Banshell has been progressing slowly, interactable Nahida GIF in the works similar to kurukurubar.
 
 Once the status tray is complete, Banshell will be merged to master as an alpha version where it can be optionally enabled.
 
 I shall consult the Rexiel Scarlet to teach me how to package it.
 
 Planned color themes:
-- Dracula/Vivian Theme (Dark theme only)
-- Nahida Colors (Light theme only)
-- JSON Color importer from color themes (Taken from rack-shell)
+- Matugen/JSON colorscheme schematic for Colors.qml
+- Adapted Nahida/Vivian Colors for both Light & Dark Theme
 
 Dependencies:
 - Quickshell 0.2.0
@@ -50,13 +56,13 @@ SSH services for file transfer and remote access. Enables sharing my 12TB hard d
 14TB Backup drive hosted on a Netgear Pro 6 with Tinycore Linux. Unfortunately failed to hook it up to Greenery via
 Ethernet.
 
-Future Endeavors: More functional Jellyfin, Proxy websites that do not involve with Kaolin, Improve Security as Greenery 
-plays an important role in my self-hosted lifestyle.
+Future Endeavors: More functional Jellyfin, Proxy websites that do not involve with Kaolin, Decide Feasibility
+of replacing the Optiplex 7050 with RPi 4.
 
 # Kaolin
 
 VPS that routes all traffic via Tailscale Exit-node while using wireguard as a bridge to connect tailscale
-with Cloudflare-WARP. Also doubles as a DNS Proxy Server with dnscrypt-proxy
+with Cloudflare-WARP. Also doubles as a DNS Proxy Server with dnscrypt-proxy resolving with Quad9
 
 Infected Infomaniak's Debian with NixOS my beloved.
 
@@ -199,7 +205,7 @@ ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for mana
 Problems: AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed.
 Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
 
-Future Endeavors: Rice my laptop with quickshell and other theming applications, fix AMDGPU crashes from Youtube/demanding HWAccel Tasks.
+Future Endeavors: Rice Banshell, fix AMDGPU crashes from Youtube/demanding HWAccel Tasks.
 
 <details>
 <summary>Enabling USB4 on Zenbook S13 OLED (UM5302TA)</summary>
@@ -223,7 +229,8 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 
 Dell Latitude 5400 found in the dumpster. Consisted of 16GB of RAM and 256GB NVME SSD. Pretty good find imo.
 
-Used for work.
+UPDATE: NixOS Stage 1 got fucked somehow, so I have to reinstall and reconfigure it. Gives me the opportunity
+to unfuck my undeclarative python.
 
 # Quartz
 
@@ -231,11 +238,14 @@ Custom-built gaming pc intended for workstation and gaming.
 
 Intended to be used as my nix config manager while I'm at home.
 
-Future Endeavors: Enable sunshine config for moonlight clients (Beryl & Graphite) to access it. 
+Consists of (WIP) iGPU-Passthrough Windows 10 IoT LTSC Virtual Machine managed by libvirtd. Remote using
+Sunshine + Moonlight via Tailscale.
+
+Future Endeavors: Fix Error Code 43 in iGPU driver on Windows (not a problem on Linux VMs, it's windows being ASS)
 
 ## Quartz PC Specifications
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
-- RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP) (Underclocked to 5600MHz due to RAM stability issues)
+- RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP)
 - MB: [Gigabyte Z690 AORUS ELITE AX REV 1.4](https://www.gigabyte.com/Motherboard/Z690-AORUS-ELITE-AX-rev-14)
 - GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
 

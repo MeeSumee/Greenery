@@ -45,6 +45,7 @@
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;
+      vindows.enable = true;
     };
 
     system = {
