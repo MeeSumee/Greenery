@@ -56,7 +56,7 @@ Rectangle {
   MouseArea {
     id: marea
     anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
+    cursorShape: root.player.isPlaying ? Qt.ArrowCursor : Qt.PointingHandCursor
     onPressed: {
       gif.source = root.player.isPlaying ? root.jumpge : root.lewdge
       gif.playing = true
