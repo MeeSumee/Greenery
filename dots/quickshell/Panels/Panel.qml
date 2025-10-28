@@ -42,12 +42,12 @@ Rectangle {
           anchors.centerIn: parent
           font.pixelSize: (content.currentIndex == 0) ? 40:25
 
-          Behavior on font.pixelSize {
-            NumberAnimation {
-              duration: Dat.MaterialEasing.standardAccelTime
-              easing.bezierCurve: Dat.MaterialEasing.standardAccel
-            }
-          }
+          // Behavior on font.pixelSize {
+          //   NumberAnimation {
+          //     duration: Dat.MaterialEasing.standardAccelTime
+          //     easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          //   }
+          // }
 
           font.bold: false
           color: Dat.Colors.foreground
@@ -78,12 +78,12 @@ Rectangle {
           anchors.centerIn: parent
           font.pixelSize: (content.currentIndex == 1) ? 40:25
 
-          Behavior on font.pixelSize {
-            NumberAnimation {
-              duration: Dat.MaterialEasing.standardAccelTime
-              easing.bezierCurve: Dat.MaterialEasing.standardAccel
-            }
-          }
+          // Behavior on font.pixelSize {
+          //   NumberAnimation {
+          //     duration: Dat.MaterialEasing.standardAccelTime
+          //     easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          //   }
+          // }
 
           font.bold: false
           color: Dat.Colors.foreground
@@ -113,12 +113,12 @@ Rectangle {
           anchors.centerIn: parent
           font.pixelSize: (content.currentIndex == 2) ? 40:25
 
-          Behavior on font.pixelSize {
-            NumberAnimation {
-              duration: Dat.MaterialEasing.standardAccelTime
-              easing.bezierCurve: Dat.MaterialEasing.standardAccel
-            }
-          }
+          // Behavior on font.pixelSize {
+          //   NumberAnimation {
+          //     duration: Dat.MaterialEasing.standardAccelTime
+          //     easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          //   }
+          // }
 
           font.bold: false
           color: Dat.Colors.foreground
@@ -148,12 +148,12 @@ Rectangle {
           anchors.centerIn: parent
           font.pixelSize: (content.currentIndex == 3) ? 40:25
 
-          Behavior on font.pixelSize {
-            NumberAnimation {
-              duration: Dat.MaterialEasing.standardAccelTime
-              easing.bezierCurve: Dat.MaterialEasing.standardAccel
-            }
-          }
+          // Behavior on font.pixelSize {
+          //   NumberAnimation {
+          //     duration: Dat.MaterialEasing.standardAccelTime
+          //     easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          //   }
+          // }
 
           font.bold: false
           color: Dat.Colors.foreground
@@ -222,12 +222,12 @@ Rectangle {
           anchors.centerIn: parent
           font.pixelSize: (content.currentIndex == 5) ? 40:25
 
-          Behavior on font.pixelSize {
-            NumberAnimation {
-              duration: Dat.MaterialEasing.standardAccelTime
-              easing.bezierCurve: Dat.MaterialEasing.standardAccel
-            }
-          }
+          // Behavior on font.pixelSize {
+          //   NumberAnimation {
+          //     duration: Dat.MaterialEasing.standardAccelTime
+          //     easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          //   }
+          // }
 
           font.bold: false
           color: Dat.Colors.foreground

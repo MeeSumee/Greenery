@@ -22,7 +22,6 @@ Rectangle {
     target: root.player
     function onIsPlayingChanged() {
       const currentge = root.player.isPlaying ? root.jumpge : root.readge;
-      gif.source = "";
       gif.source = currentge;
       gif.playing = true;
     }
