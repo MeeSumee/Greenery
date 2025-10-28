@@ -104,7 +104,7 @@ Rectangle {
           values: [...Mpris.players.values]
         }
         
-        Wid.MediaGif {
+        Wid.Nahida {
           required property MprisPlayer modelData
           player: modelData
         }
