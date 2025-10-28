@@ -116,7 +116,7 @@ Rectangle {
             id: text
 
             anchors.fill: parent
-            color: (entry.modelData?.enabled) ? Dat.Colors.foreground : Dat.Colors.pink
+            color: (entry.modelData?.enabled) ? Dat.Colors.foreground : Dat.Colors.purple
             font.pointSize: 11
             text: entry.modelData?.text ?? ""
             verticalAlignment: Text.AlignVCenter
