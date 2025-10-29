@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import qs.Widgets as Wid
 import qs.Data as Dat
 import Quickshell.Services.SystemTray
+import Quickshell
 
 Rectangle {
   id: dashboard
@@ -34,7 +35,6 @@ Rectangle {
       }
 
       Wid.StatusTray {
-        stackView: 0
       }
     }
 
