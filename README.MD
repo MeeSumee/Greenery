@@ -36,6 +36,12 @@ Planned color themes:
 - Matugen/JSON colorscheme schematic for Colors.qml
 - Adapted Nahida/Vivian Colors for both Light & Dark Theme
 
+Dependencies:
+- Quickshell 0.2.0
+- Upower
+- Power-Profiles-Daemon
+- Google Material-Symbols Font
+
 # Greenery
 
 Dell Optiplex 7050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
