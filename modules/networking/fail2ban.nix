@@ -14,9 +14,10 @@
       ignoreIP = [
         "greenery.berylline-mine.ts.net"
         "beryl.berylline-mine.ts.net"
-        "garnet.berylline-mine.ts.net"
+        "obsidian.berylline-mine.ts.net"
         "kaolin.berylline-mine.ts.net"
         "quartz.berylline-mine.ts.net"
+        "graphite.berylline-mine.ts.net"
       ];
       bantime = "48h";
       bantime-increment = {
