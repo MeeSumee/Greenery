@@ -94,6 +94,7 @@
         xournalpp                       # note taking
         mpv                             # media player
         libreoffice-fresh               # office applications
+        gparted                         # disk management software
         prismlauncher                   # minecraft 
         gnome-calculator                # gnome calculator
         nemo                            # nemo file browser
@@ -104,9 +105,6 @@
           color = "teal";
         })                              # Papirus Icons with violet folders
       ];
-
-      # Enable KDE Partition Manager
-      programs.partition-manager.enable = true;
 
       # Theme gtk apps
       programs.dconf.profiles.user.databases = [{
