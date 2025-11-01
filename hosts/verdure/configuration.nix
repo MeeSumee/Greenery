@@ -27,7 +27,6 @@
 
     programs = {
       enable = true;
-      core.enable = true;
       server.enable  = true;
       nvim.enable = true;
     };
@@ -44,6 +43,17 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
+
+  # Core programs for Pi set here temporarily
+  environment.systemPackages = with pkgs; [
+    git
+    tree
+    unzip
+    fzf
+    npins
+    libraspberrypi
+    raspberrypi-eeprom
+  ];
   
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
