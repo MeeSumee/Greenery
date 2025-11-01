@@ -45,6 +45,7 @@
           quartz fd7a:115c:a1e0::ff01:637f
           graphite fd7a:115c:a1e0::b534:9e21
           obsidian fd7a:115c:a1e0::2034:ae77
+          verdure fd7a:115c:a1e0::fc37:d442
         '';
 
         sources.public-resolvers = {
