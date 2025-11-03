@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import qs.Widgets as Wid
 import qs.Data as Dat
-import Quickshell.Services.SystemTray
-import Quickshell
 
 Rectangle {
   id: dashboard
@@ -34,7 +32,39 @@ Rectangle {
         color: Dat.Colors.foreground
       }
 
-      Wid.StatusTray {
+      Rectangle {
+        implicitWidth: parent.implicitWidth
+        implicitHeight: parent.implicitHeight / 6
+        topLeftRadius: parent.radius
+        topRightRadius: parent.radius
+        anchors.top: parent.top
+        color: "transparent"
+
+        border {
+          width: 1
+          color: Dat.Colors.foreground
+        }
+
+        Wid.SessionControl {
+        }
+      }
+
+
+      Rectangle {
+        implicitWidth: parent.implicitWidth
+        implicitHeight: parent.implicitHeight / 6
+        bottomLeftRadius: parent.radius
+        bottomRightRadius: parent.radius
+        anchors.bottom: parent.bottom
+        color: "transparent"
+
+        border {
+          width: 1
+          color: Dat.Colors.foreground
+        }
+
+        Wid.StatusTray {
+        }
       }
     }
 
