@@ -28,22 +28,32 @@ Column {
       color: "transparent"
 
       Dat.MaterialSymbols {
+        id: prevArrow
         anchors.centerIn: parent
         font.pixelSize: 25
         font.bold: false
         color: Dat.Colors.foreground
+        opacity: 1
         icon: "arrow_circle_left"
+
+        Behavior on opacity {
+          NumberAnimation {
+            duration: Dat.MaterialEasing.standardAccelTime
+            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          }
+        }
 
         MouseArea {
           id: prevMonthArea
 
           anchors.fill: parent
           hoverEnabled: true
-          cursorShape: Qt.PointingHandCursor
+          onExited: prevArrow.opacity = 1
+          onEntered: prevArrow.opacity = 0.6
           onClicked: {
-            let newDate = new Date(displayDate);
+            let newDate = new Date(calendarGrid.displayDate);
             newDate.setMonth(newDate.getMonth() - 1);
-            displayDate = newDate;
+            calendarGrid.displayDate = newDate;
           }
         }
       }
@@ -52,7 +62,7 @@ Column {
     Text {
       width: parent.width - 80
       height: 40
-      text: Qt.formatDate(displayDate, "MMMM yyyy")
+      text: Qt.formatDate(calendarGrid.displayDate, "MMMM yyyy")
       font.pointSize: 15
       color: Dat.Colors.foreground
       horizontalAlignment: Text.AlignHCenter
@@ -66,22 +76,32 @@ Column {
       color: "transparent"
 
       Dat.MaterialSymbols {
+        id: nextArrow
         anchors.centerIn: parent
         font.pixelSize: 25
         font.bold: false
         color: Dat.Colors.foreground
+        opacity: 1
         icon: "arrow_circle_right"
+
+        Behavior on opacity {
+          NumberAnimation {
+            duration: Dat.MaterialEasing.standardAccelTime
+            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          }
+        }
 
         MouseArea {
           id: nextMonthArea
 
           anchors.fill: parent
           hoverEnabled: true
-          cursorShape: Qt.PointingHandCursor
+          onExited: nextArrow.opacity = 1
+          onEntered: nextArrow.opacity = 0.6
           onClicked: {
-            let newDate = new Date(displayDate);
+            let newDate = new Date(calendarGrid.displayDate);
             newDate.setMonth(newDate.getMonth() + 1);
-            displayDate = newDate;
+            calendarGrid.displayDate = newDate;
           }
         }
       }
