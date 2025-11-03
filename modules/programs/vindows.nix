@@ -32,6 +32,9 @@
       };
     };
 
+    # Provide UEFI firmware support to virt-manager (due to depreciated OVMF module)
+    systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
+
     # Tell it to not fuck with port 53 from dnscrypt
     services = {
       dnsmasq = {
