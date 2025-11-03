@@ -17,6 +17,7 @@ Rectangle {
   property string jumpge: "../Assets/nahidaj.gif"
   property string readge: "../Assets/nahidar.gif"
   property string lewdge: "../Assets/nahidal.gif"
+  property string spinge: "../Assets/notnahida.gif"
 
   Connections {
     target: root.player
@@ -47,8 +48,8 @@ Rectangle {
 
     Text {
       anchors.centerIn: parent
-      text: !marea.pressed ? "(ᵕ—ᴗ—), 𝄞?" : "(⸝⸝⸝O﹏ O⸝⸝⸝)"
-      color: "#90C090"
+      text: !marea.pressed ? "(ᵕ—ᴗ—), 𝄞?" : (marea.pressedButtons == Qt.RightButton ? "クルリン〜!!!" : "(⸝⸝⸝O﹏ O⸝⸝⸝)")
+      color: marea.pressedButtons == Qt.RightButton ? "#7A56AE" : "#90C090"
       font.pointSize: 32
     }
   }
@@ -56,10 +57,17 @@ Rectangle {
   MouseArea {
     id: marea
     anchors.fill: parent
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
     cursorShape: root.player.isPlaying ? Qt.ArrowCursor : Qt.PointingHandCursor
-    onPressed: {
-      gif.source = root.player.isPlaying ? root.jumpge : root.lewdge
-      gif.playing = true
+    onPressed: (mouse)=> {
+      if (mouse.button == Qt.RightButton) {
+        gif.source = root.player.isPlaying ? root.jumpge : root.spinge;
+        gif.playing = true;
+      }
+      else {
+        gif.source = root.player.isPlaying ? root.jumpge : root.lewdge
+        gif.playing = true
+      }
     }
     onReleased: {
       gif.source = root.player.isPlaying ? root.jumpge : root.readge
