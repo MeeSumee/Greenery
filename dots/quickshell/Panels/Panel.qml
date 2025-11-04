@@ -6,12 +6,13 @@ import qs.Panels as Pan
 
 Rectangle {
   anchors.horizontalCenter: parent.horizontalCenter
+  anchors.margins: 1
   y: 27
   color: Dat.Colors.background
   radius: 25
   id: barpanel
-  implicitHeight: 369 // Ensure overlap (shitty solution)
-  implicitWidth: 1002 // Ensure overlap (shitty solution)
+  implicitHeight: 370
+  implicitWidth: 1000
 
   // Buttons
   Item {
@@ -24,7 +25,6 @@ Rectangle {
 
       anchors.fill: parent
       spacing: 0
-        
 
       Rectangle {
         id: button1
