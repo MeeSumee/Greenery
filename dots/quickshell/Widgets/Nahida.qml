@@ -49,7 +49,7 @@ Rectangle {
     Text {
       anchors.centerIn: parent
       text: !marea.pressed ? "(ᵕ—ᴗ—), 𝄞?" : (marea.pressedButtons == Qt.RightButton ? "クルリン〜!!!" : "(⸝⸝⸝O﹏ O⸝⸝⸝)")
-      color: marea.pressedButtons == Qt.RightButton ? "#7A56AE" : "#90C090"
+      color: marea.pressedButtons == Qt.RightButton ? Dat.Colors.purple : Dat.Colors.green
       font.pointSize: 32
     }
   }
