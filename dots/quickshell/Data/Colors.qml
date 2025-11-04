@@ -3,7 +3,7 @@ import Quickshell
 import QtQuick
 
 Singleton {
-    // dracula palette
+    // TokyoNight Palette
     // readonly property color foreground:"#A9B1DC"
     readonly property color foreground: "#7DCFFF"
     readonly property color background:"#1A1B2C"
