@@ -1,3 +1,4 @@
+// Extending to Niri.qml
 import QtQuick
 
 QtObject {
