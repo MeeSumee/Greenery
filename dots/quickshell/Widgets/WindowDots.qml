@@ -16,7 +16,7 @@ Rectangle {
     anchors.fill: parent
 
     Repeater {
-      model: Niri.workspaces.length
+      model: Math.min(Niri.workspaces.length, 16)
       WorkspaceItem {
         Layout.alignment: Qt.AlignCenter
       }
