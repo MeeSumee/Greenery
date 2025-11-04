@@ -30,14 +30,14 @@ Column {
       Dat.MaterialSymbols {
         id: prevArrow
         anchors.centerIn: parent
-        font.pixelSize: 25
+        font.pixelSize: 30
         font.bold: false
-        color: Dat.Colors.foreground
+        color: prevMonthArea.containsMouse ? Dat.Colors.blue : Dat.Colors.foreground
         opacity: 1
         icon: "arrow_circle_left"
 
-        Behavior on opacity {
-          NumberAnimation {
+        Behavior on color {
+          ColorAnimation {
             duration: Dat.MaterialEasing.standardAccelTime
             easing.bezierCurve: Dat.MaterialEasing.standardAccel
           }
@@ -48,8 +48,6 @@ Column {
 
           anchors.fill: parent
           hoverEnabled: true
-          onExited: prevArrow.opacity = 1
-          onEntered: prevArrow.opacity = 0.6
           onClicked: {
             let newDate = new Date(calendarGrid.displayDate);
             newDate.setMonth(newDate.getMonth() - 1);
@@ -63,7 +61,7 @@ Column {
       width: parent.width - 80
       height: 40
       text: Qt.formatDate(calendarGrid.displayDate, "MMMM yyyy")
-      font.pointSize: 15
+      font.pointSize: 18
       color: Dat.Colors.foreground
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
@@ -78,14 +76,13 @@ Column {
       Dat.MaterialSymbols {
         id: nextArrow
         anchors.centerIn: parent
-        font.pixelSize: 25
+        font.pixelSize: 30
         font.bold: false
-        color: Dat.Colors.foreground
-        opacity: 1
+        color: nextMonthArea.containsMouse ? Dat.Colors.blue : Dat.Colors.foreground
         icon: "arrow_circle_right"
 
-        Behavior on opacity {
-          NumberAnimation {
+        Behavior on color {
+          ColorAnimation {
             duration: Dat.MaterialEasing.standardAccelTime
             easing.bezierCurve: Dat.MaterialEasing.standardAccel
           }
@@ -96,8 +93,6 @@ Column {
 
           anchors.fill: parent
           hoverEnabled: true
-          onExited: nextArrow.opacity = 1
-          onEntered: nextArrow.opacity = 0.6
           onClicked: {
             let newDate = new Date(calendarGrid.displayDate);
             newDate.setMonth(newDate.getMonth() + 1);
