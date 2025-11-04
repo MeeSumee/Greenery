@@ -77,13 +77,10 @@ WlrLayershell {
       Item {
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignLeft
-        Layout.topMargin: 1
-        Layout.leftMargin: 3
+        Layout.leftMargin: 5
 
-        Wid.Logo {
+        Wid.WindowDots {
           Layout.alignment: Qt.AlignTop
-          implicitHeight: 25
-          implicitWidth: 25
         }
       }
 
