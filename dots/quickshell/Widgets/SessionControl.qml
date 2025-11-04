@@ -28,6 +28,10 @@ Item {
         Quickshell.execDetached(["systemctl", "suspend"]);
       }
 
+      function logout() {
+        Quickshell.execDetached(["niri", "msg", "action", "quit", "-s"])
+      }
+
       function lock() {
         Quickshell.execDetached(["loginctl", "lock-session"]);
       }
@@ -46,6 +50,10 @@ Item {
           action: event => suspend()
         },
         {
+          text: "↪",
+          action: event => logout()
+        },
+        {
           text: "⚷",
           action: event => lock()
         },
@@ -58,31 +66,28 @@ Item {
 
         Layout.alignment: Qt.AlignCenter
         clip: true
-        color: Dat.Colors.foreground
-        opacity: 1
+        color: marea.containsMouse ? Dat.Colors.background : Dat.Colors.foreground
         implicitHeight: this.implicitWidth
-        implicitWidth: 36
+        implicitWidth: 32
         radius: this.implicitWidth
 
         MouseArea {
           id: marea
           anchors.fill: parent
           hoverEnabled: true
-          onExited: dot.opacity = 1
-          onEntered: dot.opacity = 0.6
           onClicked: mevent => dot.modelData.action(mevent)
         }
 
-        Behavior on opacity {
-          NumberAnimation {
-            duration: Dat.MaterialEasing.standardAccelTime
+        Behavior on color {
+          ColorAnimation {
+            duration: Dat.MaterialEasing.emphasizedDecelTime
             easing.bezierCurve: Dat.MaterialEasing.standardAccel
           }
         }
 
         Text {
           anchors.centerIn: parent
-          color: Dat.Colors.background
+          color: marea.containsMouse ? Dat.Colors.foreground : Dat.Colors.background
           font.bold: true
           font.pointSize: 20
           text: dot.modelData.text
