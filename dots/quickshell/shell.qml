@@ -4,6 +4,7 @@ import QtQuick
 import qs.Panels
 
 Scope {
-    Bar{}
-    Volume{}
+  Bar{}
+  Volume{}
+  Lockscreen{}
 }
