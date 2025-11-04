@@ -18,7 +18,12 @@ Scope {
 		function onVolumeChanged() {
 			root.shouldShowOsd = true;
 			hideTimer.restart();
-		}
+    }
+
+    function onMutedChanged() {
+      root.shouldShowOsd = true;
+      hideTimer.restart();
+    }
   }
 
 	property bool shouldShowOsd: false
@@ -33,7 +38,7 @@ Scope {
 	// PanelWindow.visible could be set instead of using a loader, but using
 	// a loader will reduce the memory overhead when the window isn't open.
 	LazyLoader {
-		active: root.shouldShowOsd
+    active: root.shouldShowOsd
 
 		PanelWindow {
 			// Since the panel's screen is unset, it will be picked by the compositor
@@ -67,7 +72,7 @@ Scope {
 						font.pixelSize: 30
 						font.bold: false
 						color: Dat.Colors.foreground
-						icon: "volume_up"
+						icon: Pipewire.defaultAudioSink?.audio.muted ? "volume_off" : (Pipewire.defaultAudioSink.audio.volume > 0.5 ? "volume_up" : "volume_down")
 					}
 
 					Rectangle {
