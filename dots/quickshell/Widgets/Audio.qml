@@ -30,26 +30,52 @@ Item {
         Text {
           color: root.node?.isStream ? Dat.Colors.purple : Dat.Colors.foreground
           font.pointSize: 10
-          text: (root.node?.isStream ? root.node?.name : (nameArea.containsMouse) ? root.node?.description : (root.node?.nickname) ? root.node?.nickname : root.node?.description) ?? "Unidentified"
+          text: `${parseInt(root.node?.audio?.volume * 100)}%` ?? ""
           verticalAlignment: Text.AlignVCenter
 
-          Text {
+          ClippingRectangle {
             anchors.left: parent.right
-            anchors.leftMargin: 10
-            color: parent.color
-            font.pointSize: 10
-            text: `${parseInt(root.node?.audio?.volume * 100)}%` ?? ""
-            verticalAlignment: Text.AlignVCenter
-          }
+            anchors.leftMargin: 5
+            implicitWidth: 240
+            implicitHeight: 30
+            color: "transparent"
 
-          MouseArea {
-            id: nameArea
+            Text {
+              id: audioname
+              color: root.node?.isStream ? Dat.Colors.purple : Dat.Colors.foreground
+              font.pointSize: 10
+              text: (root.node?.isStream ? root.node?.name : (nameArea.containsMouse) ? root.node?.description : (root.node?.nickname) ? root.node?.nickname : root.node?.description) ?? "Unidentified"
+              verticalAlignment: Text.AlignVCenter
+              x: 0
 
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.top: parent.top
-            hoverEnabled: true
-            width: Math.min(parent.contentWidth, parent.width)
+              SequentialAnimation {
+                running: {
+                  if (audioname.contentWidth > 240) {
+                    return true;
+                  } else {
+                    audioname.x = 0;
+                  }
+                }
+
+                NumberAnimation {
+                  target: audioname
+                  property: "x"
+                  from: 0
+                  to: -audioname.contentWidth
+                  duration: 5000
+                }
+              }
+
+              MouseArea {
+                id: nameArea
+
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.top: parent.top
+                hoverEnabled: true
+                width: Math.min(parent.contentWidth, parent.width)
+              }
+            }
           }
         }
       }
@@ -72,6 +98,13 @@ Item {
           color: icon.active ? icon.passiveColor : icon.activeColor
           font.pointSize: 12
           icon: (!root.node?.isSink) ? (Pipewire.defaultAudioSource?.audio.muted ? "mic_off": "mic") : (Pipewire.defaultAudioSink?.audio.muted ? "volume_off" : "volume_up")
+        }
+
+        Behavior on color {
+          ColorAnimation {
+            duration: Dat.MaterialEasing.standardAccelTime
+            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+          }
         }
 
         MouseArea {
