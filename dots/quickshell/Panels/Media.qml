@@ -23,10 +23,10 @@ Rectangle {
     columnSpacing: 5
 
     Rectangle {
-      Layout.rowSpan: 1
+      Layout.rowSpan: 2
 
-      implicitHeight: 160
-      implicitWidth: 600
+      implicitHeight: 340
+      implicitWidth: 270
       color: "transparent"
       radius: 20
 
@@ -35,18 +35,23 @@ Rectangle {
         color: Dat.Colors.foreground
       }
 
-      Text {
-        anchors.centerIn: parent
-        text: "MUSIC PLAYBACK"
-        color: Dat.Colors.foreground
+      Repeater {
+        model: ScriptModel {
+          values: [...Mpris.players.values]
+        }
+
+        Wid.Mpris {
+          required property MprisPlayer modelData
+          player: modelData
+        }
       }
     }
 
     Rectangle {
-      Layout.rowSpan: 1
+      Layout.rowSpan: 2
 
-      implicitHeight: 160
-      implicitWidth: 600
+      implicitHeight: 340
+      implicitWidth: 310
       color: "transparent"
       radius: 20
 
