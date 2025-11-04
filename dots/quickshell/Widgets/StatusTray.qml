@@ -2,11 +2,10 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 
-Rectangle {
+Item {
   anchors.bottom: parent.bottom
-  height: parent.height / 5
+  height: parent.height
   width: rowL.width + 20
-  color: "transparent"
 
   RowLayout {
     spacing: 10
