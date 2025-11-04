@@ -11,7 +11,7 @@ Item {
   id: root
 
   property color bgColor: Dat.Colors.selection
-  property color fgColor: Dat.Colors.foreground
+  property color fgColor: node?.isStream ? Dat.Colors.purple : Dat.Colors.foreground
   required property PwNode node
 
   implicitHeight: 42
@@ -28,7 +28,7 @@ Item {
         Layout.fillWidth: true
 
         Text {
-          color: Dat.Colors.foreground
+          color: root.node?.isStream ? Dat.Colors.purple : Dat.Colors.foreground
           font.pointSize: 10
           text: (root.node?.isStream ? root.node?.name : (nameArea.containsMouse) ? root.node?.description : (root.node?.nickname) ? root.node?.nickname : root.node?.description) ?? "Unidentified"
           verticalAlignment: Text.AlignVCenter
@@ -36,7 +36,7 @@ Item {
           Text {
             anchors.left: parent.right
             anchors.leftMargin: 10
-            color: Dat.Colors.foreground
+            color: parent.color
             font.pointSize: 10
             text: `${parseInt(root.node?.audio?.volume * 100)}%` ?? ""
             verticalAlignment: Text.AlignVCenter
@@ -58,24 +58,25 @@ Item {
         id: icon  
         required property bool active
         property color activeColor: Dat.Colors.foreground
-        property color passiveColor: Dat.Colors.purple
-
-        color: Dat.Colors.selection
+        property color passiveColor: Dat.Colors.background
 
         Layout.fillHeight: true
         active: (root.node?.isSink) ? root.node == Pipewire.defaultAudioSink : root.node == Pipewire.defaultAudioSource
         implicitWidth: this.height
         radius: this.height
+        color: active ? activeColor : passiveColor
         visible: !root.node?.isStream
 
         Dat.MaterialSymbols {
           anchors.centerIn: parent
-          color: Dat.Colors.foreground
+          color: icon.active ? icon.passiveColor : icon.activeColor
           font.pointSize: 12
-          icon: (!root.node?.isSink) ? "mic" : "volume_up"
+          icon: (!root.node?.isSink) ? (Pipewire.defaultAudioSource?.audio.muted ? "mic_off": "mic") : (Pipewire.defaultAudioSink?.audio.muted ? "volume_off" : "volume_up")
         }
 
         MouseArea {
+          anchors.fill: parent
+          hoverEnabled: true
           onClicked: {
             if (root.node?.isSink) {
               Pipewire.preferredDefaultAudioSink = root.node;
@@ -130,20 +131,12 @@ Item {
           }
         }
         handle: Rectangle {
-          color: Dat.Colors.foreground
+          color: root.fgColor
           implicitHeight: 20
           implicitWidth: 10
-          radius: 5
+          radius: 10
           x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width + 1)
           y: slider.topPadding + slider.availableHeight / 2 - height / 2
-
-          Rectangle {
-            anchors.centerIn: parent
-            color: root.fgColor
-            height: parent.height
-            radius: 10
-            width: 5
-          }
         }
 
         onMoved: {
