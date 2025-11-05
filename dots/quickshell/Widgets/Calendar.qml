@@ -20,11 +20,11 @@ Column {
   // Month navigation header
   Row {
     width: parent.width
-    height: 40
+    height: 42
 
     Rectangle {
-      width: 40
-      height: 40
+      width: parent.height
+      height: parent.height
       radius: 20
       color: "transparent"
 
@@ -33,7 +33,7 @@ Column {
         anchors.centerIn: parent
         font.pixelSize: 30
         font.bold: false
-        color: prevMonthArea.containsMouse ? Dat.Colors.blue : Dat.Colors.foreground
+        color: prevMonthArea.containsMouse ? Dat.Colors.purple : Dat.Colors.foreground
         opacity: 1
         icon: "arrow_circle_left"
 
@@ -59,7 +59,7 @@ Column {
     }
 
     Text {
-      width: parent.width - 80
+      width: parent.width - (2 * parent.height)
       height: 40
       text: Qt.formatDate(calendarGrid.displayDate, "MMMM yyyy")
       font.pointSize: 18
@@ -69,8 +69,8 @@ Column {
     }
 
     Rectangle {
-      width: 40
-      height: 40
+      width: parent.height
+      height: parent.height
       radius: 20
       color: "transparent"
 
@@ -79,7 +79,7 @@ Column {
         anchors.centerIn: parent
         font.pixelSize: 30
         font.bold: false
-        color: nextMonthArea.containsMouse ? Dat.Colors.blue : Dat.Colors.foreground
+        color: nextMonthArea.containsMouse ? Dat.Colors.purple : Dat.Colors.foreground
         icon: "arrow_circle_right"
 
         Behavior on color {
