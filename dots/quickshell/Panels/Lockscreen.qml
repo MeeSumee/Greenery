@@ -13,7 +13,6 @@ Item {
     target: "lockscreen"
 
     function lock() {
-      lock.locked = true
       loader.active = true
     }
   }
@@ -41,13 +40,10 @@ Item {
         PamContext {
           id: pam
 
-          // Handles both fingerprint and password prompts
           onPamMessage: {
-            // Always capture messages for display
             lockContext.pamMessage = message
 
             if (responseRequired) {
-              // If PAM is asking for password
               this.respond(lockContext.currentText)
             }
           }
@@ -74,7 +70,7 @@ Item {
             anchors.fill: parent
             color: Dat.Colors.comment
 
-            // Emergency unlock button
+            // Woe
             Button {
               text: "LET ME OUT! AAAHHHHH"
               anchors.top: parent.top
@@ -93,9 +89,7 @@ Item {
               text: Dat.Time.time
             }
 
-            // Input box (password or fingerprint)
             Rectangle {
-              id: inputBox
               anchors.centerIn: parent
               width: 400
               height: 60
@@ -140,12 +134,11 @@ Item {
                   }
               }
 
-              // Status or instruction text
               Label {
                 id: pamStatus
                 anchors.centerIn: parent
                 anchors.verticalCenterOffset: -60
-                text: lockContext.showFailure ? "Incorrect password" : (lockContext.pamMessage || "Enter password or use fingerprint")
+                text: lockContext.showFailure ? "Wrong" : (lockContext.pamMessage || "Enter password or use fingerprint")
                 color: "white"
                 font.pointSize: 14
                 horizontalAlignment: Text.AlignHCenter
@@ -168,7 +161,6 @@ Item {
                 inputMethodHints: Qt.ImhSensitiveData
               }
 
-              // Fingerprint icon
               Dat.MaterialSymbols {
                 id: fingerprintIcon
                 anchors.right: parent.right
