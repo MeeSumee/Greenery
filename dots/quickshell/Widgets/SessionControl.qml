@@ -80,8 +80,8 @@ Item {
 
         Behavior on color {
           ColorAnimation {
-            duration: Dat.MaterialEasing.emphasizedDecelTime
-            easing.bezierCurve: Dat.MaterialEasing.standardAccel
+            duration: Dat.MaterialEasing.expressiveDefaultSpatialTime
+            easing.bezierCurve: Dat.MaterialEasing.expressiveDefaultSpatial
           }
         }
 
