@@ -58,7 +58,7 @@ Scope {
 			Rectangle {
 				anchors.fill: parent
 				radius: height / 2
-				color: Dat.Colors.withAlpha(Dat.Colors.background, 0.8)
+				color: Qt.alpha(Dat.Colors.background, 0.8)
 
 				RowLayout {
 					anchors {

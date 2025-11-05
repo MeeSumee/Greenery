@@ -19,7 +19,4 @@ Singleton {
     readonly property color black: "#191A21"
     readonly property color menu: "#21222C"
     readonly property color visual: "#3E4452"
-    function withAlpha(color: color, alpha: real): color {
-      return Qt.rgba(color.r, color.g, color.b, alpha);
-  }
 }
