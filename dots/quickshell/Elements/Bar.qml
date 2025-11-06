@@ -90,8 +90,12 @@ WlrLayershell {
         Layout.topMargin: 3
         anchors.horizontalCenter: parent.horizontalCenter
 
-        Wid.ClockWidget {
+        Text {
+          id: clock
           anchors.horizontalCenter: parent.horizontalCenter
+          font.pointSize: 15
+          color: Dat.Colors.foreground
+          text: Dat.Time.time
         }
 
         Pan.Panel {
