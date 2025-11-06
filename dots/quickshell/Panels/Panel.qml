@@ -309,8 +309,8 @@ Rectangle {
         opacity: visible ? 1 : 0
         Behavior on opacity {
           NumberAnimation {
-              duration: Dat.MaterialEasing.standardAccelTime
-              easing.bezierCurve: Dat.MaterialEasing.standardAccel
+            duration: Dat.MaterialEasing.standardAccelTime
+            easing.bezierCurve: Dat.MaterialEasing.standardAccel
           }
         }
       }
