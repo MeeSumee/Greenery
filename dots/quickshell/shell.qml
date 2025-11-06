@@ -1,7 +1,7 @@
 //@ pragma UseQApplication
 import Quickshell
 import QtQuick
-import qs.Panels
+import qs.Elements
 
 Scope {
   Bar{}
