@@ -13,7 +13,15 @@ Item {
     target: "lockscreen"
 
     function lock() {
-      loader.active = true
+      if (loader.active) {
+
+        // unfuck the loader by force destroy
+        loader.active = false
+        // delay
+        Qt.callLater(() => loader.active = true)
+      } else {
+        loader.active = true
+      }
     }
   }
 
