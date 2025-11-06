@@ -3,6 +3,7 @@ pragma Singleton
 
 import Quickshell
 import QtQuick
+import qs.Data as Dat
 
 Singleton {
   id: root
@@ -10,7 +11,7 @@ Singleton {
   // Accepted strings: csv coordinates, airport code, city name, landmark
   // Reference: https://github.com/chubin/wttr.in
   property string weatherLocation: "~Sears-Tower"
-  property bool imperial: false // Enable imperial units (fahrenheit, mph, etc)
+  property bool imperial: Dat.Config.imperial
 
   // Yoinked from sora's shell + added some of my own
   readonly property var weatherIcons: ({
@@ -209,7 +210,7 @@ Singleton {
 
             // Set all necessary values for derivation or presentation
             temp[0] = imperial ? parseFloat(current.temp_F) : parseFloat(current.temp_C);
-            time[0] = imperial ? current.localObsDateTime.slice(-7) : conv24hr(current.localObsDateTime.slice(-8));
+            time[0] = imperial ? current.localObsDateTime.slice(-8) : conv24hr(current.localObsDateTime.slice(-8));
             description = current.weatherDesc?.[0]?.value ?? "Unknown";
             area = location.areaName?.[0]?.value ?? "Unknown";
             feelstemp = imperial ? parseFloat(current.FeelsLikeF) : parseFloat(current.FeelsLikeC);

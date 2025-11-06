@@ -6,7 +6,6 @@ Column {
   width: parent.width
 
   property date displayDate: new Date()
-  property bool japenis: true
 
   spacing: 5
 
@@ -110,7 +109,7 @@ Column {
     height: 32
 
     Repeater {
-      model: calendarGrid.japenis ? ["日", "月", "火", "水", "木", "金", "土"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+      model: Dat.Config.calendarJP ? ["日", "月", "火", "水", "木", "金", "土"] : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
       Rectangle {
         width: parent.width / 7

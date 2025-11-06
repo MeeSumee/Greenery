@@ -1,5 +1,5 @@
 import QtQuick
-// import qs.Data as Dat
+import qs.Data as Dat
 
 Image {
   antialiasing: true
@@ -8,7 +8,7 @@ Image {
   layer.enabled: true
   retainWhileLoading: true
   smooth: true
-  source: "~/migu.jpg"
+  source: Dat.Config.wallSrc
 
   onStatusChanged: {
     if (this.status == Image.Error) {
