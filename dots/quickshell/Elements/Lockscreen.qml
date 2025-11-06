@@ -104,11 +104,17 @@ Item {
 
         WlSessionLockSurface {
 
+          // Emergency Rectangle incase background is fucked
+          Rectangle {
+            anchors.fill: parent
+            color: Dat.Colors.background
+          }
+
           Dat.Background {
             id: wallpaper
 
             anchors.fill: parent
-
+          
             layer.effect: MultiEffect {
               id: walBlur
 
@@ -133,20 +139,14 @@ Item {
             }
           }
 
-          // Emergency Rectangle incase background is fucked
-          Rectangle {
-            anchors.fill: parent
-            color: Dat.Colors.background
-          }
-
           // Woe
-          Button {
-            text: "LET ME OUT! AAAHHHHH"
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.margins: 20
-            onClicked: lock.locked = false
-          }
+          // Button {
+          //   text: "LET ME OUT! AAAHHHHH"
+          //   anchors.top: parent.top
+          //   anchors.right: parent.right
+          //   anchors.margins: 20
+          //   onClicked: lock.locked = false
+          // }
 
           Label {
             id: clock
@@ -156,6 +156,7 @@ Item {
             renderType: Text.NativeRendering
             font.pointSize: 80
             text: Dat.Time.time
+            color: Dat.Colors.background
           }
 
           Rectangle {
@@ -164,7 +165,7 @@ Item {
             width: 400
             height: 60
             radius: 30
-            color: lockContext.pamMessage.toLowerCase().includes("swipe") ? "transparent" : Dat.Colors.blue
+            color: lockContext.pamMessage.toLowerCase().includes("swipe") ? "transparent" : Dat.Colors.background
             border.color: lockContext.pamMessage.toLowerCase().includes("swipe") ? "transparent" : Dat.Colors.blue
             border.width: 2
             opacity: 0.95
@@ -206,39 +207,46 @@ Item {
               onAccepted: lockContext.tryUnlock()
             }
 
-            Dat.MaterialSymbols {
-              id: fingerprintIcon
+            Rectangle {
               anchors.centerIn: parent
               visible: lockContext.authMode === "fingerprint"
-              icon: "fingerprint"
-              color: Dat.Colors.foreground
-              font.pointSize: 30
-              opacity: lockContext.pamMessage.toLowerCase().includes("swipe") ? 1 : 0
+              width: 60
+              height: 60
+              radius: 30
+              color: Dat.Colors.background
 
-              SequentialAnimation {
-                running: {
-                  if (lockContext.showFailure || lockContext.pamMessage.toLowerCase().includes("again")) {
-                    return true;
+              Dat.MaterialSymbols {
+                id: fingerprintIcon
+                anchors.centerIn: parent
+                icon: "fingerprint"
+                color: Dat.Colors.foreground
+                font.pointSize: 30
+
+                SequentialAnimation {
+                  running: {
+                    if (lockContext.showFailure || lockContext.pamMessage.toLowerCase().includes("again")) {
+                      return true;
+                    }
                   }
-                }
-                alwaysRunToEnd: true
+                  alwaysRunToEnd: true
 
-                ColorAnimation {
-                  target: fingerprintIcon
-                  property: "color"
-                  from: Dat.Colors.foreground
-                  to: Dat.Colors.red
-                  easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
-                  duration: Dat.MaterialEasing.emphasizedDecelTime
-                }
+                  ColorAnimation {
+                    target: fingerprintIcon
+                    property: "color"
+                    from: Dat.Colors.foreground
+                    to: Dat.Colors.red
+                    easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
+                    duration: Dat.MaterialEasing.emphasizedDecelTime
+                  }
 
-                ColorAnimation {
-                  target: fingerprintIcon
-                  property: "color"
-                  from: Dat.Colors.red
-                  to: Dat.Colors.foreground
-                  easing.bezierCurve: Dat.MaterialEasing.emphasizedAccel
-                  duration: Dat.MaterialEasing.emphasizedAccelTime
+                  ColorAnimation {
+                    target: fingerprintIcon
+                    property: "color"
+                    from: Dat.Colors.red
+                    to: Dat.Colors.foreground
+                    easing.bezierCurve: Dat.MaterialEasing.emphasizedAccel
+                    duration: Dat.MaterialEasing.emphasizedAccelTime
+                  }
                 }
               }
             }
@@ -248,7 +256,7 @@ Item {
               anchors.centerIn: parent
               anchors.verticalCenterOffset: -60
               text: lockContext.showFailure ? "Authentication Failed" : lockContext.pamMessage
-              color: Dat.Colors.foreground
+              color: Dat.Colors.background
               font.pointSize: 14
               horizontalAlignment: Text.AlignHCenter
             }
