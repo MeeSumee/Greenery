@@ -140,13 +140,13 @@ Item {
           }
 
           // Woe
-          // Button {
-          //   text: "LET ME OUT! AAAHHHHH"
-          //   anchors.top: parent.top
-          //   anchors.right: parent.right
-          //   anchors.margins: 20
-          //   onClicked: lock.locked = false
-          // }
+          Button {
+            text: "LET ME OUT! AAAHHHHH"
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: 20
+            onClicked: lock.locked = false
+          }
 
           Label {
             id: clock
