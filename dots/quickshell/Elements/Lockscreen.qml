@@ -41,17 +41,11 @@ Item {
 
         onCurrentTextChanged: showFailure = false
 
-        function tryUnlock() {
-          if (currentText === "") return
-          pam.start()
-        }
-
         PamContext {
           id: pam
 
           onPamMessage: {
             lockContext.pamMessage = message
-
           }
 
           onCompleted: result => {
@@ -59,6 +53,8 @@ Item {
               lock.locked = false
             } else {
               lockContext.showFailure = true
+              lockContext.currentText = ""
+              Qt.callLater(() => pam.start())
             }
           }
         }
@@ -99,7 +95,7 @@ Item {
             }
           }
 
-          // Woe
+          // Emergency Button for debugging
           Button {
             text: "LET ME OUT! AAAHHHHH"
             anchors.top: parent.top
@@ -110,9 +106,8 @@ Item {
 
           Label {
             id: clock
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 100
+            anchors.centerIn: parent
+            anchors.verticalCenterOffset: -200
             renderType: Text.NativeRendering
             font.pointSize: 80
             text: Dat.Time.time
@@ -125,8 +120,8 @@ Item {
             width: 400
             height: 60
             radius: 30
-            color: lockContext.pamMessage.toLowerCase().includes("swipe") ? "transparent" : Dat.Colors.background
-            border.color: lockContext.pamMessage.toLowerCase().includes("swipe") ? "transparent" : Dat.Colors.blue
+            color: !pam.responseRequired ? "transparent" : Dat.Colors.background
+            border.color: !pam.responseRequired ? "transparent" : Dat.Colors.blue
             border.width: 2
             opacity: 0.95
             focus: true
@@ -134,10 +129,10 @@ Item {
             TextField {
               id: input
               anchors.centerIn: parent
-              visible: lockContext.pamMessage.toLowerCase().includes("password")
+              visible: (pam.responseRequired && !lockContext.showFailure)
               background: Rectangle { color: "transparent" }
               color: Dat.Colors.foreground
-              focus: lockContext.pamMessage.toLowerCase().includes("password")
+              focus: pam.responseRequired
               echoMode: TextInput.Password
               inputMethodHints: Qt.ImhSensitiveData
               onTextChanged: lockContext.currentText = this.text
@@ -158,7 +153,7 @@ Item {
 
             Rectangle {
               anchors.centerIn: parent
-              visible: lockContext.pamMessage.toLowerCase().includes("swipe")
+              visible: !pam.responseRequired
               width: 60
               height: 60
               radius: 30
@@ -172,7 +167,7 @@ Item {
                 font.pointSize: 30
 
                 SequentialAnimation {
-                  running: lockContext.showFailure || lockContext.pamMessage.toLowerCase().includes("again")
+                  running: lockContext.pamMessage.toLowerCase().includes("Failed") || lockContext.pamMessage.toLowerCase().includes("again")
                   alwaysRunToEnd: true
 
                   ColorAnimation {
@@ -181,7 +176,7 @@ Item {
                     from: Dat.Colors.foreground
                     to: Dat.Colors.red
                     easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
-                    duration: Dat.MaterialEasing.emphasizedDecelTime
+                    duration: Dat.MaterialEasing.emphasizedDecelTime * 3
                   }
 
                   ColorAnimation {
@@ -190,7 +185,7 @@ Item {
                     from: Dat.Colors.red
                     to: Dat.Colors.foreground
                     easing.bezierCurve: Dat.MaterialEasing.emphasizedAccel
-                    duration: Dat.MaterialEasing.emphasizedAccelTime
+                    duration: Dat.MaterialEasing.emphasizedAccelTime * 3
                   }
                 }
               }
@@ -200,7 +195,7 @@ Item {
               id: pamStatus
               anchors.centerIn: parent
               anchors.verticalCenterOffset: -60
-              text: lockContext.pamMessage
+              text: lockContext.showFailure ? "Authorization Failed" : lockContext.pamMessage
               color: Dat.Colors.background
               font.pointSize: 14
               horizontalAlignment: Text.AlignHCenter
