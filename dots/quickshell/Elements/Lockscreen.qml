@@ -117,14 +117,76 @@ Item {
           Rectangle {
             id: region
             anchors.centerIn: parent
-            width: 400
+            width: pam.responseRequired ? input.contentWidth + 60 : 60
             height: 60
             radius: 30
-            color: !pam.responseRequired ? "transparent" : Dat.Colors.background
-            border.color: !pam.responseRequired ? "transparent" : Dat.Colors.blue
+            color: Dat.Colors.background
+            border.color: Dat.Colors.foreground
             border.width: 2
             opacity: 0.95
             focus: true
+
+            SequentialAnimation {
+              running: lockContext.pamMessage.toLowerCase().includes("Failed") || lockContext.pamMessage.toLowerCase().includes("again")
+              alwaysRunToEnd: true
+
+              ColorAnimation {
+                target: region
+                property: "border.color"
+                from: Dat.Colors.foreground
+                to: Dat.Colors.red
+                easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
+                duration: Dat.MaterialEasing.emphasizedDecelTime * 3
+              }
+
+              ColorAnimation {
+                target: region
+                property: "border.color"
+                from: Dat.Colors.red
+                to: Dat.Colors.foreground
+                easing.bezierCurve: Dat.MaterialEasing.emphasizedAccel
+                duration: Dat.MaterialEasing.emphasizedAccelTime * 3
+              }
+            }
+
+            Behavior on width {
+              NumberAnimation {
+                duration: Dat.MaterialEasing.standardTime
+                easing.bezierCurve: Dat.MaterialEasing.standard
+              }
+            }
+
+            Dat.MaterialSymbols {
+              id: fingerprintIcon
+              anchors.centerIn: parent
+              visible: !pam.responseRequired
+              icon: "fingerprint"
+              color: Dat.Colors.foreground
+              font.pointSize: 30
+
+              SequentialAnimation {
+                running: lockContext.pamMessage.toLowerCase().includes("Failed") || lockContext.pamMessage.toLowerCase().includes("again")
+                alwaysRunToEnd: true
+
+                ColorAnimation {
+                  target: fingerprintIcon
+                  property: "color"
+                  from: Dat.Colors.foreground
+                  to: Dat.Colors.red
+                  easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
+                  duration: Dat.MaterialEasing.emphasizedDecelTime * 3
+                }
+
+                ColorAnimation {
+                  target: fingerprintIcon
+                  property: "color"
+                  from: Dat.Colors.red
+                  to: Dat.Colors.foreground
+                  easing.bezierCurve: Dat.MaterialEasing.emphasizedAccel
+                  duration: Dat.MaterialEasing.emphasizedAccelTime * 3
+                }
+              }
+            }
 
             TextField {
               id: input
@@ -134,6 +196,7 @@ Item {
               color: Dat.Colors.foreground
               focus: pam.responseRequired
               echoMode: TextInput.Password
+              font.pointSize: 20
               inputMethodHints: Qt.ImhSensitiveData
               onTextChanged: lockContext.currentText = this.text
               onAccepted: {
@@ -147,46 +210,6 @@ Item {
 
                 function onCurrentTextChanged() {
                   input.text = lockContext.currentText
-                }
-              }
-            }
-
-            Rectangle {
-              anchors.centerIn: parent
-              visible: !pam.responseRequired
-              width: 60
-              height: 60
-              radius: 30
-              color: Dat.Colors.background
-
-              Dat.MaterialSymbols {
-                id: fingerprintIcon
-                anchors.centerIn: parent
-                icon: "fingerprint"
-                color: Dat.Colors.foreground
-                font.pointSize: 30
-
-                SequentialAnimation {
-                  running: lockContext.pamMessage.toLowerCase().includes("Failed") || lockContext.pamMessage.toLowerCase().includes("again")
-                  alwaysRunToEnd: true
-
-                  ColorAnimation {
-                    target: fingerprintIcon
-                    property: "color"
-                    from: Dat.Colors.foreground
-                    to: Dat.Colors.red
-                    easing.bezierCurve: Dat.MaterialEasing.emphasizedDecel
-                    duration: Dat.MaterialEasing.emphasizedDecelTime * 3
-                  }
-
-                  ColorAnimation {
-                    target: fingerprintIcon
-                    property: "color"
-                    from: Dat.Colors.red
-                    to: Dat.Colors.foreground
-                    easing.bezierCurve: Dat.MaterialEasing.emphasizedAccel
-                    duration: Dat.MaterialEasing.emphasizedAccelTime * 3
-                  }
                 }
               }
             }
