@@ -64,14 +64,13 @@ in {
         gl = "git log";
 
         # misc
-        qsp = "qs -p ~/green/quickshell/";
+        qsp = "qs -p ~/green/dots/quickshell/";
         n = "nvim";
       };
 
       # Aliases to execute commands directly
       shellAliases = {
         ls = "eza --icons --group-directories-first -1";
-        gparted = "sudo -EH gparted";
         snowball = "${rebuildCommand} boot";
         snowfall = "${rebuildCommand} switch";
         snowstorm = "${rebuildCommand} test";

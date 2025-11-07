@@ -28,18 +28,12 @@
           package = pkgs.qemu_kvm;
           runAsRoot = true;
           swtpm.enable = true;
-          ovmf = {
-            enable = true;
-            packages = [
-              (pkgs.OVMF.override {
-                secureBoot = true;
-                tpmSupport = true;
-              }).fd
-            ];
-          };
         };
       };
     };
+
+    # Provide UEFI firmware support to virt-manager (due to depreciated OVMF module)
+    systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
 
     # Tell it to not fuck with port 53 from dnscrypt
     services = {
