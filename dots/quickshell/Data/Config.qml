@@ -8,7 +8,7 @@ Singleton {
   id: root
 
   // Set Wallpaper Path
-  property string wallSrc: Quickshell.env("HOME") + "/migu.jpg"
+  property string wallSrc: Quickshell.env("HOME") + "/.config/background"
   // Enable JP Months for Calendar
   property bool calendarJP: true
   // Enable imperial units (fahrenheit, mph, etc)
