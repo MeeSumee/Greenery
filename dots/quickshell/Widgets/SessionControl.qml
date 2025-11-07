@@ -38,23 +38,23 @@ Item {
 
       model: [
         {
-          text: "󰐥",
+          icon: "power_settings_new",
           action: event => poweroff()
         },
         {
-          text: "󰜉",
+          icon: "refresh",
           action: event => reboot()
         },
         {
-          text: "󰤄",
+          icon: "bedtime",
           action: event => suspend()
         },
         {
-          text: "↪",
+          icon: "logout",
           action: event => logout()
         },
         {
-          text: "⚷",
+          icon: "lock",
           action: event => lock()
         },
       ]
@@ -85,12 +85,12 @@ Item {
           }
         }
 
-        Text {
+        Dat.MaterialSymbols {
           anchors.centerIn: parent
           color: marea.containsMouse ? Dat.Colors.foreground : Dat.Colors.background
-          font.bold: true
-          font.pointSize: 20
-          text: dot.modelData.text
+          font.weight: Font.DemiBold
+          font.pointSize: 16
+          icon: dot.modelData.icon
         }
       }
     }
