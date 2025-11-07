@@ -41,6 +41,11 @@ Item {
 
         onCurrentTextChanged: showFailure = false
 
+        function restart() {
+          lockContext.showFailure = false
+          pam.start()
+        }
+
         PamContext {
           id: pam
 
@@ -53,7 +58,7 @@ Item {
               lock.locked = false
             } else {
               lockContext.showFailure = true
-              Qt.callLater(() => pam.start())
+              Qt.callLater(() => lockContext.restart())
             }
           }
         }
@@ -95,13 +100,13 @@ Item {
           }
 
           // Emergency Button for debugging
-          Button {
-            text: "LET ME OUT! AAAHHHHH"
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.margins: 20
-            onClicked: lock.locked = false
-          }
+          // Button {
+          //   text: "LET ME OUT! AAAHHHHH"
+          //   anchors.top: parent.top
+          //   anchors.right: parent.right
+          //   anchors.margins: 20
+          //   onClicked: lock.locked = false
+          // }
 
           Label {
             id: clock
@@ -126,7 +131,7 @@ Item {
             focus: true
 
             SequentialAnimation {
-              running: lockContext.pamMessage.toLowerCase().includes("failed") || lockContext.pamMessage.toLowerCase().includes("again")
+              running: lockContext.showFailure || lockContext.pamMessage.toLowerCase().includes("failed") || lockContext.pamMessage.toLowerCase().includes("again")
               alwaysRunToEnd: true
 
               ColorAnimation {
@@ -164,7 +169,7 @@ Item {
               font.pointSize: 30
 
               SequentialAnimation {
-                running: lockContext.pamMessage.toLowerCase().includes("failed") || lockContext.pamMessage.toLowerCase().includes("again")
+                running: lockContext.showFailure || lockContext.pamMessage.toLowerCase().includes("failed") || lockContext.pamMessage.toLowerCase().includes("again")
                 alwaysRunToEnd: true
 
                 ColorAnimation {
@@ -212,16 +217,6 @@ Item {
                   input.text = lockContext.currentText
                 }
               }
-            }
-
-            Label {
-              id: pamStatus
-              anchors.centerIn: parent
-              anchors.verticalCenterOffset: -60
-              text: lockContext.showFailure ? "Authorization Failed" : lockContext.pamMessage
-              color: Dat.Colors.background
-              font.pointSize: 18
-              horizontalAlignment: Text.AlignHCenter
             }
           }
         }
