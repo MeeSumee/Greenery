@@ -7,4 +7,5 @@ Scope {
   Bar{}
   Volume{}
   Lockscreen{}
+  Wallpaper{}
 }
