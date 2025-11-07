@@ -15,7 +15,7 @@
     desktop = {
       enable = true;
       hypridle.enable = true;
-      hyprlock.enable = true;
+      hyprlock.enable = false;
       kurukurudm.enable = true;
       niri.enable = true;
       xserver.enable = true;
