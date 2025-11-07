@@ -36,25 +36,14 @@ Item {
         id: lockContext
 
         property string currentText: ""
-        property bool unlockInProgress: false
         property bool showFailure: false
         property string pamMessage: ""
-        property string authMode: "auto" // or fingerprint or password
-        property int failCount: 0
 
         onCurrentTextChanged: showFailure = false
 
         function tryUnlock() {
-          lockContext.unlockInProgress = true
+          if (currentText === "") return
           pam.start()
-        }
-
-        function fallback() {
-          console.log("Fingerprint failed 3 times, fall back to password")
-          pam.abort()
-          lockContext.authMode = "password"
-          failCount = 0
-          Qt.callLater(() => pam.start())
         }
 
         PamContext {
@@ -63,15 +52,6 @@ Item {
           onPamMessage: {
             lockContext.pamMessage = message
 
-            if (message.toLowerCase().includes("fingerprint")) {
-                lockContext.authMode = "fingerprint"
-            } else if (message.toLowerCase().includes("password")) {
-                lockContext.authMode = "password"
-            }
-
-            if (responseRequired && lockContext.authMode === "password") {
-                this.respond(lockContext.currentText)
-            }
           }
 
           onCompleted: result => {
@@ -79,19 +59,7 @@ Item {
               lock.locked = false
             } else {
               lockContext.showFailure = true
-
-              if (lockContext.authMode === "fingerprint") {
-                lockContext.failCount += 1
-                if (lockContext.failCount >= 3) {
-                  lockContext.fallback()
-                  return
-                }
-              }
-
-              lockContext.currentText = ""
             }
-
-            lockContext.unlockInProgress = false
           }
         }
       }
@@ -103,6 +71,7 @@ Item {
         onLockedChanged: if (locked) pam.start()
 
         WlSessionLockSurface {
+          id: surface
 
           // Emergency Rectangle incase background is fucked
           Rectangle {
@@ -126,15 +95,6 @@ Item {
                 easing.type: Easing.Linear
                 from: 0
                 to: 0.69
-              }
-
-              NumberAnimation {
-                duration: Dat.MaterialEasing.emphasizedTime * 1.5
-                easing.type: Easing.Linear
-                property: "blur"
-                running: lockContext.unlockInProgress
-                target: walBlur
-                to: 0
               }
             }
           }
@@ -171,45 +131,34 @@ Item {
             opacity: 0.95
             focus: true
 
-            Keys.onPressed: kevent => {
-              if (pam.active) return
-
-              if (kevent.key === Qt.Key_Enter || kevent.key === Qt.Key_Return) {
-                lockContext.authMode = "password"
-                Qt.callLater(() => lockContext.tryUnlock())
-                return
-              }
-
-              if (kevent.key === Qt.Key_Backspace) {
-                if (kevent.modifiers & Qt.ControlModifier) {
-                  lockContext.currentText = ""
-                  return
-                }
-                lockContext.currentText = lockContext.currentText.slice(0, -1)
-                return
-              }
-
-              if (kevent.text) {
-                lockContext.currentText += kevent.text
-              }
-            }
-
             TextField {
-              id: textfield
+              id: input
               anchors.centerIn: parent
-              visible: lockContext.authMode === "password"
+              visible: lockContext.pamMessage.toLowerCase().includes("password")
               background: Rectangle { color: "transparent" }
               color: Dat.Colors.foreground
-              focus: lockContext.authMode === "password"
-              enabled: !lockContext.unlockInProgress
+              focus: lockContext.pamMessage.toLowerCase().includes("password")
               echoMode: TextInput.Password
               inputMethodHints: Qt.ImhSensitiveData
-              onAccepted: lockContext.tryUnlock()
+              onTextChanged: lockContext.currentText = this.text
+              onAccepted: {
+                if (pam.responseRequired) {
+                  pam.respond(lockContext.currentText)
+                }
+              }
+
+              Connections {
+                target: lockContext
+
+                function onCurrentTextChanged() {
+                  input.text = lockContext.currentText
+                }
+              }
             }
 
             Rectangle {
               anchors.centerIn: parent
-              visible: lockContext.authMode === "fingerprint"
+              visible: lockContext.pamMessage.toLowerCase().includes("swipe")
               width: 60
               height: 60
               radius: 30
@@ -223,11 +172,7 @@ Item {
                 font.pointSize: 30
 
                 SequentialAnimation {
-                  running: {
-                    if (lockContext.showFailure || lockContext.pamMessage.toLowerCase().includes("again")) {
-                      return true;
-                    }
-                  }
+                  running: lockContext.showFailure || lockContext.pamMessage.toLowerCase().includes("again")
                   alwaysRunToEnd: true
 
                   ColorAnimation {
@@ -255,7 +200,7 @@ Item {
               id: pamStatus
               anchors.centerIn: parent
               anchors.verticalCenterOffset: -60
-              text: lockContext.showFailure ? "Authentication Failed" : lockContext.pamMessage
+              text: lockContext.pamMessage
               color: Dat.Colors.background
               font.pointSize: 14
               horizontalAlignment: Text.AlignHCenter
