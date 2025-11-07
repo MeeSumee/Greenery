@@ -53,7 +53,6 @@ Item {
               lock.locked = false
             } else {
               lockContext.showFailure = true
-              lockContext.currentText = ""
               Qt.callLater(() => pam.start())
             }
           }
@@ -127,7 +126,7 @@ Item {
             focus: true
 
             SequentialAnimation {
-              running: lockContext.pamMessage.toLowerCase().includes("Failed") || lockContext.pamMessage.toLowerCase().includes("again")
+              running: lockContext.pamMessage.toLowerCase().includes("failed") || lockContext.pamMessage.toLowerCase().includes("again")
               alwaysRunToEnd: true
 
               ColorAnimation {
@@ -165,7 +164,7 @@ Item {
               font.pointSize: 30
 
               SequentialAnimation {
-                running: lockContext.pamMessage.toLowerCase().includes("Failed") || lockContext.pamMessage.toLowerCase().includes("again")
+                running: lockContext.pamMessage.toLowerCase().includes("failed") || lockContext.pamMessage.toLowerCase().includes("again")
                 alwaysRunToEnd: true
 
                 ColorAnimation {
@@ -202,6 +201,7 @@ Item {
               onAccepted: {
                 if (pam.responseRequired) {
                   pam.respond(lockContext.currentText)
+                  this.clear()
                 }
               }
 
@@ -220,7 +220,7 @@ Item {
               anchors.verticalCenterOffset: -60
               text: lockContext.showFailure ? "Authorization Failed" : lockContext.pamMessage
               color: Dat.Colors.background
-              font.pointSize: 14
+              font.pointSize: 18
               horizontalAlignment: Text.AlignHCenter
             }
           }
