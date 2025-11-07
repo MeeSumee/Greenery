@@ -26,15 +26,22 @@ My rice themes have been more or less unified with rose pine, exceptions being n
 Xcursor-Genshin-Nahida will soon be packaged in a general way, fetching from Author's GitHub and
 converted to Linux Cursors using ```pkgs.win2xcur```. This will also solve the licensing conflicts.
 
-Banshell has been progressing slowly, interactable Nahida GIF in the works similar to kurukurubar.
+Banshell has been merged to master after 5 months of starting it, yay!
+Am I done? Hell nah, I'm like, 20% done.
 
-Once the status tray is complete, Banshell will be merged to master as an alpha version where it can be optionally enabled.
+Currently, banshell is at v0.0.1 (alpha) and is HIGHLY experimental.
 
-I shall consult the Rexiel Scarlet to teach me how to package it.
+Here are the guaranteed plans put forward:
 
 Planned color themes:
 - Matugen/JSON colorscheme schematic for Colors.qml
 - Adapted Nahida/Vivian Colors for both Light & Dark Theme
+
+Dependencies:
+- Quickshell 0.2.1
+- Upower
+- Power-Profiles-Daemon
+- Google Material-Symbols Font
 
 # Greenery
 

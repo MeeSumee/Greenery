@@ -31,28 +31,24 @@
     hjem.users = lib.genAttrs users (user: {
       files = let
 
-        # Set niri wallpaper
-        niriwall = let
-          from = ["*Why_is_IT_department_a_piece_of_shit*"];
-          schizomiku = pkgs.fetchurl {
-            name = "schizomiku";
-            url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
-            hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
-          };
-          to = ["${schizomiku}"];
-        in
-          builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
+        # Set quickshell wallpaper
+        schizomiku = pkgs.fetchurl {
+          name = "schizomiku";
+          url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
+          hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
+        };
 
-        # Set hyprlock wallpaper
-        hyprvivi = let
+        # Set hypridle command
+        quickmiku = let
           from = ["%%刺し身％％"];
-          to = ["pidof hyprlock || hyprlock"];
+          to = ["qs ipc call lockscreen lock"];
         in   
           builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
 
       in {
-        ".config/niri/config.kdl".text = niriwall;
-        ".config/hypr/hypridle.conf".text = hyprvivi;
+        ".config/quickshell".source = ../../dots/quickshell;
+        ".config/background".source = schizomiku;
+        ".config/hypr/hypridle.conf".text = quickmiku;
       };
     });
   };

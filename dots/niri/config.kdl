@@ -268,9 +268,8 @@ layout {
 // Start wlsunset so my eyes don't kill themselves.
 spawn-at-startup "wlsunset" "-T" "3000" "-t" "2999"
 
-// Start swww background service and wallpaper setter
-spawn-at-startup "swww-daemon"
-spawn-at-startup "fish" "-c" "sleep 1s; swww img *Why_is_IT_department_a_piece_of_shit* --transition-type wave"
+// Start quickshell
+spawn-at-startup "qs"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -329,7 +328,7 @@ window-rule {
 
 // Make wallpaper the background of everything including overlay and not have it move around
 layer-rule {
-  match namespace="^swww-daemon$"
+  match namespace="^quickshell$"
   place-within-backdrop true
 }
 
