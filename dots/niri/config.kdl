@@ -328,7 +328,7 @@ window-rule {
 
 // Make wallpaper the background of everything including overlay and not have it move around
 layer-rule {
-  match namespace="^swww-daemon$"
+  match namespace="^quickshell$"
   place-within-backdrop true
 }
 
