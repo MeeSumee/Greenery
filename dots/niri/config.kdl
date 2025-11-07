@@ -377,7 +377,7 @@ binds {
     Mod+R hotkey-overlay-title="Run Prompt: fuzzel" { spawn "fuzzel"; }
     Mod+E hotkey-overlay-title="Run Nemo" { spawn "nemo"; }
     Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "qs" "ipc" "call" "lockscreen" "lock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
