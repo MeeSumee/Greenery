@@ -8,6 +8,7 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Services.Pam
 import qs.Data as Dat
+import qs.Widgets as Wid
 
 Item {
   IpcHandler {
@@ -111,11 +112,36 @@ Item {
           Label {
             id: clock
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: -200
+            anchors.verticalCenterOffset: -240
             renderType: Text.NativeRendering
             font.pointSize: 80
             text: Dat.Time.time
             color: Dat.Colors.background
+          }
+
+          Rectangle {
+            id: weather
+            anchors.centerIn: parent
+            anchors.verticalCenterOffset: -120
+            color: "transparent"
+            width: clock.contentWidth
+            height: 50
+
+            Text {
+              anchors.centerIn: parent
+              anchors.horizontalCenterOffset: -50
+              font.pointSize: 50
+              color: Dat.Colors.background
+              text: `${Dat.Weather.temp[0]}°`
+            }
+
+            Dat.MaterialSymbols {
+              anchors.centerIn: parent
+              anchors.horizontalCenterOffset: 60
+              font.pointSize: 50
+              color: Dat.Colors.background
+              icon: Dat.Weather.icon[0]
+            }
           }
 
           Rectangle {
