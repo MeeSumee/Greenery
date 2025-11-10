@@ -12,12 +12,11 @@
       enable = true;
       maxretry = 3;
       ignoreIP = [
-        "greenery.berylline-mine.ts.net"
-        "beryl.berylline-mine.ts.net"
-        "obsidian.berylline-mine.ts.net"
-        "kaolin.berylline-mine.ts.net"
-        "quartz.berylline-mine.ts.net"
-        "graphite.berylline-mine.ts.net"
+        "greenery.onca-ph.ts.net"
+        "beryl.onca-ph.ts.net"
+        "obsidian.onca-ph.ts.net"
+        "kaolin.onca-ph.ts.net"
+        "quartz.onca-ph.ts.net"
       ];
       bantime = "48h";
       bantime-increment = {

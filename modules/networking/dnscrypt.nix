@@ -40,12 +40,10 @@
         cloaking_rules = pkgs.writeText "cloaking_rules.txt" ''
           greenery fd7a:115c:a1e0::d501:c081
 
-          kaolin fd7a:115c:a1e0::3401:5a31
-          beryl fd7a:115c:a1e0::8801:df69
-          quartz fd7a:115c:a1e0::ff01:637f
-          graphite fd7a:115c:a1e0::b534:9e21
-          obsidian fd7a:115c:a1e0::2034:ae77
-          verdure fd7a:115c:a1e0::fc37:d442
+          kaolin fd7a:115c:a1e0::9034:6f42
+          beryl fd7a:115c:a1e0::234:1456
+          quartz fd7a:115c:a1e0::8c34:6d1e
+          obsidian fd7a:115c:a1e0::c634:f339
         '';
 
         sources.public-resolvers = {
