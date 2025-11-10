@@ -22,6 +22,16 @@
   # Enable Thunderbolt Service for USB4 support
   services.hardware.bolt.enable = true;
 
+  # Enable TPM module
+  security.tpm2 = {
+    enable = true;
+    pkcs11.enable = true;
+    tctiEnvironment.enable = true;
+  };
+
+  # Allow Sumee to have access to TPM
+  users.users.sumee.extraGroups = [ "tss" ];
+
   fileSystems."/" = { 
     device = "/dev/disk/by-uuid/e601b8ce-ce2f-423f-9dd8-dc2ea8548019";
     fsType = "ext4";
