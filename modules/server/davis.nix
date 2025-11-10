@@ -19,7 +19,7 @@
       
       caddy = {
         enable = true;
-        virtualHosts."https://davis.berylline-mine.ts.net" = {
+        virtualHosts."https://davis.onca-ph.ts.net" = {
           extraConfig = ''
             bind tailscale/davis
 

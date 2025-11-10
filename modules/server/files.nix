@@ -13,7 +13,7 @@
       # Caddy reverse-proxy using tailscale-caddy plugin
       caddy = {
         enable = true;
-        virtualHosts."https://files.berylline-mine.ts.net" = {
+        virtualHosts."https://files.onca-ph.ts.net" = {
           extraConfig = ''
             bind tailscale/files
             reverse_proxy localhost:6969

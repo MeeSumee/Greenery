@@ -14,7 +14,7 @@
       # Caddy reverse-proxy using tailscale-caddy plugin
       caddy = {
         enable = true;
-        virtualHosts."https://jellyfin.berylline-mine.ts.net" = {
+        virtualHosts."https://jellyfin.onca-ph.ts.net" = {
           extraConfig = ''
             bind tailscale/jellyfin
             reverse_proxy localhost:8096

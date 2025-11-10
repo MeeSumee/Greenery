@@ -5,7 +5,7 @@
   ... 
 }: let
 
-  revision = "v0.0.0-20250508175905-642f61fea3cc";
+  revision = "v0.0.0-20251102144943-aea8960a2d3c";
 
 in {
 
@@ -29,13 +29,13 @@ in {
       
       package = pkgs.caddy.withPlugins {
         plugins = [ "github.com/tailscale/caddy-tailscale@${revision}" ];
-        hash = "sha256-r9EDkhcgwK11dB46AV+Em8ZE6Aa7IDMwibDGkg3e/rc=";
+        hash = "sha256-CIxEPu+4XO5upkYgtRJejNFWFDycS1LkIXppM+mSVAA=";
       };
       
-      # Age file has contents TS_AUTH=<insert your auth key>
+      # Age file has contents TS_AUT=<insert your auth key>
       globalConfig = ''
         tailscale {
-          auth_key {$TS_AUTH}
+          auth_key {$TS_AUT}
         }
       '';
     };

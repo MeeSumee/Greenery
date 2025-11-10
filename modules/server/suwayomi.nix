@@ -22,7 +22,7 @@
       # Caddy reverse-proxy using tailscale-caddy plugin
       caddy = {
         enable = true;
-        virtualHosts."https://manga.berylline-mine.ts.net" = {
+        virtualHosts."https://manga.onca-ph.ts.net" = {
           extraConfig = ''
             bind tailscale/manga
             reverse_proxy localhost:4567
@@ -33,7 +33,7 @@
       # Suwayomi-server for fetching manga online
       suwayomi-server = {
         enable = true;
-        openFirewall = false;
+        openFirewall = true;
 
         settings = {
           server = {
