@@ -38,7 +38,7 @@
         ];
 
         cloaking_rules = pkgs.writeText "cloaking_rules.txt" ''
-          greenery fd7a:115c:a1e0::d501:c081
+          greenery fd7a:115c:a1e0::8d34:ce04
 
           kaolin fd7a:115c:a1e0::9034:6f42
           beryl fd7a:115c:a1e0::234:1456
