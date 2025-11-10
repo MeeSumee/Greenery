@@ -18,7 +18,7 @@ WlrLayershell {
   implicitHeight: screen.height * 0.39
   implicitWidth: screen.width * 0.61
   layer: WlrLayer.Top
-  namespace: "sumee.bar.quickshell"
+  namespace: "bar"
   screen: modelData
   surfaceFormat.opaque: false
 

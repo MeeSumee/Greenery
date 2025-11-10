@@ -18,13 +18,12 @@ WlrLayershell {
   focusable: false
   implicitHeight: 28
   layer: WlrLayer.Bottom
-  namespace: "sumee.wallpaper.quickshell"
+  namespace: "wallpaper"
   screen: modelData
   surfaceFormat.opaque: false
 
   Dat.Background {
     id: wallpaper
-
     anchors.fill: parent
     source: ""
 
@@ -32,7 +31,6 @@ WlrLayershell {
   }
 
   Rectangle {
-
     anchors.right: parent.right
     clip: true
     color: "transparent"
@@ -40,7 +38,6 @@ WlrLayershell {
     width: 0
 
     Dat.Background {
-
       anchors.right: parent.right
       height: layerRoot.height
       source: ""

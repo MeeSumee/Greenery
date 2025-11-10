@@ -31,6 +31,28 @@
     hjem.users = lib.genAttrs users (user: {
       files = let
 
+        # Set mic mute toggle command
+        xf86keybind = let
+          camerascript = pkgs.writeShellScriptBin "camScript" ''
+            if ${pkgs.kmod}/bin/lsmod | grep -q uvcvideo; then
+              ${pkgs.polkit}/bin/pkexec ${pkgs.kmod}/bin/modprobe -rf uvcvideo;
+              ${pkgs.brightnessctl}/bin/brightnessctl -d asus::camera set 1
+            else
+              ${pkgs.polkit}/bin/pkexec ${pkgs.kmod}/bin/modprobe uvcvideo;
+              ${pkgs.brightnessctl}/bin/brightnessctl -d asus::camera set 0
+            fi
+          '';
+
+          mutescript = pkgs.writeShellScriptBin "muteScript" ''
+            ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle;
+            ${pkgs.brightnessctl}/bin/brightnessctl -d platform::micmute set $(${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -c MUTED)
+          '';
+
+          from = ["I_HATE_DMV_LINES" "NICHIFALEMA?"];
+          to = ["${mutescript}/bin/muteScript" "${camerascript}/bin/camScript"];
+        in
+          builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
+
         # Set quickshell wallpaper
         schizomiku = pkgs.fetchurl {
           name = "schizomiku";
@@ -47,6 +69,7 @@
 
       in {
         ".config/quickshell".source = ../../dots/quickshell;
+        ".config/niri/config.kdl".text = xf86keybind;
         ".config/background".source = schizomiku;
         ".config/hypr/hypridle.conf".text = quickmiku;
       };
