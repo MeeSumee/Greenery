@@ -57,6 +57,15 @@
 
   networking.firewall.allowedUDPPorts = [53 67];
   
+  # Exit-node flags
+  services.tailscale = {
+    openFirewall = true;
+    extraSetFlags = [
+      "--advertise-exit-node"
+      "--webclient"
+    ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
