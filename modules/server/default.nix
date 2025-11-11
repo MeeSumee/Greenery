@@ -12,6 +12,7 @@ in {
   imports = [
     ./davis.nix
     ./files.nix
+    ./immich.nix
     ./jellyfin.nix
     ./suwayomi.nix
   ];
