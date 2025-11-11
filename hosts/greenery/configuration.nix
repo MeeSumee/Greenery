@@ -64,6 +64,7 @@
 
     hardware = {
       enable = true;
+      amdgpu.enable = true;
     };
 
     networking = {

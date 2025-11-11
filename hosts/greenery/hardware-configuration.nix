@@ -7,11 +7,6 @@
 {
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
 
-  boot.blacklistedKernelModules = [
-    "amdgpu"
-    "radeon"
-  ];
-
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
