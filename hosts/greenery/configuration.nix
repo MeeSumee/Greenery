@@ -1,4 +1,4 @@
-# Greenery Configuration
+# Greenery - Plentiful with the schizo and the self-hosted services.
 
 /*
                                     ____    _    _   _ ____    _    ____  _____   
@@ -64,7 +64,7 @@
 
     hardware = {
       enable = true;
-      amdgpu.enable = true;
+      intelgpu.enable = true;
     };
 
     networking = {

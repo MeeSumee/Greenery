@@ -25,6 +25,12 @@
         openFirewall = true;
 
         mediaLocation = "/run/media/sumee/emerald/immich";
+        machine-learning.enable = false;
+
+        # Intel QSV accel Device
+        accelerationDevices = [
+          "/dev/dri/renderD129"
+        ];
       };
     };
 
