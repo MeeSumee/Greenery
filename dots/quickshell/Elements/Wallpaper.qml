@@ -4,44 +4,48 @@ import Quickshell.Wayland
 
 import qs.Data as Dat
 
-WlrLayershell {
-  id: layerRoot
+Variants {
+  model: Quickshell.screens
 
-  required property ShellScreen modelData
+  WlrLayershell {
+    id: layerRoot
 
-  anchors.bottom: true
-  anchors.left: true
-  anchors.right: true
-  anchors.top: true
-  color: "transparent"
-  exclusionMode: ExclusionMode.Ignore
-  focusable: false
-  implicitHeight: 28
-  layer: WlrLayer.Bottom
-  namespace: "wallpaper"
-  screen: modelData
-  surfaceFormat.opaque: false
+    required property ShellScreen modelData
 
-  Dat.Background {
-    id: wallpaper
-    anchors.fill: parent
-    source: ""
-
-    Component.onCompleted: source = Dat.Config.wallSrc
-  }
-
-  Rectangle {
-    anchors.right: parent.right
-    clip: true
+    anchors.bottom: true
+    anchors.left: true
+    anchors.right: true
+    anchors.top: true
     color: "transparent"
-    height: layerRoot.screen.height
-    width: 0
+    exclusionMode: ExclusionMode.Ignore
+    focusable: false
+    implicitHeight: 28
+    layer: WlrLayer.Bottom
+    namespace: "wallpaper"
+    screen: modelData
+    surfaceFormat.opaque: false
 
     Dat.Background {
-      anchors.right: parent.right
-      height: layerRoot.height
+      id: wallpaper
+      anchors.fill: parent
       source: ""
-      width: layerRoot.width
+
+      Component.onCompleted: source = Dat.Config.wallSrc
+    }
+
+    Rectangle {
+      anchors.right: parent.right
+      clip: true
+      color: "transparent"
+      height: layerRoot.screen.height
+      width: 0
+
+      Dat.Background {
+        anchors.right: parent.right
+        height: layerRoot.height
+        source: ""
+        width: layerRoot.width
+      }
     }
   }
 }

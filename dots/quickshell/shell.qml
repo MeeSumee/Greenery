@@ -1,11 +1,11 @@
 //@ pragma UseQApplication
 import Quickshell
 import QtQuick
-import qs.Elements
+import qs.Elements as Elem
 
-Scope {
-  Bar{}
-  Volume{}
-  Lockscreen{}
-  Wallpaper{}
+ShellRoot {
+  Elem.Bar{}
+  Elem.Volume{}
+  Elem.Lockscreen{}
+  Elem.Wallpaper{}
 }
