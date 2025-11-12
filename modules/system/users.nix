@@ -52,16 +52,6 @@ in {
         directory = config.users.users.${user}.home;
         clobberFiles = lib.mkForce true;
       });
-
-      # Set face icon for all users
-      systemd.tmpfiles.rules = lib.pipe users [
-        (builtins.filter (user: config.hjem.users.${user}.files.".face.icon".source != null))
-        (builtins.map (user: [
-          "f+ /var/lib/AccountsService/users/${user}  0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
-          "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face.icon".source}"
-        ]))
-        (lib.flatten)
-      ];
     })
 
     # WHERE DOES THE STOMEE LIVE???
@@ -87,7 +77,17 @@ in {
         };
       };
 
-      # hjem config for all sumee users
+      # Set face icon for sumee
+      systemd.tmpfiles.rules = lib.pipe users [
+        (builtins.filter (user: config.hjem.users.${user}.files.".face.icon".source != null))
+        (builtins.map (user: [
+          "f+ /var/lib/AccountsService/users/${user}  0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
+          "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face.icon".source}"
+        ]))
+        (lib.flatten)
+      ];
+
+      # hjem config for sumee
       hjem.users = lib.genAttrs users (user: {
 
         # Yoinked from rexies.nix
