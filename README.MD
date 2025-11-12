@@ -5,19 +5,22 @@ Consists of multiple devices:
 - Beryl: Remote access, personal laptop for tinkering with Niri and Quickshell.
 - Quartz: Gaming PC with attempts of iGPU Passthrough Windows.
 - Kaolin: Swiss VPS acting as both an exit-node and a DNS Server.
-- Graphite: Laptop found while dumpster diving and used as an excuse to use NixOS for work.
+- Graphite: NixOS-WSL Config for my Work Laptop.
+- Verdure: US-based exit-node with NAS backup management. 
 
 ## Status Updates
- I've moved my PCI-Passthrough Config from Greenery to Quartz due to massive performance uplifts.
- However, I've been meaning to use the Intel UHD 770 iGPU to be passed through to the VM which
- has been a bitch as of late due to how Intel structured their GPUs to be more SR-IOV oriented
- rather than legacy PCI-Passthrough.
+PCI-Passthrough still isn't functioning on Quartz with the doomed Error 43 on Windows.
+Also VM no longer connects to the internet. Amazing.
 
- Due to Greenery being more overkill as of late (5% CPU + 1.8GB/32GB util), Greenery hardware might
- be shifted over to the Raspberry Pi 4 with 8GB of RAM. Need to first configure the Pi for network
- routing for the NAS before adding all the server modules.
+Due to the addition of immich, Greenery still remains important for the hardware encoding
+and the performance capabilities it has. The Raspberry Pi 4 would get cooked from that.
 
- I'm still kinda lazy in updating READMEs, I will try though.
+Instead, the Raspberry Pi replaces Greenery as an exit-node will host a NAS for data backup.
+
+Graphite is now integrated wit my work laptop to be a WSL-based distribution, fixing
+the jank of having two worktops.
+
+Rex informed me of MangoWC and I'm now interested, time to yoink his config again :D
 
 ## Notes on Banshell (and ricing in a way)
 
@@ -34,7 +37,7 @@ Currently, banshell is at v0.0.1 (alpha) and is HIGHLY experimental.
 Here are the guaranteed plans put forward:
 
 Planned color themes:
-- Matugen/JSON colorscheme schematic for Colors.qml
+- Matugen friendly colorscheme schematic for Colors.qml
 - Adapted Nahida/Vivian Colors for both Light & Dark Theme
 
 Dependencies:
@@ -45,20 +48,28 @@ Dependencies:
 
 # Greenery
 
-Dell Optiplex 7050 that formerly was used as the primary exit-node to evade website blocks by my workplace.
+Dell Optiplex 7050 with a random Radeon GPU with 4GB VRAM.
 
-Hosts Suwayomi for reading manga, Jellyfin for music (for now), Davis for Calendar and Contacts syncing, and
-FileBrowser for a unified folder to connect between Android, Windows, and NixOS.
+Hosts Suwayomi for reading manga, Jellyfin for music (for now), Davis for Calendar and Contacts syncing,
+Immich for photos and video syncing, and FileBrowser for a unified folder to connect between Android, 
+Windows, and NixOS.
 
 Implemented self-hosted websites using Caddy-Tailscale plugin and reverse-proxying localhost ports.
 
 SSH services for file transfer and remote access. Enables sharing my 12TB hard drive (taildrive).
 
-14TB Backup drive hosted on a Netgear Pro 6 with Tinycore Linux. Unfortunately failed to hook it up to Greenery via
-Ethernet.
+Future Endeavors: More functional Jellyfin, SSD Caching for Taildrive, and integrate borg backups
+once Vedure's NAS is complete.
 
-Future Endeavors: More functional Jellyfin, Proxy websites that do not involve with Kaolin, Decide Feasibility
-of replacing the Optiplex 7050 with RPi 4.
+# Verdure
+
+Raspberry Pi 4 Model B with 8GB of RAM.
+
+Currently acts as an exit-node replacement of Greenery.
+
+Acts as a router for the NAS (currently undeclarative with making eth0 shared via nmtui)
+
+Future Endeavors: Integrate the TinyCore Linux NAS with Verdure for a mass backup RAID system.
 
 # Kaolin
 
@@ -228,27 +239,34 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 
 # Graphite
 
-Dell Latitude 5400 found in the dumpster. Consisted of 16GB of RAM and 256GB NVME SSD. Pretty good find imo.
+WSL-based configuration of NixOS for my work laptop.
 
-UPDATE: NixOS Stage 1 got fucked somehow, so I have to reinstall and reconfigure it. Gives me the opportunity
-to unfuck my undeclarative python.
+Provides functionality in both nix-config management during work as well as provide
+linux programs to be used in parallel with Windows.
+
+Future endeavors: Make the system more declarative incase I switch jobs hehehehaw.
 
 # Quartz
 
 Custom-built gaming pc intended for workstation and gaming.
 
-Intended to be used as my nix config manager while I'm at home.
+Intended to be used as my nix-config manager while I'm at home.
 
 Consists of (WIP) iGPU-Passthrough Windows 10 IoT LTSC Virtual Machine managed by libvirtd. Remote using
 Sunshine + Moonlight via Tailscale.
 
 Future Endeavors: Fix Error Code 43 in iGPU driver on Windows (not a problem on Linux VMs, it's windows being ASS)
 
-## Quartz PC Specifications
+<details>
+<summary>Quartz PC Specifications</summary>
+<br>
+
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
 - RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP)
 - MB: [Gigabyte Z690 AORUS ELITE AX REV 1.4](https://www.gigabyte.com/Motherboard/Z690-AORUS-ELITE-AX-rev-14)
 - GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
+
+</details>
 
 ## Credits
 [Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. HE NEEDS A JOB.
