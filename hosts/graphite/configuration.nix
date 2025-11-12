@@ -20,7 +20,6 @@
     networking = {
       enable = true;
       openssh.enable = true;
-      tailscale.enable = true;
     };
 
     programs = {
@@ -32,6 +31,7 @@
     system = {
       enable = true;
       fish.enable = true;
+      sumee.enable = true;
     };
   };
 
