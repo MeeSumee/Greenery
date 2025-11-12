@@ -1,62 +1,55 @@
 # Graphite Configuration
 {
+  lib,
+  inputs,
   ... 
 }: {
   imports = [
     ../../modules
+    inputs.wsl.nixosModules.default
   ];
 
   # All modules and their values
   greenery = {
     enable = true;
-    
-    desktop = {
-      enable = true;
-      hypridle.enable = true;
-      hyprland.enable = true;
-      kurukurudm.enable = true;
-      xserver.enable = true;
-    };
 
     hardware = {
       enable = true;
-      audio.enable = true;
-      intelgpu.enable = true;
     };
 
     networking = {
       enable = true;
-      bluetooth.enable = true;
-      dnscrypt.enable = true;
       openssh.enable = true;
       tailscale.enable = true;
     };
 
     programs = {
       enable = true;
-      browser.enable = true;
-      foot.enable = true;
       core.enable = true;
-      daemon.enable = true;
-      desktop.enable = true;
       nvim.enable = true;
     };
 
     system = {
       enable = true;
       fish.enable = true;
-      fonts.enable = true;
-      input.enable = true;
-      lanzaboote.enable = true;
-      sumee.enable = true;
     };
   };
 
   networking.hostName = "graphite"; # The workplace grindset + friend made me do it
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Set your time zone.
-  time.timeZone = "America/Chicago";
+  # Enable WSL Features
+  wsl = {
+    enable = true;
+    defaultUser = "sumee";
+  };
+
+  # Disable Greenery Core Services
+  services = {
+    printing.enable = lib.mkForce false;
+    gvfs.enable = lib.mkForce false;
+    udisks2.enable = lib.mkForce false;
+    fwupd.enable = lib.mkForce false;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
