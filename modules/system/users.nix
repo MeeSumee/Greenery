@@ -37,7 +37,6 @@ in {
   options.greenery.system = {
     sumee.enable = mkEnableOption "Enable the SUMEE user";
     nahida.enable = mkEnableOption "MY WIFE WANTS TO USE MY COMPUTER(s)";
-    yang.enable = mkEnableOption "Enable the YANG user";
   };
   
   config = mkMerge [
@@ -151,18 +150,6 @@ in {
         nahida = {
           isNormalUser = true;
           description = "Nahida";
-          extraGroups = ["networkmanager" "wheel"];
-        };
-      };
-    })
-
-    # 陽ーおじさん wants to use a computer to learn linux sex
-    (mkIf (config.greenery.system.yang.enable && config.greenery.system.enable) {
-
-      users.users = {
-        yang = {
-          isNormalUser = true;
-          description = "Yang";
           extraGroups = ["networkmanager" "wheel"];
         };
       };

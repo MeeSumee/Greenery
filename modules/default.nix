@@ -83,7 +83,6 @@
       lanzaboote.enable = true;
       sumee.enable = true;
       nahida.enable = true;
-      yang.enable = true;
 
       age.nix included by default
       locale.nix included by default
