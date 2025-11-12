@@ -25,10 +25,10 @@
 
     # Enable core firmware services
     services = {
-      printing.enable = true;
-      gvfs.enable = true;
-      udisks2.enable = true;
-      fwupd.enable = true;
+      printing.enable = lib.mkDefault true;
+      gvfs.enable = lib.mkDefault true;
+      udisks2.enable = lib.mkDefault true;
+      fwupd.enable = lib.mkDefault true;
     };
   };
 }
