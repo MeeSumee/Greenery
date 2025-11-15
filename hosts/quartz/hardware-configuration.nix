@@ -61,12 +61,6 @@
     fsType = "ext4";
   };
   
-  # Citrine
-  fileSystems."/run/media/sumee/citrine" = {
-    device = "/dev/disk/by-uuid/65778562-a080-45d8-8290-bb5d9a017885";
-    fsType = "ext4";
-  };
-  
   # Boot
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/56C9-B0AA";
