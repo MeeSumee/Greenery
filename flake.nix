@@ -95,9 +95,7 @@
   in {
     formatter = eachSystem (pkgs: inputs.zaphkiel.packages.${pkgs.system}.irminsul);
 
-    packages = eachSystem (pkgs:{ 
-      default = pkgs.callPackage ./pkgs/cursors.nix {};
-    });
+    packages = callModule ./pkgs {};
 
     nixosConfigurations = callModule ./hosts {};
   };
