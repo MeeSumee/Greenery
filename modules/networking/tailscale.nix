@@ -11,6 +11,7 @@
     # Enable tailscale VPN service
     services.tailscale = {
       enable = true;
+      openFirewall = true;
       useRoutingFeatures = "both"; # Enables the use of exit node
       extraSetFlags = [
         "--accept-routes=true"
