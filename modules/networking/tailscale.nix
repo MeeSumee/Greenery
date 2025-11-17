@@ -18,6 +18,15 @@
       ];
     };
 
+    networking = {
+      firewall = {
+        interfaces."tailscale0" = {
+          allowedTCPPorts = [22];
+          allowedUDPPorts = [53];
+        };
+      };
+    };
+
     # Fix system hang when no internet connection
     systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
   };

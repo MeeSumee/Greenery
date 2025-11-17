@@ -45,12 +45,6 @@
   # Enable nftables & Tailscale DNS-crypt forwarding
   networking = {
     nftables.enable = true;
-    firewall = {
-      interfaces."tailscale0" = {
-        allowedTCPPorts = [22];
-        allowedUDPPorts = [53];
-      };
-    };
   };
 
   # Define specific dnscrypt proxy config
