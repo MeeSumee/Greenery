@@ -6,6 +6,7 @@ let
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFDui74G6stbKJoPcTyWe8NAexbk2TuxghA2zdf7Owma sumee@kaolin"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh sumee@beryl"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq sumee@verdure"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmulMynbxFomEUcObvRBp3bVd7kH+dO/6s/0kSBPbbg sumee@graphite"
     ];
   };
   
@@ -17,10 +18,10 @@ let
   };
 
 in {
-  "secret1.age".publicKeys = users.sumee ++ hosts.greenery;
-  "secret2.age".publicKeys = users.sumee ++ hosts.greenery;
-  "secret3.age".publicKeys = users.sumee ++ hosts.greenery;
-  "secret4.age".publicKeys = users.sumee ++ hosts.greenery;
-  "secret5.age".publicKeys = users.sumee ++ hosts.kaolin;
-  "secret6.age".publicKeys = users.sumee ++ hosts.greenery;
+  "secret1.age".publicKeys = hosts.greenery;
+  "secret2.age".publicKeys = hosts.greenery;
+  "secret3.age".publicKeys = hosts.greenery;
+  "secret4.age".publicKeys = hosts.greenery;
+  "secret5.age".publicKeys = hosts.kaolin;
+  "secret6.age".publicKeys = users.sumee;
 }
