@@ -27,7 +27,7 @@
 
     programs = {
       enable = true;
-      server.enable  = true;
+      headless.enable  = true;
       nvim.enable = true;
     };
 

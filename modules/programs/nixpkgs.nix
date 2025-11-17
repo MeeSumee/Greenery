@@ -11,7 +11,7 @@
   options.greenery.programs = {
     core.enable = lib.mkEnableOption "enable core programs";
 
-    server.enable = lib.mkEnableOption "enable server programs";
+    headless.enable = lib.mkEnableOption "enable core headless programs";
 
     daemon.enable = lib.mkEnableOption "enable daemon programs";
 
@@ -26,7 +26,6 @@
     # Core programs
     (lib.mkIf (config.greenery.programs.core.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
-
         git                             # git commands, highly important
         btop-rocm                       # hardware monitor
         tree                            # enables tree view in terminal
@@ -44,22 +43,12 @@
       };
     })
 
-    # Server programs
-    (lib.mkIf (config.greenery.programs.server.enable && config.greenery.programs.enable) {
+    # Headless programs
+    (lib.mkIf (config.greenery.programs.headless.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
         screen                          # utility to split terminal sessions during ssh login
         speedtest-cli                   # internet speedtest cli utility
       ];
-
-      # Enable non-nix executables
-      programs.nix-ld.enable = true;
-      programs.nix-ld.libraries = with pkgs; [
-        # Add any missing dynamic libraries for unpackaged programs
-        # here, NOT in environment.systemPackages
-      ];
-
-      # Java
-      programs.java.enable = true;
     })
 
     # Daemons and UI

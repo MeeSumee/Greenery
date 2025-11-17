@@ -80,7 +80,8 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠔⠁⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⡀⠀
 */
 
-{ 
+{
+  pkgs,
   ... 
 }:{
 
@@ -108,7 +109,7 @@
     programs = {
       enable = true;
       core.enable = true;
-      server.enable  = true;
+      headless.enable  = true;
       nvim.enable = true;
     };
 
@@ -135,6 +136,16 @@
 
   networking.hostName = "greenery"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Enable non-nix executables for minecraft especially
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
+
+  # Java
+  programs.java.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";

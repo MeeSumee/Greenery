@@ -57,7 +57,7 @@
       foot.enable = true;
       micro.enable = true;
       core.enable = true;
-      server.enable  = true;
+      headless.enable  = true;
       daemon.enable = true;
       desktop.enable = true;
       heavy.enable = true;
