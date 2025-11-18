@@ -42,7 +42,7 @@ let
       "${prefix} 13 Hand"             # Move
       "${prefix} 14 Mirrored Pointer" # Right Pointer
       "${prefix} 15 Finger"           # Pointer
-    ]
+    ];
   };
 
   indexName = {
