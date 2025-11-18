@@ -25,7 +25,6 @@
       # Streaming Host
       jellyfin = {
         enable = true;
-        openFirewall = true;
       };
     };
     

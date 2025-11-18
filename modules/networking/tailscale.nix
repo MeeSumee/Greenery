@@ -11,21 +11,11 @@
     # Enable tailscale VPN service
     services.tailscale = {
       enable = true;
-      openFirewall = true;
       useRoutingFeatures = "both"; # Enables the use of exit node
       extraSetFlags = [
-        "--accept-routes=true"
+        "--accept-routes"
         "--accept-dns=false"
       ];
-    };
-
-    networking = {
-      firewall = {
-        interfaces."tailscale0" = {
-          allowedTCPPorts = [22];
-          allowedUDPPorts = [53];
-        };
-      };
     };
 
     # Fix system hang when no internet connection
