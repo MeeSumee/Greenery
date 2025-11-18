@@ -41,6 +41,7 @@
   wsl = {
     enable = true;
     defaultUser = "sumee";
+    wslConf.interop.appendWindowsPath = false;
   };
 
   # Disable Greenery Core Services
