@@ -24,7 +24,6 @@
       # FileBrowser service
       filebrowser = {
         enable = true;
-        openFirewall = true;
 
         settings = {
           root = "/run/media/sumee/emerald/data";

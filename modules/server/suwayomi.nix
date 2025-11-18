@@ -33,7 +33,6 @@
       # Suwayomi-server for fetching manga online
       suwayomi-server = {
         enable = true;
-        openFirewall = true;
 
         settings = {
           server = {

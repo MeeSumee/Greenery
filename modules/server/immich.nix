@@ -22,7 +22,6 @@
 
       immich = {
         enable = true;
-        openFirewall = true;
 
         mediaLocation = "/run/media/sumee/emerald/immich";
         machine-learning.enable = false;
