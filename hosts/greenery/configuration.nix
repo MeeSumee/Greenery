@@ -82,6 +82,7 @@
 
 {
   pkgs,
+  config,
   ... 
 }:{
 
@@ -151,6 +152,35 @@
 
   # Java
   programs.java.enable = true;
+
+  # Agenix keyfile
+  age.secrets.secret7.file = ../../secrets/secret7.age;
+
+  # Set borg backup service for greenery
+  services.borgbackup.jobs = {
+    prarie = {
+      paths = [ "/run/media/sumee/emerald" "/var" ];
+      repo = "/mnt/repo";
+      encryption = {
+        mode = "repokey-blake2";
+        passCommand = "cat ${config.age.secrets.secret7.path}";
+      };
+      compression = "auto,zstd";
+      startAt = "Wed 03:00:00";
+
+      # Mount remote drive as tiny core linux doesn't have borg packaged
+      preHook = ''
+        ${pkgs.sshfs}/bin/sshfs -o \
+        allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
+        tc@seed:/mnt/raid /mnt
+      '';
+
+      # Unmount the drive when completed/failed
+      postHook = ''
+        ${pkgs.umount}/bin/umount -l /mnt
+      '';
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
