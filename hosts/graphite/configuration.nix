@@ -2,6 +2,7 @@
 {
   lib,
   inputs,
+  pkgs,
   ... 
 }: {
   imports = [
@@ -43,6 +44,14 @@
     defaultUser = "sumee";
     wslConf.interop.appendWindowsPath = false;
   };
+
+  # Pythong
+  environment.systemPackages = with pkgs; [
+    uv
+  ];
+
+  # Fix python dynamic linking
+  programs.nix-ld.enable = true;
 
   # Disable Greenery Core Services
   services = {
