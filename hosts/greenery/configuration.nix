@@ -137,6 +137,9 @@
   networking.hostName = "greenery"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Disable powersaving
+  networking.networkmanager.wifi.powersave = false;
+
   # Open Firewall ports for ethernet sharing
   networking.firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
 
