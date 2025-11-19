@@ -127,23 +127,22 @@
       fish.enable = true;
       lanzaboote.enable = true;
       sumee.enable = true;
-
-      # age.nix included by default
-      # locale.nix included by default
-      # nix.nix included by default
     };
   };
 
-  networking.hostName = "greenery"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    # My precious everything
+    hostName = "greenery";
 
-  # Disable powersaving
-  networking.networkmanager.wifi.powersave = false;
+    # Disable powersaving
+    networkmanager.wifi.powersave = false;
 
-  # Open Firewall ports for ethernet sharing
-  networking.firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
+    # Open Firewall ports for ethernet sharing
+    # I just used nmtui to set enp0s31f6 to shared cause declarative approach didn't work
+    firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
+  };
 
-  # Enable non-nix executables for minecraft especially
+  # Enable non-nix executables for dynamic libraries such as minecraft scripts
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged programs
