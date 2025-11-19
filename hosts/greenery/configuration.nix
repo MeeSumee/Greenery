@@ -137,6 +137,9 @@
   networking.hostName = "greenery"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Open Firewall ports for ethernet sharing
+  networking.firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
+
   # Enable non-nix executables for minecraft especially
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
