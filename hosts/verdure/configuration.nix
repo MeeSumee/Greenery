@@ -1,6 +1,5 @@
 # Verdure (soon greenery) Configuration
 {
-  config,
   pkgs,
   ... 
 }:{
@@ -55,7 +54,15 @@
     raspberrypi-eeprom
   ];
 
-  networking.firewall.allowedUDPPorts = [53 67];
+  # Define US dnscrypt proxy config
+  services.dnscrypt-proxy.settings = {
+    listen_addresses = [
+      "100.90.207.85:53"
+      "[fd7a:115c:a1e0::8034:cf55]:53"
+      "127.0.0.1:53"
+      "[::1]:53"
+    ];
+  };
   
   # Exit-node flags
   services.tailscale = {
