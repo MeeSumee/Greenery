@@ -34,6 +34,14 @@
     hjem.users = lib.genAttrs users (user: {
       files = let
 
+        startscript = pkgs.writeShellScriptBin "start-script" ''
+          set +e
+          echo "Xft.dpi: 140" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+          ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface text-scaling-factor 1.4 &
+          ${pkgs.wlsunset}/bin/wlsunset -T 3000 -t 2999 &
+          ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell &
+        '';
+
         # Set mic mute toggle command
         xf86keybind = let
           # camerascript = pkgs.writeShellScriptBin "camScript" ''
@@ -60,11 +68,7 @@
 
       in {
         ".config/mango/config.conf".text = xf86keybind;
-        ".config/mango/autostart.sh".source = pkgs.writeText "start-script" ''
-          #! /bin/bash
-          set +e
-          wlsunset -T 3000 -t 2999 &
-        '';
+        ".config/mango/autostart.sh".source = "${startscript}/bin/start-script";
       };
     });
   };
