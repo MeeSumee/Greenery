@@ -21,13 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # ecchirexi
-    ecchirexi = {
-      url = "github:Rexcrazy804/hjem-impure";
-      inputs.nixpkgs.follows = "";
-      inputs.hjem.follows = "";
-    };
-
     # Nix-Systems
     systems.url = "github:nix-systems/default";
 

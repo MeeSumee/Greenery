@@ -10,26 +10,6 @@
 
   inherit (lib) mkEnableOption mkMerge mkIf;
 
-  nix-dir = "green";
-
-  points = let
-    inherit (lib.fileset) unions toSource;
-    root = ../../dots;
-  in
-    toSource {
-      inherit root;
-      fileset = unions [
-        (root + /fish/config.fish)
-        (root + /foot/foot.ini)
-        (root + /fuzzel/fuzzel.ini)
-        (root + /hyprland/hypridle.conf)
-        (root + /hyprland/hyprland.conf)
-        (root + /hyprland/hyprlock.conf)
-        (root + /niri/config.kdl)
-        (root + /uwsm/env)
-      ];
-    };
-
 in {
   imports = [inputs.hjem.nixosModules.default];
 
@@ -40,19 +20,6 @@ in {
   };
   
   config = mkMerge [
-    
-    # Seal hornie rexie in my basement
-    ({
-      hjem.extraModules = [inputs.ecchirexi.hjemModules.default];
-      
-      # Hjem config for all users
-      hjem.users = lib.genAttrs users (user: {
-        enable = true;
-        directory = config.users.users.${user}.home;
-        clobberFiles = lib.mkForce true;
-      });
-    })
-
     # WHERE DOES THE STOMEE LIVE???
     (mkIf (config.greenery.system.sumee.enable && config.greenery.system.enable) {
       
@@ -90,37 +57,9 @@ in {
 
       # hjem config for sumee
       hjem.users = lib.genAttrs users (user: {
-
-        # Yoinked from rexies.nix
-        impure = {
-          enable = true;
-          dotsDir = "${points}";
-          dotsDirImpure = "/home/${user}/${nix-dir}/dots";
-          parseAttrs = [config.hjem.users.${user}.xdg.config.files];
-        };
-
-        xdg.config.files = let
-          dots = config.hjem.users.${user}.impure.dotsDir;
-        in {
-          # Fish shell
-          "fish/config.fish".source = dots + "/fish/config.fish";
-          
-          # Foot terminal
-          "foot/foot.ini".source = dots + "/foot/foot.ini";
-
-          # Fuzzel
-          "fuzzel/fuzzel.ini".source = dots + "/fuzzel/fuzzel.ini";
-
-          # Hyprland stuff
-          "hypr/hypridle.conf".source = dots + "/hyprland/hypridle.conf";
-          "hypr/hyprland.conf".source = dots + "/hyprland/hyprland.conf";
-          "hypr/hyprlock.conf".source = dots + "/hyprland/hyprlock.conf";
-          "uwsm/env".source = dots + "/uwsm/env";
-
-          # Niri stuff
-          "niri/config.kdl".source = dots + "/niri/config.kdl";
-        };
-
+        enable = true;
+        directory = config.users.users.${user}.home;
+        clobberFiles = lib.mkForce true;
         files = let 
           # Make face.icon at /home/user/
           faceIcon = let

@@ -82,25 +82,6 @@
         "type": "github"
       }
     },
-    "ecchirexi": {
-      "inputs": {
-        "hjem": [],
-        "nixpkgs": []
-      },
-      "locked": {
-        "lastModified": 1761137035,
-        "narHash": "sha256-addwMZGxcaOjvg64AXfWsXsXinxzjSS8x8h/CENOU6U=",
-        "owner": "Rexcrazy804",
-        "repo": "hjem-impure",
-        "rev": "9a58b060e9383bfb6b2b3470f9606fdd654469f3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Rexcrazy804",
-        "repo": "hjem-impure",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -253,7 +234,6 @@
         "aagl": "aagl",
         "agenix": "agenix",
         "asusnumpad": "asusnumpad",
-        "ecchirexi": "ecchirexi",
         "hjem": "hjem",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs_2",
