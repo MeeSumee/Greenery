@@ -15,6 +15,11 @@
       inputs.smfh.follows = "";
     };
 
+    mango = {
+      url = "github:DreamMaoMao/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Asusu numberpad driver
     asusnumpad = {
       url = "github:asus-linux-drivers/asus-numberpad-driver";

@@ -14,7 +14,7 @@
     desktop = {
       enable = true;
       hypridle.enable = true;
-      niri.enable = true;
+      mango.enable = true;
       sddm.enable = true;
       xserver.enable = true;
     };
