@@ -1,5 +1,6 @@
 # Common Programs used by GUI Hosts
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -89,6 +90,9 @@
         nemo                            # nemo file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme             # Rose-Pine Gtk Theme
+
+        # Noctalia Shell
+        inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
         (pkgs.papirus-icon-theme.override {
           color = "teal";
