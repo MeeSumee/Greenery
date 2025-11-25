@@ -86,7 +86,7 @@
     eachSystem = fn: lib.genAttrs systems (system: fn (pkgsFor system));
 
   in {
-    formatter = eachSystem (pkgs: inputs.zaphkiel.packages.${pkgs.system}.irminsul);
+    formatter = eachSystem (pkgs: pkgs.alejandra);
 
     packages = callModule ./pkgs {};
 
