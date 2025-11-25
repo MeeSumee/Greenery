@@ -1,6 +1,5 @@
 # Beryl Configuration
 {
-  lib,
   ...
 }: {
   imports = [
@@ -15,8 +14,8 @@
     desktop = {
       enable = true;
       hypridle.enable = true;
-      kurukurudm.enable = true;
       niri.enable = true;
+      sddm.enable = true;
       xserver.enable = true;
     };
 
@@ -56,9 +55,6 @@
       sumee.enable = true;
     };
   };
-
-  # Enables fingerprint authentication
-  programs.kurukuruDM.settings.instantAuth = lib.mkForce true;
 
   networking.hostName = "beryl"; # The tint of blue I like
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
