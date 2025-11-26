@@ -18,24 +18,18 @@ jobs:
 
     - name: Kaolin Evaluation
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#kaolin
-      run: time nix eval .#nixosConfigurations.kaolin.config.system.build.toplevel --substituters "" --option eval-cache false --raw --read-only
 
     - name: Greenery Evaluation
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#greenery
-      run: time nix eval .#nixosConfigurations.greenery.config.system.build.toplevel --substituters "" --option eval-cache false --raw --read-only
 
     - name: Verdure Evaluation
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#verdure
-      run: time nix eval .#nixosConfigurations.verdure.config.system.build.toplevel --substituters "" --option eval-cache false --raw --read-only
 
     - name: Graphite Evaluation
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#graphite
-      run: time nix eval .#nixosConfigurations.graphite.config.system.build.toplevel --substituters "" --option eval-cache false --raw --read-only
 
     - name: Beryl Evaluation
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#beryl
-      run: time nix eval .#nixosConfigurations.beryl.config.system.build.toplevel --substituters "" --option eval-cache false --raw --read-only
 
     - name: Quartz Evaluation
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#quartz
-      run: time nix eval .#nixosConfigurations.quartz.config.system.build.toplevel --substituters "" --option eval-cache false --raw --read-only
