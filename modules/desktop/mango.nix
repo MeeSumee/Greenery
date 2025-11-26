@@ -123,7 +123,7 @@
             "%%HAEINCI&&"
           ];
           to = [
-            "${noctalia} ipc call lockScreen lock"
+            "noctalia-shell ipc call lockScreen lock"
             "mmsg -d enable_monitor"
             "mmsg -d disable_monitor"
           ];

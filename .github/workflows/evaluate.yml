@@ -8,7 +8,7 @@ on:
     - '**.nix'
 jobs:
   evaluation:
-    name: Evaluate each Configuration one-by-one
+    name: Evaluate each configuration one-by-one
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
