@@ -34,6 +34,8 @@
     hjem.users = lib.genAttrs users (user: {
       files = let
 
+        noctalia = "${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell";
+
         startscript = pkgs.writeShellScriptBin "autostart" ''
           set +e
 
@@ -48,7 +50,7 @@
           ${pkgs.wlsunset}/bin/wlsunset -T 3000 -t 2999 &
 
           # Noctalia Shell
-          ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell &
+          ${noctalia} &
         '';
 
         # Set mic mute toggle command
@@ -69,31 +71,29 @@
           '';
 
           appLauncher = ''
-            ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call launcher toggle
+            ${noctalia} ipc call launcher toggle
           '';
 
           calculator = ''
-            ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call launcher calculator
+            ${noctalia} ipc call launcher calculator
           '';
 
           lock = ''
-            ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call lockScreen lock
+            ${noctalia} ipc call lockScreen lock
           '';
 
           visibleBar = ''
-            ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call bar toggle
+            ${noctalia} ipc call bar toggle
           '';
 
           visibleDock = ''
-            ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call dock toggle
+            ${noctalia} ipc call dock toggle
           '';
 
           screenRec = ''
-            ${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call screenRecorder toggle
+            ${noctalia} ipc call screenRecorder toggle
           '';
 
-          # from = ["I_HATE_DMV_LINES" "NICHIFALEMA?"];
-          # to = ["${mutescript}/bin/muteScript" "${camerascript}/bin/camScript"];
           from = [
             "!STOP"
             "@MAKING"
@@ -115,9 +115,25 @@
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/mango/config.conf);
 
+        # Set hypridle command
+        quickidle = let
+          from = [
+            "%%刺し身％％"
+            "%%WOEMYASS**"
+            "%%HAEINCI&&"
+          ];
+          to = [
+            "${noctalia} ipc call lockScreen lock"
+            "mmsg -d enable_monitor"
+            "mmsg -d disable_monitor"
+          ];
+        in   
+          builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
+
       in {
         ".config/mango/config.conf".text = keybind;
         ".config/mango/autostart.sh".source = "${startscript}/bin/autostart";
+        ".config/hypr/hypridle.conf".text = quickidle;
       };
     });
   };

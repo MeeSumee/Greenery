@@ -19,6 +19,8 @@
       inherit (pkgs) brightnessctl systemd;
       hyprlock = config.programs.hyprlock.package;
       hyprland = config.programs.hyprland.package;
+      niri = config.programs.niri.package;
+      mango = config.programs.mango.package;
     });
   };
 }

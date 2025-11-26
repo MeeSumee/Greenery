@@ -61,9 +61,17 @@
         };
 
         # Set hypridle command
-        quickmiku = let
-          from = ["%%刺し身％％"];
-          to = ["qs ipc call lockscreen lock"];
+        quickidle = let
+          from = [
+            "%%刺し身％％"
+            "%%WOEMYASS**"
+            "%%HAEINCI&&"
+          ];
+          to = [
+            "qs ipc call lockscreen lock"
+            "niri msg action power-on-monitors"
+            "niri msg action power-off-monitors"
+          ];
         in   
           builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
 
@@ -71,7 +79,7 @@
         ".config/quickshell".source = ../../dots/quickshell;
         ".config/niri/config.kdl".text = xf86keybind;
         ".config/background".source = schizomiku;
-        ".config/hypr/hypridle.conf".text = quickmiku;
+        ".config/hypr/hypridle.conf".text = quickidle;
       };
     });
   };
