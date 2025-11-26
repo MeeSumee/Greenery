@@ -21,6 +21,7 @@
       hyprland = config.programs.hyprland.package;
       niri = config.programs.niri.package;
       mango = config.programs.mango.package;
+      noctalia-shell = config.services.noctalia-shell.package;
     });
   };
 }
