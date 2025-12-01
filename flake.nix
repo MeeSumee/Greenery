@@ -37,7 +37,10 @@
     systems.url = "github:nix-systems/default";
 
     # Nix WSL for Graphite (Worktop)
-    wsl.url = "github:nix-community/NixOS-WSL/main";
+    wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Lanzaboote
     lanzaboote = {

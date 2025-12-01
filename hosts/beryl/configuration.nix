@@ -1,5 +1,6 @@
 # Beryl Configuration
 {
+  lib,
   ...
 }: {
   imports = [
@@ -15,7 +16,7 @@
       enable = true;
       hypridle.enable = true;
       mango.enable = true;
-      sddm.enable = true;
+      kurukurudm.enable = true;
       xserver.enable = true;
     };
 
@@ -61,6 +62,9 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
+
+  # Prioritize Fingerprint
+  programs.kurukuruDM.settings.instantAuth = lib.mkForce true;
   
 /*
   This value determines the NixOS release from which the default
