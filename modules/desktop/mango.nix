@@ -40,7 +40,7 @@
           ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
 
           # Set x11 scaling
-          echo "Xft.dpi: 255" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+          echo "Xft.dpi: 140" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
 
           # wlsunset
           ${pkgs.wlsunset}/bin/wlsunset -T 3000 -t 2999 &
