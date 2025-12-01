@@ -47,10 +47,10 @@ in {
 
       # Set face icon for sumee
       systemd.tmpfiles.rules = lib.pipe users [
-        (builtins.filter (user: config.hjem.users.${user}.files.".face".source != null))
+        (builtins.filter (user: config.hjem.users.${user}.files.".face.icon".source != null))
         (builtins.map (user: [
           "f+ /var/lib/AccountsService/users/${user}  0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
-          "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face".source}"
+          "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face.icon".source}"
         ]))
         (lib.flatten)
       ];
@@ -77,7 +77,7 @@ in {
             '';
 
         in {
-          ".face".source = faceIcon;
+          ".face.icon".source = faceIcon;
           ".config/btop/btop.conf".source = ../../dots/btop/btop.conf;
           ".config/btop/themes".source = sources.rosebtop;
         };
