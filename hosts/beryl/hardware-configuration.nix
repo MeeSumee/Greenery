@@ -63,7 +63,7 @@
     enable = true;
     layout = "up5401ea";
     wayland = true;
-    waylandDisplay = "wayland-0";
+    waylandDisplay = "wayland-1";
     ignoreWaylandDisplayEnv = false;
     config = {
       "activation_time" = "0.5";

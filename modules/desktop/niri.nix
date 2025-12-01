@@ -31,7 +31,7 @@
     hjem.users = lib.genAttrs users (user: {
       files = let
 
-        # Set mic mute toggle command
+        # Set keybind toggle scripts
         xf86keybind = let
           camerascript = pkgs.writeShellScriptBin "camScript" ''
             if ${pkgs.kmod}/bin/lsmod | grep -q uvcvideo; then
@@ -67,8 +67,10 @@
             "%%WOEMYASS**"
             "%%HAEINCI&&"
           ];
+          # qs keeps crashing during Wlr session lock, so hyprlock for now
           to = [
-            "qs ipc call lockscreen lock"
+            # "noctalia-shell ipc call lockScreen lock"
+            "pidof hyprlock || hyprlock"
             "niri msg action power-on-monitors"
             "niri msg action power-off-monitors"
           ];

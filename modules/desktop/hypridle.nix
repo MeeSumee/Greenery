@@ -25,7 +25,7 @@
       hyprlock = config.programs.hyprlock.package;
       hyprland = config.programs.hyprland.package;
       niri = config.programs.niri.package;
-      mango = config.programs.mango.package;
+      # mango = config.programs.mango.package;
       noctalia = config.services.noctalia-shell.package;
     });
   };
