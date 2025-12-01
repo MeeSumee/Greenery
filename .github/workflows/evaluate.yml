@@ -7,8 +7,8 @@ on:
     paths:
     - '**.nix'
 jobs:
-  evaluation:
-    name: Evaluate each configuration one-by-one
+  kaolin:
+    name: Kaolin Evaluation
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v5
@@ -16,20 +16,60 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
 
-    - name: Kaolin Evaluation
+    - name: Kaolin Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#kaolin
 
-    - name: Greenery Evaluation
+  greenery:
+    name: Greenery Evaluation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: cachix/install-nix-action@v31
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - name: Greenery Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#greenery
 
-    - name: Verdure Evaluation
+  verdure:
+    name: Verdure Evaluation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: cachix/install-nix-action@v31
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - name: Verdure Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#verdure
 
-    - name: Graphite Evaluation
+  graphite:
+    name: Graphite Evaluation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: cachix/install-nix-action@v31
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - name: Graphite Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#graphite
 
-    - name: Beryl Evaluation
+  beryl:
+    name: Beryl Evaluation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: cachix/install-nix-action@v31
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - name: Beryl Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#beryl
 
-    - name: Quartz Evaluation
+  quartz:
+    name: Quartz Evaluation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+    - uses: cachix/install-nix-action@v31
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - name: Quartz Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#quartz
