@@ -31,7 +31,7 @@
     desktop = {
       enable = true;
       hypridle.enable = true;
-      hyprland.enable = true;
+      mango.enable = true;
       kurukurudm.enable = true;
       xserver.enable = true;
     };
