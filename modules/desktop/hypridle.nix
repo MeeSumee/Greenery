@@ -1,9 +1,14 @@
 { 
   config, 
   lib,
-  pkgs, 
+  pkgs,
+  inputs,
   ... 
 }:{
+
+  imports = [
+    inputs.noctalia.nixosModules.default
+  ];
 
   options.greenery.desktop.hypridle.enable = lib.mkEnableOption "hypridle";
 
@@ -21,6 +26,7 @@
       hyprland = config.programs.hyprland.package;
       niri = config.programs.niri.package;
       mango = config.programs.mango.package;
+      noctalia = config.services.noctalia-shell.package;
     });
   };
 }
