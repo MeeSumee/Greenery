@@ -15,12 +15,6 @@
       inputs.smfh.follows = "";
     };
 
-    # MangoWC Window Manager
-    mango = {
-      url = "github:DreamMaoMao/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Noctalia Shell
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";

@@ -13,7 +13,6 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./kurukurudm.nix
-    ./mango.nix
     ./niri.nix
     ./sddm.nix
     ./xserver.nix
