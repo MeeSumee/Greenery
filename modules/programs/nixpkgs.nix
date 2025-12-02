@@ -65,7 +65,7 @@
         zpkgs.scripts.npins-show        # npins-show command
 
         # Cursor Package
-        (pkgs.callPackage ../../pkgs/cursors.nix {})      
+        wo.nahidacursor
       ];
     })
 
@@ -92,9 +92,8 @@
         # Noctalia Shell
         inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
-        (pkgs.papirus-icon-theme.override {
-          color = "teal";
-        })                              # Papirus Icons with violet folders
+        # Papirus Teal Icons
+        wo.papiteal
       ];
 
       # Core desktop services

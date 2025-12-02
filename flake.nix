@@ -83,27 +83,24 @@
 
   # RexCrazy804 Schematic
   outputs = inputs: let
-    inherit (inputs) nixpkgs self;
+    inherit (inputs) nixpkgs self systems;
     inherit (nixpkgs) lib;
-
-    # Define each system architecture
-    systems = import inputs.systems;
 
     # npin integration to flakes
     sources = import ./npins;
 
-    callModule = {
-      __functor = self: path: attrs: import path (self // attrs);
-      inherit inputs self lib sources;
-    };
+    pkgsFor = lib.getAttrs (import systems) nixpkgs.legacyPackages;
 
-    pkgsFor = system: nixpkgs.legacyPackages.${system};
-    eachSystem = fn: lib.genAttrs systems (system: fn (pkgsFor system));
+    moduleArgs = {inherit inputs self sources lib;};
+
+    eachSystem = fn: lib.mapAttrs (system: pkgs: fn {inherit system pkgs;}) pkgsFor;
+
+    callModule = path: attrs: import path (moduleArgs // attrs);
 
   in {
-    formatter = eachSystem (pkgs: pkgs.alejandra);
+    formatter = eachSystem ({pkgs,...}: pkgs.alejandra);
 
-    packages = callModule ./pkgs {};
+    packages = eachSystem (attrs: callModule ./pkgs attrs);
 
     nixosConfigurations = callModule ./hosts {};
   };

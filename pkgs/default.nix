@@ -1,7 +1,11 @@
 {
+  pkgs,
+  lib,
   ...
-}:{
-  imports = [
-    ./cursors.nix
-  ];
-}
+}: lib.fix (self: let
+  inherit (pkgs) callPackage;
+in {
+  nahidacursor = callPackage ./cursors.nix {};
+
+  papiteal = pkgs.papirus-icon-theme.override { color = "teal"; };
+})
