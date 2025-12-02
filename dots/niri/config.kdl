@@ -268,8 +268,8 @@ layout {
 // Start wlsunset so my eyes don't kill themselves.
 spawn-at-startup "wlsunset" "-T" "3000" "-t" "2999"
 
-// Start quickshell
-spawn-at-startup "qs"
+// Start noctalia-shell
+spawn-at-startup "noctalia-shell"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -307,14 +307,10 @@ animations {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
 window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+  // Set foot to spawn as full width
+  match app-id=r#"foot$"#
+  default-column-width {}
 }
 
 // Open the Librewolf picture-in-picture player as floating by default.
@@ -325,12 +321,19 @@ window-rule {
 
 // Make wallpaper the background of everything including overlay and not have it move around
 layer-rule {
-  match namespace="^wallpaper$"
+  match namespace="^noctalia-wallpaper*"
   place-within-backdrop true
 }
 
 overview {
   workspace-shadow {
+    off
+  }
+}
+
+// Disable the hot corners.
+gestures {
+  hot-corners {
     off
   }
 }
@@ -349,8 +352,13 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 20
     clip-to-geometry true
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
 }
 
 binds {
@@ -370,10 +378,11 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-    Mod+R hotkey-overlay-title="Run Prompt: fuzzel" { spawn "fuzzel"; }
+    Mod+R hotkey-overlay-title="Run Prompt: noctalia launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Mod+E hotkey-overlay-title="Run Nemo" { spawn "nemo"; }
-    Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "qs" "ipc" "call" "lockscreen" "lock"; }
+    Mod+X hotkey-overlay-title="Open Calculator" { spawn "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
+    // Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.

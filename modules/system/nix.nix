@@ -20,6 +20,9 @@
       experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
       trusted-users = ["root" "@wheel"];
+
+      extra-substituters = ["https://sumee.cachix.org"];
+      extra-trusted-public-keys = ["sumee.cachix.org-1:Hq6j5JXABEiSpFsSMwAJLiAclMmBpdP+gsUgVy2Ld4Y="];
     };
     
     # Nix auto garbage collect 

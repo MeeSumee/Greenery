@@ -24,15 +24,9 @@ in {
 
   config = lib.mkIf (config.greenery.desktop.kurukurudm.enable && config.greenery.desktop.enable) {
 
-    # Add dependencies
-    environment.systemPackages = with pkgs; [
-      kurukurubar
-    ];
-
-    # More rexware, main imports from nixpkgs.nix
+    # Rex's DM so I don't have problems with fprintd
     programs.kurukuruDM = {
       enable = true;
-
       settings = {
         wallpaper = listening;
         default_user = builtins.elemAt users 0;

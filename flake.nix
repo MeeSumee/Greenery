@@ -15,28 +15,30 @@
       inputs.smfh.follows = "";
     };
 
+    # Noctalia Shell
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Asusu numberpad driver
     asusnumpad = {
       url = "github:asus-linux-drivers/asus-numberpad-driver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # ecchirexi
-    ecchirexi = {
-      url = "github:Rexcrazy804/hjem-impure";
-      inputs.nixpkgs.follows = "";
-      inputs.hjem.follows = "";
-    };
-
     # Nix-Systems
     systems.url = "github:nix-systems/default";
 
     # Nix WSL for Graphite (Worktop)
-    wsl.url = "github:nix-community/NixOS-WSL/main";
+    wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Lanzaboote
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v0.4.3";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks-nix.follows = "";
       inputs.flake-compat.follows = "";
@@ -75,27 +77,24 @@
 
   # RexCrazy804 Schematic
   outputs = inputs: let
-    inherit (inputs) nixpkgs self;
+    inherit (inputs) nixpkgs self systems;
     inherit (nixpkgs) lib;
-
-    # Define each system architecture
-    systems = import inputs.systems;
 
     # npin integration to flakes
     sources = import ./npins;
 
-    callModule = {
-      __functor = self: path: attrs: import path (self // attrs);
-      inherit inputs self lib sources;
-    };
+    pkgsFor = lib.getAttrs (import systems) nixpkgs.legacyPackages;
 
-    pkgsFor = system: nixpkgs.legacyPackages.${system};
-    eachSystem = fn: lib.genAttrs systems (system: fn (pkgsFor system));
+    moduleArgs = {inherit inputs self sources lib;};
+
+    eachSystem = fn: lib.mapAttrs (system: pkgs: fn {inherit system pkgs;}) pkgsFor;
+
+    callModule = path: attrs: import path (moduleArgs // attrs);
 
   in {
-    formatter = eachSystem (pkgs: inputs.zaphkiel.packages.${pkgs.system}.irminsul);
+    formatter = eachSystem ({pkgs,...}: pkgs.alejandra);
 
-    packages = callModule ./pkgs {};
+    packages = eachSystem (attrs: callModule ./pkgs attrs);
 
     nixosConfigurations = callModule ./hosts {};
   };

@@ -36,17 +36,26 @@
           hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
         };
         
-        # Set quickshell lockscreen bundled from kurushell
-        kokblock = let
-          from = ["%%刺し身％％"];
-          to = ["kurukurubar ipc call lockscreen lock"];
+        # Set hypridle command
+        quickidle = let
+          from = [
+            "%%刺し身％％"
+            "%%WOEMYASS**"
+            "%%HAEINCI&&"
+          ];
+          to = [
+            "kurukurubar ipc call lockscreen lock"
+            "hyprctl dispatch dpms on"
+            "hyprctl dispatch dpms off"
+          ];
+
         in   
           builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
       in {
         ".config/uwsm/env".source = ../../dots/uwsm/env;
         ".config/hypr/hyprland.conf".source = ../../dots/hyprland/hyprland.conf;
         ".config/background".source = hyprwall;
-        ".config/hypr/hypridle.conf".text = kokblock;
+        ".config/hypr/hypridle.conf".text = quickidle;
       };
     });
   };

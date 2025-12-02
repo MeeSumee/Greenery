@@ -31,7 +31,7 @@
     hjem.users = lib.genAttrs users (user: {
       files = let
 
-        # Set mic mute toggle command
+        # Set keybind toggle scripts
         xf86keybind = let
           camerascript = pkgs.writeShellScriptBin "camScript" ''
             if ${pkgs.kmod}/bin/lsmod | grep -q uvcvideo; then
@@ -61,9 +61,19 @@
         };
 
         # Set hypridle command
-        quickmiku = let
-          from = ["%%刺し身％％"];
-          to = ["qs ipc call lockscreen lock"];
+        quickidle = let
+          from = [
+            "%%刺し身％％"
+            "%%WOEMYASS**"
+            "%%HAEINCI&&"
+          ];
+          # qs keeps crashing during Wlr session lock, so hyprlock for now
+          to = [
+            # "noctalia-shell ipc call lockScreen lock"
+            "pidof hyprlock || hyprlock"
+            "niri msg action power-on-monitors"
+            "niri msg action power-off-monitors"
+          ];
         in   
           builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
 
@@ -71,7 +81,7 @@
         ".config/quickshell".source = ../../dots/quickshell;
         ".config/niri/config.kdl".text = xf86keybind;
         ".config/background".source = schizomiku;
-        ".config/hypr/hypridle.conf".text = quickmiku;
+        ".config/hypr/hypridle.conf".text = quickidle;
       };
     });
   };

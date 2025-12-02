@@ -29,6 +29,7 @@
       hyprlock.enable = true;
       kurukurudm.enable = true;
       niri.enable = true;
+      sddm.enable = true;
       xserver.enable = true;
     };
 

@@ -1,5 +1,6 @@
 # Common Programs used by GUI Hosts
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -54,18 +55,17 @@
     # Daemons and UI
     (lib.mkIf (config.greenery.programs.daemon.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
-        fuzzel                          # I went back to it cause walker is too bloated
+        grim                            # Screenshot tool
         slurp                           # area selection tool used for grim and wl-screenrec
         wl-clipboard                    # clipboard manager
         wl-screenrec                    # screen recorder
         brightnessctl                   # brightness ctl
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
-        swww                            # SWWW wallpaper daemon
         ddcutil                         # Manipulating external monitors using i2c bus
         zpkgs.scripts.npins-show        # npins-show command
 
         # Cursor Package
-        (pkgs.callPackage ../../pkgs/cursors.nix {})      
+        wo.nahidacursor
       ];
     })
 
@@ -85,15 +85,21 @@
         libreoffice-fresh               # office applications
         gparted                         # disk management software
         prismlauncher                   # minecraft 
-        gnome-calculator                # gnome calculator
         nemo                            # nemo file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme             # Rose-Pine Gtk Theme
 
-        (pkgs.papirus-icon-theme.override {
-          color = "teal";
-        })                              # Papirus Icons with violet folders
+        # Noctalia Shell
+        inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+
+        # Papirus Teal Icons
+        wo.papiteal
       ];
+
+      # Core desktop services
+      security.polkit.enable = true;
+      programs.xwayland.enable = true;
+      services.gnome.gnome-keyring.enable = true;
 
       # Theme gtk apps
       programs.dconf.profiles.user.databases = [{

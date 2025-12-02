@@ -1,3 +1,16 @@
+# DISCLAIMER
+Currently the repository only works for headless systems. The reliance of Kurukurubar for 
+building the shell on my desktop as well as the greeter led to a build failure from the nixpkgs
+upstream.
+
+If you do wish to use this repository for your flake, do use the following commit: [eaf737c](https://github.com/MeeSumee/Greenery/commit/eaf737c3488964666a24669e1b41a3ff47b28cfe)
+
+My current plan is to wait out for the dependencies to resolve and update the nix flake
+for quartz and beryl. Updating for my graphical systems is not a priority due to real life
+commmitments as well as enjoying hollow knight :>
+
+Till then the only updates the respository shall receive is headless server upgrades.
+
 # My NixOS Repository
 Consists of multiple devices:
 

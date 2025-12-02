@@ -53,7 +53,7 @@
     };
   };
 
-  # Define specific dnscrypt proxy config
+  # Define Swiss dnscrypt proxy config
   services.dnscrypt-proxy.settings = {
     listen_addresses = [
       "100.105.111.66:53"

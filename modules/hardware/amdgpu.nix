@@ -26,7 +26,7 @@
         extraPackages = with pkgs; [
           mesa.opencl
           rocmPackages.clr.icd
-          vaapiVdpau
+          libva-vdpau-driver
           libvdpau-va-gl
         ];
       };

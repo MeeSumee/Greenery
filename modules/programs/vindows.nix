@@ -35,10 +35,14 @@
     # Provide UEFI firmware support to virt-manager (due to depreciated OVMF module)
     systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
 
-    # Enable dnsmasq for NAT routing
+    # Tell it to not fuck with port 53 from dnscrypt
     services = {
       dnsmasq = {
         enable = true;
+        settings = {
+          listen-address = "127.0.0.1";
+          port = 5300;
+        };
       };
     };
   };

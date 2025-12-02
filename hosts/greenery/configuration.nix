@@ -82,6 +82,7 @@
 
 {
   pkgs,
+  config,
   ... 
 }:{
 
@@ -127,17 +128,22 @@
       fish.enable = true;
       lanzaboote.enable = true;
       sumee.enable = true;
-
-      # age.nix included by default
-      # locale.nix included by default
-      # nix.nix included by default
     };
   };
 
-  networking.hostName = "greenery"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    # My precious everything
+    hostName = "greenery";
 
-  # Enable non-nix executables for minecraft especially
+    # Disable powersaving
+    networkmanager.wifi.powersave = false;
+
+    # Open Firewall ports for ethernet sharing
+    # I just used nmtui to set enp0s31f6 to shared cause declarative approach didn't work
+    firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
+  };
+
+  # Enable non-nix executables for dynamic libraries such as minecraft scripts
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged programs
@@ -146,6 +152,35 @@
 
   # Java
   programs.java.enable = true;
+
+  # Agenix keyfile
+  age.secrets.secret7.file = ../../secrets/secret7.age;
+
+  # Set borg backup service for greenery
+  services.borgbackup.jobs = {
+    prarie = {
+      paths = [ "/run/media/sumee/emerald" "/var" ];
+      repo = "/mnt/repo";
+      encryption = {
+        mode = "repokey-blake2";
+        passCommand = "cat ${config.age.secrets.secret7.path}";
+      };
+      compression = "auto,zstd";
+      startAt = "Wed 03:00:00";
+
+      # Mount remote drive as tiny core linux doesn't have borg packaged
+      preHook = ''
+        ${pkgs.sshfs}/bin/sshfs -o \
+        allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
+        tc@seed:/mnt/raid /mnt
+      '';
+
+      # Unmount the drive when completed/failed
+      postHook = ''
+        ${pkgs.umount}/bin/umount -l /mnt
+      '';
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";

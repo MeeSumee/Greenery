@@ -15,8 +15,9 @@
     desktop = {
       enable = true;
       hypridle.enable = true;
-      kurukurudm.enable = true;
+      hyprlock.enable = true;
       niri.enable = true;
+      kurukurudm.enable = true;
       xserver.enable = true;
     };
 
@@ -57,14 +58,14 @@
     };
   };
 
-  # Enables fingerprint authentication
-  programs.kurukuruDM.settings.instantAuth = lib.mkForce true;
-
   networking.hostName = "beryl"; # The tint of blue I like
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
+
+  # Prioritize Fingerprint
+  programs.kurukuruDM.settings.instantAuth = lib.mkForce true;
   
 /*
   This value determines the NixOS release from which the default
