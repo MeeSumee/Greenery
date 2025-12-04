@@ -88,6 +88,7 @@
         nemo                            # nemo file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme             # Rose-Pine Gtk Theme
+        teams-for-linux                 # To call for interviews lmao
 
         # Noctalia Shell
         inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
