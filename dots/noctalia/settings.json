@@ -356,7 +356,7 @@
     },
     "sessionMenu": {
         "countdownDuration": 10000,
-        "enableCountdown": true,
+        "enableCountdown": false,
         "position": "center",
         "powerOptions": [
             {
