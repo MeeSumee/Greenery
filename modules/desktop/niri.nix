@@ -3,6 +3,7 @@
   pkgs,
   lib,
   users,
+  inputs,
   ...
 }: {
 
@@ -32,7 +33,7 @@
       files = let
 
         # Set keybind toggle scripts
-        xf86keybind = let
+        keybinds = let
           camerascript = pkgs.writeShellScriptBin "camScript" ''
             if ${pkgs.kmod}/bin/lsmod | grep -q uvcvideo; then
               ${pkgs.polkit}/bin/pkexec ${pkgs.kmod}/bin/modprobe -rf uvcvideo;
@@ -53,12 +54,6 @@
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
 
-        # Set quickshell wallpaper
-        schizomiku = pkgs.fetchurl {
-          name = "schizomiku";
-          url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
-          hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
-        };
 
         # Set hypridle command
         quickidle = let
@@ -77,11 +72,20 @@
         in   
           builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
 
+        # Set noctalia wallpaper
+        schizomiku = pkgs.fetchurl {
+          name = "schizomiku";
+          url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
+          hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
+        };
+
       in {
         ".config/quickshell".source = ../../dots/quickshell;
-        ".config/niri/config.kdl".text = xf86keybind;
-        ".config/background".source = schizomiku;
+        ".config/niri/config.kdl".text = keybinds;
         ".config/hypr/hypridle.conf".text = quickidle;
+        ".config/noctalia/colors.json".source = "${inputs.noctalia}/Assets/ColorScheme/Rosepine/Rosepine.json";
+        ".config/noctalia/settings.json".source = ../../dots/noctalia/settings.json;
+        "wallpapers/schizomiku.jpg".source = schizomiku;
       };
     });
   };
