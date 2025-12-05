@@ -1,12 +1,12 @@
 # My NixOS Repository
 Consists of multiple devices:
 
-- Greenery: Self-hosted Server with multiple services.
-- Verdure: US Exit-node + DNS Server with Home Automation Capabilities.
-- Kaolin: Swiss VPS acting as both an exit-node and a DNS Server.
-- Beryl: Personal Laptop for offsite provisioning.
-- Graphite: NixOS-WSL Config for my Work Laptop.
-- Quartz: Gaming PC with attempts of iGPU Passthrough Windows.
+- [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): Self-hosted Server with multiple services.
+- [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): US Exit-node + DNS Server with Home Automation Capabilities.
+- [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
+- [Beryl](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#beryl): Personal Laptop for offsite provisioning.
+- [Graphite](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#graphite): NixOS-WSL Config for my Work Laptop.
+- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC with attempts of iGPU Passthrough Windows.
 
 ## Status Updates
 
