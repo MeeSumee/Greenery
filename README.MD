@@ -1,78 +1,50 @@
-# DISCLAIMER
-Currently the repository only works for headless systems. The reliance of Kurukurubar for 
-building the shell on my desktop as well as the greeter led to a build failure from the nixpkgs
-upstream.
-
-If you do wish to use this repository for your flake, do use the following commit: [eaf737c](https://github.com/MeeSumee/Greenery/commit/eaf737c3488964666a24669e1b41a3ff47b28cfe)
-
-My current plan is to wait out for the dependencies to resolve and update the nix flake
-for quartz and beryl. Updating for my graphical systems is not a priority due to real life
-commmitments as well as enjoying hollow knight :>
-
-Till then the only updates the respository shall receive is headless server upgrades.
-
 # My NixOS Repository
 Consists of multiple devices:
 
-- Greenery: Self-hosted Server with multiple services
-- Beryl: Remote access, personal laptop for tinkering with Niri and Quickshell.
-- Quartz: Gaming PC with attempts of iGPU Passthrough Windows.
+- Greenery: Self-hosted Server with multiple services.
+- Verdure: US Exit-node + DNS Server with Home Automation Capabilities.
 - Kaolin: Swiss VPS acting as both an exit-node and a DNS Server.
+- Beryl: Personal Laptop for offsite provisioning.
 - Graphite: NixOS-WSL Config for my Work Laptop.
-- Verdure: US-based exit-node with NAS backup management. 
+- Quartz: Gaming PC with attempts of iGPU Passthrough Windows.
 
 ## Status Updates
-PCI-Passthrough still isn't functioning on Quartz with the doomed Error 43 on Windows.
-Also VM no longer connects to the internet. Amazing.
 
-Due to the addition of immich, Greenery still remains important for the hardware encoding
-and the performance capabilities it has. The Raspberry Pi 4 would get cooked from that.
+Full Niri main + using Noctalia shell. I believe using a well-maintained shell
+is the right way to go instead of wasting time. What this means is Banshell is
+abandoned and I don't have plans to tinker with it anytime soon.
 
-Instead, the Raspberry Pi replaces Greenery as an exit-node will host a NAS for data backup.
+Desktop and Laptop are unified with the same window manager, Niri. My initial trial
+of MangoWC failed with the notable lack of touchscreen support. Patches exist, but
+I do not want to bother with another WM when Niri works perfectly fine for my use case.
 
-Graphite is now integrated wit my work laptop to be a WSL-based distribution, fixing
-the jank of having two worktops.
+Redefine my scope of how I use and maintain NixOS. Prioritize for optimizing my life 
+rather than wasting time optimizing NixOS. Also avoid being overly reliant on other 
+people's code (Wake up call from RexCrazy's revised dendritic flake -.-)
 
-Rex informed me of MangoWC and I'm now interested, time to yoink his config again :D
+Borg backups have been initialized from greenery to a RAID-1 BTRFS 6TB HDDs 
+powered by a Tiny Core Linux machine NAS (hostname: seed)
 
-## Notes on Banshell (and ricing in a way)
+Due to the recent addition of memos to greenery, this means greenery runs 6 self-hosted
+services, and this adds another service that fails when the system is down.
+Future services shall be deployed in different systems to mitigate this problem.
 
-My rice themes have been more or less unified with rose pine, exceptions being nvim with TokyoNight and fuzzel with Catppuccin.
+SamToki-Cursors are being redefined to be built from source rather than completing the finished
+derivation and shelfing into my repository. PR is currently drafted.
 
-Xcursor-Genshin-Nahida will soon be packaged in a general way, fetching from Author's GitHub and
-converted to Linux Cursors using ```pkgs.win2xcur```. This will also solve the licensing conflicts.
-
-Banshell has been merged to master after 5 months of starting it, yay!
-Am I done? Hell nah, I'm like, 20% done.
-
-Currently, banshell is at v0.0.1 (alpha) and is HIGHLY experimental.
-
-Here are the guaranteed plans put forward:
-
-Planned color themes:
-- Matugen friendly colorscheme schematic for Colors.qml
-- Adapted Nahida/Vivian Colors for both Light & Dark Theme
-
-Dependencies:
-- Quickshell 0.2.1
-- Upower
-- Power-Profiles-Daemon
-- Google Material-Symbols Font
+I've added workflows and cachix to make my builds faster tho :>
 
 # Greenery
 
-Dell Optiplex 7050 with a random Radeon GPU with 4GB VRAM.
+Dell Optiplex 7050 with a Radeon RX 550 SFF GPU.
 
-Hosts Suwayomi for reading manga, Jellyfin for music (for now), Davis for Calendar and Contacts syncing,
-Immich for photos and video syncing, and FileBrowser for a unified folder to connect between Android, 
-Windows, and NixOS.
+Hosts several self-hosted services such as jellyfin, suwayomi, filebrowser, davis, immich, and memos.
 
 Implemented self-hosted websites using Caddy-Tailscale plugin and reverse-proxying localhost ports.
 
-SSH services for file transfer and remote access. Enables sharing my 12TB hard drive (taildrive).
+New limit of self-hosted services per device capped at 6.
 
-Future Endeavors: More functional Jellyfin, SSD Caching for Taildrive, and integrate borg backups
-once Vedure's NAS is complete.
+Future Endeavors: SSD Caching for Taildrive, improve functionality of jellyfin.
 
 # Verdure
 
@@ -80,9 +52,7 @@ Raspberry Pi 4 Model B with 8GB of RAM.
 
 Currently acts as an exit-node replacement of Greenery.
 
-Acts as a router for the NAS (currently undeclarative with making eth0 shared via nmtui)
-
-Future Endeavors: Integrate the TinyCore Linux NAS with Verdure for a mass backup RAID system.
+Future Endeavors: Add Smart-Home capabilities, act as alternate self-hosted device.
 
 # Kaolin
 
@@ -230,7 +200,7 @@ ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for mana
 Problems: AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed.
 Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
 
-Future Endeavors: Rice Banshell, fix AMDGPU crashes from Youtube/demanding HWAccel Tasks.
+Future Endeavors: Fix random pagefault AMDGPU crashes from Youtube/demanding HWAccel Tasks, fix TPM error spam.
 
 <details>
 <summary>Enabling USB4 on Zenbook S13 OLED (UM5302TA)</summary>
@@ -257,18 +227,15 @@ WSL-based configuration of NixOS for my work laptop.
 Provides functionality in both nix-config management during work as well as provide
 linux programs to be used in parallel with Windows.
 
-Future endeavors: Make the system more declarative incase I switch jobs hehehehaw.
-
 # Quartz
 
 Custom-built gaming pc intended for workstation and gaming.
 
 Intended to be used as my nix-config manager while I'm at home.
 
-Consists of (WIP) iGPU-Passthrough Windows 10 IoT LTSC Virtual Machine managed by libvirtd. Remote using
-Sunshine + Moonlight via Tailscale.
+Attempted iGPU passthrough windows VM currently stale. Might end up abandoning it entirely for winboat.
 
-Future Endeavors: Fix Error Code 43 in iGPU driver on Windows (not a problem on Linux VMs, it's windows being ASS)
+Future Endeavors: Potential AI hosting?
 
 <details>
 <summary>Quartz PC Specifications</summary>
@@ -282,13 +249,13 @@ Future Endeavors: Fix Error Code 43 in iGPU driver on Windows (not a problem on 
 </details>
 
 ## Credits
-[Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. HE NEEDS A JOB.
+[Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am. HE NEEDS A JOB.
 He also gets a lot of credit for all the code I've stolen with permission.
 
-[Eel](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
+[Eel](https://github.com/zhuazhuzz) for his frontend expertise and generally helping me mald through life and code.
 
-Several sources of quickshell code I've been browsing through in an attempt to understand wtf is going on:
-[Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/Ly-sec/nixos), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
+Despite me abandoning quickshell development, I've to thank these quickshillers for making me understand wtf is going on:
+[Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/noctalia-dev/noctalia-shell), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
 
 I also want to thank the folks of UAFB who made USB4 possible.
 
