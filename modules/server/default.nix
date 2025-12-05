@@ -14,6 +14,7 @@ in {
     ./files.nix
     ./immich.nix
     ./jellyfin.nix
+    ./memos.nix
     ./suwayomi.nix
   ];
   

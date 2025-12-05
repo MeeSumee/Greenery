@@ -120,6 +120,7 @@
       files.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
+      memos.enable = true;
       suwayomi.enable = true;
     };
 
