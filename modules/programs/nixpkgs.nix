@@ -14,8 +14,6 @@
 
     headless.enable = lib.mkEnableOption "enable core headless programs";
 
-    daemon.enable = lib.mkEnableOption "enable daemon programs";
-
     desktop.enable = lib.mkEnableOption "enable desktop programs";
 
     heavy.enable = lib.mkEnableOption "enable heavy/demanding programs";
@@ -52,23 +50,6 @@
       ];
     })
 
-    # Daemons and UI
-    (lib.mkIf (config.greenery.programs.daemon.enable && config.greenery.programs.enable) {
-      environment.systemPackages = with pkgs; [
-        grim                            # Screenshot tool
-        slurp                           # area selection tool used for grim and wl-screenrec
-        wl-clipboard                    # clipboard manager
-        wl-screenrec                    # screen recorder
-        brightnessctl                   # brightness ctl
-        wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
-        ddcutil                         # Manipulating external monitors using i2c bus
-        zpkgs.scripts.npins-show        # npins-show command
-
-        # Cursor Package
-        wo.nahidacursor
-      ];
-    })
-
     # Desktop applications
     (lib.mkIf (config.greenery.programs.desktop.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
@@ -84,11 +65,21 @@
         mpv                             # media player
         libreoffice-fresh               # office applications
         gparted                         # disk management software
-        prismlauncher                   # minecraft 
         nemo                            # nemo file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme             # Rose-Pine Gtk Theme
         teams-for-linux                 # To call for interviews lmao
+        grim                            # Screenshot tool
+        slurp                           # area selection tool used for grim and wl-screenrec
+        wl-clipboard                    # clipboard manager
+        wl-screenrec                    # screen recorder
+        brightnessctl                   # brightness ctl
+        wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
+        ddcutil                         # Manipulating external monitors using i2c bus
+        zpkgs.scripts.npins-show        # npins-show command
+
+        # Cursor Package
+        wo.nahidacursor
 
         # Noctalia Shell
         inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -138,6 +129,7 @@
         gimp3                           # GIMP image manipulator
         kicad                           # KiCAD Electronic schematic/PCB designer
         rare                            # GUI based on legendary which is a port of Epic Games
+        prismlauncher                   # minecraft 
         # davinci-resolve                 # Davinci-resolve video editor
 
         # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)

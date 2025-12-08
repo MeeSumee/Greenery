@@ -58,7 +58,6 @@
       browser.enable = true;
       foot.enable = true;
       core.enable = true;
-      daemon.enable = true;
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;
