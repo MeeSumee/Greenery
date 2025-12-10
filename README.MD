@@ -10,24 +10,7 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Full Niri main + using Noctalia shell. I believe using a well-maintained shell
-is the right way to go instead of wasting time. What this means is Banshell is
-abandoned and I don't have plans to tinker with it anytime soon.
-
-Desktop and Laptop are unified with the same window manager, Niri. My initial trial
-of MangoWC failed with the notable lack of touchscreen support. Patches exist, but
-I do not want to bother with another WM when Niri works perfectly fine for my use case.
-
-Redefine my scope of how I use and maintain NixOS. Prioritize for optimizing my life 
-rather than wasting time optimizing NixOS. Also avoid being overly reliant on other 
-people's code (Wake up call from RexCrazy's revised dendritic flake -.-)
-
-Borg backups have been initialized from greenery to a RAID-1 BTRFS 6TB HDDs 
-powered by a Tiny Core Linux machine NAS (hostname: seed)
-
-Due to the recent addition of memos to greenery, this means greenery runs 6 self-hosted
-services, and this adds another service that fails when the system is down.
-Future services shall be deployed in different systems to mitigate this problem.
+Removed caddy-tailscale in favor of Tailscale's built-in Services functionality.
 
 SamToki-Cursors are being redefined to be built from source rather than completing the finished
 derivation and shelfing into my repository. PR is currently drafted.
@@ -38,11 +21,9 @@ I've added workflows and cachix to make my builds faster tho :>
 
 Dell Optiplex 7050 with a Radeon RX 550 SFF GPU.
 
-Hosts several self-hosted services such as jellyfin, suwayomi, filebrowser, davis, immich, and memos.
+Hosts several self-hosted services.
 
-Implemented self-hosted websites using Caddy-Tailscale plugin and reverse-proxying localhost ports.
-
-New limit of self-hosted services per device capped at 6.
+Reverse proxied using tailscale serve and tailscale service assignment.
 
 Future Endeavors: SSD Caching for Taildrive, improve functionality of jellyfin.
 
@@ -197,8 +178,11 @@ With this setup, it will enable you to use Tailscale as a way to connect to Clou
 
 ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for managing nix configs whenever I'm not at home.
 
-Problems: AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed.
-Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
+Problems: 
+
+- AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed. Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
+
+- TPM 256 Error Spam on tty console. Might be related to the BIOS hacking for USB4.
 
 Future Endeavors: Fix random pagefault AMDGPU crashes from Youtube/demanding HWAccel Tasks, fix TPM error spam.
 
@@ -249,7 +233,7 @@ Future Endeavors: Potential AI hosting?
 </details>
 
 ## Credits
-[Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am. HE NEEDS A JOB.
+[Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am. USE YOUR INTERNSHIP EXPERIENCE TO LEARN INDUSTRY-RELEVANT SKILLS.
 He also gets a lot of credit for all the code I've stolen with permission.
 
 [Eel](https://github.com/zhuazhuzz) for his frontend expertise and generally helping me mald through life and code.
