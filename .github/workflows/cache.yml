@@ -5,7 +5,6 @@ on:
       - master
     paths:
       - 'flake.lock'
-      - 'modules/server/**'
       - 'pkgs/**'
 jobs:
   populate-cache:
@@ -16,8 +15,6 @@ jobs:
       id: filter
       with:
         filters: |
-          caddy:
-            - 'modules/server/**'
           lockfile:
             - 'flake.lock'
           packages:
@@ -33,10 +30,6 @@ jobs:
     - name: push flake inputs
       if: steps.filter.outputs.lockfile == 'true'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
-
-    - name: build caddy package
-      if: steps.filter.outputs.caddy == 'true' || steps.filter.outputs.lockfile == 'true'
-      run: nix build --no-link --print-out-paths .#nixosConfigurations.greenery.config.services.caddy.package
 
     - name: build packages
       if: steps.filter.outputs.packages == 'true' || steps.filter.outputs.lockfile == 'true'
