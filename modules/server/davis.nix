@@ -16,18 +16,6 @@
     };
 
     services = {
-      
-      caddy = {
-        enable = true;
-        virtualHosts."https://davis.onca-ph.ts.net" = {
-          extraConfig = ''
-            bind tailscale/davis
-
-            reverse_proxy localhost:80
-          '';
-        };
-      };
-
       davis = {
         enable = true;
         hostname = "localhost";
@@ -36,7 +24,16 @@
         adminPasswordFile = config.age.secrets.secret3.path;
         appSecretFile = config.age.secrets.secret4.path;
 
-        # config = {};
+        nginx.listen = [
+          {
+            addr = "0.0.0.0";
+            port = 3600;
+          }
+          {
+            addr = "[::1]";
+            port = 3600;
+          }
+        ];
       };
     };
   };
