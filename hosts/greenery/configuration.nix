@@ -155,7 +155,7 @@
   programs.java.enable = true;
 
   # Agenix keyfile
-  age.secrets.secret7.file = ../../secrets/secret7.age;
+  age.secrets.secret2.file = ../../secrets/secret2.age;
 
   # Set borg backup service for greenery
   services.borgbackup.jobs = {
@@ -164,7 +164,7 @@
       repo = "/mnt/repo";
       encryption = {
         mode = "repokey-blake2";
-        passCommand = "cat ${config.age.secrets.secret7.path}";
+        passCommand = "cat ${config.age.secrets.secret2.path}";
       };
       compression = "auto,zstd";
       startAt = "Wed 03:00:00";
