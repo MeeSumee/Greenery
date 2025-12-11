@@ -137,7 +137,13 @@
     hostName = "greenery";
 
     # Disable powersaving
-    networkmanager.wifi.powersave = false;
+    networkmanager = {
+      wifi = {
+        powersave = false;
+        macAddress = "permanent";
+        scanRandMacAddress = false;
+      };
+    };
 
     # Open Firewall ports for ethernet sharing
     # I just used nmtui to set enp0s31f6 to shared cause declarative approach didn't work
