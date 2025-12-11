@@ -22,12 +22,18 @@
       fail2ban.enable = true;
       openssh.enable = true;
       tailscale.enable = true;
+      taildrive.enable = true;
     };
 
     programs = {
       enable = true;
       headless.enable  = true;
       nvim.enable = true;
+    };
+
+    server = {
+      enable = true;
+      anki.enable = true;
     };
 
     system = {

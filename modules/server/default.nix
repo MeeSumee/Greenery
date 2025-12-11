@@ -4,6 +4,7 @@
 }: {
 
   imports = [
+    ./anki.nix
     ./davis.nix
     ./files.nix
     ./immich.nix

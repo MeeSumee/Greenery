@@ -161,7 +161,7 @@
   programs.java.enable = true;
 
   # Agenix keyfile
-  age.secrets.secret2.file = ../../secrets/secret2.age;
+  age.secrets.secret1.file = ../../secrets/secret1.age;
 
   # Set borg backup service for greenery
   services.borgbackup.jobs = {
