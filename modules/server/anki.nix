@@ -18,12 +18,10 @@
         port = 27701;
         baseDirectory = "/run/media/sumee/taildrive/anki/";
 
-        users = {
-          sumee = {
-            username = "sumee";
-            passwordFile = config.age.secrets.secret1.path;
-          };
-        };
+        users = [{
+          username = "sumee";
+          passwordFile = config.age.secrets.secret1.path;
+        }];
       };
     };
   };
