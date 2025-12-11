@@ -15,10 +15,11 @@ let
     quartz = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBCHbUX3L2WxbS3d1EeCe+WhzdT1Tn78MzAzOz5xr1iO"];
     kaolin = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBLVW9nABsXKAakbIgzJdRWImREgUyxJ/8yOKpzbE9S"];
     beryl = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID/j0qkT/J69KlyUNFx6sDILbCf4g20MxXBd10YDvwrd"];
+    verdure = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdCRc7/VwBWConOyhV/3R9CiFK9RCaA04tGGuM+cOso"];
   };
 
 in {
-  "secret1.age".publicKeys = hosts.greenery;
+  "secret1.age".publicKeys = hosts.greenery ++ hosts.verdure;
   "secret2.age".publicKeys = hosts.greenery;
   "secret3.age".publicKeys = hosts.greenery;
   "secret4.age".publicKeys = hosts.greenery;
