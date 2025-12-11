@@ -18,6 +18,7 @@ jobs:
     - uses: cachix/cachix-action@v15
       with:
         name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
     - name: Kaolin Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#kaolin
 
@@ -32,6 +33,7 @@ jobs:
     - uses: cachix/cachix-action@v15
       with:
         name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
     - name: Greenery Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#greenery
 
@@ -46,6 +48,7 @@ jobs:
     - uses: cachix/cachix-action@v15
       with:
         name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
     - name: Verdure Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#verdure
 
@@ -60,6 +63,7 @@ jobs:
     - uses: cachix/cachix-action@v15
       with:
         name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
     - name: Graphite Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#graphite
 
@@ -74,6 +78,7 @@ jobs:
     - uses: cachix/cachix-action@v15
       with:
         name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
     - name: Beryl Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#beryl
 
@@ -88,5 +93,6 @@ jobs:
     - uses: cachix/cachix-action@v15
       with:
         name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
     - name: Quartz Dry-Build
       run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#quartz
