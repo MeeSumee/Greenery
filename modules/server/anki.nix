@@ -15,8 +15,8 @@
     services = {
       anki-sync-server = {
         enable = true;
+        address = "0.0.0.0";
         port = 27701;
-        baseDirectory = "/run/media/sumee/taildrive/anki/";
 
         users = [{
           username = "sumee";

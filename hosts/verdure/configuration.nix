@@ -60,6 +60,29 @@
     raspberrypi-eeprom
   ];
 
+  # Set borg backup service for anki
+  services.borgbackup.jobs = {
+    anki = {
+      paths = [ "/var/lib/private/anki-sync-server" ];
+      repo = "/mnt/anki";
+      encryption.mode = "none";
+      compression = "auto,zstd";
+      startAt = "Mon 04:00:00";
+
+      # Mount remote drive as tiny core linux doesn't have borg packaged
+      preHook = ''
+        ${pkgs.sshfs}/bin/sshfs -o \
+        allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
+        sumee@greenery:/run/media/sumee/emerald /mnt
+      '';
+
+      # Unmount the drive when completed/failed
+      postHook = ''
+        ${pkgs.umount}/bin/umount -l /mnt
+      '';
+    };
+  };
+
   # Define US dnscrypt proxy config
   services.dnscrypt-proxy.settings = {
     listen_addresses = [
