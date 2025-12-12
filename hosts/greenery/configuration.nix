@@ -158,7 +158,10 @@
   ];
 
   # Java
-  programs.java.enable = true;
+  programs.java = {
+    enable = true;
+    package = pkgs.jre8_headless;
+  };
 
   # Agenix keyfile
   age.secrets.secret1.file = ../../secrets/secret1.age;
