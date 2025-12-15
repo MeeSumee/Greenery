@@ -6,6 +6,7 @@
   imports = [
     ./anki.nix
     ./davis.nix
+    ./docker.nix
     ./files.nix
     ./immich.nix
     ./jellyfin.nix

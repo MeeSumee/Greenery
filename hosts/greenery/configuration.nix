@@ -117,6 +117,7 @@
     server = {
       enable = true;
       davis.enable = true;
+      docker.enable = true;
       files.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
