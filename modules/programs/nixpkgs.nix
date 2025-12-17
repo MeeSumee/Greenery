@@ -63,12 +63,11 @@
         wineWowPackages.waylandFull     # wine
         xournalpp                       # note taking
         mpv                             # media player
-        libreoffice-fresh               # office applications
+        libreoffice-qt                  # office applications
         gparted                         # disk management software
-        nemo                            # nemo file browser
+        nautilus                        # file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme             # Rose-Pine Gtk Theme
-        teams-for-linux                 # To call for interviews lmao
         grim                            # Screenshot tool
         slurp                           # area selection tool used for grim and wl-screenrec
         wl-clipboard                    # clipboard manager
@@ -92,6 +91,9 @@
       security.polkit.enable = true;
       programs.xwayland.enable = true;
       services.gnome.gnome-keyring.enable = true;
+      
+      # Hint QT to use rosepine theme from gtk
+      qt.platformTheme = "gtk2";
 
       # Theme gtk apps
       programs.dconf.profiles.user.databases = [{
