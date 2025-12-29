@@ -63,7 +63,7 @@
         wineWowPackages.waylandFull     # wine
         xournalpp                       # note taking
         mpv                             # media player
-        libreoffice-qt                  # office applications
+        onlyoffice-desktopeditors       # office applications
         gparted                         # disk management software
         nautilus                        # file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
