@@ -70,11 +70,11 @@
       enable = true;
       anki.enable = true;
       davis.enable = true;
-      docker.enable = true;
       files.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
       memos.enable = true;
+      nextcloud.enable = true;
       suwayomi.enable = true;
     };
 
