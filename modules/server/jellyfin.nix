@@ -23,5 +23,7 @@
       jellyfin-web
       jellyfin-ffmpeg
     ];
+
+    users.users.jellyfin.extraGroups = [ "video" "render" ];
   };
 }
