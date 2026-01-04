@@ -33,6 +33,7 @@
     server = {
       enable = true;
       anki.enable = true;
+      davis.enable = true;
     };
 
     system = {

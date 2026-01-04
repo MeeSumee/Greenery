@@ -11,7 +11,7 @@
   config = lib.mkIf (config.greenery.server.davis.enable && config.greenery.server.enable) {
 
     age.secrets = {
-      secret3.file = ../../secrets/secret3.age;
+      secret1.file = ../../secrets/secret1.age;
       secret4.file = ../../secrets/secret4.age;
     };
 
@@ -21,7 +21,7 @@
         hostname = "localhost";
 
         adminLogin = "sumee";
-        adminPasswordFile = config.age.secrets.secret3.path;
+        adminPasswordFile = config.age.secrets.secret1.path;
         appSecretFile = config.age.secrets.secret4.path;
 
         nginx.listen = [
