@@ -10,6 +10,7 @@
     ./immich.nix
     ./jellyfin.nix
     ./memos.nix
+    ./ollama.nix
     ./suwayomi.nix
   ];
   

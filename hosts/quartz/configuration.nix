@@ -64,6 +64,11 @@
       steam.enable = true;
     };
 
+    server = {
+      enable = true;
+      ollama.enable = true;
+    };
+
     system = {
       enable = true;
       fish.enable = true;
