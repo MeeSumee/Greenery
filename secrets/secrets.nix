@@ -20,7 +20,7 @@ let
 
 in {
   "secret1.age".publicKeys = hosts.greenery ++ hosts.verdure;
-  "secret2.age".publicKeys = hosts.greenery;
+  "secret2.age".publicKeys = hosts.greenery ++ hosts.verdure;
   "secret3.age".publicKeys = hosts.verdure;
   "secret4.age".publicKeys = hosts.verdure;
   "secret5.age".publicKeys = hosts.kaolin;
