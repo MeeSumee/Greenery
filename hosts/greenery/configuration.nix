@@ -110,13 +110,11 @@
     programs = {
       enable = true;
       core.enable = true;
-      headless.enable  = true;
       nvim.enable = true;
     };
 
     server = {
       enable = true;
-      davis.enable = true;
       files.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
@@ -157,12 +155,6 @@
     # here, NOT in environment.systemPackages
   ];
 
-  # Java
-  programs.java = {
-    enable = true;
-    package = pkgs.jre8_headless;
-  };
-
   # Agenix keyfile
   age.secrets.secret1.file = ../../secrets/secret1.age;
 
@@ -173,7 +165,7 @@
       repo = "/mnt/repo";
       encryption = {
         mode = "repokey-blake2";
-        passCommand = "cat ${config.age.secrets.secret2.path}";
+        passCommand = "cat ${config.age.secrets.secret1.path}";
       };
       compression = "auto,zstd";
       startAt = "Wed 03:00:00";

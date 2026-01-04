@@ -22,6 +22,9 @@
     # Disable nano
     programs.nano.enable = false;
 
+    # Enable git
+    programs.git.enable = true;
+
     # Set default editor
     environment.variables = {
       EDITOR = "nvim";

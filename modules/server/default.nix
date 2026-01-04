@@ -1,5 +1,6 @@
 { 
-  lib, 
+  lib,
+  config,
   ... 
 }: {
 
@@ -15,4 +16,10 @@
   ];
   
   options.greenery.server.enable = lib.mkEnableOption "enable server modules";
+
+  config = lib.mkIf config.greenery.server.enable {
+
+    # Enable GNU Screen
+    programs.screen.enable = true;
+  };
 }

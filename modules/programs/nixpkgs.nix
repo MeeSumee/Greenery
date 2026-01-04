@@ -1,4 +1,4 @@
-# Common Programs used by GUI Hosts
+# Common Programs used by hosts
 {
   inputs,
   config,
@@ -12,8 +12,6 @@
   options.greenery.programs = {
     core.enable = lib.mkEnableOption "enable core programs";
 
-    headless.enable = lib.mkEnableOption "enable core headless programs";
-
     desktop.enable = lib.mkEnableOption "enable desktop programs";
 
     heavy.enable = lib.mkEnableOption "enable heavy/demanding programs";
@@ -25,12 +23,12 @@
     # Core programs
     (lib.mkIf (config.greenery.programs.core.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
-        git                             # git commands, highly important
         btop-rocm                       # hardware monitor
         tree                            # enables tree view in terminal
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
         npins                           # Npins source manager
+        speedtest-cli                   # internet speedtest cli utility
       ];
 
       # Enables intel gpu monitoring
@@ -40,14 +38,6 @@
         source = lib.getExe pkgs.btop-rocm;
         capabilities = "cap_perfmon+ep";
       };
-    })
-
-    # Headless programs
-    (lib.mkIf (config.greenery.programs.headless.enable && config.greenery.programs.enable) {
-      environment.systemPackages = with pkgs; [
-        screen                          # utility to split terminal sessions during ssh login
-        speedtest-cli                   # internet speedtest cli utility
-      ];
     })
 
     # Desktop applications
@@ -128,7 +118,7 @@
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
       
       environment.systemPackages = with pkgs; [
-        gimp3                           # GIMP image manipulator
+        gimp                            # GIMP image manipulator
         kicad                           # KiCAD Electronic schematic/PCB designer
         rare                            # GUI based on legendary which is a port of Epic Games
         prismlauncher                   # minecraft 

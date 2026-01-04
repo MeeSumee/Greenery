@@ -58,7 +58,6 @@
       foot.enable = true;
       micro.enable = true;
       core.enable = true;
-      headless.enable  = true;
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;
