@@ -10,22 +10,17 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Removed caddy-tailscale in favor of Tailscale's built-in Services functionality.
-
-SamToki-Cursors are being redefined to be built from source rather than completing the finished
-derivation and shelfing into my repository. PR is currently drafted.
-
-I've added workflows and cachix to make my builds faster tho :>
+Started Selfhosting Ollama with my gaming PC. Works well for its job.
 
 # Greenery
 
-Dell Optiplex 7050 with a Radeon RX 550 SFF GPU.
+Dell Optiplex 7050.
 
 Hosts several self-hosted services.
 
 Reverse proxied using tailscale serve and tailscale service assignment.
 
-Future Endeavors: SSD Caching for Taildrive, improve functionality of jellyfin.
+Future Endeavors: Improve functionality of jellyfin.
 
 # Verdure
 
@@ -33,7 +28,7 @@ Raspberry Pi 4 Model B with 8GB of RAM.
 
 Currently acts as an exit-node replacement of Greenery.
 
-Future Endeavors: Add Smart-Home capabilities, act as alternate self-hosted device.
+Future Endeavors: Add Smart-Home capabilities.
 
 # Kaolin
 
@@ -217,9 +212,7 @@ Custom-built gaming pc intended for workstation and gaming.
 
 Intended to be used as my nix-config manager while I'm at home.
 
-Attempted iGPU passthrough windows VM currently stale. Might end up abandoning it entirely for winboat.
-
-Future Endeavors: Potential AI hosting?
+Future Endeavors: Winboat?
 
 <details>
 <summary>Quartz PC Specifications</summary>
