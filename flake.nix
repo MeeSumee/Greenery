@@ -11,6 +11,7 @@
     # Hjem
     hjem = {
       url = "github:feel-co/hjem";
+      inputs.nix-darwin.follows = "";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.smfh.follows = "";
     };
@@ -34,6 +35,7 @@
     wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "";
     };
 
     # Lanzaboote
