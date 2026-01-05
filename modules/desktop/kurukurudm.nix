@@ -1,16 +1,10 @@
 {
   pkgs,
   config,
-  users,
   lib,
   inputs,
   ...
 }: let
-  uwuToHypr = pkgs.runCommandLocal "quick" {} ''
-    awk '/^export/ { split($2, ARR, "="); print "env = "ARR[1]","ARR[2]}' ${../../dots/uwsm/env} > $out
-  '';
-
-  # Set wallpaper
   listening = pkgs.fetchurl {
     name = "listening";
     url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
@@ -24,22 +18,30 @@ in {
 
   config = lib.mkIf (config.greenery.desktop.kurukurudm.enable && config.greenery.desktop.enable) {
 
-    # Rex's DM so I don't have problems with fprintd
-    programs.kurukuruDM = {
-      enable = true;
-      settings = {
-        wallpaper = listening;
-        default_user = builtins.elemAt users 0;
-        instantAuth = false;
-        extraConfig = ''
-          monitor = DP-1, 3840x2160, 1920x0, 2
-          monitor = DP-2, 1920x1080, 0x0, 1
-          # night light
-          exec-once = wlsunset -T 3000 -t 2999
-          source = ${uwuToHypr}
-        '';
-      };
-    };
+    # Set wallpaper
+    programs.kurukuruDM.settings.wallpaper = listening;
+
+    # Set niri as base for rex's DM
+    services.greetd.settings.default_session.command = let
+      cfg = config.programs.kurukuruDM;
+      autostart = pkgs.writeShellScript "autostart.sh" ''
+        ${cfg.finalOpts} ${cfg.package}/bin/kurukurubar && pkill niri
+      '';
+      niri = pkgs.writeText "config.kdl" ''
+        output "eDP-1" {
+          mode "2880x1800@60"
+          scale 1.5
+          transform "normal"
+          position x=0 y=0
+        }
+        cursor {
+          xcursor-theme "xcursor-genshin-nahida"
+          xcursor-size 36
+        }
+        spawn-at-startup "${autostart}"
+      '';
+    in
+      lib.mkForce "${config.programs.niri}/bin/niri -c ${niri}";
   };
 }
 
