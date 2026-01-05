@@ -22,7 +22,6 @@
       fail2ban.enable = true;
       openssh.enable = true;
       tailscale.enable = true;
-      taildrive.enable = true;
     };
 
     programs = {
@@ -43,8 +42,8 @@
     };
   };
 
-
-  networking.hostName = "verdure"; # Alias for Greenery
+  # Alias for Greenery
+  networking.hostName = "verdure";
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -68,7 +67,7 @@
       compression = "auto,zstd";
       startAt = "Mon 04:00:00";
 
-      # Mount remote drive as tiny core linux doesn't have borg packaged
+      # Mount taildrive on demand
       preHook = ''
         ${pkgs.sshfs}/bin/sshfs -o \
         allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
