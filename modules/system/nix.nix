@@ -12,7 +12,7 @@
 
   # Enable core nix features
   nix = {
-    package = pkgs.nixVersions.nix_2_30;
+    package = pkgs.nixVersions.latest;
     registry.nixpkgs.flake = inputs.nixpkgs;
     channel.enable = false;
     settings = {
