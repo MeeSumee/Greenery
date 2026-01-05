@@ -146,6 +146,15 @@
     # Open Firewall ports for ethernet sharing
     # I just used nmtui to set enp0s31f6 to shared cause declarative approach didn't work
     firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
+
+    # Open ports for tailscale to remove NAT overhead
+    firewall.interfaces."tailscale0".allowedTCPPorts = [
+      2283
+      4567
+      5230
+      6969
+      8096
+    ];
   };
 
   # Enable non-nix executables for dynamic libraries such as minecraft scripts

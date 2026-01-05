@@ -41,12 +41,10 @@
   networking.hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable nftables & Tailscale DNS-crypt forwarding
+  # Enable Tailscale DNS-crypt forwarding
   networking = {
-    nftables.enable = true;
     firewall = {
       interfaces."tailscale0" = {
-        allowedTCPPorts = [22];
         allowedUDPPorts = [53];
       };
     };

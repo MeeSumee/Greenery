@@ -51,7 +51,6 @@
 
   # Core programs for Pi set here temporarily
   environment.systemPackages = with pkgs; [
-    git
     tree
     unzip
     fzf
@@ -80,6 +79,19 @@
       postHook = ''
         ${pkgs.umount}/bin/umount -l /mnt
       '';
+    };
+  };
+
+  # Open tailscale firewall ports
+  networking = {
+    firewall = {
+      interfaces."tailscale0" = {
+        allowedUDPPorts = [53];
+        allowedTCPPorts = [
+          3600
+          27701
+        ];
+      };
     };
   };
 
