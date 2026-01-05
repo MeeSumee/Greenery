@@ -107,7 +107,6 @@
   
   # Exit-node flags
   services.tailscale = {
-    openFirewall = true;
     extraSetFlags = [
       "--advertise-exit-node"
       "--webclient"

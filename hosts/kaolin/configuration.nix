@@ -169,7 +169,6 @@
 
   # Exit-node flags
   services.tailscale = {
-    openFirewall = true;
     extraSetFlags = [
       "--advertise-exit-node"
       "--advertise-routes=172.16.0.2/32"
