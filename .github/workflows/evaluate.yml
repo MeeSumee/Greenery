@@ -19,7 +19,7 @@ jobs:
       with:
         name: sumee
     - name: Kaolin Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#kaolin
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#kaolin
 
   greenery:
     name: Greenery Evaluation
@@ -33,7 +33,7 @@ jobs:
       with:
         name: sumee
     - name: Greenery Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#greenery
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#greenery
 
   verdure:
     name: Verdure Evaluation
@@ -47,7 +47,7 @@ jobs:
       with:
         name: sumee
     - name: Verdure Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#verdure
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#verdure
 
   graphite:
     name: Graphite Evaluation
@@ -61,7 +61,7 @@ jobs:
       with:
         name: sumee
     - name: Graphite Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#graphite
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#graphite
 
   beryl:
     name: Beryl Evaluation
@@ -75,7 +75,7 @@ jobs:
       with:
         name: sumee
     - name: Beryl Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#beryl
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#beryl
 
   quartz:
     name: Quartz Evaluation
@@ -89,4 +89,4 @@ jobs:
       with:
         name: sumee
     - name: Quartz Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild-ng dry-build --flake .#quartz
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#quartz
