@@ -11,7 +11,7 @@
       "submodules": false,
       "revision": "0af0e26901b60ada4b20522df739f032797b07c3",
       "url": "https://github.com/catppuccin/fuzzel/archive/0af0e26901b60ada4b20522df739f032797b07c3.tar.gz",
-      "hash": "163shqaf52gfp26526sizxvxz0j4b2gkifrz5ppqbaqqdcq2v4jy"
+      "hash": "sha256-XpItMGsYq4XvLT+7OJ9YRILfd/9RG1GMuO6J4hSGepg="
     },
     "micro-bounce": {
       "type": "Git",
@@ -61,9 +61,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312",
-      "url": "https://github.com/rose-pine/btop/archive/6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312.tar.gz",
-      "hash": "15s3llr9snrg30fh39a2gfzmjd8p5ki8vaggznm9jirjzdhm0a5i"
+      "revision": "c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e",
+      "url": "https://github.com/rose-pine/btop/archive/c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e.tar.gz",
+      "hash": "sha256-vtqqMEQbPOSRfQ28RIln5zZ4cZlyB3sMc2NaLUcITWo="
     },
     "rosefish": {
       "type": "Git",
@@ -74,9 +74,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b82982c55582cfaf6f220de1893c7c73dd0cb301",
-      "url": "https://github.com/rose-pine/fish/archive/b82982c55582cfaf6f220de1893c7c73dd0cb301.tar.gz",
-      "hash": "1qqxragn6hynxkf5lbfkbhvqy0w0rw2j9lq6a66lsffp9vbb1xhf"
+      "revision": "0749331afd4be6bc8035a812a20e489efe1d616f",
+      "url": "https://github.com/rose-pine/fish/archive/0749331afd4be6bc8035a812a20e489efe1d616f.tar.gz",
+      "hash": "sha256-hOcsGt0IMoX1a02t85qeoE381XEca0F2x0AtFNwOqj0="
     },
     "rosefoot": {
       "type": "Git",
@@ -87,10 +87,10 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "725e9c38880d577ee973eb916e83395964ffc287",
-      "url": "https://github.com/rose-pine/foot/archive/725e9c38880d577ee973eb916e83395964ffc287.tar.gz",
-      "hash": "1x6k38mharmvp5bfwvhzmyy0z45hlhb54wqk95a87fgyka80g3rf"
+      "revision": "b35cec816fbfb8d319123694c080f7025cf10798",
+      "url": "https://github.com/rose-pine/foot/archive/b35cec816fbfb8d319123694c080f7025cf10798.tar.gz",
+      "hash": "sha256-IecTpIM1vygExSyVG5486mZ7SWkdw6VdhtI7QrfKvJs="
     }
   },
-  "version": 5
+  "version": 7
 }
