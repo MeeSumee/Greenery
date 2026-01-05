@@ -18,7 +18,7 @@
       graphics = {
         enable = true;
         extraPackages = with pkgs; [
-          vpl-gpu-rt
+          intel-ocl
           intel-media-driver
         ];
       };
