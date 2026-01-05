@@ -26,6 +26,10 @@
       "TS_DEBUG_FIREWALL_MODE=nftables" 
     ];
 
+    # Stop wait-online service
+    systemd.services.NetworkManager-wait-online.enable = false;
+    boot.initrd.systemd.network.wait-online.enable = false;
+
     # Fix system hang when no internet connection
     systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
   };
