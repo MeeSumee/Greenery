@@ -31,6 +31,6 @@ jobs:
       if: steps.filter.outputs.lockfile == 'true'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
-    - name: build packages
+    - name: push built derivations
       if: steps.filter.outputs.packages == 'true' || steps.filter.outputs.lockfile == 'true'
-      run: nix build --no-link --print-out-paths .#papiteal .#nahidacursor
+      run: nix run github:Mic92/nix-fast-build -- --no-link --no-nom --skip-cached
