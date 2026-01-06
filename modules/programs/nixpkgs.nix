@@ -23,7 +23,7 @@
     # Core programs
     (lib.mkIf (config.greenery.programs.core.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
-        btop-rocm                       # hardware monitor
+        btop                            # hardware monitor
         tree                            # enables tree view in terminal
         unzip                           # unzip cli utility
         fzf                             # Fuzzy finder
@@ -35,7 +35,7 @@
       security.wrappers.btop = { 
         owner = "root"; 
         group = "root"; 
-        source = lib.getExe pkgs.btop-rocm;
+        source = lib.getExe pkgs.btop;
         capabilities = "cap_perfmon+ep";
       };
     })

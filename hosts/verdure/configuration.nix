@@ -26,6 +26,7 @@
 
     programs = {
       enable = true;
+      core.enable = true;
       nvim.enable = true;
     };
 
@@ -48,14 +49,11 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Core programs for Pi set here temporarily
+  # Pi programs
   environment.systemPackages = with pkgs; [
-    tree
-    unzip
-    fzf
-    npins
     libraspberrypi
     raspberrypi-eeprom
+    wakeonlan
   ];
 
   # Set borg backup service for anki
