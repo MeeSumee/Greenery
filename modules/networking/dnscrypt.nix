@@ -40,9 +40,10 @@
         cloaking_rules = pkgs.writeText "cloaking_rules.txt" ''
           greenery fd7a:115c:a1e0::8d34:ce04
           verdure fd7a:115c:a1e0::8034:cf55
+          kaolin fd7a:115c:a1e0::9034:6f42
           seed 10.42.0.160
 
-          kaolin fd7a:115c:a1e0::9034:6f42
+          graphite fd7a:115c:a1e0::8234:a473
           beryl fd7a:115c:a1e0::234:1456
           quartz fd7a:115c:a1e0::8c34:6d1e
           obsidian fd7a:115c:a1e0::c634:f339
