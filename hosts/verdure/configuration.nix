@@ -82,13 +82,11 @@
   # Open tailscale firewall ports
   networking = {
     firewall = {
-      interfaces."tailscale0" = {
-        allowedUDPPorts = [53];
-        allowedTCPPorts = [
-          3600
-          27701
-        ];
-      };
+      allowedUDPPorts = [53];
+      interfaces."tailscale0".allowedTCPPorts = [
+        3600
+        27701
+      ];
     };
   };
 

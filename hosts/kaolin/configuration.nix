@@ -42,13 +42,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable Tailscale DNS-crypt forwarding
-  networking = {
-    firewall = {
-      interfaces."tailscale0" = {
-        allowedUDPPorts = [53];
-      };
-    };
-  };
+  networking.firewall.allowedUDPPorts = [53];
 
   # Define Swiss dnscrypt proxy config
   services.dnscrypt-proxy.settings = {
