@@ -99,5 +99,16 @@
     packages = eachSystem (attrs: callModule ./pkgs attrs);
 
     nixosConfigurations = callModule ./hosts {};
+
+    checks = nixpkgs.lib.genAttrs (import systems) (
+      system:
+      let
+        inherit (nixpkgs) lib;
+        nixosMachines = lib.mapAttrs' (
+          name: config: lib.nameValuePair "nixos-${name}" config.config.system.build.toplevel
+        ) ((lib.filterAttrs (_: config: config.pkgs.stdenv.hostPlatform.system == system)) self.nixosConfigurations);
+      in
+      nixosMachines
+    );
   };
 }
