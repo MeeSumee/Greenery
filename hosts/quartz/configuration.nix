@@ -45,7 +45,7 @@
 
     networking = {
       enable = true;
-      bluetooth.enable = true;      
+      bluetooth.enable = true;
       dnscrypt.enable = true;
       openssh.enable = true;
       taildrive.enable = true;
@@ -80,6 +80,10 @@
 
   networking.hostName = "quartz"; # The color of my desktop + piezoelectric shenanigans
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Enable Wake on LAN
+  networking.interfaces.enp6s0.wakeOnLan.enable = true;
+  networking.firewall.interfaces."enp6s0".allowedUDPPorts = [ 9 ];
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
