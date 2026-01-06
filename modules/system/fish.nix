@@ -8,7 +8,7 @@
 }:
 
 let
-  rebuildCommand = "nixos-rebuild --flake ~/green# --sudo";
+  rebuildCommand = "nixos-rebuild --flake ~/green# -S";
 
 in {
 
@@ -39,9 +39,9 @@ in {
 
         # nix stuff
         snr = rebuildCommand;
-        nsh = "nix shell nixpkgs#";
-        nrn = "nix run nixpkgs#";
-        nbn = "nix build nixpkgs#";
+        ns = "nix shell nixpkgs#";
+        nr = "nix run nixpkgs#";
+        nb = "nix build nixpkgs#";
 
         # git stuff
         gaa = "git add --all";
@@ -64,7 +64,6 @@ in {
         gl = "git log";
 
         # misc
-        qsp = "qs -p ~/green/dots/quickshell/";
         n = "nvim";
       };
 
@@ -76,7 +75,9 @@ in {
         snowstorm = "${rebuildCommand} test";
         snowshed = "${rebuildCommand} dry-build";
         schizo = "ssh sumee@greenery";
-        escape = "ssh sumee@kaolin";
+        libre = "ssh sumee@kaolin";
+        deployin = "${rebuildCommand} --use-substitutes --target-host sumee@kaolin boot";
+        deployer = "${rebuildCommand} --build-host sumee@verdure --target-host sumee@verdure boot";
       };
 
       # Coloring shell, referenced from Zaphkiel config
