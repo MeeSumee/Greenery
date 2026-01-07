@@ -10,6 +10,8 @@ jobs:
   evaluation:
     name: NixOS Evaluation
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     strategy:
       matrix:
         hosts: [beryl, greenery, graphite, kaolin, quartz, verdure] 
@@ -19,7 +21,11 @@ jobs:
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
       with:
+        nix_version: 2.31.2
         nix_conf: |
+          max-jobs = auto
+          keep-build-log = false
+          timeout = 1000
           keep-env-derivations = true
           keep-outputs = true
 
@@ -41,4 +47,4 @@ jobs:
         name: sumee
 
     - name: ${{ matrix.hosts }} evaluation
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#${{ matrix.hosts }}
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build -Q --quiet --flake .#${{ matrix.hosts }}
