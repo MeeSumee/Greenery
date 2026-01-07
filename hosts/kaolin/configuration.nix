@@ -166,7 +166,6 @@
     extraSetFlags = [
       "--advertise-exit-node"
       "--advertise-routes=172.16.0.2/32"
-      "--webclient"
       "--netfilter-mode=nodivert"
     ];
   };
