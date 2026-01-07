@@ -33,7 +33,7 @@ jobs:
         purge-primary-key: never
 
     - name: Cachix readonly
-    - uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v15
       with:
         name: sumee
 
