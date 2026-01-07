@@ -23,6 +23,7 @@ jobs:
       with:
         nix_version: 2.31.2
         nix_conf: |
+          print-missing = false
           max-jobs = auto
           keep-build-log = false
           timeout = 1000
@@ -47,4 +48,4 @@ jobs:
         name: sumee
 
     - name: ${{ matrix.hosts }} evaluation
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build -Q --quiet --flake .#${{ matrix.hosts }}
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --quiet --flake .#${{ matrix.hosts }}
