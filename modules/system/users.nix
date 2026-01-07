@@ -36,7 +36,7 @@ in {
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINSVW1+OKXQC3P/x/7SOl6D46BmHPUyFUytFK7G+7kNl 本当に愛してぇる"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGg78BA24qgFIDr0+8xgx1TH5PSOQd8qrtCwlyGUvTi0 本当に愛してぇる"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq いやん〜墨ｗｗｗｗ"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmulMynbxFomEUcObvRBp3bVd7kH+dO/6s/0kSBPbbg bedsheetsSoft&Warm"
           ];
