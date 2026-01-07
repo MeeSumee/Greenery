@@ -43,7 +43,7 @@ jobs:
         purge-primary-key: never
 
     - name: Fix nix.conf dir
-      run: cp ${XDG_CONFIG_HOME:-$HOME/.config}/nix/nix.conf /etc/nix/nix.conf
+      run: mkdir /etc/nix && cp ${XDG_CONFIG_HOME:-$HOME/.config}/nix/nix.conf /etc/nix/nix.conf
 
     - name: Cachix readonly
       uses: cachix/cachix-action@v15
