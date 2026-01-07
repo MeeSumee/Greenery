@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
+        hosts: [beryl, greenery, graphite, kaolin, quartz, verdure] 
     steps:
     - uses: actions/checkout@v5
 
@@ -41,15 +40,5 @@ jobs:
       with:
         name: sumee
 
-    - name: Kaolin Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#kaolin
-    - name: Greenery Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#greenery
-    - name: Verdure Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#verdure
-    - name: Graphite Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#graphite
-    - name: Beryl Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#beryl
-    - name: Quartz Dry-Build
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#quartz
+    - name: ${{ matrix.hosts }} evaluation
+      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --flake .#${{ matrix.hosts }}
