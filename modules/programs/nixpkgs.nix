@@ -58,8 +58,7 @@
         nautilus                        # file browser
         moonlight-qt                    # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme             # Rose-Pine Gtk Theme
-        grim                            # Screenshot tool
-        slurp                           # area selection tool used for grim and wl-screenrec
+        slurp                           # area selection tool used for wl-screenrec
         wl-clipboard                    # clipboard manager
         wl-screenrec                    # screen recorder
         brightnessctl                   # brightness ctl
