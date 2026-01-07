@@ -37,6 +37,7 @@
   };
 
   networking.hostName = "graphite"; # The workplace grindset + friend made me do it
+  networking.wireless.enable = lib.mkForce false;
 
   # Enable WSL Features
   wsl = {
