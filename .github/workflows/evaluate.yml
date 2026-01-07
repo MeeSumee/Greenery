@@ -15,8 +15,8 @@ jobs:
     - uses: nixbuild/nix-quick-install-action@v34
       with:
         nix_conf: |
-        keep-env-derivations = true
-        keep-outputs = true
+          keep-env-derivations = true
+          keep-outputs = true
     - uses: cachix/cachix-action@v15
       with:
         name: sumee
