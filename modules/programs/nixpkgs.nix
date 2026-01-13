@@ -44,11 +44,6 @@
     (lib.mkIf (config.greenery.programs.desktop.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
         
-        (pkgs.vesktop.override {
-          withMiddleClickScroll = true;
-          withSystemVencord = false;
-        })                              # Better discord + Overrides
-
         qimgv                           # image viewer
         wineWowPackages.waylandFull     # wine
         xournalpp                       # note taking
@@ -65,15 +60,12 @@
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
         ddcutil                         # Manipulating external monitors using i2c bus
         zpkgs.scripts.npins-show        # npins-show command
-
-        # Cursor Package
-        wo.nahidacursor
+        wo.nahidacursor                 # Cursor Package
+        wo.papiteal                     # Papirus Teal Icons
+        wo.vesktop                      # Vesktop with overrides
 
         # Noctalia Shell
         inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-
-        # Papirus Teal Icons
-        wo.papiteal
       ];
 
       # Core desktop services
@@ -118,7 +110,7 @@
       
       environment.systemPackages = with pkgs; [
         gimp                            # GIMP image manipulator
-        kicad                           # KiCAD Electronic schematic/PCB designer
+        kicad-small                     # KiCAD Electronic schematic/PCB designer
         rare                            # GUI based on legendary which is a port of Epic Games
         prismlauncher                   # minecraft 
         # davinci-resolve                 # Davinci-resolve video editor
