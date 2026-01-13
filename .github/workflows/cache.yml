@@ -25,6 +25,8 @@ jobs:
 
     - name: Aggressive disk space removal
       uses: wimpysworld/nothing-but-nix@v6
+      with:
+        nix-permission-edict: true  
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
