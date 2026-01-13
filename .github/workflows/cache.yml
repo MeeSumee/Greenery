@@ -61,4 +61,4 @@ jobs:
 
     - name: Push built derivations
       if: steps.filter.outputs.packages == 'true' || steps.filter.outputs.lockfile == 'true'
-      run: nix run github:Mic92/nix-fast-build -- --option max-build-log-size 1 --option print-missing false --option keep-build-log false --no-link --no-nom --skip-cached
+      run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached
