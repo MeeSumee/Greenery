@@ -23,10 +23,6 @@ jobs:
       with:
         nix_version: 2.31.2
         nix_conf: |
-          print-missing = false
-          max-jobs = auto
-          keep-build-log = false
-          timeout = 1000
           keep-env-derivations = true
           keep-outputs = true
 
