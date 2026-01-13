@@ -326,11 +326,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767127038,
-        "narHash": "sha256-HdBYw064+lvsH4W8zqH9RBJtd/efsE7rH9yyL8nN82c=",
+        "lastModified": 1768068574,
+        "narHash": "sha256-soyMOYmGVMMbwPuN2ioAD2lYjtxySZ5uj+zI/8maFt8=",
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel",
-        "rev": "9058c1b3c8bc8e95d80251b6217cde1852e32d08",
+        "rev": "71405a1459402b2c054d8282b94a7a74e615ecf8",
         "type": "github"
       },
       "original": {
