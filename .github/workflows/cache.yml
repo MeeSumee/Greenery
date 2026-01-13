@@ -10,9 +10,11 @@ jobs:
   populate-cache:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
-    - name: Filter Paths
-      uses: dorny/paths-filter@main
+    - name: Checkout
+      uses: actions/checkout@v5
+
+    - name: Filter
+      uses: dorny/paths-filter@v3
       id: filter
       with:
         filters: |
@@ -20,10 +22,12 @@ jobs:
             - 'flake.lock'
           packages:
             - 'pkgs/**'
-    - name: Launch Nuke
-      uses: wimpysworld/nothing-but-nix@main
+
+    - name: Aggressive disk space removal
+      uses: wimpysworld/nothing-but-nix@v6
+
     - name: Install Nix
-      uses: nixbuild/nix-quick-install-action@main
+      uses: nixbuild/nix-quick-install-action@v34
       with:
         nix_version: 2.31.2
         nix_conf: |
@@ -56,6 +60,6 @@ jobs:
       if: steps.filter.outputs.lockfile == 'true'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
-    - name: Push built systems
+    - name: Push built derivations
       if: steps.filter.outputs.packages == 'true' || steps.filter.outputs.lockfile == 'true'
-      run: nix run github:Mic92/nix-fast-build -- --no-link --no-nom --skip-cached
+      run: nix run github:Mic92/nix-fast-build -- --no-link --no-nom --skip-cached --cachix-cache sumee
