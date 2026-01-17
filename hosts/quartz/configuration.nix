@@ -33,7 +33,8 @@
       hypridle.enable = true;
       hyprlock.enable = true;
       niri.enable = true;
-      kurukurudm.enable = true;
+      # kurukurudm.enable = true;
+      sddm.enable = true;
       xserver.enable = true;
     };
 
