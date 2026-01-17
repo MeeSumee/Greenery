@@ -8,7 +8,7 @@
 
   config = lib.mkIf (config.greenery.desktop.sddm.enable && config.greenery.desktop.enable) {
 
-    # Enable gnome display manager
+    # Enable sddm display manager
     services.displayManager.sddm = {
       enable = true;
       wayland.enable = true;
