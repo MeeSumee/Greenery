@@ -107,14 +107,17 @@
 
     # Large/Demanding applications
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
-      
+
+       virtualisation.virtualbox.host.enable = true;
+       users.extraGroups.vboxusers.members = [ "sumee" ];
+
       environment.systemPackages = with pkgs; [
         gimp                            # GIMP image manipulator
         kicad-small                     # KiCAD Electronic schematic/PCB designer
         rare                            # GUI based on legendary which is a port of Epic Games
         prismlauncher                   # minecraft 
         # davinci-resolve                 # Davinci-resolve video editor
-
+        audacity                        # temp replacement
         # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)
         # (pkgs.callPackage ./davinci.nix {})
       ];
