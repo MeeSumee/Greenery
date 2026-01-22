@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }: {
 
@@ -14,8 +15,8 @@
       dhcpcd.extraConfig = "nohook resolv.conf";
       networkmanager.dns = lib.mkForce "none";
       nameservers = [
-        "::1"
         "127.0.0.1"
+        "::1"
       ];
     };  
    
@@ -48,6 +49,14 @@
           quartz fd7a:115c:a1e0::8c34:6d1e
           obsidian fd7a:115c:a1e0::c634:f339
         '';
+
+        blocked_names.blocked_names_file = let
+          extrablocklist = '''';
+          blocklist = pkgs.writeText "blocklist.txt" ''
+            ${extrablocklist}
+            ${builtins.readFile inputs.blocklist}
+          '';
+        in blocklist;
 
         sources.public-resolvers = {
           urls = [
