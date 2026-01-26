@@ -108,9 +108,6 @@
     # Large/Demanding applications
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
 
-       virtualisation.virtualbox.host.enable = true;
-       users.extraGroups.vboxusers.members = [ "sumee" ];
-
       environment.systemPackages = with pkgs; [
         gimp                            # GIMP image manipulator
         kicad-small                     # KiCAD Electronic schematic/PCB designer
