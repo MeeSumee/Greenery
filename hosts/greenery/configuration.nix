@@ -144,8 +144,8 @@
     };
 
     # Open Firewall ports for ethernet sharing
-    # I just used nmtui to set enp0s31f6 to shared cause declarative approach didn't work
-    firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
+    # I just used nmtui to set ethernet device to shared cause declarative approach didn't work
+    firewall.interfaces."enp3s0".allowedUDPPorts = [53 67];
 
     # Open ports for tailscale to remove NAT overhead
     firewall.interfaces."tailscale0".allowedTCPPorts = [
