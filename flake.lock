@@ -54,11 +54,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769182832,
-        "narHash": "sha256-aeUNtsZzB875kNF/ZvvHa40YlLF4VEVlH1grab+dBiM=",
+        "lastModified": 1769431799,
+        "narHash": "sha256-o3hrapkUCWySFQ2K3d3hXq96Wy75xa5yti71Bp+K9l4=",
         "owner": "asus-linux-drivers",
         "repo": "asus-numberpad-driver",
-        "rev": "fd4fa0cf1fb0493ae0f5ecb0cd7d738ec59452b3",
+        "rev": "63deedffc6474ae8ea710850ef4d0eb9a9319960",
         "type": "github"
       },
       "original": {
@@ -161,11 +161,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1768305791,
-        "narHash": "sha256-AIdl6WAn9aymeaH/NvBj0H9qM+XuAuYbGMZaP0zcXAQ=",
+        "lastModified": 1769170682,
+        "narHash": "sha256-oMmN1lVQU0F0W2k6OI3bgdzp2YOHWYUAw79qzDSjenU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1412caf7bf9e660f2f962917c14b1ea1c3bc695e",
+        "rev": "c5296fdd05cfa2c187990dd909864da9658df755",
         "type": "github"
       },
       "original": {
@@ -182,11 +182,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769398289,
-        "narHash": "sha256-9UpfRxSbpwotrWilg4XbUPD4HntCoFTd0JfaO4JukXU=",
+        "lastModified": 1769449928,
+        "narHash": "sha256-fV7n9IWFZqC7qg7GAF3sO1VEadRaPCI6uf9CT0H9g+A=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "0e10ebbd32fc7fe65b94a4f938fbf0202e258260",
+        "rev": "e66a77a801e09d3fbaca7a7e595e5b94167d838b",
         "type": "github"
       },
       "original": {
