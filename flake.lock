@@ -67,18 +67,6 @@
         "type": "github"
       }
     },
-    "blocklist": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-cmUermUScHtI2b6qdWfqqUh3uta6TO6uIsLale7QVC8=",
-        "type": "file",
-        "url": "https://big.oisd.nl/domainswild"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://big.oisd.nl/domainswild"
-      }
-    },
     "crane": {
       "locked": {
         "lastModified": 1765145449,
@@ -212,7 +200,6 @@
         "aagl": "aagl",
         "agenix": "agenix",
         "asusnumpad": "asusnumpad",
-        "blocklist": "blocklist",
         "hjem": "hjem",
         "lanzaboote": "lanzaboote",
         "nixpkgs": "nixpkgs_2",

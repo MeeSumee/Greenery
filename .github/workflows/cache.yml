@@ -25,6 +25,7 @@ jobs:
             - 'pkgs/**'
 
     - name: Aggressive disk space removal
+      if: steps.filter.outputs.packages == 'true'
       uses: wimpysworld/nothing-but-nix@v6
       with:
         nix-permission-edict: true  
