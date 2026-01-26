@@ -64,6 +64,7 @@
       inputs.stash.follows = "";
       inputs.booru-hs.follows = "";
       inputs.hs-todo.follows = "";
+      inputs.nixos-wsl.follows = "";
     };
 
     # Agenix
