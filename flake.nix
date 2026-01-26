@@ -75,12 +75,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
-
-    # domain blocklist
-    blocklist = {
-      url = "https://big.oisd.nl/domainswild";
-      flake = false;
-    };
   };
 
   # RexCrazy804 Schematic

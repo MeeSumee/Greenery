@@ -1,5 +1,18 @@
 {
   "pins": {
+    "blocklist": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "StevenBlack",
+        "repo": "hosts"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "6897cff7b21b609800ddd61abe109587079a4ca1",
+      "url": "https://github.com/StevenBlack/hosts/archive/6897cff7b21b609800ddd61abe109587079a4ca1.tar.gz",
+      "hash": "sha256-NEBWlyBQllOI5L2dneXFxHYKM7kB7uofyJIIzGYRdVI="
+    },
     "catfuzzel": {
       "type": "Git",
       "repository": {

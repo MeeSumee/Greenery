@@ -2,7 +2,7 @@
   lib,
   pkgs,
   config,
-  inputs,
+  sources,
   ...
 }: {
 
@@ -54,7 +54,7 @@
           extrablocklist = '''';
           blocklist = pkgs.writeText "blocklist.txt" ''
             ${extrablocklist}
-            ${builtins.readFile inputs.blocklist}
+            ${builtins.readFile sources.blocklist + "/hosts"}
           '';
         in blocklist;
 
