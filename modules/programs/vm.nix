@@ -2,18 +2,15 @@
   config, 
   lib, 
   pkgs,
-  users,
   ...
 }: {
 
-  options.greenery.programs.vindows.enable = lib.mkEnableOption "Virtual Machine Windows";
+  options.greenery.programs.vm.enable = lib.mkEnableOption "libvirtd for VM";
 
-  config = lib.mkIf (config.greenery.programs.vindows.enable && config.greenery.programs.enable) {
+  config = lib.mkIf (config.greenery.programs.vm.enable && config.greenery.programs.enable) {
 
     # Add users to libvirtd group
-    users.extraUsers = lib.genAttrs users (user: {  
-      extraGroups = [ "libvirtd" ];
-    });
+    users.users.sumee.extraGroups = [ "libvirtd" ];
 
     # Enable virt-man
     programs.virt-manager.enable = true;
@@ -35,15 +32,13 @@
     # Provide UEFI firmware support to virt-manager (due to depreciated OVMF module)
     systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
 
-    # Tell it to not fuck with port 53 from dnscrypt
-    services = {
-      dnsmasq = {
-        enable = true;
-        settings = {
-          listen-address = "127.0.0.1";
-          port = 5300;
-        };
-      };
+    # This might fucking work
+    networking = {
+      firewall.trustedInterfaces = [ "virbr0" ];
     };
+
+    environment.systemPackages = with pkgs; [
+      dnsmasq
+    ];
   };
 }
