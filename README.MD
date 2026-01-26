@@ -6,15 +6,21 @@ Consists of multiple devices:
 - [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
 - [Beryl](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#beryl): Personal Laptop for offsite provisioning.
 - [Graphite](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#graphite): NixOS-WSL Config for my Work Laptop.
-- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC with attempts of iGPU Passthrough Windows.
+- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
 
 ## Status Updates
 
-Started Selfhosting Ollama with my gaming PC. Works well for its job.
+Banshell dots are no longer available on master, please refer to the quickshell branch for Banshell dots.
+
+Greenery got a major upgrade from recent dumpster diving. Now a Dell XPS 8940 with an i7-11700.
+
+Implemented a DNS blocklist using npins.
+
+Xcursor PR is currently stale due to my laziness.
 
 # Greenery
 
-Dell Optiplex 7050.
+Dell XPS 8940.
 
 Hosts several self-hosted services.
 
@@ -210,8 +216,6 @@ linux programs to be used in parallel with Windows.
 
 Custom-built gaming pc intended for workstation and gaming.
 
-Intended to be used as my nix-config manager while I'm at home.
-
 Future Endeavors: Winboat?
 
 <details>
@@ -226,7 +230,7 @@ Future Endeavors: Winboat?
 </details>
 
 ## Credits
-[Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am. USE YOUR INTERNSHIP EXPERIENCE TO LEARN INDUSTRY-RELEVANT SKILLS.
+[Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am.
 He also gets a lot of credit for all the code I've stolen with permission.
 
 [Eel](https://github.com/zhuazhuzz) for his frontend expertise and generally helping me mald through life and code.
@@ -247,7 +251,7 @@ explicit licensing is included.
 ## Miscellaneous Sources
 - [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact)
 - [User Profile Picture (Nix & Git)](https://danbooru.donmai.us/posts/9246148)
-- [Dell Optiplex 3050 Tower Specifications and Image](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/OptiPlex-3050-Towers-Technical-Specifications.pdf)
+- [Dell XPS 8940 Specifications and Image](https://dl.dell.com/content/manual29571812-xps-8940-setup-and-specifications.pdf?language=en-us)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
 - [Vivian Banshee Wallpaper](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
 - [ASUSTek Zenbook S13 OLED, ASUS removed the website :(](https://www.bestbuy.com/site/asus-zenbook-s-13-oled-um5302-13-3-laptop-amd-ryzen-7-16-gb-memory-1-tb-ssd-ponder-blue/6510809.p)
