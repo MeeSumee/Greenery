@@ -80,7 +80,6 @@
         };
 
       in {
-        ".config/quickshell".source = ../../dots/quickshell;
         ".config/niri/config.kdl".text = keybinds;
         ".config/hypr/hypridle.conf".text = quickidle;
         ".config/noctalia/colors.json".source = "${inputs.noctalia}/Assets/ColorScheme/Rosepine/Rosepine.json";
