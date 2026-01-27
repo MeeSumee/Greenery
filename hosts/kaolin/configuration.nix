@@ -153,6 +153,7 @@
   # Add kaolin specific packages
   environment.systemPackages = with pkgs; [
     wgcf
+    ethtool
   ];
 
   # Clear tmp cache on reboot
@@ -168,6 +169,17 @@
       "--advertise-routes=172.16.0.2/32"
       "--netfilter-mode=nodivert"
     ];
+  };
+
+  # Tailscale Exit-Node Optimization
+  services.networkd-dispatcher = {
+    enable = true;
+    rules."50-tailscale-optimizations" = {
+      onState = [ "routable" ];
+      script = ''
+        ${pkgs.ethtool}/bin/ethtool -K eth0 rx-udp-gro-forwarding on rx-gro-list off
+      '';
+    };
   };
 
   # This value determines the NixOS release from which the default
