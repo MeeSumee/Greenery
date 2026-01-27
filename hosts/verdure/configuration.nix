@@ -1,4 +1,4 @@
-# Verdure (soon greenery) Configuration
+# Verdure Configuration
 {
   pkgs,
   ... 
@@ -53,14 +53,16 @@
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
-    wakeonlan
   ];
 
   # Set borg backup service for anki
   services.borgbackup.jobs = {
     anki = {
-      paths = [ "/var/lib/private/anki-sync-server" ];
-      repo = "/mnt/anki";
+      paths = [
+        "/var/lib/private/anki-sync-server"
+        "/var/lib/davis"
+      ];
+      repo = "/mnt/verback";
       encryption.mode = "none";
       compression = "auto,zstd";
       startAt = "Mon 04:00:00";
