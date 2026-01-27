@@ -16,10 +16,10 @@ let
 
   # Principle of least privilege, other than Nahida <3
 in {
-  "secret1.age".publicKeys = cute ++ soft;
-  "secret2.age".publicKeys = cute ++ soft;
-  "secret3.age".publicKeys = cute ++ soft;
-  "secret4.age".publicKeys = cute ++ soft;
+  "secret1.age".publicKeys = cute;
+  "secret2.age".publicKeys = nahida;
+  "secret3.age".publicKeys = nahida;
+  "secret4.age".publicKeys = cute;
   "secret5.age".publicKeys = soft ++ nahida;
   "secret6.age".publicKeys = sumee ++ nahida;
 }
