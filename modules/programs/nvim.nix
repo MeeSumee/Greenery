@@ -11,6 +11,6 @@ in {
 
   # nvim config by the cutie himself :D
   config = mkIf (config.greenery.programs.nvim.enable && config.greenery.programs.enable) {
-    environment.systemPackages = [pkgs.zpkgs.xvim.vivi];
+    environment.systemPackages = [pkgs.zpkgs.xvim.default];
   };
 }
