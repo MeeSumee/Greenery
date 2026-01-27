@@ -60,5 +60,5 @@ jobs:
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
     - name: Push built derivations
-      if: steps.filter.outputs.packages == 'true' | steps.filter.outputs.lockfile == 'true'
+      if: steps.filter.outputs.packages == 'true' || steps.filter.outputs.lockfile == 'true'
       run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached
