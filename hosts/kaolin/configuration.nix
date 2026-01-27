@@ -177,7 +177,7 @@
     rules."50-tailscale-optimizations" = {
       onState = [ "routable" ];
       script = ''
-        ${pkgs.ethtool}/bin/ethtool -K eth0 rx-udp-gro-forwarding on rx-gro-list off
+        ${pkgs.ethtool}/bin/ethtool -K ens3 rx-udp-gro-forwarding on rx-gro-list off
       '';
     };
   };
