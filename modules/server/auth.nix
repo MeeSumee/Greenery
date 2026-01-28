@@ -23,9 +23,9 @@
     virtualisation.oci-containers.containers."2fauth" = {
       image = "2fauth/2fauth:latest";
       pull = "newer";
+      environmentFiles = [config.age.secrets.secret3.path];
       environment = {
         "APP_ENV" = "production";
-        "APP_KEY_FILE" = config.age.secrets.secret3.path;
         "DB_CONNECTION" = "sqlite";
         "DB_DATABASE" = "/srv/database/database.sqlite";
       };

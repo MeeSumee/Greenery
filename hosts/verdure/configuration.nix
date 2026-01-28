@@ -33,6 +33,7 @@
     server = {
       enable = true;
       anki.enable = true;
+      auth.enable = true;
       davis.enable = true;
     };
 
@@ -61,6 +62,7 @@
       paths = [
         "/var/lib/private/anki-sync-server"
         "/var/lib/davis"
+        "/var/lib/2fauth"
       ];
       repo = "/mnt/verback";
       encryption.mode = "none";
@@ -87,6 +89,7 @@
       allowedUDPPorts = [53];
       interfaces."tailscale0".allowedTCPPorts = [
         3600
+        8000
         27701
       ];
     };
