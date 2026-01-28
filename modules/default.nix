@@ -68,6 +68,7 @@
     server = {
       enable = true;
       anki.enable = true;
+      auth.enable = true;
       davis.enable = true;
       files.enable = true;
       immich.enable = true;

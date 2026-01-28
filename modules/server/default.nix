@@ -6,6 +6,7 @@
 
   imports = [
     ./anki.nix
+    ./auth.nix
     ./davis.nix
     ./files.nix
     ./immich.nix
