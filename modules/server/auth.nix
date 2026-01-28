@@ -22,10 +22,11 @@
     # Containers
     virtualisation.oci-containers.containers."2fauth" = {
       image = "2fauth/2fauth:latest";
-      pull = "newer";
       environmentFiles = [config.age.secrets.secret3.path];
       environment = {
         "APP_ENV" = "production";
+        "APP_URL" = "https://auth.onca-ph.ts.net";
+        "ASSET_URL" = "https://auth.onca-ph.ts.net";
         "DB_CONNECTION" = "sqlite";
         "DB_DATABASE" = "/srv/database/database.sqlite";
       };
