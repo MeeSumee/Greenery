@@ -54,7 +54,7 @@
 
     # Zaphkiel config
     zaphkiel = {
-      url = "github:Rexcrazy804/Zaphkiel";
+      url = "git+https://codeberg.org/Rexcrazy804/Zaphkiel";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hjem.follows = "";

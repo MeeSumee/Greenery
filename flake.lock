@@ -304,17 +304,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1769326751,
-        "narHash": "sha256-KfR8vQKlbYBSEmcRo/70koz897Acl6QKZgfLtYxEfZo=",
-        "owner": "Rexcrazy804",
-        "repo": "Zaphkiel",
-        "rev": "20fafc086f610a1fc446875dff2a3c39da43a7c4",
-        "type": "github"
+        "lastModified": 1769663230,
+        "narHash": "sha256-lgPcVWMcPKWIjW8sJys4ent0N6YuGrdpdUYFG3QqlnM=",
+        "ref": "refs/heads/master",
+        "rev": "1b24f122e00810e9d94a2d831813a0495e2bcf38",
+        "revCount": 1699,
+        "type": "git",
+        "url": "https://codeberg.org/Rexcrazy804/Zaphkiel"
       },
       "original": {
-        "owner": "Rexcrazy804",
-        "repo": "Zaphkiel",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/Rexcrazy804/Zaphkiel"
       }
     }
   },
