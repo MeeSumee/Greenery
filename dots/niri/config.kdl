@@ -385,13 +385,12 @@ binds {
 
   // Mod-Shift-/, which is usually the same as Mod-?,
   // shows a list of important hotkeys.
-  Mod+Shift+Slash { show-hotkey-overlay; }
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
   Mod+R hotkey-overlay-title="Run Prompt: noctalia launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
   Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
-  Mod+X hotkey-overlay-title="Open Calculator" { spawn "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
+  Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
   // Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
   Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
 

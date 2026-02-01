@@ -51,6 +51,7 @@
         onlyoffice-desktopeditors       # office applications
         gparted                         # disk management software
         nautilus                        # file browser
+        gnome-calculator                # calculator
         moonlight-qt                    # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme             # Rose-Pine Gtk Theme
         slurp                           # area selection tool used for wl-screenrec
