@@ -56,9 +56,9 @@
     raspberrypi-eeprom
   ];
 
-  # Set borg backup service for anki
+  # Set borg backup service for services
   services.borgbackup.jobs = {
-    anki = {
+    grass = {
       paths = [
         "/var/lib/private/anki-sync-server"
         "/var/lib/davis"
