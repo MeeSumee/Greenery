@@ -76,7 +76,7 @@
   # Sets battery charge limit
   hardware.asus.battery = {
     chargeUpto = 80;   # Maximum level of charge for your battery, as a percentage.
-    enableChargeUptoScript = true; # Whether to add charge-upto to 80
+    enableChargeUptoScript = false; # Disable charge script
   };
 
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
