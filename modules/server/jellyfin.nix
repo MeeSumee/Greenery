@@ -8,16 +8,18 @@
   options.greenery.server.jellyfin.enable = lib.mkEnableOption "jellyfin service";
 
   config = lib.mkIf (config.greenery.server.jellyfin.enable && config.greenery.server.enable) {
-    
-    services = {
 
-      # Streaming Host
+    # Streaming Host
+    services = {
       jellyfin = {
         enable = true;
       };
     };
-    
-    # Lemme find out if I actually need this :)
+
+    # Hint Jellyfin Driver
+    systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
+
+    # jellyfin plugins
     environment.systemPackages = with pkgs; [
       jellyfin
       jellyfin-web

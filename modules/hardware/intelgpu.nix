@@ -20,6 +20,7 @@
         extraPackages = with pkgs; [
           intel-ocl
           intel-media-driver
+          vpl-gpu-rt
         ];
       };
     };
