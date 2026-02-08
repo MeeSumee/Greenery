@@ -1,5 +1,6 @@
 name: "Push derivations to cachix"
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
