@@ -60,7 +60,6 @@
         brightnessctl                   # brightness ctl
         wlsunset                        # I need fucking blue light filter, my fucking eyes hurt
         ddcutil                         # Manipulating external monitors using i2c bus
-        zpkgs.scripts.npins-show        # npins-show command
         wo.nahidacursor                 # Cursor Package
         wo.papiteal                     # Papirus Teal Icons
         wo.vesktop                      # Vesktop with overrides

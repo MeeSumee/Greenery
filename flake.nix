@@ -52,19 +52,11 @@
       inputs.flake-compat.follows = "";
     };
 
-    # Zaphkiel config
-    zaphkiel = {
-      url = "git+https://codeberg.org/Rexcrazy804/Zaphkiel";
+    # nvf
+    nvf = {
+      url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
-      inputs.hjem.follows = "";
-      inputs.hjem-impure.follows = "";
-      inputs.agenix.follows = "";
-      inputs.crane.follows = "";
-      inputs.stash.follows = "";
-      inputs.booru-hs.follows = "";
-      inputs.hs-todo.follows = "";
-      inputs.nixos-wsl.follows = "";
+      inputs.systems.follows= "systems";
     };
 
     # Agenix

@@ -25,7 +25,6 @@
           }:{
             nixpkgs.overlays = [
               (_: _: {
-                zpkgs = inputs.zaphkiel.packages.${pkgs.stdenv.hostPlatform.system};
                 wo = self.packages.${pkgs.stdenv.hostPlatform.system};
               })
             ];
