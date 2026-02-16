@@ -3,14 +3,11 @@
   pkgs,
   lib,
   users,
-  inputs,
   ...
 }: {
-
   options.greenery.desktop.niri.enable = lib.mkEnableOption "niri";
 
   config = lib.mkIf (config.greenery.desktop.niri.enable && config.greenery.desktop.enable) {
-
     # Enable Niri
     programs.niri = {
       enable = true;
@@ -20,7 +17,7 @@
     services.displayManager.defaultSession = "niri";
 
     # Xwayland satellite for X11 Windowing Support
-    systemd.user.services.xwayland-satellite.wantedBy = [ "graphical-session.target" ];
+    systemd.user.services.xwayland-satellite.wantedBy = ["graphical-session.target"];
 
     # Niri Dependencies
     environment.systemPackages = with pkgs; [
@@ -31,7 +28,6 @@
     # Niri Hjem config
     hjem.users = lib.genAttrs users (user: {
       files = let
-
         # Set keybind toggle scripts
         keybinds = let
           camerascript = pkgs.writeShellScriptBin "camScript" ''
@@ -54,7 +50,6 @@
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
 
-
         # Set hypridle command
         quickidle = let
           from = [
@@ -69,7 +64,7 @@
             "niri msg action power-on-monitors"
             "niri msg action power-off-monitors"
           ];
-        in   
+        in
           builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
 
         # Set noctalia wallpaper
@@ -78,15 +73,13 @@
           url = "https://cdn.donmai.us/original/bb/e8/bbe8f1413839cdacc56b28e05c502d5d.jpg?download=1";
           hash = "sha256-XbrujvmGo90L7EOY5i1ydc3GQi77NJ68mxVHyMMq5gg=";
         };
-
       in {
         ".config/niri/config.kdl".text = keybinds;
         ".config/hypr/hypridle.conf".text = quickidle;
-        ".config/noctalia/colors.json".source = "${inputs.noctalia}/Assets/ColorScheme/Rosepine/Rosepine.json";
+        ".config/noctalia/colors.json".source = "${pkgs.noctalia-shell}/share/noctalia-shell/Assets/ColorScheme/Rosepine/Rosepine.json";
         ".config/noctalia/settings.json".source = ../../dots/noctalia/settings.json;
         "wallpapers/schizomiku.jpg".source = schizomiku;
       };
     });
   };
 }
-

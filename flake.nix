@@ -4,7 +4,6 @@
   description = "MeeSumee's Flake Config";
 
   inputs = {
-
     # NixOS Unstable
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
@@ -14,12 +13,6 @@
       inputs.nix-darwin.follows = "";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.smfh.follows = "";
-    };
-
-    # Noctalia Shell
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Asusu numberpad driver
@@ -56,7 +49,7 @@
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows= "systems";
+      inputs.systems.follows = "systems";
     };
 
     # Agenix
@@ -84,23 +77,21 @@
     eachSystem = fn: lib.mapAttrs (system: pkgs: fn {inherit system pkgs;}) pkgsFor;
 
     callModule = path: attrs: import path (moduleArgs // attrs);
-
   in {
-    formatter = eachSystem ({pkgs,...}: pkgs.alejandra);
+    formatter = eachSystem ({pkgs, ...}: pkgs.alejandra);
 
     packages = eachSystem (attrs: callModule ./pkgs attrs);
 
     nixosConfigurations = callModule ./hosts {};
 
     checks = nixpkgs.lib.genAttrs (import systems) (
-      system:
-      let
+      system: let
         inherit (nixpkgs) lib;
         nixosMachines = lib.mapAttrs' (
           name: config: lib.nameValuePair "nixos-${name}" config.config.system.build.toplevel
         ) ((lib.filterAttrs (_: config: config.pkgs.stdenv.hostPlatform.system == system)) self.nixosConfigurations);
       in
-      nixosMachines
+        nixosMachines
     );
   };
 }
