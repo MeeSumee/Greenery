@@ -45,7 +45,7 @@
       inputs.flake-compat.follows = "";
     };
 
-    # nvf
+    # nvim nvf
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,34 +62,56 @@
     };
   };
 
-  # RexCrazy804 Schematic
+  # Short, but fucked Schematic
   outputs = inputs: let
+    # Essentially takes in everything
     inherit (inputs) nixpkgs self systems;
+    # inherits lib to be used below
     inherit (nixpkgs) lib;
 
     # npin integration to flakes
     sources = import ./npins;
 
+    # pkgsFor defines x64/ARM/darwin etc with systems input
     pkgsFor = lib.getAttrs (import systems) nixpkgs.legacyPackages;
 
-    moduleArgs = {inherit inputs self sources lib;};
+    # moduleArgs defined for callModule
+    moduleArgs = {
+      inherit
+        inputs
+        self
+        sources
+        lib
+        ;
+    };
 
+    # I don't understand this, ask rex
     eachSystem = fn: lib.mapAttrs (system: pkgs: fn {inherit system pkgs;}) pkgsFor;
 
+    # callModule calls a .nix file
     callModule = path: attrs: import path (moduleArgs // attrs);
   in {
+    # alejandra formatter from upstream
     formatter = eachSystem ({pkgs, ...}: pkgs.alejandra);
 
+    # defines self's packages (nahida cursor etc)
     packages = eachSystem (attrs: callModule ./pkgs attrs);
 
+    # nixos systems configured (greenery, quartz etc)
     nixosConfigurations = callModule ./hosts {};
 
+    # checks to validate and build systems (used in GitHub CI)
+    # imports from nixosConfigurations and iterates between each one as "nixos-quartz", "nixos-beryl", etc
+    # thanks Mic92
     checks = nixpkgs.lib.genAttrs (import systems) (
       system: let
         inherit (nixpkgs) lib;
-        nixosMachines = lib.mapAttrs' (
-          name: config: lib.nameValuePair "nixos-${name}" config.config.system.build.toplevel
-        ) ((lib.filterAttrs (_: config: config.pkgs.stdenv.hostPlatform.system == system)) self.nixosConfigurations);
+        nixosMachines =
+          lib.mapAttrs' (name: config: lib.nameValuePair "nixos-${name}" config.config.system.build.toplevel)
+          (
+            (lib.filterAttrs (_: config: config.pkgs.stdenv.hostPlatform.system == system))
+            self.nixosConfigurations
+          );
       in
         nixosMachines
     );
