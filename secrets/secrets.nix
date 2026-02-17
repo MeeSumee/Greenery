@@ -5,7 +5,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFDui74G6stbKJoPcTyWe8NAexbk2TuxghA2zdf7Owma sumee@kaolin"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh sumee@beryl"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq sumee@verdure"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmulMynbxFomEUcObvRBp3bVd7kH+dO/6s/0kSBPbbg sumee@graphite"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGz6NgZd4FYbMr7F+QxY+GGL3O26H5miFm8aALnGT30V sumee@graphite"
   ];
   
   nahida = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINiA3lkgGECrzk08GOhUlSIx5+jQ6WvuERK3nAz617M7"];

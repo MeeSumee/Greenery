@@ -38,7 +38,7 @@ in {
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGg78BA24qgFIDr0+8xgx1TH5PSOQd8qrtCwlyGUvTi0 本当に愛してぇる"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq いやん〜墨ｗｗｗｗ"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmulMynbxFomEUcObvRBp3bVd7kH+dO/6s/0kSBPbbg bedsheetsSoft&Warm"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGz6NgZd4FYbMr7F+QxY+GGL3O26H5miFm8aALnGT30V bedsheetsSoft&Warm"
           ];
 
           hashedPasswordFile = config.age.secrets.secret6.path;
