@@ -10,11 +10,13 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Banshell dots are no longer available on master, please refer to the quickshell branch for Banshell dots.
+Removed Rex's dependency on kurukuruDM and nvim due to him being busy and unable to fix
+problems I face.
 
-Greenery got a major upgrade from recent dumpster diving. Now a Dell XPS 8940 with an i7-11700.
+Utilizing raf's nvf to define nvim config.
 
-Implemented a DNS blocklist using npins.
+Currently using SDDM instead of kurukuruDM, however the fprintd is suboptimal and might return to
+implementing quickshell-greetd.
 
 Xcursor PR is currently stale due to my laziness.
 
@@ -215,8 +217,6 @@ linux programs to be used in parallel with Windows.
 # Quartz
 
 Custom-built gaming pc intended for workstation and gaming.
-
-Future Endeavors: Winboat?
 
 <details>
 <summary>Quartz PC Specifications</summary>
