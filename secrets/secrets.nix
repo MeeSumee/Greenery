@@ -5,15 +5,13 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFDui74G6stbKJoPcTyWe8NAexbk2TuxghA2zdf7Owma sumee@kaolin"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh sumee@beryl"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq sumee@verdure"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGz6NgZd4FYbMr7F+QxY+GGL3O26H5miFm8aALnGT30V sumee@graphite"
   ];
-  
+
   nahida = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINiA3lkgGECrzk08GOhUlSIx5+jQ6WvuERK3nAz617M7"];
   leaf = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdCRc7/VwBWConOyhV/3R9CiFK9RCaA04tGGuM+cOso"];
   soft = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBLVW9nABsXKAakbIgzJdRWImREgUyxJ/8yOKpzbE9S"];
 
   cute = nahida ++ leaf;
-
   # Principle of least privilege, other than Nahida <3
 in {
   "secret1.age".publicKeys = cute;

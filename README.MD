@@ -5,15 +5,13 @@ Consists of multiple devices:
 - [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): US Exit-node + DNS Server with Home Automation Capabilities.
 - [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
 - [Beryl](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#beryl): Personal Laptop for offsite provisioning.
-- [Graphite](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#graphite): NixOS-WSL Config for my Work Laptop.
 - [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
 
 ## Status Updates
 
-Removed Rex's dependency on kurukuruDM and nvim due to him being busy and unable to fix
-problems I face.
+Graphite is no more cause WSL keeps getting fucked (systemctl fails to start user sumee)
 
-Utilizing raf's nvf to define nvim config.
+Graphite WSL NixOS was also excessive as all I need is ssh access to a Nix System
 
 Currently using SDDM instead of kurukuruDM, however the fprintd is suboptimal and might return to
 implementing quickshell-greetd.
@@ -206,13 +204,6 @@ To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
 Test your USB4 ports using boltctl, if there's instability, disable bolt service.
 
 </details>
-
-# Graphite
-
-WSL-based configuration of NixOS for my work laptop.
-
-Provides functionality in both nix-config management during work as well as provide
-linux programs to be used in parallel with Windows.
 
 # Quartz
 

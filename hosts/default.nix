@@ -17,21 +17,17 @@
         ./${hostName}/hardware-configuration.nix
         ../modules
 
-        # Import zaphkiel packages from flake
-        ({
-          pkgs,
-          inputs,
-          ...
-          }:{
-            nixpkgs.overlays = [
-              (_: _: {
-                wo = self.packages.${pkgs.stdenv.hostPlatform.system};
-              })
-            ];
+        # Import packages from flake
+        ({pkgs, ...}: {
+          nixpkgs.overlays = [
+            (_: _: {
+              wo = self.packages.${pkgs.stdenv.hostPlatform.system};
+            })
+          ];
         })
       ];
     };
 
-  hosts = ["beryl" "greenery" "graphite" "kaolin" "quartz" "verdure"];
+  hosts = ["beryl" "greenery" "kaolin" "quartz" "verdure"];
 in
   genAttrs hosts mkHost

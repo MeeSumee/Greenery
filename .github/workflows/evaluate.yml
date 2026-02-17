@@ -14,7 +14,7 @@ jobs:
       actions: write
     strategy:
       matrix:
-        hosts: [beryl, greenery, graphite, kaolin, quartz, verdure] 
+        hosts: [beryl, greenery, kaolin, quartz, verdure] 
     steps:
     - uses: actions/checkout@v5
 
