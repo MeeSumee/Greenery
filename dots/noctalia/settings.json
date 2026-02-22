@@ -63,7 +63,7 @@
           "id": "SystemMonitor",
           "showCpuTemp": true,
           "showCpuUsage": true,
-          "showDiskUsage": false,
+          "showDiskUsage": true,
           "showGpuTemp": false,
           "showLoadAverage": false,
           "showMemoryAsPercent": false,
@@ -119,25 +119,24 @@
       "right": [
         {
           "blacklist": [],
-          "colorizeIcons": false,
+          "colorizeIcons": true,
           "drawerEnabled": true,
           "hidePassive": false,
           "id": "Tray",
           "pinned": []
         },
         {
-          "hideWhenZero": true,
+          "hideWhenZero": false,
           "hideWhenZeroUnread": false,
           "id": "NotificationHistory",
           "showUnreadBadge": true
         },
         {
-          "deviceNativePath": "",
           "displayMode": "onhover",
           "hideIfNotDetected": true,
           "id": "Battery",
           "showNoctaliaPerformance": false,
-          "showPowerProfiles": false,
+          "showPowerProfiles": true,
           "warningThreshold": 30
         },
         {
@@ -151,10 +150,10 @@
         },
         {
           "colorizeDistroLogo": false,
-          "colorizeSystemIcon": "none",
+          "colorizeSystemIcon": "primary",
           "customIconPath": "",
           "enableColorization": false,
-          "icon": "noctalia",
+          "icon": "adjustments",
           "id": "ControlCenter",
           "useDistroLogo": false
         }
@@ -394,26 +393,38 @@
     "powerOptions": [
       {
         "action": "lock",
+        "command": "",
+        "countdownEnabled": true,
         "enabled": true
       },
       {
         "action": "suspend",
+        "command": "",
+        "countdownEnabled": true,
         "enabled": true
       },
       {
         "action": "hibernate",
+        "command": "",
+        "countdownEnabled": true,
         "enabled": false
       },
       {
         "action": "reboot",
+        "command": "",
+        "countdownEnabled": true,
         "enabled": true
       },
       {
         "action": "logout",
+        "command": "",
+        "countdownEnabled": true,
         "enabled": true
       },
       {
         "action": "shutdown",
+        "command": "",
+        "countdownEnabled": true,
         "enabled": true
       }
     ]
@@ -424,7 +435,7 @@
     "location": "top_right",
     "overlayLayer": true,
     "backgroundOpacity": 1,
-    "respectExpireTimeout": false,
+    "respectExpireTimeout": true,
     "lowUrgencyDuration": 3,
     "normalUrgencyDuration": 8,
     "criticalUrgencyDuration": 15,
