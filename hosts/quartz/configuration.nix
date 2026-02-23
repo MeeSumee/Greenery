@@ -15,12 +15,7 @@
 ⠀⠀⠀⠘⠙⣿⣷⣿⣿⣿⠛⠛⠿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣟⡟⠋⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠀⠀⠈⠉⠉⠉⠉⠁⠈⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀
 */
-{...}: {
-  imports = [
-    # Imports.
-    ../../modules
-  ];
-
+{
   # All modules and their values
   greenery = {
     enable = true;
@@ -76,6 +71,7 @@
     };
   };
 
+  # Virtualbox config
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = ["sumee"];
 

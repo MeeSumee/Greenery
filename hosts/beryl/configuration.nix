@@ -1,10 +1,5 @@
 # Beryl Configuration
-{...}: {
-  imports = [
-    # Imports.
-    ../../modules
-  ];
-
+{
   # All modules and their values
   greenery = {
     enable = true;
