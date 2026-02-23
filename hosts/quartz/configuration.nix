@@ -38,6 +38,7 @@
       enable = true;
       amdgpu.enable = true;
       audio.enable = true;
+      power.enable = true;
     };
 
     networking = {
