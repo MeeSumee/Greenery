@@ -10,9 +10,11 @@
     # Hjem
     hjem = {
       url = "github:feel-co/hjem";
-      inputs.nix-darwin.follows = "";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.smfh.follows = "";
+      inputs = {
+        nix-darwin.follows = "";
+        nixpkgs.follows = "nixpkgs";
+        smfh.follows = "";
+      };
     };
 
     # Asusu numberpad driver
@@ -27,31 +29,39 @@
     # Lanzaboote
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit.follows = "";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        pre-commit.follows = "";
+      };
     };
 
     # Anime-game
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "";
+      };
     };
 
     # nvim nvf
     nvf = {
       url = "github:NotAShelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
 
     # Agenix
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.darwin.follows = "";
-      inputs.home-manager.follows = "";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
+      inputs = {
+        darwin.follows = "";
+        home-manager.follows = "";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
   };
 
