@@ -15,10 +15,9 @@
         loadModels = [
           "deepseek-r1:14b"
           "deepseek-ocr:3b"
-          "ServiceNow-AI/Apriel-1.6-15b-Thinker:Q4_K_M"
           "gemma3:12b"
+          "translategemma:12b"
           "ministral-3:14b"
-          "qwen3-embedding:8b"
         ];
       };
 
@@ -26,7 +25,8 @@
         enable = true;
         port = 2127;
         environment = {
-          OLLAMA_API_BASE_URL = "http://${config.services.ollama.host}:${builtins.toString config.services.ollama.port}";
+          ENABLE_OPENAI_API = "False";
+          OLLAMA_BASE_URL = "http://${config.services.ollama.host}:${builtins.toString config.services.ollama.port}";
           DO_NOT_TRACK = "True";
           SCARF_NO_ANALYTICS = "True";
         };
