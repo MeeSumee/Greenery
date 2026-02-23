@@ -1,26 +1,25 @@
 # Beryl Hardware Configuration
-{ 
-  config, 
-  lib, 
-  pkgs, 
-  inputs, 
-  ... 
-}:{
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
-    ./battery.nix
-
-    # Import asus-numberpad-driver
     inputs.asusnumpad.nixosModules.default
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-  
-  # Enable Thunderbolt Service for USB4 support
-  services.hardware.bolt.enable = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
+
+    # Potential fix for AMD Rembrandt Hardware Acceleration Crash? I'll find out soon
+    kernelParams = ["idle=nowwait" "iommu=pt"];
+  };
 
   # Enable TPM module
   security.tpm2 = {
@@ -29,54 +28,66 @@
     tctiEnvironment.enable = true;
   };
 
-  # Allow Sumee to have access to TPM
-  users.users.sumee.extraGroups = [ "tss" ];
+  # Systemd script to delay tpm start to eliminate 256 error spam
+  # adapted from https://gist.github.com/guilhem/d372e8a257d5f67678ea33c662c48f39
+  systemd.services.tpm-startup = {
+    description = "Execute TPM2 Startup with Delay After Suspend";
+    after = [
+      "systemd-suspend.service"
+      "systemd-hybrid-sleep.service"
+      "systemd-hibernate.service"
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
+      ExecStart = "${pkgs.tpm2-tools}/bin/tpm2_startup";
+    };
+    wantedBy = [
+      "sleep.target"
+      "multi-user.target"
+    ];
+  };
 
-  fileSystems."/" = { 
+  fileSystems."/" = {
     device = "/dev/disk/by-uuid/e601b8ce-ce2f-423f-9dd8-dc2ea8548019";
     fsType = "ext4";
   };
 
-  fileSystems."/boot" = { 
+  fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/5797-C73C";
     fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
+    options = ["fmask=0077" "dmask=0077"];
   };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
   systemd.services.fprintd = {
     wantedBy = ["multi-user.target"];
     serviceConfig.Type = "simple";
   };
+  services = {
+    # Enable Thunderbolt Service for USB4 support
+    hardware.bolt.enable = true;
 
-  services.fprintd = {
-    enable = true;
-    package = pkgs.fprintd-tod;
-    tod.enable = true;
-    tod.driver = pkgs.libfprint-2-tod1-elan;
-  };
-
-  # Enable Asus Numpad Service (wayland-1 for niri)
-  services.asus-numberpad-driver = {
-    enable = true;
-    layout = "up5401ea";
-    wayland = true;
-    waylandDisplay = "wayland-1";
-    ignoreWaylandDisplayEnv = false;
-    config = {
-      "activation_time" = "0.5";
+    fprintd = {
+      enable = true;
+      package = pkgs.fprintd-tod;
+      tod.enable = true;
+      tod.driver = pkgs.libfprint-2-tod1-elan;
     };
-  };
 
-  # Potential fix for AMD Rembrandt Hardware Acceleration Crash? I'll find out soon
-  boot.kernelParams = ["idle=nowwait" "iommu=pt"];
-
-  # Sets battery charge limit
-  hardware.asus.battery = {
-    chargeUpto = 80;   # Maximum level of charge for your battery, as a percentage.
-    enableChargeUptoScript = false; # Disable charge script
+    # Enable Asus Numpad Service (wayland-1 for niri)
+    asus-numberpad-driver = {
+      enable = true;
+      layout = "up5401ea";
+      wayland = true;
+      waylandDisplay = "wayland-1";
+      ignoreWaylandDisplayEnv = false;
+      config = {
+        "activation_time" = "0.5";
+      };
+    };
   };
 
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
