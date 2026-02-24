@@ -15,7 +15,7 @@
 
     environment = {
       # Autostart niri, thanks https://github.com/niri-wm/niri/discussions/2241
-      loginShellInit = ''
+      loginShellInit = lib.mkIf config.services.getty.autologinOnce ''
         if [ -z "$DISPLAY" && "$(tty)" = "/dev/tty1" && -z "$NIRI_LOADED"]; then
           export NIRI_LOADED=1
           exec ${config.programs.niri.package}/bin/niri-session
