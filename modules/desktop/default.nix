@@ -2,11 +2,11 @@
   config,
   lib,
   users,
-  sources,
   ...
 }: {
   imports = [
     # Import files
+    ./fuzzel.nix
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
@@ -34,8 +34,6 @@
     hjem.users = lib.genAttrs users (user: {
       files = {
         ".config/mpv".source = ../../dots/mpv;
-        ".config/fuzzel/fuzzel.ini".source = ../../dots/fuzzel/fuzzel.ini;
-        ".config/fuzzel/themes".source = sources.catfuzzel + "/themes";
       };
     });
   };
