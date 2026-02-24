@@ -10,7 +10,6 @@
       hyprlock.enable = true;
       niri.enable = true;
       sddm.enable = true;
-      xserver.enable = true;
     };
 
     hardware = {
