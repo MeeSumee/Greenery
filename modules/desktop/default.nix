@@ -2,11 +2,11 @@
   config,
   lib,
   users,
+  pkgs,
   ...
 }: {
   imports = [
     # Import files
-    ./fuzzel.nix
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
@@ -30,9 +30,74 @@
       autologinUser = "sumee";
     };
 
-    # Hjem for file management
+    # Core desktop services
+    security.polkit.enable = true;
+
+    programs = {
+      xwayland.enable = true;
+      nautilus-open-any-terminal = {
+        enable = true;
+        terminal = "foot";
+      };
+
+      # Theme gtk apps
+      dconf.profiles.user.databases = [
+        {
+          settings = {
+            "org/gnome/desktop/interface" = {
+              gtk-theme = "rose-pine";
+              icon-theme = "Papirus-Dark";
+              cursor-theme = "xcursor-genshin-nahida";
+              document-font-name = "DejaVu Serif";
+              font-name = "DejaVu Sans";
+              monospace-font-name = "CaskaydiaMono NF";
+              color-scheme = "prefer-dark";
+              clock-show-weekday = true;
+            };
+          };
+        }
+      ];
+    };
+
+    services.gnome.gnome-keyring.enable = true;
+
+    # Hint QT to use rosepine theme from gtk
+    qt = {
+      enable = true;
+      style = "gtk2";
+      platformTheme = "gtk2";
+    };
+
+    # Set xdg config for defaults/portals/terminals
+    xdg = {
+      portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
+        ];
+      };
+      terminal-exec = {
+        enable = true;
+        settings = {
+          default = [
+            "foot.desktop"
+          ];
+        };
+      };
+      mime.defaultApplications = {
+        "image/*" = "qimgv.desktop";
+      };
+    };
+
+    # Correct gtk theming for apps that don't use runtime directory
     hjem.users = lib.genAttrs users (user: {
-      files = {
+      files = let
+        themeName = "rose-pine";
+        themeDir = "${pkgs.rose-pine-gtk-theme}/share/themes/${themeName}";
+      in {
+        ".config/gtk-4.0/assets".source = "${themeDir}/assets";
+        ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
         ".config/mpv".source = ../../dots/mpv;
       };
     });

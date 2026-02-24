@@ -19,7 +19,6 @@
 
     desktop = {
       enable = true;
-      fuzzel.enable = true;
       hypridle.enable = true;
       hyprland.enable = true;
       hyprlock.enable = true;
@@ -51,6 +50,7 @@
       aagl.enable = true;
       browser.enable = true;
       foot.enable = true;
+      fuzzel.enable = true;
       micro.enable = true;
       core.enable = true;
       desktop.enable = true;

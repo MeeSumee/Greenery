@@ -3,7 +3,6 @@
   config,
   pkgs,
   lib,
-  users,
   ...
 }: {
   # Options maker
@@ -60,48 +59,6 @@
         wo.papiteal # Papirus Teal Icons
         wo.vesktop # Vesktop with overrides
       ];
-
-      # Core desktop services
-      security.polkit.enable = true;
-      programs.xwayland.enable = true;
-      programs.nautilus-open-any-terminal = {
-        enable = true;
-        terminal = "foot/footclient";
-      };
-      services.gnome.gnome-keyring.enable = true;
-
-      # Hint QT to use rosepine theme from gtk
-      qt.platformTheme = "gtk2";
-
-      # Theme gtk apps
-      programs.dconf.profiles.user.databases = [
-        {
-          settings = {
-            "org/gnome/desktop/interface" = {
-              gtk-theme = "rose-pine";
-              icon-theme = "Papirus-Dark";
-              cursor-theme = "xcursor-genshin-nahida";
-              document-font-name = "DejaVu Serif";
-              font-name = "DejaVu Sans";
-              monospace-font-name = "CaskaydiaMono NF";
-              color-scheme = "prefer-dark";
-              clock-show-weekday = true;
-            };
-          };
-        }
-      ];
-
-      # Correct gtk theming for apps that don't use runtime directory
-      hjem.users = lib.genAttrs users (user: {
-        files = let
-          themeName = "rose-pine";
-          themeDir = "${pkgs.rose-pine-gtk-theme}/share/themes/${themeName}/gtk-4.0";
-        in {
-          ".config/gtk-4.0/assets".source = "${themeDir}/assets";
-          ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk.css";
-          ".config/gtk-4.0/gtk-dark.css".source = "${themeDir}/gtk-dark.css";
-        };
-      });
     })
 
     # Large/Demanding applications
