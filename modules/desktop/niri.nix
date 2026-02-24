@@ -13,11 +13,20 @@
       enable = true;
     };
 
-    # Niri Dependencies
-    environment.systemPackages = with pkgs; [
-      xwayland-satellite
-      jq
-    ];
+    environment = {
+      # Autostart niri
+      loginShellInit = ''
+        if [ -z "$DISPLAY" && "$(tty)" = "/dev/tty1" && -z "$NIRI_LOADED"]; then
+          export NIRI_LOADED=1
+          exec ${config.programs.niri.package}/bin/niri-session
+        fi
+      '';
+      # Niri Dependencies
+      systemPackages = with pkgs; [
+        xwayland-satellite
+        jq
+      ];
+    };
 
     # Niri Hjem config
     hjem.users = lib.genAttrs users (user: {
