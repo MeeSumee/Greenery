@@ -9,12 +9,12 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Graphite is no more cause WSL keeps getting fucked (systemctl fails to start user sumee)
+No more display manager as I now leverage auto-login for quartz and beryl. I might
+roll back given I'm working on the niri-session autostart script.
 
-Graphite WSL NixOS was also excessive as all I need is ssh access to a Nix System
+Resolved TPM error in beryl as far as I know?
 
-Currently using SDDM instead of kurukuruDM, however the fprintd is suboptimal and might return to
-implementing quickshell-greetd.
+Fixed lots of errors and bugs as of late.
 
 Xcursor PR is currently stale due to my laziness.
 
@@ -183,9 +183,7 @@ Problems:
 
 - AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed. Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
 
-- TPM 256 Error Spam on tty console. Might be related to the BIOS hacking for USB4.
-
-Future Endeavors: Fix random pagefault AMDGPU crashes from Youtube/demanding HWAccel Tasks, fix TPM error spam.
+Future Endeavors: Fix random pagefault AMDGPU crashes from Youtube/demanding HWAccel Tasks
 
 <details>
 <summary>Enabling USB4 on Zenbook S13 OLED (UM5302TA)</summary>
@@ -208,6 +206,8 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 # Quartz
 
 Custom-built gaming pc intended for workstation and gaming.
+
+Runs ollama with openwebui for locally hosted AI (used primarily for resume/cover letter generation, excel scripts, OCR, and language translation)
 
 <details>
 <summary>Quartz PC Specifications</summary>
