@@ -24,6 +24,11 @@
       loader.efi.canTouchEfiVariables = lib.mkDefault true;
     };
 
+    # Nuke faster
+    systemd.user.extraConfig = ''
+      DefaultTimeoutStopSec=10s
+    '';
+
     # Enable core firmware services
     services = {
       gvfs.enable = lib.mkDefault true;
