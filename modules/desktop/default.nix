@@ -68,15 +68,8 @@
       platformTheme = "gtk2";
     };
 
-    # Set xdg config for defaults/portals/terminals
+    # Set xdg config for defaults/terminals
     xdg = {
-      portal = {
-        enable = true;
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-gtk
-          xdg-desktop-portal-gnome
-        ];
-      };
       terminal-exec = {
         enable = true;
         settings = {
