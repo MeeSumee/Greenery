@@ -13,12 +13,6 @@
       enable = true;
     };
 
-    # Set niri as default session
-    services.displayManager.defaultSession = "niri";
-
-    # Xwayland satellite for X11 Windowing Support
-    systemd.user.services.xwayland-satellite.wantedBy = ["graphical-session.target"];
-
     # Niri Dependencies
     environment.systemPackages = with pkgs; [
       xwayland-satellite

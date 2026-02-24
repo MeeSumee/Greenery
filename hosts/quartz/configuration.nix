@@ -25,7 +25,6 @@
       hypridle.enable = true;
       hyprlock.enable = true;
       niri.enable = true;
-      sddm.enable = true;
     };
 
     hardware = {
