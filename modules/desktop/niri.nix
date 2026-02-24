@@ -14,7 +14,7 @@
     };
 
     environment = {
-      # Autostart niri
+      # Autostart niri, thanks https://github.com/niri-wm/niri/discussions/2241
       loginShellInit = ''
         if [ -z "$DISPLAY" && "$(tty)" = "/dev/tty1" && -z "$NIRI_LOADED"]; then
           export NIRI_LOADED=1
