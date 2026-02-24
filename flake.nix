@@ -26,12 +26,19 @@
     # Nix-Systems
     systems.url = "github:nix-systems/default";
 
+    # Rust-overlay dependency matching for lanzaboote and aagl
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Lanzaboote
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         pre-commit.follows = "";
+        rust-overlay.follows = "rust-overlay";
       };
     };
 
@@ -40,6 +47,7 @@
       url = "github:ezKEa/aagl-gtk-on-nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
         flake-compat.follows = "";
       };
     };
@@ -50,6 +58,8 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
+        flake-compat.follows = "";
+        ndg.follows = "";
       };
     };
 
