@@ -177,7 +177,6 @@ in {
     # Hjem fish dotfiles
     hjem.users = lib.genAttrs users (user: {
       files = {
-        # ".config/fish/config.fish".source = ../../dots/fish/config.fish;
         ".config/fish/themes".source = sources.rosefish + "/themes";
       };
     });
