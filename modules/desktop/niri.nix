@@ -9,18 +9,22 @@
 
   config = lib.mkIf (config.greenery.desktop.niri.enable && config.greenery.desktop.enable) {
     # Enable Niri
-    programs.niri = {
-      enable = true;
+    programs = {
+      niri = {
+        enable = true;
+      };
+      # Autostart niri, adapted to fish from https://github.com/niri-wm/niri/discussions/2241
+      fish.loginShellInit = lib.mkIf config.services.getty.autologinOnce ''
+        begin
+          if test -z $DISPLAY && test -z $NIRI_LOADED && test "$(tty)" = "/dev/tty1";
+            set -gx NIRI_LOADED 1
+            exec ${config.programs.niri.package}/bin/niri-session
+          end
+        end
+      '';
     };
 
     environment = {
-      # Autostart niri, thanks https://github.com/niri-wm/niri/discussions/2241
-      loginShellInit = lib.mkIf config.services.getty.autologinOnce ''
-        if [ -z "$DISPLAY" && "$(tty)" = "/dev/tty1" && -z "$NIRI_LOADED"]; then
-          export NIRI_LOADED=1
-          exec ${config.programs.niri.package}/bin/niri-session
-        fi
-      '';
       # Niri Dependencies
       systemPackages = with pkgs; [
         xwayland-satellite
