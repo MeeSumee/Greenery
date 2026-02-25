@@ -410,9 +410,6 @@ binds {
   XF86AudioMute         allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
   XF86AudioMicMute      allow-when-locked=true { spawn "I_HATE_DMV_LINES"; }
 
-  // Lock/Unlock Camera
-  XF86WebCam            allow-when-locked=true { spawn "NICHIFALEMA?"; }
-
   // Example brightness key mappings for brightnessctl.
   XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
   XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }

@@ -24,17 +24,7 @@
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     };
 
-    # Configure autologin for graphical desktops
-    services.getty = {
-      autologinOnce = true;
-      autologinUser = "sumee";
-    };
-
-    # Core desktop services
-    security.polkit.enable = true;
-
     programs = {
-      xwayland.enable = true;
       nautilus-open-any-terminal = {
         enable = true;
         terminal = "foot";
@@ -59,13 +49,10 @@
       ];
     };
 
-    services.gnome.gnome-keyring.enable = true;
-
     # Hint QT to use rosepine theme from gtk
     qt = {
       enable = true;
-      style = "gtk2";
-      platformTheme = "gtk2";
+      style = "adwaita-dark";
     };
 
     # Set xdg config for defaults/terminals

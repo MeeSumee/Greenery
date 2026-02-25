@@ -8,13 +8,15 @@
   options.greenery.desktop.niri.enable = lib.mkEnableOption "niri";
 
   config = lib.mkIf (config.greenery.desktop.niri.enable && config.greenery.desktop.enable) {
-    # Enable Niri
+    # Niri programs
     programs = {
       niri = {
         enable = true;
       };
+      # Seahorse for gnome-keyring monkaging
+      seahorse.enable = true;
       # Autostart niri, adapted to fish from https://github.com/niri-wm/niri/discussions/2241
-      fish.loginShellInit = lib.mkIf config.services.getty.autologinOnce ''
+      fish.loginShellInit = ''
         begin
           if test -z $DISPLAY && test -z $NIRI_LOADED && test "$(tty)" = "/dev/tty1";
             set -gx NIRI_LOADED 1
@@ -23,6 +25,9 @@
         end
       '';
     };
+
+    # Recommended for niri
+    security.polkit.enable = true;
 
     environment = {
       # Niri Dependencies
@@ -37,23 +42,13 @@
       files = let
         # Set keybind toggle scripts
         keybinds = let
-          camerascript = pkgs.writeShellScriptBin "camScript" ''
-            if ${pkgs.kmod}/bin/lsmod | grep -q uvcvideo; then
-              ${pkgs.polkit}/bin/pkexec ${pkgs.kmod}/bin/modprobe -rf uvcvideo;
-              ${pkgs.brightnessctl}/bin/brightnessctl -d asus::camera set 1
-            else
-              ${pkgs.polkit}/bin/pkexec ${pkgs.kmod}/bin/modprobe uvcvideo;
-              ${pkgs.brightnessctl}/bin/brightnessctl -d asus::camera set 0
-            fi
-          '';
-
           mutescript = pkgs.writeShellScriptBin "muteScript" ''
             ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle;
             ${pkgs.brightnessctl}/bin/brightnessctl -d platform::micmute set $(${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -c MUTED)
           '';
 
-          from = ["I_HATE_DMV_LINES" "NICHIFALEMA?"];
-          to = ["${mutescript}/bin/muteScript" "${camerascript}/bin/camScript"];
+          from = ["I_HATE_DMV_LINES"];
+          to = ["${mutescript}/bin/muteScript"];
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
 
