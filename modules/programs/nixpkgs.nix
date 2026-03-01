@@ -40,7 +40,7 @@
     (lib.mkIf (config.greenery.programs.desktop.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
         qimgv # image viewer
-        wineWowPackages.waylandFull # wine
+        wineWow64Packages.wayland # wine
         xournalpp # note taking
         mpv # media player
         onlyoffice-desktopeditors # office applications
