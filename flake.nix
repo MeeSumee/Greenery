@@ -4,8 +4,8 @@
   description = "MeeSumee's Flake Config";
 
   inputs = {
-    # NixOS Unstable
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # NixOS Unstable pinned hash
+    nixpkgs.url = "github:nixos/nixpkgs?ref=d6c71932130818840fc8fe9509cf50be8c64634f";
 
     # Hjem
     hjem = {
