@@ -18,17 +18,7 @@
   options.greenery.programs.enable = lib.mkEnableOption "programs";
 
   config = lib.mkIf config.greenery.programs.enable {
-    # Disable nano
-    programs.nano.enable = false;
-
     # Enable git
     programs.git.enable = true;
-
-    # Set default editor
-    environment.variables = {
-      EDITOR = "nvim";
-      SYSTEMD_EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
   };
 }
