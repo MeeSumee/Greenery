@@ -9,12 +9,9 @@ Consists of multiple devices:
 
 ## Status Updates
 
-No more display manager as I now leverage auto-login for quartz and beryl. I might
-roll back given I'm working on the niri-session autostart script.
+Autologin removed as keyring gets screwed.
 
-Resolved TPM error in beryl as far as I know?
-
-Fixed lots of errors and bugs as of late.
+Remove more unneccessary overhead for edge compute (Kaolin & Verdure)
 
 Xcursor PR is currently stale due to my laziness.
 
