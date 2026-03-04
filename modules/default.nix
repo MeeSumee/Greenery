@@ -1,33 +1,27 @@
-{
-  lib,
-  ...
-}:{
+{lib, ...}: {
   imports = [
     ./desktop
     ./hardware
-    ./networking    
+    ./networking
     ./programs
     ./server
     ./system
   ];
-  
+
   # Do you really want to disable every single file in modules lmfao??
   options.greenery.enable = lib.mkEnableOption "すべて";
 
-/*
+  /*
   This is for reference for all NixOS systems
 
   greenery = {
     enable = true;
-    
+
     desktop = {
       enable = true;
-      gdm.enable = true;
-      gnome.enable = true;
       hypridle.enable = true;
       hyprland.enable = true;
       hyprlock.enable = true;
-      kurukurudm.enable = true;
       niri.enable = true;
       sddm.enable = true;
       xserver.enable = true;
@@ -43,7 +37,7 @@
 
     networking = {
       enable = true;
-      bluetooth.enable = true;      
+      bluetooth.enable = true;
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
@@ -56,23 +50,26 @@
       aagl.enable = true;
       browser.enable = true;
       foot.enable = true;
+      fuzzel.enable = true;
       micro.enable = true;
       core.enable = true;
-      headless.enable  = true;
-      daemon.enable = true;
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;
-      vindows.enable = true;
+      vm.enable = true;
     };
 
     server = {
       enable = true;
+      anki.enable = true;
+      auth.enable = true;
       davis.enable = true;
       files.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
+      memos.enable = true;
+      ollama.enable = true;
       suwayomi.enable = true;
     };
 
@@ -90,5 +87,5 @@
       nix.nix included by default
     };
   };
-*/
+  */
 }

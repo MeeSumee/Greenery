@@ -1,5 +1,18 @@
 {
   "pins": {
+    "blocklist": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "StevenBlack",
+        "repo": "hosts"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "484d3c71b9433e08fa887297e25a3b53c0c6fd57",
+      "url": "https://github.com/StevenBlack/hosts/archive/484d3c71b9433e08fa887297e25a3b53c0c6fd57.tar.gz",
+      "hash": "sha256-4exSkO2QcRy+yhQf2tV6jgO3noNNPvSeIad1YLxpazI="
+    },
     "catfuzzel": {
       "type": "Git",
       "repository": {
@@ -9,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "0af0e26901b60ada4b20522df739f032797b07c3",
-      "url": "https://github.com/catppuccin/fuzzel/archive/0af0e26901b60ada4b20522df739f032797b07c3.tar.gz",
-      "hash": "163shqaf52gfp26526sizxvxz0j4b2gkifrz5ppqbaqqdcq2v4jy"
+      "revision": "879879da8a7dc58f173b4cd7987723fd19bef6d5",
+      "url": "https://github.com/catppuccin/fuzzel/archive/879879da8a7dc58f173b4cd7987723fd19bef6d5.tar.gz",
+      "hash": "sha256-+/7lxQTRDZ0m+GAAFIjvFt8EXDeqZUtv0pLnNgaauZw="
     },
     "micro-bounce": {
       "type": "Git",
@@ -61,9 +74,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312",
-      "url": "https://github.com/rose-pine/btop/archive/6d6abdc0a8c8bcd3b056d9fe3256cfbe7e359312.tar.gz",
-      "hash": "15s3llr9snrg30fh39a2gfzmjd8p5ki8vaggznm9jirjzdhm0a5i"
+      "revision": "c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e",
+      "url": "https://github.com/rose-pine/btop/archive/c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e.tar.gz",
+      "hash": "sha256-vtqqMEQbPOSRfQ28RIln5zZ4cZlyB3sMc2NaLUcITWo="
     },
     "rosefish": {
       "type": "Git",
@@ -74,23 +87,10 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "b82982c55582cfaf6f220de1893c7c73dd0cb301",
-      "url": "https://github.com/rose-pine/fish/archive/b82982c55582cfaf6f220de1893c7c73dd0cb301.tar.gz",
-      "hash": "1qqxragn6hynxkf5lbfkbhvqy0w0rw2j9lq6a66lsffp9vbb1xhf"
-    },
-    "rosefoot": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "rose-pine",
-        "repo": "foot"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "725e9c38880d577ee973eb916e83395964ffc287",
-      "url": "https://github.com/rose-pine/foot/archive/725e9c38880d577ee973eb916e83395964ffc287.tar.gz",
-      "hash": "1x6k38mharmvp5bfwvhzmyy0z45hlhb54wqk95a87fgyka80g3rf"
+      "revision": "6cfc508e81b231e955690dc9723c631374f468eb",
+      "url": "https://github.com/rose-pine/fish/archive/6cfc508e81b231e955690dc9723c631374f468eb.tar.gz",
+      "hash": "sha256-NgfZnaik5OAur53y3WA0Hqu6f332aVdhhMWnEtDxmNs="
     }
   },
-  "version": 5
+  "version": 7
 }

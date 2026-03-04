@@ -79,17 +79,11 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠀⠀⠀⠀⠣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⢀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠔⠁⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⡀⠀
 */
-
 {
   pkgs,
   config,
-  ... 
-}:{
-
-  imports = [
-    ../../modules
-  ];
-
+  ...
+}: {
   # All modules and their values
   greenery = {
     enable = true;
@@ -110,16 +104,15 @@
     programs = {
       enable = true;
       core.enable = true;
-      headless.enable  = true;
       nvim.enable = true;
     };
 
     server = {
       enable = true;
-      davis.enable = true;
       files.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
+      memos.enable = true;
       suwayomi.enable = true;
     };
 
@@ -136,11 +129,26 @@
     hostName = "greenery";
 
     # Disable powersaving
-    networkmanager.wifi.powersave = false;
+    networkmanager = {
+      wifi = {
+        powersave = false;
+        macAddress = "permanent";
+        scanRandMacAddress = false;
+      };
+    };
 
     # Open Firewall ports for ethernet sharing
-    # I just used nmtui to set enp0s31f6 to shared cause declarative approach didn't work
-    firewall.interfaces."enp0s31f6".allowedUDPPorts = [53 67];
+    # I just used nmtui to set ethernet device to shared cause declarative approach didn't work
+    firewall.interfaces."enp3s0".allowedUDPPorts = [53 67];
+
+    # Open ports for tailscale to remove NAT overhead
+    firewall.interfaces."tailscale0".allowedTCPPorts = [
+      2283
+      4567
+      5230
+      6969
+      8096
+    ];
   };
 
   # Enable non-nix executables for dynamic libraries such as minecraft scripts
@@ -150,20 +158,17 @@
     # here, NOT in environment.systemPackages
   ];
 
-  # Java
-  programs.java.enable = true;
-
   # Agenix keyfile
-  age.secrets.secret7.file = ../../secrets/secret7.age;
+  age.secrets.secret1.file = ../../secrets/secret1.age;
 
   # Set borg backup service for greenery
   services.borgbackup.jobs = {
     prarie = {
-      paths = [ "/run/media/sumee/emerald" "/var" ];
+      paths = ["/run/media/sumee/emerald" "/var"];
       repo = "/mnt/repo";
       encryption = {
         mode = "repokey-blake2";
-        passCommand = "cat ${config.age.secrets.secret7.path}";
+        passCommand = "cat ${config.age.secrets.secret1.path}";
       };
       compression = "auto,zstd";
       startAt = "Wed 03:00:00";

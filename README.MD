@@ -1,78 +1,32 @@
-# DISCLAIMER
-Currently the repository only works for headless systems. The reliance of Kurukurubar for 
-building the shell on my desktop as well as the greeter led to a build failure from the nixpkgs
-upstream.
-
-If you do wish to use this repository for your flake, do use the following commit: [eaf737c](https://github.com/MeeSumee/Greenery/commit/eaf737c3488964666a24669e1b41a3ff47b28cfe)
-
-My current plan is to wait out for the dependencies to resolve and update the nix flake
-for quartz and beryl. Updating for my graphical systems is not a priority due to real life
-commmitments as well as enjoying hollow knight :>
-
-Till then the only updates the respository shall receive is headless server upgrades.
-
 # My NixOS Repository
 Consists of multiple devices:
 
-- Greenery: Self-hosted Server with multiple services
-- Beryl: Remote access, personal laptop for tinkering with Niri and Quickshell.
-- Quartz: Gaming PC with attempts of iGPU Passthrough Windows.
-- Kaolin: Swiss VPS acting as both an exit-node and a DNS Server.
-- Graphite: NixOS-WSL Config for my Work Laptop.
-- Verdure: US-based exit-node with NAS backup management. 
+- [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): Self-hosted Server with multiple services.
+- [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): US Exit-node + DNS Server with Home Automation Capabilities.
+- [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
+- [Beryl](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#beryl): Personal Laptop for offsite provisioning.
+- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
 
 ## Status Updates
-PCI-Passthrough still isn't functioning on Quartz with the doomed Error 43 on Windows.
-Also VM no longer connects to the internet. Amazing.
 
-Due to the addition of immich, Greenery still remains important for the hardware encoding
-and the performance capabilities it has. The Raspberry Pi 4 would get cooked from that.
+No more display manager as I now leverage auto-login for quartz and beryl. I might
+roll back given I'm working on the niri-session autostart script.
 
-Instead, the Raspberry Pi replaces Greenery as an exit-node will host a NAS for data backup.
+Resolved TPM error in beryl as far as I know?
 
-Graphite is now integrated wit my work laptop to be a WSL-based distribution, fixing
-the jank of having two worktops.
+Fixed lots of errors and bugs as of late.
 
-Rex informed me of MangoWC and I'm now interested, time to yoink his config again :D
-
-## Notes on Banshell (and ricing in a way)
-
-My rice themes have been more or less unified with rose pine, exceptions being nvim with TokyoNight and fuzzel with Catppuccin.
-
-Xcursor-Genshin-Nahida will soon be packaged in a general way, fetching from Author's GitHub and
-converted to Linux Cursors using ```pkgs.win2xcur```. This will also solve the licensing conflicts.
-
-Banshell has been merged to master after 5 months of starting it, yay!
-Am I done? Hell nah, I'm like, 20% done.
-
-Currently, banshell is at v0.0.1 (alpha) and is HIGHLY experimental.
-
-Here are the guaranteed plans put forward:
-
-Planned color themes:
-- Matugen friendly colorscheme schematic for Colors.qml
-- Adapted Nahida/Vivian Colors for both Light & Dark Theme
-
-Dependencies:
-- Quickshell 0.2.1
-- Upower
-- Power-Profiles-Daemon
-- Google Material-Symbols Font
+Xcursor PR is currently stale due to my laziness.
 
 # Greenery
 
-Dell Optiplex 7050 with a random Radeon GPU with 4GB VRAM.
+Dell XPS 8940.
 
-Hosts Suwayomi for reading manga, Jellyfin for music (for now), Davis for Calendar and Contacts syncing,
-Immich for photos and video syncing, and FileBrowser for a unified folder to connect between Android, 
-Windows, and NixOS.
+Hosts several self-hosted services.
 
-Implemented self-hosted websites using Caddy-Tailscale plugin and reverse-proxying localhost ports.
+Reverse proxied using tailscale serve and tailscale service assignment.
 
-SSH services for file transfer and remote access. Enables sharing my 12TB hard drive (taildrive).
-
-Future Endeavors: More functional Jellyfin, SSD Caching for Taildrive, and integrate borg backups
-once Vedure's NAS is complete.
+Future Endeavors: Improve functionality of jellyfin.
 
 # Verdure
 
@@ -80,9 +34,7 @@ Raspberry Pi 4 Model B with 8GB of RAM.
 
 Currently acts as an exit-node replacement of Greenery.
 
-Acts as a router for the NAS (currently undeclarative with making eth0 shared via nmtui)
-
-Future Endeavors: Integrate the TinyCore Linux NAS with Verdure for a mass backup RAID system.
+Future Endeavors: Add Smart-Home capabilities.
 
 # Kaolin
 
@@ -227,10 +179,11 @@ With this setup, it will enable you to use Tailscale as a way to connect to Clou
 
 ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for managing nix configs whenever I'm not at home.
 
-Problems: AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed.
-Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
+Problems: 
 
-Future Endeavors: Rice Banshell, fix AMDGPU crashes from Youtube/demanding HWAccel Tasks.
+- AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed. Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
+
+Future Endeavors: Fix random pagefault AMDGPU crashes from Youtube/demanding HWAccel Tasks
 
 <details>
 <summary>Enabling USB4 on Zenbook S13 OLED (UM5302TA)</summary>
@@ -250,25 +203,11 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 
 </details>
 
-# Graphite
-
-WSL-based configuration of NixOS for my work laptop.
-
-Provides functionality in both nix-config management during work as well as provide
-linux programs to be used in parallel with Windows.
-
-Future endeavors: Make the system more declarative incase I switch jobs hehehehaw.
-
 # Quartz
 
 Custom-built gaming pc intended for workstation and gaming.
 
-Intended to be used as my nix-config manager while I'm at home.
-
-Consists of (WIP) iGPU-Passthrough Windows 10 IoT LTSC Virtual Machine managed by libvirtd. Remote using
-Sunshine + Moonlight via Tailscale.
-
-Future Endeavors: Fix Error Code 43 in iGPU driver on Windows (not a problem on Linux VMs, it's windows being ASS)
+Runs ollama with openwebui for locally hosted AI (used primarily for resume/cover letter generation, excel scripts, OCR, and language translation)
 
 <details>
 <summary>Quartz PC Specifications</summary>
@@ -282,13 +221,13 @@ Future Endeavors: Fix Error Code 43 in iGPU driver on Windows (not a problem on 
 </details>
 
 ## Credits
-[Rexcrazy804](https://github.com/Rexcrazy804) for literally carrying me. HE NEEDS A JOB.
+[Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am.
 He also gets a lot of credit for all the code I've stolen with permission.
 
-[Eel](https://github.com/zhuazhuzz) for his frontend expertise and helping me mald over quickshell design.
+[Eel](https://github.com/zhuazhuzz) for his frontend expertise and generally helping me mald through life and code.
 
-Several sources of quickshell code I've been browsing through in an attempt to understand wtf is going on:
-[Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/Ly-sec/nixos), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
+Despite me abandoning quickshell development, I've to thank these quickshillers for making me understand wtf is going on:
+[Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/noctalia-dev/noctalia-shell), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
 
 I also want to thank the folks of UAFB who made USB4 possible.
 
@@ -303,7 +242,7 @@ explicit licensing is included.
 ## Miscellaneous Sources
 - [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact)
 - [User Profile Picture (Nix & Git)](https://danbooru.donmai.us/posts/9246148)
-- [Dell Optiplex 3050 Tower Specifications and Image](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/OptiPlex-3050-Towers-Technical-Specifications.pdf)
+- [Dell XPS 8940 Specifications and Image](https://dl.dell.com/content/manual29571812-xps-8940-setup-and-specifications.pdf?language=en-us)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
 - [Vivian Banshee Wallpaper](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
 - [ASUSTek Zenbook S13 OLED, ASUS removed the website :(](https://www.bestbuy.com/site/asus-zenbook-s-13-oled-um5302-13-3-laptop-amd-ryzen-7-16-gb-memory-1-tb-ssd-ponder-blue/6510809.p)

@@ -9,8 +9,8 @@
 
   config = lib.mkIf (config.greenery.networking.taildrive.enable && config.greenery.networking.enable) {
 
-    # Set taildrive to mount in user folder (very cursed lol)
-    fileSystems."/run/media/${builtins.concatStringsSep "," users}/taildrive" = {
+    # Set taildrive to mount in sumee folder
+    fileSystems."/run/media/sumee/taildrive" = {
       device = "sumee@greenery:/run/media/sumee/emerald";
       fsType = "sshfs";
       options = [

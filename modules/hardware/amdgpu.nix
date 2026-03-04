@@ -9,9 +9,6 @@
 
   config = lib.mkIf (config.greenery.hardware.amdgpu.enable && config.greenery.hardware.enable) {
     
-    # Set boot to immediately load amdgpu drivers
-    boot.initrd.kernelModules = [ "amdgpu" ];
-    
     # Set exposed video decode for mpv?
     environment.variables = {
       RADV_PERFTEST = "video_decode";
@@ -20,6 +17,7 @@
     
     # Enable OpenGL with AMD Vulkan
     hardware = {
+      amdgpu.initrd.enable = true;
       graphics = {
         enable = true;
         enable32Bit = true;
@@ -33,8 +31,17 @@
     };
 
     # amd hip
-    systemd.tmpfiles.rules = [
-      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    systemd.tmpfiles.rules = let
+      rocmEnv = pkgs.symlinkJoin {
+        name = "rocm-combined";
+        paths = with pkgs.rocmPackages; [
+          rocblas
+          hipblas
+          clr
+        ];
+      };
+    in [
+      "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
     ];
 
     # Set xserver video driver

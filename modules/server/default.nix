@@ -1,43 +1,34 @@
-{ 
-  lib, 
+{
+  lib,
   config,
-  pkgs,
-  ... 
-}: let
-
-  revision = "v0.0.0-20251102144943-aea8960a2d3c";
-
-in {
-
+  ...
+}: {
   imports = [
+    ./anki.nix
+    ./auth.nix
     ./davis.nix
     ./files.nix
     ./immich.nix
     ./jellyfin.nix
+    ./memos.nix
+    ./ollama.nix
     ./suwayomi.nix
   ];
-  
+
   options.greenery.server.enable = lib.mkEnableOption "enable server modules";
 
-  
   config = lib.mkIf config.greenery.server.enable {
-  
-    # Age secret for caddy
-    age.secrets.secret1.file = ../../secrets/secret1.age;
-
-    services.caddy = {
-      environmentFile = config.age.secrets.secret1.path;
-      
-      package = pkgs.caddy.withPlugins {
-        plugins = [ "github.com/tailscale/caddy-tailscale@${revision}" ];
-        hash = "sha256-yeIHPB4I+OOhEm4vtLScpf90NR2cOb04p3+/NqnxVSY=";
-      };
-      
-      # Age file has contents TS_AUT=<insert your auth key>
-      globalConfig = ''
-        tailscale {
-          auth_key {$TS_AUT}
-        }
+    # Enable GNU Screen
+    programs.screen = {
+      enable = true;
+      screenrc = ''
+        startup_message off
+        vbell off
+        altscreen on
+        termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
+        truecolor on
+        hardstatus off
+        hardstatus alwayslastline '%{#00ff00}[ %H ][%{#ffffff}%= %{7}%?%-Lw%?%{1;0}%{1}(%{15}%n%f%t%?(%u)%?%{1;0}%{1})%{7}%?%+Lw%? %=%{#00ff00}][ %{#00a5ff}%{6}%Y-%m-%d %{#ffffff}%{7}%0c%{#00ff00} ]'
       '';
     };
   };

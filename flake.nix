@@ -4,21 +4,17 @@
   description = "MeeSumee's Flake Config";
 
   inputs = {
-
-    # NixOS Unstable
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # NixOS Unstable pinned hash
+    nixpkgs.url = "github:nixos/nixpkgs?ref=d6c71932130818840fc8fe9509cf50be8c64634f";
 
     # Hjem
     hjem = {
       url = "github:feel-co/hjem";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.smfh.follows = "";
-    };
-
-    # Noctalia Shell
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nix-darwin.follows = "";
+        nixpkgs.follows = "nixpkgs";
+        smfh.follows = "";
+      };
     };
 
     # Asusu numberpad driver
@@ -30,72 +26,107 @@
     # Nix-Systems
     systems.url = "github:nix-systems/default";
 
-    # Nix WSL for Graphite (Worktop)
-    wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
+    # Rust-overlay dependency matching for lanzaboote and aagl
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Lanzaboote
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.3";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks-nix.follows = "";
-      inputs.flake-compat.follows = "";
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        pre-commit.follows = "";
+        rust-overlay.follows = "rust-overlay";
+      };
     };
 
     # Anime-game
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+        flake-compat.follows = "";
+      };
     };
 
-    # Zaphkiel config
-    zaphkiel = {
-      url = "github:Rexcrazy804/Zaphkiel";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
-      inputs.hjem.follows = "";
-      inputs.hjem-impure.follows = "";
-      inputs.agenix.follows = "";
-      inputs.crane.follows = "";
-      inputs.stash.follows = "";
-      inputs.booru-hs.follows = "";
-      inputs.hs-todo.follows = "";
+    # nvim nvf
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        flake-compat.follows = "";
+        ndg.follows = "";
+      };
     };
 
     # Agenix
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.darwin.follows = "";
-      inputs.home-manager.follows = "";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
+      inputs = {
+        darwin.follows = "";
+        home-manager.follows = "";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
   };
 
-  # RexCrazy804 Schematic
+  # Short, but fucked Schematic
   outputs = inputs: let
+    # Essentially takes in everything
     inherit (inputs) nixpkgs self systems;
+    # inherits lib to be used below
     inherit (nixpkgs) lib;
 
     # npin integration to flakes
     sources = import ./npins;
 
+    # pkgsFor defines x64/ARM/darwin etc with systems input
     pkgsFor = lib.getAttrs (import systems) nixpkgs.legacyPackages;
 
-    moduleArgs = {inherit inputs self sources lib;};
+    # moduleArgs defined for callModule
+    moduleArgs = {
+      inherit
+        inputs
+        self
+        sources
+        lib
+        ;
+    };
 
+    # I don't understand this, ask rex
     eachSystem = fn: lib.mapAttrs (system: pkgs: fn {inherit system pkgs;}) pkgsFor;
 
+    # callModule calls a .nix file
     callModule = path: attrs: import path (moduleArgs // attrs);
-
   in {
-    formatter = eachSystem ({pkgs,...}: pkgs.alejandra);
+    # alejandra formatter from upstream
+    formatter = eachSystem ({pkgs, ...}: pkgs.alejandra);
 
+    # defines self's packages (nahida cursor etc)
     packages = eachSystem (attrs: callModule ./pkgs attrs);
 
+    # nixos systems configured (greenery, quartz etc)
     nixosConfigurations = callModule ./hosts {};
+
+    # checks to validate and build systems (used in GitHub CI)
+    # imports from nixosConfigurations and iterates between each one as "nixos-quartz", "nixos-beryl", etc
+    # thanks Mic92
+    checks = nixpkgs.lib.genAttrs (import systems) (
+      system: let
+        inherit (nixpkgs) lib;
+        nixosMachines =
+          lib.mapAttrs' (name: config: lib.nameValuePair "nixos-${name}" config.config.system.build.toplevel)
+          (
+            (lib.filterAttrs (_: config: config.pkgs.stdenv.hostPlatform.system == system))
+            self.nixosConfigurations
+          );
+      in
+        nixosMachines
+    );
   };
 }
