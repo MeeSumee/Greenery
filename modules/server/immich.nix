@@ -2,12 +2,10 @@
   lib,
   config,
   ...
-}:
-{
+}: {
   options.greenery.server.immich.enable = lib.mkEnableOption "Immich Photo & Video Sync";
-  
-  config = lib.mkIf (config.greenery.server.immich.enable && config.greenery.server.enable) {
 
+  config = lib.mkIf (config.greenery.server.immich.enable && config.greenery.server.enable) {
     services = {
       immich = {
         enable = true;
@@ -24,6 +22,6 @@
       };
     };
 
-    users.users.immich.extraGroups = [ "video" "render" ];
+    users.users.immich.extraGroups = ["video" "render"];
   };
 }
