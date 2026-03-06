@@ -57,13 +57,13 @@
         noctalia-shell # Noctalia Shell
         wo.nahidacursor # Cursor Package
         wo.papiteal # Papirus Teal Icons
-        wo.vesktop # Vesktop with overrides
       ];
     })
 
     # Large/Demanding applications
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
+        wo.vesktop # Vesktop with overrides
         gimp # GIMP image manipulator
         kicad-small # KiCAD Electronic schematic/PCB designer
         rare # GUI based on legendary which is a port of Epic Games
