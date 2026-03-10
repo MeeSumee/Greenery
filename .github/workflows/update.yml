@@ -1,0 +1,30 @@
+name: "Chore: Update blocklist"
+on:
+  schedule:
+    - cron: "0 9 * * *" # 9 am UTC
+  workflow_dispatch:
+jobs:
+  blocklist:
+    name: Update blocklist
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Install Nix
+      uses: nixbuild/nix-quick-install-action@v34
+      with:
+        nix_version: 2.31.2
+        nix_conf: |
+          keep-env-derivations = true
+          keep-outputs = true
+
+    - name: Update
+      run: nix shell nixpkgs#npins --command npins update blocklist
+
+    - name: Push Changes
+      run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add npins/sources.json
+          git diff --staged --quiet || git commit -m "Chore: Update blocklist"
+          git push
