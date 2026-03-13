@@ -56,11 +56,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772445269,
-        "narHash": "sha256-oRFdaCPjU28ycZjD6i0flQj0wd1fAapV+BkJt5LO/lk=",
+        "lastModified": 1773236313,
+        "narHash": "sha256-dB6xESgxtcaRlyPHz+rCY0bo63noYpsh/FjPESTuhbc=",
         "owner": "asus-linux-drivers",
         "repo": "asus-numberpad-driver",
-        "rev": "ea5d1a76ed9ea487a0830de14daea137ca9be698",
+        "rev": "dd35093e3ed66dcf40e17bdef230e9013c3633f5",
         "type": "github"
       },
       "original": {
@@ -114,11 +114,11 @@
         "smfh": []
       },
       "locked": {
-        "lastModified": 1769053318,
-        "narHash": "sha256-cKETEBrseo7Iz+bOzflwy1xTpDuUj3QaLA+P49yJw8k=",
+        "lastModified": 1773429908,
+        "narHash": "sha256-bPTW00Tkp8c7HJbhNC7wLO3fcngFXBpuX7LZByE/F8c=",
         "owner": "feel-co",
         "repo": "hjem",
-        "rev": "9d0c8d4b44f661910595b07e6480557644c1431c",
+        "rev": "4d0d0e4dc99245ffaa0d51acf69e288fb59fb0f1",
         "type": "github"
       },
       "original": {
@@ -170,16 +170,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1770562336,
-        "narHash": "sha256-oMmN1lVQU0F0W2k6OI3bgdzp2YOHWYUAw79qzDSjenU=",
+        "lastModified": 1773282481,
+        "narHash": "sha256-b/GV2ysM8mKHhinse2wz+uP37epUrSE+sAKXy/xvBY4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
+        "rev": "fe416aaedd397cacb33a610b33d60ff2b431b127",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "d6c71932130818840fc8fe9509cf50be8c64634f",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -198,11 +198,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771704400,
-        "narHash": "sha256-8U9xnN4HdxPfAXAft3lBsArWSv1ZTTxJci1lOA/xpno=",
+        "lastModified": 1773343795,
+        "narHash": "sha256-0+HEuOytpwyPt7i1jj6v2QJ+NXXisCYnL2XNwPBltvg=",
         "owner": "NotAShelf",
         "repo": "nvf",
-        "rev": "5c38b357da7e8c870350cd1847fb5b2602a28eb0",
+        "rev": "83b44eaf50b96bd5d06b1a56a3a51f1b2362db52",
         "type": "github"
       },
       "original": {
@@ -231,11 +231,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770952264,
-        "narHash": "sha256-CjymNrJZWBtpavyuTkfPVPaZkwzIzGaf0E/3WgcwM14=",
+        "lastModified": 1773216618,
+        "narHash": "sha256-iZlowevS+xKLGOXtZwpIrz3SWe7PtoGUfEeVZNib+WE=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "ec6a3d5cdf14bb5a1dd03652bd3f6351004d2188",
+        "rev": "07d7dc6fcc5eae76b4fb0e19d4afd939437bec97",
         "type": "github"
       },
       "original": {
