@@ -50,8 +50,8 @@
       allowReboot = true;
       runGarbageCollection = true;
       rebootWindow = {
-        lower = "10:00 UTC";
-        upper = "11:00 UTC";
+        lower = "03:00";
+        upper = "12:00";
       };
     };
   };
