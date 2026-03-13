@@ -21,7 +21,7 @@ in {
       );
 
     # man-cache is too annoying
-    documentation.man.generateCaches = false;
+    documentation.man.cache.enable = false;
     programs = {
       # Extensive fish shell stuff
       fish = {
