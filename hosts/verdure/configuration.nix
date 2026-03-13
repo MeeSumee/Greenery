@@ -30,6 +30,7 @@
 
     system = {
       enable = true;
+      autoUpgrade.enable = true;
       fish.enable = true;
       sumee.enable = true;
     };
