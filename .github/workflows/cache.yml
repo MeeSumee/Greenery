@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Filter
-      uses: dorny/paths-filter@v3
+      uses: dorny/paths-filter@v4
       id: filter
       with:
         filters: |
@@ -26,7 +26,7 @@ jobs:
             - 'pkgs/**'
 
     - name: Aggressive disk space removal
-      uses: wimpysworld/nothing-but-nix@v6
+      uses: wimpysworld/nothing-but-nix@v10
       with:
         nix-permission-edict: true  
 
@@ -39,7 +39,7 @@ jobs:
           keep-outputs = true
 
     - name: Restore & Save Nix Store
-      uses: nix-community/cache-nix-action@v6
+      uses: nix-community/cache-nix-action@v7
       with:
         primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
         restore-prefixes-first-match: nix-${{ runner.os }}-
@@ -51,7 +51,7 @@ jobs:
         purge-primary-key: never
 
     - name: Cachix
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v16
       with:
         name: sumee
         authToken: '${{ secrets.CACHIX_AUTH }}'

@@ -16,7 +16,7 @@ jobs:
       matrix:
         hosts: [beryl, greenery, kaolin, quartz, verdure] 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
@@ -27,7 +27,7 @@ jobs:
           keep-outputs = true
 
     - name: Restore & Save Nix Store
-      uses: nix-community/cache-nix-action@v6
+      uses: nix-community/cache-nix-action@v7
       with:
         primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
         restore-prefixes-first-match: nix-${{ runner.os }}-
@@ -39,7 +39,7 @@ jobs:
         purge-primary-key: never
 
     - name: Cachix readonly
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v16
       with:
         name: sumee
 
