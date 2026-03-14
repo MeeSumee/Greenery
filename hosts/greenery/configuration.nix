@@ -118,6 +118,7 @@
 
     system = {
       enable = true;
+      autoUpgrade.enable = true;
       fish.enable = true;
       lanzaboote.enable = true;
       sumee.enable = true;
