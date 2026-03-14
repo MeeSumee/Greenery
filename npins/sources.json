@@ -87,9 +87,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "6cfc508e81b231e955690dc9723c631374f468eb",
-      "url": "https://github.com/rose-pine/fish/archive/6cfc508e81b231e955690dc9723c631374f468eb.tar.gz",
-      "hash": "sha256-NgfZnaik5OAur53y3WA0Hqu6f332aVdhhMWnEtDxmNs="
+      "revision": "127a990e5ad4688118c950123787fb0686afa4c8",
+      "url": "https://github.com/rose-pine/fish/archive/127a990e5ad4688118c950123787fb0686afa4c8.tar.gz",
+      "hash": "sha256-3heI6nhItw5WfKGQT1FRQKfv+lONyn+DzwYjYqJjzLE="
     }
   },
   "version": 7
