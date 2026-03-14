@@ -2,7 +2,7 @@
   lib,
   config,
   ...
-}:{
+}: {
   imports = [
     ./bluetooth.nix
     ./dnscrypt.nix
@@ -15,10 +15,45 @@
   options.greenery.networking.enable = lib.mkEnableOption "networking";
 
   config = lib.mkIf config.greenery.networking.enable {
-    
     # Enable network manager
-    networking = {
-      networkmanager.enable = true;
+    networking.networkmanager.enable = true;
+
+    # NM hardening
+    systemd.services = {
+      NetworkManager.serviceConfig = {
+        ProtectSystem = "full";
+        ProtectHome = true;
+        PrivateTmp = "disconnected";
+        PrivateMounts = true;
+        ProtectClock = true;
+        ProtectKernelTunables = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
+        ProtectControlGroups = true;
+        RestrictNamespaces = true;
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+      };
+      NetworkManager-dispatcher.serviceConfig = {
+        ProtectSystem = "full";
+        ProtectHome = true;
+        PrivateTmp = "disconnected";
+        PrivateMounts = true;
+        ProtectClock = true;
+        ProtectKernelTunables = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
+        ProtectControlGroups = true;
+        RestrictNamespaces = true;
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+      };
     };
 
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
