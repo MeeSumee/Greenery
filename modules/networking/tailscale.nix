@@ -2,12 +2,10 @@
   lib,
   config,
   ...
-}: {    
-
+}: {
   options.greenery.networking.tailscale.enable = lib.mkEnableOption "tailscale";
 
   config = lib.mkIf (config.greenery.networking.tailscale.enable && config.greenery.networking.enable) {
-
     # Enable tailscale VPN service
     services.tailscale = {
       enable = true;
@@ -18,19 +16,41 @@
       ];
     };
 
-    networking.nftables.enable = true;
-    networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
+    networking = {
+      nftables.enable = true;
+      firewall.allowedUDPPorts = [config.services.tailscale.port];
+    };
 
-    # Force tailscaled to use nftables
-    systemd.services.tailscaled.serviceConfig.Environment = [ 
-      "TS_DEBUG_FIREWALL_MODE=nftables" 
-    ];
+    systemd.services = {
+      tailscaled.serviceConfig = {
+        # Force tailscaled to use nftables
+        Environment = [
+          "TS_DEBUG_FIREWALL_MODE=nftables"
+        ];
 
-    # Stop wait-online service
-    systemd.services.NetworkManager-wait-online.enable = false;
+        # Systemd-hardening
+        ProtectClock = true;
+        ProtectKernelTunables = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        ProtectHome = true;
+        ProtectSystem = "full";
+        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
+        ProtectControlGroups = true;
+        RestrictNamespaces = true;
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+      };
+
+      # Stop wait-online service
+      NetworkManager-wait-online.enable = false;
+
+      # Fix system hang when no internet connection
+      tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
+    };
+
     boot.initrd.systemd.network.wait-online.enable = false;
-
-    # Fix system hang when no internet connection
-    systemd.services.tailscaled-autoconnect.serviceConfig.Type = lib.mkForce "exec";
   };
 }
