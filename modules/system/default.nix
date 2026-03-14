@@ -25,15 +25,48 @@
     boot = {
       loader.systemd-boot.enable = lib.mkDefault true;
       loader.efi.canTouchEfiVariables = lib.mkDefault true;
+
+      # Hardening Features
+      kernel.sysctl = {
+        "fs.protected_fifos" = 2;
+        "fs.protected_regular" = 2;
+        "fs.suid_dumpable" = false;
+        "kernel.kptr_restrict" = 2;
+        "kernel.sysrq" = false;
+        "kernel.unprivileged_bpf_disabled" = true;
+        "net.core.bpf_jit_harden" = 2;
+        "net.ipv4.conf.all.accept_redirects" = false;
+        "net.ipv4.conf.default.accept_redirects" = false;
+        "net.ipv6.conf.all.accept_redirects" = false;
+        "net.ipv6.conf.default.accept_redirects" = false;
+        "net.ipv4.conf.all.log_martians" = true;
+        "net.ipv4.conf.default.log_martians" = true;
+        "net.ipv4.conf.all.rp_filter" = true;
+        "net.ipv4.conf.all.send_redirects" = false;
+      };
     };
+
+    # Journal daemon hardening
+    systemd.services.systemd-journald = {
+      serviceConfig = {
+        UMask = 0077;
+        PrivateNetwork = true;
+        ProtectHostname = true;
+        ProtectKernelModules = true;
+      };
+    };
+
+    # Sudo privilege restriction
+    security.sudo.execWheelOnly = true;
 
     # Nuke faster
     systemd.user.extraConfig = ''
       DefaultTimeoutStopSec=10s
     '';
 
-    # Enable core firmware services
+    # Core firmware services
     services = {
+      services.dbus.implementation = "broker";
       gvfs.enable = lib.mkDefault true;
       udisks2.enable = lib.mkDefault true;
       fwupd.enable = lib.mkDefault true;
