@@ -66,7 +66,7 @@
 
     # Core firmware services
     services = {
-      services.dbus.implementation = "broker";
+      dbus.implementation = "broker";
       gvfs.enable = lib.mkDefault true;
       udisks2.enable = lib.mkDefault true;
       fwupd.enable = lib.mkDefault true;
