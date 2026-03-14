@@ -34,7 +34,6 @@
         "kernel.kptr_restrict" = 2;
         "kernel.sysrq" = false;
         "kernel.unprivileged_bpf_disabled" = true;
-        "net.core.bpf_jit_harden" = 2;
       };
     };
 
