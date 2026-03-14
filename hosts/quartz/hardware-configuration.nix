@@ -2,11 +2,9 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: {
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
     initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
 
     # Blacklist kvm_intel to fix virtualbox
