@@ -38,9 +38,9 @@
               gtk-theme = "rose-pine";
               icon-theme = "Papirus-Dark";
               cursor-theme = "xcursor-genshin-nahida";
-              document-font-name = "DejaVu Serif";
-              font-name = "DejaVu Sans";
-              monospace-font-name = "CaskaydiaMono NF";
+              document-font-name = "Noto Serif";
+              font-name = "Noto Sans";
+              monospace-font-name = "Noto Sans Mono";
               color-scheme = "prefer-dark";
               clock-show-weekday = true;
             };
