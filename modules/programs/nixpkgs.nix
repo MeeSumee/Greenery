@@ -46,6 +46,7 @@
         onlyoffice-desktopeditors # office applications
         gparted # disk management software
         nautilus # file browser
+        bitwarden-desktop # bitwarden password-manager
         gnome-calculator # calculator
         moonlight-qt # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme # Rose-Pine Gtk Theme
