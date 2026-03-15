@@ -21,36 +21,35 @@
     # NM hardening
     systemd.services = {
       NetworkManager.serviceConfig = {
-        ProtectSystem = "full";
         ProtectHome = true;
         PrivateTmp = "disconnected";
-        PrivateMounts = true;
         ProtectClock = true;
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
-        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
         RestrictNamespaces = true;
-        LockPersonality = true;
         MemoryDenyWriteExecute = true;
-        RestrictRealtime = true;
-        RestrictSUIDSGID = true;
       };
       NetworkManager-dispatcher.serviceConfig = {
-        ProtectSystem = "full";
         ProtectHome = true;
-        PrivateTmp = "disconnected";
-        PrivateMounts = true;
-        ProtectClock = true;
         ProtectKernelTunables = true;
         ProtectKernelModules = true;
-        ProtectKernelLogs = true;
-        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
         ProtectControlGroups = true;
-        RestrictNamespaces = true;
-        LockPersonality = true;
+        ProtectKernelLogs = true;
+        ProtectHostname = true;
+        ProtectClock = true;
+        ProtectProc = "invisible";
+        ProcSubset = "pid";
+        PrivateUsers = true;
+        PrivateDevices = true;
         MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+        LockPersonality = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
+        RestrictNamespaces = true;
+        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
+        SystemCallArchitectures = "native";
+        UMask = "0077";
       };
     };
 
