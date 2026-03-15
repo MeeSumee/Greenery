@@ -150,6 +150,25 @@ in {
           };
         };
 
+        "BookmarkBarEnabled" = true;
+        "ManagedBookmarks" = [
+          {
+            "toplevel_name" = "NixOS Managed Bookmarks";
+          }
+          {
+            "name" = "GitHub - MeeSumee/Greenery";
+            "url" = "https://github.com/MeeSumee/Greenery";
+          }
+          {
+            "name" = "NixOS Search";
+            "url" = "https://search.nixos.org/";
+          }
+          {
+            "name" = "NixOS Wiki";
+            "url" = "https://wiki.nixos.org/wiki/NixOS_Wiki";
+          }
+        ];
+
         # 5 = Open New Tab Page
         # 1 = Restore the last session
         # 4 = Open a list of URLs
