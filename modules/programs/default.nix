@@ -5,7 +5,7 @@
 }: {
   imports = [
     ./aagl.nix
-    ./browser.nix
+    ./chromium.nix
     ./foot.nix
     ./fuzzel.nix
     ./micro.nix

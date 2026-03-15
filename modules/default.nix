@@ -48,7 +48,7 @@
     programs = {
       enable = true;
       aagl.enable = true;
-      browser.enable = true;
+      chromium.enable = true;
       foot.enable = true;
       fuzzel.enable = true;
       micro.enable = true;

@@ -29,7 +29,7 @@
 
     programs = {
       enable = true;
-      browser.enable = true;
+      chromium.enable = true;
       foot.enable = true;
       core.enable = true;
       desktop.enable = true;
