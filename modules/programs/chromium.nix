@@ -13,7 +13,7 @@
     fi
      echo "checking if chromium hash changed..."
      # configuration hash storage location, might need to be updated to some persistent location on your computer
-     CHROMIUM_HASH_FILE="/persist/chromium-config.hash"
+     CHROMIUM_HASH_FILE="$HOME/chromium-config.hash"
      CURRENT_HASH="${
       builtins.hashString "sha256" (
         (builtins.toJSON config.programs.chromium.extensions)
@@ -30,12 +30,10 @@
        fi
      fi
      echo "chromium hash changed, deleting 'First Run' files..."
-     for i in /home/*; do
-       if [ -f "$i/.config/chromium/First Run" ]; then
-         echo "Deleting '$i/.config/chromium/First Run'"
-         rm -f "$i/.config/chromium/First Run"
-       fi
-     done
+     if [ -f "$HOME/.config/chromium/First Run" ]; then
+       echo "Deleting '$HOME/.config/chromium/First Run'"
+       rm -f "$HOME/.config/chromium/First Run"
+     fi
      echo "$CURRENT_HASH" > "$CHROMIUM_HASH_FILE"
   '';
 
@@ -87,6 +85,55 @@
       "+vie-1"
     ];
   };
+
+  dark-reader-rose-pine = {
+    "applyToListedOnly" = false;
+    "automation" = {
+      "enabled" = false;
+      "mode" = "";
+      "behavior" = "OnOff";
+    };
+    "changeBrowserTheme" = false;
+    "customThemes" = [];
+    "enableForPDF" = true;
+    "enableForProtectedPages" = false;
+    "enableContextMenus" = false;
+    "detectDarkTheme" = true;
+    "enabled" = true;
+    "location" = {
+      "latitude" = null;
+      "longitude" = null;
+    };
+    "notifyOfNews" = false;
+    "presets" = [];
+    "previewNewDesign" = true;
+    "siteList" = [];
+    "siteListEnabled" = [];
+    "syncSettings" = true;
+    "theme" = {
+      "mode" = 1;
+      "brightness" = 100;
+      "contrast" = 100;
+      "grayscale" = 0;
+      "sepia" = 0;
+      "useFont" = true;
+      "fontFamily" = "Noto Sans";
+      "textStroke" = 0;
+      "engine" = "dynamicTheme";
+      "stylesheet" = "";
+      "darkSchemeBackgroundColor" = "#191724";
+      "darkSchemeTextColor" = "#e0def4";
+      "lightSchemeBackgroundColor" = "#faf4ed";
+      "lightSchemeTextColor" = "#575279";
+      "scrollbarColor" = "auto";
+      "selectionColor" = "#c4a7e7";
+      "styleSystemControls" = true;
+    };
+    "time" = {
+      "activation" = "18:00";
+      "deactivation" = "9:00";
+    };
+  };
 in {
   options.greenery.programs.chromium.enable = lib.mkEnableOption "Chromium Browsers";
 
@@ -99,6 +146,7 @@ in {
       extensions = [
         "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBOL
         "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
+        "noimedcjdohhokijigpfcbjcfcaaahej" # Rose-Pine
       ];
 
       defaultSearchProviderEnabled = true;
@@ -146,6 +194,9 @@ in {
           "extensions" = {
             "ddkjiahejlhfcafbddmgiahcphecmpfh" = {
               adminSettings = builtins.toJSON ublockPolicies;
+            };
+            "eimadpbcbfnmbkopoojfekhnkhdbieeh" = {
+              adminSettings = builtins.toJSON dark-reader-rose-pine;
             };
           };
         };
@@ -216,11 +267,30 @@ in {
       })
     ];
 
-    systemd.services.deleteChromiumFirstRun = {
+    systemd.user.services.deleteChromiumFirstRun = {
       script = deleteFirstRunFiles;
-      wantedBy = ["multi-user.target"];
+      wantedBy = ["default.target"];
       serviceConfig = {
         Type = "oneshot";
+        ProtectSystem = "full";
+        CapabilityBoundingSet = ["CAP_DAC_READ_SEARCH" "CAP_SYSLOG" "CAP_NET_BIND_SERVICE"];
+        ProtectClock = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateMounts = true;
+        PrivateNetwork = true;
+        ProtectHostname = true;
+        ProtectKernelTunables = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        RestrictAddressFamilies = ["AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK"];
+        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
+        ProtectControlGroups = true;
+        RestrictNamespaces = true;
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
       };
     };
 
