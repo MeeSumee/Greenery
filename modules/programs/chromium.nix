@@ -85,55 +85,6 @@
       "+vie-1"
     ];
   };
-
-  dark-reader-rose-pine = {
-    "applyToListedOnly" = false;
-    "automation" = {
-      "enabled" = false;
-      "mode" = "";
-      "behavior" = "OnOff";
-    };
-    "changeBrowserTheme" = false;
-    "customThemes" = [];
-    "enableForPDF" = true;
-    "enableForProtectedPages" = false;
-    "enableContextMenus" = false;
-    "detectDarkTheme" = true;
-    "enabled" = true;
-    "location" = {
-      "latitude" = null;
-      "longitude" = null;
-    };
-    "notifyOfNews" = false;
-    "presets" = [];
-    "previewNewDesign" = true;
-    "siteList" = [];
-    "siteListEnabled" = [];
-    "syncSettings" = true;
-    "theme" = {
-      "mode" = 1;
-      "brightness" = 100;
-      "contrast" = 100;
-      "grayscale" = 0;
-      "sepia" = 0;
-      "useFont" = true;
-      "fontFamily" = "Noto Sans";
-      "textStroke" = 0;
-      "engine" = "dynamicTheme";
-      "stylesheet" = "";
-      "darkSchemeBackgroundColor" = "#191724";
-      "darkSchemeTextColor" = "#e0def4";
-      "lightSchemeBackgroundColor" = "#faf4ed";
-      "lightSchemeTextColor" = "#575279";
-      "scrollbarColor" = "auto";
-      "selectionColor" = "#c4a7e7";
-      "styleSystemControls" = true;
-    };
-    "time" = {
-      "activation" = "18:00";
-      "deactivation" = "9:00";
-    };
-  };
 in {
   options.greenery.programs.chromium.enable = lib.mkEnableOption "Chromium Browsers";
 
@@ -192,12 +143,7 @@ in {
 
         "3rdparty" = {
           "extensions" = {
-            "ddkjiahejlhfcafbddmgiahcphecmpfh" = {
-              adminSettings = builtins.toJSON ublockPolicies;
-            };
-            "eimadpbcbfnmbkopoojfekhnkhdbieeh" = {
-              adminSettings = builtins.toJSON dark-reader-rose-pine;
-            };
+            "ddkjiahejlhfcafbddmgiahcphecmpfh" = ublockPolicies;
           };
         };
 
@@ -217,6 +163,30 @@ in {
           {
             "name" = "NixOS Wiki";
             "url" = "https://wiki.nixos.org/wiki/NixOS_Wiki";
+          }
+          {
+            "name" = "Manga";
+            "url" = "manga.onca-ph.ts.net";
+          }
+          {
+            "name" = "Auth";
+            "url" = "auth.onca-ph.ts.net";
+          }
+          {
+            "name" = "Jellyfin";
+            "url" = "jellyfin.onca-ph.ts.net";
+          }
+          {
+            "name" = "Immich";
+            "url" = "immich.onca-ph.ts.net";
+          }
+          {
+            "name" = "FileBrowser";
+            "url" = "files.onca-ph.ts.net";
+          }
+          {
+            "name" = "Memos";
+            "url" = "memos.onca-ph.ts.net";
           }
         ];
 
