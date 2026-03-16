@@ -282,9 +282,6 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// Start wlsunset so my eyes don't kill themselves.
-spawn-at-startup "wlsunset" "-T" "3000" "-t" "2999"
-
 // Start noctalia-shell
 spawn-at-startup "noctalia-shell"
 
@@ -324,12 +321,6 @@ animations {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
-// Open the Librewolf picture-in-picture player as floating by default.
-window-rule {
-  match app-id=r#"librewolf$"# title="^Picture-in-Picture$"
-  open-floating true
-}
-
 // Make wallpaper the background of everything including overlay and not have it move around
 layer-rule {
   match namespace="^noctalia-wallpaper*"
@@ -349,10 +340,10 @@ gestures {
   }
 }
 
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
+// Block bitwarden from screen capture.
 window-rule {
-  match app-id=r#"librewolf$"# title="^Bitwarden$"
+  match app-id="Bitwarden"
+  match title="Bitwarden"
 
   block-out-from "screen-capture"
 
@@ -528,15 +519,6 @@ binds {
   Mod+7 { focus-workspace 7; }
   Mod+8 { focus-workspace 8; }
   Mod+9 { focus-workspace 9; }
-  Mod+KP_End { focus-workspace 1; }
-  Mod+KP_Down { focus-workspace 2; }
-  Mod+KP_Next { focus-workspace 3; }
-  Mod+KP_Left { focus-workspace 4; }
-  Mod+KP_Begin { focus-workspace 5; }
-  Mod+KP_Right { focus-workspace 6; }
-  Mod+KP_Home { focus-workspace 7; }
-  Mod+KP_Up { focus-workspace 8; }
-  Mod+KP_Prior { focus-workspace 9; }
   Mod+Ctrl+1 { move-column-to-workspace 1; }
   Mod+Ctrl+2 { move-column-to-workspace 2; }
   Mod+Ctrl+3 { move-column-to-workspace 3; }
@@ -546,15 +528,6 @@ binds {
   Mod+Ctrl+7 { move-column-to-workspace 7; }
   Mod+Ctrl+8 { move-column-to-workspace 8; }
   Mod+Ctrl+9 { move-column-to-workspace 9; }
-  Mod+Ctrl+KP_End { move-column-to-workspace 1; }
-  Mod+Ctrl+KP_Down { move-column-to-workspace 2; }
-  Mod+Ctrl+KP_Next { move-column-to-workspace 3; }
-  Mod+Ctrl+KP_Left { move-column-to-workspace 4; }
-  Mod+Ctrl+KP_Begin { move-column-to-workspace 5; }
-  Mod+Ctrl+KP_Right { move-column-to-workspace 6; }
-  Mod+Ctrl+KP_Home { move-column-to-workspace 7; }
-  Mod+Ctrl+KP_Up { move-column-to-workspace 8; }
-  Mod+Ctrl+KP_Prior { move-column-to-workspace 9; }
 
   // Alternatively, there are commands to move just a single window:
   // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -635,7 +608,6 @@ binds {
   Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
   // The quit action will show a confirmation dialog to avoid accidental exits.
-  Mod+Shift+M { quit; }
   Ctrl+Alt+Delete { quit; }
 
   // Powers off the monitors. To turn them back on, do any input like
