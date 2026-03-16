@@ -98,6 +98,7 @@ in {
         "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBOL
         "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
         "noimedcjdohhokijigpfcbjcfcaaahej" # Rose-Pine
+        "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       ];
 
       defaultSearchProviderEnabled = true;
@@ -131,6 +132,11 @@ in {
 
             # Pin ublock
             "ddkjiahejlhfcafbddmgiahcphecmpfh" = {
+              installation_mode = "allowed";
+              "toolbar_pin" = "force_pinned";
+            };
+            # Pin Bitwarden
+            "nngceckbapebfimnlniiiahkandclblb" = {
               installation_mode = "allowed";
               "toolbar_pin" = "force_pinned";
             };
