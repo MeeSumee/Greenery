@@ -9,14 +9,6 @@
     config.allowUnfree = true;
   };
 
-  # Harden nix-daemon
-  systemd.services.nix-daemon = {
-    serviceConfig = {
-      ProtectHome = true;
-      PrivateUsers = false;
-    };
-  };
-
   # Enable core nix features
   nix = {
     package = pkgs.nixVersions.latest;
