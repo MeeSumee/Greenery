@@ -25,16 +25,6 @@
     boot = {
       loader.systemd-boot.enable = lib.mkDefault true;
       loader.efi.canTouchEfiVariables = lib.mkDefault true;
-
-      # Hardening Features
-      kernel.sysctl = {
-        "fs.protected_fifos" = 2;
-        "fs.protected_regular" = 2;
-        "fs.suid_dumpable" = false;
-        "kernel.kptr_restrict" = 2;
-        "kernel.sysrq" = false;
-        "kernel.unprivileged_bpf_disabled" = true;
-      };
     };
     systemd = {
       # Nuke faster
