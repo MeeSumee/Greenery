@@ -2,12 +2,13 @@
   pkgs,
   lib,
   ...
-}: lib.fix (self: let
+}:
+lib.fix (self: let
   inherit (pkgs) callPackage;
 in {
   nahidacursor = callPackage ./cursors.nix {};
-  papiteal = pkgs.papirus-icon-theme.override { color = "teal"; };
-  vesktop = pkgs.vesktop.override {
+  papiteal = pkgs.papirus-icon-theme.override {color = "teal";};
+  vesktop = pkgs.equibop.override {
     withTTS = false;
     withMiddleClickScroll = true;
   };
