@@ -9,11 +9,16 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Autologin removed as keyring gets screwed.
+More automation with @github-actions[bot] & @dependabot[bot].
 
-Remove more unneccessary overhead for edge compute (Kaolin & Verdure)
+Replaced Librewolf in favor of Ungoogled-Chromium for security reasons.
 
-Xcursor PR is currently stale due to my laziness.
+## TODO
+
+- [ ] Automate Nix Flake Update to Continuous Integration with build checks.
+- [ ] Deprecate Brave and fully use Ungoogled-Chromium with Profiles (declaratively).
+- [ ] Harden Services used in Greenery to reduce attack surface.
+- [ ] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
 
 # Greenery
 
