@@ -1,0 +1,24 @@
+name: "Update License"
+on:
+  schedule:
+    - cron: "0 0 1 1 *" # Jan 1st
+  workflow_dispatch:
+jobs:
+  license:
+    name: Update License
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v6
+    - name: Update Year
+      run: |
+          sed -i "s/[0-9]\{4\}/$(date +"%Y")/g" LICENSE
+
+    - name: Push Changes
+      run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add LICENSE
+          git diff --staged --quiet || git commit -m "Chore: Update License"
+          git push
