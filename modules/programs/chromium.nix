@@ -171,6 +171,10 @@ in {
             "url" = "https://wiki.nixos.org/wiki/NixOS_Wiki";
           }
           {
+            "name" = "Ollama";
+            "url" = "quartz.onca-ph.ts.net";
+          }
+          {
             "name" = "Manga";
             "url" = "manga.onca-ph.ts.net";
           }
