@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [inputs.nvf.nixosModules.default];
@@ -109,6 +110,17 @@
                 gitFiles = "<leader>gf";
                 gitStash = "<leader>gx";
                 gitStatus = "<leader>gs";
+              };
+              setupOpts = {
+                defaults.pickers.find_command = [
+                  "${pkgs.fd}/bin/fd"
+                  "-H"
+                ];
+                pickers.find_files.find_command = [
+                  "${pkgs.fd}/bin/fd"
+                  "--type=file"
+                  "-H"
+                ];
               };
             };
 
