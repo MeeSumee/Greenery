@@ -12,6 +12,11 @@
       enable = true;
       startWhenNeeded = true;
       openFirewall = false;
+      allowSFTP = true;
+
+      knownHosts = {
+        "greenery".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINiA3lkgGECrzk08GOhUlSIx5+jQ6WvuERK3nAz617M7";
+      };
 
       # Fix colors not showing
       extraConfig = ''
