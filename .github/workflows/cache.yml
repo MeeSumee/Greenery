@@ -12,7 +12,10 @@ on:
     - master
   workflow_run:
     workflows: ["Backport to Stable"]
-    types: completed
+    types:
+      - completed
+    branches:
+      - stable
 jobs:
   populate-cache:
     timeout-minutes: 60
