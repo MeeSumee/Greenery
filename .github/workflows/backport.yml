@@ -12,13 +12,20 @@ jobs:
       pull-requests: write
     steps:
     - uses: actions/checkout@v6
+      with:
+        ref: stable
+
+    - name: Reset stable branch
+      run: |
+        git fetch origin master:master
+        git reset --hard master
 
     - name: Create Pull Request
       id: pr
       uses: peter-evans/create-pull-request@v8
       with:
         base: stable
-        branch: master
+        branch: master-to-stable
         title: "[Backport] Merge master to stable"
         body: "This Pull Request is automatically generated and merges changes from master to stable"
         labels: "automatically generated pr"
