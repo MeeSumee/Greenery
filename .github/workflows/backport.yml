@@ -1,0 +1,32 @@
+name: "Backport to Stable"
+on:
+  schedule:
+    - cron: "0 0 * * 6" # Saturday 12 am UTC
+  workflow_dispatch:
+jobs:
+  backport:
+    name: Backport
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Create Pull Request
+      id: pr
+      uses: peter-evans/create-pull-request@v8
+      with:
+        base: stable
+        branch: master
+        title: "[Backport] Merge master to stable"
+        body: "This Pull Request is automatically generated and merges changes from master to stable"
+        labels: "automatically generated pr"
+        draft: false
+
+    - name: Automerge
+      if: steps.pr.outputs.pull-request-operation == 'created'
+      run: |
+          gh pr review --approve "${{ steps.pr.outputs.pull-request-number }}"
+          gh pr merge --merge --auto "${{ steps.pr.outputs.pull-request-number }}"
+
