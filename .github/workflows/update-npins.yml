@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
     - uses: actions/checkout@v6
 
@@ -23,10 +24,21 @@ jobs:
     - name: Update
       run: nix shell nixpkgs#npins --command npins update blocklist
 
-    - name: Push Changes
-      run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add npins/sources.json
-          git diff --staged --quiet || git commit -m "Chore: Update Blocklist"
-          git push
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v8
+      with:
+          sign-commits: true
+          add-paths: npins/sources.json
+          branch: blocklist-update
+          delete-branch: true
+          draft: false
+          commit-message: "Update Blocklist"
+          title: "[Chore] Update Blocklist"
+          body: >
+            Automated Pull Request to Update Blocklist at 9 am UTC.
+          labels: automated pr
+
+    - name: Auto-merge github-actions bot commit
+      if: github.actor == 'github-actions[bot]'
+      run: gh pr merge --merge --auto "1"
+
