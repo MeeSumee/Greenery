@@ -24,10 +24,12 @@ jobs:
       id: pr
       uses: peter-evans/create-pull-request@v8
       with:
+        token: ${{ secrets.PAT }}
         branch: master-to-stable
         title: "[Backport] Merge master to stable"
         body: "This Pull Request is automatically generated and merges changes from master to stable"
-        labels: "automatically generated pr"
+        labels: |
+          automated pr
         draft: false
 
     - name: Automerge
