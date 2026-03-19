@@ -24,7 +24,6 @@ jobs:
       id: pr
       uses: peter-evans/create-pull-request@v8
       with:
-        base: stable
         branch: master-to-stable
         title: "[Backport] Merge master to stable"
         body: "This Pull Request is automatically generated and merges changes from master to stable"
