@@ -9,7 +9,10 @@ on:
       - 'pkgs/**'
   pull_request:
     branches:
-    - stable
+    - master
+  workflow_run:
+    workflows: ["Backport to Stable"]
+    types: completed
 jobs:
   populate-cache:
     timeout-minutes: 60
