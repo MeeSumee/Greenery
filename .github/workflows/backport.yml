@@ -16,6 +16,7 @@ jobs:
       with:
         app-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
+        owner: ${{ github.repository_owner }}
 
     - uses: actions/checkout@v6
       with:
