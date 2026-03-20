@@ -16,13 +16,10 @@ jobs:
       with:
         app-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
-        owner: ${{ github.repository_owner }}
 
     - uses: actions/checkout@v6
       with:
-        token: ${{ steps.generate-token.outputs.token }}
         ref: stable
-        persist-credentials: false
 
     - name: Reset stable branch
       run: |
@@ -33,7 +30,6 @@ jobs:
       id: pr
       uses: peter-evans/create-pull-request@v8
       with:
-        sign-commits: true
         token: ${{ steps.generate-token.outputs.token }}
         branch: master-to-stable
         title: "[Backport] Merge master to stable"
