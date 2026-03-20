@@ -34,11 +34,3 @@ jobs:
         labels: |
           automated pr
         draft: false
-
-    - name: Automerge
-      if: steps.pr.outputs.pull-request-operation == 'created'
-      env:
-        GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-      run: |
-          gh pr review --approve "${{ steps.pr.outputs.pull-request-number }}"
-          gh pr merge --merge --auto "${{ steps.pr.outputs.pull-request-number }}"
