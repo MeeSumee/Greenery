@@ -1,5 +1,5 @@
 name: Approve & Merge
-on: pull_request_target
+on: pull_request
 
 jobs:
   approve-and-merge:
