@@ -21,10 +21,13 @@ jobs:
       id: filter
       with:
         filters: |
+          lockfile:
+            - 'flake.lock'
           packages:
             - 'pkgs/**'
 
     - name: Aggressive disk space removal
+      if: steps.filter.outputs.lockfile == 'true'
       uses: wimpysworld/nothing-but-nix@v10
       with:
         nix-permission-edict: true  
@@ -44,11 +47,13 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH }}'
 
     - name: Push flake inputs
+      if: steps.filter.outputs.lockfile == 'true'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
     - name: Build system derivations
+      if: steps.filter.outputs.lockfile == 'true'
       run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached
 
-    - name: Push built derivations
+    - name: Build package derivations
       if: steps.filter.outputs.packages == 'true'
       run: nix build .#nahidacursor .#papiteal .#vesktop

@@ -1,5 +1,5 @@
 name: Approve & Merge
-on: pull_request_target
+on: pull_request
 
 jobs:
   approve-and-merge:
@@ -8,7 +8,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    if: ${{ github.actor == 'nahida-greenery[bot]' }} || ${{ github.actor == 'dependabot[bot]' }}
+    if: ${{ github.actor == 'nahida-greenery[bot]' || github.actor == 'dependabot[bot]' }}
     steps:
       - name: Autoapprove & Merge
         env:
