@@ -22,10 +22,38 @@
 
   config = lib.mkIf config.greenery.system.enable {
     # Bootloader
-    boot = {
-      loader.systemd-boot.enable = lib.mkDefault true;
-      loader.efi.canTouchEfiVariables = lib.mkDefault true;
+    boot.loader = {
+      systemd-boot.enable = lib.mkDefault true;
+      efi.canTouchEfiVariables = lib.mkDefault true;
     };
+
+    # Sudo privilege restriction
+    security.sudo.execWheelOnly = true;
+
+    # Core firmware services
+    services = {
+      dbus.implementation = "broker";
+      gvfs.enable = lib.mkDefault true;
+      udisks2.enable = lib.mkDefault true;
+      fwupd.enable = lib.mkDefault true;
+    };
+
+    system.autoUpgrade = lib.mkIf (config.greenery.system.autoUpgrade.enable && config.greenery.system.enable) {
+      enable = true;
+      flake = "github:MeeSumee/Greenery/stable";
+      flags = [
+        "--print-build-logs"
+      ];
+      dates = "Sat 10:00 UTC";
+      randomizedDelaySec = "45min";
+      allowReboot = true;
+      runGarbageCollection = true;
+      rebootWindow = {
+        lower = "03:00";
+        upper = "12:00";
+      };
+    };
+
     systemd = {
       # Nuke faster
       user.extraConfig = ''
@@ -224,33 +252,6 @@
             IPAddressDeny = "any";
           };
         };
-      };
-    };
-
-    # Sudo privilege restriction
-    security.sudo.execWheelOnly = true;
-
-    # Core firmware services
-    services = {
-      dbus.implementation = "broker";
-      gvfs.enable = lib.mkDefault true;
-      udisks2.enable = lib.mkDefault true;
-      fwupd.enable = lib.mkDefault true;
-    };
-
-    system.autoUpgrade = lib.mkIf (config.greenery.system.autoUpgrade.enable && config.greenery.system.enable) {
-      enable = true;
-      flake = "github:MeeSumee/Greenery";
-      flags = [
-        "--print-build-logs"
-      ];
-      dates = "10:00 UTC";
-      randomizedDelaySec = "45min";
-      allowReboot = true;
-      runGarbageCollection = true;
-      rebootWindow = {
-        lower = "03:00";
-        upper = "12:00";
       };
     };
   };
