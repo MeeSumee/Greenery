@@ -1,0 +1,18 @@
+name: Approve & Merge
+on: pull_request_target
+
+jobs:
+  approve-and-merge:
+    name: Approve & Merge PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    if: ${{ github.actor == 'nahida-greenery[bot]' }} || ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Autoapprove & Merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+            gh pr review --approve "${{ github.event.pull_request.html_url }}"
+            gh pr merge --merge --auto "${{ github.event.pull_request.html_url }}"
