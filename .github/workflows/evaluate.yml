@@ -7,14 +7,6 @@ on:
     paths:
     - '**.nix'
   pull_request:
-    branches:
-    - master
-  workflow_run:
-    workflows: ["Backport to Stable"]
-    types:
-      - completed
-    branches:
-      - stable
 jobs:
   evaluation:
     name: NixOS Evaluation

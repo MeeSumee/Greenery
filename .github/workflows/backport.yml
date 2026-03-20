@@ -11,6 +11,12 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+    - uses: actions/create-github-app-token@v2
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
+
     - uses: actions/checkout@v6
       with:
         ref: stable
@@ -24,9 +30,17 @@ jobs:
       id: pr
       uses: peter-evans/create-pull-request@v8
       with:
+        sign-commits: true
+        token: ${{ steps.generate-token.outputs.token }}
         branch: master-to-stable
         title: "[Backport] Merge master to stable"
         body: "This Pull Request is automatically generated and merges changes from master to stable"
         labels: |
           automated pr
         draft: false
+
+    - name: Automerge
+      if: steps.pr.outputs.pull-request-operation == 'created'
+      run: |
+          gh pr review --approve "${{ steps.pr.outputs.pull-request-number }}"
+          gh pr merge --merge --auto "${{ steps.pr.outputs.pull-request-number }}"
