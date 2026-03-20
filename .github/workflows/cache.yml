@@ -7,9 +7,7 @@ on:
     paths:
       - 'flake.lock'
       - 'pkgs/**'
-  pull_request_review:
-    types:
-      - submitted
+  pull_request:
 jobs:
   populate-cache:
     timeout-minutes: 60

@@ -6,9 +6,7 @@ on:
     - master
     paths:
     - '**.nix'
-  pull_request_review:
-    types:
-      - submitted
+  pull_request:
 jobs:
   evaluation:
     name: NixOS Evaluation
