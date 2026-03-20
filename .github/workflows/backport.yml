@@ -1,0 +1,36 @@
+name: "Backport to Stable"
+on:
+  schedule:
+    - cron: "0 0 * * 6" # Saturday 12 am UTC
+  workflow_dispatch:
+jobs:
+  backport:
+    name: Backport
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/create-github-app-token@v2
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
+
+    - uses: actions/checkout@v6
+      with:
+        ref: stable
+
+    - name: Reset stable branch
+      run: |
+        git fetch origin master:master
+        git reset --hard master
+
+    - name: Create Pull Request
+      id: pr
+      uses: peter-evans/create-pull-request@v8
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+        branch: master-to-stable
+        title: "[Backport] Merge master to stable"
+        body: "This Pull Request is automatically generated and merges changes from master to stable"
+        labels: |
+          automated pr
+        draft: false
