@@ -18,15 +18,14 @@
         "greenery".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINiA3lkgGECrzk08GOhUlSIx5+jQ6WvuERK3nAz617M7";
       };
 
-      # Fix colors not showing
-      extraConfig = ''
-        AcceptEnv COLORTERM
-      '';
-
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "no";
         AllowUsers = users;
+        ClientAliveInterval = 300;
+        AcceptEnv = [
+          "COLORTERM"
+        ];
       };
     };
 
