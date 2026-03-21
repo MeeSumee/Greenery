@@ -27,20 +27,15 @@ jobs:
           keep-env-derivations = true
           keep-outputs = true
 
-    - name: Update Flakes
+    - name: Update flakes
       run: nix flake update
 
     - name: Update npins
       run: nix shell nixpkgs#npins --command npins update
 
-    - name: Configure nahida-bot
+    - name: Push Changes
       run: |
           git config --local user.email "nahida-greenery[bot]@users.noreply.github.com"
           git config --local user.name "nahida-greenery[bot]"
-          git commit -a -m "Chore: Update flakes & npins"
-    
-    - name: Push Changes
-      uses: ad-m/github-push-action@v1.0.0
-      with:
-        github_token: ${{ steps.generate-token.outputs.token }}
-        branch: ${{ github.ref }}
+          ggit diff --staged --quiet || git commit -am "Chore: Update flakes & npins"
+          git push "https://x-access-token:${{ steps.generate-token.outputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}
