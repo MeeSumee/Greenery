@@ -15,7 +15,7 @@ Replaced Librewolf in favor of Ungoogled-Chromium for security reasons.
 
 ## TODO
 
-- [ ] Automate Nix Flake Update to Continuous Integration with build checks.
+- [x] Automate Nix Flake Update to Continuous Integration with build checks.
 - [ ] Deprecate Brave and fully use Ungoogled-Chromium with Profiles (declaratively).
 - [ ] Harden Services used in Greenery to reduce attack surface.
 - [ ] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
