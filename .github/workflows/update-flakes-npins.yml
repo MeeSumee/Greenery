@@ -16,6 +16,8 @@ jobs:
         app-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
     - uses: actions/checkout@v6
+      with:
+        persist-credentials: false
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
