@@ -8,7 +8,6 @@
     ./dnscrypt.nix
     ./fail2ban.nix
     ./openssh.nix
-    ./taildrive.nix
     ./tailscale.nix
   ];
 

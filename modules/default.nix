@@ -41,7 +41,6 @@
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
-      taildrive.enable = true;
       tailscale.enable = true;
     };
 

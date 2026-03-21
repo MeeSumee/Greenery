@@ -74,7 +74,7 @@
         compression = "auto,zstd";
         startAt = "Mon 04:00:00";
 
-        # Mount taildrive on demand
+        # Mount emerald on demand
         preHook = ''
           ${pkgs.sshfs}/bin/sshfs -o \
           allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \

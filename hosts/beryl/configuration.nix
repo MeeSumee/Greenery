@@ -23,7 +23,6 @@
       bluetooth.enable = true;
       dnscrypt.enable = true;
       openssh.enable = true;
-      taildrive.enable = true;
       tailscale.enable = true;
     };
 
