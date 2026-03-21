@@ -5,11 +5,16 @@ on:
   workflow_dispatch:
 jobs:
   update:
-    name: Install Nix
+    name: Initialize Token
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+    - uses: actions/create-github-app-token@v2
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
     - uses: actions/checkout@v6
 
     - name: Install Nix
