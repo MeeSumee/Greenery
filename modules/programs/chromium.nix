@@ -274,37 +274,11 @@ in {
       };
     };
 
-    environment = {
-      # Debloat brave
-      etc."/brave/policies/managed/GroupPolicy.json".text = ''
-        {
-          "BraveAIChatEnabled": false,
-          "BraveRewardsDisabled": true,
-          "BraveWalletDisabled": true,
-          "BraveVPNDisabled": true,
-          "TorDisabled": true,
-          "BraveP3AEnabled": false,
-          "BraveStatsPingEnabled": false,
-          "BraveWebDiscoveryEnabled": false,
-          "BraveNewsDisabled": true,
-          "BraveTalkDisabled": true,
-          "BraveSpeedreaderEnabled": false,
-          "BraveWaybackMachineEnabled": false,
-          "BravePlaylistEnabled": false,
-          "SyncDisabled": false,
-          "PasswordManagerEnabled": false,
-          "AutofillAddressEnabled": false,
-          "AutofillCreditCardEnabled": false,
-          "TranslateEnabled": false,
-          "DnsOverHttpsMode": "secure",
-          "DnsOverHttpsTemplates": "https://dns.adguard-dns.com/dns-query"
-        }
-      '';
-      # Browsers
-      systemPackages = with pkgs; [
-        brave
-        ungoogled-chromium
-      ];
-    };
+    # Kinda annoying that profiles have to be set manually
+    # But all you need to do is make a new one and install extensions
+    # All settings are pre-set from global profile configs
+    environment.systemPackages = with pkgs; [
+      ungoogled-chromium
+    ];
   };
 }
