@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   update:
-    name: Initialize Token
+    name: Update script
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -31,10 +31,14 @@ jobs:
     - name: Update npins
       run: nix shell nixpkgs#npins --command npins update
 
-    - name: Push Changes
+    - name: Configure nahida-bot
       run: |
           git config --local user.email "nahida-greenery[bot]@users.noreply.github.com"
           git config --local user.name "nahida-greenery[bot]"
-          git add flake.lock npins/sources.json
-          git diff --staged --quiet || git commit -m "Chore: Update flakes & npins"
-          git push
+          git commit -a -m "Chore: Update flakes & npins"
+    
+    - name: Push Changes
+      uses: ad-m/github-push-action@v1.0.0
+      with:
+        github_token: ${{ steps.generate-token.outputs.token }}
+        branch: ${{ github.ref }}
