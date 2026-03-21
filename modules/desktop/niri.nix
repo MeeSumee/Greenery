@@ -78,7 +78,6 @@
       in {
         ".config/niri/config.kdl".text = keybinds;
         ".config/hypr/hypridle.conf".text = quickidle;
-        ".config/noctalia/colors.json".source = "${pkgs.noctalia-shell}/share/noctalia-shell/Assets/ColorScheme/Rosepine/Rosepine.json";
         ".config/noctalia/settings.json".source = ../../dots/noctalia/settings.json;
         "wallpapers/schizomiku.jpg".source = schizomiku;
       };
