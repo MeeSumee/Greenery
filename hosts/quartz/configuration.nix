@@ -64,6 +64,7 @@
       fish.enable = true;
       fonts.enable = true;
       input.enable = true;
+      lanzaboote.enable = true;
       sumee.enable = true;
     };
   };
