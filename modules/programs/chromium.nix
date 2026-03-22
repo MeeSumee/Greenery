@@ -99,6 +99,7 @@ in {
         "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
         "noimedcjdohhokijigpfcbjcfcaaahej" # Rose-Pine
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+        "pbanhockgagggenencehbnadejlgchfc" # J*b
       ];
 
       defaultSearchProviderEnabled = true;
