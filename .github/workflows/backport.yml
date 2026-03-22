@@ -6,7 +6,7 @@ on:
 jobs:
   backport:
     name: Backport
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
     - uses: actions/create-github-app-token@v2
       id: generate-token
