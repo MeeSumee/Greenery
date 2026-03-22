@@ -8,10 +8,15 @@ on:
       - 'flake.lock'
       - 'pkgs/**'
   pull_request:
+
 jobs:
-  populate-cache:
+  build-derivations:
+    name: Build derivations & Push to Cachix
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -52,7 +57,7 @@ jobs:
 
     - name: Build system derivations
       if: steps.filter.outputs.lockfile == 'true'
-      run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached
+      run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --file builtins.currentSystem)"
 
     - name: Build package derivations
       if: steps.filter.outputs.packages == 'true'
