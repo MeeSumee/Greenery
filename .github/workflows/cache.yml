@@ -8,6 +8,7 @@ on:
       - 'flake.lock'
       - 'pkgs/**'
   pull_request:
+    types: [ labeled ]
 
 jobs:
   build-derivations:
@@ -32,7 +33,7 @@ jobs:
             - 'pkgs/**'
 
     - name: Aggressive disk space removal
-      if: steps.filter.outputs.lockfile == 'true'
+      if: steps.filter.outputs.lockfile == 'true' || github.event.label.name == 'automated pr'
       uses: wimpysworld/nothing-but-nix@v10
       with:
         nix-permission-edict: true  
@@ -52,11 +53,11 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH }}'
 
     - name: Push flake inputs
-      if: steps.filter.outputs.lockfile == 'true'
+      if: steps.filter.outputs.lockfile == 'true' || github.event.label.name == 'automated pr'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
     - name: Build system derivations
-      if: steps.filter.outputs.lockfile == 'true'
+      if: steps.filter.outputs.lockfile == 'true' || github.event.label.name == 'automated pr'
       run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
 
     - name: Build package derivations
