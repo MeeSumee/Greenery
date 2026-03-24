@@ -46,15 +46,15 @@
 
     server = {
       enable = true;
-      anki.enable = true;
-      auth.enable = true;
-      davis.enable = true;
-      files.enable = true;
-      immich.enable = true;
+      # anki.enable = true;
+      # auth.enable = true;
+      # davis.enable = true;
+      # files.enable = true;
+      # immich.enable = true;
       jellyfin.enable = true;
-      memos.enable = true;
-      ollama.enable = true;
-      suwayomi.enable = true;
+      # memos.enable = true;
+      # ollama.enable = true;
+      # suwayomi.enable = true;
     };
 
     system = {
