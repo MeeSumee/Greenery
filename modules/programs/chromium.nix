@@ -275,9 +275,7 @@ in {
       };
     };
 
-    # Kinda annoying that profiles have to be set manually
-    # But all you need to do is make a new one and install extensions
-    # All settings are pre-set from global profile configs
+    # Using machine-based isolation rather than per profile
     environment.systemPackages = with pkgs; [
       ungoogled-chromium
     ];
