@@ -63,6 +63,7 @@
     # Large/Demanding applications
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
+        nixos-shell # Spawn virtual machines for testing
         wo.vesktop # Vesktop with overrides
         gimp # GIMP image manipulator
         kicad-small # KiCAD Electronic schematic/PCB designer
