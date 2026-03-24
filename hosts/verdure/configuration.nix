@@ -61,6 +61,7 @@
   };
 
   services = {
+    tailscale.serve.enable = true;
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
