@@ -15,13 +15,22 @@
     ./xserver.nix
   ];
 
-  options.greenery.desktop.enable = lib.mkEnableOption "desktop enviroment";
+  options.greenery.desktop = {
+    enable = lib.mkEnableOption "desktop enviroment";
+    autologin.enable = lib.mkEnableOption "autologin";
+  };
 
   config = lib.mkIf config.greenery.desktop.enable {
     # Session variables for wayland usage
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    };
+
+    # Autologin
+    services.getty = lib.mkIf (config.greenery.desktop.autologin.enable && config.greenery.desktop.enable) {
+      autologinOnce = true;
+      autologinUser = "sumee";
     };
 
     # So I can open foot while browsing nautilus
