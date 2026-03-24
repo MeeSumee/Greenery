@@ -67,6 +67,9 @@
             PrivateNetwork = true;
             ProtectHostname = true;
             ProtectKernelModules = true;
+            ProtectProc = "invisible";
+            PrivateMounts = true;
+            NoNewPrivileges = true;
           };
         };
 
