@@ -14,6 +14,24 @@
       group = "suwayomi";
     };
 
+    # Upstream recommendation: https://github.com/Suwayomi/Suwayomi-Server/blob/master/scripts/resources/pkg/systemd/suwayomi-server.service
+    systemd.services.suwaomi-server.serviceConfig = {
+      WorkingDirectory = config.services.suwayomi-server.dataDir;
+      ProtectSystem = "full";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      ProtectClock = true;
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      ProtectControlGroups = true;
+      RestrictSUIDSGID = true;
+      RestrictRealtime = true;
+      RestrictNamespaces = true;
+      NoNewPrivileges = true;
+    };
+
     services = {
       tailscale.serve.services.manga.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString config.services.suwayomi-server.settings.server.port}";
 
