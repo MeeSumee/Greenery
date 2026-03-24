@@ -76,6 +76,31 @@
   networking.hostName = "quartz"; # The color of my desktop + piezoelectric shenanigans
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # # Sunshine
+  # services.sunshine = {
+  #   enable = true;
+  #   autoStart = true;
+  #   capSysAdmin = true;
+  #   openFirewall = false;
+  # };
+  #
+  # # Open tailscale firewall ports for sunshine
+  # networking.firewall.interfaces."tailscale0" = {
+  #   allowedTCPPorts = [
+  #     47984
+  #     47989
+  #     47990
+  #     48010
+  #   ];
+  #   allowedUDPPorts = [
+  #     47998
+  #     47999
+  #     48000
+  #     48002
+  #     48010
+  #   ];
+  # };
+
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
