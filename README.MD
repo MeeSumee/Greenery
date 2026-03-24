@@ -9,9 +9,9 @@ Consists of multiple devices:
 
 ## Status Updates
 
-More automation with @github-actions[bot] & @dependabot[bot].
+Deprecated Brave, realized profiles break auto extension config, so I isolated by machine - Laptop as 1 profile, Desktop as another.
 
-Replaced Librewolf in favor of Ungoogled-Chromium for security reasons.
+Created stable branch to isolate servers and clients to provide more time to debug.
 
 ## TODO
 
