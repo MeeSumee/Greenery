@@ -15,7 +15,7 @@
     };
 
     # Upstream recommendation: https://github.com/Suwayomi/Suwayomi-Server/blob/master/scripts/resources/pkg/systemd/suwayomi-server.service
-    systemd.services.suwaomi-server.serviceConfig = {
+    systemd.services.suwayomi-server.serviceConfig = {
       WorkingDirectory = config.services.suwayomi-server.dataDir;
       ProtectSystem = "full";
       ProtectHome = true;
