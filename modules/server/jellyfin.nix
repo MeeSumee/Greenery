@@ -11,6 +11,22 @@
     services = {
       jellyfin = {
         enable = true;
+        forceEncodingConfig = true;
+        hardwareAcceleration = {
+          enable = true;
+          device = "/dev/dri/renderD128";
+          type = "qsv";
+        };
+        transcoding = {
+          enableHardwareEncoding = true;
+          hardwareDecodingCodecs = {
+            h264 = true;
+            hevc = true;
+            hevc10bit = true;
+            vc1 = true;
+            vp9 = true;
+          };
+        };
       };
       tailscale.serve.services.jellyfin.endpoints."tcp:443" = "https://127.0.0.1:8096";
     };
