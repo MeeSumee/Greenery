@@ -9,6 +9,8 @@
     # Enable tailscale VPN service
     services.tailscale = {
       enable = true;
+      # TODO: Figure out how to set quartz serve to be binding to quartz.onca-ph.ts.net via config
+      serve.enable = lib.mkIf config.greenery.system.autoUpgrade.enable true;
       useRoutingFeatures = "both"; # Enables the use of exit node
       extraSetFlags = [
         "--accept-routes"

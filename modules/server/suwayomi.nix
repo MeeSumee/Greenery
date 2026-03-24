@@ -2,13 +2,10 @@
   lib,
   config,
   ...
-}:
-{
-
+}: {
   options.greenery.server.suwayomi.enable = lib.mkEnableOption "suwayomi";
-  
+
   config = lib.mkIf (config.greenery.server.suwayomi.enable && config.greenery.server.enable) {
-    
     # Add age secret files
     age.secrets.secret2 = {
       file = ../../secrets/secret2.age;
@@ -18,6 +15,7 @@
     };
 
     services = {
+      tailscale.serve.services.manga.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString config.services.suwayomi-server.settings.server.port}";
 
       # Suwayomi-server for fetching manga online
       suwayomi-server = {
@@ -32,7 +30,7 @@
             basicAuthEnabled = true;
             basicAuthUsername = "sumee";
             basicAuthPasswordFile = config.age.secrets.secret2.path;
-             
+
             # WebUI
             webUIEnabled = true;
             webUIFlavor = "WebUI";

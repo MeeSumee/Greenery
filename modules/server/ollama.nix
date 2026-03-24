@@ -7,6 +7,7 @@
   options.greenery.server.ollama.enable = lib.mkEnableOption "ollama-openwebui service";
 
   config = lib.mkIf (config.greenery.server.ollama.enable && config.greenery.server.enable) {
+    # For single service system (quartz), use sudo tailscale serve --bg ${open-webui port}
     services = {
       ollama = {
         enable = true;
