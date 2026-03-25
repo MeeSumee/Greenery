@@ -8,6 +8,7 @@
     ./auth.nix
     ./davis.nix
     ./files.nix
+    ./home.nix
     ./immich.nix
     ./jellyfin.nix
     ./memos.nix
