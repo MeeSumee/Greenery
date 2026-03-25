@@ -47,7 +47,7 @@ jobs:
           keep-outputs = true
 
     - name: Cachix
-      uses: cachix/cachix-action@v16
+      uses: cachix/cachix-action@v17
       with:
         name: sumee
         authToken: '${{ secrets.CACHIX_AUTH }}'
