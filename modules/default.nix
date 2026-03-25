@@ -1,4 +1,4 @@
-{lib, ...}: {
+{
   imports = [
     ./desktop
     ./hardware
@@ -8,15 +8,10 @@
     ./system
   ];
 
-  # Do you really want to disable every single file in modules lmfao??
-  options.greenery.enable = lib.mkEnableOption "すべて";
-
   /*
   This is for reference for all NixOS systems
 
   greenery = {
-    enable = true;
-
     desktop = {
       enable = true;
       hypridle.enable = true;

@@ -6,8 +6,6 @@
 }: {
   # All modules and their values
   greenery = {
-    enable = true;
-
     hardware = {
       enable = true;
     };

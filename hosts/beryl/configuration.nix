@@ -2,8 +2,6 @@
 {
   # All modules and their values
   greenery = {
-    enable = true;
-
     desktop = {
       enable = true;
       hypridle.enable = true;
