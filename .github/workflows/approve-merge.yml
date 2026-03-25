@@ -1,5 +1,6 @@
 name: Approve & Merge
-on: pull_request
+on:
+  pull_request:
 
 jobs:
   approve-and-merge:
@@ -8,11 +9,26 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    if: ${{ github.actor == 'nahida-greenery[bot]' || github.actor == 'dependabot[bot]' }}
     steps:
-      - name: Autoapprove & Merge
+      - name: Autoapprove & Merge Nahida's PR
+        if: github.actor == 'nahida-greenery[bot]'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            gh pr review --approve "${{ github.event.pull_request.html_url }}"
-            gh pr merge --merge --auto "${{ github.event.pull_request.html_url }}"
+          gh pr review --approve "${{ github.event.pull_request.html_url }}"
+          gh pr merge --merge --auto "${{ github.event.pull_request.html_url }}"
+
+      - name: Dependabot metadata
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Autoapprove & Merge Dependabot's PR
+        if: github.event.pull_request.user.login == 'dependabot[bot]'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review --approve "${{ github.event.pull_request.html_url }}"
+          gh pr merge --merge --auto "${{ github.event.pull_request.html_url }}"
+
