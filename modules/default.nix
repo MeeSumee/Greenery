@@ -84,6 +84,7 @@
       age.nix included by default
       locale.nix included by default
       nix.nix included by default
+      systemd.nix included by default
     };
   };
   */
