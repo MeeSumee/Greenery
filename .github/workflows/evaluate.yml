@@ -11,6 +11,8 @@ jobs:
   evaluation:
     name: NixOS Evaluation
     runs-on: ubuntu-latest
+    # Run if its not a dependabot pr
+    if: github.event.label.name != 'dependencies'
     permissions:
       actions: write
     strategy:
