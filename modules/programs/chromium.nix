@@ -4,8 +4,10 @@
   pkgs,
   ...
 }: let
+  # Auto opens links on startup to download
   chromeWebstoreCrxUrl = id: "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${pkgs.ungoogled-chromium.version}&x=id%3D${id}%26uc";
 
+  # Kinda annoying rn cause if version doesn't change, you delete hash file & perform nixos rebuild boot
   deleteFirstRunFiles = ''
     if ! systemctl is-system-running --quiet; then
       echo "system is not fully running yet. skipping chromium update check."
@@ -102,6 +104,7 @@ in {
         "pbanhockgagggenencehbnadejlgchfc" # J*b
       ];
 
+      # DuckDuckGo stuff
       defaultSearchProviderEnabled = true;
       defaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
       defaultSearchProviderSuggestURL = "https://ac.duckduckgo.com/ac/?q={searchTerms}&type=list";
@@ -148,12 +151,19 @@ in {
             };
           };
 
+        # Inherits ublock settings
         "3rdparty" = {
           "extensions" = {
             "ddkjiahejlhfcafbddmgiahcphecmpfh" = ublockPolicies;
           };
         };
 
+        # Shows a page when opening incognito to force enable ublock origin
+        "MandatoryExtensionsForIncognitoNavigation" = [
+          "ddkjiahejlhfcafbddmgiahcphecmpfh"
+        ];
+
+        # Managed bookmarks
         "BookmarkBarEnabled" = true;
         "ManagedBookmarks" = [
           {
@@ -211,6 +221,7 @@ in {
         # 2 = Do not predict network actions on any network connection
         "NetworkPredictionOptions" = 0;
 
+        # Self-explanatory policies
         "HttpsOnlyMode" = "force_enabled";
         "MemorySaverModeSavings" = 1;
         "SearchSuggestEnabled" = true;
@@ -235,19 +246,30 @@ in {
       (self: super: {
         ungoogled-chromium = super.ungoogled-chromium.override {
           commandLineArgs = [
+            # Theming
             "--enable-incognito-themes"
+            "--force-dark-mode"
+            # For extension auto-install
             "--extension-mime-request-handling=always-prompt-for-install"
+            # Generate Noise to spoof fingerprinting mfs
             "--fingerprinting-canvas-image-data-noise"
             "--fingerprinting-canvas-measuretext-noise"
             "--fingerprinting-client-rects-noise"
-            "--force-dark-mode"
-            "--enable-features=WebUIDarkMode,EnableFingerprintingProtectionFilter:activation_level/enabled/enable_console_logging/true,EnableFingerprintingProtectionFilterInIncognito:activation_level/enabled/enable_console_logging/true,TabstripDeclutter,DevToolsPrivacyUI,ImprovedSettingsUIOnDesktop,MultiTabOrganization,OneTimePermission,TabOrganization,TabOrganizationSettingsVisibility,TabReorganization,TabReorganizationDivider,TabSearchPositionSetting,TabstripDedupe,TaskManagerDesktopRefresh"
-            "--disable-features=EnableTabMuting"
+            # Fingerprint Protection with console logs to see what's happening, Tab decluttering, User Agent Spoofing & other "fun" stuff
+            "--enable-features=WebUIDarkMode,EnableFingerprintingProtectionFilter:activation_level/enabled/enable_console_logging/true,EnableFingerprintingProtectionFilterInIncognito:activation_level/enabled/enable_console_logging/true,TabstripDeclutter,DevToolsPrivacyUI,ImprovedSettingsUIOnDesktop,MultiTabOrganization,OneTimePermission,TabOrganization,TabOrganizationSettingsVisibility,TabReorganization,TabReorganizationDivider,TabSearchPositionSetting,TabstripDedupe,TaskManagerDesktopRefresh,ReduceUserAgentDataLinuxPlatformVersion,ReducedSystemInfo,RemoveClientHints,WebRtcHideLocalIpsWithMdns,NoReferrers,SpoofWebGLInfo:renderer/NVIDIA+GeForce+GTX+980%2C+or+similar/vendor/NVIDIA+Corporation"
+            # Fuck allowing cast to bind IP
+            "--disable-features=CastAllowAllIPs"
+            # Wayland Input Method (fcitx5)
+            "--enable-wayland-ime=true"
+            # GPU/Hardware Acceleration
+            "--render-node-override=/dev/dri/renderD128"
+            "--enable-gpu-rasterization"
           ];
         };
       })
     ];
 
+    # Hardened systemd script cause I am paranoid
     systemd.user.services.deleteChromiumFirstRun = {
       script = deleteFirstRunFiles;
       wantedBy = ["default.target"];
