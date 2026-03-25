@@ -1,4 +1,4 @@
-_: {
+{
   systemd = {
     # Nuke faster
     user.extraConfig = ''
