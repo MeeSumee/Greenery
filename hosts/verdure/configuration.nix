@@ -37,6 +37,7 @@
       anki.enable = true;
       auth.enable = true;
       davis.enable = true;
+      home.enable = true;
     };
 
     system = {
@@ -66,6 +67,7 @@
       interfaces."tailscale0".allowedTCPPorts = [
         3600
         8000
+        8123
         27701
       ];
     };
