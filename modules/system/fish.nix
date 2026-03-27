@@ -43,7 +43,8 @@ in {
           ga = "git add";
           gs = "git status";
           gc = "git commit";
-          gcm = ''git commit -m "$hostname:'';
+          gcm = ''git commit -m '';
+          gcs = ''git commit -S -m "$hostname:'';
           gck = "git checkout -b";
           gp = "git push";
           gpu = "git pull";
