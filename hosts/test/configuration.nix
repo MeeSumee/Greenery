@@ -44,15 +44,16 @@
 
     server = {
       enable = true;
-      anki.enable = true;
+      # anki.enable = true;
       auth.enable = true;
-      davis.enable = true;
-      files.enable = true;
-      immich.enable = true;
-      jellyfin.enable = true;
-      memos.enable = true;
-      ollama.enable = true;
-      suwayomi.enable = true;
+      # davis.enable = true;
+      # files.enable = true;
+      # home.enable = true;
+      # immich.enable = true;
+      # jellyfin.enable = true;
+      # memos.enable = true;
+      # ollama.enable = true;
+      # suwayomi.enable = true;
     };
 
     system = {
@@ -75,7 +76,16 @@
       "-bios"
       "${pkgs.OVMF.fd}/FV/OVMF.fd"
     ];
+    forwardPorts = [
+      {
+        from = "host";
+        host.port = 16384;
+        guest.port = 8000;
+      }
+    ];
   };
 
+  documentation.enable = false;
   networking.hostName = "nixos";
+  system.stateVersion = "25.11";
 }
