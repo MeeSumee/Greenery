@@ -72,7 +72,14 @@
   };
 
   services = {
-    tailscale.serve.enable = true;
+    tailscale = {
+      serve.enable = true;
+
+      # Exit-node flags
+      extraSetFlags = [
+        "--advertise-exit-node"
+      ];
+    };
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
@@ -107,13 +114,6 @@
         "[fd7a:115c:a1e0::8034:cf55]:53"
         "127.0.0.1:53"
         "[::1]:53"
-      ];
-    };
-
-    # Exit-node flags
-    tailscale = {
-      extraSetFlags = [
-        "--advertise-exit-node"
       ];
     };
   };
