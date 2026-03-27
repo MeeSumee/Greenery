@@ -25,6 +25,7 @@
     hardware = {
       enable = true;
       amdgpu.enable = true;
+      asus-numpad.enable = true;
       audio.enable = true;
       intelgpu.enable = true;
       power.enable = true;

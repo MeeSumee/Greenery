@@ -3,13 +3,8 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: {
-  imports = [
-    inputs.asusnumpad.nixosModules.default
-  ];
-
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
@@ -61,7 +56,6 @@
 
   swapDevices = [];
 
-  # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
   systemd.services.fprintd = {
     wantedBy = ["multi-user.target"];
     serviceConfig.Type = "simple";
@@ -70,23 +64,12 @@
     # Enable Thunderbolt Service for USB4 support
     hardware.bolt.enable = true;
 
+    # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
     fprintd = {
       enable = true;
       package = pkgs.fprintd-tod;
       tod.enable = true;
       tod.driver = pkgs.libfprint-2-tod1-elan;
-    };
-
-    # Enable Asus Numpad Service (wayland-1 for niri)
-    asus-numberpad-driver = {
-      enable = true;
-      layout = "up5401ea";
-      wayland = true;
-      waylandDisplay = "wayland-1";
-      ignoreWaylandDisplayEnv = false;
-      config = {
-        "activation_time" = "0.5";
-      };
     };
   };
 
