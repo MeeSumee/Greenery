@@ -5,11 +5,9 @@
   sources,
   ...
 }: {
-
   options.greenery.networking.dnscrypt.enable = lib.mkEnableOption "dnscrypt";
 
   config = lib.mkIf (config.greenery.networking.dnscrypt.enable && config.greenery.networking.enable) {
-
     # Set DNS route
     networking = {
       dhcpcd.extraConfig = "nohook resolv.conf";
@@ -18,8 +16,8 @@
         "127.0.0.1"
         "::1"
       ];
-    };  
-   
+    };
+
     # DNS Proxy for DNS Resolving with Tailscale Integration
     services.dnscrypt-proxy = {
       enable = true;
@@ -28,6 +26,11 @@
         ipv6_servers = true;
         doh_servers = true;
         require_dnssec = true;
+
+        bootstrap_resolvers = [
+          "9.9.9.11:53"
+          "1.1.1.1:53"
+        ];
 
         forwarding_rules = pkgs.writeText "forwarding_rules.txt" ''
           ts.net 100.100.100.100
@@ -56,7 +59,8 @@
             ${extrablocklist}
             ${builtins.readFile (sources.blocklist + "/hosts")}
           '';
-        in blocklist;
+        in
+          blocklist;
 
         sources.public-resolvers = {
           urls = [
