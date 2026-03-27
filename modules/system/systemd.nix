@@ -39,7 +39,7 @@
       syslog = {
         serviceConfig = {
           PrivateNetwork = true;
-          CapabilityBoundingSet = ["CAP_DAC_READ_SEARCH" "CAP_SYSLOG" "CAP_NET_BIND_SERVICE"];
+          CapabilityBoundingSet = ["CAP_DAC_READ_SEARCH" "CAP_NET_BIND_SERVICE"];
           NoNewPrivileges = true;
           PrivateDevices = true;
           ProtectClock = true;
