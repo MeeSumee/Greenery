@@ -11,25 +11,30 @@
 
   # Enable core nix features
   nix = {
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedClass = "idle";
     package = pkgs.nixVersions.latest;
     registry.nixpkgs.flake = inputs.nixpkgs;
     channel.enable = false;
     settings = {
+      flake-registry = "/etc/nix/registry.json";
       allow-import-from-derivation = false;
       experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
       trusted-users = ["root" "@wheel"];
 
+      # fuck this
+      warn-dirty = false;
+
+      # Cache stuff
+      builders-use-substitutes = true;
       extra-substituters = ["https://sumee.cachix.org"];
       extra-trusted-public-keys = ["sumee.cachix.org-1:Hq6j5JXABEiSpFsSMwAJLiAclMmBpdP+gsUgVy2Ld4Y="];
     };
+  };
 
-    # Nix auto garbage collect
-    gc = {
-      persistent = true;
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
+  # Uses /var/tmp instead of tmpfs for building
+  systemd.services.nix-daemon = {
+    environment.TMPDIR = "/var/tmp";
   };
 }
