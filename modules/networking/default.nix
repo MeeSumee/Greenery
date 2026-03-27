@@ -23,7 +23,6 @@
         ProtectHome = true;
         PrivateTmp = "disconnected";
         ProtectClock = true;
-        ProtectKernelModules = true;
         ProtectKernelLogs = true;
         RestrictNamespaces = true;
         MemoryDenyWriteExecute = true;
