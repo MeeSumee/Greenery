@@ -25,7 +25,7 @@ in {
         pull = "newer";
         image = "2fauth/2fauth:latest";
         autoStart = true;
-        # environmentFiles = [config.age.secrets.secret3.path];
+        environmentFiles = [config.age.secrets.secret3.path];
         environment = {
           "APP_ENV" = "production";
           "APP_URL" = "https://auth.onca-ph.ts.net";
