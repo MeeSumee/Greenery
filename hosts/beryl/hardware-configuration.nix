@@ -16,33 +16,6 @@
     kernelParams = ["idle=nowwait" "iommu=pt"];
   };
 
-  # Enable TPM module
-  security.tpm2 = {
-    enable = true;
-    pkcs11.enable = true;
-    tctiEnvironment.enable = true;
-  };
-
-  # Systemd script to delay tpm start to eliminate 256 error spam
-  # adapted from https://gist.github.com/guilhem/d372e8a257d5f67678ea33c662c48f39
-  systemd.services.tpm-startup = {
-    description = "Execute TPM2 Startup with Delay After Suspend";
-    after = [
-      "systemd-suspend.service"
-      "systemd-hybrid-sleep.service"
-      "systemd-hibernate.service"
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
-      ExecStart = "${pkgs.tpm2-tools}/bin/tpm2_startup";
-    };
-    wantedBy = [
-      "sleep.target"
-      "multi-user.target"
-    ];
-  };
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/e601b8ce-ce2f-423f-9dd8-dc2ea8548019";
     fsType = "ext4";
@@ -56,22 +29,8 @@
 
   swapDevices = [];
 
-  systemd.services.fprintd = {
-    wantedBy = ["multi-user.target"];
-    serviceConfig.Type = "simple";
-  };
-  services = {
-    # Enable Thunderbolt Service for USB4 support
-    hardware.bolt.enable = true;
-
-    # Enable Fingerprint Sensor, Elan 04f3:0c6e type fingerprint
-    fprintd = {
-      enable = true;
-      package = pkgs.fprintd-tod;
-      tod.enable = true;
-      tod.driver = pkgs.libfprint-2-tod1-elan;
-    };
-  };
+  # Enable Thunderbolt Service for USB4 support
+  services.hardware.bolt.enable = true;
 
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 

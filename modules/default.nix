@@ -27,8 +27,10 @@
       amdgpu.enable = true;
       asus-numpad.enable = true;
       audio.enable = true;
+      fprint.enable = true;
       intelgpu.enable = true;
       power.enable = true;
+      tpm.enable = true;
     };
 
     networking = {

@@ -8,8 +8,10 @@
     ./amdgpu.nix
     ./asus-numpad.nix
     ./audio.nix
+    ./fprint.nix
     ./intelgpu.nix
     ./power.nix
+    ./tpm.nix
 
     # Scans undetected hardware
     (modulesPath + "/installer/scan/not-detected.nix")
