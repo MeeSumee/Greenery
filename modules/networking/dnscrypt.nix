@@ -48,7 +48,7 @@
           seed 10.42.0.160
 
           graphite fd7a:115c:a1e0::8234:a473
-          beryl fd7a:115c:a1e0::234:1456
+          beryl fd7a:115c:a1e0::ec34:1779
           quartz fd7a:115c:a1e0::8c34:6d1e
           obsidian fd7a:115c:a1e0::c634:f339
         '';
