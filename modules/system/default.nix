@@ -44,7 +44,7 @@
       flags = [
         "--print-build-logs"
       ];
-      dates = "monthly 10:00 UTC";
+      dates = "Sat 10:00 UTC";
       randomizedDelaySec = "45min";
       allowReboot = true;
       runGarbageCollection = true;
