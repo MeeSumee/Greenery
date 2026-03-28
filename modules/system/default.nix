@@ -34,18 +34,17 @@
     # Core firmware services
     services = {
       dbus.implementation = "broker";
-      gvfs.enable = lib.mkDefault true;
-      udisks2.enable = lib.mkDefault true;
       fwupd.enable = lib.mkDefault true;
     };
 
+    # Autoupgrade nixos based on stable branch
     system.autoUpgrade = lib.mkIf (config.greenery.system.autoUpgrade.enable && config.greenery.system.enable) {
       enable = true;
       flake = "github:MeeSumee/Greenery/stable";
       flags = [
         "--print-build-logs"
       ];
-      dates = "Sat 10:00 UTC";
+      dates = "monthly 10:00 UTC";
       randomizedDelaySec = "45min";
       allowReboot = true;
       runGarbageCollection = true;

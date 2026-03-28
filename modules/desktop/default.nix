@@ -27,10 +27,16 @@
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     };
 
-    # Autologin
-    services.getty = lib.mkIf (config.greenery.desktop.autologin.enable && config.greenery.desktop.enable) {
-      autologinOnce = true;
-      autologinUser = "sumee";
+    services = {
+      # Automounting
+      gvfs.enable = true;
+      udisks2.enable = true;
+
+      # Autologin
+      getty = lib.mkIf (config.greenery.desktop.autologin.enable && config.greenery.desktop.enable) {
+        autologinOnce = true;
+        autologinUser = "sumee";
+      };
     };
 
     # So I can open foot while browsing nautilus
