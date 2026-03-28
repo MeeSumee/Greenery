@@ -1,7 +1,7 @@
 name: "Backport to Stable"
 on:
   schedule:
-    - cron: "0 0 */14 * *" # Run on 14th & 28th of every month
+    - cron: "30 2 */14 * *" # Run on 14th & 28th of every month at 02:30
   workflow_dispatch:
 jobs:
   backport:
