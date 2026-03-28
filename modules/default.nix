@@ -14,6 +14,7 @@
   greenery = {
     desktop = {
       enable = true;
+      autologin.enable = true;
       hypridle.enable = true;
       hyprland.enable = true;
       hyprlock.enable = true;
