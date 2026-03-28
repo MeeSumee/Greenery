@@ -6,7 +6,7 @@ on:
 jobs:
   update:
     name: Update script
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -37,5 +37,5 @@ jobs:
       run: |
           git config --local user.email "nahida-greenery[bot]@users.noreply.github.com"
           git config --local user.name "nahida-greenery[bot]"
-          ggit diff --staged --quiet || git commit -am "Chore: Update flakes & npins"
+          git diff --staged --quiet || git commit -S -am "Chore: Update flakes & npins"
           git push "https://x-access-token:${{ steps.generate-token.outputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}
