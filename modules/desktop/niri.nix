@@ -52,23 +52,6 @@
         in
           builtins.replaceStrings from to (builtins.readFile ../../dots/niri/config.kdl);
 
-        # Set hypridle command
-        quickidle = let
-          from = [
-            "%%刺し身％％"
-            "%%WOEMYASS**"
-            "%%HAEINCI&&"
-          ];
-          # qs keeps crashing during Wlr session lock, so hyprlock for now
-          to = [
-            # "noctalia-shell ipc call lockScreen lock"
-            "pidof hyprlock || hyprlock"
-            "niri msg action power-on-monitors"
-            "niri msg action power-off-monitors"
-          ];
-        in
-          builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
-
         # Set noctalia wallpaper
         schizomiku = pkgs.fetchurl {
           name = "schizomiku";
@@ -77,7 +60,6 @@
         };
       in {
         ".config/niri/config.kdl".text = keybinds;
-        ".config/hypr/hypridle.conf".text = quickidle;
         ".config/noctalia/settings.json".source = ../../dots/noctalia/settings.json;
         "wallpapers/schizomiku.jpg".source = schizomiku;
       };
