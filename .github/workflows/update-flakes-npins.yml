@@ -10,14 +10,25 @@ jobs:
     permissions:
       contents: write
     steps:
+    # Creates token to allow for workflow event calls
     - uses: actions/create-github-app-token@v3
       id: generate-token
       with:
         app-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
+
+    # Checkout doesn't persist credential to allow the use of generated token
     - uses: actions/checkout@v6
       with:
         persist-credentials: false
+
+    # Allows Nahida to sign commits
+    - uses: crazy-max/ghaction-import-gpg@v7
+      with:
+        gpg_private_key: ${{ secrets.GPG_KEY }}
+        passphrase: ${{ secrets.GPG_PHRASE }}
+        git_user_signingkey: true
+        git_commit_gpgsign: true
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
@@ -33,9 +44,10 @@ jobs:
     - name: Update npins
       run: nix shell nixpkgs#npins --command npins update
 
+    # Pushes changes with appropriate github token
     - name: Push Changes
       run: |
-          git config --local user.email "nahida-greenery[bot]@users.noreply.github.com"
+          git config --local user.email "269606562+nahida-greenery[bot]@users.noreply.github.com"
           git config --local user.name "nahida-greenery[bot]"
           git commit -S -am "Chore: Update flakes & npins" || git diff --staged --quiet 
           git push "https://x-access-token:${{ steps.generate-token.outputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}

@@ -8,21 +8,26 @@ jobs:
     name: Backport
     runs-on: ubuntu-slim
     steps:
+    # Creates token to allow for workflow event calls
     - uses: actions/create-github-app-token@v3
       id: generate-token
       with:
         app-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
 
+    # Persisting is okay as create PR automatically handles that
     - uses: actions/checkout@v6
       with:
         ref: stable
 
+    # Makes stable the new master branch
     - name: Reset stable branch
       run: |
         git fetch origin master:master
         git reset --hard master
 
+    # Creates pull request
+    # No need to sign commits as Nahida doesn't commit anything, all commits are signed by MeeSumee
     - name: Create Pull Request
       id: pr
       uses: peter-evans/create-pull-request@v8
