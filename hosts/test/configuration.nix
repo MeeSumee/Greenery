@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  modulesPath,
+  ...
+}: {
+  imports = [
+    (modulesPath + "/virtualisation/qemu-vm.nix")
+  ];
+
   greenery = {
     desktop = {
       # enable = true;
