@@ -21,6 +21,12 @@ in {
         adminLogin = "sumee";
         adminPasswordFile = config.age.secrets.secret1.path;
         appSecretFile = config.age.secrets.secret4.path;
+        config = {
+          WEBDAV_ENABLED = true;
+          WEBDAV_TMP_DIR = "${config.services.davis.dataDir}/webdav/tmp";
+          WEBDAV_PUBLIC_DIR = "${config.services.davis.dataDir}/webdav/public";
+          WEBDAV_HOMES_DIR = "${config.services.davis.dataDir}/webdav/homes";
+        };
 
         nginx.listen = [
           {
