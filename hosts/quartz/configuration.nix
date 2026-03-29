@@ -50,6 +50,7 @@
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;
+      sunshine.enable = true;
     };
 
     server = {
