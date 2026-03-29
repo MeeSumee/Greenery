@@ -1,10 +1,8 @@
 {
-  ...
-}:{
   # Set internationalisation properties
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    extraLocales = [ "ja_JP.UTF-8/UTF-8" ] ;
+    extraLocales = ["ja_JP.UTF-8/UTF-8"];
   };
 
   i18n.extraLocaleSettings = {
@@ -17,11 +15,5 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
   };
 }
