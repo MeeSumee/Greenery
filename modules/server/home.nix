@@ -12,6 +12,10 @@
       extraComponents = [
         "isal" # Faster Compression
         "matter" # For my smart plug
+        # Add dependencies for first start
+        "ai_task"
+        "tts"
+        "assist_pipeline"
       ];
       config = {
         http = {
