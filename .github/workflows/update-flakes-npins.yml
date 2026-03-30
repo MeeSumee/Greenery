@@ -34,7 +34,7 @@ jobs:
       run: nix flake update
 
     - name: Update npins
-      run: nix shell nixpkgs#npins --command npins update
+      run: nix run --quiet nixpkgs#npins -- update
 
     - name: Commit & Push changes
       uses: iarekylew00t/verified-bot-commit@v2
