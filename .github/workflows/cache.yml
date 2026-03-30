@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'flake.lock'
+      - 'npins/sources.json'
       - 'pkgs/**'
 
   # Run only when pull request is requested for review
@@ -14,7 +15,7 @@ on:
 
 jobs:
   build-derivations:
-    name: Build derivations & Push to Cachix
+    name: Push derivations to Cachix
     timeout-minutes: 60
     strategy:
       matrix:
@@ -31,6 +32,8 @@ jobs:
         filters: |
           lockfile:
             - 'flake.lock'
+          npins:
+            - 'npins/sources.json'
           packages:
             - 'pkgs/**'
 
@@ -51,15 +54,23 @@ jobs:
         name: sumee
         authToken: '${{ secrets.CACHIX_AUTH }}'
 
-    - name: Push flake inputs
+    # Pushes flakes based on cachix CI guide
+    - name: Push flake inputs to cachix
       if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
+    # Cursed way of one-line command to print out npins path for cachix
+    - name: Push npins archive to cachix
+      if: steps.filter.outputs.npins == 'true' || github.event.review.state == 'approved'
+      run: |
+        for i in $(nix run --quiet nixpkgs#npins -- show | sed -n "/: (git repository)/s/: (git repository)//p"); do echo -e "$(nix run --quiet nixpkgs#npins -- get-path "$i")"; done
+
+    # Evaluates & Builds only for the system based on the matrix (x64 for ubuntu-latest, arm64 for ubuntu-arm)
     - name: Build system derivations
       if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
-      run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
+      run: nix run --quiet github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
 
     # More of an edge case honestly since nix-fast-build builds packages too
     - name: Build package derivations
       if: steps.filter.outputs.packages == 'true'
-      run: nix build .#nahidacursor .#papiteal .#vesktop
+      run: nix build --quiet .#nahidacursor .#papiteal .#vesktop
