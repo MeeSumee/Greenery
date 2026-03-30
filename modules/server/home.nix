@@ -15,13 +15,7 @@
             "matter" # For my smart plug
           ];
           config = {
-            http = {
-              server_host = [
-                "0.0.0.0"
-                "::"
-              ];
-              server_port = 8123;
-            };
+            http.server_port = 8123;
             homeassistant = {
               unit_system = "metric";
               time_zone = config.time.timeZone;
