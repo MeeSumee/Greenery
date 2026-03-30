@@ -60,36 +60,12 @@
     raspberrypi-eeprom
   ];
 
-  # Open tailscale firewall ports
-  networking = {
-    firewall = {
-      allowedUDPPorts = [53];
-      interfaces."tailscale0".allowedTCPPorts = [
-        3600
-        8000
-        8123
-        27701
-      ];
-    };
-  };
-
   services = {
-    tailscale = {
-      serve.enable = true;
-
-      # Exit-node flags
-      extraSetFlags = [
-        "--advertise-exit-node"
-      ];
-    };
+    tailscale.serve.enable = true;
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
-        paths = [
-          "/var/lib/private/anki-sync-server"
-          "/var/lib/davis"
-          "/var/lib/2fauth"
-        ];
+        paths = ["/var"];
         repo = "/mnt/verback";
         encryption.mode = "none";
         compression = "auto,zstd";
@@ -107,16 +83,6 @@
           ${pkgs.umount}/bin/umount -l /mnt
         '';
       };
-    };
-
-    # Define US dnscrypt proxy config
-    dnscrypt-proxy.settings = {
-      listen_addresses = [
-        "100.90.207.85:53"
-        "[fd7a:115c:a1e0::8034:cf55]:53"
-        "127.0.0.1:53"
-        "[::1]:53"
-      ];
     };
   };
 

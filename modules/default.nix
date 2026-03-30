@@ -40,7 +40,10 @@
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        exitNode = true;
+      };
     };
 
     programs = {

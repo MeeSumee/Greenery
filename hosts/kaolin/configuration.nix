@@ -36,7 +36,10 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        exitNode = true;
+      };
     };
 
     programs = {
@@ -54,10 +57,6 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
 
   networking = {
     hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Enable Tailscale DNS-crypt forwarding
-    firewall.allowedUDPPorts = [53];
 
     # Wireguard config to not cuck tailscale
     wg-quick.interfaces = {
@@ -148,36 +147,21 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
       listen_addresses = [
         "100.105.111.66:53"
         "[fd7a:115c:a1e0::9034:6f42]:53"
-        "127.0.0.1:53"
-        "[::1]:53"
       ];
     };
 
-    # Exit-node flags
+    # Additional flags for kaolin
     tailscale = {
       extraSetFlags = [
-        "--advertise-exit-node"
         "--advertise-routes=172.16.0.2/32"
         "--netfilter-mode=nodivert"
       ];
-    };
-
-    # Tailscale Exit-Node Optimization
-    networkd-dispatcher = {
-      enable = true;
-      rules."50-tailscale-optimizations" = {
-        onState = ["routable"];
-        script = ''
-          ${pkgs.ethtool}/bin/ethtool -K ens3 rx-udp-gro-forwarding on rx-gro-list off
-        '';
-      };
     };
   };
 
   # Enable IPv4 forwarding
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = true;
     "net.ipv4.conf.wgcf.rp_filter" = false;
   };
 
