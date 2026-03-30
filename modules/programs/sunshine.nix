@@ -30,5 +30,8 @@
         48010
       ];
     };
+
+    # I don't use HDMI so use it as a virtual-port so it plays nicely with Sunshine
+    boot.kernelParams = ["video=HDMI-A-1:1920x1080R@60D"];
   };
 }
