@@ -40,6 +40,9 @@ in {
           "${port}:${port}/tcp"
         ];
         log-driver = "journald";
+        extraOptions = [
+          "--network=host"
+        ];
       };
     };
     services.tailscale.serve.services.auth.endpoints."tcp:443" = "https://127.0.0.1:${port}";
