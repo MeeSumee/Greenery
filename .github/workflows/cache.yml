@@ -7,8 +7,10 @@ on:
     paths:
       - 'flake.lock'
       - 'pkgs/**'
-  pull_request:
-    types: [ labeled ]
+
+  # Run only when pull request is requested for review
+  pull_request_review:
+    types: [ submitted ]
 
 jobs:
   build-derivations:
@@ -33,18 +35,15 @@ jobs:
             - 'pkgs/**'
 
     - name: Aggressive disk space removal
-      if: steps.filter.outputs.lockfile == 'true' || github.event.label.name == 'automated pr'
+      if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
       uses: wimpysworld/nothing-but-nix@v10
       with:
-        nix-permission-edict: true  
+        nix-permission-edict: true # Ensure install nix action has the right permissions
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
       with:
         nix_version: 2.31.2
-        nix_conf: |
-          keep-env-derivations = true
-          keep-outputs = true
 
     - name: Cachix
       uses: cachix/cachix-action@v17
@@ -53,13 +52,14 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH }}'
 
     - name: Push flake inputs
-      if: steps.filter.outputs.lockfile == 'true' || github.event.label.name == 'automated pr'
+      if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
     - name: Build system derivations
-      if: steps.filter.outputs.lockfile == 'true' || github.event.label.name == 'automated pr'
+      if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
       run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
 
+    # More of an edge case honestly since nix-fast-build builds packages too
     - name: Build package derivations
       if: steps.filter.outputs.packages == 'true'
       run: nix build .#nahidacursor .#papiteal .#vesktop
