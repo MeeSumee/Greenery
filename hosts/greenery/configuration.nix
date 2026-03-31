@@ -156,8 +156,6 @@
 
   # Set borg backup service for greenery
   services = {
-    tailscale.serve.enable = true;
-
     # Define US dnscrypt proxy config
     dnscrypt-proxy.settings = {
       listen_addresses = [
