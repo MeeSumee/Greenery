@@ -1,8 +1,8 @@
 # My Configuration Repository
 Consists of multiple devices:
 
-- [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): Self-hosted Server with multiple services.
-- [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): US Exit-node + DNS Server with Home Automation Capabilities.
+- [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): x86-based server with multiple services.
+- [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): Arm-based server with multiple services.
 - [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
 - [Beryl](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#beryl): Personal Laptop for offsite provisioning.
 - [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
@@ -23,7 +23,9 @@ Updated lots of actions and reworking most of the repo while I have time.
 
 ## Greenery
 
-Dell XPS 8940.
+Dell XPS 8940 with i7-11700.
+
+Acts as a home exit-node.
 
 Hosts Jellyfin, Immich, FileBrowser, Suwayomi, & Memos.
 
@@ -35,9 +37,9 @@ Future Endeavors: Improve functionality of jellyfin.
 
 Raspberry Pi 4 Model B with 8GB of RAM.
 
-Currently acts as an exit-node replacement of Greenery.
+Hosts Anki Sync, Davis, 2fauth, & Home Assistant.
 
-Future Endeavors: Add Smart-Home capabilities.
+Future Endeavors: Network UPS Tools?
 
 ## Kaolin
 
