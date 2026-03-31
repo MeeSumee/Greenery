@@ -7,30 +7,35 @@ on:
     paths:
     - '**.nix'
 jobs:
-  evaluation:
-    name: NixOS Evaluation
+  check:
+    name: Check if cache.yml is running
+    runs-on: ubuntu-slim
+    outputs:
+      changes: steps.filter.outputs.lockfile
+    steps:
+    - uses: actions/checkout@v6
+    - uses: dorny/paths-filter@v4
+      id: filter
+      with:
+        filters: |
+          lockfile: 'flake.lock'
+
+  # Ensures it doesn't run if lockfile is updated
+  evaluate:
+    needs: check
+    if: needs.check.outputs.changes == 'false'
+    name: Evaluate NixOS Systems
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       actions: write
     strategy:
       matrix:
-        hosts: [beryl, greenery, kaolin, quartz, verdure] 
+        hosts: [beryl, greenery, kaolin, quartz, verdure]
+
     steps:
-    - uses: actions/checkout@v6
-
-    # Ensure evaluate.yml don't run when lockfile also changes as cache.yml triggers eval anyway
-    - name: Filter
-      uses: dorny/paths-filter@v4
-      id: filter
-      with:
-        filters: |
-          lockfile:
-            - 'flake.lock'
-
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
-      if: steps.filter.outputs.lockfile == 'false'
       with:
         nix_version: 2.31.2
         nix_conf: |
@@ -39,7 +44,6 @@ jobs:
 
     - name: Restore & Save Nix Store
       uses: nix-community/cache-nix-action@v7
-      if: steps.filter.outputs.lockfile == 'false'
       with:
         primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
         restore-prefixes-first-match: nix-${{ runner.os }}-
@@ -52,10 +56,8 @@ jobs:
 
     - name: Cachix readonly
       uses: cachix/cachix-action@v17
-      if: steps.filter.outputs.lockfile == 'false'
       with:
         name: sumee
 
     - name: ${{ matrix.hosts }} evaluation
-      if: steps.filter.outputs.lockfile == 'false'
       run: nix eval --quiet .#nixosConfigurations.${{ matrix.hosts }}.config.system.build.toplevel
