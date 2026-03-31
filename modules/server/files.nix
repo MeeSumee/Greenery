@@ -16,7 +16,6 @@
           port = 6969;
         };
       };
-      tailscale.serve.services.files.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString config.services.filebrowser.settings.port}";
     };
   };
 }

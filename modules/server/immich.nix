@@ -21,8 +21,6 @@
           "/dev/dri/renderD129"
         ];
       };
-
-      tailscale.serve.services.immich.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString config.services.immich.port}";
     };
 
     users.users.immich.extraGroups = ["video" "render"];

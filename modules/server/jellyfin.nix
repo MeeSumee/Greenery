@@ -28,7 +28,6 @@
           };
         };
       };
-      tailscale.serve.services.jellyfin.endpoints."tcp:443" = "https://127.0.0.1:8096";
     };
 
     # Hint Jellyfin Driver

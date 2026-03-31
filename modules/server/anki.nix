@@ -23,8 +23,6 @@
           }
         ];
       };
-
-      tailscale.serve.services.anki.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString config.services.anki-sync-server.port}";
     };
   };
 }

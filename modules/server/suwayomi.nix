@@ -33,8 +33,6 @@
     };
 
     services = {
-      tailscale.serve.services.manga.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString config.services.suwayomi-server.settings.server.port}";
-
       # Suwayomi-server for fetching manga online
       suwayomi-server = {
         enable = true;

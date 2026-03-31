@@ -39,8 +39,6 @@ in {
           }
         ];
       };
-
-      tailscale.serve.services.davis.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString port}";
     };
 
     # Based on https://github.com/alegrey91/systemd-service-hardening/blob/master/ansible/files/php-fpm.service

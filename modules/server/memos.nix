@@ -20,7 +20,6 @@
           MEMOS_INSTANCE_URL = "http://localhost:5230";
         };
       };
-      tailscale.serve.services.memos.endpoints."tcp:443" = "https://127.0.0.1:${builtins.toString config.services.memos.settings.MEMOS_PORT}";
     };
   };
 }
