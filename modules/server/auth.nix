@@ -17,7 +17,6 @@ in {
         enable = true;
         autoPrune.enable = true;
         dockerCompat = true;
-        defaultNetwork.settings.dns_enabled = true;
       };
 
       # Containers
@@ -42,37 +41,20 @@ in {
         log-driver = "journald";
       };
     };
-    services.tailscale.serve.services.auth.endpoints."tcp:443" = "https://127.0.0.1:${port}";
 
     # Hardening
-    systemd.services = {
-      "podman-2fauth".serviceConfig = {
-        ProtectHome = true;
-        ProtectSystem = true;
-        PrivateTmp = "disconnected";
-        ProtectClock = true;
-        ProtectKernelModules = true;
-        ProtectKernelLogs = true;
-        PrivateMounts = true;
-        RestrictRealtime = true;
-        LockPersonality = true;
-        SystemCallArchitectures = "native";
-        RemoveIPC = true;
-      };
-
-      "podman".serviceConfig = {
-        ProtectHome = true;
-        ProtectSystem = true;
-        PrivateTmp = "disconnected";
-        ProtectClock = true;
-        ProtectKernelModules = true;
-        ProtectKernelLogs = true;
-        PrivateMounts = true;
-        RestrictRealtime = true;
-        LockPersonality = true;
-        SystemCallArchitectures = "native";
-        RemoveIPC = true;
-      };
+    systemd.services."podman-2fauth".serviceConfig = {
+      ProtectHome = true;
+      ProtectSystem = true;
+      PrivateTmp = "disconnected";
+      ProtectClock = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      PrivateMounts = true;
+      RestrictRealtime = true;
+      LockPersonality = true;
+      SystemCallArchitectures = "native";
+      RemoveIPC = true;
     };
   };
 }
