@@ -34,6 +34,7 @@ jobs:
         hosts: [beryl, greenery, kaolin, quartz, verdure]
 
     steps:
+    - uses: actions/checkout@v6
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
       with:
