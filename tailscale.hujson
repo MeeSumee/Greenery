@@ -34,7 +34,7 @@
       "dst": ["*"],
       "ip":  ["22", "53"],
     },
-    // Access to exposed services
+    // Access to exposed services via http/https
     {
       "src": ["autogroup:member"],
       "dst": ["*"],
