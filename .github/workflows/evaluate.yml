@@ -23,7 +23,7 @@ jobs:
   # Ensures it doesn't run if lockfile is updated
   evaluate:
     needs: check
-    if: needs.check.outputs.changes == 'false'
+    if: ${{ needs.check.outputs.changes != 'true' }}
     name: Evaluate NixOS Systems
     runs-on: ubuntu-latest
     timeout-minutes: 15
