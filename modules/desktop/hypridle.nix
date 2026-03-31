@@ -39,7 +39,7 @@
             "niri msg action power-off-monitors"
           ];
         in
-          builtins.replaceStrings from to (builtins.readFile ../../dots/hyprland/hypridle.conf);
+          builtins.replaceStrings from to (builtins.readFile ../../dots/hypr/hypridle.conf);
       in {
         ".config/hypr/hypridle.conf".text = quickidle;
       };
