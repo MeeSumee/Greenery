@@ -46,6 +46,9 @@
       };
     };
 
+    # Enable matter server for home-assistant
+    services.matter-server.enable = true;
+
     # Hardening
     systemd.services."podman-hass".serviceConfig = {
       ProtectHome = true;
