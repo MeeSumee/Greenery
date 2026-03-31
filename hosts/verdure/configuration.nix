@@ -21,6 +21,7 @@
 
     networking = {
       enable = true;
+      bluetooth.enable = true;
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
@@ -61,7 +62,6 @@
   ];
 
   services = {
-    tailscale.serve.enable = true;
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
