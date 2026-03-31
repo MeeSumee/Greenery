@@ -6,33 +6,59 @@
   options.greenery.server.home.enable = lib.mkEnableOption "Home Assistant";
 
   config = lib.mkIf (config.greenery.server.home.enable && config.greenery.server.enable) {
-    # Note that this service runs on <system-host>.<tailnet-name>.ts.net
-    services.home-assistant = {
-      enable = true;
-      extraComponents = [
-        "isal" # Faster Compression
-        "matter" # For my smart plug
-        # Add dependencies for first start
-        "ai_task"
-        "tts"
-        "assist_pipeline"
-      ];
-      config = {
-        http = {
-          server_port = 8123;
-          # Thanks https://community.home-assistant.io/t/home-assistant-400-bad-request-docker-proxy-solution/322163
-          use_x_forwarded_for = true;
-          trusted_proxies = [
-            "127.0.0.1"
-            "::1"
-          ];
-        };
-        homeassistant = {
-          unit_system = "metric";
-          time_zone = config.time.timeZone;
-          temperature_unit = "C";
-        };
+    # Podman container cause being declarative got annoying especially when the fucking phone got involved with matter devices
+    virtualisation = {
+      # Runtime
+      podman = {
+        enable = true;
+        autoPrune.enable = true;
+        dockerCompat = true;
       };
+
+      # Containers
+      oci-containers.containers."hass" = {
+        pull = "newer";
+        image = "ghcr.io/home-assistant/home-assistant:stable";
+        environment.TZ = config.time.timeZone;
+        volumes = [
+          "/var/lib/hass:/config:rw"
+          "/run/dbus:/run/dbus:ro"
+        ];
+        log-driver = "journald";
+        extraOptions = [
+          # Restrict permissions & only have what is defined
+          "--security-opt=no-new-privileges:true"
+          "--cap-drop=ALL"
+          "--cap-add=NET_RAW"
+          "--cap-add=NET_ADMIN"
+          "--cap-add=CHOWN"
+          "--cap-add=DAC_OVERRIDE"
+          "--cap-add=FSETID"
+          "--cap-add=FOWNER"
+          "--cap-add=SETGID"
+          "--cap-add=SETUID"
+          "--cap-add=SYS_CHROOT"
+          "--cap-add=KILL"
+
+          # Use host networking
+          "--network=host"
+        ];
+      };
+    };
+
+    # Hardening
+    systemd.services."podman-hass".serviceConfig = {
+      ProtectHome = true;
+      ProtectSystem = true;
+      PrivateTmp = "disconnected";
+      ProtectClock = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      PrivateMounts = true;
+      RestrictRealtime = true;
+      LockPersonality = true;
+      SystemCallArchitectures = "native";
+      RemoveIPC = true;
     };
   };
 }
