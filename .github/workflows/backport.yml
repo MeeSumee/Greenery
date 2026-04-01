@@ -6,7 +6,7 @@ on:
 jobs:
   backport:
     name: Backport
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
     # Creates token to allow for workflow event calls
     - uses: actions/create-github-app-token@v3
