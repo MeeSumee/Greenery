@@ -1,7 +1,7 @@
 name: "Update License"
 on:
   schedule:
-    - cron: "0 0 1 1 *" # Jan 1st
+    - cron: "0 6 1 1 *" # 6 am Jan 1st UTC
   workflow_dispatch:
 jobs:
   license:
