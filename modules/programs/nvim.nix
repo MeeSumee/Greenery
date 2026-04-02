@@ -57,7 +57,14 @@
               enable = true;
               formatOnSave = true;
               lightbulb.enable = true;
-              trouble.enable = true;
+              trouble = {
+                enable = true;
+                mappings = {
+                  locList = "<leader>lx";
+                  quickfix = "<leader>lq";
+                  symbols = "<leader>ly";
+                };
+              };
             };
 
             languages = {
