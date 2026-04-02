@@ -43,18 +43,35 @@ in {
     };
 
     # Hardening
-    systemd.services."podman-2fauth".serviceConfig = {
-      ProtectHome = true;
-      ProtectSystem = true;
-      PrivateTmp = "disconnected";
-      ProtectClock = true;
-      ProtectKernelModules = true;
-      ProtectKernelLogs = true;
-      PrivateMounts = true;
-      RestrictRealtime = true;
-      LockPersonality = true;
-      SystemCallArchitectures = "native";
-      RemoveIPC = true;
+    systemd.services = {
+      "podman-2fauth".serviceConfig = {
+        ProtectHome = true;
+        ProtectSystem = true;
+        PrivateTmp = "disconnected";
+        ProtectClock = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        PrivateMounts = true;
+        RestrictRealtime = true;
+        LockPersonality = true;
+        SystemCallArchitectures = "native";
+        RemoveIPC = true;
+      };
+
+      # Podman hardening
+      "podman".serviceConfig = {
+        ProtectHome = true;
+        ProtectSystem = true;
+        PrivateTmp = "disconnected";
+        ProtectClock = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        PrivateMounts = true;
+        RestrictRealtime = true;
+        LockPersonality = true;
+        SystemCallArchitectures = "native";
+        RemoveIPC = true;
+      };
     };
   };
 }

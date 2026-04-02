@@ -200,21 +200,6 @@
           IPAddressDeny = "any";
         };
       };
-
-      # Podman hardening
-      "podman".serviceConfig = {
-        ProtectHome = true;
-        ProtectSystem = true;
-        PrivateTmp = "disconnected";
-        ProtectClock = true;
-        ProtectKernelModules = true;
-        ProtectKernelLogs = true;
-        PrivateMounts = true;
-        RestrictRealtime = true;
-        LockPersonality = true;
-        SystemCallArchitectures = "native";
-        RemoveIPC = true;
-      };
     };
   };
 }

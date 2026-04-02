@@ -50,18 +50,35 @@
     services.matter-server.enable = true;
 
     # Hardening
-    systemd.services."podman-hass".serviceConfig = {
-      ProtectHome = true;
-      ProtectSystem = true;
-      PrivateTmp = "disconnected";
-      ProtectClock = true;
-      ProtectKernelModules = true;
-      ProtectKernelLogs = true;
-      PrivateMounts = true;
-      RestrictRealtime = true;
-      LockPersonality = true;
-      SystemCallArchitectures = "native";
-      RemoveIPC = true;
+    systemd.services = {
+      "podman-hass".serviceConfig = {
+        ProtectHome = true;
+        ProtectSystem = true;
+        PrivateTmp = "disconnected";
+        ProtectClock = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        PrivateMounts = true;
+        RestrictRealtime = true;
+        LockPersonality = true;
+        SystemCallArchitectures = "native";
+        RemoveIPC = true;
+      };
+
+      # Podman hardening
+      "podman".serviceConfig = {
+        ProtectHome = true;
+        ProtectSystem = true;
+        PrivateTmp = "disconnected";
+        ProtectClock = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        PrivateMounts = true;
+        RestrictRealtime = true;
+        LockPersonality = true;
+        SystemCallArchitectures = "native";
+        RemoveIPC = true;
+      };
     };
   };
 }
