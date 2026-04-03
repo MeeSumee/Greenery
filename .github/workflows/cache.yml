@@ -67,4 +67,4 @@ jobs:
     # More of an edge case honestly since nix-fast-build builds packages too
     - name: Build package derivations
       if: steps.filter.outputs.packages == 'true'
-      run: nix build --quiet .#nahidacursor .#papiteal .#vesktop
+      run: nix build --quiet .#nahidacursor .#papiteal .#dickord .#caddyscale

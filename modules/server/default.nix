@@ -3,9 +3,7 @@
   config,
   pkgs,
   ...
-}: let
-  revision = "v0.0.0-20260106222316-bb080c4414ac";
-in {
+}: {
   imports = [
     ./anki.nix
     ./auth.nix
@@ -42,11 +40,7 @@ in {
     # Caddy-tailscale plugin to get subdomains
     services.caddy = {
       environmentFile = config.age.secrets.secret7.path;
-      package = pkgs.caddy.withPlugins {
-        plugins = ["github.com/tailscale/caddy-tailscale@${revision}"];
-        hash = "sha256-xJOPVE56h4tlhW7m8ZFN8F2jrZW/3gYeLXVqaEaoVvY=";
-      };
-
+      package = pkgs.wo.caddyscale;
       # Age file has contents TS_AUTH=<insert your auth key>
       globalConfig = ''
         tailscale {
