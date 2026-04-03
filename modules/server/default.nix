@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  revision = "bb080c4414acd465d8be93b4d8f907dbb2ab2544";
+  revision = "v0.0.0-20260106222316-bb080c4414ac";
 in {
   imports = [
     ./anki.nix
@@ -44,7 +44,7 @@ in {
       environmentFile = config.age.secrets.secret7.path;
       package = pkgs.caddy.withPlugins {
         plugins = ["github.com/tailscale/caddy-tailscale@${revision}"];
-        hash = "";
+        hash = "sha256-xJOPVE56h4tlhW7m8ZFN8F2jrZW/3gYeLXVqaEaoVvY=";
       };
 
       # Age file has contents TS_AUTH=<insert your auth key>
