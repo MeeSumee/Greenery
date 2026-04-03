@@ -11,6 +11,7 @@
     ./micro.nix
     ./nixpkgs.nix
     ./nvim.nix
+    ./rustdesk.nix
     ./steam.nix
     ./sunshine.nix
     ./vm.nix

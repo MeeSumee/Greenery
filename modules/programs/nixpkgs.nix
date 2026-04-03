@@ -48,6 +48,7 @@
         nautilus # file browser
         gnome-calculator # calculator
         moonlight-qt # Remote to Windows GPU-Passthru
+        rustdesk-flutter # Remote desktop
         rose-pine-gtk-theme # Rose-Pine Gtk Theme
         slurp # area selection tool used for wl-screenrec
         wl-clipboard # clipboard manager

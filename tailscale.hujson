@@ -40,21 +40,18 @@
       "dst": ["*"],
       "ip":  ["tcp:80", "tcp:443"],
     },
-    // Sunshine Ports
+    // Rustdesk Ports
     {
       "src": ["autogroup:member"],
       "dst": ["autogroup:member"],
 
       "ip": [
-        "tcp:47984",
-        "tcp:47989",
-        "tcp:47990",
-        "tcp:48010",
-        "udp:47998",
-        "udp:47999",
-        "udp:48000",
-        "udp:48002",
-        "udp:48010",
+        "tcp:21115",
+        "tcp:21116",
+        "tcp:21117",
+        "tcp:21118",
+        "tcp:21119",
+        "udp:21116",
       ],
     },
   ],
@@ -77,12 +74,6 @@
 
     // Exit Node Tag
     "tag:Exit-Node": ["autogroup:owner"],
-  },
-
-  // Hard-coded, but eh, its like in dnscrypt.nix under modules
-  "hosts": {
-    // Client Quartz
-    "quartz": "fd7a:115c:a1e0::8c34:6d1e",
   },
 
   // Test access rules every time they're saved.
