@@ -8,7 +8,7 @@ on:
     - '**.nix'
 jobs:
   check:
-    name: Check if cache.yml is running
+    name: Check if flake lockfile has changed
     runs-on: ubuntu-slim
     outputs:
       changes: ${{ steps.filter.outputs.lockfile }}

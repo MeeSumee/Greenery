@@ -14,13 +14,12 @@ on:
     types: [ submitted ]
 
 jobs:
-  build-derivations:
-    name: Push derivations to Cachix
-    timeout-minutes: 60
-    strategy:
-      matrix:
-        os: [ubuntu-latest, ubuntu-24.04-arm]
-    runs-on: ${{ matrix.os }}
+  archives:
+    name: Push archives to cachix
+    runs-on: ubuntu-latest
+    outputs:
+      lockfile: ${{ steps.filter.outputs.lockfile }}
+      packages: ${{ steps.filter.outputs.packages }}
     steps:
     - uses: actions/checkout@v6
     - uses: dorny/paths-filter@v4
@@ -30,12 +29,6 @@ jobs:
           lockfile: 'flake.lock'
           npins: 'npins/sources.json'
           packages: 'pkgs/**'
-
-    - name: Aggressive disk space removal
-      if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
-      uses: wimpysworld/nothing-but-nix@v10
-      with:
-        nix-permission-edict: true # Ensure install nix action has the right permissions
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
@@ -59,12 +52,42 @@ jobs:
       run: |
         for i in $(nix run --quiet nixpkgs#npins -- show | sed -n "/: (git repository)/s/: (git repository)//p"); do echo -e "$(nix run --quiet nixpkgs#npins -- get-path "$i")"; done
 
+  derivations:
+    needs: archives
+    name: Push derivations to cachix
+    if: ${{ needs.archives.outputs.lockfile == 'true' || needs.archives.outputs.packages == 'true' || github.event.review.state == 'approved' }}
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Aggressive disk space removal
+      if: ${{ needs.archives.outputs.lockfile == 'true' || github.event.review.state == 'approved' }}
+      uses: wimpysworld/nothing-but-nix@v10
+      with:
+        nix-permission-edict: true # Ensure install nix action has the right permissions
+
+    - name: Install Nix
+      uses: nixbuild/nix-quick-install-action@v34
+      with:
+        nix_version: 2.31.2
+
+    - name: Cachix
+      uses: cachix/cachix-action@v17
+      with:
+        name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
+
+
     # Evaluates & Builds only for the system based on the matrix (x64 for ubuntu-latest, arm64 for ubuntu-arm)
     - name: Build system derivations
-      if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
+      if: ${{ needs.archives.outputs.lockfile == 'true' || github.event.review.state == 'approved' }}
       run: nix run --quiet github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
 
     # More of an edge case honestly since nix-fast-build builds packages too
     - name: Build package derivations
-      if: steps.filter.outputs.packages == 'true'
+      if: ${{ needs.archives.outputs.packages == 'true' }}
       run: nix build --quiet .#nahidacursor .#papiteal .#dickord .#caddyscale
