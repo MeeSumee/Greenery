@@ -32,7 +32,7 @@
     {
       "src": ["autogroup:owner", "autogroup:tagged"],
       "dst": ["*"],
-      "ip":  ["22", "53"],
+      "ip":  ["tcp:22", "udp:53"],
     },
     // Access to exposed services via http/https
     {
@@ -77,12 +77,6 @@
 
     // Exit Node Tag
     "tag:Exit-Node": ["autogroup:owner"],
-  },
-
-  // Hard-coded, but eh, its like in dnscrypt.nix under modules
-  "hosts": {
-    // Client Quartz
-    "quartz": "fd7a:115c:a1e0::8c34:6d1e",
   },
 
   // Test access rules every time they're saved.
