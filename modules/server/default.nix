@@ -36,11 +36,12 @@ in {
       '';
     };
 
+    # Caddy Secret
     age.secrets.secret7.file = ../../secrets/secret7.age;
 
+    # Caddy-tailscale plugin to get subdomains
     services.caddy = {
       environmentFile = config.age.secrets.secret7.path;
-
       package = pkgs.caddy.withPlugins {
         plugins = ["github.com/tailscale/caddy-tailscale@${revision}"];
         hash = "";
