@@ -21,6 +21,7 @@ in {
         adminLogin = "sumee";
         adminPasswordFile = config.age.secrets.secret1.path;
         appSecretFile = config.age.secrets.secret4.path;
+        # Enable webdav solely for GrapheneOS Seedvault backups lmfao
         config = {
           WEBDAV_ENABLED = lib.mkForce true;
           WEBDAV_TMP_DIR = "${config.services.davis.dataDir}/webdav/tmp";
@@ -38,6 +39,15 @@ in {
             port = port;
           }
         ];
+      };
+      caddy = {
+        enable = true;
+        virtualHosts."https://davis.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/davis
+            reverse_proxy localhost:${builtins.toString port}
+          '';
+        };
       };
     };
 

@@ -32,6 +32,16 @@
           SCARF_NO_ANALYTICS = "True";
         };
       };
+
+      caddy = {
+        enable = true;
+        virtualHosts."https://ai.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/ai
+            reverse_proxy localhost:${builtins.toString config.services.open-webui.port}
+          '';
+        };
+      };
     };
 
     # Harden model-loader

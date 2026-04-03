@@ -1,8 +1,11 @@
 {
   lib,
   config,
+  pkgs,
   ...
-}: {
+}: let
+  revision = "v0.0.0-20260106222316-bb080c4414ac";
+in {
   imports = [
     ./anki.nix
     ./auth.nix
@@ -30,6 +33,25 @@
         truecolor on
         hardstatus off
         hardstatus alwayslastline '%{#00ff00}[ %H ][%{#ffffff}%= %{7}%?%-Lw%?%{1;0}%{1}(%{15}%n%f%t%?(%u)%?%{1;0}%{1})%{7}%?%+Lw%? %=%{#00ff00}][ %{#00a5ff}%{6}%Y-%m-%d %{#ffffff}%{7}%0c%{#00ff00} ]'
+      '';
+    };
+
+    # Caddy Secret
+    age.secrets.secret7.file = ../../secrets/secret7.age;
+
+    # Caddy-tailscale plugin to get subdomains
+    services.caddy = {
+      environmentFile = config.age.secrets.secret7.path;
+      package = pkgs.caddy.withPlugins {
+        plugins = ["github.com/tailscale/caddy-tailscale@${revision}"];
+        hash = "sha256-xJOPVE56h4tlhW7m8ZFN8F2jrZW/3gYeLXVqaEaoVvY=";
+      };
+
+      # Age file has contents TS_AUTH=<insert your auth key>
+      globalConfig = ''
+        tailscale {
+          auth_key {$TS_AUTH}
+        }
       '';
     };
   };

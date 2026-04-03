@@ -23,6 +23,15 @@
           }
         ];
       };
+      caddy = {
+        enable = true;
+        virtualHosts."https://anki.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/anki
+            reverse_proxy localhost:${builtins.toString config.services.anki-sync-server.port}
+          '';
+        };
+      };
     };
   };
 }
