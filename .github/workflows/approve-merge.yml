@@ -7,6 +7,8 @@ jobs:
   approve-and-merge:
     name: Approve & Merge PR
     runs-on: ubuntu-slim
+    # Don't run unless its nahida or dependabot
+    if: github.actor == 'nahida-greenery[bot]' || github.actor == 'dependabot[bot]'
     permissions:
       contents: write
       pull-requests: write
@@ -18,7 +20,6 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Autoapprove & Merge PR
-        if: github.actor == 'nahida-greenery[bot]' || github.actor == 'dependabot[bot]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
