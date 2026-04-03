@@ -20,6 +20,15 @@
           MEMOS_INSTANCE_URL = "http://localhost:5230";
         };
       };
+      caddy = {
+        enable = true;
+        virtualHosts."https://memos.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/memos
+            reverse_proxy localhost:${config.services.memos.settings.MEMOS_PORT}
+          '';
+        };
+      };
     };
   };
 }

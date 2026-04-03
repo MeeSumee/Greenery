@@ -21,6 +21,15 @@
           "/dev/dri/renderD129"
         ];
       };
+      caddy = {
+        enable = true;
+        virtualHosts."https://immich.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/immich
+            reverse_proxy localhost:${builtins.toString config.services.immich.port}
+          '';
+        };
+      };
     };
 
     users.users.immich.extraGroups = ["video" "render"];

@@ -42,6 +42,16 @@ in {
       };
     };
 
+    services.caddy = {
+      enable = true;
+      virtualHosts."https://auth.onca-ph.ts.net" = {
+        extraConfig = ''
+          bind tailscale/auth
+          reverse_proxy localhost:${port}
+        '';
+      };
+    };
+
     # Hardening
     systemd.services = {
       "podman-2fauth".serviceConfig = {

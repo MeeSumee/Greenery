@@ -47,7 +47,19 @@
     };
 
     # Enable matter server for home-assistant
-    services.matter-server.enable = true;
+    services = {
+      matter-server.enable = true;
+
+      caddy = {
+        enable = true;
+        virtualHosts."https://home.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/home
+            reverse_proxy localhost:8123
+          '';
+        };
+      };
+    };
 
     # Hardening
     systemd.services = {

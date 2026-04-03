@@ -89,6 +89,15 @@
           };
         };
       };
+      caddy = {
+        enable = true;
+        virtualHosts."https://manga.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/manga
+            reverse_proxy localhost:${builtins.toString config.services.suwayomi-server.settings.server.port}
+          '';
+        };
+      };
     };
   };
 }
