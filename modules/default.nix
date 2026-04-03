@@ -57,7 +57,6 @@
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;
-      rustdesk.enable = true;
       steam.enable = true;
       sunshine.enable = true;
       vm.enable = true;
