@@ -1,24 +1,33 @@
 name: "Update License"
 on:
   schedule:
-    - cron: "0 0 1 1 *" # Jan 1st
+    - cron: "0 6 1 1 *" # 6 am Jan 1st UTC
   workflow_dispatch:
 jobs:
   license:
     name: Update License
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: write
     steps:
+    - uses: actions/create-github-app-token@v3
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
+
     - uses: actions/checkout@v6
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+
     - name: Update Year
       run: |
           sed -i "s/[0-9]\{4\}/$(date +"%Y")/g" LICENSE
 
-    - name: Push Changes
-      run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add LICENSE
-          git diff --staged --quiet || git commit -m "Chore: Update License"
-          git push
+    - name: Commit & Push changes
+      uses: iarekylew00t/verified-bot-commit@v2
+      with:
+        message: 'Chore: Update License'
+        token: ${{ steps.generate-token.outputs.token }}
+        files: |
+          **

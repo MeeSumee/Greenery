@@ -12,6 +12,7 @@
     ./nixpkgs.nix
     ./nvim.nix
     ./steam.nix
+    ./sunshine.nix
     ./vm.nix
   ];
 

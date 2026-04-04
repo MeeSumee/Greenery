@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  users,
   ...
 }: {
   options.greenery.desktop.hypridle.enable = lib.mkEnableOption "hypridle";
@@ -18,6 +19,30 @@
       hyprlock = config.programs.hyprlock.package;
       hyprland = config.programs.hyprland.package;
       niri = config.programs.niri.package;
+    });
+
+    # Hjem hypridle config
+    hjem.users = lib.genAttrs users (user: {
+      files = let
+        # Set hypridle command
+        quickidle = let
+          from = [
+            "%%刺し身％％"
+            "%%WOEMYASS**"
+            "%%HAEINCI&&"
+          ];
+          # qs keeps crashing during Wlr session lock, so hyprlock for now
+          to = [
+            # "noctalia-shell ipc call lockScreen lock"
+            "pidof hyprlock || hyprlock"
+            "niri msg action power-on-monitors"
+            "niri msg action power-off-monitors"
+          ];
+        in
+          builtins.replaceStrings from to (builtins.readFile ../../dots/hypr/hypridle.conf);
+      in {
+        ".config/hypr/hypridle.conf".text = quickidle;
+      };
     });
   };
 }

@@ -96,34 +96,40 @@ in {
           ];
           fzf-options = builtins.concatStringsSep " " (builtins.map (option: "--color=" + option) rosepine-fzf);
         in ''
+
+          # base settings
           set sponge_purge_only_on_exit true
           set fish_greeting
           set fish_cursor_insert line blink
+
+          # Environment Color Association
           set -Ux LS_COLORS (${pkgs.vivid}/bin/vivid generate rose-pine)
           set -Ux FZF_DEFAULT_OPTS ${fzf-options}
 
-          # Set real-time config
+          # Set theme
           fish_config theme choose "Rosé Pine"
+
+          # Bindings
+          function fish_user_key_bindings
+            bind --mode insert alt-c 'cdi; commandline -f repaint'
+            bind --mode insert alt-f 'fzf-file-widget'
+          end
+
+          # Overrides rose pine colors for transparency
+          set -g fish_color_search_match
+          set -g fish_pager_color_background
+          set -g fish_pager_color_selected_background
+
+          # hydro (prompt) stuff
+          set -g hydro_symbol_start
+          set -U hydro_symbol_git_dirty "*"
+          set -U fish_prompt_pwd_dir_length 0
           set -U hydro_color_pwd $fish_color_pine
           set -U hydro_color_git $fish_color_foam
           set -U hydro_color_start $fish_color_iris
           set -U hydro_color_error $fish_color_love
           set -U hydro_color_prompt $fish_color_pine
           set -U hydro_color_duration $fish_color_iris
-          set -U fish_prompt_pwd_dir_length 0
-          set -g fish_color_search_match
-          set -g fish_pager_color_background
-          set -g fish_pager_color_selected_background
-
-          function fish_user_key_bindings
-            bind --mode insert alt-c 'cdi; commandline -f repaint'
-            bind --mode insert alt-f 'fzf-file-widget'
-          end
-
-          # hydro (prompt) stuff
-          set -g hydro_symbol_start
-          set -U hydro_symbol_git_dirty "*"
-          set -U fish_prompt_pwd_dir_length 0
           function fish_mode_prompt; end;
 
           # Sets package in nix shell prompt
@@ -148,17 +154,13 @@ in {
       };
 
       # Zoxide, faster change directory
-      zoxide = {
-        enable = true;
-        enableBashIntegration = true;
-        enableFishIntegration = true;
-      };
-
-      # Fish integration
-      direnv.enableFishIntegration = true;
+      zoxide.enable = true;
 
       # CNF
       command-not-found.enable = false;
+
+      # Nix-Index (CNF for nixos)
+      nix-index.enable = true;
 
       # Fuzzy Finder keybinds
       fzf.keybindings = true;

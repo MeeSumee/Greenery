@@ -1,4 +1,4 @@
-{lib, ...}: {
+{
   imports = [
     ./desktop
     ./hardware
@@ -8,17 +8,13 @@
     ./system
   ];
 
-  # Do you really want to disable every single file in modules lmfao??
-  options.greenery.enable = lib.mkEnableOption "すべて";
-
   /*
   This is for reference for all NixOS systems
 
   greenery = {
-    enable = true;
-
     desktop = {
       enable = true;
+      autologin.enable = true;
       hypridle.enable = true;
       hyprland.enable = true;
       hyprlock.enable = true;
@@ -30,9 +26,12 @@
     hardware = {
       enable = true;
       amdgpu.enable = true;
+      asus-numpad.enable = true;
       audio.enable = true;
+      fprint.enable = true;
       intelgpu.enable = true;
       power.enable = true;
+      tpm.enable = true;
     };
 
     networking = {
@@ -41,8 +40,10 @@
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
-      taildrive.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        exitNode = true;
+      };
     };
 
     programs = {
@@ -57,6 +58,7 @@
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;
+      sunshine.enable = true;
       vm.enable = true;
     };
 
@@ -66,6 +68,7 @@
       auth.enable = true;
       davis.enable = true;
       files.enable = true;
+      home.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
       memos.enable = true;
@@ -85,6 +88,7 @@
       age.nix included by default
       locale.nix included by default
       nix.nix included by default
+      systemd.nix included by default
     };
   };
   */

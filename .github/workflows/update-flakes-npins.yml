@@ -1,0 +1,45 @@
+name: "Update flakes & npins"
+on:
+  schedule:
+    - cron: "0 12 * * 6" # 12 PM UTC on Saturday
+  workflow_dispatch:
+jobs:
+  update:
+    name: Update script
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    # Creates token to allow for workflow event calls
+    - uses: actions/create-github-app-token@v3
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
+
+    # Checkout doesn't persist credential to allow the use of generated token
+    - uses: actions/checkout@v6
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+
+    - name: Install Nix
+      uses: nixbuild/nix-quick-install-action@v34
+      with:
+        nix_version: 2.31.2
+        nix_conf: |
+          keep-env-derivations = true
+          keep-outputs = true
+
+    - name: Update flakes
+      run: nix flake update
+
+    - name: Update npins
+      run: nix run --quiet nixpkgs#npins -- update
+
+    - name: Commit & Push changes
+      uses: iarekylew00t/verified-bot-commit@v2
+      with:
+        message: 'Chore: Update flakes & npins'
+        token: ${{ steps.generate-token.outputs.token }}
+        files: |
+          **

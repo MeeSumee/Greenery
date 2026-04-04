@@ -33,7 +33,7 @@
 
   swapDevices = [];
 
-  # Check file consistency for taildrive
+  # Check file consistency for emerald
   services.btrfs.autoScrub = {
     enable = true;
     interval = "monthly";

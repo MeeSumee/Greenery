@@ -7,6 +7,7 @@
   options.greenery.server.ollama.enable = lib.mkEnableOption "ollama-openwebui service";
 
   config = lib.mkIf (config.greenery.server.ollama.enable && config.greenery.server.enable) {
+    # For single service system (quartz), use sudo tailscale serve --bg ${open-webui port}
     services = {
       ollama = {
         enable = true;
@@ -29,6 +30,16 @@
           OLLAMA_BASE_URL = "http://${config.services.ollama.host}:${builtins.toString config.services.ollama.port}";
           DO_NOT_TRACK = "True";
           SCARF_NO_ANALYTICS = "True";
+        };
+      };
+
+      caddy = {
+        enable = true;
+        virtualHosts."https://ai.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/ai
+            reverse_proxy localhost:${builtins.toString config.services.open-webui.port}
+          '';
         };
       };
     };

@@ -1,24 +1,51 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: {
-  options.greenery.networking.tailscale.enable = lib.mkEnableOption "tailscale";
+  options.greenery.networking.tailscale = {
+    enable = lib.mkEnableOption "tailscale";
+    exitNode = lib.mkEnableOption "tailscale exit node";
+  };
 
   config = lib.mkIf (config.greenery.networking.tailscale.enable && config.greenery.networking.enable) {
     # Enable tailscale VPN service
-    services.tailscale = {
-      enable = true;
-      useRoutingFeatures = "both"; # Enables the use of exit node
-      extraSetFlags = [
-        "--accept-routes"
-        "--accept-dns=false"
-      ];
+    services = {
+      tailscale = {
+        enable = true;
+
+        # Condition to check if system is client or server to ensure no forwarding
+        useRoutingFeatures =
+          if config.greenery.networking.tailscale.exitNode
+          then "server"
+          else "client";
+
+        extraSetFlags = [
+          "--accept-routes"
+          "--accept-dns=false"
+          (lib.mkIf config.greenery.networking.tailscale.exitNode "--advertise-exit-node")
+        ];
+      };
+
+      # Tailscale Exit-Node Optimization
+      networkd-dispatcher = lib.mkIf config.greenery.networking.tailscale.exitNode {
+        enable = true;
+        rules."50-tailscale-optimizations" = {
+          onState = ["routable"];
+          script = ''
+            ${pkgs.ethtool}/bin/ethtool -K ens3 rx-udp-gro-forwarding on rx-gro-list off
+          '';
+        };
+      };
     };
 
+    # Allow tailscale ports
     networking = {
-      nftables.enable = true;
-      firewall.allowedUDPPorts = [config.services.tailscale.port];
+      firewall.allowedUDPPorts = [
+        config.services.tailscale.port
+        (lib.mkIf config.greenery.networking.tailscale.exitNode 53)
+      ];
     };
 
     systemd.services = {

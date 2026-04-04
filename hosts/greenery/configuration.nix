@@ -86,8 +86,6 @@
 }: {
   # All modules and their values
   greenery = {
-    enable = true;
-
     hardware = {
       enable = true;
       intelgpu.enable = true;
@@ -98,7 +96,10 @@
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        exitNode = true;
+      };
     };
 
     programs = {
@@ -140,16 +141,7 @@
 
     # Open Firewall ports for ethernet sharing
     # I just used nmtui to set ethernet device to shared cause declarative approach didn't work
-    firewall.interfaces."enp3s0".allowedUDPPorts = [53 67];
-
-    # Open ports for tailscale to remove NAT overhead
-    firewall.interfaces."tailscale0".allowedTCPPorts = [
-      2283
-      4567
-      5230
-      6969
-      8096
-    ];
+    firewall.interfaces."enp3s0".allowedUDPPorts = [67];
   };
 
   # Enable non-nix executables for dynamic libraries such as minecraft scripts
@@ -163,28 +155,39 @@
   age.secrets.secret1.file = ../../secrets/secret1.age;
 
   # Set borg backup service for greenery
-  services.borgbackup.jobs = {
-    prarie = {
-      paths = ["/run/media/sumee/emerald" "/var"];
-      repo = "/mnt/repo";
-      encryption = {
-        mode = "repokey-blake2";
-        passCommand = "cat ${config.age.secrets.secret1.path}";
+  services = {
+    # Define US dnscrypt proxy config
+    dnscrypt-proxy.settings = {
+      listen_addresses = [
+        "100.74.206.4:53"
+        "[fd7a:115c:a1e0::8d34:ce04]:53"
+      ];
+    };
+
+    # Borgbackup remote backup
+    borgbackup.jobs = {
+      prarie = {
+        paths = ["/run/media/sumee/emerald" "/var"];
+        repo = "/mnt/repo";
+        encryption = {
+          mode = "repokey-blake2";
+          passCommand = "cat ${config.age.secrets.secret1.path}";
+        };
+        compression = "auto,zstd";
+        startAt = "Wed 03:00:00";
+
+        # Mount remote drive as tiny core linux doesn't have borg packaged
+        preHook = ''
+          ${pkgs.sshfs}/bin/sshfs -o \
+          allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
+          tc@seed:/mnt/raid /mnt
+        '';
+
+        # Unmount the drive when completed/failed
+        postHook = ''
+          ${pkgs.umount}/bin/umount -l /mnt
+        '';
       };
-      compression = "auto,zstd";
-      startAt = "Wed 03:00:00";
-
-      # Mount remote drive as tiny core linux doesn't have borg packaged
-      preHook = ''
-        ${pkgs.sshfs}/bin/sshfs -o \
-        allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
-        tc@seed:/mnt/raid /mnt
-      '';
-
-      # Unmount the drive when completed/failed
-      postHook = ''
-        ${pkgs.umount}/bin/umount -l /mnt
-      '';
     };
   };
 

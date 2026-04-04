@@ -1,44 +1,47 @@
-# My NixOS Repository
+# My Configuration Repository
 Consists of multiple devices:
 
-- [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): Self-hosted Server with multiple services.
-- [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): US Exit-node + DNS Server with Home Automation Capabilities.
+- [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): x86-based server with multiple services.
+- [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): Arm-based server with multiple services.
 - [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
 - [Beryl](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#beryl): Personal Laptop for offsite provisioning.
 - [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
+- [Graphite](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#graphite): Fedora-WSL that I tinker on occasion.
 
 ## Status Updates
 
-More automation with @github-actions[bot] & @dependabot[bot].
+Moved Fedora dots to this repo as dotfiles are fairly transferrable between distributions (with some edits).
 
-Replaced Librewolf in favor of Ungoogled-Chromium for security reasons.
+Updated lots of actions and reworking most of the repo while I have time.
 
 ## TODO
 
-- [ ] Automate Nix Flake Update to Continuous Integration with build checks.
-- [ ] Deprecate Brave and fully use Ungoogled-Chromium with Profiles (declaratively).
+- [x] Automate Nix Flake Update to Continuous Integration with build checks.
+- [x] Deprecate Brave and fully use Ungoogled-Chromium with Profiles (not declaratively tho).
 - [ ] Harden Services used in Greenery to reduce attack surface.
 - [ ] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
 
-# Greenery
+## Greenery
 
-Dell XPS 8940.
+Dell XPS 8940 with i7-11700.
 
-Hosts several self-hosted services.
+Acts as a home exit-node.
+
+Hosts Jellyfin, Immich, FileBrowser, Suwayomi, & Memos.
 
 Reverse proxied using tailscale serve and tailscale service assignment.
 
 Future Endeavors: Improve functionality of jellyfin.
 
-# Verdure
+## Verdure
 
 Raspberry Pi 4 Model B with 8GB of RAM.
 
-Currently acts as an exit-node replacement of Greenery.
+Hosts Anki Sync, Davis, 2fauth, & Home Assistant.
 
-Future Endeavors: Add Smart-Home capabilities.
+Future Endeavors: Network UPS Tools?
 
-# Kaolin
+## Kaolin
 
 VPS that routes all traffic via Tailscale Exit-node while using wireguard as a bridge to connect tailscale
 with Cloudflare-WARP. Also doubles as a DNS Proxy Server with dnscrypt-proxy resolving with Quad9
@@ -177,7 +180,7 @@ With this setup, it will enable you to use Tailscale as a way to connect to Clou
 
 </details>
 
-# Beryl
+## Beryl
 
 ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for managing nix configs whenever I'm not at home.
 
@@ -205,7 +208,7 @@ Test your USB4 ports using boltctl, if there's instability, disable bolt service
 
 </details>
 
-# Quartz
+## Quartz
 
 Custom-built gaming pc intended for workstation and gaming.
 
@@ -222,20 +225,33 @@ Runs ollama with openwebui for locally hosted AI (used primarily for resume/cove
 
 </details>
 
+## Graphite
+
+Windows Worktop with Fedora-WSL.
+
+Configuration located under dots.
+
+Don't have much to say, I only have lazyvim & fish config that are used.
+
+fedora-install.txt can be used to autodownload all the required programs using:
+```bash
+sudo dnf install $(cat fedora-install.txt)
+```
+
 ## Credits
 [Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am.
 He also gets a lot of credit for all the code I've stolen with permission.
 
 [Eel](https://github.com/zhuazhuzz) for his frontend expertise and generally helping me mald through life and code.
 
+NixOS themselves for crafting a declarative environment for automation & deployment. (By making it easy)
+
 Despite me abandoning quickshell development, I've to thank these quickshillers for making me understand wtf is going on:
 [Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/noctalia-dev/noctalia-shell), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
 
-I also want to thank the folks of UAFB who made USB4 possible.
+Several other gists, discussions & forums that solve problems for anything really.
 
-Lastly, I want to thank the Nix Community for its push for packages,
-maintainers, and hardware support. I haven't had this much fun in
-a while.
+I also want to thank the folks of UAFB who made USB4 possible.
 
 ## Licensing
 All code in this repository is under the MIT license unless wherever an
@@ -243,7 +259,7 @@ explicit licensing is included.
 
 ## Miscellaneous Sources
 - [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact)
-- [User Profile Picture (Nix & Git)](https://danbooru.donmai.us/posts/9246148)
+- [User Profile Picture](https://danbooru.donmai.us/posts/9259057)
 - [Dell XPS 8940 Specifications and Image](https://dl.dell.com/content/manual29571812-xps-8940-setup-and-specifications.pdf?language=en-us)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
 - [Vivian Banshee Wallpaper](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
