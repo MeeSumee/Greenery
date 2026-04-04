@@ -159,8 +159,8 @@
     # Define US dnscrypt proxy config
     dnscrypt-proxy.settings = {
       listen_addresses = [
-        "100.74.206.4:53"
-        "[fd7a:115c:a1e0::8d34:ce04]:53"
+        "100.65.16.29:53"
+        "[fd7a:115c:a1e0::c437:101d]:53"
       ];
     };
 
