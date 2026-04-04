@@ -9,14 +9,13 @@ on:
       - 'npins/sources.json'
       - 'pkgs/**'
 
-  # Run when pull request is labeled (if conditions later restrict it to run only if PR is made by nahida)
-  pull_request_target:
-    types: [labeled]
+  # Run when pull request is issued (restrictions applied later)
+  pull_request:
 
 jobs:
   archives:
     name: Push archives to cachix
-    if: (github.event_name == 'push') || (github.event_name == 'pull_request' && github.actor == 'nahida-greenery[bot]')
+    if: (github.event_name == 'push') || (github.event.label.name == 'automated pr' && github.actor == 'nahida-greenery[bot]')
     runs-on: ubuntu-latest
     outputs:
       lockfile: ${{ steps.filter.outputs.lockfile }}
@@ -44,19 +43,19 @@ jobs:
 
     # Pushes flakes based on cachix CI guide
     - name: Push flake inputs to cachix
-      if: steps.filter.outputs.lockfile == 'true' || github.event.review.state == 'approved'
+      if: steps.filter.outputs.lockfile == 'true' || (github.event.label.name == 'automated pr' && github.actor == 'nahida-greenery[bot]')
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
     # Cursed way of one-line command to print out npins path for cachix
     - name: Push npins archive to cachix
-      if: steps.filter.outputs.npins == 'true' || github.event.review.state == 'approved'
+      if: steps.filter.outputs.npins == 'true' || (github.event.label.name == 'automated pr' && github.actor == 'nahida-greenery[bot]')
       run: |
         for i in $(nix run --quiet nixpkgs#npins -- show | sed -n "/: (git repository)/s/: (git repository)//p"); do echo -e "$(nix run --quiet nixpkgs#npins -- get-path "$i")"; done
 
   derivations:
     needs: archives
     name: Push derivations to cachix
-    if: ${{ needs.archives.outputs.lockfile == 'true' || needs.archives.outputs.packages == 'true' || (github.event_name == 'pull_request' && github.actor == 'nahida-greenery[bot]') }}
+    if: ${{ needs.archives.outputs.lockfile == 'true' || needs.archives.outputs.packages == 'true' || (github.event.label.name == 'automated pr' && github.actor == 'nahida-greenery[bot]') }}
     timeout-minutes: 60
     strategy:
       matrix:
@@ -66,7 +65,7 @@ jobs:
     - uses: actions/checkout@v6
 
     - name: Aggressive disk space removal
-      if: ${{ needs.archives.outputs.lockfile == 'true' || (github.event_name == 'pull_request' && github.actor == 'nahida-greenery[bot]') }}
+      if: ${{ needs.archives.outputs.lockfile == 'true' || (github.event.label.name == 'automated pr' && github.actor == 'nahida-greenery[bot]') }}
       uses: wimpysworld/nothing-but-nix@v10
       with:
         nix-permission-edict: true # Ensure install nix action has the right permissions
@@ -85,7 +84,7 @@ jobs:
 
     # Evaluates & Builds only for the system based on the matrix (x64 for ubuntu-latest, arm64 for ubuntu-arm)
     - name: Build system derivations
-      if: ${{ needs.archives.outputs.lockfile == 'true' || (github.event_name == 'pull_request' && github.actor == 'nahida-greenery[bot]') }}
+      if: ${{ needs.archives.outputs.lockfile == 'true' || (github.event.label.name == 'automated pr' && github.actor == 'nahida-greenery[bot]') }}
       run: nix run --quiet github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
 
     # More of an edge case honestly since nix-fast-build builds packages too
