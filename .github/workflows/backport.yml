@@ -1,12 +1,14 @@
 name: "Backport to Stable"
 on:
-  schedule:
-    - cron: "27 10 */2 * 6" # “At 10:27 on every 2nd day-of-month if it's on Saturday.”
+  workflow_run:
+    workflows: [Update flakes & npins]
+    types: 
+    - requested
   workflow_dispatch:
 jobs:
   backport:
     name: Backport
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
     # Creates token to allow for workflow event calls
     - uses: actions/create-github-app-token@v3
@@ -20,15 +22,26 @@ jobs:
       with:
         ref: stable
 
+    - name: Check if the Saturday is an even number
+      id: saturday
+      run: |
+        WEEK=$(date -u +%V)
+        if [ $((WEEK % 2)) -ne 0 ]; then 
+          echo "skip=true" >> $GITHUB_OUTPUT
+        else
+          echo "skip=false" >> $GITHUB_OUTPUT
+
     # Makes stable the new master branch
     - name: Reset stable branch
+      if: steps.saturday.outputs.skip == 'false'
       run: |
         git fetch origin master:master
         git reset --hard master
 
     # Creates pull request
-    # No need to sign commits as Nahida doesn't commit anything, all commits are signed by MeeSumee
+    # No need to sign commits as Nahida doesn't commit anything, all commits are already signed before
     - name: Create Pull Request
+      if: steps.saturday.outputs.skip == 'false'
       id: pr
       uses: peter-evans/create-pull-request@v8
       with:
