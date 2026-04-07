@@ -27,9 +27,7 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
 }: {
   # All modules and their values
   greenery = {
-    hardware = {
-      enable = true;
-    };
+    hardware.enable = true;
 
     networking = {
       enable = true;
@@ -42,10 +40,7 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
       };
     };
 
-    programs = {
-      enable = true;
-      core.enable = true;
-    };
+    programs.enable = true;
 
     system = {
       enable = true;

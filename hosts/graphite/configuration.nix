@@ -40,7 +40,6 @@
 
     programs = {
       enable = true;
-      core.enable = true;
       nvim.enable = true;
     };
 

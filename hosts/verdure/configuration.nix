@@ -15,9 +15,7 @@
 {pkgs, ...}: {
   # All modules and their values
   greenery = {
-    hardware = {
-      enable = true;
-    };
+    hardware.enable = true;
 
     networking = {
       enable = true;
@@ -28,10 +26,7 @@
       tailscale.enable = true;
     };
 
-    programs = {
-      enable = true;
-      core.enable = true;
-    };
+    programs.enable = true;
 
     server = {
       enable = true;

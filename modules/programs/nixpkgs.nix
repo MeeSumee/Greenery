@@ -7,17 +7,14 @@
 }: {
   # Options maker
   options.greenery.programs = {
-    core.enable = lib.mkEnableOption "enable core programs";
-
     desktop.enable = lib.mkEnableOption "enable desktop programs";
-
     heavy.enable = lib.mkEnableOption "enable heavy/demanding programs";
   };
 
   # Config selector
   config = lib.mkMerge [
     # Core programs
-    (lib.mkIf (config.greenery.programs.core.enable && config.greenery.programs.enable) {
+    (lib.mkIf config.greenery.programs.enable {
       environment.systemPackages = with pkgs; [
         btop # hardware monitor
         tree # enables tree view in terminal

@@ -47,7 +47,6 @@
       chromium.enable = true;
       git.enable = true;
       foot.enable = true;
-      core.enable = true;
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;
