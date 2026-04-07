@@ -45,6 +45,7 @@
       enable = true;
       aagl.enable = true;
       chromium.enable = true;
+      git.enable = true;
       foot.enable = true;
       core.enable = true;
       desktop.enable = true;

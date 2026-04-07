@@ -105,6 +105,7 @@
     programs = {
       enable = true;
       core.enable = true;
+      git.enable = true;
       nvim.enable = true;
     };
 
