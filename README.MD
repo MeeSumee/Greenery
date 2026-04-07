@@ -10,14 +10,20 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Moved Fedora dots to this repo as dotfiles are fairly transferrable between distributions (with some edits).
+GitHub was being pepega when trying to run backport.yml in a schedule (it didn't get scheduled for 3 weeks). So I instead
+use an already working schedule workflow (update-flakes-npins.yml) and use that to trigger backport with a conditional check
+to run only on even weeks (alternating Saturdays). Cool thing is it uses the commit before nahida-greenery pushes the new
+lockfile preventing servers from getting a brand-new untested version.
 
-Updated lots of actions and reworking most of the repo while I have time.
+Kaolin has not been upgraded due to a regression of [tailscale](https://github.com/tailscale/tailscale/issues/19259)? Greenery works fine and a virtual machine I spun works fine too. Weird.
+
+Home Assistant configured using docker as it keeps complaining of missing packages that I admit defeat. /var folder is backed up
+by borg anyway.
+
+WebDAV enabled in Davis for Seedvault backup in GrapheneOS.
 
 ## TODO
 
-- [x] Automate Nix Flake Update to Continuous Integration with build checks.
-- [x] Deprecate Brave and fully use Ungoogled-Chromium with Profiles (not declaratively tho).
 - [ ] Harden Services used in Greenery to reduce attack surface.
 - [ ] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
 
