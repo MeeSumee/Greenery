@@ -7,9 +7,7 @@
   users,
   ...
 }: let
-
   inherit (lib) mkEnableOption mkMerge mkIf;
-
 in {
   imports = [inputs.hjem.nixosModules.default];
 
@@ -18,11 +16,10 @@ in {
     sumee.enable = mkEnableOption "Enable the SUMEE user";
     nahida.enable = mkEnableOption "MY WIFE WANTS TO USE MY COMPUTER(s)";
   };
-  
+
   config = mkMerge [
     # WHERE DOES THE STOMEE LIVE???
     (mkIf (config.greenery.system.sumee.enable && config.greenery.system.enable) {
-      
       age.secrets.secret6 = {
         file = ../../secrets/secret6.age;
         owner = "sumee";
@@ -60,7 +57,7 @@ in {
         enable = true;
         directory = config.users.users.${user}.home;
         clobberFiles = lib.mkForce true;
-        files = let 
+        files = let
           # Make face.icon at /home/user/
           faceIcon = let
             pfp = pkgs.fetchurl {
@@ -75,7 +72,6 @@ in {
             } ''
               magick ${pfp} -crop 1000x1000+210+100 - > $out
             '';
-
         in {
           ".face.icon".source = faceIcon;
           ".config/btop/btop.conf".source = ../../dots/btop/btop.conf;
@@ -83,10 +79,9 @@ in {
         };
       });
     })
-    
+
     # SHE'S MAKING A SUPERCOMPUTER IN MINECRAFT AGAIN????
     (mkIf (config.greenery.system.nahida.enable && config.greenery.system.enable) {
-      
       users.users = {
         nahida = {
           isNormalUser = true;

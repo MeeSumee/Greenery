@@ -1,3 +1,24 @@
+/*
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢠⡇⠀⠀⡆⠀⠀⠀⠀⠀⢀⠀⠀⣼⣿⠀⠀⠀⢰⠀⠀⠀⢀⡇⠀⠀⠀⠀
+⠀⠀⢸⡇⠀⠀⣷⠀⠀⢠⠀⠀⣸⡀⠀⣿⣿⠀⠀⠀⣼⡇⠀⠀⣼⠀⠀⢠⡆⠀
+⠀⠀⣼⡇⠀⠀⣿⡆⠀⣾⠀⠀⣿⡇⢀⣿⣿⠀⠀⠀⣿⣿⠀⢀⣿⡇⠀⢸⡇⠀
+⠀⠀⣿⣇⠀⢠⣿⣧⢀⣿⠀⢰⣿⡇⢸⣿⣿⡇⠀⢠⣿⣿⡆⢸⣿⡇⠀⣿⣷⠀
+⠀⢀⣿⣿⠀⢸⣿⣿⢸⣿⡄⣼⣿⣷⢸⣿⣿⣿⣀⣾⣿⣿⡇⣿⣿⣷⢰⣿⣿⠀
+⠀⢸⣿⣿⡇⢸⣿⣿⣾⣿⣿⣿⣿⣿⣼⣿⣿⣿⣿⣿⣿⣿⣇⣿⣿⣿⣿⣿⣿⠀
+⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀
+⠀⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠀
+Kaolinite clay occurs in abundance in soils that have formed from the chemical
+weathering of rocks in hot, moist climates; for example in tropical rainforest areas.
+Comparing soils along a gradient towards progressively cooler or drier climates, the
+proportion of kaolinite decreases, while the proportion of other clay minerals such
+as illite (in cooler climates) or smectite (in drier climates) increases. Such
+climatically related differences in clay mineral content are often used to infer changes
+in climates in the geological past, where ancient soils have been buried and preserved.
+Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
+*/
 # Kaolin Configuration
 {
   config,
@@ -6,27 +27,24 @@
 }: {
   # All modules and their values
   greenery = {
-    enable = true;
-
-    hardware = {
-      enable = true;
-    };
+    hardware.enable = true;
 
     networking = {
       enable = true;
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        exitNode = true;
+      };
     };
 
-    programs = {
-      enable = true;
-      core.enable = true;
-    };
+    programs.enable = true;
 
     system = {
       enable = true;
+      autoUpgrade.enable = true;
       fish.enable = true;
       sumee.enable = true;
     };
@@ -34,12 +52,9 @@
 
   networking = {
     hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Enable Tailscale DNS-crypt forwarding
-    firewall.allowedUDPPorts = [53];
 
     # Wireguard config to not cuck tailscale
+    # Massive credit to https://gist.github.com/4piu/e08f27ef0032b1a72bdbd063c084929b
     wg-quick.interfaces = {
       wgcf = {
         privateKeyFile = config.age.secrets.secret5.path;
@@ -133,31 +148,18 @@
       ];
     };
 
-    # Exit-node flags
+    # Additional flags for kaolin
     tailscale = {
       extraSetFlags = [
-        "--advertise-exit-node"
         "--advertise-routes=172.16.0.2/32"
         "--netfilter-mode=nodivert"
       ];
-    };
-
-    # Tailscale Exit-Node Optimization
-    networkd-dispatcher = {
-      enable = true;
-      rules."50-tailscale-optimizations" = {
-        onState = ["routable"];
-        script = ''
-          ${pkgs.ethtool}/bin/ethtool -K ens3 rx-udp-gro-forwarding on rx-gro-list off
-        '';
-      };
     };
   };
 
   # Enable IPv4 forwarding
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = true;
     "net.ipv4.conf.wgcf.rp_filter" = false;
   };
 

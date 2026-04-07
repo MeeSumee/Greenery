@@ -7,6 +7,7 @@
   options.greenery.server.ollama.enable = lib.mkEnableOption "ollama-openwebui service";
 
   config = lib.mkIf (config.greenery.server.ollama.enable && config.greenery.server.enable) {
+    # For single service system (quartz), use sudo tailscale serve --bg ${open-webui port}
     services = {
       ollama = {
         enable = true;
@@ -31,6 +32,31 @@
           SCARF_NO_ANALYTICS = "True";
         };
       };
+
+      caddy = {
+        enable = true;
+        virtualHosts."https://ai.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/ai
+            reverse_proxy localhost:${builtins.toString config.services.open-webui.port}
+          '';
+        };
+      };
+    };
+
+    # Harden model-loader
+    systemd.services.ollama-model-loader.serviceConfig = {
+      ProtectClock = true;
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
+      ProtectControlGroups = true;
+      RestrictNamespaces = true;
+      LockPersonality = true;
+      MemoryDenyWriteExecute = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
     };
   };
 }

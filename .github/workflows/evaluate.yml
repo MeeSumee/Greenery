@@ -7,17 +7,34 @@ on:
     paths:
     - '**.nix'
 jobs:
-  evaluation:
-    name: NixOS Evaluation
+  check:
+    name: Check if flake lockfile has changed
+    runs-on: ubuntu-slim
+    outputs:
+      changes: ${{ steps.filter.outputs.lockfile }}
+    steps:
+    - uses: actions/checkout@v6
+    - uses: dorny/paths-filter@v4
+      id: filter
+      with:
+        filters: |
+          lockfile: 'flake.lock'
+
+  # Ensures it doesn't run if lockfile is updated
+  evaluate:
+    needs: check
+    if: ${{ needs.check.outputs.changes != 'true' }}
+    name: Evaluate NixOS Systems
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       actions: write
     strategy:
       matrix:
-        hosts: [beryl, greenery, kaolin, quartz, verdure] 
-    steps:
-    - uses: actions/checkout@v5
+        hosts: [beryl, greenery, kaolin, quartz, verdure]
 
+    steps:
+    - uses: actions/checkout@v6
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
       with:
@@ -27,7 +44,7 @@ jobs:
           keep-outputs = true
 
     - name: Restore & Save Nix Store
-      uses: nix-community/cache-nix-action@v6
+      uses: nix-community/cache-nix-action@v7
       with:
         primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
         restore-prefixes-first-match: nix-${{ runner.os }}-
@@ -39,9 +56,9 @@ jobs:
         purge-primary-key: never
 
     - name: Cachix readonly
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v17
       with:
         name: sumee
 
     - name: ${{ matrix.hosts }} evaluation
-      run: nix shell nixpkgs#nixos-rebuild-ng --command nixos-rebuild dry-build --max-jobs auto --option print-missing false --option keep-build-log false --option timeout 1000 --quiet --flake .#${{ matrix.hosts }}
+      run: nix eval --quiet .#nixosConfigurations.${{ matrix.hosts }}.config.system.build.toplevel

@@ -6,60 +6,94 @@ on:
       - master
     paths:
       - 'flake.lock'
+      - 'npins/sources.json'
       - 'pkgs/**'
-jobs:
-  populate-cache:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v5
 
-    - name: Filter
-      uses: dorny/paths-filter@v3
+  # Run when pull request is issued
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  archives:
+    name: Push archives to cachix
+    runs-on: ubuntu-latest
+    # Pipe outputs for the next job incase there are more actions to do
+    outputs:
+      lockfile: ${{ steps.filter.outputs.lockfile }}
+      packages: ${{ steps.filter.outputs.packages }}
+    steps:
+    - uses: actions/checkout@v6
+    - uses: dorny/paths-filter@v4
       id: filter
       with:
         filters: |
-          lockfile:
-            - 'flake.lock'
-          packages:
-            - 'pkgs/**'
-
-    - name: Aggressive disk space removal
-      uses: wimpysworld/nothing-but-nix@v6
-      with:
-        nix-permission-edict: true  
+          lockfile: 'flake.lock'
+          npins: 'npins/sources.json'
+          packages: 'pkgs/**'
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
       with:
         nix_version: 2.31.2
-        nix_conf: |
-          keep-env-derivations = true
-          keep-outputs = true
-
-    - name: Restore & Save Nix Store
-      uses: nix-community/cache-nix-action@v6
-      with:
-        primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
-        restore-prefixes-first-match: nix-${{ runner.os }}-
-        gc-max-store-size-linux: 1G
-        purge: true
-        purge-prefixes: nix-${{ runner.os }}-
-        purge-created: 0
-        purge-last-accessed: P1DT12H
-        purge-primary-key: never
 
     - name: Cachix
-      uses: cachix/cachix-action@v15
+      uses: cachix/cachix-action@v17
       with:
         name: sumee
         authToken: '${{ secrets.CACHIX_AUTH }}'
 
-    - name: Push flake inputs
-      if: steps.filter.outputs.lockfile == 'true'
+    # Pushes flakes based on cachix CI guide
+    - name: Push flake inputs to cachix
+      # Run if flake.lock changes OR nahida opens a pull request from backport.yml
+      if: steps.filter.outputs.lockfile == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
-    - name: Push built derivations
-      if: steps.filter.outputs.packages == 'true' || steps.filter.outputs.lockfile == 'true'
-      run: nix run github:Mic92/nix-fast-build -- --no-nom --skip-cached
+    # Cursed way of one-line command to print out npins path for cachix
+    - name: Push npins archive to cachix
+      # Run if sources.json changes OR nahida opens a pull request from backport.yml
+      if: steps.filter.outputs.npins == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]'
+      run: |
+        for i in $(nix run --quiet nixpkgs#npins -- show | sed -n "/: (git repository)/s/: (git repository)//p"); do echo -e "$(nix run --quiet nixpkgs#npins -- get-path "$i")"; done
+
+  derivations:
+    needs: archives
+    name: Push derivations to cachix
+    # If nahida opens a pull request from backport.yml, then disregard any of the piped outputs
+    if: ${{ needs.archives.outputs.lockfile == 'true' || needs.archives.outputs.packages == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
+    timeout-minutes: 60 # So I don't run out of the free 2000 minute limit
+    strategy:
+      matrix:
+        # Build on x86 & arm for my devices
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v6
+
+    # Only need this when nix-fast-build runs as ALL my derivations take a fuck ton of space
+    - name: Aggressive disk space removal
+      if: ${{ needs.archives.outputs.lockfile == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
+      uses: wimpysworld/nothing-but-nix@v10
+      with:
+        nix-permission-edict: true # Ensure install nix action has the right permissions
+
+    - name: Install Nix
+      uses: nixbuild/nix-quick-install-action@v34
+      with:
+        nix_version: 2.31.2
+
+    - name: Cachix
+      uses: cachix/cachix-action@v17
+      with:
+        name: sumee
+        authToken: '${{ secrets.CACHIX_AUTH }}'
+
+    # Evaluates & Builds only for the system based on the matrix (x64 for ubuntu-latest, arm64 for ubuntu-arm)
+    - name: Build system derivations
+      if: ${{ needs.archives.outputs.lockfile == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
+      # nix eval expression ensures arm platforms don't get evaluated on x86 platforms & vice-versa
+      run: nix run --quiet github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
+
+    # More of an edge case honestly since nix-fast-build builds packages too
+    - name: Build package derivations
+      if: ${{ needs.archives.outputs.packages == 'true' }}
+      run: nix build --quiet .#nahidacursor .#papiteal .#dickord .#caddyscale

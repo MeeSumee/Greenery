@@ -15,7 +15,10 @@
     ./xserver.nix
   ];
 
-  options.greenery.desktop.enable = lib.mkEnableOption "desktop enviroment";
+  options.greenery.desktop = {
+    enable = lib.mkEnableOption "desktop enviroment";
+    autologin.enable = lib.mkEnableOption "autologin";
+  };
 
   config = lib.mkIf config.greenery.desktop.enable {
     # Session variables for wayland usage
@@ -24,6 +27,19 @@
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     };
 
+    services = {
+      # Automounting
+      gvfs.enable = true;
+      udisks2.enable = true;
+
+      # Autologin
+      getty = lib.mkIf (config.greenery.desktop.autologin.enable && config.greenery.desktop.enable) {
+        autologinOnce = true;
+        autologinUser = "sumee";
+      };
+    };
+
+    # So I can open foot while browsing nautilus
     programs = {
       nautilus-open-any-terminal = {
         enable = true;
@@ -38,9 +54,9 @@
               gtk-theme = "rose-pine";
               icon-theme = "Papirus-Dark";
               cursor-theme = "xcursor-genshin-nahida";
-              document-font-name = "DejaVu Serif";
-              font-name = "DejaVu Sans";
-              monospace-font-name = "CaskaydiaMono NF";
+              document-font-name = "Noto Serif";
+              font-name = "Noto Sans";
+              monospace-font-name = "Noto Sans Mono";
               color-scheme = "prefer-dark";
               clock-show-weekday = true;
             };
@@ -70,15 +86,26 @@
       };
     };
 
-    # Correct gtk theming for apps that don't use runtime directory
+    # Forward themes and configs for desktop apps
     hjem.users = lib.genAttrs users (user: {
       files = let
         themeName = "rose-pine";
         themeDir = "${pkgs.rose-pine-gtk-theme}/share/themes/${themeName}";
+        inherit (config.users.users.${user}) home;
       in {
         ".config/gtk-4.0/assets".source = "${themeDir}/assets";
         ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
         ".config/mpv".source = ../../dots/mpv;
+        # Bookmarks for Nautilus
+        ".config/gtk-3.0/bookmarks".text = ''
+          file://${home}/Documents Documents
+          file://${home}/Music Music
+          file://${home}/Pictures Pictures
+          file://${home}/Videos Videos
+          file://${home}/Downloads Downloads
+          file://${home}/green green
+          sftp://sumee@greenery/run/media/sumee/emerald emerald
+        '';
       };
     });
   };

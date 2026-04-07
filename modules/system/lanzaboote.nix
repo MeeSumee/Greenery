@@ -4,8 +4,7 @@
   lib,
   inputs,
   ...
-}: 
-{
+}: {
   imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
   options.greenery.system.lanzaboote.enable = lib.mkEnableOption "lanzaboote";
@@ -16,11 +15,6 @@
     boot.lanzaboote = {
       enable = true;
       pkiBundle = "/var/lib/sbctl";
-      # WARNING
-      # this is from the internal overlay NOT THE SAME as pkgs.lanzaboote-tool
-      # in nipxkgs which does NOT contain the required uefi stub
-      # package = pkgs.lanzaboote-tool;
-      configurationLimit = 12;
     };
   };
 }

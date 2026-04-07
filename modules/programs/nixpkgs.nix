@@ -7,18 +7,16 @@
 }: {
   # Options maker
   options.greenery.programs = {
-    core.enable = lib.mkEnableOption "enable core programs";
-
     desktop.enable = lib.mkEnableOption "enable desktop programs";
-
     heavy.enable = lib.mkEnableOption "enable heavy/demanding programs";
   };
 
   # Config selector
   config = lib.mkMerge [
     # Core programs
-    (lib.mkIf (config.greenery.programs.core.enable && config.greenery.programs.enable) {
+    (lib.mkIf config.greenery.programs.enable {
       environment.systemPackages = with pkgs; [
+        git # git package only for kaolin & verdure
         btop # hardware monitor
         tree # enables tree view in terminal
         unzip # unzip cli utility
@@ -40,7 +38,7 @@
     (lib.mkIf (config.greenery.programs.desktop.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
         qimgv # image viewer
-        wineWowPackages.waylandFull # wine
+        wineWow64Packages.wayland # wine
         xournalpp # note taking
         mpv # media player
         onlyoffice-desktopeditors # office applications
@@ -57,21 +55,19 @@
         noctalia-shell # Noctalia Shell
         wo.nahidacursor # Cursor Package
         wo.papiteal # Papirus Teal Icons
-        wo.vesktop # Vesktop with overrides
       ];
     })
 
     # Large/Demanding applications
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
+        nixos-shell # Spawn virtual machines for testing
+        wo.dickord # Equibop with overrides
         gimp # GIMP image manipulator
         kicad-small # KiCAD Electronic schematic/PCB designer
         rare # GUI based on legendary which is a port of Epic Games
         prismlauncher # minecraft
-        # davinci-resolve                 # Davinci-resolve video editor
         audacity # temp replacement
-        # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)
-        # (pkgs.callPackage ./davinci.nix {})
       ];
     })
   ];

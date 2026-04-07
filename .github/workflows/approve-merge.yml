@@ -1,0 +1,28 @@
+name: Approve & Merge
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  approve-and-merge:
+    name: Approve & Merge PR
+    runs-on: ubuntu-slim
+    # Don't run unless its nahida or dependabot
+    if: github.actor == 'nahida-greenery[bot]' || github.actor == 'dependabot[bot]'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      # I think this will ensure dependabot actually triggers GH Actions to approve?
+      - name: Dependabot metadata
+        if: github.actor == 'dependabot[bot]'
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Autoapprove & Merge PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge --merge --auto "${{ github.event.pull_request.html_url }}"
+          gh pr review --approve "${{ github.event.pull_request.html_url }}"

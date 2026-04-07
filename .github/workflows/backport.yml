@@ -1,0 +1,62 @@
+name: "Backport to Stable"
+on:
+  workflow_run:
+    workflows: [Update flakes & npins]
+    types: 
+    - requested
+  workflow_dispatch:
+jobs:
+  check:
+    name: Check if its an alternating weekend
+    runs-on: ubuntu-slim
+    outputs:
+      run: ${{ steps.saturday.outputs.run }}
+    steps:
+    # Uses week number to determine whether to run workflow
+    - name: Check if the Saturday is an even number
+      id: saturday
+      run: |
+        WEEK=$(date -u +%V)
+        if [ $((WEEK % 2)) -ne 0 ]; then 
+          echo "run=false" >> $GITHUB_OUTPUT
+        else
+          echo "run=true" >> $GITHUB_OUTPUT
+        fi
+
+  backport:
+    needs: check
+    if: ${{ needs.check.outputs.run == 'true' }}
+    name: Backport
+    runs-on: ubuntu-slim
+    steps:
+    # Creates token to allow for workflow event calls
+    - uses: actions/create-github-app-token@v3
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
+
+    # Persisting is okay as create PR automatically handles that
+    - uses: actions/checkout@v6
+      with:
+        ref: stable
+
+    # Makes stable the new master branch
+    - name: Reset stable branch
+      run: |
+        git fetch origin master:master
+        git reset --hard master
+
+    # Creates pull request
+    # No need to sign commits as Nahida doesn't commit anything, all commits are already signed before
+    - name: Create Pull Request
+      id: pr
+      uses: peter-evans/create-pull-request@v8
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+        branch: master-to-stable
+        title: "[Backport] Merge master to stable"
+        body: "This Pull Request is automatically generated and merges changes from master to stable"
+        labels: |
+          automated pr
+        draft: false

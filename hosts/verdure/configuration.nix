@@ -1,35 +1,44 @@
+/*
+⠀⠀⠀⠀⠀⠀⠀⣶⣄⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣴⣿⡄⠀⠀⠀⠀⠀⢀⡀⠀
+⠀⠀⠀⠀⠰⣶⣾⣿⣿⣿⣿⣿⡇⠀⢠⣷⣤⣶⣿⡇⠀
+⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣀⣿⣿⣿⣿⣿⣧⣀
+⠀⠀⠀⣷⣦⣀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃
+⢲⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀
+⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠁⠀⠀
+⠀⠚⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠂⠀⠀
+⠀⠀⠀⠀⠀⠉⠙⢻⣿⣿⡿⠛⠉⡇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠘⠋⠁⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢳⡀⠀⠀⠀⠀⠀
+*/
 # Verdure Configuration
 {pkgs, ...}: {
   # All modules and their values
   greenery = {
-    enable = true;
-
-    hardware = {
-      enable = true;
-    };
+    hardware.enable = true;
 
     networking = {
       enable = true;
+      bluetooth.enable = true;
       dnscrypt.enable = true;
       fail2ban.enable = true;
       openssh.enable = true;
       tailscale.enable = true;
     };
 
-    programs = {
-      enable = true;
-      core.enable = true;
-    };
+    programs.enable = true;
 
     server = {
       enable = true;
       anki.enable = true;
       auth.enable = true;
       davis.enable = true;
+      home.enable = true;
     };
 
     system = {
       enable = true;
+      autoUpgrade.enable = true;
       fish.enable = true;
       sumee.enable = true;
     };
@@ -47,33 +56,17 @@
     raspberrypi-eeprom
   ];
 
-  # Open tailscale firewall ports
-  networking = {
-    firewall = {
-      allowedUDPPorts = [53];
-      interfaces."tailscale0".allowedTCPPorts = [
-        3600
-        8000
-        27701
-      ];
-    };
-  };
-
   services = {
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
-        paths = [
-          "/var/lib/private/anki-sync-server"
-          "/var/lib/davis"
-          "/var/lib/2fauth"
-        ];
+        paths = ["/var"];
         repo = "/mnt/verback";
         encryption.mode = "none";
         compression = "auto,zstd";
         startAt = "Mon 04:00:00";
 
-        # Mount taildrive on demand
+        # Mount emerald on demand
         preHook = ''
           ${pkgs.sshfs}/bin/sshfs -o \
           allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
@@ -85,23 +78,6 @@
           ${pkgs.umount}/bin/umount -l /mnt
         '';
       };
-    };
-
-    # Define US dnscrypt proxy config
-    dnscrypt-proxy.settings = {
-      listen_addresses = [
-        "100.90.207.85:53"
-        "[fd7a:115c:a1e0::8034:cf55]:53"
-        "127.0.0.1:53"
-        "[::1]:53"
-      ];
-    };
-
-    # Exit-node flags
-    tailscale = {
-      extraSetFlags = [
-        "--advertise-exit-node"
-      ];
     };
   };
 

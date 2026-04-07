@@ -38,7 +38,7 @@
         key-bindings = {
           search-start = "Control+Shift+f";
         };
-        colors = {
+        colors-dark = {
           alpha = 0.8;
         };
       };

@@ -12,28 +12,46 @@
     ./lanzaboote.nix
     ./locale.nix
     ./nix.nix
+    ./systemd.nix
     ./users.nix
   ];
 
-  options.greenery.system.enable = lib.mkEnableOption "system";
+  options.greenery = {
+    system.enable = lib.mkEnableOption "system";
+    system.autoUpgrade.enable = lib.mkEnableOption "auto-update NixOS";
+  };
 
   config = lib.mkIf config.greenery.system.enable {
     # Bootloader
-    boot = {
-      loader.systemd-boot.enable = lib.mkDefault true;
-      loader.efi.canTouchEfiVariables = lib.mkDefault true;
+    boot.loader = {
+      systemd-boot.enable = lib.mkDefault true;
+      efi.canTouchEfiVariables = lib.mkDefault true;
     };
 
-    # Nuke faster
-    systemd.user.extraConfig = ''
-      DefaultTimeoutStopSec=10s
-    '';
+    # Sudo privilege restriction
+    security.sudo.execWheelOnly = true;
 
-    # Enable core firmware services
+    # Core firmware services
     services = {
-      gvfs.enable = lib.mkDefault true;
-      udisks2.enable = lib.mkDefault true;
+      dbus.implementation = "broker";
       fwupd.enable = lib.mkDefault true;
+    };
+
+    # Autoupgrade nixos based on stable branch
+    system.autoUpgrade = lib.mkIf (config.greenery.system.autoUpgrade.enable && config.greenery.system.enable) {
+      enable = true;
+      flake = "github:MeeSumee/Greenery/stable";
+      flags = [
+        "--print-build-logs"
+      ];
+      dates = "Sat 10:00 UTC";
+      randomizedDelaySec = "45min";
+      allowReboot = true;
+      runGarbageCollection = true;
+      rebootWindow = {
+        lower = "03:00";
+        upper = "12:00";
+      };
     };
   };
 }

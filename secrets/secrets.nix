@@ -7,6 +7,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq sumee@verdure"
   ];
 
+  autism = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBCHbUX3L2WxbS3d1EeCe+WhzdT1Tn78MzAzOz5xr1iO"];
   nahida = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINiA3lkgGECrzk08GOhUlSIx5+jQ6WvuERK3nAz617M7"];
   leaf = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdCRc7/VwBWConOyhV/3R9CiFK9RCaA04tGGuM+cOso"];
   soft = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBLVW9nABsXKAakbIgzJdRWImREgUyxJ/8yOKpzbE9S"];
@@ -20,4 +21,5 @@ in {
   "secret4.age".publicKeys = cute;
   "secret5.age".publicKeys = soft ++ nahida;
   "secret6.age".publicKeys = sumee ++ nahida;
+  "secret7.age".publicKeys = autism ++ cute;
 }

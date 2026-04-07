@@ -28,6 +28,6 @@
       ];
     };
 
-  hosts = ["beryl" "greenery" "kaolin" "quartz" "verdure"];
+  hosts = ["beryl" "greenery" "kaolin" "quartz" "verdure" "test"];
 in
   genAttrs hosts mkHost

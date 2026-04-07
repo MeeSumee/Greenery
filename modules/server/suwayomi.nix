@@ -2,13 +2,10 @@
   lib,
   config,
   ...
-}:
-{
-
+}: {
   options.greenery.server.suwayomi.enable = lib.mkEnableOption "suwayomi";
-  
+
   config = lib.mkIf (config.greenery.server.suwayomi.enable && config.greenery.server.enable) {
-    
     # Add age secret files
     age.secrets.secret2 = {
       file = ../../secrets/secret2.age;
@@ -17,8 +14,25 @@
       group = "suwayomi";
     };
 
-    services = {
+    # Upstream recommendation: https://github.com/Suwayomi/Suwayomi-Server/blob/master/scripts/resources/pkg/systemd/suwayomi-server.service
+    systemd.services.suwayomi-server.serviceConfig = {
+      WorkingDirectory = config.services.suwayomi-server.dataDir;
+      ProtectSystem = "full";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      ProtectClock = true;
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      ProtectControlGroups = true;
+      RestrictSUIDSGID = true;
+      RestrictRealtime = true;
+      RestrictNamespaces = true;
+      NoNewPrivileges = true;
+    };
 
+    services = {
       # Suwayomi-server for fetching manga online
       suwayomi-server = {
         enable = true;
@@ -32,7 +46,7 @@
             basicAuthEnabled = true;
             basicAuthUsername = "sumee";
             basicAuthPasswordFile = config.age.secrets.secret2.path;
-             
+
             # WebUI
             webUIEnabled = true;
             webUIFlavor = "WebUI";
@@ -73,6 +87,15 @@
             backupInterval = 1;
             backupTTL = 14;
           };
+        };
+      };
+      caddy = {
+        enable = true;
+        virtualHosts."https://manga.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/manga
+            reverse_proxy localhost:${builtins.toString config.services.suwayomi-server.settings.server.port}
+          '';
         };
       };
     };

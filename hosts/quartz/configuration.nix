@@ -18,8 +18,6 @@
 {
   # All modules and their values
   greenery = {
-    enable = true;
-
     desktop = {
       enable = true;
       hypridle.enable = true;
@@ -31,6 +29,7 @@
       enable = true;
       amdgpu.enable = true;
       audio.enable = true;
+      intelgpu.enable = true;
       power.enable = true;
     };
 
@@ -39,20 +38,20 @@
       bluetooth.enable = true;
       dnscrypt.enable = true;
       openssh.enable = true;
-      taildrive.enable = true;
       tailscale.enable = true;
     };
 
     programs = {
       enable = true;
       aagl.enable = true;
-      browser.enable = true;
+      chromium.enable = true;
+      git.enable = true;
       foot.enable = true;
-      core.enable = true;
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;
       steam.enable = true;
+      sunshine.enable = true;
     };
 
     server = {
@@ -65,6 +64,7 @@
       fish.enable = true;
       fonts.enable = true;
       input.enable = true;
+      lanzaboote.enable = true;
       sumee.enable = true;
     };
   };

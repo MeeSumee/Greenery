@@ -5,7 +5,7 @@
 
   inputs = {
     # NixOS Unstable pinned hash
-    nixpkgs.url = "github:nixos/nixpkgs?ref=d6c71932130818840fc8fe9509cf50be8c64634f";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Hjem
     hjem = {

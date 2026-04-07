@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [inputs.nvf.nixosModules.default];
@@ -56,7 +57,14 @@
               enable = true;
               formatOnSave = true;
               lightbulb.enable = true;
-              trouble.enable = true;
+              trouble = {
+                enable = true;
+                mappings = {
+                  locList = "<leader>lx";
+                  quickfix = "<leader>lq";
+                  symbols = "<leader>ly";
+                };
+              };
             };
 
             languages = {
@@ -109,6 +117,17 @@
                 gitFiles = "<leader>gf";
                 gitStash = "<leader>gx";
                 gitStatus = "<leader>gs";
+              };
+              setupOpts = {
+                defaults.pickers.find_command = [
+                  "${pkgs.fd}/bin/fd"
+                  "-H"
+                ];
+                pickers.find_files.find_command = [
+                  "${pkgs.fd}/bin/fd"
+                  "--type=file"
+                  "-H"
+                ];
               };
             };
 

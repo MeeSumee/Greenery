@@ -2,14 +2,12 @@
   lib,
   config,
   ...
-}:
-
-{
-
+}: let
+  port = 3600;
+in {
   options.greenery.server.davis.enable = lib.mkEnableOption "davis calendar";
-  
-  config = lib.mkIf (config.greenery.server.davis.enable && config.greenery.server.enable) {
 
+  config = lib.mkIf (config.greenery.server.davis.enable && config.greenery.server.enable) {
     age.secrets = {
       secret1.file = ../../secrets/secret1.age;
       secret4.file = ../../secrets/secret4.age;
@@ -23,18 +21,39 @@
         adminLogin = "sumee";
         adminPasswordFile = config.age.secrets.secret1.path;
         appSecretFile = config.age.secrets.secret4.path;
+        # Enable webdav solely for GrapheneOS Seedvault backups lmfao
+        config = {
+          WEBDAV_ENABLED = lib.mkForce true;
+          WEBDAV_TMP_DIR = "${config.services.davis.dataDir}/webdav/tmp";
+          WEBDAV_PUBLIC_DIR = "${config.services.davis.dataDir}/webdav/public";
+          WEBDAV_HOMES_DIR = "${config.services.davis.dataDir}/webdav/homes";
+        };
 
         nginx.listen = [
           {
             addr = "0.0.0.0";
-            port = 3600;
+            port = port;
           }
           {
             addr = "[::1]";
-            port = 3600;
+            port = port;
           }
         ];
       };
+      caddy = {
+        enable = true;
+        virtualHosts."https://davis.onca-ph.ts.net" = {
+          extraConfig = ''
+            bind tailscale/davis
+            reverse_proxy localhost:${builtins.toString port}
+          '';
+        };
+      };
+    };
+
+    # Based on https://github.com/alegrey91/systemd-service-hardening/blob/master/ansible/files/php-fpm.service
+    systemd.services.phpfpm-davis.serviceConfig = {
+      NoNewPrivileges = true;
     };
   };
 }

@@ -16,11 +16,15 @@
         ignoreUserConfig = true;
         addons = with pkgs; [
           fcitx5-mozc # Japanese Input
+          qt6Packages.fcitx5-chinese-addons # Pinyin Input
           fcitx5-rose-pine # Rose Pine Theme
         ];
         settings = {
           addons = {
-            classicui.globalSection.Theme = "rose-pine";
+            classicui.globalSection = {
+              Theme = "rose-pine";
+              Font = "Sans 18";
+            };
           };
           inputMethod = {
             "Groups/0" = {
@@ -31,6 +35,7 @@
 
             "Groups/0/Items/0".Name = "keyboard-us";
             "Groups/0/Items/1".Name = "mozc";
+            "Groups/0/Items/2".Name = "pinyin";
           };
         };
       };

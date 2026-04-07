@@ -1,0 +1,35 @@
+name: "Update License"
+on:
+  schedule:
+    - cron: "0 6 1 1 *" # 6 am Jan 1st UTC
+  workflow_dispatch:
+jobs:
+  license:
+    name: Update License
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/create-github-app-token@v3
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
+
+    - uses: actions/checkout@v6
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+
+    # Finds numbers on MIT License and replaces it with year reported
+    - name: Update Year
+      run: |
+          sed -i "s/[0-9]\{4\}/$(date +"%Y")/g" LICENSE
+
+    # Signed commit
+    - name: Commit & Push changes
+      uses: iarekylew00t/verified-bot-commit@v2
+      with:
+        message: 'Chore: Update License'
+        token: ${{ steps.generate-token.outputs.token }}
+        files: |
+          **

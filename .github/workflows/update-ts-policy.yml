@@ -1,0 +1,25 @@
+name: Sync Tailscale ACLs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'tailscale.hujson'
+
+jobs:
+  acls:
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Deploy ACL
+        id: deploy-acl
+        uses: tailscale/gitops-acl-action@v1
+        with:
+          policy-file: tailscale.hujson
+          # Note that API Key needs to be updated over time
+          api-key: ${{ secrets.TS_API_KEY }}
+          tailnet: ${{ secrets.TS_TAILNET }}
+          action: apply
+
