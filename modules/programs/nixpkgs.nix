@@ -69,10 +69,7 @@
         kicad-small # KiCAD Electronic schematic/PCB designer
         rare # GUI based on legendary which is a port of Epic Games
         prismlauncher # minecraft
-        # davinci-resolve                 # Davinci-resolve video editor
         audacity # temp replacement
-        # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)
-        # (pkgs.callPackage ./davinci.nix {})
       ];
     })
   ];
