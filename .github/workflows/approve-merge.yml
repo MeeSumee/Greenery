@@ -13,6 +13,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      # I think this will ensure dependabot actually triggers GH Actions to approve?
       - name: Dependabot metadata
         if: github.actor == 'dependabot[bot]'
         uses: dependabot/fetch-metadata@v2

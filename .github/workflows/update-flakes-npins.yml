@@ -17,7 +17,7 @@ jobs:
         app-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
 
-    # Checkout doesn't persist credential to allow the use of generated token
+    # Checkout uses generated token instead of using GITHUB_TOKEN
     - uses: actions/checkout@v6
       with:
         token: ${{ steps.generate-token.outputs.token }}

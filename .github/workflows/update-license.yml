@@ -20,10 +20,12 @@ jobs:
       with:
         token: ${{ steps.generate-token.outputs.token }}
 
+    # Finds numbers on MIT License and replaces it with year reported
     - name: Update Year
       run: |
           sed -i "s/[0-9]\{4\}/$(date +"%Y")/g" LICENSE
 
+    # Signed commit
     - name: Commit & Push changes
       uses: iarekylew00t/verified-bot-commit@v2
       with:

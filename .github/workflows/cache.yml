@@ -17,6 +17,7 @@ jobs:
   archives:
     name: Push archives to cachix
     runs-on: ubuntu-latest
+    # Pipe outputs for the next job incase there are more actions to do
     outputs:
       lockfile: ${{ steps.filter.outputs.lockfile }}
       packages: ${{ steps.filter.outputs.packages }}
@@ -43,11 +44,13 @@ jobs:
 
     # Pushes flakes based on cachix CI guide
     - name: Push flake inputs to cachix
+      # Run if flake.lock changes OR nahida opens a pull request from backport.yml
       if: steps.filter.outputs.lockfile == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]'
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
 
     # Cursed way of one-line command to print out npins path for cachix
     - name: Push npins archive to cachix
+      # Run if sources.json changes OR nahida opens a pull request from backport.yml
       if: steps.filter.outputs.npins == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]'
       run: |
         for i in $(nix run --quiet nixpkgs#npins -- show | sed -n "/: (git repository)/s/: (git repository)//p"); do echo -e "$(nix run --quiet nixpkgs#npins -- get-path "$i")"; done
@@ -55,15 +58,18 @@ jobs:
   derivations:
     needs: archives
     name: Push derivations to cachix
+    # If nahida opens a pull request from backport.yml, then disregard any of the piped outputs
     if: ${{ needs.archives.outputs.lockfile == 'true' || needs.archives.outputs.packages == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
-    timeout-minutes: 60
+    timeout-minutes: 60 # So I don't run out of the free 2000 minute limit
     strategy:
       matrix:
+        # Build on x86 & arm for my devices
         os: [ubuntu-latest, ubuntu-24.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v6
 
+    # Only need this when nix-fast-build runs as ALL my derivations take a fuck ton of space
     - name: Aggressive disk space removal
       if: ${{ needs.archives.outputs.lockfile == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
       uses: wimpysworld/nothing-but-nix@v10
@@ -81,10 +87,10 @@ jobs:
         name: sumee
         authToken: '${{ secrets.CACHIX_AUTH }}'
 
-
     # Evaluates & Builds only for the system based on the matrix (x64 for ubuntu-latest, arm64 for ubuntu-arm)
     - name: Build system derivations
       if: ${{ needs.archives.outputs.lockfile == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
+      # nix eval expression ensures arm platforms don't get evaluated on x86 platforms & vice-versa
       run: nix run --quiet github:Mic92/nix-fast-build -- --no-nom --skip-cached  --flake ".#checks.$(nix eval --raw --impure --expr builtins.currentSystem)"
 
     # More of an edge case honestly since nix-fast-build builds packages too
