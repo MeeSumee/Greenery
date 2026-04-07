@@ -16,6 +16,7 @@
     # Core programs
     (lib.mkIf config.greenery.programs.enable {
       environment.systemPackages = with pkgs; [
+        git # git package only for kaolin & verdure
         btop # hardware monitor
         tree # enables tree view in terminal
         unzip # unzip cli utility

@@ -54,6 +54,7 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
     hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
 
     # Wireguard config to not cuck tailscale
+    # Massive credit to https://gist.github.com/4piu/e08f27ef0032b1a72bdbd063c084929b
     wg-quick.interfaces = {
       wgcf = {
         privateKeyFile = config.age.secrets.secret5.path;
