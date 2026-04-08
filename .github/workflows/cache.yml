@@ -11,12 +11,14 @@ on:
 
   # Run when pull request is issued
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [opened, reopened, synchronize, ready_for_review]
 
 jobs:
   archives:
     name: Push archives to cachix
     runs-on: ubuntu-latest
+    # Don't run on draft PRs
+    if: github.event.pull_request.draft == false
     # Pipe outputs for the next job incase there are more actions to do
     outputs:
       lockfile: ${{ steps.filter.outputs.lockfile }}
