@@ -2,7 +2,7 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  win2xcur,
+  pkgs,
   shadows ? false,
   ...
 }:
@@ -14,10 +14,6 @@ stdenv.mkDerivation (finalAttrs: {
     rev = "a711ee74222edfb1a6a96f945221046a95342d86";
     sha256 = "sha256-bnErAQeND5hZsdrbgU7Ky0oepcAaPELANTnOJSK8gEU=";
   };
-
-  nativeBuildInputs = [
-    win2xcur
-  ];
 
   installPhase = let
     nahida = [
@@ -72,58 +68,53 @@ stdenv.mkDerivation (finalAttrs: {
     sym14 = ["9d800788f1b08800ae810202380a0822" "e29285e634086352946a0e7090d73106" "hand1" "hand2" "pointing_hand"];
     sym = [sym0 sym1 sym2 sym3 sym4 sym5 sym6 sym7 sym8 sym9 sym10 sym11 sym12 sym13 sym14];
   in ''
-    mkdir -p $out/share/icons/xcursor-genshin-nahida;
-    cd ./PROJECT/STMC;
+    mkdir -p $out/share/icons/xcursor-genshin-nahida
+    cd ./PROJECT/STMC
 
-    function rename() {
-      ${
-      lib.concatImapStringsSep " "
-      (pos: input: "cp ${input} -t $out/share/icons/xcursor-genshin-nahida/${builtins.elemAt linux (pos - 1)}")
-      nahida
-    }
-    }
+    # Copy to working directory
+    for input in ${builtins.concatStringsSep " " nahida}; do
+      cp "$input" -t $out/share/icons/xcursor-genshin-nahida/
+    done
 
-    cd $out/share/icons/xcursor-genshin-nahida;
+    cd $out/share/icons/xcursor-genshin-nahida
 
-    win2xcur *.{ani,cur} -o .
+    echo "Files copied to $out/share/icons/xcursor-genshin-nahida/"
+
+    ${pkgs.win2xcur}/bin/win2xcur $out/share/icons/xcursor-genshin-nahida/*.{ani,cur} -o $out/share/icons/xcursor-genshin-nahida/
 
     ${
       if shadows
-      then "win2xcur *.{ani,cur} -o . -s"
+      then "${pkgs.win2xcur}/bin/win2xcur -s $out/share/icons/xcursor-genshin-nahida/*.{ani,cur} -o $out/share/icons/xcursor-genshin-nahida/"
       else ""
     };
 
+    cd $out/share/icons/xcursor-genshin-nahida
     rm *.{ani,cur}
 
-    function symlink() {
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 0} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 0)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 1} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 1)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 2} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 2)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 3} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 3)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 4} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 4)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 5} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 5)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 6} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 6)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 7} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 7)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 8} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 8)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 9} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 9)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 10} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 10)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 11} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 11)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 12} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 12)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 13} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 13)};
-      ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 14} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 14)};
-    }
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 0} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 0)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 1} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 1)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 2} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 2)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 3} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 3)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 4} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 4)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 5} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 5)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 6} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 6)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 7} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 7)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 8} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 8)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 9} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 9)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 10} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 10)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 11} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 11)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 12} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 12)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 13} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 13)};
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(${builtins.elemAt linux 14} | cut -f 1 -d '.') ${symlink}") (builtins.elemAt sym 14)};
 
-    function index_maker() {
-      cd .. || exit
-      touch index.theme
-      (
-        echo "[Icon Theme]"
-        echo "Name=Genshin Nahida"
-        echo "Name[ja]=原神 ナヒーダ"
-        echo "Name[zh_CN]=原神 纳西妲"
-        echo "Name[zh_TW]=原神 納西妲"
-      ) >> index.theme
-    }
+    touch index.theme
+    (
+      echo "[Icon Theme]"
+      echo "Name=Genshin Nahida"
+      echo "Name[ja]=原神 ナヒーダ"
+      echo "Name[zh_CN]=原神 纳西妲"
+      echo "Name[zh_TW]=原神 納西妲"
+    ) >> index.theme
   '';
 
   meta = {
