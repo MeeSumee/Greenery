@@ -5,11 +5,11 @@
 }: {
   options.greenery.programs.git.enable = lib.mkEnableOption "git & git setup";
 
-  config = lib.mkIf (config.greenery.programs.git.enable && config.greenery.programs.enable) {
+  config = lib.mkIf config.greenery.programs.enable {
     # Gaseous H2O
     programs.git = {
       enable = true;
-      config = lib.mkIf config.greenery.system.sumee.enable {
+      config = lib.mkIf config.greenery.programs.git.enable {
         user = {
           name = "MeeSumee";
           email = "79007212+MeeSumee@users.noreply.github.com";
