@@ -7,11 +7,12 @@
   ...
 }:
 stdenv.mkDerivation (finalAttrs: {
-  name = "xcursor-genshin-nahida";
+  pname = "STMC-xcursor-nahida";
+  version = "9.06";
   src = fetchFromGitHub {
     repo = "Sam-Toki-Mouse-Cursors";
     owner = "SamToki";
-    rev = "a711ee74222edfb1a6a96f945221046a95342d86";
+    tag = "v${finalAttrs.version}";
     sha256 = "sha256-bnErAQeND5hZsdrbgU7Ky0oepcAaPELANTnOJSK8gEU=";
   };
 
@@ -20,6 +21,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   installPhase = let
+    # Modified a bit from actual v9.06
     nahida = [
       "STMC Genshin Nahida 01 Pointer.cur"
       "STMC Genshin 02 Help.cur"
@@ -28,14 +30,14 @@ stdenv.mkDerivation (finalAttrs: {
       "STMC Genshin Nahida 05 Cross.cur"
       "STMC Genshin Nahida 06 Beam.cur"
       "STMC Genshin Nahida 07 Pen.cur"
-      "STMC Common 08 Not Allowed.cur"
+      "STMC Silent Witch 08 Not Allowed.cur"
       "STMC Genshin Nahida 09 NS.cur"
       "STMC Genshin Nahida 10 EW.cur"
       "STMC Genshin Nahida 11 NWSE.cur"
       "STMC Genshin Nahida 12 NESW.cur"
-      "STMC Common 13 Hand.cur"
+      "STMC Genshin Nahida 13 Hand.cur"
       "STMC Genshin Nahida 14 Mirrored Pointer.cur"
-      "STMC Common 15 Finger.cur"
+      "STMC Genshin Nahida 15 Finger.cur"
     ];
     linux = [
       "default.cur"
@@ -55,62 +57,67 @@ stdenv.mkDerivation (finalAttrs: {
       "pointer.cur"
     ];
 
-    sym0 = ["arrow" "left_ptr" "size-bdiag" "size-fdiag" "size-hor" "size-ver" "top_left_arrow"];
-    sym1 = ["5c6cd98b3f3ebcb1f9c7f1c204630408" "d9ce0ab605698f320427677b458ad60b" "left_ptr_help" "question_arrow" "whats_this"];
-    sym2 = ["00000000000000020006000e7e9ffc3f" "08e8e1c95fe2fc01f976f1e063a24ccd" "3ecb610c1bf2410f44200f48c40d3599" "half-busy" "left_ptr_watch"];
-    sym3 = ["watch"];
-    sym4 = ["cross" "tcross"];
-    sym5 = ["ibeam" "xterm"];
-    sym6 = ["draft"];
-    sym7 = ["circle" "crossed_circle"];
-    sym8 = ["00008160000006810000408080010102" "n-resize" "ns-resize" "s-resize" "sb_v_double_arrow" "v_double_arrow"];
-    sym9 = ["e-resize" "ew-resize" "h_double_arrow" "sb_h_double_arrow" "w-resize"];
-    sym10 = ["nw-resize" "nwse-resize" "se-resize"];
-    sym11 = ["ne-resize" "nesw-resize" "sw-resize"];
-    sym12 = ["4498f0e0c1937ffe01fd06f973665830" "9081237383d90e509aa00f00170e968f" "closedhand" "dnd-none" "fcf21c00b30f7e3f83fe0dfd12e71cff" "move" "all-scroll" "fleur" "size_all"];
-    sym13 = ["link" "alias" "640fb0e74195791501fd1ed57b41487f" "3085a0e285430894940527032f8b26df" "a2a266d0498c3104214a47bd64ab0fc8"];
-    sym14 = ["9d800788f1b08800ae810202380a0822" "e29285e634086352946a0e7090d73106" "hand1" "hand2" "pointing_hand"];
-    sym = [sym0 sym1 sym2 sym3 sym4 sym5 sym6 sym7 sym8 sym9 sym10 sym11 sym12 sym13 sym14];
+    # Referenced from https://github.com/quantum5/win2xcur/blob/master/win2xcur/theme.py
+    default = ["arrow" "left_ptr" "top_left_arrow" "left-arrow" "right-arrow" "down-arrow" "sb_left_arrow" "sb_right_arrow" "sb_down_arrow" "top_left_corner" "top_right_corner" "bottom_left_corner" "bottom_right_corner" "top_side" "bottom_side" "left_side" "right_side" "ul_angle" "ur_angle" "ll_angle" "lr_angle" "vertical-text" "copy" "dnd-copy" "1081e37283d90000800003c07f3ef6bf" "6407b0e94181790501fd1e167b474872" "b66166c04f8c3109214a4fbd64a50fc8" "zoom-in" "zoom-out" "context-menu" "center_ptr" "color-picker" "X_cursor" "x-cursor" "wayland-cursor" "pirate" "top_tee" "bottom_tee" "left_tee" "right_tee"];
+    help = ["5c6cd98b3f3ebcb1f9c7f1c204630408" "d9ce0ab605698f320427677b458ad60b" "left_ptr_help" "question_arrow" "whats_this"];
+    progress = ["00000000000000020006000e7e9ffc3f" "08e8e1c95fe2fc01f976f1e063a24ccd" "3ecb610c1bf2410f44200f48c40d3599" "half-busy" "left_ptr_watch" "working"];
+    wait = ["watch"];
+    crosshair = ["cross" "tcross" "cross_reverse" "diamond_cross" "cell" "plus"];
+    text = ["ibeam" "xterm"];
+    pencil = ["pen" "draft"];
+    not-allowed = ["unavailable" "circle" "crossed_circle" "03b6e0fcb3499374a867c041f52298f0" "forbidden" "no-drop" "dnd-no-drop"];
+    size_ver = ["size_ns" "size-ver" "n-resize" "ns-resize" "s-resize" "sb_v_double_arrow" "v_double_arrow" "row-resize" "split_v" "double_arrow" "00008160000006810000408080010102" "2870a09082c103050810ffdffffe0204"];
+    size_hor = ["size_ew" "size-hor" "e-resize" "ew-resize" "h_double_arrow" "sb_h_double_arrow" "w-resize" "col-resize"];
+    size_fdiag = ["size_nwse" "size-fdiag" "nw-resize" "nwse-resize" "se-resize" "bd_double_arrow"];
+    size_bdiag = ["size_nesw" "size-bdiag" "ne-resize" "nesw-resize" "sw-resize" "fd_double_arrow"];
+    dnd-move = ["4498f0e0c1937ffe01fd06f973665830" "9081237383d90e509aa00f00170e968f" "closedhand" "dnd-ask" "dnd-none" "fcf21c00b30f7e3f83fe0dfd12e71cff" "move" "grab" "openhand" "grabbing" "all-scroll" "fleur" "size_all"];
+    up-arrow = ["up_arrow" "sb_up_arrow"];
+    pointer = ["dnd-link" "link" "alias" "640fb0e74195791501fd1ed57b41487f" "3085a0e285430894940527032f8b26df" "a2a266d0498c3104214a47bd64ab0fc8" "9d800788f1b08800ae810202380a0822" "e29285e634086352946a0e7090d73106" "hand" "hand1" "hand2" "pointing_hand" "dotbox" "dot_box_mask" "draped_box" "icon" "target"];
+    sym = [default help progress wait crosshair text pencil not-allowed size_ver size_hor size_fdiag size_bdiag dnd-move up-arrow pointer];
   in ''
 
-    mkdir -p $out/share/icons/xcursor-genshin-nahida
+    mkdir -p $out/share/icons/STMC-xcursor-nahida/cursors
     cd ./PROJECT/STMC
 
     for input in '${builtins.concatStringsSep "' '" nahida}'; do
       for output in ${builtins.concatStringsSep " " linux}; do
-        cp "$input" $out/share/icons/xcursor-genshin-nahida/"$output"
-        echo "Copied $input to $output"
-        break
+        cp "$input" $out/share/icons/STMC-xcursor-nahida/cursors/"$output"
+        continue
       done
     done
 
-    win2xcur $out/share/icons/xcursor-genshin-nahida/*.{ani,cur} -o $out/share/icons/xcursor-genshin-nahida/
-
     ${
       if shadows
-      then "win2xcur -s $out/share/icons/xcursor-genshin-nahida/*.{ani,cur} -o $out/share/icons/xcursor-genshin-nahida/"
-      else ""
+      then ''
+        win2xcur -s $out/share/icons/STMC-xcursor-nahida/cursors/*.cur -o $out/share/icons/STMC-xcursor-nahida/cursors/
+        win2xcur -s $out/share/icons/STMC-xcursor-nahida/cursors/*.ani -o $out/share/icons/STMC-xcursor-nahida/cursors/
+      ''
+      else ''
+        win2xcur $out/share/icons/STMC-xcursor-nahida/cursors/*.cur -o $out/share/icons/STMC-xcursor-nahida/cursors/
+        win2xcur $out/share/icons/STMC-xcursor-nahida/cursors/*.ani -o $out/share/icons/STMC-xcursor-nahida/cursors/
+      ''
     }
 
-    cd $out/share/icons/xcursor-genshin-nahida
+    cd $out/share/icons/STMC-xcursor-nahida/cursors
     rm *.{ani,cur}
 
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 0}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 0)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 1}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 1)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 2}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 2)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 3}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 3)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 4}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 4)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 5}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 5)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 6}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 6)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 7}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 7)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 8}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 8)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 9}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 9)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 10}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 10)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 11}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 11)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 12}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 12)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 13}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 13)}
-    ${lib.concatMapStringsSep " " (symlink: "ln -rs $(echo '${builtins.elemAt linux 14}' | cut -f 1 -d '.') '${symlink}';") (builtins.elemAt sym 14)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 0}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 0)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 1}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 1)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 2}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 2)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 3}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 3)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 4}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 4)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 5}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 5)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 6}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 6)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 7}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 7)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 8}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 8)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 9}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 9)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 10}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 10)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 11}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 11)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 12}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 12)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 13}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 13)}
+    ${lib.concatMapStringsSep " " (symlink: "ln -s $(echo '${builtins.elemAt linux 14}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt sym 14)}
 
+    cd ..
     touch index.theme
     (
       echo "[Icon Theme]"
