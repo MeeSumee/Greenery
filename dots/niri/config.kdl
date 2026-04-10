@@ -302,8 +302,8 @@ screenshot-path null
 
 // Set cursor theme
 cursor {
-  xcursor-theme "xcursor-genshin-nahida"
-  xcursor-size 36
+  xcursor-theme "STMC-xcursor-nahida"
+  xcursor-size 32
 }
 
 // Animation settings.

@@ -10,22 +10,14 @@ Consists of multiple devices:
 
 ## Status Updates
 
-GitHub was being pepega when trying to run backport.yml in a schedule (it didn't get scheduled for 3 weeks). So I instead
-use an already working schedule workflow (update-flakes-npins.yml) and use that to trigger backport with a conditional check
-to run only on even weeks (alternating Saturdays). Cool thing is it uses the commit before nahida-greenery pushes the new
-lockfile preventing servers from getting a brand-new untested version.
+Sam-Toki Cursors package PR finally is merged with success.
 
 Kaolin has not been upgraded due to a regression of [tailscale](https://github.com/tailscale/tailscale/issues/19259)? Greenery works fine and a virtual machine I spun works fine too. Weird.
 
-Home Assistant configured using docker as it keeps complaining of missing packages that I admit defeat. /var folder is backed up
-by borg anyway.
-
-WebDAV enabled in Davis for Seedvault backup in GrapheneOS.
-
 ## TODO
 
+- [x] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
 - [ ] Harden Services used in Greenery to reduce attack surface.
-- [ ] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
 
 ## Greenery
 
@@ -35,7 +27,7 @@ Acts as a home exit-node.
 
 Hosts Jellyfin, Immich, FileBrowser, Suwayomi, & Memos.
 
-Reverse proxied using tailscale serve and tailscale service assignment.
+Reverse proxied using caddy-tailscale plugin.
 
 Future Endeavors: Improve functionality of jellyfin.
 
@@ -264,9 +256,8 @@ All code in this repository is under the MIT license unless wherever an
 explicit licensing is included.
 
 ## Miscellaneous Sources
-- [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact)
+- [Sam-Toki-Mouse-Cursors](https://github.com/SamToki/Sam-Toki-Mouse-Cursors)
 - [User Profile Picture](https://danbooru.donmai.us/posts/9259057)
 - [Dell XPS 8940 Specifications and Image](https://dl.dell.com/content/manual29571812-xps-8940-setup-and-specifications.pdf?language=en-us)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
-- [Vivian Banshee Wallpaper](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
-- [ASUSTek Zenbook S13 OLED, ASUS removed the website :(](https://www.bestbuy.com/site/asus-zenbook-s-13-oled-um5302-13-3-laptop-amd-ryzen-7-16-gb-memory-1-tb-ssd-ponder-blue/6510809.p)
+- [Monitoring Vivian for my GitHub pfp](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
