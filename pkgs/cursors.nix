@@ -119,6 +119,7 @@ stdenv.mkDerivation (finalAttrs: {
       echo "Name[ja]=原神 ナヒーダ"
       echo "Name[zh_CN]=原神 纳西妲"
       echo "Name[zh_TW]=原神 納西妲"
+      echo "Comment=Xcursor port of Sam-Toki Genshin Nahida"
     ) >> index.theme
   '';
 
