@@ -105,4 +105,6 @@ jobs:
     # Since sam-toki cursor is unfree, build separately
     - name: Build Nahida Cursor
       if: ${{ needs.archives.outputs.cursor == 'true' }}
-      run: export NIXPKGS_ALLOW_UNFREE=1 && nix build --quiet --impure .#nahidacursor
+      run: nix build --quiet --impure .#nahidacursor
+      env:
+        NIXPKGS_ALLOW_UNFREE: 1
