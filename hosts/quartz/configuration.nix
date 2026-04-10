@@ -29,7 +29,6 @@
       enable = true;
       amdgpu.enable = true;
       audio.enable = true;
-      intelgpu.enable = true;
       power.enable = true;
     };
 
