@@ -81,6 +81,7 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $out/share/icons/STMC-xcursor-nahida/cursors
     cd ./PROJECT/STMC
 
+    # This brings me joy
     ${
       lib.concatImapStrings (pos: x: ''cp '${x}' $out/share/icons/STMC-xcursor-nahida/cursors/${builtins.elemAt linux (pos - 1)};'') nahida
     }
@@ -94,6 +95,7 @@ stdenv.mkDerivation (finalAttrs: {
     cd $out/share/icons/STMC-xcursor-nahida/cursors
     rm *.{ani,cur}
 
+    # This does not
     ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 0}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 0)}
     ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 1}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 1)}
     ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 2}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 2)}
