@@ -53,7 +53,8 @@
             "org/gnome/desktop/interface" = {
               gtk-theme = "rose-pine";
               icon-theme = "Papirus-Dark";
-              cursor-theme = "xcursor-genshin-nahida";
+              cursor-theme = "STMC-xcursor-nahida";
+              cursor-size = 32;
               document-font-name = "Noto Serif";
               font-name = "Noto Sans";
               monospace-font-name = "Noto Sans Mono";
@@ -65,7 +66,7 @@
       ];
     };
 
-    # Hint QT to use rosepine theme from gtk
+    # Hint QT to inherit adwaitha from gtk
     qt = {
       enable = true;
       style = "adwaita-dark";
@@ -92,9 +93,17 @@
         themeName = "rose-pine";
         themeDir = "${pkgs.rose-pine-gtk-theme}/share/themes/${themeName}";
         inherit (config.users.users.${user}) home;
+        gtk-cursor = ''
+          [Settings]
+          gtk-cursor-theme-name=STMC-xcursor-nahida
+          gtk-cursor-them-size=32
+          gtk-application-prefer-dark-theme=1
+        '';
       in {
         ".config/gtk-4.0/assets".source = "${themeDir}/assets";
         ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
+        ".config/gtk-4.0/settings.ini".text = gtk-cursor;
+        ".config/gtk-3.0/settings.ini".text = gtk-cursor;
         ".config/mpv".source = ../../dots/mpv;
         # Bookmarks for Nautilus
         ".config/gtk-3.0/bookmarks".text = ''
