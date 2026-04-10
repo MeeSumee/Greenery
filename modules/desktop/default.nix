@@ -54,7 +54,7 @@
               gtk-theme = "rose-pine";
               icon-theme = "Papirus-Dark";
               cursor-theme = "STMC-xcursor-nahida";
-              cursor-size = 32;
+              cursor-size = lib.gvariant.mkInt32 32;
               document-font-name = "Noto Serif";
               font-name = "Noto Sans";
               monospace-font-name = "Noto Sans Mono";
