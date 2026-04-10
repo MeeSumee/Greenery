@@ -100,11 +100,4 @@ jobs:
     # More of an edge case honestly since nix-fast-build builds packages too
     - name: Build package derivations
       if: ${{ needs.archives.outputs.packages == 'true' }}
-      run: nix build --quiet .#papiteal .#dickord .#caddyscale
-
-    # Since sam-toki cursor is unfree, build separately
-    - name: Build Nahida Cursor
-      if: ${{ needs.archives.outputs.cursor == 'true' }}
-      run: nix build --quiet --impure .#nahidacursor
-      env:
-        NIXPKGS_ALLOW_UNFREE: 1
+      run: nix build --quiet .#nahidacursor .#papiteal .#dickord .#caddyscale

@@ -125,11 +125,12 @@ stdenv.mkDerivation (finalAttrs: {
     ) >> index.theme
   '';
 
-  meta = {
-    description = "Sam-Toki-Mouse-Cursors";
-    homepage = "https://github.com/SamToki/Sam-Toki-Mouse-Cursors";
-    changelog = "https://github.com/SamToki/Sam-Toki-Mouse-Cursors/releases/tag/v${finalAttrs.version}";
-    license = lib.licenses.cc-by-nc-sa-30;
-    platforms = lib.platforms.all;
-  };
+  # This is gonna be for the future, anything I do in my machine refuses to eval unless its impure lmfao
+  # meta = {
+  #   description = "Sam-Toki-Mouse-Cursors";
+  #   homepage = "https://github.com/SamToki/Sam-Toki-Mouse-Cursors";
+  #   changelog = "https://github.com/SamToki/Sam-Toki-Mouse-Cursors/releases/tag/v${finalAttrs.version}";
+  #   license = lib.licenses.cc-by-nc-sa-30;
+  #   platforms = lib.platforms.all;
+  # };
 })

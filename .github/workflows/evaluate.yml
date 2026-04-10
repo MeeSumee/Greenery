@@ -61,6 +61,4 @@ jobs:
         name: sumee
 
     - name: ${{ matrix.hosts }} evaluation
-      run: nix eval --impure --quiet .#nixosConfigurations.${{ matrix.hosts }}.config.system.build.toplevel
-      env:
-        NIXPKGS_ALLOW_UNFREE: 1
+      run: nix eval --quiet .#nixosConfigurations.${{ matrix.hosts }}.config.system.build.toplevel
