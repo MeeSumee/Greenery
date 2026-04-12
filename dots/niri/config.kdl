@@ -388,8 +388,8 @@ binds {
   Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
   Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
   Alt+F4 hotkey-overlay-title="Open Session Menu" { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
-  // Mod+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
-  Mod+L hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
+  Mod+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+  // Mod+L hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
 
   // You can also use a shell. Do this if you need pipes, multiple commands, etc.
   // Note: the entire command goes as a single argument in the end.

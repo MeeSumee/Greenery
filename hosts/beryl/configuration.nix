@@ -37,7 +37,7 @@
     desktop = {
       enable = true;
       hypridle.enable = true;
-      hyprlock.enable = true;
+      # hyprlock.enable = true;
       niri.enable = true;
     };
 

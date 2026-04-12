@@ -31,10 +31,10 @@
             "%%WOEMYASS**"
             "%%HAEINCI&&"
           ];
-          # qs keeps crashing during Wlr session lock, so hyprlock for now
+          # noctalia-qs fixes most of the monitor reloading crashes I think
           to = [
-            # "noctalia-shell ipc call lockScreen lock"
-            "pidof hyprlock || hyprlock"
+            "noctalia-shell ipc call lockScreen lock"
+            # "pidof hyprlock || hyprlock"
             "niri msg action power-on-monitors"
             "niri msg action power-off-monitors"
           ];
