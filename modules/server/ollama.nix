@@ -13,7 +13,8 @@
         package = pkgs.ollama-rocm;
         syncModels = true;
         loadModels = [
-          "gemma3:12b"
+          "gemma4:e4b"
+          "qwen3.5:9b"
           "deepseek-r1:14b"
         ];
       };
