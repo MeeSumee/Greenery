@@ -13,7 +13,6 @@
       inputs = {
         nix-darwin.follows = "";
         nixpkgs.follows = "nixpkgs";
-        smfh.follows = "";
       };
     };
 
