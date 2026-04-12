@@ -23,7 +23,6 @@ jobs:
     outputs:
       lockfile: ${{ steps.filter.outputs.lockfile }}
       packages: ${{ steps.filter.outputs.packages }}
-      cursor: ${{ steps.filter.outputs.cursor }}
     steps:
     - uses: actions/checkout@v6
     - uses: dorny/paths-filter@v4
@@ -32,8 +31,7 @@ jobs:
         filters: |
           lockfile: 'flake.lock'
           npins: 'npins/sources.json'
-          packages: 'pkgs/default.nix'
-          cursor: 'pkgs/cursors.nix'
+          packages: 'pkgs/**'
 
     - name: Install Nix
       uses: nixbuild/nix-quick-install-action@v34
@@ -63,7 +61,7 @@ jobs:
     needs: archives
     name: Push derivations to cachix
     # If nahida opens a pull request from backport.yml, then disregard any of the piped outputs
-    if: ${{ needs.archives.outputs.lockfile == 'true' || needs.archives.outputs.packages == 'true' || needs.archives.outputs.cursor == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
+    if: ${{ needs.archives.outputs.lockfile == 'true' || needs.archives.outputs.packages == 'true' || github.event.pull_request.user.login == 'nahida-greenery[bot]' }}
     timeout-minutes: 60 # So I don't run out of the free 2000 minute limit
     strategy:
       matrix:
