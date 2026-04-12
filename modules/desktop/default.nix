@@ -97,7 +97,6 @@
           [Settings]
           gtk-cursor-theme-name=STMC-xcursor-nahida
           gtk-cursor-them-size=32
-          gtk-application-prefer-dark-theme=1
         '';
       in {
         ".config/gtk-4.0/assets".source = "${themeDir}/assets";
