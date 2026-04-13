@@ -23,8 +23,8 @@ jobs:
 
     - name: Merge stable to master
       run: |
-        git checkout stable
-        git pull origin/stable
+        git checkout -b stable
+        git pull origin stable
         git checkout master
         git merge stable -m "Sync master & stable"
 
