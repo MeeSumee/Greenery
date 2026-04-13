@@ -1,0 +1,39 @@
+name: "Sync branches"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - stable
+jobs:
+  sync:
+    name: Sync stable & master after PR merged
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/create-github-app-token@v3
+      id: generate-token
+      with:
+        app-id: ${{ secrets.HEADPATS }}
+        private-key: ${{ secrets.LAP_PILLOW }}
+
+    - uses: actions/checkout@v6
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+
+    - name: Merge stable to master
+      run: |
+        git checkout stable
+        git pull origin/stable
+        git checkout master
+        git merge stable -m "Sync master & stable"
+
+    # # Signed commit
+    # - name: Commit & Push changes
+    #   uses: iarekylew00t/verified-bot-commit@v2
+    #   with:
+    #     message: 'Chore: Sync Branch'
+    #     allow-empty-commit: true
+    #     token: ${{ steps.generate-token.outputs.token }}
+    #     files: |
+    #       **
