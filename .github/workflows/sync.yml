@@ -14,18 +14,17 @@ jobs:
     - uses: actions/create-github-app-token@v3
       id: generate-token
       with:
-        app-id: ${{ secrets.HEADPATS }}
+        client-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
 
     - uses: actions/checkout@v6
       with:
-        ref: stable
         token: ${{ steps.generate-token.outputs.token }}
 
     - name: Merge stable to master
       run: |
-        git fetch origin master:master
-        git reset --hard master
+        git fetch origin stable:stable
+        git reset --hard stable
         git status
 
     # # Signed commit

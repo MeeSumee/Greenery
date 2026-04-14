@@ -13,7 +13,7 @@ jobs:
     - uses: actions/create-github-app-token@v3
       id: generate-token
       with:
-        app-id: ${{ secrets.HEADPATS }}
+        client-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
 
     - uses: actions/checkout@v6
