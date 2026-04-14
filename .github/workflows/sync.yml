@@ -31,5 +31,4 @@ jobs:
         git fetch origin
         git checkout master
         git merge stable
-        git diff HEAD~1 # Show changes
-        # git push origin master
+        git push origin master
