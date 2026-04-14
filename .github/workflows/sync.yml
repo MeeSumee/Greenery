@@ -22,9 +22,12 @@ jobs:
         fetch-depth: 0
         ref: stable
         token: ${{ steps.generate-token.outputs.token }}
+        persist-credentials: false
 
     - name: Merge stable to master
       run: |
+        git config --local user.email "269606562+nahida-greenery[bot]@users.noreply.github.com"
+        git config --local user.name "nahida-greenery[bot]"
         git fetch origin
         git checkout master
         git merge stable
