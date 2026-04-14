@@ -26,7 +26,7 @@ jobs:
       run: |
         git fetch origin master:master
         git reset --hard master
-        git merge stable -m "Sync master & stable"
+        git status
 
     # # Signed commit
     # - name: Commit & Push changes
