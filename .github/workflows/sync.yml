@@ -24,8 +24,8 @@ jobs:
 
     - name: Merge stable to master
       run: |
-        git checkout -b master
-        git pull --rebase origin master
+        git fetch origin master:master
+        git reset --hard master
         git merge stable -m "Sync master & stable"
 
     # # Signed commit
