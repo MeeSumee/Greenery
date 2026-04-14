@@ -10,14 +10,11 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Sam-Toki Cursors package PR finally is merged with success.
-
 Kaolin has not been upgraded due to a regression of [tailscale](https://github.com/tailscale/tailscale/issues/19259)? Greenery works fine and a virtual machine I spun works fine too. Weird.
 
-## TODO
+## Installation
 
-- [x] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
-- [ ] Harden Services used in Greenery to reduce attack surface.
+See my [wiki](https://github.com/MeeSumee/Greenery/wiki/Installation)
 
 ## Greenery
 
