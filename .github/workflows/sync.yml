@@ -31,4 +31,4 @@ jobs:
         git fetch origin
         git checkout master
         git merge stable
-        git push origin master
+        git push "https://x-access-token:${{ steps.generate-token.outputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}
