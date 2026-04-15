@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-    - stable
+    - stable # Runs when merged to stable (only happens when github-actions merges nahida PR)
 jobs:
   sync:
     name: Sync stable & master after PR merged
@@ -17,16 +17,16 @@ jobs:
         client-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
 
+    # Checkout stable branch
     - uses: actions/checkout@v6
       with:
         ref: stable
         token: ${{ steps.generate-token.outputs.token }}
         persist-credentials: false
 
+    # Merge without making a commit
     - name: Merge stable to master
       run: |
-        git config --local user.email "269606562+nahida-greenery[bot]@users.noreply.github.com"
-        git config --local user.name "nahida-greenery[bot]"
         git fetch origin
         git checkout master
         git merge --no-commit stable
