@@ -6,7 +6,7 @@
   options.greenery.programs.git.enable = lib.mkEnableOption "git & git setup";
 
   config = lib.mkIf config.greenery.programs.enable {
-    # Gaseous H2O
+    # Git, config enabled if greenery.programs.git is enabled
     programs.git = {
       enable = true;
       config = lib.mkIf config.greenery.programs.git.enable {
