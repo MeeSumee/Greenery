@@ -254,7 +254,6 @@ explicit licensing is included.
 
 ## Miscellaneous Sources
 - [Sam-Toki-Mouse-Cursors](https://github.com/SamToki/Sam-Toki-Mouse-Cursors)
-- [User Profile Picture](https://danbooru.donmai.us/posts/9259057)
+- [User & GitHub pfp](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
 - [Dell XPS 8940 Specifications and Image](https://dl.dell.com/content/manual29571812-xps-8940-setup-and-specifications.pdf?language=en-us)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
-- [Monitoring Vivian for my GitHub pfp](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)

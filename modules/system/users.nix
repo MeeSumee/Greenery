@@ -24,7 +24,6 @@ in {
         file = ../../secrets/secret6.age;
         owner = "sumee";
       };
-
       users.users = {
         sumee = {
           isNormalUser = true;
@@ -37,7 +36,6 @@ in {
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq いやん〜墨ｗｗｗｗ"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGz6NgZd4FYbMr7F+QxY+GGL3O26H5miFm8aALnGT30V bedsheetsSoft&Warm"
           ];
-
           hashedPasswordFile = config.age.secrets.secret6.path;
         };
       };
@@ -49,7 +47,7 @@ in {
           "f+ /var/lib/AccountsService/users/${user}  0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
           "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face.icon".source}"
         ]))
-        (lib.flatten)
+        lib.flatten
       ];
 
       # hjem config for sumee
@@ -61,16 +59,16 @@ in {
           # Make face.icon at /home/user/
           faceIcon = let
             pfp = pkgs.fetchurl {
-              name = "vivianpfp.jpg";
-              url = "https://cdn.donmai.us/original/b3/b2/__vivian_banshee_zenless_zone_zero_drawn_by_icetea_art__b3b237c829304f29705f1291118e468f.jpg?download=1";
-              hash = "sha256-KQZHp4tOufAOI4utGo8zLpihicMTzF5dRzQPEKc4omI=";
+              name = "monitoring-vivian.jpg";
+              url = "https://cdn.donmai.us/original/22/3a/__vivian_banshee_zenless_zone_zero_and_1_more_drawn_by_pyogo__223ad637e74d7f5bd860e08e7ea435ad.png?download=1";
+              hash = "sha256-oCx5xtlR4Kq4WGcdDHMbeMd7IiSA3RKsnh+cpD+4UY0=";
             };
           in
             pkgs.runCommandWith {
               name = "cropped-${pfp.name}";
               derivationArgs.nativeBuildInputs = [pkgs.imagemagick];
             } ''
-              magick ${pfp} -crop 1000x1000+210+100 - > $out
+              magick ${pfp} -crop 1000x1000+1340+280 - > $out
             '';
         in {
           ".face.icon".source = faceIcon;
