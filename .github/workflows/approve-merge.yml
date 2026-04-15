@@ -16,7 +16,7 @@ jobs:
       # I think this will ensure dependabot actually triggers GH Actions to approve?
       - name: Dependabot metadata
         if: github.actor == 'dependabot[bot]'
-        uses: dependabot/fetch-metadata@v2
+        uses: dependabot/fetch-metadata@v3
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
