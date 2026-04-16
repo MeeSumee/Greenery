@@ -39,7 +39,9 @@
         wineWow64Packages.wayland # wine
         xournalpp # note taking
         mpv # media player
-        onlyoffice-desktopeditors # office applications
+        libreoffice-qt # Office
+        hunspell # Spellcheck for libreoffice
+        hunspellDicts.en_US # English language spellcheck
         gparted # disk management software
         nautilus # file browser
         gnome-calculator # calculator
