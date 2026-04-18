@@ -7,24 +7,20 @@
 }: {
   # Options maker
   options.greenery.programs = {
-    core.enable = lib.mkEnableOption "enable core programs";
-
     desktop.enable = lib.mkEnableOption "enable desktop programs";
-
     heavy.enable = lib.mkEnableOption "enable heavy/demanding programs";
   };
 
   # Config selector
   config = lib.mkMerge [
     # Core programs
-    (lib.mkIf (config.greenery.programs.core.enable && config.greenery.programs.enable) {
+    (lib.mkIf config.greenery.programs.enable {
       environment.systemPackages = with pkgs; [
         btop # hardware monitor
         tree # enables tree view in terminal
         unzip # unzip cli utility
         fzf # Fuzzy finder
         npins # Npins source manager
-        speedtest-cli # internet speedtest cli utility
       ];
 
       # Enables intel gpu monitoring
@@ -43,7 +39,9 @@
         wineWow64Packages.wayland # wine
         xournalpp # note taking
         mpv # media player
-        onlyoffice-desktopeditors # office applications
+        libreoffice-qt # Office
+        hunspell # Spellcheck for libreoffice
+        hunspellDicts.en_US # English language spellcheck
         gparted # disk management software
         nautilus # file browser
         gnome-calculator # calculator
@@ -69,10 +67,7 @@
         kicad-small # KiCAD Electronic schematic/PCB designer
         rare # GUI based on legendary which is a port of Epic Games
         prismlauncher # minecraft
-        # davinci-resolve                 # Davinci-resolve video editor
         audacity # temp replacement
-        # Davinci derivation patched (－ˋ⩊ˊ－) (fails to build tho :woe:)
-        # (pkgs.callPackage ./davinci.nix {})
       ];
     })
   ];

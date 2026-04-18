@@ -52,8 +52,8 @@
       chromium.enable = true;
       foot.enable = true;
       fuzzel.enable = true;
+      git.enable = true;
       micro.enable = true;
-      core.enable = true;
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;

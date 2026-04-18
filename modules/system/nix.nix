@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: {
-  # Essential config changes
   nixpkgs = {
+    # Pure libre isn't exactly feasible
     config.allowUnfree = true;
   };
 

@@ -28,8 +28,8 @@
 
       settings = {
         Theme = {
-          CursorTheme = "xcursor-genshin-nahida";
-          CursorSize = 24;
+          CursorTheme = "STMC-xcursor-nahida";
+          CursorSize = 32;
         };
       };
     };

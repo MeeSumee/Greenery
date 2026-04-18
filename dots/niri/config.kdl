@@ -302,8 +302,8 @@ screenshot-path null
 
 // Set cursor theme
 cursor {
-  xcursor-theme "xcursor-genshin-nahida"
-  xcursor-size 36
+  xcursor-theme "STMC-xcursor-nahida"
+  xcursor-size 32
 }
 
 // Animation settings.
@@ -384,11 +384,12 @@ binds {
 
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-  Mod+R hotkey-overlay-title="Run Prompt: noctalia launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+  Mod+R hotkey-overlay-title="Run Prompt: noctalia launcher" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
   Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
   Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
-  // Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
-  Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
+  Alt+F4 hotkey-overlay-title="Open Session Menu" { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
+  Mod+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+  // Mod+L hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }
 
   // You can also use a shell. Do this if you need pipes, multiple commands, etc.
   // Note: the entire command goes as a single argument in the end.
@@ -594,8 +595,8 @@ binds {
   // Mod+Shift+Space { switch-layout "prev"; }
 
   Print { screenshot; }
-  Ctrl+Print { screenshot-screen; }
-  Alt+Print { screenshot-window; }
+  Mod+Print { screenshot-screen; }
+  Ctrl+Print { screenshot-window; }
 
   // Applications such as remote-desktop clients and software KVM switches may
   // request that niri stops processing the keyboard shortcuts defined here

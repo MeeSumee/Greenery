@@ -1,5 +1,5 @@
 {
-  "settingsVersion": 57,
+  "settingsVersion": 59,
   "bar": {
     "barType": "simple",
     "position": "top",
@@ -15,7 +15,6 @@
     "enableExclusionZoneInset": true,
     "backgroundOpacity": 1,
     "useSeparateOpacity": false,
-    "floating": false,
     "marginVertical": 5,
     "marginHorizontal": 5,
     "frameThickness": 8,
@@ -100,6 +99,7 @@
           "maxWidth": 145,
           "scrollingMode": "hover",
           "showIcon": true,
+          "showText": true,
           "textColor": "none",
           "useFixedWidth": false
         },
@@ -218,7 +218,7 @@
     "screenRadiusRatio": 1,
     "animationSpeed": 1,
     "animationDisabled": false,
-    "compactLockScreen": false,
+    "compactLockScreen": true,
     "lockScreenAnimations": false,
     "lockOnSuspend": false,
     "showSessionButtonsOnLockScreen": true,
@@ -235,11 +235,11 @@
     "telemetryEnabled": false,
     "enableLockScreenCountdown": true,
     "lockScreenCountdownDuration": 10000,
-    "autoStartAuth": false,
-    "allowPasswordWithFprintd": false,
+    "autoStartAuth": true,
+    "allowPasswordWithFprintd": true,
     "clockStyle": "custom",
     "clockFormat": "hh\\nmm",
-    "passwordChars": false,
+    "passwordChars": true,
     "lockScreenMonitors": [],
     "lockScreenBlur": 0,
     "lockScreenTint": 0,
@@ -267,7 +267,8 @@
         "Del"
       ]
     },
-    "reverseScroll": false
+    "reverseScroll": false,
+    "smoothScrollEnabled": true
   },
   "ui": {
     "fontDefault": "CaskaydiaCove Nerd Font",
@@ -287,6 +288,7 @@
     "name": "Chicago",
     "weatherEnabled": true,
     "weatherShowEffects": true,
+    "weatherTaliaMascotAlways": false,
     "useFahrenheit": false,
     "use12hourFormat": false,
     "showWeekNumberInCalendar": false,
@@ -295,7 +297,8 @@
     "analogClockInCalendar": false,
     "firstDayOfWeek": -1,
     "hideWeatherTimezone": false,
-    "hideWeatherCityName": false
+    "hideWeatherCityName": false,
+    "autoLocate": false
   },
   "calendar": {
     "cards": [
@@ -322,6 +325,7 @@
     "showHiddenFiles": false,
     "viewMode": "single",
     "setWallpaperOnAllMonitors": true,
+    "linkLightAndDarkWallpapers": true,
     "fillMode": "crop",
     "fillColor": "#000000",
     "useSolidColor": false,
@@ -330,11 +334,19 @@
     "wallpaperChangeMode": "random",
     "randomIntervalSec": 300,
     "transitionDuration": 1500,
-    "transitionType": "random",
+    "transitionType": [
+      "fade",
+      "disc",
+      "stripes",
+      "wipe",
+      "pixelate",
+      "honeycomb"
+    ],
     "skipStartupTransition": false,
     "transitionEdgeSmoothness": 0.05,
     "panelPosition": "follow_bar",
     "hideWallpaperFilenames": false,
+    "useOriginalImages": false,
     "overviewBlur": 0.4,
     "overviewTint": 0.6,
     "useWallhaven": false,
@@ -356,11 +368,12 @@
     "autoPasteClipboard": false,
     "enableClipPreview": true,
     "clipboardWrapText": true,
+    "enableClipboardSmartIcons": true,
+    "enableClipboardChips": true,
     "clipboardWatchTextCommand": "wl-paste --type text --watch cliphist store",
     "clipboardWatchImageCommand": "wl-paste --type image --watch cliphist store",
     "position": "center",
     "pinnedApps": [],
-    "useApp2Unit": false,
     "sortByMostUsed": true,
     "terminalCommand": "foot -e",
     "customLaunchPrefixEnabled": false,
@@ -471,6 +484,8 @@
     "colorizeIcons": false,
     "showLauncherIcon": false,
     "launcherPosition": "end",
+    "launcherUseDistroLogo": false,
+    "launcherIcon": "",
     "launcherIconColor": "none",
     "pinnedStatic": false,
     "inactiveIndicators": false,
@@ -487,8 +502,6 @@
     "indicatorOpacity": 0.6
   },
   "network": {
-    "wifiEnabled": true,
-    "airplaneModeEnabled": false,
     "bluetoothRssiPollingEnabled": false,
     "bluetoothRssiPollIntervalMs": 10000,
     "networkPanelView": "wifi",
@@ -614,6 +627,7 @@
     "volumeOverdrive": false,
     "spectrumFrameRate": 30,
     "visualizerType": "linear",
+    "spectrumMirrored": true,
     "mprisBlacklist": [],
     "preferredPlayer": "",
     "volumeFeedback": false,
@@ -633,7 +647,8 @@
     "manualSunrise": "06:30",
     "manualSunset": "18:30",
     "generationMethod": "tonal-spot",
-    "monitorForColors": ""
+    "monitorForColors": "",
+    "syncGsettings": true
   },
   "templates": {
     "activeTemplates": [],
@@ -657,10 +672,12 @@
     "performanceModeEnabled": "",
     "performanceModeDisabled": "",
     "startup": "",
-    "session": ""
+    "session": "",
+    "colorGeneration": ""
   },
   "plugins": {
-    "autoUpdate": false
+    "autoUpdate": false,
+    "notifyUpdates": true
   },
   "idle": {
     "enabled": false,

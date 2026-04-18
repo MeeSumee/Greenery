@@ -1,11 +1,12 @@
-name: "Update License"
+name: "Sync branches"
 on:
-  schedule:
-    - cron: "0 6 1 1 *" # 6 am Jan 1st UTC
   workflow_dispatch:
+  push:
+    branches:
+    - stable # Runs when merged to stable (only happens when github-actions merges nahida PR)
 jobs:
-  license:
-    name: Update License
+  sync:
+    name: Sync stable & master after PR merged
     runs-on: ubuntu-slim
     permissions:
       contents: write
@@ -16,20 +17,26 @@ jobs:
         client-id: ${{ secrets.HEADPATS }}
         private-key: ${{ secrets.LAP_PILLOW }}
 
+    # Checkout stable branch
     - uses: actions/checkout@v6
       with:
+        ref: stable
         token: ${{ steps.generate-token.outputs.token }}
+        persist-credentials: false
 
-    # Finds numbers on MIT License and replaces it with year reported
-    - name: Update Year
+    # Merge without making a commit
+    - name: Merge stable to master
       run: |
-          sed -i "s/[0-9]\{4\}/$(date +"%Y")/g" LICENSE
+        git fetch origin
+        git checkout master
+        git merge --no-commit stable
 
     # Signed commit
     - name: Commit & Push changes
       uses: iarekylew00t/verified-bot-commit@v2
       with:
-        message: 'Chore: Update License'
+        allow-empty-commit: true
+        message: 'Chore: Sync Branches'
         token: ${{ steps.generate-token.outputs.token }}
         files: |
           **

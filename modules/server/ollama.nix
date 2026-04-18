@@ -7,18 +7,15 @@
   options.greenery.server.ollama.enable = lib.mkEnableOption "ollama-openwebui service";
 
   config = lib.mkIf (config.greenery.server.ollama.enable && config.greenery.server.enable) {
-    # For single service system (quartz), use sudo tailscale serve --bg ${open-webui port}
     services = {
       ollama = {
         enable = true;
         package = pkgs.ollama-rocm;
         syncModels = true;
         loadModels = [
+          "gemma4:e4b"
+          "qwen3.5:9b"
           "deepseek-r1:14b"
-          "deepseek-ocr:3b"
-          "gemma3:12b"
-          "translategemma:12b"
-          "ministral-3:14b"
         ];
       };
 

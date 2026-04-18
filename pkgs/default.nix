@@ -8,6 +8,7 @@ lib.fix (self: let
   revision = "v0.0.0-20260106222316-bb080c4414ac";
 in {
   nahidacursor = callPackage ./cursors.nix {};
+  davinci = callPackage ./davinci.nix {};
   papiteal = pkgs.papirus-icon-theme.override {color = "teal";};
   dickord = pkgs.equibop.override {
     withTTS = false;

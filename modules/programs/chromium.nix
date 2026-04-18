@@ -101,7 +101,7 @@ in {
         "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
         "noimedcjdohhokijigpfcbjcfcaaahej" # Rose-Pine
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-        "pbanhockgagggenencehbnadejlgchfc" # J*b
+        (lib.mkIf (config.networking.hostName == "beryl") "pbanhockgagggenencehbnadejlgchfc") # J*b
       ];
 
       # DuckDuckGo stuff
@@ -183,7 +183,7 @@ in {
           }
           {
             "name" = "Ollama";
-            "url" = "quartz.onca-ph.ts.net";
+            "url" = "ai.onca-ph.ts.net";
           }
           {
             "name" = "Manga";

@@ -21,7 +21,7 @@
     desktop = {
       enable = true;
       hypridle.enable = true;
-      hyprlock.enable = true;
+      # hyprlock.enable = true;
       niri.enable = true;
     };
 
@@ -44,8 +44,8 @@
       enable = true;
       aagl.enable = true;
       chromium.enable = true;
+      git.enable = true;
       foot.enable = true;
-      core.enable = true;
       desktop.enable = true;
       heavy.enable = true;
       nvim.enable = true;

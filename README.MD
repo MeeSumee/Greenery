@@ -10,16 +10,11 @@ Consists of multiple devices:
 
 ## Status Updates
 
-Moved Fedora dots to this repo as dotfiles are fairly transferrable between distributions (with some edits).
+Kaolin has not been upgraded due to a regression of [tailscale](https://github.com/tailscale/tailscale/issues/19259)? Greenery works fine and a virtual machine I spun works fine too. Weird.
 
-Updated lots of actions and reworking most of the repo while I have time.
+## Installation
 
-## TODO
-
-- [x] Automate Nix Flake Update to Continuous Integration with build checks.
-- [x] Deprecate Brave and fully use Ungoogled-Chromium with Profiles (not declaratively tho).
-- [ ] Harden Services used in Greenery to reduce attack surface.
-- [ ] Migrate nahida-xcursor dotfiles to a package downloading from source to comply with License.
+See my [wiki](https://github.com/MeeSumee/Greenery/wiki/Installation)
 
 ## Greenery
 
@@ -29,7 +24,7 @@ Acts as a home exit-node.
 
 Hosts Jellyfin, Immich, FileBrowser, Suwayomi, & Memos.
 
-Reverse proxied using tailscale serve and tailscale service assignment.
+Reverse proxied using caddy-tailscale plugin.
 
 Future Endeavors: Improve functionality of jellyfin.
 
@@ -258,9 +253,7 @@ All code in this repository is under the MIT license unless wherever an
 explicit licensing is included.
 
 ## Miscellaneous Sources
-- [xcursor-genshin-nahida](https://aur.archlinux.org/packages/xcursor-samtoki-genshin-impact)
-- [User Profile Picture](https://danbooru.donmai.us/posts/9259057)
+- [Sam-Toki-Mouse-Cursors](https://github.com/SamToki/Sam-Toki-Mouse-Cursors)
+- [User & GitHub pfp](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
 - [Dell XPS 8940 Specifications and Image](https://dl.dell.com/content/manual29571812-xps-8940-setup-and-specifications.pdf?language=en-us)
 - [Rex's Kokomi Image I shamelessly removed for professionalism](https://danbooru.donmai.us/posts/9590836)
-- [Vivian Banshee Wallpaper](https://danbooru.donmai.us/posts/9259057?q=vivian_banshee+pyogo)
-- [ASUSTek Zenbook S13 OLED, ASUS removed the website :(](https://www.bestbuy.com/site/asus-zenbook-s-13-oled-um5302-13-3-laptop-amd-ryzen-7-16-gb-memory-1-tb-ssd-ponder-blue/6510809.p)

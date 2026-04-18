@@ -72,8 +72,9 @@ in {
           snowshed = "${rebuildCommand} dry-build";
           schizo = "ssh sumee@greenery";
           libre = "ssh sumee@kaolin";
-          deployin = "${rebuildCommand} --use-substitutes --target-host sumee@kaolin boot";
-          deployer = "${rebuildCommand} --build-host sumee@verdure --target-host sumee@verdure boot";
+          dream = "ssh sumee@verdure";
+          deploy = "${rebuildCommand} boot --target-host";
+          remote = "${rebuildCommand} boot --build-host";
         };
 
         # Coloring shell, referenced from Zaphkiel config
@@ -158,9 +159,6 @@ in {
 
       # CNF
       command-not-found.enable = false;
-
-      # Nix-Index (CNF for nixos)
-      nix-index.enable = true;
 
       # Fuzzy Finder keybinds
       fzf.keybindings = true;
