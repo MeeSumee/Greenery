@@ -24,5 +24,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr merge --merge --auto "${{ github.event.pull_request.html_url }}"
+          # Rebase to ensure clean history
+          gh pr merge --rebase --auto "${{ github.event.pull_request.html_url }}"
           gh pr review --approve "${{ github.event.pull_request.html_url }}"
