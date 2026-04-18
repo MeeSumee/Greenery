@@ -29,7 +29,7 @@ jobs:
       run: |
         git fetch origin
         git checkout master
-        git merge --squash stable
+        git merge --squash --allow-unrelated-histories stable
 
     # Signed commit
     - name: Commit & Push changes
