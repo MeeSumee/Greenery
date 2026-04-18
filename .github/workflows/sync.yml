@@ -24,12 +24,12 @@ jobs:
         token: ${{ steps.generate-token.outputs.token }}
         persist-credentials: false
 
-    # Merge without making a commit
+    # Squash merge which doesn't create a commit
     - name: Merge stable to master
       run: |
         git fetch origin
         git checkout master
-        git merge --no-commit stable
+        git merge --squash stable
 
     # Signed commit
     - name: Commit & Push changes
