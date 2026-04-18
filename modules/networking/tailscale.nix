@@ -18,7 +18,7 @@
         # Condition to check if system is client or server to ensure no forwarding
         useRoutingFeatures =
           if config.greenery.networking.tailscale.exitNode
-          then "server"
+          then "both"
           else "client";
 
         extraSetFlags = [
