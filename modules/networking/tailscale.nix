@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }: {
   options.greenery.networking.tailscale = {
@@ -26,17 +25,6 @@
           "--accept-dns=false"
           (lib.mkIf config.greenery.networking.tailscale.exitNode "--advertise-exit-node")
         ];
-      };
-
-      # Tailscale Exit-Node Optimization
-      networkd-dispatcher = lib.mkIf config.greenery.networking.tailscale.exitNode {
-        enable = true;
-        rules."50-tailscale-optimizations" = {
-          onState = ["routable"];
-          script = ''
-            ${pkgs.ethtool}/bin/ethtool -K ens3 rx-udp-gro-forwarding on rx-gro-list off
-          '';
-        };
       };
     };
 
