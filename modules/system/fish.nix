@@ -43,7 +43,7 @@ in {
           ga = "git add";
           gs = "git status";
           gc = "git commit";
-          gcm = ''git commit -m "'';
+          gcm = ''git commit -m'';
           gck = "git checkout -b";
           gp = "git push";
           gpu = "git pull";
