@@ -44,8 +44,14 @@
     };
   };
 
-  # Alias for Greenery
-  networking.hostName = "verdure";
+  networking = {
+    # Alias for Greenery
+    hostName = "verdure";
+
+    # Open Firewall ports for ethernet sharing
+    # I just used nmtui to set ethernet device to shared cause declarative approach didn't work
+    firewall.interfaces."end0".allowedUDPPorts = [67];
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
