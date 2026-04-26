@@ -6,7 +6,7 @@
   options.greenery.server.home.enable = lib.mkEnableOption "Home Assistant";
 
   config = lib.mkIf (config.greenery.server.home.enable && config.greenery.server.enable) {
-    # Podman container cause being declarative got annoying especially when the fucking phone got involved with matter devices
+    # Podman container cause being declarative got annoying especially when the fucking phone got involved
     virtualisation = {
       # Runtime
       podman = {
@@ -46,10 +46,7 @@
       };
     };
 
-    # Enable matter server for home-assistant
     services = {
-      matter-server.enable = true;
-
       caddy = {
         enable = true;
         virtualHosts."https://home.onca-ph.ts.net" = {
