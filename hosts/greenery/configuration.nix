@@ -169,7 +169,7 @@
     # Borgbackup remote backup
     borgbackup.jobs = {
       prarie = {
-        paths = ["/run/media/sumee/emerald" "/var"];
+        paths = ["/run/media/sumee/emerald"];
         repo = "/mnt/repo";
         encryption = {
           mode = "repokey-blake2";
