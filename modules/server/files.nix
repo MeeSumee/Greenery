@@ -12,7 +12,8 @@
         enable = true;
 
         settings = {
-          root = "/run/media/sumee/emerald/data";
+          root = "/run/media/sumee/emerald/services/filebrowser/data";
+          database = "/run/media/sumee/emerald/services/filebrowser/database.db";
           port = 6969;
         };
       };
