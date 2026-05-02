@@ -1,19 +1,22 @@
-{
-  lib, 
-  ... 
-}:
-{
-  boot.initrd.availableKernelModules = [ "xhci_pci" "usbhid" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+{lib, ...}: {
+  boot = {
+    initrd = {
+      availableKernelModules = ["xhci_pci" "usbhid"];
+      kernelModules = [];
+    };
+    kernelModules = [];
+    extraModulePackages = [];
 
-  # Set boot loader settings for RPi4B
-  boot.loader = {
-    efi.canTouchEfiVariables = lib.mkForce false;
-    systemd-boot.enable = lib.mkForce false;
-    grub.enable = false;
-    generic-extlinux-compatible.enable = true;
+    # Set boot loader settings for RPi4B
+    loader = {
+      efi.canTouchEfiVariables = lib.mkForce false;
+      systemd-boot.enable = lib.mkForce false;
+      grub.enable = false;
+      generic-extlinux-compatible = {
+        enable = true;
+        configurationLimit = 5;
+      };
+    };
   };
 
   fileSystems."/" = {
