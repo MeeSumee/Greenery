@@ -10,7 +10,7 @@
     services = {
       memos = {
         enable = true;
-        dataDir = "/run/media/sumee/emerald/memos/";
+        dataDir = "/run/media/sumee/emerald/services/memos/";
         settings = {
           MEMOS_MODE = "prod";
           MEMOS_ADDR = "127.0.0.1";

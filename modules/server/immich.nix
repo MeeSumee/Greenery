@@ -11,14 +11,14 @@
         enable = true;
         port = 2283;
 
-        mediaLocation = "/run/media/sumee/emerald/immich";
+        mediaLocation = "/run/media/sumee/emerald/services/immich";
         machine-learning.enable = false;
 
         host = "0.0.0.0";
 
         # Intel QSV accel Device
         accelerationDevices = [
-          "/dev/dri/renderD129"
+          "/dev/dri/renderD128"
         ];
       };
       caddy = {

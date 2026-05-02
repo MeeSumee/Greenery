@@ -11,6 +11,7 @@
     services = {
       jellyfin = {
         enable = true;
+        dataDir = "/run/media/sumee/emerald/services/jellyfin";
         forceEncodingConfig = true;
         hardwareAcceleration = {
           enable = true;

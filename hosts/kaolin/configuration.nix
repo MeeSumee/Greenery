@@ -155,6 +155,17 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
         "--netfilter-mode=nodivert"
       ];
     };
+
+    # Tailscale Exit-Node Optimization
+    networkd-dispatcher = {
+      enable = true;
+      rules."50-tailscale-optimizations" = {
+        onState = ["routable"];
+        script = ''
+          ${pkgs.ethtool}/bin/ethtool -K ens3 rx-udp-gro-forwarding on rx-gro-list off;
+        '';
+      };
+    };
   };
 
   # Enable IPv4 forwarding

@@ -8,16 +8,35 @@ Consists of multiple devices:
 - [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
 - [Graphite](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#graphite): Fedora-WSL that I tinker on occasion.
 
-## Status Updates
-
-Kaolin has not been upgraded due to a regression of [tailscale](https://github.com/tailscale/tailscale/issues/19259)? Greenery works fine and a virtual machine I spun works fine too. Weird.
-
 ## Installation
+You may install as a flake to access my programs and modules using:
+```nix
+    # MeeSumee config
+    greenery = {
+      url = "github:MeeSumee/Greenery/stable"; # Use stable config
+      inputs = {
+        nixpkgs.follows = "nixpkgs"; # To prevent different nixpkgs versions for your system
+        asusnumpad.follows = ""; # Example of disabling asusnumpad flake if you don't want to use it
+      };
+    };
+```
+The downside is you pull my entire repository to use as your flake (roughly 53MB).
 
-See my [wiki](https://github.com/MeeSumee/Greenery/wiki/Installation)
+You may also run directly as a VM to test the system out:
+```bash
+git clone https://github.com/MeeSumee/Greenery
+
+cd Greenery
+
+# Modify test.nix (or any host system) as needed (i.e adding users)
+# I highly recommend adding more RAM for GUI based configs (at least 5GB)
+
+nix run .#nixosConfigurations.$HOSTNAME.config.system.build.vm
+```
+
+I also documented how to install from scratch on my [wiki](https://github.com/MeeSumee/Greenery/wiki/Installation)
 
 ## Greenery
-
 Dell XPS 8940 with i7-11700.
 
 Acts as a home exit-node.
@@ -26,15 +45,13 @@ Hosts Jellyfin, Immich, FileBrowser, Suwayomi, & Memos.
 
 Reverse proxied using caddy-tailscale plugin.
 
-Future Endeavors: Improve functionality of jellyfin.
-
 ## Verdure
 
 Raspberry Pi 4 Model B with 8GB of RAM.
 
 Hosts Anki Sync, Davis, 2fauth, & Home Assistant.
 
-Future Endeavors: Network UPS Tools?
+Future Endeavors: Network UPS Tools
 
 ## Kaolin
 
@@ -78,7 +95,6 @@ To setup nftables and Wireguard interfaces
   # Enable IPv4 forwarding
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = true;
     "net.ipv4.conf.wgcf.rp_filter" = false;
   };
 
@@ -163,12 +179,16 @@ To setup nftables and Wireguard interfaces
     };
   };
 
-  # Advertise Routes
-  services.tailscale.extraSetFlags = [
-    "--advertise-exit-node"
-    "--advertise-routes=[Insert IPv4 from wgcf]"
-    "--netfilter-mode=nodivert"
-  ];
+  # Tailscale Settings
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+    extraSetFlags = [
+      "--advertise-exit-node"
+      "--advertise-routes=[Insert IPv4 from wgcf]"
+      "--netfilter-mode=nodivert"
+    ];
+  };
 ```
 
 With this setup, it will enable you to use Tailscale as a way to connect to Cloudflare Warp, enabling your phone to use the machine as an exit node.
