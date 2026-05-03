@@ -3,6 +3,7 @@
   lib,
   users,
   pkgs,
+  sources,
   ...
 }: {
   imports = [
@@ -100,11 +101,11 @@
           gtk-cursor-them-size=32
         '';
       in {
+        # GTK local settings
         ".config/gtk-4.0/assets".source = "${themeDir}/assets";
         ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
         ".config/gtk-4.0/settings.ini".text = gtk-local-theme;
         ".config/gtk-3.0/settings.ini".text = gtk-local-theme;
-        ".config/mpv".source = ../../dots/mpv;
         # Bookmarks for Nautilus
         ".config/gtk-3.0/bookmarks".text = ''
           file://${home}/Documents Documents
@@ -115,6 +116,12 @@
           file://${home}/green green
           sftp://sumee@greenery/run/media/sumee/emerald emerald
         '';
+        # MPV settings
+        ".config/mpv".source = ../../dots/mpv;
+        # Equibop settings (too lazy to consider only for quartz)
+        ".config/equibop/settings.json".source = ../../dots/equibop/settings.json;
+        ".config/equibop/settings".source = ../../dots/equibop/settings;
+        ".config/equibop/themes".source = sources.rosedickord + "/dist";
       };
     });
   };
