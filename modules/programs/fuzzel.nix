@@ -19,7 +19,7 @@
           value = {
             globalSection = {
               dpi-aware = "auto";
-              icon-theme = "Papirus-Dark";
+              icon-theme = "rose-pine";
               font = "Hack:weight=bold:size=18";
               fields = "name,generic,comment,categories,filename,keywords";
               password-character = "*";

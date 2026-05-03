@@ -98,4 +98,4 @@ jobs:
     # More of an edge case honestly since nix-fast-build builds packages too
     - name: Build package derivations
       if: ${{ needs.archives.outputs.packages == 'true' }}
-      run: nix build --quiet .#nahidacursor .#papiteal .#dickord .#caddyscale
+      run: nix build --quiet .#stmc-cursor .#dickord .#caddyscale
