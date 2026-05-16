@@ -11,6 +11,7 @@
       systemd-boot.enable = lib.mkForce false;
       grub = {
         enable = true;
+        configurationLimit = 5;
         device = "nodev";
         efiInstallAsRemovable = true;
         efiSupport = true;

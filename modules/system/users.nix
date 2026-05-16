@@ -70,10 +70,15 @@ in {
             } ''
               magick ${pfp} -crop 1000x1000+1340+280 - > $out
             '';
+          btop-transparent = let
+            from = [''theme[main_bg]="#191724"''];
+            to = [''theme[main_bg]=""''];
+          in
+            builtins.replaceStrings from to (builtins.readFile (sources.rosebtop + "/rose-pine.theme"));
         in {
           ".face.icon".source = faceIcon;
           ".config/btop/btop.conf".source = ../../dots/btop/btop.conf;
-          ".config/btop/themes".source = sources.rosebtop;
+          ".config/btop/themes/rose-pine.theme".text = btop-transparent;
         };
       });
     })

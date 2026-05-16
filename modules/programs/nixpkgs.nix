@@ -47,14 +47,14 @@
         gnome-calculator # calculator
         moonlight-qt # Remote to Windows GPU-Passthru
         rose-pine-gtk-theme # Rose-Pine Gtk Theme
+        rose-pine-icon-theme # Rose-Pine Icon Theme
         slurp # area selection tool used for wl-screenrec
         wl-clipboard # clipboard manager
         wl-screenrec # screen recorder
         brightnessctl # brightness ctl
         wlsunset # I need fucking blue light filter, my fucking eyes hurt
         noctalia-shell # Noctalia Shell
-        wo.nahidacursor # Cursor Package
-        wo.papiteal # Papirus Teal Icons
+        wo.stmc-cursor # Cursor Package
       ];
     })
 
@@ -67,7 +67,8 @@
         kicad-small # KiCAD Electronic schematic/PCB designer
         rare # GUI based on legendary which is a port of Epic Games
         prismlauncher # minecraft
-        audacity # temp replacement
+        audacity # music editing software
+        freecad # FreeCAD (it is actually good now)
       ];
     })
   ];

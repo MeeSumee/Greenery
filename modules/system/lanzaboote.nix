@@ -14,6 +14,7 @@
     boot.loader.systemd-boot.enable = lib.mkForce false;
     boot.lanzaboote = {
       enable = true;
+      configurationLimit = 5;
       pkiBundle = "/var/lib/sbctl";
     };
   };

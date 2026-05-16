@@ -29,10 +29,11 @@
       "left": [
         {
           "colorizeSystemIcon": "none",
-          "enableColorization": false,
+          "colorizeSystemText": "none",
           "generalTooltipText": "",
           "hideMode": "alwaysExpanded",
           "icon": "rocket",
+          "iconPosition": "left",
           "id": "CustomButton",
           "ipcIdentifier": "",
           "leftClickExec": "noctalia-shell ipc call launcher toggle",
@@ -187,6 +188,7 @@
         {
           "colorizeDistroLogo": false,
           "colorizeSystemIcon": "primary",
+          "colorizeSystemText": "none",
           "customIconPath": "",
           "enableColorization": false,
           "icon": "adjustments",
@@ -507,8 +509,8 @@
     "networkPanelView": "wifi",
     "wifiDetailsViewMode": "grid",
     "bluetoothDetailsViewMode": "grid",
-    "bluetoothHideUnnamedDevices": false,
-    "disableDiscoverability": false,
+    "bluetoothHideUnnamedDevices": true,
+    "disableDiscoverability": true,
     "bluetoothAutoConnect": true
   },
   "sessionMenu": {
