@@ -126,23 +126,8 @@
     };
   };
 
-  networking = {
-    # My precious everything
-    hostName = "greenery";
-
-    # Disable powersaving
-    networkmanager = {
-      wifi = {
-        powersave = false;
-        macAddress = "permanent";
-        scanRandMacAddress = false;
-      };
-    };
-
-    # Open Firewall ports for ethernet sharing
-    # I just used nmtui to set ethernet device to shared cause declarative approach didn't work
-    firewall.interfaces."enp3s0".allowedUDPPorts = [67];
-  };
+  # My precious everything
+  networking.hostName = "greenery";
 
   # Enable non-nix executables for dynamic libraries such as minecraft scripts
   programs.nix-ld.enable = true;
