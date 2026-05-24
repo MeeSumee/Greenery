@@ -45,7 +45,7 @@
             port = 4567;
 
             # Auth
-            authMode = "simple_login";
+            basicAuthEnabled = true;
             basicAuthUsername = "sumee";
             basicAuthPasswordFile = config.age.secrets.secret2.path;
 
