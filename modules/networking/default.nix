@@ -16,7 +16,14 @@
   config = lib.mkIf config.greenery.networking.enable {
     # Enable network manager & nftables
     networking = {
-      networkmanager.enable = true;
+      networkmanager = {
+        enable = true;
+        # MAC Address spoofing
+        ethernet.macAddress = "random";
+        wifi.macAddress = "random";
+        # Doesn't send hostname info (added privacy)
+        settings.main.hostname-mode = "none";
+      };
       nftables.enable = true;
 
       # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
