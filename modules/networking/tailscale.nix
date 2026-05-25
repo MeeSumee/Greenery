@@ -21,6 +21,7 @@
           else "client";
 
         extraSetFlags = [
+          "--operator=sumee"
           "--accept-routes"
           "--accept-dns=false"
           (lib.mkIf config.greenery.networking.tailscale.exitNode "--advertise-exit-node")
