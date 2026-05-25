@@ -22,7 +22,11 @@
         ethernet.macAddress = "random";
         wifi.macAddress = "random";
         # Doesn't send hostname info (added privacy)
-        settings.main.hostname-mode = "none";
+        settings.connection = {
+          "ipv4.dhcp-send-hostname" = 0;
+          "ipv6.ip6-privacy" = 2;
+          "ipv6.dhcp-send-hostname" = 0;
+        };
       };
       nftables.enable = true;
 
