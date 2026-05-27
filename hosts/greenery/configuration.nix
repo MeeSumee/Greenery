@@ -167,7 +167,7 @@
         preHook = ''
           ${pkgs.sshfs}/bin/sshfs -o \
           allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
-          tc@seed:/mnt/raid /mnt
+          sumee@seed:/mnt/raid /mnt
         '';
 
         # Unmount the drive when completed/failed
