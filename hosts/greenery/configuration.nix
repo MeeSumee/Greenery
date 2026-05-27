@@ -155,25 +155,17 @@
     borgbackup.jobs = {
       prarie = {
         paths = ["/run/media/sumee/emerald"];
-        repo = "/mnt/repo";
+        repo = "ssh://sumee@seed//mnt/raid/repo";
+        environment = {
+          BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
+          BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";
+        };
         encryption = {
           mode = "repokey-blake2";
           passCommand = "cat ${config.age.secrets.secret1.path}";
         };
         compression = "auto,zstd";
         startAt = "Wed 03:00:00";
-
-        # Mount remote drive as tiny core linux doesn't have borg packaged
-        preHook = ''
-          ${pkgs.sshfs}/bin/sshfs -o \
-          allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
-          sumee@seed:/mnt/raid /mnt
-        '';
-
-        # Unmount the drive when completed/failed
-        postHook = ''
-          ${pkgs.umount}/bin/umount -l /mnt
-        '';
       };
     };
   };
