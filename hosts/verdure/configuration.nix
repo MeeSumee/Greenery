@@ -12,7 +12,11 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢳⡀⠀⠀⠀⠀⠀
 */
 # Verdure Configuration
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   # All modules and their values
   greenery = {
     hardware.enable = true;
@@ -56,13 +60,19 @@
     raspberrypi-eeprom
   ];
 
+  # Agenix keyfile
+  age.secrets.secret1.file = ../../secrets/secret1.age;
+
   services = {
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
         paths = ["/var"];
         repo = "/mnt/verback";
-        encryption.mode = "none";
+        encryption = {
+          mode = "repokey-blake2";
+          passCommand = "cat ${config.age.secrets.secret1.path}";
+        };
         compression = "auto,zstd";
         startAt = "Mon 04:00:00";
 
@@ -70,7 +80,7 @@
         preHook = ''
           ${pkgs.sshfs}/bin/sshfs -o \
           allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,IdentityFile=/home/sumee/.ssh/id_ed25519 \
-          sumee@greenery:/run/media/sumee/emerald /mnt
+          sumee@seed:/mnt/raid /mnt
         '';
 
         # Unmount the drive when completed/failed
