@@ -49,9 +49,8 @@
             greenery fd7a:115c:a1e0::c437:101d
             verdure fd7a:115c:a1e0::c737:c515
             kaolin fd7a:115c:a1e0::b637:7f6f
-            seed 10.42.0.160
+            seed fd7a:115c:a1e0::1a37:db22
 
-            graphite fd7a:115c:a1e0::8234:a473
             beryl fd7a:115c:a1e0::ec34:1779
             quartz fd7a:115c:a1e0::8c34:6d1e
             obsidian fd7a:115c:a1e0::c634:f339
