@@ -68,10 +68,6 @@
     };
   };
 
-  # Virtualbox config
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = ["sumee"];
-
   networking.hostName = "quartz"; # The color of my desktop + piezoelectric shenanigans
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

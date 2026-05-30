@@ -98,7 +98,7 @@
           gtk-theme-name=rose-pine
           gtk-icon-theme-name=rose-pine-icons
           gtk-cursor-theme-name=STMC-xcursor-nahida
-          gtk-cursor-them-size=32
+          gtk-cursor-theme-size=32
         '';
       in {
         # GTK local settings

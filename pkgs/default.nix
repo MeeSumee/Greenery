@@ -15,6 +15,6 @@ in {
   };
   caddyscale = pkgs.caddy.withPlugins {
     plugins = ["github.com/tailscale/caddy-tailscale@${revision}"];
-    hash = "sha256-xJOPVE56h4tlhW7m8ZFN8F2jrZW/3gYeLXVqaEaoVvY=";
+    hash = "sha256-iUQXsmUJEdOpv6uXte73RXFOhxfzwb/r9vdCTVXjP4Y=";
   };
 })

@@ -58,6 +58,12 @@ in {
           gds = "git diff --staged";
           gl = "git log";
 
+          # tailscale stuff
+          ts = "tailscale status";
+          te = "tailscale set --exit-node=";
+          tek = "tailscale set --exit-node=kaolin";
+          teg = "tailscale set --exit-node=greenery";
+
           # misc
           n = "nvim";
         };

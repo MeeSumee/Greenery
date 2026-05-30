@@ -36,9 +36,10 @@
       # Suwayomi-server for fetching manga online
       suwayomi-server = {
         enable = true;
-        dataDir = "/run/media/sumee/emerald/services/suwayomi-server";
-
-        settings = {
+        dataDir = "/var/lib/suwayomi-server";
+        settings = let
+          data = "/run/media/sumee/emerald/services/suwayomi-server";
+        in {
           server = {
             ip = "0.0.0.0";
             port = 4567;
@@ -54,10 +55,11 @@
             initialOpenInBrowserEnabled = false;
             webUIInterface = "browser";
             webUIChannel = "stable";
+            webUIUpdateCheckInterval = 0;
 
             # Downloader
             downloadAsCbz = true;
-            downloadsPath = "${config.services.suwayomi-server.dataDir}/downloads";
+            downloadsPath = "${data}/downloads";
             autoDownloadNewChapters = false;
             excludeEntryWithUnreadChapters = true;
             autoDownloadIgnoreReUploads = false;
@@ -75,6 +77,9 @@
             # Requests
             maxSourcesInParallel = 6;
 
+            # Local sources
+            localSourcePath = "${data}/local";
+
             # Updater
             excludeUnreadChapters = true;
             excludeNotStarted = true;
@@ -83,7 +88,7 @@
             updateMangas = false;
 
             # Backups
-            backupPath = "${config.services.suwayomi-server.dataDir}/backups";
+            backupPath = "${data}/backups";
             backupTime = "04:00";
             backupInterval = 1;
             backupTTL = 14;
