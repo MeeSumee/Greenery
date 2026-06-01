@@ -79,11 +79,12 @@ stdenv.mkDerivation (finalAttrs: {
     symlinks = [default help progress wait crosshair text pencil not-allowed size_ver size_hor size_fdiag size_bdiag grab dnd-move right_ptr pointer];
   in ''
     mkdir -p $out/share/icons/STMC-xcursor-nahida/cursors
-    pushd PROJECT/STMC
+    cd ./PROJECT/STMC
 
     # This brings me joy
-    # Yesn't - Rex
-    ${lib.concatStringsSep "\n" (lib.zipListsWith (nh: lnx: "cp '${nh}' $out/share/icons/STMC-xcursor-nahida/cursors/${lnx};") nahida linux)}
+    ${
+      lib.concatImapStrings (pos: x: ''cp '${x}' $out/share/icons/STMC-xcursor-nahida/cursors/${builtins.elemAt linux (pos - 1)};'') nahida
+    }
 
     win2xcur ${
       if shadows
@@ -91,33 +92,37 @@ stdenv.mkDerivation (finalAttrs: {
       else ""
     } $out/share/icons/STMC-xcursor-nahida/cursors/*.{ani,cur} -o $out/share/icons/STMC-xcursor-nahida/cursors/
 
-    pushd $out/share/icons/STMC-xcursor-nahida/
-    pushd cursors
-
+    cd $out/share/icons/STMC-xcursor-nahida/cursors
     rm *.{ani,cur}
 
     # This does not
-    # Now this too should bring you joy - Rex
-    ${let
-      inherit (lib) zipListsWith pipe flatten concatStringsSep;
-    in
-      pipe linux [
-        (zipListsWith (syms: lnx: map (sym: "ln -s $(echo '${lnx}' | cut -f 1 -d '.') ${sym}") syms) symlinks)
-        flatten
-        (concatStringsSep "\n")
-      ]}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 0}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 0)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 1}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 1)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 2}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 2)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 3}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 3)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 4}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 4)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 5}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 5)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 6}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 6)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 7}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 7)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 8}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 8)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 9}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 9)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 10}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 10)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 11}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 11)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 12}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 12)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 13}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 13)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 14}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 14)}
+    ${lib.concatMapStrings (symlink: "ln -s $(echo '${builtins.elemAt linux 15}' | cut -f 1 -d '.') ${symlink};") (builtins.elemAt symlinks 15)}
 
-    popd
-
-    # keep it shrimple
-    cat <<EOF>index.theme
-    [Icon Theme]"
-    Name=Genshin Nahida"
-    Name[ja]=原神 ナヒーダ"
-    Name[zh_CN]=原神 纳西妲"
-    Name[zh_TW]=原神 納西妲"
-    Comment=Xcursor port of Sam-Toki Genshin Nahida"
-    EOF
+    cd ..
+    touch index.theme
+    (
+      echo "[Icon Theme]"
+      echo "Name=Genshin Nahida"
+      echo "Name[ja]=原神 ナヒーダ"
+      echo "Name[zh_CN]=原神 纳西妲"
+      echo "Name[zh_TW]=原神 納西妲"
+      echo "Comment=Xcursor port of Sam-Toki Genshin Nahida"
+    ) >> index.theme
   '';
 
   # This is gonna be for the future, anything I do in my machine refuses to eval unless its impure lmfao
