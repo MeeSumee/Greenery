@@ -68,7 +68,7 @@
     borgbackup.jobs = {
       grass = {
         paths = ["/var/lib"];
-        repo = "ssh://sumee@seed//mnt/raid/verback";
+        repo = "ssh://sumee@seed//mnt/md0/verback";
         environment = {
           BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
           BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";

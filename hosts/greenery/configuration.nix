@@ -155,7 +155,7 @@
     borgbackup.jobs = {
       prarie = {
         paths = ["/run/media/sumee/emerald"];
-        repo = "ssh://sumee@seed//mnt/raid/repo";
+        repo = "ssh://sumee@seed//mnt/md0/repo";
         environment = {
           BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
           BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";
