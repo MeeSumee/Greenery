@@ -13,6 +13,7 @@
     ./immich.nix
     ./jellyfin.nix
     ./memos.nix
+    ./motioneye.nix
     ./ollama.nix
     ./suwayomi.nix
   ];

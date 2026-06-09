@@ -72,6 +72,7 @@
       immich.enable = true;
       jellyfin.enable = true;
       memos.enable = true;
+      motioneye.enable = true;
       ollama.enable = true;
       suwayomi.enable = true;
     };
