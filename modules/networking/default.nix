@@ -19,10 +19,10 @@
       networkmanager = {
         enable = true;
         # MAC Address spoofing
-        ethernet.macAddress = "random";
-        wifi.macAddress = "random";
+        ethernet.macAddress = lib.mkIf (config.networking.hostName != "kaolin") "random";
+        wifi.macAddress = lib.mkIf (config.networking.hostName != "kaolin") "random";
         # Doesn't send hostname info (added privacy)
-        settings.connection = {
+        settings.connection = lib.mkIf (config.networking.hostName != "kaolin") {
           "ipv4.dhcp-send-hostname" = 0;
           "ipv6.ip6-privacy" = 2;
           "ipv6.dhcp-send-hostname" = 0;
