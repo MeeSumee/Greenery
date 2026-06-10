@@ -68,7 +68,7 @@
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
-        paths = ["/var/lib"];
+        paths = ["/var/lib/2fauth" "/var/lib/private/anki-sync-server" "/var/lib/davis" "/var/lib/hass" "/var/lib/postgresql"];
         repo = "ssh://sumee@seed//mnt/md0/verback";
         environment.BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
         encryption = {
