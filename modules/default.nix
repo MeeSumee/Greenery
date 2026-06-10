@@ -75,6 +75,7 @@
       motioneye.enable = true;
       ollama.enable = true;
       suwayomi.enable = true;
+      vaultwarden.enable = true;
     };
 
     system = {

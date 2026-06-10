@@ -38,6 +38,7 @@
       auth.enable = true;
       davis.enable = true;
       home.enable = true;
+      vaultwarden.enable = true;
     };
 
     system = {
