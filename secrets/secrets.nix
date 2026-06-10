@@ -22,4 +22,5 @@ in {
   "secret5.age".publicKeys = soft ++ nahida;
   "secret6.age".publicKeys = sumee ++ nahida;
   "secret7.age".publicKeys = autism ++ cute;
+  "secret8.age".publicKeys = cute;
 }
