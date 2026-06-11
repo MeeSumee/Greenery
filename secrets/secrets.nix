@@ -13,6 +13,7 @@ let
   soft = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBLVW9nABsXKAakbIgzJdRWImREgUyxJ/8yOKpzbE9S"];
 
   cute = nahida ++ leaf;
+  unison = cute ++ autism ++ soft;
   # Principle of least privilege, other than Nahida <3
 in {
   "secret1.age".publicKeys = cute;
@@ -21,6 +22,6 @@ in {
   "secret4.age".publicKeys = cute;
   "secret5.age".publicKeys = soft ++ nahida;
   "secret6.age".publicKeys = sumee ++ nahida;
-  "secret7.age".publicKeys = autism ++ cute;
+  "secret7.age".publicKeys = unison;
   "secret8.age".publicKeys = cute;
 }
