@@ -17,6 +17,7 @@
     ./ollama.nix
     ./suwayomi.nix
     ./vaultwarden.nix
+    ./webserver.nix
   ];
 
   options.greenery.server.enable = lib.mkEnableOption "enable server modules";

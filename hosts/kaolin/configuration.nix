@@ -42,6 +42,11 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
 
     programs.enable = true;
 
+    server = {
+      enable = true;
+      webserver.enable = true;
+    };
+
     system = {
       enable = true;
       autoUpgrade.enable = true;

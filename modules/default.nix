@@ -76,6 +76,7 @@
       ollama.enable = true;
       suwayomi.enable = true;
       vaultwarden.enable = true;
+      webserver.enable = true;
     };
 
     system = {

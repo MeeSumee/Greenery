@@ -14,7 +14,10 @@ in {
     withMiddleClickScroll = true;
   };
   caddyscale = pkgs.caddy.withPlugins {
-    plugins = ["github.com/tailscale/caddy-tailscale@${revision}"];
-    hash = "sha256-iUQXsmUJEdOpv6uXte73RXFOhxfzwb/r9vdCTVXjP4Y=";
+    plugins = [
+      "github.com/tailscale/caddy-tailscale@${revision}"
+      "github.com/caddy-dns/cloudflare@v0.2.4"
+    ];
+    hash = "sha256-ufqG0y0mTInZRJZaYHoKeNBPnJtczvq3G24hgAuwk48=";
   };
 })
