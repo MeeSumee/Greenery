@@ -7,7 +7,7 @@
   users,
   ...
 }: let
-  inherit (lib) mkEnableOption mkMerge mkIf;
+  inherit (lib) mkEnableOption mkMerge mkIf pipe flatten genAttrs mkForce;
 in {
   imports = [inputs.hjem.nixosModules.default];
 
@@ -33,28 +33,26 @@ in {
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGg78BA24qgFIDr0+8xgx1TH5PSOQd8qrtCwlyGUvTi0 本当に愛してぇる"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL3prIWylLFPpuCoNCdKNj3nCqik1lN51CZ73HXhxjvq いやん〜墨ｗｗｗｗ"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGz6NgZd4FYbMr7F+QxY+GGL3O26H5miFm8aALnGT30V bedsheetsSoft&Warm"
           ];
           hashedPasswordFile = config.age.secrets.secret6.path;
         };
       };
 
       # Set face icon for sumee
-      systemd.tmpfiles.rules = lib.pipe users [
+      systemd.tmpfiles.rules = pipe users [
         (builtins.filter (user: config.hjem.users.${user}.files.".face.icon".source != null))
         (builtins.map (user: [
           "f+ /var/lib/AccountsService/users/${user}  0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
           "L+ /var/lib/AccountsService/icons/${user}  -    -    -    -  ${config.hjem.users.${user}.files.".face.icon".source}"
         ]))
-        lib.flatten
+        flatten
       ];
 
       # hjem config for sumee
-      hjem.users = lib.genAttrs users (user: {
+      hjem.users = genAttrs users (user: {
         enable = true;
         directory = config.users.users.${user}.home;
-        clobberFiles = lib.mkForce true;
+        clobberFiles = mkForce true;
         files = let
           # Make face.icon at /home/user/
           faceIcon = let
@@ -64,12 +62,14 @@ in {
               hash = "sha256-oCx5xtlR4Kq4WGcdDHMbeMd7IiSA3RKsnh+cpD+4UY0=";
             };
           in
+            # Crops the image using imagemagick
             pkgs.runCommandWith {
               name = "cropped-${pfp.name}";
               derivationArgs.nativeBuildInputs = [pkgs.imagemagick];
             } ''
               magick ${pfp} -crop 1000x1000+1340+280 - > $out
             '';
+          # Enables transparent  btop by overwritting source
           btop-transparent = let
             from = [''theme[main_bg]="#191724"''];
             to = [''theme[main_bg]=""''];

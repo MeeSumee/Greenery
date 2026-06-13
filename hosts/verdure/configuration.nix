@@ -38,6 +38,7 @@
       auth.enable = true;
       davis.enable = true;
       home.enable = true;
+      vaultwarden.enable = true;
     };
 
     system = {
@@ -67,12 +68,9 @@
     # Set borg backup service for services
     borgbackup.jobs = {
       grass = {
-        paths = ["/var/lib"];
-        repo = "ssh://sumee@seed//mnt/verback";
-        environment = {
-          BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
-          BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";
-        };
+        paths = ["/var/lib/2fauth" "/var/lib/private/anki-sync-server" "/var/lib/davis" "/var/lib/hass" "/var/lib/postgresql"];
+        repo = "ssh://sumee@seed//mnt/md0/verback";
+        environment.BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
         encryption = {
           mode = "repokey-blake2";
           passCommand = "cat ${config.age.secrets.secret1.path}";

@@ -41,7 +41,7 @@ Dell XPS 8940 with i7-11700.
 
 Acts as a home exit-node.
 
-Hosts Jellyfin, Immich, FileBrowser, Suwayomi, & Memos.
+Hosts Jellyfin, Immich, FileBrowser, Suwayomi, MotionEye & Memos.
 
 Reverse proxied using caddy-tailscale plugin.
 
@@ -49,7 +49,7 @@ Reverse proxied using caddy-tailscale plugin.
 
 Raspberry Pi 4 Model B with 8GB of RAM.
 
-Hosts Anki Sync, Davis, 2fauth, & Home Assistant.
+Hosts Anki Sync, Davis, 2fauth, VaultWarden, & Home Assistant.
 
 Future Endeavors: Network UPS Tools
 

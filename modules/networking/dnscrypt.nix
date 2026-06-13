@@ -49,7 +49,7 @@
             greenery fd7a:115c:a1e0::c437:101d
             verdure fd7a:115c:a1e0::c737:c515
             kaolin fd7a:115c:a1e0::b637:7f6f
-            seed fd7a:115c:a1e0::1a37:db22
+            seed fd7a:115c:a1e0::b037:4f52
 
             beryl fd7a:115c:a1e0::ec34:1779
             quartz fd7a:115c:a1e0::8c34:6d1e

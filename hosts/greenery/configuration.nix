@@ -114,6 +114,7 @@
       immich.enable = true;
       jellyfin.enable = true;
       memos.enable = true;
+      motioneye.enable = true;
       suwayomi.enable = true;
     };
 
@@ -155,11 +156,8 @@
     borgbackup.jobs = {
       prarie = {
         paths = ["/run/media/sumee/emerald"];
-        repo = "ssh://sumee@seed//mnt/raid/repo";
-        environment = {
-          BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
-          BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes";
-        };
+        repo = "ssh://sumee@seed//mnt/md0/repo";
+        environment.BORG_RSH = "ssh -i /home/sumee/.ssh/id_ed25519";
         encryption = {
           mode = "repokey-blake2";
           passCommand = "cat ${config.age.secrets.secret1.path}";

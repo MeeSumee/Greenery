@@ -13,8 +13,11 @@
     ./immich.nix
     ./jellyfin.nix
     ./memos.nix
+    ./motioneye.nix
     ./ollama.nix
     ./suwayomi.nix
+    ./vaultwarden.nix
+    ./webserver.nix
   ];
 
   options.greenery.server.enable = lib.mkEnableOption "enable server modules";
