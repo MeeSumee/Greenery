@@ -13,7 +13,7 @@
         openFirewall = true;
         virtualHosts."greenery.cc" = {
           extraConfig = ''
-            root * /var/www/greenery.cc
+            root * /var/www/greenery.cc/public
             encode gzip
             file_server {
               hide .git
