@@ -2,6 +2,8 @@
 {
   inputs,
   pkgs,
+  config,
+  lib,
   ...
 }: {
   nixpkgs = {
@@ -11,6 +13,12 @@
 
   # Enable core nix features
   nix = {
+    # Garbage collect okay for kaolin as VPS SSDs have redundancy
+    gc = lib.mkIf (config.networking.hostName == "kaolin") {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
     package = pkgs.nixVersions.latest;
