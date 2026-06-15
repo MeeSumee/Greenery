@@ -44,7 +44,6 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
 
     server = {
       enable = true;
-      webserver.enable = true;
     };
 
     system = {
