@@ -81,6 +81,8 @@ in {
           dream = "ssh sumee@verdure";
           deploy = "${rebuildCommand} boot --target-host";
           remote = "${rebuildCommand} boot --build-host";
+          prarie = "sudo borg create -s --progress /mnt/prarie::prarie /run/media/sumee/emerald/";
+          grass = "sudo borg create -s --progress /mnt/grass::grass /var/lib/2fauth /var/lib/private/anki-sync-server /var/lib/davis /var/lib/hass /var/lib/postgresql";
         };
 
         # Coloring shell, referenced from Zaphkiel config
