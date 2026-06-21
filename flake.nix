@@ -58,7 +58,6 @@
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
         flake-compat.follows = "";
-        ndg.follows = "";
       };
     };
 
