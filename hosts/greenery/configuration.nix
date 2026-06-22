@@ -137,6 +137,9 @@
     # here, NOT in environment.systemPackages
   ];
 
+  # Minecraft
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [25565];
+
   # Agenix keyfile
   age.secrets.secret1.file = ../../secrets/secret1.age;
 
