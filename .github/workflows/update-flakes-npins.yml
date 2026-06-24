@@ -23,7 +23,7 @@ jobs:
         token: ${{ steps.generate-token.outputs.token }}
 
     - name: Install Nix
-      uses: nixbuild/nix-quick-install-action@v34
+      uses: nixbuild/nix-quick-install-action@v35
       with:
         nix_version: 2.31.2
         nix_conf: |
