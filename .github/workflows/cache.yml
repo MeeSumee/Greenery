@@ -24,7 +24,7 @@ jobs:
       lockfile: ${{ steps.filter.outputs.lockfile }}
       packages: ${{ steps.filter.outputs.packages }}
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: dorny/paths-filter@v4
       id: filter
       with:
@@ -69,7 +69,7 @@ jobs:
         os: [ubuntu-latest, ubuntu-24.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     # Only need this when nix-fast-build runs as ALL my derivations take a fuck ton of space
     - name: Aggressive disk space removal

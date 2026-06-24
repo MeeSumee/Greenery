@@ -37,7 +37,7 @@ jobs:
         private-key: ${{ secrets.LAP_PILLOW }}
 
     # Persisting is okay as create PR automatically handles that
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         ref: stable
 
