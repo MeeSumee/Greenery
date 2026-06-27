@@ -22,9 +22,13 @@ in {
       # Containers
       oci-containers.containers."2fauth" = {
         pull = "newer";
-        image = "2fauth/2fauth:latest";
+        image = "docker.io/2fauth/2fauth:latest";
         autoStart = true;
         environmentFiles = [config.age.secrets.secret3.path];
+        # Allows for autoupdate of containers
+        labels = {
+          "io.containers.autoupdate" = "registry";
+        };
         environment = {
           "APP_ENV" = "production";
           "APP_URL" = "https://auth.onca-ph.ts.net";
@@ -52,8 +56,11 @@ in {
       };
     };
 
-    # Hardening
     systemd.services = {
+      # Enable podman auto-update service
+      "podman-auto-update".wantedBy = ["multi-user.target"];
+
+      # Hardening
       "podman-2fauth".serviceConfig = {
         ProtectHome = true;
         ProtectSystem = true;

@@ -40,6 +40,12 @@
       "dst": ["*"],
       "ip":  ["tcp:80", "tcp:443"],
     },
+    // Allow sharing of MC server to friends
+    {
+      "src": ["autogroup:member"],
+      "dst": ["*"],
+      "ip":  ["tcp:25565"],
+    },
     // Sunshine Ports
     {
       "src": ["autogroup:member"],

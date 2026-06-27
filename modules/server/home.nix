@@ -19,6 +19,10 @@
       oci-containers.containers."hass" = {
         pull = "newer";
         image = "ghcr.io/home-assistant/home-assistant:stable";
+        # Allows for autoupdate of containers
+        labels = {
+          "io.containers.autoupdate" = "registry";
+        };
         environment.TZ = config.time.timeZone;
         volumes = [
           "/var/lib/hass:/config:rw"
@@ -58,8 +62,11 @@
       };
     };
 
-    # Hardening
     systemd.services = {
+      # Enable podman auto-update service
+      "podman-auto-update".wantedBy = ["multi-user.target"];
+
+      # Hardening
       "podman-hass".serviceConfig = {
         ProtectHome = true;
         ProtectSystem = true;

@@ -13,7 +13,7 @@ jobs:
     outputs:
       changes: ${{ steps.filter.outputs.lockfile }}
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: dorny/paths-filter@v4
       id: filter
       with:
@@ -34,11 +34,11 @@ jobs:
         hosts: [beryl, greenery, kaolin, quartz, verdure]
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: Install Nix
-      uses: nixbuild/nix-quick-install-action@v34
+      uses: nixbuild/nix-quick-install-action@v35
       with:
-        nix_version: 2.31.2
+        nix_version: 2.34.7
         nix_conf: |
           keep-env-derivations = true
           keep-outputs = true

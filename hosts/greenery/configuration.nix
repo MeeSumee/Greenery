@@ -131,11 +131,20 @@
   networking.hostName = "greenery";
 
   # Enable non-nix executables for dynamic libraries such as minecraft scripts
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      # Add any missing dynamic libraries for unpackaged programs
+      # here, NOT in environment.systemPackages
+    ];
+  };
+
+  # Minecraft
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [25565];
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk17;
+  };
 
   # Agenix keyfile
   age.secrets.secret1.file = ../../secrets/secret1.age;

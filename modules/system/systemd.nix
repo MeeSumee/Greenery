@@ -1,9 +1,8 @@
 {
   systemd = {
     # Nuke faster
-    user.extraConfig = ''
-      DefaultTimeoutStopSec=10s
-    '';
+    settings.Manager.DefaultTimeoutStopSec = "30s";
+    user.settings.Manager.DefaultTimeoutStopSec = "30s";
     services = {
       # Journal daemon hardening
       systemd-journald = {

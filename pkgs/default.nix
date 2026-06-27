@@ -16,8 +16,8 @@ in {
   caddyscale = pkgs.caddy.withPlugins {
     plugins = [
       "github.com/tailscale/caddy-tailscale@${revision}"
-      "github.com/caddy-dns/cloudflare@v0.2.4"
+      # "github.com/caddy-dns/cloudflare@v0.2.4"
     ];
-    hash = "sha256-ufqG0y0mTInZRJZaYHoKeNBPnJtczvq3G24hgAuwk48=";
+    hash = "sha256-XBdYjtuPVu/beIgFgFcVp6ln4r9kq0B6+4xJ8+WWYn0=";
   };
 })

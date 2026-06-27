@@ -18,14 +18,14 @@ jobs:
         private-key: ${{ secrets.LAP_PILLOW }}
 
     # Checkout uses generated token instead of using GITHUB_TOKEN
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         token: ${{ steps.generate-token.outputs.token }}
 
     - name: Install Nix
-      uses: nixbuild/nix-quick-install-action@v34
+      uses: nixbuild/nix-quick-install-action@v35
       with:
-        nix_version: 2.31.2
+        nix_version: 2.34.7
         nix_conf: |
           keep-env-derivations = true
           keep-outputs = true
