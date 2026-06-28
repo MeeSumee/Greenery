@@ -11,7 +11,6 @@
     hjem = {
       url = "github:feel-co/hjem";
       inputs = {
-        nix-darwin.follows = "";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -33,7 +32,7 @@
 
     # Lanzaboote
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/001e560fffc8f0235e9db20ebeb4ccde0ade1caf";
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         pre-commit.follows = "";
