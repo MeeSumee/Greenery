@@ -12,6 +12,7 @@
     ./intelgpu.nix
     ./power.nix
     ./tpm.nix
+    ./ups.nix
 
     # Scans undetected hardware
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -21,7 +22,7 @@
   options.greenery.hardware.enable = lib.mkEnableOption "hardware";
 
   config = lib.mkIf config.greenery.hardware.enable {
-    # Define host platform
+    # Define default host platform
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   };
 }

@@ -19,7 +19,10 @@
 }: {
   # All modules and their values
   greenery = {
-    hardware.enable = true;
+    hardware = {
+      enable = true;
+      ups.server.enable = true;
+    };
 
     networking = {
       enable = true;

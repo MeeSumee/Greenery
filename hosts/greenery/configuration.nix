@@ -89,6 +89,7 @@
     hardware = {
       enable = true;
       intelgpu.enable = true;
+      ups.enable = true;
     };
 
     networking = {
