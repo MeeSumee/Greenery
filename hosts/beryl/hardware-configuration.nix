@@ -29,9 +29,6 @@
 
   swapDevices = [];
 
-  # Enable Thunderbolt Service for USB4 support
-  services.hardware.bolt.enable = true;
-
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
