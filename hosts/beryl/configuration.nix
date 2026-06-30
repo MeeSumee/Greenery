@@ -34,20 +34,10 @@
 {
   # All modules and their values
   greenery = {
-    desktop = {
-      enable = true;
-      hypridle.enable = true;
-      # hyprlock.enable = true;
-      niri.enable = true;
-    };
-
     hardware = {
       enable = true;
       amdgpu.enable = true;
-      asus-numpad.enable = true;
-      audio.enable = true;
       fprint.enable = true;
-      power.enable = true;
       tpm.enable = true;
     };
 
@@ -61,19 +51,14 @@
 
     programs = {
       enable = true;
-      chromium.enable = true;
-      foot.enable = true;
       git.enable = true;
-      desktop.enable = true;
       nvim.enable = true;
-      steam.enable = true;
     };
 
     system = {
       enable = true;
       fish.enable = true;
       fonts.enable = true;
-      input.enable = true;
       lanzaboote.enable = true;
       sumee.enable = true;
     };
