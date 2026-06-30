@@ -2,11 +2,9 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
     initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
     initrd.kernelModules = [];
     kernelModules = ["kvm-amd"];
