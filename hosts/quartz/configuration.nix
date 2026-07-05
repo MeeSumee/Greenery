@@ -20,8 +20,8 @@
   greenery = {
     desktop = {
       enable = true;
+      autologin.enable = true;
       hypridle.enable = true;
-      # hyprlock.enable = true;
       niri.enable = true;
     };
 
