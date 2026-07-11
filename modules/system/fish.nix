@@ -6,7 +6,7 @@
   sources,
   ...
 }: let
-  rebuildCommand = "nixos-rebuild --flake ~/green# -S";
+  rebuildCommand = "nixos-rebuild --flake ~/green# --elevate=sudo";
 in {
   options.greenery.system.fish.enable = lib.mkEnableOption "fish shell";
 
