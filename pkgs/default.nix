@@ -18,6 +18,6 @@ in {
       "github.com/tailscale/caddy-tailscale@${revision}"
       # "github.com/caddy-dns/cloudflare@v0.2.4"
     ];
-    hash = "sha256-vC/nyCKMD2jKgbGVA5NIJP6dGXiP9z0yEA8WINgFcVc=";
+    hash = "sha256-XBdYjtuPVu/beIgFgFcVp6ln4r9kq0B6+4xJ8+WWYn0=";
   };
 })
