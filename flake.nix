@@ -55,6 +55,7 @@
       url = "github:NotAShelf/nvf";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
         flake-compat.follows = "";
       };
     };
