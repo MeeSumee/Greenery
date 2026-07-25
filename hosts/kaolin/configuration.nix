@@ -57,6 +57,9 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
   networking = {
     hostName = "kaolin"; # Kaolin is (stopping) soft(ware from asking my ID)
 
+    # Allow networkd-dispatcher to actually execute scripts
+    useNetworkd = true;
+
     # Wireguard config to not cuck tailscale
     # Massive credit to https://gist.github.com/4piu/e08f27ef0032b1a72bdbd063c084929b
     wg-quick.interfaces = {
