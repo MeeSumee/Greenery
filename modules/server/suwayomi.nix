@@ -57,6 +57,14 @@
             webUIChannel = "stable";
             webUIUpdateCheckInterval = 0;
 
+            # Cloudflare bypass
+            flareSolverrEnabled = true;
+            flareSolverrUrl = "http://localhost:${config.services.flaresolverr.port}";
+            flareSolverrTimeout = 60;
+            flareSolverrSessionName = "suwayomi";
+            flareSolverrSessionTtl = 15;
+            flareSolverrAsResponseFallback = false;
+
             # Downloader
             downloadAsCbz = true;
             downloadsPath = "${data}/downloads";
@@ -95,6 +103,8 @@
           };
         };
       };
+      # Cloudflare bypass to ensure it can fetch mangas
+      flaresolverr.enable = true;
       caddy = {
         enable = true;
         virtualHosts."https://manga.onca-ph.ts.net" = {
