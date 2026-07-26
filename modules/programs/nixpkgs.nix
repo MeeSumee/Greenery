@@ -68,7 +68,7 @@
         rare # GUI based on legendary which is a port of Epic Games
         prismlauncher # minecraft
         audacity # music editing software
-        # freecad # FreeCAD (it is actually good now)
+        freecad # FreeCAD (it is actually good now)
       ];
     })
   ];
