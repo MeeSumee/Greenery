@@ -59,7 +59,7 @@
 
             # Cloudflare bypass
             flareSolverrEnabled = true;
-            flareSolverrUrl = "http://localhost:${config.services.flaresolverr.port}";
+            flareSolverrUrl = "http://localhost:${builtins.toString config.services.flaresolverr.port}";
             flareSolverrTimeout = 60;
             flareSolverrSessionName = "suwayomi";
             flareSolverrSessionTtl = 15;
