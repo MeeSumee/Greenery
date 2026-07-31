@@ -9,34 +9,30 @@
 
   # Kinda annoying rn cause if version doesn't change, you delete hash file & perform nixos rebuild boot
   deleteFirstRunFiles = ''
-    if ! systemctl is-system-running --quiet; then
-      echo "system is not fully running yet. skipping chromium update check."
-      exit 0
-    fi
-     echo "checking if chromium hash changed..."
-     # configuration hash storage location, might need to be updated to some persistent location on your computer
-     CHROMIUM_HASH_FILE="$HOME/chromium-config.hash"
-     CURRENT_HASH="${
+    echo "checking if chromium hash changed..."
+    # configuration hash storage location, might need to be updated to some persistent location on your computer
+    CHROMIUM_HASH_FILE="$HOME/chromium-config.hash"
+    CURRENT_HASH="${
       builtins.hashString "sha256" (
         (builtins.toJSON config.programs.chromium.extensions)
         + (builtins.toJSON config.programs.chromium.extraOpts.ExtensionSettings)
         + (builtins.toJSON config.programs.chromium.initialPrefs)
       )
     }"
-     echo $CURRENT_HASH
-     if [ -f "$CHROMIUM_HASH_FILE" ]; then
-       STORED_HASH=$(cat "$CHROMIUM_HASH_FILE")
-       if [ "$STORED_HASH" = "$CURRENT_HASH" ]; then
-         echo "chromium hash unchanged, skipping deletion of 'First Run' files."
-         exit 0
-       fi
-     fi
-     echo "chromium hash changed, deleting 'First Run' files..."
-     if [ -f "$HOME/.config/chromium/First Run" ]; then
-       echo "Deleting '$HOME/.config/chromium/First Run'"
-       rm -f "$HOME/.config/chromium/First Run"
-     fi
-     echo "$CURRENT_HASH" > "$CHROMIUM_HASH_FILE"
+    echo $CURRENT_HASH
+    if [ -f "$CHROMIUM_HASH_FILE" ]; then
+      STORED_HASH=$(cat "$CHROMIUM_HASH_FILE")
+      if [ "$STORED_HASH" = "$CURRENT_HASH" ]; then
+        echo "chromium hash unchanged, skipping deletion of 'First Run' files."
+        exit 0
+      fi
+    fi
+    echo "chromium hash changed, deleting 'First Run' files..."
+    if [ -f "$HOME/.config/chromium/First Run" ]; then
+      echo "Deleting '$HOME/.config/chromium/First Run'"
+      rm -f "$HOME/.config/chromium/First Run"
+    fi
+    echo "$CURRENT_HASH" > "$CHROMIUM_HASH_FILE"
   '';
 
   # ublock policies as an attr set
@@ -273,6 +269,10 @@ in {
     systemd.user.services.deleteChromiumFirstRun = {
       script = deleteFirstRunFiles;
       wantedBy = ["default.target"];
+      # Don't run command for 5 seconds instead of using a systemd check of whether system is running
+      preStart = ''
+        sleep 5
+      '';
       serviceConfig = {
         Type = "oneshot";
         ProtectSystem = "full";
