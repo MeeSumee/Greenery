@@ -20,7 +20,7 @@
         # Client side monitoring
         upsmon = {
           monitor."SMX1500RMUNC" = {
-            system = "SMX1500RMUNC@verdure";
+            system = "SMX1500RMUNC@100.75.197.21";
             powerValue = 1;
             type = "secondary";
             user = "nut-observer";
