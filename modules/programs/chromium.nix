@@ -97,7 +97,6 @@ in {
         "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
         "noimedcjdohhokijigpfcbjcfcaaahej" # Rose-Pine
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-        (lib.mkIf (config.networking.hostName == "beryl") "pbanhockgagggenencehbnadejlgchfc") # J*b
       ];
 
       # DuckDuckGo stuff
