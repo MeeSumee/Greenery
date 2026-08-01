@@ -56,11 +56,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784703345,
-        "narHash": "sha256-I6hChxS2UAzLlv7zLMQMzUfPAoUKcjs0bVtQ++AuIps=",
+        "lastModified": 1785250952,
+        "narHash": "sha256-Z06kvxC9hP6cBdq2lyxymFYgpKq4tyxRaJTLTWoD0bo=",
         "owner": "asus-linux-drivers",
         "repo": "asus-numberpad-driver",
-        "rev": "1f9bfac78f1d88850f278860a0a032b3d3149ae6",
+        "rev": "01e330afe15e8de30bab0a3b274e509b93b8a770",
         "type": "github"
       },
       "original": {
@@ -91,11 +91,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784896036,
-        "narHash": "sha256-EAadJywc5P9CSIB7212S5jpQX48aTfYUbsJeAIbQaVI=",
+        "lastModified": 1785525782,
+        "narHash": "sha256-M9v4zyKLYSVv2RYB4iYTg2THKvW3mDlj+fR1KvW9G3w=",
         "owner": "feel-co",
         "repo": "hjem",
-        "rev": "08d2b170a74a102c230c9651d8989fe6b39dfad8",
+        "rev": "d628ecda714785fddf86cad28ee4f506dc5b7eb9",
         "type": "github"
       },
       "original": {
@@ -147,11 +147,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1784796856,
-        "narHash": "sha256-wWFrV5/Qbm+lyt5x20E/bSbfJiGKMo4RCxZV8cl/WZI=",
+        "lastModified": 1785454630,
+        "narHash": "sha256-LQy14TZp77TwbQf40gg1V3jo8FwJG0jGDkAH+zRHqg8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e2587caef70cea85dd97d7daab492899902dbf5d",
+        "rev": "1559d3daa3ecc813a650b79375ea61b6741b8746",
         "type": "github"
       },
       "original": {
@@ -170,11 +170,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784917177,
-        "narHash": "sha256-BunxD3nKN6oa4LXh9I3rAopolL0bloBtswKBXrm8hEE=",
+        "lastModified": 1785524545,
+        "narHash": "sha256-ILww3rsO4JA9bY2pV56Pg/VrRADQmIw/alhpM4eUIYY=",
         "owner": "NotAShelf",
         "repo": "nvf",
-        "rev": "07d5eb208b8f16306b10342b634da7e07e926fa5",
+        "rev": "fbf73761f56c7b41f8095bd1a8fcadefea30a05b",
         "type": "github"
       },
       "original": {
