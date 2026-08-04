@@ -54,7 +54,7 @@
         wl-screenrec # screen recorder
         brightnessctl # brightness ctl
         wlsunset # I need fucking blue light filter, my fucking eyes hurt
-        noctalia-shell # Noctalia Shell
+        noctalia # Noctalia v5
         wo.stmc-cursor # Cursor Package
       ];
     })
