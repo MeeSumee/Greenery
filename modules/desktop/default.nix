@@ -52,7 +52,8 @@
         {
           settings = {
             "org/gnome/desktop/interface" = {
-              gtk-theme = "rose-pine";
+              # gtk-theme = "rose-pine";
+              gtk-theme = "WhiteSur";
               icon-theme = "rose-pine";
               cursor-theme = "STMC-xcursor-nahida";
               cursor-size = lib.gvariant.mkInt32 32;
@@ -90,20 +91,20 @@
     # Forward themes and configs for desktop apps
     hjem.users = lib.genAttrs users (user: {
       files = let
-        themeName = "rose-pine";
-        themeDir = "${pkgs.rose-pine-gtk-theme}/share/themes/${themeName}";
+        # themeName = "rose-pine";
+        # themeDir = "${pkgs.rose-pine-gtk-theme}/share/themes/${themeName}";
         inherit (config.users.users.${user}) home;
+        # gtk-theme-name=rose-pine
+        # gtk-icon-theme-name=rose-pine-icons
         gtk-local-theme = ''
           [Settings]
-          gtk-theme-name=rose-pine
-          gtk-icon-theme-name=rose-pine-icons
           gtk-cursor-theme-name=STMC-xcursor-nahida
           gtk-cursor-theme-size=32
         '';
       in {
         # GTK local settings
-        ".config/gtk-4.0/assets".source = "${themeDir}/assets";
-        ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
+        # ".config/gtk-4.0/assets".source = "${themeDir}/assets";
+        # ".config/gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
         ".config/gtk-4.0/settings.ini".text = gtk-local-theme;
         ".config/gtk-3.0/settings.ini".text = gtk-local-theme;
         # Bookmarks for Nautilus

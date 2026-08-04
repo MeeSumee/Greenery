@@ -46,7 +46,8 @@
         nautilus # file browser
         gnome-calculator # calculator
         moonlight-qt # Remote to Windows GPU-Passthru
-        rose-pine-gtk-theme # Rose-Pine Gtk Theme
+        # rose-pine-gtk-theme # Rose-Pine Gtk Theme
+        whitesur-gtk-theme # Added temporarily to get rp added back to nixpkgs
         rose-pine-icon-theme # Rose-Pine Icon Theme
         slurp # area selection tool used for wl-screenrec
         wl-clipboard # clipboard manager
