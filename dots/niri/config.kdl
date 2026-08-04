@@ -386,7 +386,7 @@ binds {
   Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
   Mod+R hotkey-overlay-title="Run Prompt: noctalia launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
   Mod+E hotkey-overlay-title="Run Nautilus" { spawn "nautilus"; }
-  Mod+X hotkey-overlay-title="Open Calculator" { spawn "gnome-calculator"; }
+  Mod+X hotkey-overlay-title="Open Calculator" { spawn-sh "noctalia msg panel-toggle launcher /calc"; }
   Alt+F4 hotkey-overlay-title="Open Session Menu" { spawn-sh "noctalia msg panel-toggle session"; }
   Mod+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
   // Mod+L hotkey-overlay-title="Lock the Screen" { spawn "hyprlock"; }

@@ -44,7 +44,6 @@
         hunspellDicts.en_US # English language spellcheck
         gparted # disk management software
         nautilus # file browser
-        gnome-calculator # calculator
         moonlight-qt # Remote to Windows GPU-Passthru
         # rose-pine-gtk-theme # Rose-Pine Gtk Theme
         whitesur-gtk-theme # Added temporarily to get rp added back to nixpkgs

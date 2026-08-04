@@ -28,7 +28,7 @@ address = "Chicago"
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2" ]
+widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2", "lockscreen-widget-0000000000000001" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -83,7 +83,21 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2" ]
         show_media = true
         show_session_buttons = true
         show_unlock_hint = true
-        show_weather = true
+        show_weather = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 176.0
+    box_width = 384.0
+    cx = 960.0
+    cy = 244.0
+    output = "DP-2"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        color = "primary"
+        shadow = true
 
 [nightlight]
 enabled = true
@@ -103,7 +117,10 @@ password_style = "random"
 
 [theme]
 builtin = "Rosé Pine"
+community_palette = "Oxocarbon"
+mode = "dark"
 source = "wallpaper"
+wallpaper_scheme = "m3-content"
 
     [theme.templates]
     enable_community_templates = false
