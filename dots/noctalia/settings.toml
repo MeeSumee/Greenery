@@ -1,22 +1,11 @@
 [bar.default]
 background_opacity = 0.79999998211860657
 center = [ "workspaces" ]
-end = [
-    "media",
-    "tray",
-    "notifications",
-    "network",
-    "bluetooth",
-    "volume",
-    "brightness",
-    "battery",
-    "control-center",
-    "session"
-]
+end = [ "tray", "notifications", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "session" ]
 margin_ends = 0
 radius_top_left = 0
 radius_top_right = 0
-start = [ "launcher", "clock" ]
+start = [ "launcher", "clock", "media" ]
 widget_spacing = 20
 
 [desktop_widgets]
@@ -102,7 +91,7 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2", "lock
 [nightlight]
 enabled = true
 force = true
-temperature_day = 3500
+temperature_day = 3000
 
 [shell]
 app_icon_colorize = true
@@ -114,6 +103,44 @@ password_style = "random"
 
     [shell.panel]
     transparency_mode = "glass"
+
+    [shell.session]
+    grid_columns = 2
+
+        [[shell.session.actions]]
+        action = "lock"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "1"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "lock_and_suspend"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "2"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "logout"
+        countdown_seconds = 0.0
+        enabled = false
+        shortcut = "3"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "reboot"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "3"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "shutdown"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "4"
+        variant = "destructive"
 
 [theme]
 builtin = "Rosé Pine"
