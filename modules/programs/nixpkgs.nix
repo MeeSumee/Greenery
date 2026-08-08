@@ -44,16 +44,14 @@
         hunspellDicts.en_US # English language spellcheck
         gparted # disk management software
         nautilus # file browser
-        gnome-calculator # calculator
         moonlight-qt # Remote to Windows GPU-Passthru
-        rose-pine-gtk-theme # Rose-Pine Gtk Theme
         rose-pine-icon-theme # Rose-Pine Icon Theme
         slurp # area selection tool used for wl-screenrec
         wl-clipboard # clipboard manager
         wl-screenrec # screen recorder
         brightnessctl # brightness ctl
         wlsunset # I need fucking blue light filter, my fucking eyes hurt
-        noctalia-shell # Noctalia Shell
+        noctalia # Noctalia v5
         wo.stmc-cursor # Cursor Package
       ];
     })
@@ -68,7 +66,7 @@
         rare # GUI based on legendary which is a port of Epic Games
         prismlauncher # minecraft
         audacity # music editing software
-        # freecad # FreeCAD (it is actually good now)
+        freecad # FreeCAD (it is actually good now)
       ];
     })
   ];

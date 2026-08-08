@@ -60,7 +60,7 @@
         };
       in {
         ".config/niri/config.kdl".text = keybinds;
-        ".config/noctalia/settings.json".source = ../../dots/noctalia/settings.json;
+        ".config/noctalia/settings.toml".source = ../../dots/noctalia/settings.toml;
         "wallpapers/schizomiku.jpg".source = schizomiku;
       };
     });
