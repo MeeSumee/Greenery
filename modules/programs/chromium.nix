@@ -37,11 +37,14 @@
 
   # ublock policies as an attr set
   ublockPolicies = {
-    "defaultFiltering" = "complete";
+    "filteringModes" = {
+      "complete" = [
+        "all-urls"
+      ];
+    };
     "rulesets" = [
       "+adguard-mobile"
       "+block-lan"
-      "+dpollock-0"
       "+adguard-spyware-url"
       "+annoyances-ai"
       "+annoyances-cookies"
@@ -74,6 +77,7 @@
       "+lva-0"
       "+mkd-0"
       "+pol-0"
+      "+pol-3"
       "+rou-1"
       "+rus-0"
       "+rus-1"
