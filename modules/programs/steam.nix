@@ -9,7 +9,6 @@
     # Gaseous H2O
     programs.steam = {
       enable = true;
-      gamescopeSession.enable = true; # Gamescope for native xwayland windows
     };
   };
 }
