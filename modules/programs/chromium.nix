@@ -4,37 +4,6 @@
   pkgs,
   ...
 }: let
-  # Auto opens links on startup to download
-  chromeWebstoreCrxUrl = id: "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${pkgs.ungoogled-chromium.version}&x=id%3D${id}%26uc";
-
-  # Kinda annoying rn cause if version doesn't change, you delete hash file & perform nixos rebuild boot
-  deleteFirstRunFiles = ''
-    echo "checking if chromium hash changed..."
-    # configuration hash storage location, might need to be updated to some persistent location on your computer
-    CHROMIUM_HASH_FILE="$HOME/chromium-config.hash"
-    CURRENT_HASH="${
-      builtins.hashString "sha256" (
-        (builtins.toJSON config.programs.chromium.extensions)
-        + (builtins.toJSON config.programs.chromium.extraOpts.ExtensionSettings)
-        + (builtins.toJSON config.programs.chromium.initialPrefs)
-      )
-    }"
-    echo $CURRENT_HASH
-    if [ -f "$CHROMIUM_HASH_FILE" ]; then
-      STORED_HASH=$(cat "$CHROMIUM_HASH_FILE")
-      if [ "$STORED_HASH" = "$CURRENT_HASH" ]; then
-        echo "chromium hash unchanged, skipping deletion of 'First Run' files."
-        exit 0
-      fi
-    fi
-    echo "chromium hash changed, deleting 'First Run' files..."
-    if [ -f "$HOME/.config/chromium/First Run" ]; then
-      echo "Deleting '$HOME/.config/chromium/First Run'"
-      rm -f "$HOME/.config/chromium/First Run"
-    fi
-    echo "$CURRENT_HASH" > "$CHROMIUM_HASH_FILE"
-  '';
-
   # ublock policies as an attr set
   ublockPolicies = {
     "filteringModes" = {
@@ -97,10 +66,9 @@ in {
 
       # Extensions
       extensions = [
-        "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBOL
-        "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
-        "noimedcjdohhokijigpfcbjcfcaaahej" # Rose-Pine
-        "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+        "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx" # uBOL
+        "noimedcjdohhokijigpfcbjcfcaaahej;https://clients2.google.com/service/update2/crx" # Rose-Pine
+        "nngceckbapebfimnlniiiahkandclblb;https://clients2.google.com/service/update2/crx" # Bitwarden
       ];
 
       # DuckDuckGo stuff
@@ -136,17 +104,12 @@ in {
             # Pin ublock
             "ddkjiahejlhfcafbddmgiahcphecmpfh" = {
               installation_mode = "allowed";
-              "toolbar_pin" = "force_pinned";
+              toolbar_pin = "force_pinned";
             };
             # Pin Bitwarden
             "nngceckbapebfimnlniiiahkandclblb" = {
               installation_mode = "allowed";
-              "toolbar_pin" = "force_pinned";
-            };
-            # Pin dark reader
-            "eimadpbcbfnmbkopoojfekhnkhdbieeh" = {
-              installation_mode = "allowed";
-              "toolbar_pin" = "force_pinned";
+              toolbar_pin = "force_pinned";
             };
           };
 
@@ -181,10 +144,6 @@ in {
             "url" = "https://wiki.nixos.org/wiki/NixOS_Wiki";
           }
           {
-            "name" = "Ollama";
-            "url" = "ai.onca-ph.ts.net";
-          }
-          {
             "name" = "Manga";
             "url" = "manga.onca-ph.ts.net";
           }
@@ -210,99 +169,142 @@ in {
           }
         ];
 
+        # NO AI SLOP PLEASE
+        "AIModeSettings" = 1;
+        "BuiltInAIAPIsEnabled" = false;
+        "DevToolsGenAiSettings" = 2;
+        "GeminiActOnWebSettings" = 1;
+        "GeminiSparkSettings" = 1;
+        "GenAILocalFoundationalModelSettings" = 1;
+        "ThirdPartyAiChatSettings" = 1;
+
+        # Added from chromium hardening guides
+        # https://rknf404.github.io/chromium-hardening-guide/
+        "AlternateErrorPagesEnabled" = false;
+        "AudioSandboxEnabled" = true;
+        "AutofillAddressEnabled" = false;
+        "AutofillCreditCardEnabled" = false;
+        "AutofillPredictionSettings" = 2;
+        "AutomatedPasswordChangeSettings" = 2;
+        "BackgroundModeEnabled" = false;
+        "BlockExternalExtensions" = true;
+        "BlockThirdPartyCookies" = true;
+        "BrowserLabsEnabled" = false;
+        "BrowserSignin" = 0;
+        "ChromeSuggestionsSettings" = 1;
+        "ChromeVariations" = 2;
+        "ClearBrowsingDataOnExitList" = [
+          "download_history"
+          "cached_images_and_files"
+          "autofill"
+        ];
+        "ClickToCallEnabled" = false;
+        "CreateThemesSettings" = 2;
+        "DefaultBrowserSettingEnabled" = false;
+        "DefaultSensorsSetting" = 2;
+        "DesktopSharingHubEnabled" = false;
+        "Disable3DAPIs" = true;
+        "EnableMediaRouter" = false;
+        "ExtensionAllowedTypes" = [
+          "extension"
+          "theme"
+        ];
+        "ExtensionDeveloperModeSettings" = 1;
+        "ExtensionInstallAllowlist" = [
+          "ddkjiahejlhfcafbddmgiahcphecmpfh"
+          "nngceckbapebfimnlniiiahkandclblb"
+          "noimedcjdohhokijigpfcbjcfcaaahej"
+        ];
+        "ExtensionInstallBlocklist" = [
+          "*"
+        ];
+        "HelpMeWriteSettings" = 2;
+        "HistoryClustersVisible" = false;
+        "HistorySearchSettings" = 2;
+        "HttpsOnlyMode" = "force_enabled";
+        "LiveTranslateEnabled" = false;
+        "MediaRecommendationsEnabled" = false;
+        "MetricsReportingEnabled" = false;
+        "NTPCardsVisible" = false;
+        "NativeMessagingBlocklist" = [
+          "*"
+        ];
+        "NetworkPredictionOptions" = 2;
+        "NetworkServiceSandboxEnabled" = true;
+        "NewTabPageLocation" = "chrome://new-tab-page-third-party";
+        "PasswordLeakDetectionEnabled" = false;
+        "PasswordManagerEnabled" = false;
+        "PaymentMethodQueryEnabled" = false;
+        "PrivacySandboxAdMeasurementEnabled" = false;
+        "PrivacySandboxAdTopicsEnabled" = false;
+        "PrivacySandboxPromptEnabled" = false;
+        "PrivacySandboxSiteEnabledAdsEnabled" = false;
+        "PromotionsEnabled" = false;
+        "PromptForDownloadLocation" = true;
+        "RelatedWebsiteSetsEnabled" = false;
+        "RemoteAccessHostAllowRemoteAccessConnections" = false;
+        "RemoteAccessHostFirewallTraversal" = false;
+        "RemoteDebuggingAllowed" = false;
+        "SafeBrowsingDeepScanningEnabled" = false;
+        "SafeBrowsingExtendedReportingEnabled" = false;
+        "SafeBrowsingSurveysEnabled" = false;
+        "SearchContentSharingSettings" = 1;
+        "SearchSuggestEnabled" = false;
+        "SharedClipboardEnabled" = false;
+        "ShoppingListEnabled" = false;
+        "ShowFullUrlsInAddressBar" = true;
+        "SitePerProcess" = true;
+        "SpellCheckServiceEnabled" = false;
+        "SyncDisabled" = true;
+        "TabCompareSettings" = 2;
+        "TranslateEnabled" = false;
+        "TranslatorAPIAllowed" = false;
+        "UrlKeyedAnonymizedDataCollectionEnabled" = false;
+        "UserFeedbackAllowed" = false;
+        "VoiceTypingSettings" = 2;
+        "WebRtcIPHandling" = "disable_non_proxied_udp";
+        "WebRtcTextLogCollectionAllowed" = false;
+
         # 5 = Open New Tab Page
         # 1 = Restore the last session
         # 4 = Open a list of URLs
         # 6 = Open a list of URLs and restore the last session
         "RestoreOnStartup" = 1;
-
-        # 0 = Predict network actions on any network connection
-        # 2 = Do not predict network actions on any network connection
-        "NetworkPredictionOptions" = 0;
-
-        # Self-explanatory policies
-        "HttpsOnlyMode" = "force_enabled";
-        "MemorySaverModeSavings" = 1;
-        "SearchSuggestEnabled" = true;
-        "PasswordManagerEnabled" = false;
-        "SpellcheckEnabled" = true;
-        "SpellcheckLanguage" = [
-          "en-US"
-        ];
-      };
-
-      # The user has to confirm the installation of extensions on the first run
-      initialPrefs = {
-        "first_run_tabs" =
-          (map chromeWebstoreCrxUrl config.programs.chromium.extensions)
-          ++ [
-            "https://github.com/NeverDecaf/chromium-web-store/releases/latest/download/Chromium.Web.Store.crx"
-          ];
       };
     };
 
     nixpkgs.overlays = [
       (self: super: {
-        ungoogled-chromium = super.ungoogled-chromium.override {
+        chromium = super.chromium.override {
           commandLineArgs = [
             # Theming
             "--enable-incognito-themes"
             "--force-dark-mode"
             # For extension auto-install
             "--extension-mime-request-handling=always-prompt-for-install"
-            # Generate Noise to spoof fingerprinting mfs
-            "--fingerprinting-canvas-image-data-noise"
-            "--fingerprinting-canvas-measuretext-noise"
-            "--fingerprinting-client-rects-noise"
-            # Fingerprint Protection with console logs to see what's happening, Tab decluttering, User Agent Spoofing & other "fun" stuff
-            "--enable-features=WebUIDarkMode,EnableFingerprintingProtectionFilter:activation_level/enabled/enable_console_logging/true,EnableFingerprintingProtectionFilterInIncognito:activation_level/enabled/enable_console_logging/true,TabstripDeclutter,DevToolsPrivacyUI,ImprovedSettingsUIOnDesktop,MultiTabOrganization,OneTimePermission,TabOrganization,TabOrganizationSettingsVisibility,TabReorganization,TabReorganizationDivider,TabSearchPositionSetting,TabstripDedupe,TaskManagerDesktopRefresh,ReduceUserAgentDataLinuxPlatformVersion,ReducedSystemInfo,RemoveClientHints,WebRtcHideLocalIpsWithMdns,SpoofWebGLInfo:renderer/NVIDIA+GeForce+GTX+980%2C+or+similar/vendor/NVIDIA+Corporation"
-            # Fuck allowing cast to bind IP
-            "--disable-features=CastAllowAllIPs"
-            # Wayland Input Method (fcitx5)
-            "--enable-wayland-ime=true"
-            # GPU/Hardware Acceleration
-            "--render-node-override=/dev/dri/renderD128"
-            "--enable-gpu-rasterization"
+            "--use-fake-device-for-media-stream"
+            "--disable-reading-from-canvas"
+            "--component-updater=disable-pings"
+            "--disable-breakpad"
+            "--disable-crash-reporter"
+            "--no-default-browser-check"
+            "--disable-remote-fonts"
+            "--no-pings"
+            "--propagate-iph-for-testing"
+            "--js-flags=--jitless"
+            "--disable-webgl"
+            "--disable-3d-apis"
+            "--extension-content-verification=enforce_strict"
+            "--extensions-install-verification=enforce_strict"
+            "--enable-features=ClearCrossSiteCrossBrowsingContextGroupWindowName,CertificateTransparencyAskBeforeEnabling,IsolateSandboxedIframes:grouping/per-document,AllowWithholdingExtensionPermissionsOnInstall,DebuggerAPIRestrictedToDevMode,SearchEngineUnconditionalDialog,LocalNetworkAccessChecksWebRTC,PartitionAllocWithAdvancedChecks:enabled-processes/all-processes,OriginKeyedProcessesByDefault,HstsTopLevelNavigationsOnly,PartitionConnectionsByNetworkIsolationKey,ScopeMemoryCachePerContext,SplitCacheByIncludeCredentials,SplitCacheByNetworkIsolationKey,SplitCodeCacheByNetworkIsolationKey,ReduceAcceptLanguage,StrictOriginIsolation"
+            "--disable-features=AimEnabled,LensStandalone,StarterPackExpansion,AutofillServerCommunication,InterestFeedV2,NTPPopularSitesBakedInContent,Journeys,MediaDrmPreprovisioning,OptimizationHints,OptimizationHintsFetchingSRP,BrowsingTopics,BrowsingTopicsDocumentAPI,BrowsingTopicsParameters,PrivacySandboxSettings4,Reporting,CrashReporting,DocumentReporting,AllowSwiftShaderFallback,AllowSoftwareGLFallbackDueToCrash,TabHoverCardImages,WebGPUBlobCache,WebGPUService"
           ];
         };
       })
     ];
-
-    # Hardened systemd script cause I am paranoid
-    systemd.user.services.deleteChromiumFirstRun = {
-      script = deleteFirstRunFiles;
-      wantedBy = ["default.target"];
-      # Don't run command for 5 seconds instead of using a systemd check of whether system is running
-      preStart = ''
-        sleep 5
-      '';
-      serviceConfig = {
-        Type = "oneshot";
-        ProtectSystem = "full";
-        CapabilityBoundingSet = ["CAP_DAC_READ_SEARCH" "CAP_SYSLOG" "CAP_NET_BIND_SERVICE"];
-        ProtectClock = true;
-        NoNewPrivileges = true;
-        PrivateDevices = true;
-        PrivateMounts = true;
-        PrivateNetwork = true;
-        ProtectHostname = true;
-        ProtectKernelTunables = true;
-        ProtectKernelModules = true;
-        ProtectKernelLogs = true;
-        RestrictAddressFamilies = ["AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK"];
-        SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
-        ProtectControlGroups = true;
-        RestrictNamespaces = true;
-        LockPersonality = true;
-        MemoryDenyWriteExecute = true;
-        RestrictRealtime = true;
-        RestrictSUIDSGID = true;
-      };
-    };
-
     # Using machine-based isolation rather than per profile
     environment.systemPackages = with pkgs; [
-      ungoogled-chromium
+      chromium
     ];
   };
 }
