@@ -42,7 +42,7 @@
     },
     // Allow sharing of MC server to friends
     {
-      "src": ["autogroup:member"],
+      "src": ["*"],
       "dst": ["*"],
       "ip":  ["tcp:25565"],
     },
