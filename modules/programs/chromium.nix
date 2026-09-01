@@ -12,6 +12,12 @@
       ];
     };
     "rulesets" = [
+      "+easylist"
+      "+easyprivacy"
+      "+pgl"
+      "+ublock-badware"
+      "+ublock-filters"
+      "+urlhaus-full"
       "+adguard-mobile"
       "+block-lan"
       "+adguard-spyware-url"
