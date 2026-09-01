@@ -272,10 +272,7 @@ in {
         chromium = super.chromium.override {
           commandLineArgs = [
             # Theming
-            "--enable-incognito-themes"
             "--force-dark-mode"
-            # For extension auto-install
-            "--extension-mime-request-handling=always-prompt-for-install"
             "--use-fake-device-for-media-stream"
             "--disable-reading-from-canvas"
             "--component-updater=disable-pings"
