@@ -88,12 +88,7 @@ in {
                 installation_mode = "allowed";
               };
             })
-            (
-              config.programs.chromium.extensions
-              ++ [
-                "ocaahdebbfolfmndjeplogmgcagdmblk" # chromium web store
-              ]
-            )
+            config.programs.chromium.extensions
           ))
           // {
             "*" = {
@@ -302,7 +297,6 @@ in {
         };
       })
     ];
-    # Using machine-based isolation rather than per profile
     environment.systemPackages = with pkgs; [
       chromium
     ];
