@@ -74,7 +74,6 @@ in {
       extensions = [
         "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx" # uBOL
         "noimedcjdohhokijigpfcbjcfcaaahej;https://clients2.google.com/service/update2/crx" # Rose-Pine
-        "nngceckbapebfimnlniiiahkandclblb;https://clients2.google.com/service/update2/crx" # Bitwarden
       ];
 
       # DuckDuckGo stuff
@@ -104,11 +103,6 @@ in {
 
             # Pin ublock
             "ddkjiahejlhfcafbddmgiahcphecmpfh" = {
-              installation_mode = "allowed";
-              toolbar_pin = "force_pinned";
-            };
-            # Pin Bitwarden
-            "nngceckbapebfimnlniiiahkandclblb" = {
               installation_mode = "allowed";
               toolbar_pin = "force_pinned";
             };
@@ -213,7 +207,6 @@ in {
         "ExtensionDeveloperModeSettings" = 1;
         "ExtensionInstallAllowlist" = [
           "ddkjiahejlhfcafbddmgiahcphecmpfh"
-          "nngceckbapebfimnlniiiahkandclblb"
           "noimedcjdohhokijigpfcbjcfcaaahej"
         ];
         "ExtensionInstallBlocklist" = [
