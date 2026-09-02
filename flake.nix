@@ -110,7 +110,7 @@
     nixosConfigurations = callModule ./hosts {};
 
     # checks to validate and build systems (used in GitHub CI)
-    # imports from nixosConfigurations and iterates between each one as "nixos-quartz", "nixos-beryl", etc
+    # imports from nixosConfigurations and iterates between each one as "nixos-quartz", "nixos-greenery", etc
     # thanks Mic92
     checks = nixpkgs.lib.genAttrs (import systems) (
       system: let

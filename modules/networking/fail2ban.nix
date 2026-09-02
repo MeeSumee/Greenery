@@ -1,19 +1,16 @@
-{ 
-  config, 
-  lib, 
+{
+  config,
+  lib,
   ...
 }: {
-
   options.greenery.networking.fail2ban.enable = lib.mkEnableOption "fail2ban service";
 
   config = lib.mkIf (config.greenery.networking.fail2ban.enable && config.greenery.networking.enable) {
-
     services.fail2ban = {
       enable = true;
       maxretry = 3;
       ignoreIP = [
         "greenery.onca-ph.ts.net"
-        "beryl.onca-ph.ts.net"
         "obsidian.onca-ph.ts.net"
         "kaolin.onca-ph.ts.net"
         "quartz.onca-ph.ts.net"
