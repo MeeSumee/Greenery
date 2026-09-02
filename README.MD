@@ -1,10 +1,10 @@
-# My Configuration Repository
+# My NixOS Repository
 Consists of multiple devices:
 
 - [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): x86-based server with multiple services.
 - [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): Arm-based server with multiple services.
 - [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
-- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
+- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming and Workstation PC.
 
 ## Installation
 You may install as a flake to access my programs and modules using:
@@ -26,7 +26,6 @@ git clone https://github.com/MeeSumee/Greenery
 
 cd Greenery
 
-# Modify test.nix (or any host system) as needed (i.e adding users)
 # I highly recommend adding more RAM for GUI based configs (at least 5GB)
 
 nix run .#nixosConfigurations.$HOSTNAME.config.system.build.vm
@@ -198,6 +197,7 @@ Custom-built gaming pc that I mainly use at home.
 <details>
 <summary>Quartz PC Specifications</summary>
 <br>
+I know its impossible to build a PC now. This looks more like flexing rather than useful information.
 
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
 - RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP)
