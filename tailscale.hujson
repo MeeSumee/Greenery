@@ -63,6 +63,12 @@
         "udp:48010",
       ],
     },
+    // UPS-daemon
+    {
+      "src": ["autogroup:member"],
+      "dst": ["autogroup:member"],
+      "ip": ["tcp:3493"],
+    },
   ],
 
   // Define users and devices that can use Tailscale SSH.
