@@ -31,7 +31,6 @@ in {
           extraGroups = ["networkmanager" "wheel" "fuse"];
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEwTjZGFn9J8wwwSAxfIirryeMBBLofBNF7fZ40engRh はとっても可愛いですよ"
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGg78BA24qgFIDr0+8xgx1TH5PSOQd8qrtCwlyGUvTi0 本当に愛してぇる"
           ];
           hashedPasswordFile = config.age.secrets.secret6.path;

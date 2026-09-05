@@ -42,7 +42,7 @@
     },
     // Allow sharing of MC server to friends
     {
-      "src": ["autogroup:member"],
+      "src": ["*"],
       "dst": ["*"],
       "ip":  ["tcp:25565"],
     },
@@ -62,6 +62,12 @@
         "udp:48002",
         "udp:48010",
       ],
+    },
+    // UPS-daemon
+    {
+      "src": ["autogroup:member"],
+      "dst": ["autogroup:member"],
+      "ip": ["tcp:3493"],
     },
   ],
 

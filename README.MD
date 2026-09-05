@@ -1,12 +1,10 @@
-# My Configuration Repository
+# My NixOS Repository
 Consists of multiple devices:
 
 - [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): x86-based server with multiple services.
 - [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): Arm-based server with multiple services.
 - [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
-- [Beryl](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#beryl): Personal Laptop for offsite provisioning.
-- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming PC hosting Ollama.
-- [Graphite](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#graphite): Fedora-WSL that I tinker on occasion.
+- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming and Workstation PC.
 
 ## Installation
 You may install as a flake to access my programs and modules using:
@@ -28,7 +26,6 @@ git clone https://github.com/MeeSumee/Greenery
 
 cd Greenery
 
-# Modify test.nix (or any host system) as needed (i.e adding users)
 # I highly recommend adding more RAM for GUI based configs (at least 5GB)
 
 nix run .#nixosConfigurations.$HOSTNAME.config.system.build.vm
@@ -50,8 +47,6 @@ Reverse proxied using caddy-tailscale plugin.
 Raspberry Pi 4 Model B with 8GB of RAM.
 
 Hosts Anki Sync, Davis, 2fauth, VaultWarden, & Home Assistant.
-
-Future Endeavors: Network UPS Tools
 
 ## Kaolin
 
@@ -195,43 +190,14 @@ With this setup, it will enable you to use Tailscale as a way to connect to Clou
 
 </details>
 
-## Beryl
-
-ASUSTek Zenbook S13 OLED formerly used for college, now is my plaything for managing nix configs whenever I'm not at home.
-
-Problems: 
-
-- AMDGPU crash prevelent in mainly hardware-accelerated scenarios. Was also observed when Windows was installed. Due to the issue being a relatively rare scenario (once every month or two), I'm not in a hurry to fix it.
-
-Future Endeavors: Fix random pagefault AMDGPU crashes from Youtube/demanding HWAccel Tasks
-
-<details>
-<summary>Enabling USB4 on Zenbook S13 OLED (UM5302TA)</summary>
-<br>
-
-This is not recommended for most users as it involves "hacking" the
-BIOS. DO IT AT YOUR OWN RISK.
-
-UM5302TA is one of the few laptops capable of USB4, but disabled by the
-manufacturer due to potential instability with specific devices. 
-Despite knowing the risk, I've decided to enable USB4 using 
-[UniversalAMDFormBrowser](https://github.com/DavidS95/Smokeless_UMAF/blob/main/UniversalAMDFormBrowser.zip) by following this reddit [post](https://www.reddit.com/r/ASUS/comments/13omq1e/zenbook_s13_bios_update_for_usb_4_whats_going_on/).
-Note that there are three options when enabling USB4.
-
-To activate USB4 on NixOS, set ```services.hardware.bolt.enable``` to true.
-Test your USB4 ports using boltctl, if there's instability, disable bolt service.
-
-</details>
-
 ## Quartz
 
-Custom-built gaming pc intended for workstation and gaming.
-
-Runs ollama with openwebui for locally hosted AI (used primarily for resume/cover letter generation, excel scripts, OCR, and language translation)
+Custom-built gaming pc that I mainly use at home.
 
 <details>
 <summary>Quartz PC Specifications</summary>
 <br>
+I know its impossible to build a PC now. This looks more like flexing rather than useful information.
 
 - CPU: [Intel i9-12900K non-oxidizing edition](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
 - RAM: [GSkill Ripjaws S5 32GB DDR5-6000](https://www.gskill.com/products/1/165/377/Ripjaws-S5-DDR5-Intel-XMP)
@@ -239,19 +205,6 @@ Runs ollama with openwebui for locally hosted AI (used primarily for resume/cove
 - GPU: [XFX SPEEDSTER MERC 319 AMD RX 6950 XT](https://www.xfxforce.com/shop/xfx-speedster-merc-319-amd-radeon-tm-rx-6950-xt-black)
 
 </details>
-
-## Graphite
-
-Windows Worktop with Fedora-WSL.
-
-Configuration located under dots.
-
-Don't have much to say, I only have lazyvim & fish config that are used.
-
-fedora-install.txt can be used to autodownload all the required programs using:
-```bash
-sudo dnf install $(cat fedora-install.txt)
-```
 
 ## Credits
 [Rexcrazy804](https://github.com/Rexcrazy804) for carrying me to the state I am.
@@ -265,8 +218,6 @@ Despite me abandoning quickshell development, I've to thank these quickshillers 
 [Outfoxxed](https://quickshell.outfoxxed.me/), [Soramane](https://github.com/caelestia-dots/shell), [Ly-sec](https://github.com/noctalia-dev/noctalia-shell), [end_4 (Hi for swapped.txt)](https://github.com/end-4/dots-hyprland), [Rexcrazy804 (Hai~)](https://github.com/Rexcrazy804/Zaphkiel/tree/master/users/dots/quickshell/kurukurubar), [bbedward](https://github.com/bbedward/DankMaterialShell)
 
 Several other gists, discussions & forums that solve problems for anything really.
-
-I also want to thank the folks of UAFB who made USB4 possible.
 
 ## Licensing
 All code in this repository is under the MIT license unless wherever an
