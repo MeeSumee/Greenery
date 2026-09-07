@@ -150,8 +150,6 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
       listen_addresses = [
         "100.105.111.66:53"
         "[fd7a:115c:a1e0::b637:7f6f]:53"
-        "127.0.0.1:53"
-        "[::1]:53"
       ];
     };
 
