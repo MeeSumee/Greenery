@@ -61,7 +61,7 @@
   # Pi programs
   environment.systemPackages = with pkgs; [
     libraspberrypi
-    raspberrypi-eeprom
+    # raspberrypi-eeprom
   ];
 
   # Agenix keyfile
