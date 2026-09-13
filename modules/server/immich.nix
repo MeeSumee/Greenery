@@ -14,7 +14,7 @@
         mediaLocation = "/run/media/sumee/emerald/services/immich";
         machine-learning.enable = false;
 
-        host = "0.0.0.0";
+        host = "127.0.0.1";
 
         # Intel QSV accel Device
         accelerationDevices = [
