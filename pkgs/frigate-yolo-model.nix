@@ -51,7 +51,7 @@ in
       owner = "WongKinYiu";
       repo = "yolov9";
       inherit rev;
-      hash = "sha256-0RXqFJvjzXqjAnWsFalouiET42DGT0SQpazz4aNxdPE=";
+      hash = "sha256-DJ2iM+xb00NKaomUcoe7BI/O7mHNu5ARmy/SJYsCEEg=";
     };
 
     nativeBuildInputs = [pythonEnv];
