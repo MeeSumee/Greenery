@@ -132,6 +132,22 @@ in {
                 roles = ["detect" "record"];
               }
             ];
+            record = {
+              # Disable for now
+              enabled = false;
+              retain = {
+                days = 7;
+                mode = "motion";
+              };
+              events = {
+                retain = {
+                  days = 7;
+                  mode = "active_objects";
+                };
+                pre_capture = 15;
+                post_capture = 15;
+              };
+            };
             detect = {
               width = 1280;
               height = 720;
