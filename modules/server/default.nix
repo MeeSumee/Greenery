@@ -9,6 +9,7 @@
     ./auth.nix
     ./davis.nix
     ./files.nix
+    ./frigate.nix
     ./home.nix
     ./immich.nix
     ./jellyfin.nix
