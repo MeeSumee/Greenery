@@ -3,7 +3,7 @@
   stdenv,
   fetchFromGitHub,
   fetchurl,
-  python311,
+  python3,
 }: let
   # Pinned so the export is reproducible - the upstream Docker recipe just
   # `git clone`s the default branch, which nix can't do reproducibly.
@@ -22,7 +22,7 @@
   # pycocotools, tensorboard, seaborn, thop, gitpython, scipy) that aren't actually
   # imported on the `--include onnx` export path (albumentations is a lazy/optional
   # import; the rest simply aren't referenced by this path at all).
-  pythonEnv = python311.withPackages (ps:
+  pythonEnv = python3.withPackages (ps:
     with ps; [
       torch
       torchvision
