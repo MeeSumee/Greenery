@@ -41,6 +41,7 @@
       onnxruntime
       onnxscript
       setuptools
+      standard-pkg-resources
     ]);
 in
   stdenv.mkDerivation {
