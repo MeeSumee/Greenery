@@ -3,7 +3,6 @@
   inputs,
   pkgs,
   config,
-  lib,
   ...
 }: {
   nixpkgs = {
@@ -13,16 +12,25 @@
 
   # Enable core nix features
   nix = {
-    # Garbage collect okay for kaolin as VPS SSDs have redundancy
-    gc = lib.mkIf (config.networking.hostName == "kaolin") {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
+    # Kaolin has faster gc than other systems as its a VPS with limited storage
+    gc =
+      if (config.networking.hostName == "kaolin")
+      then {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 3d";
+      }
+      else {
+        automatic = true;
+        dates = "monthly";
+        options = "--delete-older-than 14d";
+      };
+    # Let nix daemon run as an idle process and not eat CPU
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
     package = pkgs.nixVersions.latest;
     registry.nixpkgs.flake = inputs.nixpkgs;
+    # Disable channels
     channel.enable = false;
     settings = {
       flake-registry = "/etc/nix/registry.json";

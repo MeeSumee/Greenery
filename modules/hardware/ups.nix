@@ -20,7 +20,7 @@
         # Client side monitoring
         upsmon = {
           monitor."SMX1500RMUNC" = {
-            system = "SMX1500RMUNC@100.75.197.21";
+            system = "SMX1500RMUNC@verdure";
             powerValue = 1;
             type = "secondary";
             user = "nut-observer";
@@ -129,6 +129,10 @@
             }
             {
               address = "::1";
+              port = 3493;
+            }
+            {
+              address = "fd7a:115c:a1e0::c737:c515";
               port = 3493;
             }
           ];

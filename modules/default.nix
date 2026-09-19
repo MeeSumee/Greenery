@@ -68,6 +68,7 @@
       auth.enable = true;
       davis.enable = true;
       files.enable = true;
+      frigate.enable = true;
       home.enable = true;
       immich.enable = true;
       jellyfin.enable = true;

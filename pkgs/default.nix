@@ -12,6 +12,7 @@ lib.fix (self: let
 in {
   stmc-cursor = callPackage ./stmc.nix {};
   davinci = callPackage ./davinci.nix {};
+  frigate-yolo-model = callPackage ./frigate-yolo-model.nix {};
   dickord = pkgs.equibop.override {
     withTTS = false;
     withMiddleClickScroll = true;

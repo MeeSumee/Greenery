@@ -274,7 +274,6 @@ in {
             # Theming
             "--force-dark-mode"
             "--use-fake-device-for-media-stream"
-            "--disable-reading-from-canvas"
             "--component-updater=disable-pings"
             "--disable-breakpad"
             "--disable-crash-reporter"

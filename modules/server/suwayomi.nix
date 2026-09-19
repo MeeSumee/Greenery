@@ -41,7 +41,7 @@
           data = "/run/media/sumee/emerald/services/suwayomi-server";
         in {
           server = {
-            ip = "0.0.0.0";
+            ip = "127.0.0.1";
             port = 4567;
 
             # Auth

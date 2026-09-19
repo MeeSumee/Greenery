@@ -9,6 +9,7 @@
     ./auth.nix
     ./davis.nix
     ./files.nix
+    ./frigate.nix
     ./home.nix
     ./immich.nix
     ./jellyfin.nix
@@ -45,9 +46,10 @@
       environmentFile = config.age.secrets.secret7.path;
       package = pkgs.wo.caddyscale;
       # Age file has contents TS_AUTH=<insert your auth key>
+      # Need to update env variable everytime the auth key expires just to invoke a caddy rebuild
       globalConfig = ''
         tailscale {
-          auth_key {$TS_AUTH}
+          auth_key {$TS_AUT}
         }
       '';
     };

@@ -22,6 +22,7 @@
       nano.enable = false;
 
       # nvim config
+      # https://nvf.notashelf.dev/options.html
       nvf = {
         enable = true;
         settings = {
@@ -85,7 +86,7 @@
 
             statusline.lualine = {
               enable = true;
-              theme = "auto";
+              setupOpts.options.theme = "auto";
             };
 
             tabline = {

@@ -112,10 +112,11 @@
     server = {
       enable = true;
       files.enable = true;
+      frigate.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
       memos.enable = true;
-      motioneye.enable = true;
+      # motioneye.enable = true;
       suwayomi.enable = true;
     };
 
