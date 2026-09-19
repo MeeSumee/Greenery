@@ -82,7 +82,7 @@ jobs:
           nix-permission-edict: true # Ensure install nix action has the right permissions
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v22
+        uses: DeterminateSystems/nix-installer-action@v23
         with:
           extra-conf: |
             build-dir = /nix/build
