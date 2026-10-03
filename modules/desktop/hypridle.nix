@@ -15,7 +15,7 @@
 
     # Fix paths
     systemd.user.services.hypridle.path = lib.mkForce (lib.attrValues {
-      inherit (pkgs) brightnessctl systemd coreutils noctalia-shell;
+      inherit (pkgs) brightnessctl systemd coreutils noctalia;
       hyprlock = config.programs.hyprlock.package;
       hyprland = config.programs.hyprland.package;
       niri = config.programs.niri.package;
@@ -33,7 +33,7 @@
           ];
           # noctalia-qs fixes most of the monitor reloading crashes I think
           to = [
-            "noctalia-shell ipc call lockScreen lock"
+            "noctalia msg session lock"
             # "pidof hyprlock || hyprlock"
             "niri msg action power-on-monitors"
             "niri msg action power-off-monitors"
