@@ -9,9 +9,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "21605ccaecf26941005d4a7a3c1267af234599cf",
-      "url": "https://github.com/StevenBlack/hosts/archive/21605ccaecf26941005d4a7a3c1267af234599cf.tar.gz",
-      "hash": "sha256-YqEwyvlwH+si0AnhMuGE8irKUcqotrcxTRh27F0DOc8="
+      "revision": "2025dea10a1d17c41acf1035056e5c4a2913ebfc",
+      "url": "https://github.com/StevenBlack/hosts/archive/2025dea10a1d17c41acf1035056e5c4a2913ebfc.tar.gz",
+      "hash": "sha256-nxkGu1hRH2Qw+/VzkCCizngSzDH6dTPPFrjWCnn/xJY="
     },
     "catfuzzel": {
       "type": "Git",
@@ -100,9 +100,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "7d3b517adc0eb52b43c4b22bdc774b062271f969",
-      "url": "https://github.com/rose-pine/fish/archive/7d3b517adc0eb52b43c4b22bdc774b062271f969.tar.gz",
-      "hash": "sha256-V+MKT2YqkuIqvWtbuB2/Sdn2siZwBKcZSewRe62DBp0="
+      "revision": "b4ccaddaafc91d3c991d542830fdf2fb61128ba0",
+      "url": "https://github.com/rose-pine/fish/archive/b4ccaddaafc91d3c991d542830fdf2fb61128ba0.tar.gz",
+      "hash": "sha256-nTMaJ2sKa/EyvH5iOndS6Q0mdjFOqIiSh/gnLmdb5t8="
     }
   },
   "version": 8
