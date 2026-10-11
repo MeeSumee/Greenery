@@ -184,5 +184,11 @@ in {
 
     # For /dev/video0 access
     users.users.frigate.extraGroups = ["video"];
+
+    # The frigate module hardens its unit with MemoryDenyWriteExecute=true, which seccomp-blocks
+    # mmap/mprotect calls that add PROT_EXEC - but Intel's GPU compute stack (IGC) JIT-compiles
+    # kernels at runtime for OpenVINO's GPU plugin, so every attempt gets EPERM'd
+    # ("can't protect" in plugin.cpp). Relax just this one flag to let the iGPU detector run.
+    systemd.services.frigate.serviceConfig.MemoryDenyWriteExecute = lib.mkForce false;
   };
 }
