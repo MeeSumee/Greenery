@@ -39,7 +39,6 @@
       seaborn
       onnx
       onnxruntime
-      onnxscript
       setuptools
       standard-pkg-resources
     ]);
@@ -65,6 +64,9 @@ in
       # it anchors the match to that one call so we don't touch unrelated map_location='cpu' uses.
       substituteInPlace models/experimental.py \
         --replace-fail "map_location='cpu')" "map_location='cpu', weights_only=False)"
+      # Need to add this to remove the failed check
+      substituteInPlace export.py \
+        --replace-fail "do_constant_folding=True," "do_constant_folding=True, dynamo=False,"
       runHook postPatch
     '';
 

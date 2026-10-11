@@ -17,6 +17,9 @@
         enable = true;
         extraPackages = with pkgs; [
           intel-ocl
+          # OpenCL/Level-Zero runtime for the iGPU itself - intel-ocl above is CPU-only,
+          # so without this nothing backs OpenVINO's GPU plugin (needed by Frigate's detector)
+          intel-compute-runtime
           intel-media-driver
           vpl-gpu-rt
         ];
