@@ -94,6 +94,15 @@ in {
   config = lib.mkIf (config.greenery.server.frigate.enable && config.greenery.server.enable) {
     # Frigate NVR Server
     services = {
+      # NixOS packages go2rtc as its own systemd unit (unlike the Docker image, where
+      # it runs as a sibling process Frigate launches itself) - services.frigate only
+      # declares After=go2rtc.service, it never enables or configures it, so this has
+      # to be turned on and given the stream config explicitly or nothing listens on 8554.
+      go2rtc = {
+        enable = true;
+        settings.streams.usb_camera = ["ffmpeg:device?video=0&video_size=1280x720#video=h264"];
+      };
+
       frigate = {
         enable = true;
         checkConfig = true;
@@ -121,6 +130,8 @@ in {
           # Hardware-accelerated decode via the same iGPU
           ffmpeg.hwaccel_args = "preset-vaapi";
 
+          # Mirrors services.go2rtc.settings.streams above - frigate.yml needs this too so
+          # Frigate's own API/live-view knows the stream exists, but it does NOT start go2rtc.
           go2rtc.streams.usb_camera = ["ffmpeg:device?video=0&video_size=1280x720#video=h264"];
 
           cameras.usb_camera = {
@@ -128,7 +139,7 @@ in {
             ffmpeg.inputs = [
               {
                 path = "rtsp://127.0.0.1:8554/usb_camera";
-                input_args = ["preset-rtsp-restream"];
+                input_args = "preset-rtsp-restream";
                 roles = ["detect" "record"];
               }
             ];
