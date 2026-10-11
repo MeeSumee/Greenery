@@ -98,8 +98,6 @@ in {
         enable = true;
         checkConfig = true;
         hostname = "localhost";
-        # SupplementaryGroups already includes "render", so no extra group needed for iGPU access
-        vaapiDriver = "iHD";
         settings = {
           mqtt.enabled = false;
 
@@ -123,45 +121,51 @@ in {
           # Hardware-accelerated decode via the same iGPU
           ffmpeg.hwaccel_args = "preset-vaapi";
 
+          go2rtc.streams.usb_camera = "ffmpeg:device?video=0&video_size=1280x720#video=h264";
+
           cameras.usb_camera = {
+            enabled = true;
             ffmpeg.inputs = [
               {
-                path = "/dev/video0";
-                # Tune resolution/format/framerate to match `v4l2-ctl --list-formats-ext -d /dev/video0`
-                input_args = ["-f" "v4l2" "-input_format" "mjpeg" "-video_size" "1280x720" "-framerate" "15"];
+                path = "rtsp://127.0.0.1:8554/usb_camera";
+                input_args = ["preset-rtsp-restream"];
                 roles = ["detect" "record"];
               }
             ];
             record = {
-              # Disable for now
-              enabled = false;
-              retain = {
-                days = 7;
-                mode = "motion";
-              };
-              events = {
+              enabled = true;
+              continuous.days = 0;
+              motion.days = 3;
+              alerts = {
                 retain = {
-                  days = 7;
-                  mode = "active_objects";
+                  days = 14;
+                  mode = "motion";
                 };
-                pre_capture = 15;
-                post_capture = 15;
               };
             };
             detect = {
+              enabled = true;
               width = 1280;
               height = 720;
-              fps = 5;
             };
           };
         };
       };
+
+      # Override listen
+      nginx.virtualHosts."localhost".listen = [
+        {
+          addr = "127.0.0.1";
+          port = 8080;
+        }
+      ];
+      # Proxy again
       caddy = {
         enable = true;
         virtualHosts."https://frigate.onca-ph.ts.net" = {
           extraConfig = ''
             bind tailscale/frigate
-            reverse_proxy localhost:5000
+            reverse_proxy localhost:8080
           '';
         };
       };
