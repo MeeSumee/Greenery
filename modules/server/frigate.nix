@@ -155,7 +155,7 @@ in {
               };
             };
             detect = {
-              enabled = true;
+              enabled = false;
               width = 1280;
               height = 720;
             };
