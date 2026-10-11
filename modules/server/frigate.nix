@@ -121,7 +121,7 @@ in {
           # Hardware-accelerated decode via the same iGPU
           ffmpeg.hwaccel_args = "preset-vaapi";
 
-          go2rtc.streams.usb_camera = "ffmpeg:device?video=0&video_size=1280x720#video=h264";
+          go2rtc.streams.usb_camera = ["ffmpeg:device?video=0&video_size=1280x720#video=h264"];
 
           cameras.usb_camera = {
             enabled = true;
