@@ -282,7 +282,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// Start noctalia-shell
+// Start noctalia
 spawn-at-startup "noctalia"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.

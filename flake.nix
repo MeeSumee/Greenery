@@ -62,12 +62,7 @@
     # Agenix
     agenix = {
       url = "github:ryantm/agenix";
-      inputs = {
-        darwin.follows = "";
-        home-manager.follows = "";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
