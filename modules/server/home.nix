@@ -68,7 +68,6 @@
 
       # Hardening
       "podman-hass".serviceConfig = {
-        NoNewPrivileges = true;
         ProtectHome = true;
         ProtectSystem = "full";
         PrivateTmp = "disconnected";
@@ -86,7 +85,6 @@
 
       # Podman hardening
       "podman".serviceConfig = {
-        NoNewPrivileges = true;
         ProtectHome = true;
         ProtectSystem = "full";
         PrivateTmp = "disconnected";

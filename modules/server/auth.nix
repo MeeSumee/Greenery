@@ -70,7 +70,6 @@ in {
 
       # Hardening
       "podman-2fauth".serviceConfig = {
-        NoNewPrivileges = true;
         ProtectHome = true;
         ProtectSystem = "full";
         PrivateTmp = "disconnected";
@@ -88,7 +87,6 @@ in {
 
       # Podman hardening
       "podman".serviceConfig = {
-        NoNewPrivileges = true;
         ProtectHome = true;
         ProtectSystem = "full";
         PrivateTmp = "disconnected";
