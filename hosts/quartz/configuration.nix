@@ -16,13 +16,6 @@
 ⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠀⠀⠈⠉⠉⠉⠉⠁⠈⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀
 */
 {
-  # Import nixos-shell
-  imports = [inputs.nixos-shell.nixosModules.nixos-shell];
-  virtualisation = {
-    memorySize = 2048;
-    diskSize = 5 * 1024;
-  };
-
   # All modules and their values
   greenery = {
     desktop = {

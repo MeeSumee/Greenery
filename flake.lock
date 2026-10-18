@@ -140,6 +140,26 @@
         "type": "github"
       }
     },
+    "nixos-shell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791308053,
+        "narHash": "sha256-Cg1BQmDLvNwT7NJxCGAXX2ow8WD19GnWhJqdjsJNKLo=",
+        "owner": "Mic92",
+        "repo": "nixos-shell",
+        "rev": "42368097a2c9936a8a6fe032bf2fcd0ffb3a45e8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "nixos-shell",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1791956154,
@@ -185,6 +205,7 @@
         "asusnumpad": "asusnumpad",
         "hjem": "hjem",
         "lanzaboote": "lanzaboote",
+        "nixos-shell": "nixos-shell",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
         "rust-overlay": "rust-overlay",
