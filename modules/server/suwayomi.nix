@@ -32,6 +32,7 @@ in {
         labels = {
           "io.containers.autoupdate" = "registry";
         };
+        environmentFiles = [config.age.secrets.secret2.path];
         environment = {
           "TZ" = config.time.timeZone;
 
@@ -42,7 +43,6 @@ in {
           # Auth
           "AUTH_MODE" = "basic_auth";
           "AUTH_USERNAME" = "sumee";
-          "AUTH_PASSWORD_FILE" = "/run/secrets/suwayomi_auth_password";
 
           # WebUI
           "WEB_UI_UPDATE_INTERVAL" = "0";
@@ -81,7 +81,6 @@ in {
           "${data}/downloads:/home/suwayomi/.local/share/Tachidesk/downloads:rw"
           "${data}/local:/home/suwayomi/.local/share/Tachidesk/local:rw"
           "${data}/backups:/home/suwayomi/.local/share/Tachidesk/backups:rw"
-          "${config.age.secrets.secret2.path}:/run/secrets/suwayomi_auth_password:ro"
         ];
         log-driver = "journald";
         extraOptions = [
