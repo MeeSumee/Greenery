@@ -88,6 +88,10 @@ in {
           # Restrict permissions & only have what is defined
           "--security-opt=no-new-privileges:true"
           "--cap-drop=ALL"
+          # Needed for the container runtime to switch from root to the
+          # image's unprivileged "suwayomi" (uid 1000) user at startup
+          "--cap-add=SETUID"
+          "--cap-add=SETGID"
 
           # Use host networking to reach flaresolverr & be reverse-proxied via localhost
           "--network=host"
