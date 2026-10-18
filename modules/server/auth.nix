@@ -43,6 +43,12 @@ in {
           "${port}:${port}/tcp"
         ];
         log-driver = "journald";
+        extraOptions = [
+          # 2FAuth already runs as a non-root (1000:1000) user internally and
+          # doesn't need to chown/setuid anything, so no caps need to be added back
+          "--security-opt=no-new-privileges:true"
+          "--cap-drop=ALL"
+        ];
       };
     };
 
@@ -62,32 +68,40 @@ in {
 
       # Hardening
       "podman-2fauth".serviceConfig = {
+        NoNewPrivileges = true;
         ProtectHome = true;
-        ProtectSystem = true;
+        ProtectSystem = "full";
         PrivateTmp = "disconnected";
         ProtectClock = true;
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
+        ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
+        RestrictSUIDSGID = true;
         LockPersonality = true;
         SystemCallArchitectures = "native";
         RemoveIPC = true;
+        UMask = "0077";
       };
 
       # Podman hardening
       "podman".serviceConfig = {
+        NoNewPrivileges = true;
         ProtectHome = true;
-        ProtectSystem = true;
+        ProtectSystem = "full";
         PrivateTmp = "disconnected";
         ProtectClock = true;
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
+        ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
+        RestrictSUIDSGID = true;
         LockPersonality = true;
         SystemCallArchitectures = "native";
         RemoveIPC = true;
+        UMask = "0077";
       };
     };
   };
