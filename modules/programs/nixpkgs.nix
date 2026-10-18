@@ -3,7 +3,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
 }: {
   # Options maker
@@ -60,7 +59,6 @@
     # Large/Demanding applications
     (lib.mkIf (config.greenery.programs.heavy.enable && config.greenery.programs.enable) {
       environment.systemPackages = with pkgs; [
-        inputs.nixos-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
         wo.dickord # Equibop with overrides
         gimp # GIMP image manipulator
         kicad-small # KiCAD Electronic schematic/PCB designer

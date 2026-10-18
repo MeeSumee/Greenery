@@ -21,12 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nixos-shell
-    nixos-shell = {
-      url = "github:Mic92/nixos-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Nix-Systems
     systems.url = "github:nix-systems/default";
 
