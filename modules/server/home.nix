@@ -78,7 +78,6 @@
         ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
-        RestrictSUIDSGID = true;
         LockPersonality = true;
         SystemCallArchitectures = "native";
         RemoveIPC = true;
@@ -97,7 +96,6 @@
         ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
-        RestrictSUIDSGID = true;
         LockPersonality = true;
         SystemCallArchitectures = "native";
         RemoveIPC = true;
