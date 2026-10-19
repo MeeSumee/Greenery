@@ -33,12 +33,23 @@ nix run .#nixosConfigurations.$HOSTNAME.config.system.build.vm
 
 I also documented how to install from scratch on my [wiki](https://github.com/MeeSumee/Greenery/wiki/Installation)
 
+## Updates
+Due to more annoyance in maintenance of my servers, my Raspberry Pi will run Fedora CoreOS
+with services running as podman containers.
+
+I am also more inclined to convert my main desktop PC to CachyOS as I taught one of my friends irl
+with CachyOS. (Only reason I'd use Cachy over Arch is less steps towards a complete setup)
+
+Greenery might remain on nixos due to its high dependence on it.
+
+Kaolin will remain on nixos due to its low maintenance and fast deployment on any VPS.
+
 ## Greenery
 Dell XPS 8940 with i7-11700.
 
 Acts as a home exit-node.
 
-Hosts Jellyfin, Immich, FileBrowser, Suwayomi, MotionEye & Memos.
+Hosts Jellyfin, Immich, Davis, & Memos.
 
 Reverse proxied using caddy-tailscale plugin.
 
@@ -46,7 +57,7 @@ Reverse proxied using caddy-tailscale plugin.
 
 Raspberry Pi 4 Model B with 8GB of RAM.
 
-Hosts Anki Sync, Davis, 2fauth, VaultWarden, & Home Assistant.
+Hosts 2fauth, VaultWarden, & Home Assistant.
 
 ## Kaolin
 
