@@ -82,7 +82,6 @@ in {
         LockPersonality = true;
         SystemCallArchitectures = "native";
         RemoveIPC = true;
-        UMask = "0077";
       };
 
       # Podman hardening
