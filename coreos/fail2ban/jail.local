@@ -1,0 +1,21 @@
+# Replicates modules/networking/fail2ban.nix exactly:
+# maxretry=3, bantime=48h with exponential bantime-increment up to 1680h
+# (10 weeks), ignoring sibling tailnet hosts. fail2ban is layered via
+# rpm-ostree (systemd/layer-packages.service); this file is just dropped
+# in directly since fail2ban has no equivalent of NixOS's declarative module.
+[DEFAULT]
+maxretry = 3
+bantime = 48h
+
+bantime.increment = true
+bantime.formula = ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)
+bantime.maxtime = 1680h
+bantime.overalljails = true
+
+# NOTE: fail2ban resolves hostnames in ignoreip at startup; if that proves
+# flaky on this box, replace with the sibling hosts' current Tailscale IPs
+# instead (cross-reference coreos/dnscrypt-proxy/cloaking-rules.txt).
+ignoreip = 127.0.0.1/8 ::1 greenery.onca-ph.ts.net obsidian.onca-ph.ts.net kaolin.onca-ph.ts.net quartz.onca-ph.ts.net
+
+[sshd]
+enabled = true

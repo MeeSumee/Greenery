@@ -1,0 +1,5 @@
+# Bootstrap-only placeholder, shipped via Ignition so dnscrypt-proxy has a
+# valid (if empty) blocked_names_file to read before the first real fetch
+# completes. update-blocklist.service overwrites this at every boot (and
+# weekly via update-blocklist.timer) with StevenBlack's unified hosts list
+# -- see coreos/dnscrypt-proxy/update-blocklist.sh. Nothing to fill in here.

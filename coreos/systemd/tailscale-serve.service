@@ -1,0 +1,20 @@
+# Native tailscale-serve replacement for the Caddy + caddy-tailscale vhosts
+# in modules/server/{home,auth,vaultwarden}.nix. Uses Tailscale virtual
+# services so each app keeps its exact current subdomain
+# (home./auth./vault.onca-ph.ts.net) with no app-side URL changes -- see
+# plan §3. Requires verdure to be a tagged device with ACL grants for
+# svc:home/svc:auth/svc:vault (plan §7, item 4) *before* this will succeed.
+[Unit]
+Description=Configure Tailscale virtual services for app reverse proxying
+After=tailscale-up.service hass.service 2fauth.service vaultwarden.service
+Requires=tailscale-up.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/podman exec tailscaled tailscale serve --service=svc:home  --bg --https=443 localhost:8123
+ExecStart=/usr/bin/podman exec tailscaled tailscale serve --service=svc:auth  --bg --https=443 localhost:8000
+ExecStart=/usr/bin/podman exec tailscaled tailscale serve --service=svc:vault --bg --https=443 localhost:8222
+
+[Install]
+WantedBy=multi-user.target

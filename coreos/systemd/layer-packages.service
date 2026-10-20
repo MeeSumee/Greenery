@@ -1,0 +1,34 @@
+# One-time rpm-ostree layering for fail2ban, dnscrypt-proxy, nut, bluez,
+# borgbackup, and age -- these need to exist as host-level binaries/packages
+# (no NixOS modules to port, and NUT/bluez both need direct hardware access
+# which is easier at the host level than fighting container device
+# passthrough -- see plan §7 item 5). bluez replaces
+# modules/networking/bluetooth.nix's `hardware.bluetooth.enable = true`
+# (verdure's RPi4 onboard Bluetooth is used by a Home Assistant integration
+# over the host D-Bus socket -- see hass.container's /run/dbus mount).
+# borgbackup and age ride along here too rather than a custom container
+# image / vendored static binary respectively: both are plain Fedora RPMs,
+# so this gets normal security updates through rpm-ostree instead of being
+# frozen at whatever was fetched once, at no extra cost since this
+# layer/reboot already has to happen anyway. Everything else
+# (configuration) is dropped in directly by Ignition as plain config files;
+# only the binaries come from rpm-ostree.
+#
+# This reboots the box ONCE after first boot to activate the new deployment
+# layer -- acceptable since it's a one-time provisioning event, not a
+# recurring one. decrypt-secrets.service / fail2ban.service /
+# dnscrypt-proxy.service / nut-server.service / bluetooth.service /
+# borgbackup.service are all ordered After/Requires= this so they don't
+# try to start before the packages exist.
+[Unit]
+Description=Layer fail2ban, dnscrypt-proxy, nut, bluez, borgbackup, age via rpm-ostree
+ConditionPathExists=!/var/lib/layered-packages-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rpm-ostree install --idempotent --allow-inactive fail2ban dnscrypt-proxy nut bluez borgbackup age btop
+ExecStart=/usr/bin/touch /var/lib/layered-packages-done
+ExecStart=/usr/bin/systemctl reboot
+
+[Install]
+WantedBy=multi-user.target

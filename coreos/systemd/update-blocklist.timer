@@ -1,0 +1,13 @@
+# Weekly refresh, offset from borgbackup.timer (Mon 04:00) so they don't
+# compete for network/CPU. Jittered slightly to avoid hammering GitHub at
+# the exact same second as every other box that copied this timer.
+[Unit]
+Description=Weekly refresh of the StevenBlack hosts blocklist
+
+[Timer]
+OnCalendar=Sun 03:00:00
+Persistent=true
+RandomizedDelaySec=30m
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,30 @@
+# Replaces services.borgbackup.jobs.grass (hosts/verdure/configuration.nix).
+# Points at the SAME existing repo on `seed` with the SAME SSH identity and
+# passphrase as today -- this must append to the existing archive chain,
+# never re-init. The passphrase comes from /run/secrets/secret1, decrypted
+# by decrypt-secrets.service directly from the existing secrets/secret1.age
+# (unmodified) -- the exact same value the live NixOS box already uses as
+# its passCommand output, so no re-init/passphrase-mismatch risk.
+#
+# Runs the host-layered `borg` binary directly (rpm-ostree, see
+# layer-packages.service) rather than in a container -- borgbackup ships as
+# a plain Fedora RPM, so there's no benefit to a custom image here.
+#
+# /var/lib/postgresql is replaced by /var/lib/vaultwarden (now SQLite-backed,
+# see vaultwarden.container). ExecStartPre makes a SQLite online-backup-API
+# copy first so Borg never backs up a file that's mid-write -- strictly
+# safer than the old raw Postgres-datadir approach this replaces.
+[Unit]
+Description=Weekly Borg backup to seed
+After=decrypt-secrets.service layer-packages.service network-online.target
+Requires=decrypt-secrets.service layer-packages.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+Environment=BORG_RSH=ssh -i /home/sumee/.ssh/id_ed25519 -o StrictHostKeyChecking=accept-new
+Environment=BORG_PASSCOMMAND=cat /run/secrets/secret1
+ExecStartPre=/usr/bin/sqlite3 /var/lib/vaultwarden/db.sqlite3 ".backup /var/lib/vaultwarden/db.sqlite3.bak"
+ExecStart=/usr/bin/borg create --compression auto,zstd \
+  "ssh://sumee@seed//mnt/md0/verback::verdure-{now:%Y-%m-%d_%H:%M}" \
+  /var/lib/2fauth /var/lib/hass /var/lib/vaultwarden

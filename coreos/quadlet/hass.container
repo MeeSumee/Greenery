@@ -1,0 +1,26 @@
+# 1:1 port of the NixOS oci-containers.containers."hass" definition
+# (modules/server/home.nix in the flake repo).
+[Unit]
+Description=Home Assistant
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/home-assistant/home-assistant:stable
+ContainerName=hass
+AutoUpdate=registry
+Network=host
+Volume=/var/lib/hass:/config:rw
+Volume=/run/dbus:/run/dbus:ro
+Environment=TZ=America/Chicago
+NoNewPrivileges=true
+DropCapability=ALL
+AddCapability=NET_RAW NET_ADMIN CHOWN DAC_OVERRIDE FSETID FOWNER SETGID SETUID SYS_CHROOT KILL
+LogDriver=journald
+
+[Service]
+Restart=always
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+# Exact match for the current startAt = "Mon 04:00:00".
+[Unit]
+Description=Weekly Borg backup timer
+
+[Timer]
+OnCalendar=Mon 04:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

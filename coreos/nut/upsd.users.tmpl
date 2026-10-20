@@ -1,0 +1,15 @@
+# Template rendered by systemd/render-nut-config.service at boot --
+# both __NUT_ADMIN_PASS__ and __NUT_OBSERVER_PASS__ are substituted with
+# the SAME value, decrypted from the existing secret1.age (see
+# coreos/README.md "Secrets"), matching modules/hardware/ups.nix's
+# passwordFile = secret1.path for both users today.
+# Replicates modules/hardware/ups.nix's upsd.users block exactly.
+[nut-admin]
+    password = __NUT_ADMIN_PASS__
+    actions = SET FSD
+    instcmds = ALL
+    upsmon primary
+
+[nut-observer]
+    password = __NUT_OBSERVER_PASS__
+    upsmon secondary

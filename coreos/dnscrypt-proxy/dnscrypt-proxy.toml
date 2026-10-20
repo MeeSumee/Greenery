@@ -1,0 +1,35 @@
+# Replicates modules/networking/dnscrypt.nix exactly. dnscrypt-proxy is
+# layered via rpm-ostree (systemd/layer-packages.service); this file (plus
+# the companion forwarding-rules.txt/cloaking-rules.txt/blocklist.txt) is
+# dropped in directly to /etc/dnscrypt-proxy/ since there's no NixOS-module
+# equivalent to generate it from.
+listen_addresses = ['127.0.0.1:53', '[::1]:53']
+ipv4_servers = true
+ipv6_servers = true
+doh_servers = true
+require_dnssec = true
+
+bootstrap_resolvers = ['9.9.9.11:53', '1.1.1.1:53']
+
+# ts.net queries are forwarded to Tailscale's internal resolver.
+forwarding_rules = '/etc/dnscrypt-proxy/forwarding-rules.txt'
+
+# Per-host tailnet hostname -> IPv6 mappings.
+cloaking_rules = '/etc/dnscrypt-proxy/cloaking-rules.txt'
+
+# Quad9, no-filter, chosen for privacy -- same servers as today.
+server_names = ['quad9-dnscrypt-ip4-nofilter-pri', 'quad9-dnscrypt-ip6-nofilter-pri']
+
+[sources.'public-resolvers']
+urls = [
+  'https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md',
+  'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md',
+]
+cache_file = '/var/lib/dnscrypt-proxy/public-resolvers.md'
+minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+
+[blocked_names]
+# Replaces the npins-pinned blocklist source from the old
+# modules/networking/dnscrypt.nix with a live weekly fetch of StevenBlack's
+# unified hosts list -- see update-blocklist.service/.timer.
+blocked_names_file = '/etc/dnscrypt-proxy/blocklist.txt'

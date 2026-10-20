@@ -1,0 +1,22 @@
+[Unit]
+Description=Tailscale daemon
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/tailscale/tailscale:stable
+ContainerName=tailscaled
+Network=host
+Volume=/var/lib/tailscale:/var/lib/tailscale
+Volume=/dev/net/tun:/dev/net/tun
+AddCapability=NET_ADMIN NET_RAW
+Environment=TS_STATE_DIR=/var/lib/tailscale
+Environment=TS_USERSPACE=false
+LogDriver=journald
+
+[Service]
+Restart=always
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target

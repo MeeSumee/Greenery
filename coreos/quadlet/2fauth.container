@@ -1,0 +1,31 @@
+# Port of oci-containers.containers."2fauth" (modules/server/auth.nix).
+# EnvironmentFile is decrypted from secret3.age by decrypt-secrets.service at boot.
+[Unit]
+Description=2FAuth
+After=network-online.target decrypt-secrets.service tailscaled.service
+Requires=decrypt-secrets.service
+Wants=network-online.target
+
+[Container]
+Image=docker.io/2fauth/2fauth:latest
+ContainerName=2fauth
+AutoUpdate=registry
+EnvironmentFile=/run/secrets/2fauth.env
+Environment=APP_ENV=production
+Environment=APP_URL=https://auth.onca-ph.ts.net
+Environment=ASSET_URL=https://auth.onca-ph.ts.net
+Environment=DB_CONNECTION=sqlite
+Environment=DB_DATABASE=/srv/database/database.sqlite
+Volume=/var/lib/2fauth:/2fauth:rw
+PublishPort=127.0.0.1:8000:8000
+NoNewPrivileges=true
+DropCapability=ALL
+AddCapability=SETUID SETGID
+LogDriver=journald
+
+[Service]
+Restart=always
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target

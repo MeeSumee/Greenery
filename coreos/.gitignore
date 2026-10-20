@@ -1,0 +1,4 @@
+# Decrypted/raw secret material and generated Ignition output must never be committed.
+secrets/*
+!secrets/.gitkeep
+*.ign

@@ -1,0 +1,39 @@
+# Template rendered by systemd/render-nut-config.service at boot --
+# __NUT_ADMIN_PASS__ is substituted from the existing secret1.age (see
+# coreos/README.md "Secrets"), same value used for the NUT users in
+# upsd.users.tmpl and the Borg passphrase. Replicates the server-side
+# upsmon block (primary monitor of localhost) in modules/hardware/ups.nix,
+# including the NOTIFYMSG/NOTIFYFLAG table and timing values.
+MONITOR SMX1500RMUNC@localhost 1 nut-admin __NUT_ADMIN_PASS__ primary
+
+MINSUPPLIES 1
+POLLFREQ 5
+POLLFREQALERT 5
+HOSTSYNC 15
+DEADTIME 15
+POWERDOWNFLAG /etc/killpower
+RBWARNTIME 216000
+NOCOMMWARNTIME 300
+FINALDELAY 0
+
+NOTIFYMSG ONLINE "UPS %s: On line power."
+NOTIFYMSG ONBATT "UPS %s: On battery."
+NOTIFYMSG LOWBATT "UPS %s: Battery is low."
+NOTIFYMSG REPLBATT "UPS %s: Battery needs to be replaced."
+NOTIFYMSG FSD "UPS %s: Forced shutdown in progress."
+NOTIFYMSG SHUTDOWN "Auto logout and shutdown proceeding."
+NOTIFYMSG COMMOK "UPS %s: Communications (re-)established."
+NOTIFYMSG COMMBAD "UPS %s: Communications lost."
+NOTIFYMSG NOCOMM "UPS %s: Not available."
+NOTIFYMSG NOPARENT "upsmon parent dead, shutdown impossible."
+
+NOTIFYFLAG ONLINE SYSLOG+WALL
+NOTIFYFLAG ONBATT SYSLOG+WALL
+NOTIFYFLAG LOWBATT SYSLOG+WALL
+NOTIFYFLAG REPLBATT SYSLOG+WALL
+NOTIFYFLAG FSD SYSLOG+WALL
+NOTIFYFLAG SHUTDOWN SYSLOG+WALL
+NOTIFYFLAG COMMOK SYSLOG+WALL
+NOTIFYFLAG COMMBAD SYSLOG+WALL
+NOTIFYFLAG NOCOMM SYSLOG+WALL
+NOTIFYFLAG NOPARENT SYSLOG+WALL

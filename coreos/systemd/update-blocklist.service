@@ -1,0 +1,20 @@
+# Fetches/refreshes dnscrypt-proxy's blocklist from StevenBlack's hosts
+# repo (see coreos/dnscrypt-proxy/update-blocklist.sh). Runs once at every
+# boot (so a from-scratch provision has a populated blocklist even before
+# the weekly timer fires) and again on the schedule in
+# update-blocklist.timer. `systemctl try-restart` inside the script is
+# best-effort -- if dnscrypt-proxy isn't installed/running yet (e.g. this
+# runs before layer-packages.service's one-time reboot), the fetch still
+# succeeds and dnscrypt-proxy picks up the file whenever it does start.
+[Unit]
+Description=Refresh StevenBlack hosts blocklist for dnscrypt-proxy
+After=network-online.target
+Wants=network-online.target
+Before=dnscrypt-proxy.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/update-blocklist.sh
+
+[Install]
+WantedBy=multi-user.target

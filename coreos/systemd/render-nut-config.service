@@ -1,0 +1,30 @@
+# NUT's upsd.users/upsmon.conf have no "passwordFile" indirection like the
+# NixOS power.ups module provided -- this renders the decrypted password
+# from /run/secrets into the real config files at boot, matching what the
+# Nix module did at activation time.
+#
+# Both nut-admin and nut-observer use the SAME /run/secrets/secret1 value
+# below -- this isn't a simplification, it's the existing repo's actual
+# behavior: modules/hardware/ups.nix sets passwordFile =
+# config.age.secrets.secret1.path for both NUT users (and for the Borg
+# passphrase too, see borgbackup.service). Preserved as-is for parity
+# rather than splitting it, since secret1.age isn't being re-encrypted.
+[Unit]
+Description=Render NUT config with decrypted secrets
+After=decrypt-secrets.service layer-packages.service
+Requires=decrypt-secrets.service
+Before=nut-server.service nut-monitor.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/sh -c '\
+  PASS=$(cat /run/secrets/secret1); \
+  sed -e "s/__NUT_ADMIN_PASS__/$PASS/" -e "s/__NUT_OBSERVER_PASS__/$PASS/" /etc/nut/upsd.users.tmpl > /etc/nut/upsd.users; \
+  sed -e "s/__NUT_ADMIN_PASS__/$PASS/" /etc/nut/upsmon.conf.tmpl > /etc/nut/upsmon.conf \
+'
+ExecStartPost=/usr/bin/chmod 0640 /etc/nut/upsd.users /etc/nut/upsmon.conf
+ExecStartPost=/usr/bin/chown root:nut /etc/nut/upsd.users /etc/nut/upsmon.conf
+
+[Install]
+WantedBy=multi-user.target

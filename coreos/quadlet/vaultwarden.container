@@ -1,0 +1,37 @@
+# Replaces the native NixOS services.vaultwarden + Postgres setup
+# (modules/server/vaultwarden.nix). Backend migrated to SQLite per the
+# approved migration plan -- see coreos/README.md for the one-time
+# Postgres -> SQLite export step that must run before first boot of this unit.
+#
+# ROCKET_ADDRESS is 0.0.0.0 *inside* the container network namespace;
+# PublishPort below restricts it to localhost on the host, preserving the
+# "only Caddy/tailscale serve on localhost can reach it" property that
+# ROCKET_ADDRESS=127.0.0.1 gave for free under the native NixOS service.
+[Unit]
+Description=Vaultwarden
+After=network-online.target decrypt-secrets.service tailscaled.service
+Requires=decrypt-secrets.service
+Wants=network-online.target
+
+[Container]
+Image=docker.io/vaultwarden/server:latest
+ContainerName=vaultwarden
+AutoUpdate=registry
+EnvironmentFile=/run/secrets/vaultwarden.env
+Environment=DOMAIN=https://vault.onca-ph.ts.net
+Environment=SIGNUPS_ALLOWED=false
+Environment=ROCKET_ADDRESS=0.0.0.0
+Environment=ROCKET_PORT=8222
+Environment=ROCKET_LOG=critical
+Volume=/var/lib/vaultwarden:/data:rw
+PublishPort=127.0.0.1:8222:8222
+NoNewPrivileges=true
+DropCapability=ALL
+LogDriver=journald
+
+[Service]
+Restart=always
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target

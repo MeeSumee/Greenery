@@ -1,0 +1,40 @@
+# Brings the node up, equivalent to the current
+# extraSetFlags = ["--operator=sumee" "--accept-routes" "--accept-dns=false"]
+# in modules/networking/tailscale.nix. Auth key comes from the existing
+# secret7.age (previously Caddy's Tailscale auth key, now used directly
+# for `tailscale up`), decrypted by decrypt-secrets.service into
+# /run/secrets/tailscale.env. The variable inside that file is literally
+# named TS_AUT (not TS_AUTH) -- that's an existing quirk/typo baked into
+# the live ciphertext (see modules/server/default.nix's Caddyfile, which
+# references {$TS_AUT}), carried forward as-is since the secret isn't
+# being re-encrypted.
+#
+# IMPORTANT: use --hostname=verdure-fcos during validation (see plan §1) so
+# this coexists with the live NixOS "verdure" node. Switch to
+# --hostname=verdure only at the final cutover step, after the old node's
+# Tailscale identity has been disabled in the admin console.
+#
+# --advertise-tags requires the tag to already be defined in the tailnet
+# ACL policy with this node's key authorized to claim it -- required for
+# tailscale-serve.service's virtual services to work at all (plan §3/§7).
+[Unit]
+Description=Bring up Tailscale node
+After=tailscaled.service decrypt-secrets.service
+Requires=tailscaled.service decrypt-secrets.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/sh -c '\
+  . /run/secrets/tailscale.env; \
+  exec /usr/bin/podman exec tailscaled tailscale up \
+    --operator=sumee \
+    --accept-routes \
+    --accept-dns=false \
+    --authkey="$TS_AUT" \
+    --hostname=verdure-fcos \
+    --advertise-tags=tag:server \
+'
+
+[Install]
+WantedBy=multi-user.target

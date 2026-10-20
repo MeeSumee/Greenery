@@ -1,0 +1,183 @@
+# Compile from the REPO ROOT (not from inside coreos/) so local file
+# references can reach both coreos/ and the existing top-level secrets/:
+#
+#   butane --pretty --strict coreos/butane/verdure.bu --files-dir . > coreos/verdure.ign
+#
+# Secrets are read directly from the repo's existing agenix secrets/*.age --
+# no re-encryption, no separate host age keypair. The SSH private key
+# deployed below for Borg (secrets/id_ed25519, user-supplied, gitignored)
+# is already an authorized age/agenix recipient for secret1/3/7/8.age (see
+# secrets/agenix-rules.nix: secret1/3/8 -> `cute`, secret7 -> `unison`,
+# both of which include the personal key that ends up at
+# /home/sumee/.ssh/id_ed25519 on every host) -- age natively accepts
+# ssh-ed25519 keys as decryption identities, so the exact same key already
+# used for agenix on the live NixOS box works here unchanged.
+
+variant: fcos
+version: 1.7.0
+
+passwd:
+  users:
+    - name: sumee
+      groups: [wheel]
+      ssh_authorized_keys:
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHITLg3/cEFB883XDG1KnaSmEAkYbqOBJMziWmfEadqO ナヒーダの白い髪"
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGg78BA24qgFIDr0+8xgx1TH5PSOQd8qrtCwlyGUvTi0 本当に愛してぇる"
+
+storage:
+  directories:
+    - path: /etc/containers/systemd
+      mode: 0755
+    - path: /etc/secrets
+      mode: 0700
+    - path: /var/lib/hass
+      mode: 0755
+    - path: /var/lib/2fauth
+      mode: 0755
+    - path: /var/lib/vaultwarden
+      mode: 0755
+    - path: /var/lib/tailscale
+      mode: 0700
+    - path: /home/sumee/.ssh
+      mode: 0700
+      user: {name: sumee}
+      group: {name: sumee}
+
+  files:
+    # --- Existing agenix secrets, referenced directly from the repo root --
+    # same ciphertext that's already committed in secrets/, untouched. ---
+    - path: /etc/secrets/secret1.age
+      contents: {local: secrets/secret1.age}
+    - path: /etc/secrets/secret3.age
+      contents: {local: secrets/secret3.age}
+    - path: /etc/secrets/secret7.age
+      contents: {local: secrets/secret7.age}
+    - path: /etc/secrets/secret8.age
+      contents: {local: secrets/secret8.age}
+
+    # --- Borg SSH identity to `seed` (same key material as today, see §5
+    # of the plan) -- doubles as the age decryption identity above. Supply
+    # at coreos/secrets/id_ed25519, kept gitignored; never committed. ---
+    - path: /home/sumee/.ssh/id_ed25519
+      mode: 0400
+      user: {name: sumee}
+      group: {name: sumee}
+      contents: {local: coreos/secrets/id_ed25519}
+
+    # --- StevenBlack hosts-blocklist fetcher for dnscrypt-proxy ---
+    - path: /usr/local/bin/update-blocklist.sh
+      mode: 0755
+      contents: {local: coreos/dnscrypt-proxy/update-blocklist.sh}
+
+    # --- Quadlet container units ---
+    - path: /etc/containers/systemd/tailscaled.container
+      contents: {local: coreos/quadlet/tailscaled.container}
+    - path: /etc/containers/systemd/hass.container
+      contents: {local: coreos/quadlet/hass.container}
+    - path: /etc/containers/systemd/2fauth.container
+      contents: {local: coreos/quadlet/2fauth.container}
+    - path: /etc/containers/systemd/vaultwarden.container
+      contents: {local: coreos/quadlet/vaultwarden.container}
+
+    # --- Plain systemd units (secrets decrypt, tailscale bring-up/serve, borg, one-time package layering, NUT config render) ---
+    - path: /etc/systemd/system/decrypt-secrets.service
+      contents: {local: coreos/systemd/decrypt-secrets.service}
+    - path: /etc/systemd/system/tailscale-up.service
+      contents: {local: coreos/systemd/tailscale-up.service}
+    - path: /etc/systemd/system/tailscale-serve.service
+      contents: {local: coreos/systemd/tailscale-serve.service}
+    - path: /etc/systemd/system/borgbackup.service
+      contents: {local: coreos/systemd/borgbackup.service}
+    - path: /etc/systemd/system/borgbackup.timer
+      contents: {local: coreos/systemd/borgbackup.timer}
+    - path: /etc/systemd/system/layer-packages.service
+      contents: {local: coreos/systemd/layer-packages.service}
+    - path: /etc/systemd/system/render-nut-config.service
+      contents: {local: coreos/systemd/render-nut-config.service}
+    - path: /etc/systemd/system/update-blocklist.service
+      contents: {local: coreos/systemd/update-blocklist.service}
+    - path: /etc/systemd/system/update-blocklist.timer
+      contents: {local: coreos/systemd/update-blocklist.timer}
+
+    # --- fail2ban (binary layered by layer-packages.service, config dropped in directly) ---
+    - path: /etc/fail2ban/jail.local
+      contents: {local: coreos/fail2ban/jail.local}
+
+    # --- dnscrypt-proxy (binary layered, config dropped in directly) ---
+    - path: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+      contents: {local: coreos/dnscrypt-proxy/dnscrypt-proxy.toml}
+    - path: /etc/dnscrypt-proxy/forwarding-rules.txt
+      contents: {local: coreos/dnscrypt-proxy/forwarding-rules.txt}
+    - path: /etc/dnscrypt-proxy/cloaking-rules.txt
+      contents: {local: coreos/dnscrypt-proxy/cloaking-rules.txt}
+    - path: /etc/dnscrypt-proxy/blocklist.txt
+      contents: {local: coreos/dnscrypt-proxy/blocklist.txt}
+    # --- NetworkManager (random MAC spoofing, DHCP hostname-leak
+    # mitigation, dns=none for dnscrypt-proxy -- ports
+    # modules/networking/default.nix's connection-privacy settings) ---
+    - path: /etc/NetworkManager/NetworkManager.conf
+      contents: {local: coreos/networkmanager/NetworkManager.conf}
+    - path: /etc/resolv.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          nameserver 127.0.0.1
+          nameserver ::1
+
+    # --- NUT (binary layered, config dropped in directly; upsd.users/upsmon.conf are templates rendered at boot) ---
+    - path: /etc/nut/ups.conf
+      contents: {local: coreos/nut/ups.conf}
+    - path: /etc/nut/upsd.conf
+      contents: {local: coreos/nut/upsd.conf}
+    - path: /etc/nut/upsd.users.tmpl
+      contents: {local: coreos/nut/upsd.users.tmpl}
+    - path: /etc/nut/upsmon.conf.tmpl
+      contents: {local: coreos/nut/upsmon.conf.tmpl}
+
+    # --- nftables (SSH + NUT restricted to tailscale0, matching current posture) ---
+    - path: /etc/nftables.conf
+      contents: {local: coreos/nftables/nftables.conf}
+
+systemd:
+  units:
+    - name: sshd.service
+      enabled: true
+    - name: nftables.service
+      enabled: true
+    - name: systemd-resolved.service
+      mask: true
+    - name: layer-packages.service
+      enabled: true
+    - name: decrypt-secrets.service
+      enabled: true
+    - name: render-nut-config.service
+      enabled: true
+    - name: update-blocklist.service
+      enabled: true
+    - name: update-blocklist.timer
+      enabled: true
+    - name: dnscrypt-proxy.service
+      enabled: true
+    - name: bluetooth.service
+      enabled: true
+    - name: tailscaled.service
+      enabled: true
+    - name: tailscale-up.service
+      enabled: true
+    - name: tailscale-serve.service
+      enabled: true
+    - name: hass.service
+      enabled: true
+    - name: 2fauth.service
+      enabled: true
+    - name: vaultwarden.service
+      enabled: true
+    - name: borgbackup.timer
+      enabled: true
+    - name: fail2ban.service
+      enabled: true
+    - name: nut-server.service
+      enabled: true
+    - name: nut-monitor.service
+      enabled: true
