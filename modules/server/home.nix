@@ -69,11 +69,12 @@
       # Hardening
       "podman-hass".serviceConfig = {
         ProtectHome = true;
-        ProtectSystem = true;
+        ProtectSystem = "full";
         PrivateTmp = "disconnected";
         ProtectClock = true;
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
+        ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
         LockPersonality = true;
@@ -84,16 +85,18 @@
       # Podman hardening
       "podman".serviceConfig = {
         ProtectHome = true;
-        ProtectSystem = true;
+        ProtectSystem = "full";
         PrivateTmp = "disconnected";
         ProtectClock = true;
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
+        ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
         LockPersonality = true;
         SystemCallArchitectures = "native";
         RemoveIPC = true;
+        UMask = "0077";
       };
     };
   };

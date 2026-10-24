@@ -43,6 +43,14 @@ in {
           "${port}:${port}/tcp"
         ];
         log-driver = "journald";
+        extraOptions = [
+          "--security-opt=no-new-privileges:true"
+          "--cap-drop=ALL"
+          # Needed for the container runtime to switch from root to the
+          # image's baked-in unprivileged (1000:1000) user at startup
+          "--cap-add=SETUID"
+          "--cap-add=SETGID"
+        ];
       };
     };
 
@@ -63,11 +71,12 @@ in {
       # Hardening
       "podman-2fauth".serviceConfig = {
         ProtectHome = true;
-        ProtectSystem = true;
+        ProtectSystem = "full";
         PrivateTmp = "disconnected";
         ProtectClock = true;
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
+        ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
         LockPersonality = true;
@@ -78,16 +87,18 @@ in {
       # Podman hardening
       "podman".serviceConfig = {
         ProtectHome = true;
-        ProtectSystem = true;
+        ProtectSystem = "full";
         PrivateTmp = "disconnected";
         ProtectClock = true;
         ProtectKernelModules = true;
         ProtectKernelLogs = true;
+        ProtectProc = "invisible";
         PrivateMounts = true;
         RestrictRealtime = true;
         LockPersonality = true;
         SystemCallArchitectures = "native";
         RemoveIPC = true;
+        UMask = "0077";
       };
     };
   };

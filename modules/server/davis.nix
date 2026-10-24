@@ -21,7 +21,7 @@ in {
         adminLogin = "sumee";
         adminPasswordFile = config.age.secrets.secret1.path;
         appSecretFile = config.age.secrets.secret4.path;
-        # Enable webdav solely for GrapheneOS Seedvault backups lmfao
+        dataDir = "/run/media/sumee/emerald/services/davis";
         config = {
           WEBDAV_ENABLED = lib.mkForce true;
           WEBDAV_TMP_DIR = "${config.services.davis.dataDir}/webdav/tmp";

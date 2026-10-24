@@ -18,7 +18,7 @@ in {
   "secret1.age".publicKeys = cute;
   "secret2.age".publicKeys = nahida;
   "secret3.age".publicKeys = cute;
-  "secret4.age".publicKeys = cute;
+  "secret4.age".publicKeys = nahida;
   "secret5.age".publicKeys = soft ++ nahida;
   "secret6.age".publicKeys = sumee ++ nahida;
   "secret7.age".publicKeys = unison;
