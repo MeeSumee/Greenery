@@ -126,20 +126,41 @@ root.)
 2. `decrypt-secrets.service` decrypts `secret1/3/7/8.age` into
    `/run/secrets` (tmpfs), using the now-layered `age` binary and
    `/home/sumee/.ssh/id_ed25519` as the identity.
-3. `render-nut-config.service` substitutes the NUT password into
-   `upsd.users`/`upsmon.conf`.
-4. `tailscaled.container` starts, `tailscale-up.service` brings the node
+3. `enable-layered-units.service` runs `systemctl enable` for
+   `dnscrypt-proxy`/`nut-server`/`nut-monitor` (not started yet — see
+   below) and `systemctl enable --now` for `fail2ban`/`bluetooth` (safe to
+   start immediately, no config-render dependency). These five can only be
+   enabled now, post-reboot — Ignition itself can't enable them earlier
+   since their unit files don't exist until this point (see "Gotcha"
+   below).
+4. `render-nut-config.service` substitutes the NUT password into
+   `upsd.users`/`upsmon.conf`, then itself starts `nut-server`/
+   `nut-monitor` — deliberately not started by step 3, so they never come
+   up with the literal `__NUT_ADMIN_PASS__` placeholder still in place.
+5. `tailscaled.container` starts, `tailscale-up.service` brings the node
    up as `verdure-fcos` (see note in that file about renaming to `verdure`
    at cutover).
-5. `hass.container`, `2fauth.container`, `vaultwarden.container` start.
-6. `tailscale-serve.service` wires up the three virtual services.
-7. `update-blocklist.service` fetches StevenBlack's hosts list and
-   converts it into `/etc/dnscrypt-proxy/blocklist.txt` (runs again weekly
-   via `update-blocklist.timer`, `Sun 03:00:00`).
-8. `fail2ban.service`, `dnscrypt-proxy.service`, `bluetooth.service`,
-   `nut-server.service`, `nut-monitor.service` start (now that their
-   binaries are layered).
+6. `hass.container`, `2fauth.container`, `vaultwarden.container` start.
+7. `tailscale-serve.service` wires up the three virtual services.
+8. `update-blocklist.service` fetches StevenBlack's hosts list into
+   `/etc/dnscrypt-proxy/blocklist.txt`, then starts `dnscrypt-proxy`
+   itself — again deliberately not started by step 3, so it never starts
+   against a missing/stale blocklist. Runs again weekly via
+   `update-blocklist.timer`, `Sun 03:00:00`.
 9. `borgbackup.timer` is armed for the next `Mon 04:00:00`.
+
+**Gotcha this sequence exists to avoid**: `fail2ban.service`,
+`dnscrypt-proxy.service`, `bluetooth.service`, `nut-server.service`, and
+`nut-monitor.service` all ship inside packages `layer-packages.service`
+installs via `rpm-ostree` — their unit files don't exist until *after*
+that service's one-time reboot. Listing them in Butane's
+`systemd.units: enabled: true` (like every other unit here) makes
+Ignition fail outright during the very first boot, before the reboot has
+even happened, because it can't enable a unit file that isn't on disk
+yet — this is exactly what happened on first provisioning (the box
+dropped to emergency mode the same way the `NetworkManager.conf`
+`overwrite` issue above did). The fix is `enable-layered-units.service`,
+which does the real enabling once the packages actually exist.
 
 ## Known placeholders left in this tree
 

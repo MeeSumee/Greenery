@@ -1,0 +1,38 @@
+# dnscrypt-proxy.service, fail2ban.service, bluetooth.service,
+# nut-server.service, and nut-monitor.service all ship inside packages
+# that layer-packages.service installs via rpm-ostree -- they don't exist
+# on disk until AFTER that unit's one-time reboot. Ignition's own
+# `systemd.units: enabled: true` stanza runs during the FIRST boot's
+# Ignition stage, before that reboot has happened, so declaring those
+# units there fails outright (Ignition can't enable a unit file that
+# doesn't exist yet). This unit does the enabling for real, once the
+# packages are actually present -- so on every *subsequent* boot they
+# come up normally via multi-user.target like any statically-enabled unit.
+#
+# Only fail2ban/bluetooth are started immediately here (`--now`) since
+# they have no config-rendering dependency. nut-server/nut-monitor are
+# deliberately NOT started here -- render-nut-config.service starts them
+# itself after writing the real upsd.users/upsmon.conf, so they never come
+# up with the literal __NUT_ADMIN_PASS__ template placeholder still in
+# place. Likewise dnscrypt-proxy is left to update-blocklist.service to
+# start once a real blocklist is in place.
+#
+# Gated on the same /var/lib/layered-packages-done marker
+# layer-packages.service writes, but the opposite way: only runs AFTER
+# that marker exists (i.e. only on boots following the layering reboot).
+# Its own marker makes this a no-op on every boot after the first run.
+[Unit]
+Description=Enable systemd units provided by rpm-ostree-layered packages
+ConditionPathExists=/var/lib/layered-packages-done
+ConditionPathExists=!/var/lib/layered-units-enabled
+After=layer-packages.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/systemctl enable dnscrypt-proxy.service nut-server.service nut-monitor.service
+ExecStart=/usr/bin/systemctl enable --now fail2ban.service bluetooth.service
+ExecStart=/usr/bin/touch /var/lib/layered-units-enabled
+
+[Install]
+WantedBy=multi-user.target

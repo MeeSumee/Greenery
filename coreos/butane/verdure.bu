@@ -98,6 +98,8 @@ storage:
       contents: {local: coreos/systemd/update-blocklist.service}
     - path: /etc/systemd/system/update-blocklist.timer
       contents: {local: coreos/systemd/update-blocklist.timer}
+    - path: /etc/systemd/system/enable-layered-units.service
+      contents: {local: coreos/systemd/enable-layered-units.service}
 
     # --- fail2ban (binary layered by layer-packages.service, config dropped in directly) ---
     - path: /etc/fail2ban/jail.local
@@ -114,8 +116,12 @@ storage:
       contents: {local: coreos/dnscrypt-proxy/blocklist.txt}
     # --- NetworkManager (random MAC spoofing, DHCP hostname-leak
     # mitigation, dns=none for dnscrypt-proxy -- ports
-    # modules/networking/default.nix's connection-privacy settings) ---
+    # modules/networking/default.nix's connection-privacy settings).
+    # overwrite:true is required -- this file ships as part of the base
+    # FCOS image (not layered later), so it already exists on disk by the
+    # time Ignition gets here, and Butane's default is overwrite:false. ---
     - path: /etc/NetworkManager/NetworkManager.conf
+      overwrite: true
       contents: {local: coreos/networkmanager/NetworkManager.conf}
     - path: /etc/resolv.conf
       mode: 0644
@@ -135,8 +141,12 @@ storage:
     - path: /etc/nut/upsmon.conf.tmpl
       contents: {local: coreos/nut/upsmon.conf.tmpl}
 
-    # --- nftables (SSH + NUT restricted to tailscale0, matching current posture) ---
+    # --- nftables (SSH + NUT restricted to tailscale0, matching current
+    # posture). overwrite:true for the same reason as NetworkManager.conf
+    # above -- nftables ships in the base FCOS image with its own default
+    # ruleset already on disk. ---
     - path: /etc/nftables.conf
+      overwrite: true
       contents: {local: coreos/nftables/nftables.conf}
 
 systemd:
@@ -157,9 +167,7 @@ systemd:
       enabled: true
     - name: update-blocklist.timer
       enabled: true
-    - name: dnscrypt-proxy.service
-      enabled: true
-    - name: bluetooth.service
+    - name: enable-layered-units.service
       enabled: true
     - name: tailscaled.service
       enabled: true
@@ -175,9 +183,12 @@ systemd:
       enabled: true
     - name: borgbackup.timer
       enabled: true
-    - name: fail2ban.service
-      enabled: true
-    - name: nut-server.service
-      enabled: true
-    - name: nut-monitor.service
-      enabled: true
+    # fail2ban.service, dnscrypt-proxy.service, bluetooth.service,
+    # nut-server.service, and nut-monitor.service are deliberately NOT
+    # listed here -- their unit files don't exist until
+    # layer-packages.service's rpm-ostree reboot has happened, and
+    # Ignition's enabling of a nonexistent unit fails the whole first-boot
+    # stage. enable-layered-units.service (above) enables all five for
+    # real, once they actually exist; render-nut-config.service and
+    # update-blocklist.service start nut-server/nut-monitor and
+    # dnscrypt-proxy respectively, once their config is actually ready.

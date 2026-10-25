@@ -23,4 +23,11 @@ if [ "$LINES" -lt 1000 ]; then
 fi
 
 mv "$TMP" "$DEST"
-systemctl try-restart dnscrypt-proxy.service || true
+# `restart` rather than `try-restart`: on the first boot after the
+# layer-packages.service reboot, dnscrypt-proxy.service isn't running yet
+# at all (it's only enable'd, not started, by enable-layered-units.service
+# -- deliberately, so it never starts with a stale/missing blocklist).
+# `restart` starts a not-yet-running unit instead of silently no-op'ing
+# like `try-restart` would. `|| true` covers the brief window before
+# layer-packages.service has even run once, when the unit doesn't exist.
+systemctl restart dnscrypt-proxy.service || true

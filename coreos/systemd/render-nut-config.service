@@ -9,10 +9,17 @@
 # config.age.secrets.secret1.path for both NUT users (and for the Borg
 # passphrase too, see borgbackup.service). Preserved as-is for parity
 # rather than splitting it, since secret1.age isn't being re-encrypted.
+#
+# Starts nut-server/nut-monitor itself (last ExecStartPost) rather than
+# relying on them being enabled -- see enable-layered-units.service, which
+# deliberately does NOT start these two, precisely so they never come up
+# with the literal __NUT_ADMIN_PASS__ template placeholder still in place.
+# `restart` (not `start`) so re-runs of this unit on later boots also pick
+# up any rotated secret.
 [Unit]
 Description=Render NUT config with decrypted secrets
 After=decrypt-secrets.service layer-packages.service
-Requires=decrypt-secrets.service
+Requires=decrypt-secrets.service layer-packages.service
 Before=nut-server.service nut-monitor.service
 
 [Service]
@@ -25,6 +32,7 @@ ExecStart=/usr/bin/sh -c '\
 '
 ExecStartPost=/usr/bin/chmod 0640 /etc/nut/upsd.users /etc/nut/upsmon.conf
 ExecStartPost=/usr/bin/chown root:nut /etc/nut/upsd.users /etc/nut/upsmon.conf
+ExecStartPost=-/usr/bin/systemctl restart nut-server.service nut-monitor.service
 
 [Install]
 WantedBy=multi-user.target
