@@ -1,0 +1,9 @@
+# Arch-native equivalent of the fishPlugins.* entries in
+# modules/system/fish.nix's environment.systemPackages. Install fisher
+# (https://github.com/jorgebucaran/fisher) first, then:
+#   fisher update
+# to install everything listed here.
+jorgebucaran/fisher
+franciscolourenco/done
+meaningful-ooo/sponge
+jorgebucaran/hydro

@@ -1,0 +1,29 @@
+# Arch-native equivalent of modules/programs/git.nix.
+# Symlink/copy to ~/.gitconfig.
+#
+# `core.editor` is hardcoded to nvim here, matching this host having
+# greenery.programs.nvim.enable = true on quartz; swap to another editor
+# if nvim isn't being installed alongside this.
+#
+# Nix's `user.github` key had no real git meaning (not a key git or gpg
+# ever reads) and is dropped here rather than carried over as dead config.
+
+[user]
+	name = MeeSumee
+	email = 79007212+MeeSumee@users.noreply.github.com
+	signingkey = /home/sumee/.ssh/id_ed25519.pub
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	format = ssh
+
+[core]
+	editor = nvim
+
+[init]
+	defaultBranch = master
+
+[push]
+	autoSetupRemote = true
