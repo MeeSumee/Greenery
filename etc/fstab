@@ -1,0 +1,4 @@
+# Additional drive mounts
+# DO NOT BLINDLY REPLACE/SYMLINK THE FILE, YOU WILL BRICK YOUR SYSTEM
+UUID=22496045-6215-4194-9cfb-f364aa3b0472 /mnt/amethyst  ext4    defaults 0 2
+UUID=23f31baa-5f4a-427e-89f3-9599306925aa /mnt/ametrine  ext4    defaults 0 2
