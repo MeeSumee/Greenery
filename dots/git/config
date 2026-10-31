@@ -1,0 +1,19 @@
+[user]
+	name = MeeSumee
+	email = 79007212+MeeSumee@users.noreply.github.com
+	signingkey = /home/sumee/.ssh/id_ed25519.pub
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	format = ssh
+
+[core]
+	editor = nvim
+
+[init]
+	defaultBranch = master
+
+[push]
+	autoSetupRemote = true

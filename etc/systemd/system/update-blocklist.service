@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh StevenBlack hosts blocklist for dnscrypt-proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/etc/dnscrypt-proxy/update-blocklist.sh
+
+[Install]
+WantedBy=multi-user.target

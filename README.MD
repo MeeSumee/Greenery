@@ -4,7 +4,7 @@ Consists of multiple devices:
 - [Greenery](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#greenery): x86-based server with multiple services.
 - [Verdure](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#verdure): Arm-based server with multiple services.
 - [Kaolin](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#kaolin): Swiss VPS acting as both an exit-node and a DNS Server.
-- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming and Workstation PC.
+- [Quartz](https://github.com/MeeSumee/Greenery?tab=readme-ov-file#quartz): Gaming and Workstation PC running CachyOS.
 
 ## Installation
 You may install as a flake to access my programs and modules using:
@@ -34,15 +34,10 @@ nix run .#nixosConfigurations.$HOSTNAME.config.system.build.vm
 I also documented how to install from scratch on my [wiki](https://github.com/MeeSumee/Greenery/wiki/Installation)
 
 ## Updates
-Due to more annoyance in maintenance of my servers, my Raspberry Pi will run Fedora CoreOS
-with services running as podman containers.
+RPi running CoreOS is a disaster and I had absolutely no reason to swap, at least I kept the 
+original so rollover was easy.
 
-I am also more inclined to convert my main desktop PC to CachyOS as I taught one of my friends irl
-with CachyOS. (Only reason I'd use Cachy over Arch is less steps towards a complete setup)
-
-Greenery might remain on nixos due to its high dependence on it.
-
-Kaolin will remain on nixos due to its low maintenance and fast deployment on any VPS.
+Meanwhile quartz is now on CachyOS, slowly will build dotfiles.
 
 ## Greenery
 Dell XPS 8940 with i7-11700.
@@ -203,7 +198,7 @@ With this setup, it will enable you to use Tailscale as a way to connect to Clou
 
 ## Quartz
 
-Custom-built gaming pc that I mainly use at home.
+Custom-built gaming pc that I mainly use at home running CachyOS.
 
 <details>
 <summary>Quartz PC Specifications</summary>

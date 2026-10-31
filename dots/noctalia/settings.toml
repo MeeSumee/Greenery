@@ -11,6 +11,24 @@ widget_spacing = 20
 [desktop_widgets]
 enabled = false
 
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
 [location]
 address = "Chicago"
 
@@ -30,6 +48,8 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2", "lock
     cx = 1280.0
     cy = 1258.0
     output = "DP-1"
+    placement_height = 1440.0
+    placement_width = 2560.0
     rotation = 0.0
     type = "login_box"
 
@@ -45,6 +65,7 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2", "lock
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -53,8 +74,10 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2", "lock
     box_height = 196.0
     box_width = 810.0
     cx = 960.0
-    cy = 890.0
+    cy = 898.0
     output = "DP-2"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "login_box"
 
@@ -70,16 +93,19 @@ widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@DP-2", "lock
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
-        show_weather = false
+        show_weather = true
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
-    box_height = 176.0
-    box_width = 384.0
+    box_height = 208.0
+    box_width = 480.0
     cx = 960.0
-    cy = 244.0
+    cy = 300.0
     output = "DP-2"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "clock"
 
@@ -98,8 +124,12 @@ app_icon_colorize = true
 avatar_path = "/home/sumee/.face.icon"
 clipboard_enabled = false
 clipboard_keep_from_closed_apps = false
-font_family = "CaskaydiaCove Nerd Font"
+font_family = "Noto Sans"
 password_style = "random"
+polkit_agent = true
+
+    [shell.launcher]
+    default_view = "all"
 
     [shell.panel]
     transparency_mode = "glass"
@@ -159,6 +189,12 @@ directory = "/home/sumee/wallpapers"
     path = "/home/sumee/wallpapers/schizomiku.jpg"
 
     [wallpaper.last]
+    path = "/home/sumee/wallpapers/schizomiku.jpg"
+
+    [wallpaper.monitors.DP-1]
+    path = "/home/sumee/wallpapers/schizomiku.jpg"
+
+    [wallpaper.monitors.DP-2]
     path = "/home/sumee/wallpapers/schizomiku.jpg"
 
 [widget.clock]
