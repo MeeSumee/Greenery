@@ -9,9 +9,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "11550239d5714d60b62be8796446ecba84a1bfb2",
-      "url": "https://github.com/StevenBlack/hosts/archive/11550239d5714d60b62be8796446ecba84a1bfb2.tar.gz",
-      "hash": "sha256-iP7/ivovLnTnpmaKLjLsmLWKBrv4WvTYQJZ6LZumBOQ="
+      "revision": "6d56ab44f2b3d27de062b5194eb51bcd8115a773",
+      "url": "https://github.com/StevenBlack/hosts/archive/6d56ab44f2b3d27de062b5194eb51bcd8115a773.tar.gz",
+      "hash": "sha256-p+gx9oQuf12pcT2DO9hSmN5MsucWkj9Mdww/g0cMLz0="
     },
     "catfuzzel": {
       "type": "Git",
