@@ -77,7 +77,7 @@ jobs:
 
       # Only need this when nix-fast-build runs as ALL my derivations take a fuck ton of space
       - name: Aggressive disk space removal
-        uses: wimpysworld/nothing-but-nix@v10
+        uses: wimpysworld/nothing-but-nix@v12
         with:
           nix-permission-edict: true # Ensure install nix action has the right permissions
 
