@@ -23,6 +23,7 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   # All modules and their values
@@ -172,6 +173,9 @@ Source: https://en.wikipedia.org/wiki/Kaolinite#Occurrence
       };
     };
   };
+
+  # Disable systemd-networkd as it got enabled by networkd-dispatcher
+  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   # Enable IPv4 forwarding
   boot.kernel.sysctl = {
