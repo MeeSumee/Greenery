@@ -13,8 +13,6 @@
     services = {
       vaultwarden = {
         enable = true;
-        dbBackend = "postgresql";
-        configurePostgres = true;
         environmentFile = config.age.secrets.secret8.path;
         config = {
           DOMAIN = "https://vault.onca-ph.ts.net";
