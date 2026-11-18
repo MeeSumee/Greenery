@@ -44,13 +44,13 @@
       flags = [
         "--print-build-logs"
       ];
-      dates = "Sat 12:00 UTC";
+      dates = "Sun 12:00 UTC";
       randomizedDelaySec = "15min";
       allowReboot = true;
       runGarbageCollection = true;
       rebootWindow = {
         lower = "05:00";
-        upper = "13:00";
+        upper = "15:00";
       };
     };
   };
